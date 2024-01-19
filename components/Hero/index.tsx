@@ -1,8 +1,156 @@
+"use client";
+
+import IonIcon from "@reacticons/ionicons";
 import Link from "next/link";
+import {useState } from "react";
+import Modal from "react-responsive-modal";
+
+
+
 
 const Hero = () => {
+  const [open, setOpen] = useState(false);
+  const [openAdd, setOpenAdd] = useState(false);
+
   return (
     <>
+      <Modal closeIcon={<IonIcon name="close" color='white'/>} styles={{
+        modal : {borderRadius: '1rem', maxWidth: '500px', padding: '0rem', backgroundColor: 'rgb(235, 233, 233)', zIndex: 56},
+        closeIcon: {color: 'white !important'},
+        overlay: {backgroundColor: 'rgba(220, 217, 217, 0.5)'}
+      }}  open={open} center onClose={() => setOpen(!open) }>
+        <p style={{background: 'linear-gradient(89deg, var(--token-dc60c65c-2692-4b09-8d77-49a86f7aedee, rgb(24, 36, 61)) /* {"name":"Azul prinicipal"} */ 0%, var(--token-1632e6e1-d1e5-427f-b435-20cb1e67f695, rgb(54, 98, 227)) /* {"name":"Azul claro"} */ 123.5068681091516%)', width: '100%', padding: '1rem', color:'white'}}>Envia tu solicitud</p>
+        <div style={{padding: '.5rem'}}>
+          <p className="dark:text-body-color-dark mb-8 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+          Recibe tus cotizaciones por Whatsapp con un link de pago directo o <a style={{color: '#3662E3'}} href="#">crea tu cuenta</a> para conectar con proveedores
+                </p>
+          <div style={{display: 'flex', justifyContent: 'space-between'}}>
+          <select className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}>
+            <option value={-1}>Marca</option>
+            <option value={-1}>Toyota</option>
+            <option value={-1}>Nissan</option>
+            <option value={-1}>Hyundai</option>
+            <option value={-1}>Kia</option>
+            <option value={-1}>Chevrolet</option>
+            <option value={-1}>Ford</option>
+            <option value={-1}>Volskwagen</option>
+            <option value={-1}>Mazda</option>
+            <option value={-1}>Mitsubishi</option>
+            <option value={-1}>Suzuki</option>
+            <option value={-1}>Peugeot</option>
+            <option value={-1}>BMW</option>
+            <option value={-1}>Mercedes Benz</option>
+            <option value={-1}>Audi</option>
+            <option value={-1}>Jeep</option>
+            <option value={-1}>Land Rover</option>
+            <option value={-1}>Volvo</option>
+            <option value={-1}>Mini</option>
+            <option value={-1}>Porsche</option>
+            <option value={-1}>Kia</option>
+            <option value={-1}>Geely</option>
+            <option value={-1}>Renault</option>
+
+          </select>
+          <select className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}>
+            <option value={-1}>Medio de pago</option>
+            <option value={-1}>Efectivo</option>
+            <option value={-1}>Billetera virtual</option>
+            <option value={-1}>Online</option>
+
+
+         
+
+          </select>
+          </div>
+          <div style={{display: 'flex', justifyContent: 'space-between'}}>
+            <input placeholder="Whatsapp" className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+            <input placeholder="Placa(Opcional)" className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+
+
+          </div>
+
+          <p className="dark:text-body-color-dark mb-1 text-base ml-4 mt-4 !leading-relaxed text-body-color sm:text-xl md:text-xl" style={{color: '#3662E3'}}>
+          Items</p>
+          
+          <div style={{backgroundColor: 'white', borderRadius: '.5rem', padding: '1rem', margin: '1rem'}}>
+            <div style={{display: 'flex', justifyContent: 'space-between', paddingBottom: '1rem'}}>
+              <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+              Nombre</p>
+              <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+              Cantidad</p>
+              <button></button>
+            </div>
+
+            <div style={{display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(220, 220, 220, .3)'}}>
+              <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+              Nombre</p>
+              <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+              6</p>
+              <button style={{color: 'orange'}}><IonIcon name="pencil-outline" color='orange'/></button>
+            </div>
+
+
+            <div style={{paddingTop: '.5rem', display: 'flex', justifyContent: 'space-between'}}>
+              <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+              Nombre</p>
+              <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+              8</p>
+              <button style={{color: 'orange'}}><IonIcon name="pencil-outline" color='orange'/></button>
+            </div>
+
+            <div style={{textAlign: 'right', width: '100%'}}>
+            <button onClick={() => setOpenAdd(!openAdd)} style={{marginTop: '.5rem', color: 'grey'}}>
+              
+              <IonIcon name="add"/>
+              Añadir
+            </button>
+            </div>
+
+
+          </div>
+          
+
+          
+          
+        </div>
+        <div style={{textAlign: 'center',}}>
+            <button style={{background: 'green', color: 'white', padding: '.5rem', margin: '.5rem', borderRadius: '.5rem'}} className="rounded-sm bg-primary px-8 py-4 text-base font-semibold text-white duration-300 ease-in-out hover:bg-primary/80">Enviar solicitud</button>
+          </div>
+      </Modal>
+
+
+
+      <Modal closeIcon={<IonIcon name="close"/>} styles={{
+        modal : {borderRadius: '1rem', minWidth: '300px', padding: '0rem'},
+        closeIcon: {color: 'white !important'},
+        overlay: {backgroundColor: 'rgba(220, 217, 217, 0.5)'}
+      }}  open={openAdd} center onClose={() => setOpenAdd(false) }>
+        <p style={{background: 'linear-gradient(89deg, var(--token-dc60c65c-2692-4b09-8d77-49a86f7aedee, rgb(24, 36, 61)) /* {"name":"Azul prinicipal"} */ 0%, var(--token-1632e6e1-d1e5-427f-b435-20cb1e67f695, rgb(54, 98, 227)) /* {"name":"Azul claro"} */ 123.5068681091516%)', width: '100%', padding: '1rem', color:'white'}}>Nuevo producto</p>
+        <div style={{margin: '2rem'}}>
+          <div style={{display: 'flex', justifyContent: 'space-between'}}>
+            <input placeholder="Nombre"  className="border-stroke dark:text-body-color-dark dark:shadow-two  rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent', width: '70%'}}></input>
+            <input placeholder="Cantidad" type='number' className="border-stroke dark:text-body-color-dark dark:shadow-two rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent', width: '30%'}}></input>
+
+            
+          </div>
+          <div style={{textAlign: 'right',}}>
+            <button style={{background: 'green', color: 'white', padding: '.5rem', margin: '.5rem', borderRadius: '.5rem'}} className="rounded-sm bg-primary px-8 py-4 text-base font-semibold text-white duration-300 ease-in-out hover:bg-primary/80">Añadir</button>
+          </div>
+          
+        </div>
+      </Modal>
+
+
+
+
+
+
+
+
+
+
+
+
       <section
         id="home"
         className="dark:bg-gray-dark relative z-10 overflow-hidden bg-white pb-16 pt-[120px] md:pb-[120px] md:pt-[150px] xl:pb-[160px] xl:pt-[180px] 2xl:pb-[200px] 2xl:pt-[210px]"
@@ -14,27 +162,33 @@ const Hero = () => {
                 className="wow fadeInUp mx-auto max-w-[800px] text-center"
                 data-wow-delay=".2s"
               >
-                <h1 className="mb-5 text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight">
-                  Free and Open-Source Next.js Template for Startup & SaaS
+                <h1 className="mb-5 text-5xl font-bold leading-tight text-black dark:text-white sm:text-4xl sm:leading-tight md:text-6xl md:leading-tight" style={{color: '#18243D'}}>
+                  No pierdas tiempo buscando repuestos de carros
                 </h1>
-                <p className="dark:text-body-color-dark mb-12 text-base !leading-relaxed text-body-color sm:text-lg md:text-xl">
-                  Startup is free Next.js template for startups and SaaS
-                  business websites comes with all the essential pages,
-                  components, and sections you need to launch a complete
-                  business website, built-with Next 13.x and Tailwind CSS.
+                <h1 style={{
+                }} className="mb-5 text-3xl font-bold leading-tight text-grey dark:text-grey sm:text-4xl sm:leading-tight md:text-3xl md:leading-tight">
+                </h1>
+                <p className="dark:text-body-color-dark mb-12 text-base !leading-relaxed text-body-color sm:text-lg md:text-xl" >
+                Conecta tu taller con varias tiendas de repuestos de autos en Lima o
+ Realiza un pedido de los repuestos que necesitas, compáralos y escoge el que más te convenga. 
+
+
                 </p>
                 <div className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-                  <Link
-                    href="https://nextjstemplates.com/templates/saas-starter-startup"
-                    className="rounded-sm bg-primary px-8 py-4 text-base font-semibold text-white duration-300 ease-in-out hover:bg-primary/80"
+                  <button
+                    onClick={() => setOpen(!open)}
+                    className="rounded-sm bg-primary px-8 py-4 text-base font-semibold text-white duration-300 ease-in-out hover:bg-primary/80"              
+                    style={{backgroundImage: 'linear-gradient(89deg, var(--token-dc60c65c-2692-4b09-8d77-49a86f7aedee, rgb(24, 36, 61)) /* {"name":"Azul prinicipal"} */ 0%, var(--token-1632e6e1-d1e5-427f-b435-20cb1e67f695, rgb(54, 98, 227)) /* {"name":"Azul claro"} */ 123.5068681091516%)'}}
+                  
                   >
-                    🔥 Get Pro
-                  </Link>
+                    Enviar una solicitud
+                  </button>
                   <Link
                     href="https://github.com/NextJSTemplates/startup-nextjs"
                     className="inline-block rounded-sm bg-black px-8 py-4 text-base font-semibold text-white duration-300 ease-in-out hover:bg-black/90 dark:bg-white/10 dark:text-white dark:hover:bg-white/5"
+                    style={{color: '#3662E3', background: 'transparent'}}
                   >
-                    Star on GitHub
+                    Recibir solicitudes
                   </Link>
                 </div>
               </div>
@@ -173,8 +327,8 @@ const Hero = () => {
                 y2="338.63"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stopColor="#4A6CF7" />
-                <stop offset="1" stopColor="#4A6CF7" stopOpacity="0" />
+                <stop stopColor="#18243D" />
+                <stop offset="1" stopColor="#18243D" stopOpacity="0" />
               </linearGradient>
             </defs>
           </svg>
@@ -221,8 +375,8 @@ const Hero = () => {
                 y2="212.24"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stopColor="#4A6CF7" stopOpacity="0" />
-                <stop offset="1" stopColor="#4A6CF7" />
+                <stop stopColor="#18243D" stopOpacity="0" />
+                <stop offset="1" stopColor="#18243D" />
               </linearGradient>
               <linearGradient
                 id="paint1_linear_25:218"
@@ -232,8 +386,8 @@ const Hero = () => {
                 y2="212.24"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stopColor="#4A6CF7" stopOpacity="0" />
-                <stop offset="1" stopColor="#4A6CF7" />
+                <stop stopColor="#18243D" stopOpacity="0" />
+                <stop offset="1" stopColor="#18243D" />
               </linearGradient>
               <linearGradient
                 id="paint2_linear_25:218"
@@ -243,8 +397,8 @@ const Hero = () => {
                 y2="212.24"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stopColor="#4A6CF7" stopOpacity="0" />
-                <stop offset="1" stopColor="#4A6CF7" />
+                <stop stopColor="#18243D" stopOpacity="0" />
+                <stop offset="1" stopColor="#18243D" />
               </linearGradient>
               <linearGradient
                 id="paint3_linear_25:218"
@@ -254,8 +408,8 @@ const Hero = () => {
                 y2="210.214"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stopColor="#4A6CF7" stopOpacity="0" />
-                <stop offset="1" stopColor="#4A6CF7" />
+                <stop stopColor="#18243D" stopOpacity="0" />
+                <stop offset="1" stopColor="#18243D" />
               </linearGradient>
               <linearGradient
                 id="paint4_linear_25:218"
@@ -265,8 +419,8 @@ const Hero = () => {
                 y2="99.5816"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stopColor="#4A6CF7" />
-                <stop offset="1" stopColor="#4A6CF7" stopOpacity="0" />
+                <stop stopColor="#18243D" />
+                <stop offset="1" stopColor="#18243D" stopOpacity="0" />
               </linearGradient>
               <radialGradient
                 id="paint5_radial_25:218"
@@ -286,5 +440,7 @@ const Hero = () => {
     </>
   );
 };
+
+
 
 export default Hero;

@@ -7,6 +7,7 @@
 @layer base {
   body {
     font-family: "Inter", sans-serif;
+    color: rgb(235, 233, 233)
   }
 }
 
@@ -30,4 +31,8 @@
   input#checkboxLabel:checked ~ .box span {
     @apply opacity-100;
   }
+}
+
+h1, h2, h3, h4 {
+  color: #18243D !important;
 }

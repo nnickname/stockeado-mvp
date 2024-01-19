@@ -41,6 +41,7 @@ const Header = () => {
   return (
     <>
       <header
+        style={{zIndex: 55}}
         className={`header left-0 top-0 z-40 flex w-full items-center ${
           sticky
             ? "dark:bg-gray-dark dark:shadow-sticky-dark fixed z-[9999] bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm transition"
@@ -57,14 +58,14 @@ const Header = () => {
                 } `}
               >
                 <Image
-                  src="/images/logo/logo-2.svg"
+                  src="/images/logo/color.png"
                   alt="logo"
                   width={140}
                   height={30}
                   className="w-full dark:hidden"
                 />
                 <Image
-                  src="/images/logo/logo.svg"
+                  src="/images/logo/white.png"
                   alt="logo"
                   width={140}
                   height={30}
@@ -162,17 +163,23 @@ const Header = () => {
                 <Link
                   href="/signin"
                   className="hidden px-7 py-3 text-base font-medium text-dark hover:opacity-70 dark:text-white md:block"
+                  style={{
+                    color: 'white',
+                    margin: '.5rem',
+                    borderRadius: '.5rem',
+                    backgroundImage: 'linear-gradient(89deg, var(--token-dc60c65c-2692-4b09-8d77-49a86f7aedee, rgb(24, 36, 61)) /* {"name":"Azul prinicipal"} */ 0%, var(--token-1632e6e1-d1e5-427f-b435-20cb1e67f695, rgb(54, 98, 227)) /* {"name":"Azul claro"} */ 123.5068681091516%)'}}
+
                 >
-                  Sign In
+                  Registrarme
                 </Link>
                 <Link
                   href="/signup"
                   className="ease-in-up shadow-btn hover:shadow-btn-hover hidden rounded-sm bg-primary px-8 py-3 text-base font-medium text-white transition duration-300 hover:bg-opacity-90 md:block md:px-9 lg:px-6 xl:px-9"
+                  style={{backgroundColor: 'transparent', color: '#3662E3', border: '1px solid #3662E3', borderRadius: '.5rem'}}
                 >
-                  Sign Up
+                  Iniciar sesión
                 </Link>
                 <div>
-                  <ThemeToggler />
                 </div>
               </div>
             </div>
