@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@dorbus/flexboard": "^1.1.2",
     "@reacticons/ionicons": "^7.1.0",
     "eslint": "8.33.0",
     "eslint-config-next": "13.1.6",

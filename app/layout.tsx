@@ -1,8 +1,8 @@
 "use client";
 
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import ScrollToTop from "@/components/ScrollToTop";
+import Footer from "@/components/dashboard/Footer";
+import Header from "@/components/dashboard/Header";
+import ScrollToTop from "@/components/dashboard/ScrollToTop";
 import { Inter } from "next/font/google";
 import "node_modules/react-modal-video/css/modal-video.css";
 import "../styles/index.css";
@@ -24,9 +24,7 @@ export default function RootLayout({
 
       <body className={`bg-[#FCFCFC] dark:bg-black ${inter.className}`}>
         <Providers>
-          <Header />
           {children}
-          <Footer />
           <ScrollToTop />
         </Providers>
       </body>

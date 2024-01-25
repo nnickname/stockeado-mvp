@@ -1,5 +1,5 @@
-import Breadcrumb from "@/components/Common/Breadcrumb";
-import Contact from "@/components/Contact";
+import Breadcrumb from "@/components/dashboard/Common/Breadcrumb";
+import Contact from "@/components/dashboard/Contact";
 
 import { Metadata } from "next";
 

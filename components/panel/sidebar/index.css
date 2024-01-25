@@ -1,0 +1,57 @@
+.sidebarCustomStyle{
+    padding: 1rem;
+    text-align: center;
+    width: 100%;
+}
+.sidebarCustomStyle .avatar{
+    margin-top: 1.5rem;
+    width: 50px;
+    height: 50px;
+    background-color: #3662E3;
+    border-radius: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sidebarCustomStyle .title{
+    margin-top: .5rem;
+    color: #3662E3 !important;
+    font-weight: 500;
+}
+
+
+.sidebarCustomStyle .list{
+    cursor: pointer;
+    margin-top: 1rem;
+    padding: .5rem;
+    display: flex;
+}
+.sidebarCustomStyle .list:hover {
+}
+.sidebarCustomStyle .list:hover .icon {
+    color:#3662E3;
+
+}
+.sidebarCustomStyle .list:hover .text {
+    color:#3662E3;
+
+}
+.sidebarCustomStyle .list .icon{
+    margin-right: .5rem;
+    width: 18px !important;
+    height: 18px !important;
+    color: rgb(54, 53, 53);
+}
+
+.sidebarCustomStyle .list .text{
+    color: rgb(54, 54, 54);
+    font-size: 14px !important;
+}
+
+.sidebarCustomStyle .list.logout .text{
+    color: rgb(140, 56, 56);
+}
+
+.sidebarCustomStyle .list.logout .icon{
+    color: rgb(140, 56, 56);
+}
