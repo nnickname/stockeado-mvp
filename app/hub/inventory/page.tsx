@@ -11,6 +11,12 @@ import {
   import { data } from './makeData';
   import SideBarComponent from "@/components/panel/sidebar";
   import { Metadata, NextPage } from "next";
+
+export const metadata: Metadata = {
+    title: "Stockeado - Inventario",
+    description: "Mira tu inventario en Stockeado",
+    // other metadata
+};
 import InventoryResume from '@/components/panel/inventoryresume';
 
   const columnHelper = createMRTColumnHelper();

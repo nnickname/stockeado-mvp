@@ -7,6 +7,11 @@ import SellResume from "@/components/panel/sellresume";
 import InventoryResume from "@/components/panel/inventoryresume";
 
 
+export const metadata: Metadata = {
+  title: "Stockeado - Dashboard",
+  description: "Mira tu resumen en Stockeado",
+  // other metadata
+};
 
 const HubExample: NextPage = () => {
   return (
