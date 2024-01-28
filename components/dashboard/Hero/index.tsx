@@ -18,7 +18,7 @@ const Hero = () => {
         modal : {borderRadius: '1rem', maxWidth: '500px', padding: '0rem', backgroundColor: 'rgb(235, 233, 233)', zIndex: 56},
         closeIcon: {color: 'white !important'},
         overlay: {backgroundColor: 'rgba(220, 217, 217, 0.5)'}
-      }}  open={open} center onClose={() => setOpen(!open) }>
+      }}  open={open} center onClose={() => setOpen(false) }>
         <p style={{background: 'linear-gradient(89deg, var(--token-dc60c65c-2692-4b09-8d77-49a86f7aedee, rgb(24, 36, 61)) /* {"name":"Azul prinicipal"} */ 0%, var(--token-1632e6e1-d1e5-427f-b435-20cb1e67f695, rgb(54, 98, 227)) /* {"name":"Azul claro"} */ 123.5068681091516%)', width: '100%', padding: '1rem', color:'white'}}>Envia tu solicitud</p>
         <div style={{padding: '.5rem'}}>
           <p className="dark:text-body-color-dark mb-8 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >

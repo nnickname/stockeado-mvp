@@ -1,0 +1,19 @@
+.resume{
+
+}
+.resume .resumeContainer{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.centerIcon{
+    position: relative;
+    margin-bottom: 2rem;
+}
+.centerIcon div{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

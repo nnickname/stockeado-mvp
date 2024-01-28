@@ -7,10 +7,11 @@ import IonIcon from "@reacticons/ionicons";
 import { FunctionComponent, ReactNode } from "react";
 
 type SideBarProps = {
-    frameContennt: ReactNode
+    frameContennt: ReactNode,
+    route: string
 };
 
-const SideBarComponent: FunctionComponent<SideBarProps> = ({frameContennt}) => {
+const SideBarComponent: FunctionComponent<SideBarProps> = ({frameContennt, route}) => {
     return <FlexboardProvider>
     <Flexboard
     direction={Position.left}
@@ -31,22 +32,22 @@ const SideBarComponent: FunctionComponent<SideBarProps> = ({frameContennt}) => {
             <div style={{marginTop: '3rem'}}></div>
 
             <div className="list">
-                <IonIcon className="icon" name="home-outline" />
-                <p className="text">Dashboard</p>
+                <IonIcon style={{color: route === 'dashboard' ? '#1570EF' : 'black'}} className="icon" name="home-outline" />
+                <p style={{color: route === 'dashboard' ? '#1570EF' : 'black'}} className="text">Dashboard</p>
             </div>
             <div className="list">
-                <IonIcon className="icon" name="cart-outline" />
-                <p className="text">Inventario</p>
+                <IonIcon style={{color: route === 'inventory' ? '#1570EF' : 'black'}} className="icon" name="cart-outline" />
+                <p style={{color: route === 'inventory' ? '#1570EF' : 'black'}} className="text">Inventario</p>
             </div>
             <div className="list">
-                <IonIcon className="icon" name="mail-unread-outline" />
-                <p className="text">Solicitudes</p>
+                <IonIcon style={{color: route === 'request' ? '#1570EF' : 'black'}} className="icon" name="mail-unread-outline" />
+                <p style={{color: route === 'request' ? '#1570EF' : 'black'}} className="text">Ordenes finales</p>
             </div>
 
             <div style={{marginTop: '3rem'}}></div>
             <div className="list">
-                <IonIcon className="icon" name="settings-outline" />
-                <p className="text">Configuración</p>
+                <IonIcon style={{color: route === 'configuration' ? '#1570EF' : 'black'}} className="icon" name="settings-outline" />
+                <p style={{color: route === 'configuration' ? '#1570EF' : 'black'}} className="text">Configuración</p>
             </div>
             <div className="list logout">
                 <IonIcon className="icon" name="log-out-outline" />
