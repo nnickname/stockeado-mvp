@@ -1,27 +1,20 @@
 'use client';
+
+import InventoryResume from "@/components/panel/inventoryresume";
 import {
-    MaterialReactTable,
-    createMRTColumnHelper,
-    useMaterialReactTable,
-  } from 'material-react-table';
-  import { Box, Button } from '@mui/material';
-  import FileDownloadIcon from '@mui/icons-material/FileDownload';
-  import { jsPDF } from 'jspdf'; //or use your library of choice here
-  import autoTable from 'jspdf-autotable';
-  import { data } from './makeData';
-  import SideBarComponent from "@/components/panel/sidebar";
-  import { Metadata, NextPage } from "next";
-
-export const metadata: Metadata = {
-    title: "Stockeado - Inventario",
-    description: "Mira tu inventario en Stockeado",
-    // other metadata
-};
-import InventoryResume from '@/components/panel/inventoryresume';
-
-  const columnHelper = createMRTColumnHelper();
+  MaterialReactTable,
+  createMRTColumnHelper,
+  useMaterialReactTable,
+} from 'material-react-table';
+import { Box, Button } from '@mui/material';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import { jsPDF } from 'jspdf'; //or use your library of choice here
+import autoTable from 'jspdf-autotable';
+import SideBarComponent from "@/components/panel/sidebar";;
+import { data } from "./makeData";
+const columnHelper = createMRTColumnHelper();
   
-  const columns = [
+const columns = [
     columnHelper.accessor('id', {
       header: 'ID',
     }),
@@ -106,13 +99,8 @@ const Example = () => {
   
     return <MaterialReactTable   table={table} />;
 };
-
-
-
-const InventoryPage: NextPage = () => {
-  return (
-    
-      <SideBarComponent route='inventory' frameContennt={
+const LayoutHubInventoryPage = () => {
+    return <SideBarComponent route='inventory' frameContennt={
         <div className="resume" style={{overflow: 'hidden', maxWidth: '80%'}}>
             <InventoryResume></InventoryResume>
             <div className="content-frame-container">
@@ -121,9 +109,7 @@ const InventoryPage: NextPage = () => {
             
 
         </div>
-      }/>
-    
-  );
-};
+      }/>;
+}
 
-export default InventoryPage;
+export default LayoutHubInventoryPage;
