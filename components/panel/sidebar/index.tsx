@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { Flexboard, FlexboardProvider, FlexboardFrame, ResizerType, Position } from '@dorbus/flexboard';
 import Logo from '../../../public/images/logo/logopreferente.png';
 import './index.css';
 import Image from "next/image";
 import IonIcon from "@reacticons/ionicons";
 import { FunctionComponent, ReactNode } from "react";
+import Flexboard from "@dorbus/flexboard";
 
 type SideBarProps = {
     frameContennt: ReactNode,
@@ -12,17 +12,7 @@ type SideBarProps = {
 };
 
 const SideBarComponent: FunctionComponent<SideBarProps> = ({frameContennt, route}) => {
-    return <FlexboardProvider>
-    <Flexboard
-    direction={Position.left}
-    draggable={true}
-    width={250}
-    minWidth={250}
-    maxWidth={320}
-    flexboardStyle={{ backgroundColor: "white" }}
-    resizerStyle={{ backgroundColor: "white" }}
-    resizerType={ResizerType.gutterlane}
-    >
+    return <div className="sideBar">
         <div className="sidebarCustomStyle">
             <Image src={Logo}  alt=""/>
             <div className="avatar">
@@ -54,12 +44,9 @@ const SideBarComponent: FunctionComponent<SideBarProps> = ({frameContennt, route
                 <p className="text">Cerrar sesión</p>
             </div>
         </div>
-    </Flexboard>
-    <FlexboardFrame >
-        <div className="sidebarCustomStyle" style={{backgroundColor: 'rgb(242, 242, 242)'}}>
-            {frameContennt}
-        </div>
-    </FlexboardFrame>
-</FlexboardProvider>
+    <div className="sideBarContainer" >
+        {frameContennt}
+    </div>
+</div>
 }
 export default SideBarComponent

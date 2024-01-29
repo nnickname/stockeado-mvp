@@ -101,7 +101,7 @@ const Example = () => {
 };
 const LayoutHubInventoryPage = () => {
     return <SideBarComponent route='inventory' frameContennt={
-        <div className="resume" style={{overflow: 'hidden', maxWidth: '80%'}}>
+        <div className="resume" style={{overflow: 'hidden'}}>
             <InventoryResume></InventoryResume>
             <div className="content-frame-container">
               <Example/>

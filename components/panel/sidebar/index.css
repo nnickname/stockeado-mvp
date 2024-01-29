@@ -1,4 +1,15 @@
+.sideBar{
+    display: flex;
+}
+.sideBarContainer{
+    background-color: rgb(242, 242, 242);
+    padding: 1rem;
+    width: 80%;
+
+}
+
 .sidebarCustomStyle{
+    width: 20%;
     padding: 1rem;
     text-align: center;
 }
