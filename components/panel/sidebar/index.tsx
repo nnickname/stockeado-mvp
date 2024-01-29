@@ -4,7 +4,6 @@ import './index.css';
 import Image from "next/image";
 import IonIcon from "@reacticons/ionicons";
 import { FunctionComponent, ReactNode } from "react";
-import Flexboard from "@dorbus/flexboard";
 
 type SideBarProps = {
     frameContennt: ReactNode,
