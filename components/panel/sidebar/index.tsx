@@ -13,7 +13,7 @@ type SideBarProps = {
 const SideBarComponent: FunctionComponent<SideBarProps> = ({frameContennt, route}) => {
     return <div className="sideBar">
         <div className="sidebarCustomStyle">
-            <Image src={Logo}  alt=""/>
+            <Image src={Logo}  alt="Logo" />
             <div className="avatar">
 
             </div>
