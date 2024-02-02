@@ -8,7 +8,7 @@ import "../styles/index.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -30,4 +30,5 @@ export default function RootLayout({
   );
 }
 
-import { Providers } from "./providers";
+import { Providers } from "./providers";import { getUser } from "./api/user/login/call";
+

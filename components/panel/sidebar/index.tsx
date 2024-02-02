@@ -1,23 +1,25 @@
+'use client';
 import Link from "next/link";
 import Logo from '../../../public/images/logo/logopreferente.png';
 import './index.css';
 import Image from "next/image";
 import IonIcon from "@reacticons/ionicons";
 import { FunctionComponent, ReactNode } from "react";
-
+import { UserModel } from "@/models/user";
 type SideBarProps = {
     frameContennt: ReactNode,
-    route: string
+    route: string,
+    user?: UserModel
 };
 
-const SideBarComponent: FunctionComponent<SideBarProps> = ({frameContennt, route}) => {
+const SideBarComponent: FunctionComponent<SideBarProps> = ({user, frameContennt, route}) => {
     return <div className="sideBar">
         <div className="sidebarCustomStyle">
             <Image src={Logo}  alt="Logo" />
             <div className="avatar">
 
             </div>
-            <h1 className="title">Repuestos Jorge</h1>
+            <h1 className="title">{user?.name}e</h1>
             <div style={{marginTop: '3rem'}}></div>
 
             <div className="list">

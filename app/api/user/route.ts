@@ -2,9 +2,18 @@ import dbConnect from "../db";
 import User from "../../../models/user";
 import bcrypt from 'bcrypt';
 import { NextResponse } from "next/server";
+import middleware from "../../_middleware";
 
 
+export async function GET (req: Request | any, res: Response, next: any){
+  const midd:any = await middleware(req, res, );
+  if(midd === null){
+   return NextResponse.json({message: 'Invalid token'});
+  }
+  var responseUser = await User.findOne({_id: midd});
+  return NextResponse.json({ message: "User found", user: responseUser});
 
+}
 
 export async function POST(
   req: Request,
