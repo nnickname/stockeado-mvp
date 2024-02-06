@@ -147,14 +147,14 @@ const Example = () => {
             <select className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}>
               <option value={-1}>Marca</option>
 
-              {TypeBrands.map((e, index) => <option value={index+1}>{e}</option>)}
+              {TypeBrands.map((e, index) => <option key={index} value={index+1}>{e}</option>)}
 
             </select>
             <div style={{display: 'flex', justifyContent: 'space-between'}}>
               <input placeholder="Precio"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
               <select className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}>
                 <option value={-1}>Categoria</option>
-                {TypeCategories.map((e, index) => <option value={index+1}>{e}</option>)}
+                {TypeCategories.map((e, index) => <option key={index} value={index+1}>{e}</option>)}
               </select>            
             </div>
             
@@ -200,7 +200,7 @@ const LayoutHubInventoryPage = () => {
           <div className="resume" style={{overflow: 'hidden'}}>
               <InventoryResume></InventoryResume>
               <div style={{padding: '1rem'}}>
-                <h1 style={{marginBottom: '1rem', marginTop: '.5rem', fontSize: '1rem', fontWeight: '500'}}>Productos en MarketPlace <span style={{color: 'blue', marginLeft: '1rem'}}> Compartir url</span></h1>
+                <h1 style={{marginBottom: '1rem', marginTop: '.5rem', fontSize: '1rem', fontWeight: '500'}}>Productos en MarketPlace <Link style={{fontSize: '1rem', color: '#3662E3', marginLeft: '.5rem'}} href="">Mi URL<IonIcon name='open-outline'/></Link></h1>
                 <Example/>
               </div>
               
