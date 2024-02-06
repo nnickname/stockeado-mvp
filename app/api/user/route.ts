@@ -2,7 +2,7 @@ import dbConnect from "../db";
 import User from "../../../models/user";
 import bcrypt from 'bcrypt';
 import { NextResponse } from "next/server";
-import middleware from "../../_middleware";
+import middleware from "../_middleware";
 
 
 export async function GET (req: Request | any, res: Response, next: any){
