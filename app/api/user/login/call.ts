@@ -9,7 +9,6 @@ export const loginUser = async (email: string, password: string) => {
         console.log(response.data);
         if(response?.data?.user !== undefined){
             cookies.set('access_token', response?.data?.token, { path: '/' })
-            console.log('setting');
             return true;
         } else return false;
     }

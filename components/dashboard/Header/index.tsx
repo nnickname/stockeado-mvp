@@ -161,7 +161,7 @@ const Header = () => {
               </div>
               <div className="flex items-center justify-end pr-16 lg:pr-0">
                 <Link
-                  href="/signin"
+                  href="/signup"
                   className="hidden px-7 py-3 text-base font-medium text-dark hover:opacity-70 dark:text-white md:block"
                   style={{
                     color: 'white',
@@ -173,7 +173,7 @@ const Header = () => {
                   Registrarme
                 </Link>
                 <Link
-                  href="/signup"
+                  href="/signin"
                   className="ease-in-up shadow-btn hover:shadow-btn-hover hidden rounded-sm bg-primary px-8 py-3 text-base font-medium text-white transition duration-300 hover:bg-opacity-90 md:block md:px-9 lg:px-6 xl:px-9"
                   style={{backgroundColor: 'transparent', color: '#3662E3', border: '1px solid #3662E3', borderRadius: '.5rem'}}
                 >
