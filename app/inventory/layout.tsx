@@ -13,11 +13,15 @@ import autoTable from 'jspdf-autotable';
 import SideBarComponent from "@/components/panel/sidebar";;
 import { data } from "./makeData";
 import IonIcon from "@reacticons/ionicons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "react-responsive-modal";
 import 'react-responsive-modal/styles.css';
 import { TypeBrands, TypeCategories } from "@/models/brands";
 import Link from "next/link";
+import { UserModel } from "@/models/user";
+import Cookie from 'universal-cookie';
+import { useRouter } from "next/navigation";
+import { getUser } from "../api/user/login/call";
 
 
 
@@ -176,8 +180,23 @@ const Example = () => {
     </>;
 };
 const LayoutHubInventoryPage = () => {
+  const router = useRouter();
+    const [user, setUser] = useState<UserModel>();
+    const toUser = async () => {
+        const cookies = new Cookie();
+        const token = await cookies.get('access_token');
+        const userr = await getUser(token);
+        console.log(userr);
+        if(userr === undefined){
+            router.push('/');
+        }
+        setUser(userr);
+    }
+    useEffect(() => {
+        toUser();
+    }, []);
     return <>
-      <SideBarComponent route='inventory' frameContennt={
+      <SideBarComponent user={user} route='inventory' frameContennt={
           <div className="resume" style={{overflow: 'hidden'}}>
               <InventoryResume></InventoryResume>
               <div style={{padding: '1rem'}}>

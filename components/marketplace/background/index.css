@@ -1,0 +1,23 @@
+.background{
+    text-align: center;
+    margin-top: 8rem;
+    padding: 2rem;
+    background-size: 100%;
+}
+
+.background h1{
+    font-size: 2rem;
+    color: white;
+}
+.background p{
+    color: white;
+}
+.background button{
+    padding: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: white;
+    color: #3662E3;
+    margin: 2rem;
+    border-radius: .3rem;
+}
