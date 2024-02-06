@@ -2,7 +2,7 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "http://stockeado-mvp.vercel.app/api",
+  baseURL: "https://stockeado-mvp.vercel.app/api",
   
   withCredentials: true,
   headers: {

@@ -17,7 +17,7 @@ const LayoutSignIn = () =>{
         const cookies = new Cookie();
         const token = await cookies.get('access_token');
         const userr = await getUser(token);
-        if(userr !== undefined){
+        if(userr !== undefined || user === null){
             router.push('/hub');
         }
         setUser(userr);

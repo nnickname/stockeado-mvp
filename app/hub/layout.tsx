@@ -16,7 +16,7 @@ const LayouHubDashboardPage = () =>{
         const token = await cookies.get('access_token');
         const userr = await getUser(token);
         console.log(userr);
-        if(userr === undefined){
+        if(userr === undefined || user === null){
             router.push('/');
         }
         setUser(userr);
