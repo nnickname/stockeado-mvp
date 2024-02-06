@@ -1,5 +1,6 @@
 "use client";
 
+import { TypeBrands } from "@/models/brands";
 import IonIcon from "@reacticons/ionicons";
 import Link from "next/link";
 import {useState } from "react";
@@ -14,8 +15,8 @@ const Hero = () => {
 
   return (
     <>
-      <Modal closeIcon={<IonIcon name="close" color='white'/>} styles={{
-        modal : {borderRadius: '1rem', maxWidth: '500px', padding: '0rem', backgroundColor: 'rgb(235, 233, 233)', zIndex: 56},
+      <Modal closeIcon={<IonIcon name="close" color='white' />} styles={{
+        modal : {borderRadius: '1rem', maxWidth: '500px', padding: '0rem', backgroundColor: 'rgb(245, 243, 243)', zIndex: 56},
         closeIcon: {color: 'white !important'},
         overlay: {backgroundColor: 'rgba(220, 217, 217, 0.5)'}
       }}  open={open} center onClose={() => setOpen(false) }>
@@ -26,29 +27,7 @@ const Hero = () => {
                 </p>
           <div style={{display: 'flex', justifyContent: 'space-between'}}>
           <select className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}>
-            <option value={-1}>Marca</option>
-            <option value={-1}>Toyota</option>
-            <option value={-1}>Nissan</option>
-            <option value={-1}>Hyundai</option>
-            <option value={-1}>Kia</option>
-            <option value={-1}>Chevrolet</option>
-            <option value={-1}>Ford</option>
-            <option value={-1}>Volskwagen</option>
-            <option value={-1}>Mazda</option>
-            <option value={-1}>Mitsubishi</option>
-            <option value={-1}>Suzuki</option>
-            <option value={-1}>Peugeot</option>
-            <option value={-1}>BMW</option>
-            <option value={-1}>Mercedes Benz</option>
-            <option value={-1}>Audi</option>
-            <option value={-1}>Jeep</option>
-            <option value={-1}>Land Rover</option>
-            <option value={-1}>Volvo</option>
-            <option value={-1}>Mini</option>
-            <option value={-1}>Porsche</option>
-            <option value={-1}>Kia</option>
-            <option value={-1}>Geely</option>
-            <option value={-1}>Renault</option>
+            {TypeBrands.map((e, index) => <option value={index+1}>{e}</option>)}
 
           </select>
           <select className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}>

@@ -28,7 +28,11 @@ const SideBarComponent: FunctionComponent<SideBarProps> = ({user, frameContennt,
             </div>
             <div className="list">
                 <IonIcon style={{color: route === 'inventory' ? '#1570EF' : 'black'}} className="icon" name="cart-outline" />
-                <p style={{color: route === 'inventory' ? '#1570EF' : 'black'}} className="text">Inventario</p>
+                <p style={{color: route === 'inventory' ? '#1570EF' : 'black'}} className="text">Inventario Web</p>
+            </div>
+            <div className="list">
+                <IonIcon style={{color: route === 'request' ? '#1570EF' : 'black'}} className="icon" name="person-outline" />
+                <p style={{color: route === 'request' ? '#1570EF' : 'black'}} className="text">Solicitudes</p>
             </div>
             <div className="list">
                 <IonIcon style={{color: route === 'request' ? '#1570EF' : 'black'}} className="icon" name="mail-unread-outline" />
