@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import './index.css';
 import IonIcon from "@reacticons/ionicons";
+import { Popover } from "react-tiny-popover";
+import productImage from '../../../public/images/logo/productImage.png';
 const HeaderMarketPlace = () => {
   // Navbar toggle
   const [navbarOpen, setNavbarOpen] = useState(false);
@@ -34,13 +36,14 @@ const HeaderMarketPlace = () => {
       setOpenIndex(index);
     }
   };
+  const [isPopoverOpen, setIsPopoverOpen] = useState<boolean>(false);
 
   const usePathName = usePathname();
 
   return (
     <>
       <header
-        style={{zIndex: 55, borderBottom: '1px solid rgba(230, 230, 230, 0.5)'}}
+        style={{zIndex: 55}}
         className={`header left-0 top-0 flex w-full items-center ${
           sticky
             ? "dark:bg-gray-dark dark:shadow-sticky-dark fixed z-[9999] bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm transition"
@@ -81,10 +84,63 @@ const HeaderMarketPlace = () => {
 
 
             </div>
-            <div className="cart">
-                <IonIcon name="cart-outline"/>
-                <p>Mi carrito</p>
-            </div>
+            <Popover
+                    containerStyle={{
+                        minWidth: '350px',
+                        backgroundColor: 'white',
+                        padding: '1rem',
+                        border: '1px solid rgba(0, 0, 0, 0.2)',
+                        borderRadius: '0rem 0rem .5rem .5rem'
+                    }}
+                    isOpen={isPopoverOpen}
+                    positions={['bottom', 'left', 'right', 'top']} // preferred positions by priority
+                    content={
+                    <div>
+
+
+                    <div>
+                        <div style={{display: 'flex', justifyContent: 'space-between', paddingBottom: '1rem'}}>
+                        <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+                          Imagen</p>
+                          <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+                          Nombre</p>
+                          <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+                          Cantidad</p>
+                          <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+                          Precio</p>
+                          <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+                          Action</p>
+                          
+                        </div>
+
+                        <div style={{display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(220, 220, 220, .3)'}}>
+                          <Image style={{width: '35px', height: '35px'}} src={productImage} alt='Product Image' />
+                          <p style={{maxWidth: '100px'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+                          Cojinete metal de goma</p>
+                          <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+                          6</p>
+                          <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+                          s/. 1.320</p>
+                          <button style={{color: '#ff6347'}}><IonIcon name="trash-outline" color='#ff6347'/></button>
+                        </div>
+
+
+                        
+                      </div>
+                      <div style={{marginTop: '1rem', display: 'flex', justifyContent: 'space-between'}}>
+                        <p style={{fontSize: '1.1rem'}}>Total</p>
+                        <p>s/. 10.030.00</p>
+                      </div>
+                      <button style={{padding: '.5rem', textAlign: 'center', width:'100%', background: 'linear-gradient(180deg, #127FFF 0%, #3662E3 100%)', color: 'white'}}>Ir a pagar</button>
+                    </div>
+                }
+                    >
+                    <div className="cart" onClick={() => setIsPopoverOpen(!isPopoverOpen)}>
+                        <IonIcon name="cart-outline"/>
+                        <p>Mi Carrito{' (7)'}</p>
+                    </div>
+              </Popover>
+            
             
           </div>
         </div>

@@ -37,7 +37,7 @@ const Home = () => {
         <div className="sidebarM">
           <h1>Categorias</h1>
           {TypeCategories.map((e, index) => {
-            return <div style={{display: 'flex', marginTop: '.4rem'}}>
+            return <div key={index} style={{display: 'flex', marginTop: '.4rem'}}>
               <input type='checkbox' style={{marginRight: '.5rem'}}/>
               <p>{e}</p>
               
@@ -47,7 +47,7 @@ const Home = () => {
 
           <h1>Tipo de pieza</h1>
           {TypeOfPiece.map((e, index) => {
-            return <div style={{display: 'flex', marginTop: '.4rem'}}>
+            return <div key={index} style={{display: 'flex', marginTop: '.4rem'}}>
               <input type='checkbox' style={{marginRight: '.5rem'}}/>
               <p>{e}</p>
               
@@ -58,7 +58,7 @@ const Home = () => {
         
           <h1>Marcas</h1>
           {TypeBrands.map((e, index) => {
-            return <div style={{display: 'flex', marginTop: '.4rem'}}>
+            return <div key={index} style={{display: 'flex', marginTop: '.4rem'}}>
               <input type='checkbox' style={{marginRight: '.5rem'}}/>
               <p>{e}</p>
               
