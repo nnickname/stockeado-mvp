@@ -4,3 +4,5 @@ export const TypeBrands = [
 ]
 
 export const TypeCategories = ['Partes de motor', 'Neumaticos', 'Otro'];
+
+export const TypeOfPiece = ['Genuino', 'Original', 'Alternativo', 'Segunda'];

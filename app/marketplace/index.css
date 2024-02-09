@@ -1,0 +1,54 @@
+.marketplace{
+    display: flex;
+}
+.marketplace .sidebarM{
+    padding: 2rem;
+    min-width: 250px;
+    height: 100%;
+    background-color: #edeef0;
+}
+.sidebarM h1{
+    margin-bottom: 1rem;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+.sidebarM input{
+    margin-top: .2rem;
+    width: 17px;
+    height: 17px;
+}
+
+.contentM{
+    width: 100%;
+    padding: 1.5rem;
+}
+
+.contentM .brands{
+    cursor: pointer;
+    text-align: center;
+    width: 100% !important;
+    margin: .7rem;
+    justify-content: center;
+    background-color:white ;
+    border-radius: .5rem;
+    position: relative;    
+    box-shadow: 9px 8px 28px -13px rgba(0,0,0,0.75);
+}
+.contentM .brands img{
+    box-shadow: 9px 8px 28px -13px rgba(0,0,0,0.75);
+
+    border-radius: .5rem;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.gridItems{
+    display: grid;
+    grid-template-rows: auto auto auto;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1rem;
+}

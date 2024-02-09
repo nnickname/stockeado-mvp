@@ -41,7 +41,7 @@ const HeaderMarketPlace = () => {
     <>
       <header
         style={{zIndex: 55, borderBottom: '1px solid rgba(230, 230, 230, 0.5)'}}
-        className={`header left-0 top-0 z-40 flex w-full items-center ${
+        className={`header left-0 top-0 flex w-full items-center ${
           sticky
             ? "dark:bg-gray-dark dark:shadow-sticky-dark fixed z-[9999] bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm transition"
             : "absolute bg-transparent"
