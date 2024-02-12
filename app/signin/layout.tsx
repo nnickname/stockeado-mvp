@@ -2,10 +2,10 @@
 import Header from "@/components/dashboard/Header";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { getUser, loginUser } from "../api/user/login/call";
+import { getUser, loginUser } from "../api/user/call";
 import { useRouter } from "next/navigation";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-import { UserModel } from "@/models/user";
+import { UserModel } from "@/models/userModel";
 import  Cookie  from "universal-cookie";
 
 const LayoutSignIn = () =>{

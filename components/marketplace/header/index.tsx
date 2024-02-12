@@ -85,6 +85,7 @@ const HeaderMarketPlace = () => {
 
             </div>
             <Popover
+            children={<div></div>}
                     containerStyle={{
                         minWidth: '350px',
                         backgroundColor: 'white',

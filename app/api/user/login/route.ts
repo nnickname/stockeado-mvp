@@ -1,10 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "../../db";
-import User from "../../../../models/user";
 import bcrypt from 'bcrypt';
 import { NextRequest, NextResponse } from "next/server";
 import jwt, { JwtPayload } from "jsonwebtoken";
-
+import Users from '../../../../models/userModel';
 const statictoken = 'eyJhbGciOiJIUz';
 export async function POST (req: Request,
 
@@ -12,7 +11,7 @@ export async function POST (req: Request,
       await dbConnect();
 
       let body = await req.json();
-      const account = await User.findOne({ email: body?.email });
+      const account = await Users.findOne({ email: body?.email });
       if(account){
         if (bcrypt.compareSync(body?.password.toString(), account?.password.toString())) {
           const token = jwt.sign({ _id: account?._id.toString() }, "SECRET_EXAMPLE_KEY", {

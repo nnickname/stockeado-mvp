@@ -1,13 +1,14 @@
-import mongoose from "mongoose";
+import mongoose, {model, ObjectId, Schema} from "mongoose";
 
-export interface UserModel extends mongoose.Document {
+export interface UserModel extends Document {
+  _id: ObjectId;
   name: string;
   password: string;
   email: string
 }
 
 /* PetSchema will correspond to a collection in your MongoDB database. */
-const UserSchema = new mongoose.Schema<UserModel>({
+const UserSchema = new Schema({
   name: {
     /* The name of this pet */
 
@@ -31,5 +32,4 @@ const UserSchema = new mongoose.Schema<UserModel>({
   },
   
 });
-
-export default mongoose.models.User || mongoose.model<UserModel>("User", UserSchema);
+export default  mongoose.models.Users || model<UserModel>("Users", UserSchema);

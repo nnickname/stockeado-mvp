@@ -1,7 +1,7 @@
 import Cookie from 'universal-cookie';
-import axios from '../../call';
+import axios from '../call';
 
-export const loginUser = async (email: string, password: string) => {
+export const createInventory = async (email: string, password: string) => {
     
     try{
         const cookies = new Cookie();
@@ -17,11 +17,13 @@ export const loginUser = async (email: string, password: string) => {
     }
 }
 
-export const getUser = async (token: string) => {
+export const getInventory = async () => {
     
     try{
-        const response: any = await axios.get("/user", {headers: {'token': token}});
-        return response?.data?.user;
+        const cookies = new Cookie();
+        const token = cookies.get('access_token');
+        const response: any = await axios.get("/inventory", {headers: {'token': token}});
+        return response?.data?.items;
     }
     catch(error){
         return null;

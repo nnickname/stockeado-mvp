@@ -5,7 +5,7 @@ import './index.css';
 import Image from "next/image";
 import IonIcon from "@reacticons/ionicons";
 import { FunctionComponent, ReactNode } from "react";
-import { UserModel } from "@/models/user";
+import { UserModel } from "@/models/userModel";
 import Cookie from "universal-cookie";
 import { useRouter } from "next/navigation";
 type SideBarProps = {

@@ -1,5 +1,5 @@
 import dbConnect from "../db";
-import User from "../../../models/user";
+import User from "../../../models/userModel";
 import bcrypt from 'bcrypt';
 import { NextResponse } from "next/server";
 import middleware from "../_middleware";

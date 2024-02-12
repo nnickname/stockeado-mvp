@@ -5,16 +5,14 @@ import SellResume from "@/components/panel/sellresume";
 import SideBarComponent from "@/components/panel/sidebar";
 import { createConnection } from "mongoose";
 import { useEffect, useState } from "react";
-import { getUser } from "../api/user/login/call";
+import { getUser } from "../api/user/call";
 import Cookie from 'universal-cookie';
-import { UserModel } from '../../models/user';
+import { UserModel } from '../../models/userModel';
 const LayouHubDashboardPage = () =>{
     const router = useRouter();
     const [user, setUser] = useState<UserModel>();
     const toUser = async () => {
-        const cookies = new Cookie();
-        const token = await cookies.get('access_token');
-        const userr = await getUser(token);
+        const userr = await getUser();
         console.log(userr);
         if(userr === undefined || user === null){
             router.push('/');

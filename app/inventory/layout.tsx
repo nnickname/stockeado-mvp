@@ -1,119 +1,141 @@
 'use client';
 
 import InventoryResume from "@/components/panel/inventoryresume";
-import {
-  MaterialReactTable,
-  createMRTColumnHelper,
-  useMaterialReactTable,
-} from 'material-react-table';
-import { Box, Button } from '@mui/material';
-import FileDownloadIcon from '@mui/icons-material/FileDownload';
-import { jsPDF } from 'jspdf'; //or use your library of choice here
-import autoTable from 'jspdf-autotable';
+
+
 import SideBarComponent from "@/components/panel/sidebar";;
-import { data } from "./makeData";
 import IonIcon from "@reacticons/ionicons";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Modal from "react-responsive-modal";
 import 'react-responsive-modal/styles.css';
 import { TypeBrands, TypeCategories } from "@/models/brands";
 import Link from "next/link";
-import { UserModel } from "@/models/user";
+import { UserModel } from "@/models/userModel";
 import Cookie from 'universal-cookie';
 import { useRouter } from "next/navigation";
-import { getUser } from "../api/user/login/call";
+import { getInventory } from "../api/inventory/call";
+import { getUser } from "../api/user/call";
+import { usePagination } from "@table-library/react-table-library/pagination";
+import { CompactTable } from '@table-library/react-table-library/compact';
+import './index.css';
+import '../../components/marketplace/header/index.css';
+export type InventoryTableModel = {
+    id: number;
+    _id: string;
+    sku: string;
+    name: string;
+    ammount: number;
+    sellings: number;
+    price: string;
+};
+const COLUMNS = [
+  { label: 'SKU', renderCell: (item) => item.sku },
+  /*{
+    label: 'Deadline',
+    renderCell: (item) =>
+      item.deadline.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      }),
+  },*/
+  { label: 'Nombre Producto', renderCell: (item) => item.name },
+  {
+    label: 'Cantidad',
+    renderCell: (item) => item.ammount,
+  },
+  { label: 'Ventas', renderCell: (item) => item.sellings },
+  { label: 'Precio', renderCell: (item) => item.price },
+  { label: '', pinRigth: true , renderCell: (item) =>     
+    <div style={{display: 'flex', fontSize: '1.2rem'}}>
+      <div style={{color: 'tomato', marginRight: '.5rem', cursor: 'pointer'}} onClick={() => {
+      //handleUpdate(event.target.value, item.action, "name")
+      }}>
+        <IonIcon name="trash-outline"/>
 
+      </div>
+      <div style={{color: 'orange', cursor: 'pointer'}} onClick={() => {
+      //handleUpdate(event.target.value, item.action, "name")
+      }}>
+        <IonIcon name="pencil-outline"/>
 
+      </div>
+      
+    </div>
+  }
+];
+  
 
-const columnHelper = createMRTColumnHelper();
+const TableRow = () => {
   
-const columns = [
-    columnHelper.accessor('id', {
-      header: 'SKU',
-    }),
-    columnHelper.accessor('firstName', {
-      header: 'Nombre producto',
-    }),
-    columnHelper.accessor('lastName', {
-      header: 'Cantidad',
-    }),
-    columnHelper.accessor('company', {
-      header: 'Ventas',
-    }),
-    columnHelper.accessor('city', {
-      header: 'Disponibilidad',
-    }),
-    columnHelper.accessor('country', {
-      header: 'Editar producto',
-    }),
-  ];
-  
-const Example = () => {
-   const [open, setOpen] = useState<boolean>(false);
-
-    const handleExportRows = (rows) => {
-      const doc = new jsPDF();
-      const tableData = rows.map((row) => Object.values(row.original));
-      const tableHeaders = columns.map((c) => c.header);
-  
-      autoTable(doc, {
-        head: [tableHeaders],
-        body: tableData,
-      });
-  
-      doc.save('document.pdf');
-    };
-  
-    const table = useMaterialReactTable({
-      columns,
-      data,
-      enableRowSelection: true,
-      columnFilterDisplayMode: 'popover',
-      paginationDisplayMode: 'pages',
-      positionToolbarAlertBanner: 'bottom',
-      renderTopToolbarCustomActions: ({ table }) => (
-        <Box
-          sx={{
-            display: 'flex',
-            gap: '8px',
-            padding: '0px',
-            flexWrap: 'wrap',
-          }}
-        >
-          <Button
-            disabled={table.getPrePaginationRowModel().rows.length === 0}
-            //export all rows, including from the next page, (still respects filtering and sorting)
-            onClick={() =>
-              setOpen(true)
-            }
-            startIcon={<IonIcon name="add-outline" />}
-          >
-            Cargar inventario
-          </Button>
-          <Button
-            disabled={table.getRowModel().rows.length === 0}
-            //export all rows as seen on the screen (respects pagination, sorting, filtering, etc.)
-            onClick={() => handleExportRows(table.getRowModel().rows)}
-            startIcon={<FileDownloadIcon />}
-          >
-            Descargar
-          </Button>
-          <Button
-            disabled={
-              !table.getIsSomeRowsSelected() && !table.getIsAllRowsSelected()
-            }
-            //only export selected rows
-            onClick={() => handleExportRows(table.getSelectedRowModel().rows)}
-            startIcon={<FileDownloadIcon />}
-          >
-            Exportar seleccionado
-          </Button>
-        </Box>
-      ),
+    const [inventoryData, setInventory] = useState<InventoryTableModel[]>([]);
+    const pagination = usePagination({nodes: [...inventoryData ?? []]}, {
+      state: {
+        page: 0,
+        size: 12,
+      },
     });
-  
+    const MakeData = async () => {
+      const inventoryCast = await getInventory();
+      const inventoryy: InventoryTableModel[] = inventoryCast as InventoryTableModel[];
+      inventoryy?.map((e: InventoryTableModel, index) => {
+        inventoryy[index].id = index;
+        inventoryy[index].sellings = inventoryCast[index]?.sellings?.length ?? 0;
+      }) 
+      setInventory(inventoryy !== null ? inventoryy : []);
+    }
+    useEffect(() => {
+      MakeData();
+      
+    }, []);
+    
+   const [open, setOpen] = useState<boolean>(false);
+   const [search, setSearch] = useState("");
+
+    const handleSearch = (event) => {
+      setSearch(event.target.value);
+    };
+   
     return <>
-      <MaterialReactTable   table={table} />
+      <div className="input-search" style={{marginTop: '1rem', marginBottom: '1rem'}}>
+        <div className="iconinput">
+          <IonIcon name="search-outline"/>
+
+        </div>
+        <input placeholder="Busca por nombre de producto" type='text' value={search} onChange={handleSearch} />
+        <button >
+          Buscar
+        </button>
+
+
+      </div>
+      <CompactTable  pagination={pagination} columns={COLUMNS} data={{nodes: inventoryData?.filter((item) =>
+        item.name.toLowerCase().includes(search.toLowerCase()) || item.sku.toLowerCase().includes(search.toLowerCase())
+        
+      )}} />
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <span style={{margin: '.5rem'}}>Paginas: {pagination.state.getTotalPages(inventoryData ?? [])}</span>
+
+        <span>
+          Actual:{"  "}
+          {pagination.state.getPages(inventoryData ?? []).map((_, index) => (
+            <button
+              key={index}
+              type="button"
+              style={{
+
+                fontWeight: pagination.state.page === index ? "bold" : "normal",
+                color: pagination.state.page === index ? "#3662E3" : "black",
+                margin: '.5rem'
+              }}
+              onClick={() => pagination.fns.onSetPage(index)}
+            >
+              {index + 1} {'  '}
+            </button>
+          ))}
+        </span>
+      </div>
+
       <Modal closeIcon={<IonIcon name="close"/>} styles={{
         modal : {borderRadius: '1rem', minWidth: '300px', padding: '0rem'},
         closeIcon: {color: 'white !important'},
@@ -165,13 +187,12 @@ const Example = () => {
             </div>
           </div>
           <div style={{width: '100%', textAlign: 'right'}}>
-            <Button
-                      href="https://github.com/NextJSTemplates/startup-nextjs"
+            <button
                       className="inline-block rounded-sm bg-black px-8 py-4 text-base font-semibold text-white duration-300 ease-in-out hover:bg-black/90 dark:bg-white/10 dark:text-white dark:hover:bg-white/5"
                       style={{color: '#3662E3', background: 'transparent', fontWeight: '400', fontSize: '1rem'}}
                     >
                       Añadir
-            </Button>
+            </button>
           </div>
             
           
@@ -183,9 +204,8 @@ const LayoutHubInventoryPage = () => {
   const router = useRouter();
     const [user, setUser] = useState<UserModel>();
     const toUser = async () => {
-        const cookies = new Cookie();
-        const token = await cookies.get('access_token');
-        const userr = await getUser(token);
+        const userr = await getUser();
+        const inventory = await getInventory();
         if(userr === undefined || user === null){
             router.push('/');
         }
@@ -199,8 +219,8 @@ const LayoutHubInventoryPage = () => {
           <div className="resume" style={{overflow: 'hidden'}}>
               <InventoryResume></InventoryResume>
               <div style={{padding: '1rem'}}>
-                <h1 style={{marginBottom: '1rem', marginTop: '.5rem', fontSize: '1rem', fontWeight: '500'}}>Productos en MarketPlace <Link style={{fontSize: '1rem', color: '#3662E3', marginLeft: '.5rem'}} href="">Mi URL<IonIcon name='open-outline'/></Link></h1>
-                <Example/>
+                <h1 style={{marginBottom: '1rem', marginTop: '.5rem', fontSize: '1rem', fontWeight: '500'}}>Productos en MarketPlace <Link style={{fontSize: '1rem', color: '#3662E3', marginLeft: '.5rem'}} href={'http://localhost:3000/marketplace/' + user?._id}>Mi URL<IonIcon name='open-outline'/></Link></h1>
+                <TableRow />
               </div>
               
 

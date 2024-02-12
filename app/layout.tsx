@@ -30,5 +30,5 @@ export default async function RootLayout({
   );
 }
 
-import { Providers } from "./providers";import { getUser } from "./api/user/login/call";
+import { Providers } from "./providers";import { getUser } from "./api/user/call";
 
