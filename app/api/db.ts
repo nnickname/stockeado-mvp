@@ -9,7 +9,7 @@ import cors from "cors";
 
 const corsOptions ={
   
-  origin:'http://localhost:3000/',
+  origin:'https://stockeado-mvp.vercel.app/',
   credentials:true, 
   optionSuccessStatus:200,
   
