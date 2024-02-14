@@ -66,7 +66,7 @@ const LayoutConfigurationPage = () =>{
                         margin: '0px',
                         color: 'white',
                         backgroundSize: '100%',
-                        backgroundImage: image !== null ? image : 'rgba(0,0,0, 0.2)', cursor: 'pointer'}}> <Image alt="Logo" src={ImageLogo}/>
+                        backgroundImage: image !== null ? image : 'rgba(0,0,0, 0.2)', cursor: 'pointer'}}>{image !== null ? <img src={image}/> : <img alt="Logo" src={user?.image !== "load" ? user?.image : ImageLogo.src }/>} 
                         </label>
 
                         <input accept="image" id="image" onChange={onChangeImage} type='file' placeholder='Subir archivo' style={{
