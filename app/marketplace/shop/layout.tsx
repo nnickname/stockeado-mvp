@@ -31,7 +31,7 @@ const LayoutMarketPlaceShop = () => {
     return <>
     <HeaderMarketPlace/>
     <div className="background" style={{backgroundPosition: '50%',backgroundImage: `url(${backgroundImage.src})`, height: '200px'}}>
-        <img style={{margin: 'auto', marginTop: '3rem', height: '40px'}} src={user?.image}/>
+        <img alt="Logo" style={{margin: 'auto', marginTop: '3rem', height: '40px'}} src={user?.image}/>
     </div>
     <div className="marketplace">
 
@@ -76,7 +76,7 @@ const LayoutMarketPlaceShop = () => {
           <p>Se encontraron <span style={{fontWeight: '700'}}>{inventoryData?.length} productos</span></p>
         </div>
         <div className="gridItems">
-          {inventoryData?.map((e) => <CardMarketPlace item={e}/>)}
+          {inventoryData?.map((e, index) => <CardMarketPlace key={index} item={e}/>)}
 
         </div>
       </div>
