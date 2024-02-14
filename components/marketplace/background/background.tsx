@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import backgroundImage from '../../../public/images/logo/background.jpeg';
 import './index.css';
-type
 const BackgroundImage = () => {
     return <div className="background" style={{backgroundImage: `url(${backgroundImage.src})`,}}>
         <div style={{zIndex: 99}}>
