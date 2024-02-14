@@ -81,13 +81,7 @@ const Home = () => {
             <p>Se encontraron <span style={{fontWeight: '700'}}>180 productos</span></p>
           </div>
           <div className="gridItems">
-            <CardMarketPlace/>
-            <CardMarketPlace/>
-            <CardMarketPlace/>
-            <CardMarketPlace/>
-            <CardMarketPlace/>
-            <CardMarketPlace/>
-            <CardMarketPlace/>
+            
 
           </div>
         </div>
