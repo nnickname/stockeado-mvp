@@ -3,6 +3,11 @@ import mongoose, {model, ObjectId, Schema} from "mongoose";
 export interface UserModel extends Document {
   _id: ObjectId;
   name: string;
+  lastname: string;
+  nameShop: string;
+  phone: string;
+  image: string;
+  direction: string;
   password: string;
   email: string
 }
@@ -14,6 +19,34 @@ const UserSchema = new Schema({
 
     type: String,
     required: [true, "Please provide a name."],
+    maxlength: [60, "Name cannot be more than 60 characters"],
+  },
+  lastname: {
+    /* The name of this pet */
+
+    type: String,
+    required: [true, "Please provide a lastname."],
+    maxlength: [60, "Name cannot be more than 60 characters"],
+  },
+  nameShop: {
+    /* The name of this pet */
+
+    type: String,
+    required: [true, "Please provide a nameShop."],
+    maxlength: [60, "Name cannot be more than 60 characters"],
+  },
+  phone: {
+    /* The name of this pet */
+
+    type: String,
+    required: [true, "Please provide a Phone."],
+    maxlength: [60, "Name cannot be more than 60 characters"],
+  },
+  direction: {
+    /* The name of this pet */
+
+    type: String,
+    required: [true, "Please provide a direction."],
     maxlength: [60, "Name cannot be more than 60 characters"],
   },
   email: {

@@ -23,7 +23,7 @@ const SideBarComponent: FunctionComponent<SideBarProps> = ({user, frameContennt,
             <div className="avatar">
 
             </div>
-            <h1 className="title">{user?.name}</h1>
+            <h1 className="title">{user?.nameShop}</h1>
             <div style={{marginTop: '3rem'}}></div>
 
             <div className="list" onClick={() => router.push('/hub')}>
@@ -43,8 +43,8 @@ const SideBarComponent: FunctionComponent<SideBarProps> = ({user, frameContennt,
                 <p style={{color: route === 'request' ? '#1570EF' : 'black'}} className="text">Ordenes finales</p>
             </div>
 
-            <div style={{marginTop: '3rem'}}></div>
-            <div className="list">
+            <div style={{marginTop: '3rem'}} ></div>
+            <div onClick={() => router.push('/configuration')} className="list">
                 <IonIcon style={{color: route === 'configuration' ? '#1570EF' : 'black'}} className="icon" name="settings-outline" />
                 <p style={{color: route === 'configuration' ? '#1570EF' : 'black'}} className="text">Configuración</p>
             </div>

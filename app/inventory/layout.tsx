@@ -99,13 +99,13 @@ const ModalEditProduct: FunctionComponent<EditRowParams> = ({user, item, makeDat
           padding: '4rem',
           margin: '0px',
           backgroundSize: '100%',
-          backgroundImage: image !== null ? image : 'rgba(0,0,0, 0.2)', cursor: 'pointer'}}>Subir Imagen</label>
+          backgroundImage: image !== null ? image : 'rgba(0,0,0, 0.2)', cursor: 'pointer'}}><img height='400px' src={image === null ? item.image : image}/></label>
 
         <input accept="image" id="image" onChange={onChangeImage} type='file' placeholder='Subir archivo' style={{
           visibility: 'hidden', display: 'none'
           
         }}/>
-        <img height='400px' src={image === null ? item.image : image}/>
+        
         <div style={{marginTop: '4rem'}}>
           <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Nombre de producto" className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
         </div>
@@ -208,10 +208,10 @@ const TableRow: FunctionComponent<TableRowParams> = ({user}) =>{
       { label: 'Nombre Producto', renderCell: (item) => item.name },
       {
         label: 'Cantidad',
-        renderCell: (item) => item.ammount,
+        renderCell: (item) => <p style={{color: item.ammount < 4 ? 'tomato' : 'black'}}>{item.ammount}</p> ,
       },
-      { label: 'Ventas', renderCell: (item) => item.sellings },
-      { label: 'Precio', renderCell: (item) => item.price },
+      { label: 'Ventas', renderCell: (item) => item.sellings},
+      { label: 'Precio', renderCell: (item) => 's/.' + item.price },
       { label: '', pinRigth: true , renderCell: (item) =>     
         <div style={{display: 'flex', fontSize: '1.2rem'}}>
           <div style={{color: 'tomato', marginRight: '.5rem', cursor: 'pointer'}} onClick={() => {
@@ -254,7 +254,9 @@ const TableRow: FunctionComponent<TableRowParams> = ({user}) =>{
     }
     const deleteVisualInventory = async () => {
       if(await deleteInventory(itemSelected)){
+        setOpenDelete(false);
         NotificationManager.success('Eliminaste el item', 'Success');
+        window.location.reload();
       } else NotificationManager.error('Ocurrio un error', 'Error');
     }
     const validateForm = async () => {
@@ -275,11 +277,11 @@ const TableRow: FunctionComponent<TableRowParams> = ({user}) =>{
         type,
         owner_id: user._id
       }
-      if(name !== "" && image !== null && sku !== null && ammount !== null && price !== null && brand !== -1 && categorie !== -1 && onMP !== null && model !== null && type !== -1){
+      if(name !== "" && image !== null && sku !== null && ammount !== null && price !== null && brand !== -1 && categorie !== -1 && model !== null && type !== -1){
           const response = await createInventory(buildBody);
           if(response){
              NotificationManager.success('Añadiste un item.', 'Success');
-             await MakeData(true);
+             window.location.reload();
           } else NotificationManager.error('Ocurrio un error', 'Error');
         } else NotificationManager.error('Completa el formulario.', 'Error');
     }
@@ -340,21 +342,25 @@ const TableRow: FunctionComponent<TableRowParams> = ({user}) =>{
           <p style={{color: 'grey'}}>Carga tu inventario desde un .csv <Link style={{fontSize: '1rem', color: '#3662E3', marginLeft: '.5rem'}} href="">Convertir<IonIcon name='open-outline'/></Link></p>
           <input style={{margin: '1rem'}} placeholder="Upload" type="file"/>
           <div style={{width: '100%', textAlign: 'center'}}>
+            <div style={{width: '1px', height: '53px', background: 'rgba(10, 10, 10, 0.2)', marginRight: 'auto', marginLeft: 'auto'}}></div>
             <p style={{color: 'grey'}}> o cargalo manualmente</p>
-            <div style={{width: '1px', height: '33px', background: 'rgba(10, 10, 10, 0.2)', marginRight: 'auto', marginLeft: 'auto'}}></div>
 
-            <div style={{marginTop: '1rem'}}></div>
+            <div style={{marginTop: '2rem'}}></div>
             <label htmlFor="image" style={{width: '100%',
               padding: '4rem',
               margin: '0px',
               backgroundSize: '100%',
-              backgroundImage: image !== null ? image : 'rgba(0,0,0, 0.2)', cursor: 'pointer'}}>Subir Imagen</label>
+              backgroundImage: image !== null ? image : 'rgba(0,0,0, 0.2)', cursor: 'pointer'}}>
+                {
+                  image === null ? 'Subir imagen' :
+                  <img style={{maxHeight: '400px !important'}} src={image}/>
+                }
+              </label>
 
             <input accept="image" id="image" onChange={onChangeImage} type='file' placeholder='Subir archivo' style={{
               visibility: 'hidden', display: 'none'
               
             }}/>
-            <img height='400px' src={image}/>
             <div style={{marginTop: '4rem'}}>
               <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Nombre de producto" className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
             </div>

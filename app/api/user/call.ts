@@ -29,3 +29,16 @@ export const getUser = async () => {
         return null;
     }
 }
+
+export const editUser = async (body: Object) => {
+    
+    try{
+        const response: any = await axios.post("/user/edit", {...body});
+        if(response?.data?.user !== undefined){
+            return true;
+        } else return false;
+    }
+    catch(error){
+        return false;
+    }
+}
