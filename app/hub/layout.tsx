@@ -14,8 +14,8 @@ const LayouHubDashboardPage = () =>{
     const toUser = async () => {
         const userr = await getUser();
         console.log(userr);
-        if(userr === undefined || user === null){
-            router.push('/');
+        if(userr === undefined || userr === null){
+            router.push('/signin');
         }
         setUser(userr);
     }

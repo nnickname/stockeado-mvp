@@ -14,10 +14,8 @@ const LayoutSignIn = () =>{
   const [password, setPassword] = useState<string>('');
     const [user, setUser] = useState<UserModel>();
     const toUser = async () => {
-        const cookies = new Cookie();
-        const token = await cookies.get('access_token');
-        const userr = await getUser(token);
-        if(userr !== undefined || user === null){
+        const userr = await getUser();
+        if(userr !== undefined && user !== null){
             router.push('/hub');
         }
         setUser(userr);

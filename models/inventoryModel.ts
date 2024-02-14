@@ -6,6 +6,7 @@ type SellingsModel = {
     order_id: ObjectId
 }
 export interface InventoryModel extends Document {
+  _id: String;
   name: string;
   price: string;
   stars: number;
@@ -17,10 +18,13 @@ export interface InventoryModel extends Document {
   sku: string;
   ammount: number;
   image: string;
+  model: string;
+  inMP: boolean;
 }
 
 /* PetSchema will correspond to a collection in your MongoDB database. */
 const InventorySchema = new Schema({
+ 
   name: {
     /* The name of this pet */
 
@@ -90,6 +94,18 @@ const InventorySchema = new Schema({
 
     type: String,
     required: [true, "Please provide a image."],
+  },
+  model: {
+    /* The name of this pet */
+
+    type: String,
+    required: [true, "Please provide a model."],
+  },
+  inMP: {
+    /* The name of this pet */
+
+    type: Boolean,
+    required: [true, "Please provide a boolean."],
   },
 });
 

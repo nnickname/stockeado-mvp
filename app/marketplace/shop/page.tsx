@@ -56,26 +56,8 @@ const MarketPlaceURLPage: NextPage = () => {
 
 
       <div className="contentM">
-        <p> Tiendas mas visitadas</p>
-        <div  style={{marginTop: '3rem' ,display: 'flex', justifyContent: 'space-between'}}>
-
-          <div className="brands">
-            <Image src={MpLogo1} alt=""/>
-          </div>
-          <div className="brands">
-            <Image src={MpLogo2} alt=""/>
-          </div>
-          <div className="brands">
-            <Image src={MpLogo3} alt=""/>
-          </div>
-          <div className="brands">
-            <Image src={MpLogo4} alt=""/>
-          </div>
-          <div className="brands">
-            <Image src={MpLogo4} alt=""/>
-          </div>
-        </div>
-        <div style={{marginTop: '3rem', padding: '.6rem', width: '100%', borderRadius: '.5rem', border: '1px solid rgba(0, 0, 0, 0.2)'}}>
+        
+        <div style={{marginTop: '0rem', padding: '.6rem', width: '100%', borderRadius: '.5rem', border: '1px solid rgba(0, 0, 0, 0.2)'}}>
           <p>Se encontraron <span style={{fontWeight: '700'}}>180 productos</span></p>
         </div>
         <div className="gridItems">
