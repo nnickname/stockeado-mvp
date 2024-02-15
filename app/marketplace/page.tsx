@@ -18,7 +18,7 @@ const Home = () => {
 
   return (
     <>
-      <HeaderMarketPlace/>
+      <HeaderMarketPlace cartItems={[]} setCart={undefined}/>
       <BackgroundImage/>
       <div className="marketplace">
 

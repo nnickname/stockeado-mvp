@@ -8,11 +8,19 @@ import IonIcon from "@reacticons/ionicons";
 import { Popover } from "react-tiny-popover";
 import productImage from '../../../public/images/logo/productImage.png';
 import { TypeBrands } from "@/models/brands";
-import { CartProps } from "@/app/marketplace/shop/layout";
+import { CartProps } from "@/models/ordersModel";
 
 type HeaderMarketPlaceProps = {
   cartItems: CartProps[];
   setCart: any
+}
+
+export const getTotalPrice = (cartItems: CartProps[]) => {
+  var price: number = 0;
+  cartItems?.map((e) => {
+    price = price + (Number(e?.item?.price) * e?.ammount);
+  })
+      return String(price);
 }
 const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems, setCart}) => {
   // Navbar toggle
@@ -45,13 +53,7 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
   };
   const [isPopoverOpen, setIsPopoverOpen] = useState<boolean>(false);
 
-  const getTotalPrice = (cartItems: CartProps[]) => {
-    var price: number = 0;
-    cartItems?.map((e) => {
-      price = price + (Number(e?.item?.price) * e?.ammount);
-    })
-        return String(price);
-  }
+
   return (
     <>
       <header

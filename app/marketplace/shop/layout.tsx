@@ -12,12 +12,10 @@ import '../index.css';
 import HeaderMarketPlace from "@/components/marketplace/header";
 import { InventoryModel } from "@/models/inventoryModel";
 import '../../../components/marketplace/background/index.css';
+import { CartProps } from "@/models/ordersModel";
 
 
-export type CartProps = {
-  item: InventoryModel,
-  ammount: number
-}
+
 const LayoutMarketPlaceShop = () => {
     const searchParams = useSearchParams()
     const search = searchParams.get('id');

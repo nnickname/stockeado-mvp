@@ -38,9 +38,9 @@ const SideBarComponent: FunctionComponent<SideBarProps> = ({user, frameContennt,
                 <IonIcon style={{color: route === 'request' ? '#1570EF' : 'black'}} className="icon" name="person-outline" />
                 <p style={{color: route === 'request' ? '#1570EF' : 'black'}} className="text">Solicitudes</p>
             </div>
-            <div className="list">
-                <IonIcon style={{color: route === 'request' ? '#1570EF' : 'black'}} className="icon" name="mail-unread-outline" />
-                <p style={{color: route === 'request' ? '#1570EF' : 'black'}} className="text">Ordenes finales</p>
+            <div onClick={() => router.push('/orders')} className="list">
+                <IonIcon style={{color: route === 'orders' ? '#1570EF' : 'black'}} className="icon" name="mail-unread-outline" />
+                <p style={{color: route === 'orders' ? '#1570EF' : 'black'}} className="text">Ordenes finales</p>
             </div>
 
             <div style={{marginTop: '3rem'}} ></div>
