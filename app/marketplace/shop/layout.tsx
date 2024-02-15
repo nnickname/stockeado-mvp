@@ -12,12 +12,20 @@ import '../index.css';
 import HeaderMarketPlace from "@/components/marketplace/header";
 import { InventoryModel } from "@/models/inventoryModel";
 import '../../../components/marketplace/background/index.css';
+
+
+export type CartProps = {
+  item: InventoryModel,
+  ammount: number
+}
 const LayoutMarketPlaceShop = () => {
     const searchParams = useSearchParams()
     const search = searchParams.get('id');
     const [user, setUser] = useState<UserModel>();
     const [inventoryRealData, setInventoryRealData] = useState<InventoryModel[]>([]);
     const [inventoryData, setInventoryData] = useState<InventoryModel[]>([]);
+    const [cart, setCart] = useState<CartProps[]>([]);
+    const [ammountItem, setAmmountItem] = useState<number>(0);
 
     const toUser = async () => {
         const userr = await getMarketPlace(search);
@@ -29,7 +37,7 @@ const LayoutMarketPlaceShop = () => {
         toUser();
     }, []);
     return <>
-    <HeaderMarketPlace/>
+    <HeaderMarketPlace cartItems={cart} setCart={setCart}/>
     <div className="background" style={{backgroundPosition: '50%',backgroundImage: `url(${backgroundImage.src})`, height: '200px'}}>
         <img alt="Logo" style={{margin: 'auto', marginTop: '3rem', height: '40px'}} src={user?.image}/>
     </div>
@@ -76,8 +84,8 @@ const LayoutMarketPlaceShop = () => {
           <p>Se encontraron <span style={{fontWeight: '700'}}>{inventoryData?.length} productos</span></p>
         </div>
         <div className="gridItems">
-          {inventoryData?.map((e, index) => <CardMarketPlace key={index} item={e}/>)}
-
+          {inventoryData?.map((e, index) => <CardMarketPlace key={index} item={e} setCart={setCart} setAmmountItem={setAmmountItem} ammountItem={ammountItem} cart={cart}/>)}
+ 
         </div>
       </div>
     </div>

@@ -2,12 +2,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import './index.css';
 import IonIcon from "@reacticons/ionicons";
 import { Popover } from "react-tiny-popover";
 import productImage from '../../../public/images/logo/productImage.png';
-const HeaderMarketPlace = () => {
+import { TypeBrands } from "@/models/brands";
+import { CartProps } from "@/app/marketplace/shop/layout";
+
+type HeaderMarketPlaceProps = {
+  cartItems: CartProps[];
+  setCart: any
+}
+const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems, setCart}) => {
   // Navbar toggle
   const [navbarOpen, setNavbarOpen] = useState(false);
   const navbarToggleHandler = () => {
@@ -38,8 +45,13 @@ const HeaderMarketPlace = () => {
   };
   const [isPopoverOpen, setIsPopoverOpen] = useState<boolean>(false);
 
-  const usePathName = usePathname();
-
+  const getTotalPrice = (cartItems: CartProps[]) => {
+    var price: number = 0;
+    cartItems?.map((e) => {
+      price = price + (Number(e?.item?.price) * e?.ammount);
+    })
+        return String(price);
+  }
   return (
     <>
       <header
@@ -97,10 +109,9 @@ const HeaderMarketPlace = () => {
                     content={
                     <div>
 
-
                     <div>
                         <div style={{display: 'flex', justifyContent: 'space-between', paddingBottom: '1rem'}}>
-                        <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+                          <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
                           Imagen</p>
                           <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
                           Nombre</p>
@@ -112,24 +123,33 @@ const HeaderMarketPlace = () => {
                           Action</p>
                           
                         </div>
+                        {cartItems?.length === 0 ? <p style={{textAlign: 'center', color: 'grey'}}>Todavia no añadiste nada</p> : ''}
 
-                        <div style={{display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(220, 220, 220, .3)'}}>
-                          <Image style={{width: '35px', height: '35px'}} src={productImage} alt='Product Image' />
-                          <p style={{maxWidth: '100px'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                          Cojinete metal de goma</p>
-                          <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                          6</p>
-                          <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                          s/. 1.320</p>
-                          <button style={{color: '#ff6347'}}><IonIcon name="trash-outline" color='#ff6347'/></button>
-                        </div>
+                        {cartItems?.map((e, index) => {
+                          return <div key={index}>
+                          <div style={{display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(220, 220, 220, .3)'}}>
+                            <img style={{width: '35px', height: '35px'}} src={e?.item?.image} alt='Product Image' />
+                            <p style={{maxWidth: '100px'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+                            <p>{e?.item?.name} {TypeBrands[e?.item.brand-1] + ' '} {e?.item?.model }</p></p>
+                            <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+                            {String(e?.ammount)}</p>
+                            <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+                            s/. {Number(e?.item?.price) * e?.ammount}</p>
+                            <button onClick={() => {
+                              setCart(cartItems.filter((obj, indexx) => index !== indexx))
+                            }} style={{color: '#ff6347'}}><IonIcon name="trash-outline" color='#ff6347'/></button>
+                          </div>
+                          </div>
+                        })}
+
+                        
 
 
                         
                       </div>
                       <div style={{marginTop: '1rem', display: 'flex', justifyContent: 'space-between'}}>
                         <p style={{fontSize: '1.1rem'}}>Total</p>
-                        <p>s/. 10.030.00</p>
+                        <p>s/. {getTotalPrice(cartItems)}</p>
                       </div>
                       <button style={{padding: '.5rem', textAlign: 'center', width:'100%', background: 'linear-gradient(180deg, #127FFF 0%, #3662E3 100%)', color: 'white'}}>Ir a pagar</button>
                     </div>
@@ -137,7 +157,7 @@ const HeaderMarketPlace = () => {
                     >
                     <div className="cart" onClick={() => setIsPopoverOpen(!isPopoverOpen)}>
                         <IonIcon name="cart-outline"/>
-                        <p>Mi Carrito{' (7)'}</p>
+                        <p>Mi Carrito{' (' + cartItems.length + ')'}</p>
                     </div>
               </Popover>
             

@@ -7,13 +7,21 @@ import { FunctionComponent, useState } from 'react';
 import IonIcon from '@reacticons/ionicons';
 import { InventoryModel } from '@/models/inventoryModel';
 import { TypeBrands, TypeCategories, TypeOfPiece } from '@/models/brands';
+import { CartProps } from '@/app/marketplace/shop/layout';
 
 
 type CardProps = {
-    item: InventoryModel
+    item: InventoryModel,
+    setCart: any,
+    setAmmountItem: any,
+    ammountItem: number,
+    cart: CartProps[]
 }
-const CardMarketPlace: FunctionComponent<CardProps> = ({item}) => {
+
+const CardMarketPlace: FunctionComponent<CardProps> = ({item,setCart, setAmmountItem, ammountItem, cart}) => {
     const [isPopoverOpen, setIsPopoverOpen] = useState<boolean>(false);
+    
+
     return <div  className="cardMarketPlace">
         <div className="contentImage">
             <img  src={item.image} alt="Item Image"/>
@@ -21,11 +29,12 @@ const CardMarketPlace: FunctionComponent<CardProps> = ({item}) => {
         <div  className="card-content">
             <div style={{display: 'flex', justifyContent: 'space-between'}}>
                 <div>
-                    <p>{item.name}</p>
+                    <p>{item.name} {TypeBrands[item.brand-1] + ' '} {item.model }</p>
                     <span style={{fontSize: '.9rem', color: 'green'}}> s/. {item.price}</span>
                 </div>
                 <div>
                 <Popover
+                    
                     containerStyle={{
                         backgroundColor: 'white',
                         padding: '1rem',
@@ -36,21 +45,30 @@ const CardMarketPlace: FunctionComponent<CardProps> = ({item}) => {
                     positions={['top', 'bottom', 'left', 'right']} // preferred positions by priority
                     content={
                     <div>
-                        <input min='0' max={item.ammount} style={{padding: '.5rem', border: '1px solid rgba(0,0,0, 0.1)'}} type='number' placeholder='Cantidad'/>
+                        <input value={ammountItem} onChange={(e) => setAmmountItem(Number(e.target.value))} min='0' max={item.ammount} style={{padding: '.5rem', border: '1px solid rgba(0,0,0, 0.1)', width: '100%'}} type='number' placeholder='Cantidad'/>
                         <br/>
-                        <button style={{marginTop: '1rem', padding: '.5rem', textAlign: 'center', width: '100%', background: 'green', color: 'white'}}>Añadir al carrito</button>
+                        <button onClick={() => {
+                            setCart([...cart, {
+                                item: item,
+                                ammount: ammountItem
+                            }]);
+                            setIsPopoverOpen(false);
+                        }} style={{marginTop: '1rem', padding: '.5rem', textAlign: 'center', width: '100%', background: 'green', color: 'white'}}>Añadir al carrito</button>
 
                     </div>
                 }
                     >
-                    <div style={{padding: '.3rem', borderRadius: '.5rem', color: '#3662E3', fontSize: '1rem', cursor: 'pointer', border: '1px solid rgba(0, 0, 0, 0.1)'}} onClick={() => setIsPopoverOpen(!isPopoverOpen)}>
+                    <div style={{padding: '.3rem', borderRadius: '.5rem', color: '#3662E3', fontSize: '1rem', cursor: 'pointer', border: '1px solid rgba(0, 0, 0, 0.1)'}} onClick={() => {
+                        setIsPopoverOpen(!isPopoverOpen),
+                        setAmmountItem(0)
+                        }}>
                         <IonIcon style={{fontSize: '1.5rem'}} name="cart-outline"/>
                     </div>
                 </Popover>
                 </div>
             </div>
             
-            <span style={{fontSize: '.8rem', color: 'grey'}}> {TypeBrands[item.brand-1] + ' - '} {item.model + ' - '} {TypeOfPiece[item.type -1] + ' - '} {TypeCategories[item.categorie-1] + ' - '}</span>
+            <span style={{fontSize: '.8rem', color: 'grey'}}>  {TypeOfPiece[item.type -1] + ' - '} {TypeCategories[item.categorie-1]}</span>
 
         </div>
     </div>
