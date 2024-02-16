@@ -6,13 +6,13 @@ import backgroundImage from '../../../public/images/logo/background3.webp';
 import CardMarketPlace from "@/components/marketplace/item";
 import { TypeCategories, TypeOfPiece, TypeBrands } from "@/models/brands";
 import { UserModel } from "@/models/userModel";
-import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import '../index.css';
 import HeaderMarketPlace from "@/components/marketplace/header";
 import { InventoryModel } from "@/models/inventoryModel";
 import '../../../components/marketplace/background/index.css';
 import { CartProps } from "@/models/ordersModel";
+import { useSearchParams } from "next/dist/client/components/navigation";
 
 
 
