@@ -2,8 +2,9 @@ import HeaderMarketPlace from "@/components/marketplace/header";
 import type { NextPage } from "next";
 import '../index.css';
 import LayoutMarketPlaceShop from "./layout";
+export const dynamic='force-dynamic';
+
 const MarketPlaceURLPage: NextPage = () => {
-    
     return <>
         <LayoutMarketPlaceShop/>      
   </>

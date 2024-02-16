@@ -53,10 +53,11 @@ export const getInventory = async () => {
     }
 }
 
-export const getMarketPlace = async (id) => {
+export const getMarketPlace = async (id: string) => {
     
     try{
         const response: any = await axios.get("/inventory/marketplace", {headers: {'id': id}});
+        console.log(response);
         return response?.data;
     }
     catch(error){
