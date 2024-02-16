@@ -7,7 +7,7 @@ import { FunctionComponent, useState } from 'react';
 import IonIcon from '@reacticons/ionicons';
 import { InventoryModel } from '@/models/inventoryModel';
 import { TypeBrands, TypeCategories, TypeOfPiece } from '@/models/brands';
-import { CartProps } from '@/app/marketplace/shop/layout';
+import { CartProps } from '@/models/ordersModel';
 
 
 type CardProps = {
