@@ -12,13 +12,12 @@ import HeaderMarketPlace from "@/components/marketplace/header";
 import { InventoryModel } from "@/models/inventoryModel";
 import '../../../components/marketplace/background/index.css';
 import { CartProps } from "@/models/ordersModel";
-import { useSearchParams } from "next/dist/client/components/navigation";
+import { useParams } from 'next/navigation';
 
 
 
 const LayoutMarketPlaceShop = () => {
-    const searchParams = useSearchParams()
-    const search = searchParams.get('id');
+    const { id } = useParams();
     const [user, setUser] = useState<UserModel>();
     const [inventoryRealData, setInventoryRealData] = useState<InventoryModel[]>([]);
     const [inventoryData, setInventoryData] = useState<InventoryModel[]>([]);
@@ -26,7 +25,7 @@ const LayoutMarketPlaceShop = () => {
     const [ammountItem, setAmmountItem] = useState<number>(0);
 
     const toUser = async () => {
-        const userr = await getMarketPlace(search);
+        const userr = await getMarketPlace(id);
         setInventoryRealData(userr?.items ?? []);
         setInventoryData(userr?.items ?? []);
         setUser(userr?.user);
