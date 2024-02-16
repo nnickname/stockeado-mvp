@@ -29,8 +29,8 @@ const CardMarketPlace: FunctionComponent<CardProps> = ({item,setCart, setAmmount
         <div  className="card-content">
             <div style={{display: 'flex', justifyContent: 'space-between'}}>
                 <div>
-                    <p>{item.name} {TypeBrands[item.brand-1] + ' '} {item.model }</p>
-                    <span style={{fontSize: '.9rem', color: 'green'}}> s/. {item.price}</span>
+                    <p>{item.name} {TypeBrands[(item?.brand-1) ?? 0] + ' '} {item?.model }</p>
+                    <span style={{fontSize: '.9rem', color: 'green'}}> s/. {item?.price}</span>
                 </div>
                 <div>
                 <Popover
@@ -45,11 +45,11 @@ const CardMarketPlace: FunctionComponent<CardProps> = ({item,setCart, setAmmount
                     positions={['top', 'bottom', 'left', 'right']} // preferred positions by priority
                     content={
                     <div>
-                        <input value={ammountItem} onChange={(e) => setAmmountItem(Number(e.target.value))} min='0' max={item.ammount} style={{padding: '.5rem', border: '1px solid rgba(0,0,0, 0.1)', width: '100%'}} type='number' placeholder='Cantidad'/>
+                        <input value={ammountItem} onChange={(e) => setAmmountItem(Number(e?.target?.value))} min='0' max={item?.ammount} style={{padding: '.5rem', border: '1px solid rgba(0,0,0, 0.1)', width: '100%'}} type='number' placeholder='Cantidad'/>
                         <br/>
                         <button onClick={() => {
                             setCart([...cart, {
-                                item: item,
+                                item: item ?? {},
                                 ammount: ammountItem
                             }]);
                             setIsPopoverOpen(false);
@@ -68,7 +68,7 @@ const CardMarketPlace: FunctionComponent<CardProps> = ({item,setCart, setAmmount
                 </div>
             </div>
             
-            <span style={{fontSize: '.8rem', color: 'grey'}}>  {TypeOfPiece[item.type -1] + ' - '} {TypeCategories[item.categorie-1]}</span>
+            <span style={{fontSize: '.8rem', color: 'grey'}}>  {TypeOfPiece[(item?.type -1) ?? 0] + ' - '} {TypeCategories[(item.categorie-1) ?? 0]}</span>
 
         </div>
     </div>
