@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { FunctionComponent, useEffect, useState } from "react";
 import './index.css';
 import IonIcon from "@reacticons/ionicons";
@@ -24,6 +24,7 @@ export const getTotalPrice = (cartItems: CartProps[]) => {
       return String(price);
 }
 const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems, setCart}) => {
+  const router = useRouter();
   // Navbar toggle
   const [navbarOpen, setNavbarOpen] = useState(false);
   const navbarToggleHandler = () => {
@@ -129,19 +130,19 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
                         {cartItems?.length === 0 ? <p style={{textAlign: 'center', color: 'grey'}}>Todavia no añadiste nada</p> : ''}
 
                         {cartItems?.map((e, index) => {
+                          console.log(e);
                           return <div key={index}>
                           <div style={{display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(220, 220, 220, .3)'}}>
                             <img style={{width: '35px', height: '35px'}} src={e?.item?.image} alt='Product Image' />
                             <p style={{maxWidth: '100px'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                            <p>{e?.item?.name} {TypeBrands[e?.item.brand-1] + ' '} {e?.item?.model }</p></p>
+                            <p>{e?.item?.name} {TypeBrands[e?.item?.brand-1] + ' '} {e?.item?.model }</p></p>
                             <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
                             {String(e?.ammount)}</p>
                             <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
                             s/. {Number(e?.item?.price) * e?.ammount}</p>
                             <button onClick={() => {
-                                const cookies = new Cookie();
-                              setCart(cartItems.filter((obj, indexx) => index !== indexx))
-                              cookies.set('cart', JSON.stringify(cartItems.filter((obj, indexx) => index !== indexx)), { path: '/' })
+                                setCart(cartItems.filter((obj, indexx) => index !== indexx));
+                                sessionStorage.setItem('cart', JSON.stringify(cartItems.filter((obj, indexx) => index !== indexx)))
 
                             }} style={{color: '#ff6347'}}><IonIcon name="trash-outline" color='#ff6347'/></button>
                           </div>
@@ -157,13 +158,13 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
                         <p style={{fontSize: '1.1rem'}}>Total</p>
                         <p>s/. {getTotalPrice(cartItems)}</p>
                       </div>
-                      <button style={{padding: '.5rem', textAlign: 'center', width:'100%', background: 'linear-gradient(180deg, #127FFF 0%, #3662E3 100%)', color: 'white'}}>Ir a pagar</button>
+                      <button onClick={() => router.push('/marketplace/payment')} style={{padding: '.5rem', textAlign: 'center', width:'100%', background: 'linear-gradient(180deg, #127FFF 0%, #3662E3 100%)', color: 'white'}}>Ir a pagar</button>
                     </div>
                 }
                     >
                     <div className="cart" onClick={() => setIsPopoverOpen(!isPopoverOpen)}>
                         <IonIcon name="cart-outline"/>
-                        <p>Mi Carrito{' (' + cartItems.length + ')'}</p>
+                        <p>Mi Carrito{' (' + (cartItems?.length ?? 0) + ')'}</p>
                     </div>
               </Popover>
             

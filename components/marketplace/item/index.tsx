@@ -52,7 +52,7 @@ const CardMarketPlace: FunctionComponent<CardProps> = ({item,setCart, setAmmount
                                 ammount: ammountItem
                             }];
                             setCart(cartCast);
-                            setCartCookies('cart', JSON.stringify(cartCast?.map((e: any) => e?.item )));
+                            sessionStorage.setItem("cart", String(JSON.stringify(cartCast)));
                             setIsPopoverOpen(false);
                         }} style={{marginTop: '1rem', padding: '.5rem', textAlign: 'center', width: '100%', background: 'green', color: 'white'}}>Añadir al carrito</button>
 

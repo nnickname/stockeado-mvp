@@ -38,10 +38,9 @@ const LayoutMarketPlaceShop = () => {
     useEffect(() => {
         
         toUser();
-        const cartCast = getCartCookies();
+        const cartCast = JSON.parse(sessionStorage.getItem("cart"));
+        if(cartCast !== undefined) setCart(cartCast ?? []);
         console.log(cartCast);
-        //if(cartCast !== undefined) setCart(JSON.parse(cartCast));
-
     }, []);
     return <>
     <HeaderMarketPlace cartItems={cart} setCart={setCart}/>
@@ -99,3 +98,7 @@ const LayoutMarketPlaceShop = () => {
     </>
 }
 export default LayoutMarketPlaceShop;
+
+
+
+
