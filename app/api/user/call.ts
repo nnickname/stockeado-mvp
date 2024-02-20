@@ -6,7 +6,6 @@ export const loginUser = async (email: string, password: string) => {
     try{
         const cookies = new Cookie();
         const response: any = await axios.post("/user/login", {email, password});
-        console.log(response.data);
         if(response?.data?.user !== undefined){
             cookies.set('access_token', response?.data?.token, { path: '/' })
             return true;

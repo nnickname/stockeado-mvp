@@ -1,6 +1,6 @@
 'use client';
 
-import { getMarketPlace } from "@/app/api/inventory/call";
+import { getCartCookies, getMarketPlace } from "@/app/api/inventory/call";
 import { getUser } from "@/app/api/user/call";
 import backgroundImage from '../../../public/images/logo/background3.webp';
 import CardMarketPlace from "@/components/marketplace/item";
@@ -16,6 +16,8 @@ import { useSearchParams } from 'next/navigation';
 
 
 
+
+
 const LayoutMarketPlaceShop = () => {
     const search = useSearchParams();
     const id = search.get('id');
@@ -26,14 +28,20 @@ const LayoutMarketPlaceShop = () => {
     const [ammountItem, setAmmountItem] = useState<number>(0);
 
     const toUser = async () => {
-        console.log(id);
+        
+        
         const userr = await getMarketPlace(id);
         setInventoryRealData(userr?.items ?? []);
         setInventoryData(userr?.items ?? []);
         setUser(userr?.user);
     }
     useEffect(() => {
+        
         toUser();
+        const cartCast = getCartCookies();
+        console.log(cartCast);
+        //if(cartCast !== undefined) setCart(JSON.parse(cartCast));
+
     }, []);
     return <>
     <HeaderMarketPlace cartItems={cart} setCart={setCart}/>

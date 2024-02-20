@@ -1,6 +1,20 @@
 import Cookie from 'universal-cookie';
 import axios from '../call';
 
+
+
+export const setCartCookies = (name: string, value: string) => {
+    const cookies = new Cookie();
+    console.log(name, value);
+    cookies.set(name, value, {path: '/'});
+}
+export const getCartCookies = () => {
+    const cookies = new Cookie();
+    
+    const cart = cookies.getAll();
+    console.log(cart);
+    return cart
+}
 export const deleteInventory = async (id: any) => {
     try{
         const response: any = await axios.get("/inventory/edit", {headers: {'id': id}});

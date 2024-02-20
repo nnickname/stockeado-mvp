@@ -19,11 +19,11 @@ export async function POST(
   req: Request,
 ) {
 
-  await dbConnect();
 
   
       try {  
-        
+        await dbConnect();
+
         const c = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         let randPassword = [...Array(8)].map(_ => c[~~(Math.random()*c.length)]).join('');
         let encryptedrandPassword = bcrypt.hashSync(randPassword.toString(), 10);

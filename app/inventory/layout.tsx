@@ -140,7 +140,7 @@ const ModalEditProduct: FunctionComponent<EditRowParams> = ({user, item, makeDat
         </div>
         <div style={{display: 'flex', margin: '.5rem', marginTop: '0rem'}}>
           <input value={onMP} onChange={(e) => {setOnMP(e.target.value), console.log(e.target.value)}} type='checkbox' style={{marginRight: '.5rem'}}/>
-          <p>Publicar en marketplace</p>
+          <p>Publicar en Marketplace</p>
           
         </div>
       </div>

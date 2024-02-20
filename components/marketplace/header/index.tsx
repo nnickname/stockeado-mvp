@@ -9,6 +9,7 @@ import { Popover } from "react-tiny-popover";
 import productImage from '../../../public/images/logo/productImage.png';
 import { TypeBrands } from "@/models/brands";
 import { CartProps } from "@/models/ordersModel";
+import Cookie from 'universal-cookie';
 
 type HeaderMarketPlaceProps = {
   cartItems: CartProps[];
@@ -138,7 +139,10 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
                             <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
                             s/. {Number(e?.item?.price) * e?.ammount}</p>
                             <button onClick={() => {
+                                const cookies = new Cookie();
                               setCart(cartItems.filter((obj, indexx) => index !== indexx))
+                              cookies.set('cart', JSON.stringify(cartItems.filter((obj, indexx) => index !== indexx)), { path: '/' })
+
                             }} style={{color: '#ff6347'}}><IonIcon name="trash-outline" color='#ff6347'/></button>
                           </div>
                           </div>

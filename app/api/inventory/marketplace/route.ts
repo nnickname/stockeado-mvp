@@ -9,9 +9,15 @@ export async function GET (req: Request | any, res: Response, next: any){
     try{
       await dbConnect();
       const shop = headers().get('id');
+      console.log(shop);
       const response = await Users.findById({_id: shop});
-      const responseInventory = await Inventory.find({owner_id: shop});
-      const responseUpdate = await Users.findOneAndUpdate({_id: shop}, { visits: response?.visits + 1 });
+      const responseInventory = await Inventory.find({owner_id: shop, inMP: true});
+      var responseUpdate;
+      if(response?.visits !== undefined){
+        responseUpdate = await Users.findOneAndUpdate({_id: shop}, { visits: response?.visits  + 1 });
+
+      }else
+      responseUpdate = await Users.findOneAndUpdate({_id: shop});
   
       if(response !== undefined){
           return NextResponse.json({message: 'Valid tokens', user: response ?? {} , items: responseInventory ?? [] });

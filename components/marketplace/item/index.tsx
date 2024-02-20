@@ -8,7 +8,8 @@ import IonIcon from '@reacticons/ionicons';
 import { InventoryModel } from '@/models/inventoryModel';
 import { TypeBrands, TypeCategories, TypeOfPiece } from '@/models/brands';
 import { CartProps } from '@/models/ordersModel';
-
+import Cookie from 'universal-cookie';
+import { setCartCookies } from '@/app/api/inventory/call';
 
 type CardProps = {
     item: InventoryModel,
@@ -20,8 +21,6 @@ type CardProps = {
 
 const CardMarketPlace: FunctionComponent<CardProps> = ({item,setCart, setAmmountItem, ammountItem, cart}) => {
     const [isPopoverOpen, setIsPopoverOpen] = useState<boolean>(false);
-    
-
     return <div  className="cardMarketPlace">
         <div className="contentImage">
             <img  src={item.image} alt="Item Image"/>
@@ -48,10 +47,12 @@ const CardMarketPlace: FunctionComponent<CardProps> = ({item,setCart, setAmmount
                         <input value={ammountItem} onChange={(e) => setAmmountItem(Number(e?.target?.value))} min='0' max={item?.ammount} style={{padding: '.5rem', border: '1px solid rgba(0,0,0, 0.1)', width: '100%'}} type='number' placeholder='Cantidad'/>
                         <br/>
                         <button onClick={() => {
-                            setCart([...cart, {
+                            const cartCast = [...cart, {
                                 item: item ?? {},
                                 ammount: ammountItem
-                            }]);
+                            }];
+                            setCart(cartCast);
+                            setCartCookies('cart', JSON.stringify(cartCast?.map((e: any) => e?.item )));
                             setIsPopoverOpen(false);
                         }} style={{marginTop: '1rem', padding: '.5rem', textAlign: 'center', width: '100%', background: 'green', color: 'white'}}>Añadir al carrito</button>
 
