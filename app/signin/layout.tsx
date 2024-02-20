@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import { UserModel } from "@/models/userModel";
 import  Cookie  from "universal-cookie";
+import CSVReader from 'react-csv-reader'
 
 const LayoutSignIn = () =>{
   var router = useRouter();
@@ -15,7 +16,7 @@ const LayoutSignIn = () =>{
     const [user, setUser] = useState<UserModel>();
     const toUser = async () => {
         const userr = await getUser();
-        if(userr !== undefined && user !== null){
+        if(userr !== undefined && userr !== null){
             router.push('/hub');
         }
         setUser(userr);

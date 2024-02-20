@@ -12,7 +12,7 @@ import Link from "next/link";
 import { UserModel } from "@/models/userModel";
 import Cookie from 'universal-cookie';
 import { useRouter } from "next/navigation";
-import { createInventory, deleteInventory, editInventory, getInventory } from "../api/inventory/call";
+import { createInventory, createManyInventories, deleteInventory, editInventory, getInventory } from "../api/inventory/call";
 import { getUser } from "../api/user/call";
 import { usePagination } from "@table-library/react-table-library/pagination";
 import { CompactTable } from '@table-library/react-table-library/compact';
@@ -20,6 +20,7 @@ import './index.css';
 import '../../components/marketplace/header/index.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import { InventoryModel } from "@/models/inventoryModel";
+import CSVReader from "react-csv-reader";
 
 export type InventoryTableModel = {
     id: number;
@@ -76,6 +77,7 @@ const ModalEditProduct: FunctionComponent<EditRowParams> = ({user, item, makeDat
              await makeData(true);
           } else NotificationManager.error('Ocurrio un error', 'Error');
   }
+  
   const onChangeImage = async (event) => {
     const file = event.target.files[0];
     const fileReader = new FileReader();
@@ -86,8 +88,6 @@ const ModalEditProduct: FunctionComponent<EditRowParams> = ({user, item, makeDat
     fileReader.onerror = (error) => {
       console.log(error);
     };
-
-
   }
   return <div>
     <p style={{background: 'linear-gradient(89deg, var(--token-dc60c65c-2692-4b09-8d77-49a86f7aedee, rgb(24, 36, 61)) /* {"name":"Azul prinicipal"} */ 0%, var(--token-1632e6e1-d1e5-427f-b435-20cb1e67f695, rgb(54, 98, 227)) /* {"name":"Azul claro"} */ 123.5068681091516%)', width: '100%', padding: '1rem', color:'white'}}>Editar producto</p>
@@ -280,10 +280,30 @@ const TableRow: FunctionComponent<TableRowParams> = ({user}) =>{
       if(name !== "" && image !== null && sku !== null && ammount !== null && price !== null && brand !== -1 && categorie !== -1 && model !== null && type !== -1){
           const response = await createInventory(buildBody);
           if(response){
-             NotificationManager.success('Añadiste un item.', 'Success');
+             NotificationManager.success('Añadiste un item.', 'Cargado');
              window.location.reload();
           } else NotificationManager.error('Ocurrio un error', 'Error');
         } else NotificationManager.error('Completa el formulario.', 'Error');
+    }
+    const onConvertCsv = async (data, fileInfo, originalFile) => {
+      var mapping = data?.map((e, index) => {return {
+        sku: e[0], 
+        name: e[1], 
+        ammount: e[2],
+        image: 'https://d2t1xqejof9utc.cloudfront.net/screenshots/pics/45807e95436336cce6fa477075468176/large.png',
+        price: '0.00',
+        brand: 0,
+        categorie: 0,
+        inMP : false,
+        model: 'Toyota',
+        stars: 0,
+        type: 0,
+        owner_id: user._id
+      } });
+      delete mapping[0];
+      if(await createManyInventories(mapping)){
+        NotificationManager.success('Logramos cargar tu inventario con exito, recuerda editarlo correctamente', 'Cargado');
+      } else NotificationManager.error('Ocurrio un error cargando tu CSV, recorda que tu csv debe tener los encabezados SKU, description y cantidad', 'Error');
     }
     return <>
       <div style={{width: '100%', display: 'flex', justifyContent: 'space-between'}}>
@@ -339,8 +359,8 @@ const TableRow: FunctionComponent<TableRowParams> = ({user}) =>{
       }}  open={open} center onClose={() => setOpen(false) }>
         <p style={{background: 'linear-gradient(89deg, var(--token-dc60c65c-2692-4b09-8d77-49a86f7aedee, rgb(24, 36, 61)) /* {"name":"Azul prinicipal"} */ 0%, var(--token-1632e6e1-d1e5-427f-b435-20cb1e67f695, rgb(54, 98, 227)) /* {"name":"Azul claro"} */ 123.5068681091516%)', width: '100%', padding: '1rem', color:'white'}}>Cargar Inventario</p>
         <div style={{margin: '2rem'}}>
-          <p style={{color: 'grey'}}>Carga tu inventario desde un .csv <Link style={{fontSize: '1rem', color: '#3662E3', marginLeft: '.5rem'}} href="">Convertir<IonIcon name='open-outline'/></Link></p>
-          <input style={{margin: '1rem'}} placeholder="Upload" type="file"/>
+          <p style={{color: 'grey'}}>Carga tu inventario desde los siguientes formatos: </p>
+          <CSVReader label='CSV' onFileLoaded={onConvertCsv} />
           <div style={{width: '100%', textAlign: 'center'}}>
             <div style={{width: '1px', height: '53px', background: 'rgba(10, 10, 10, 0.2)', marginRight: 'auto', marginLeft: 'auto'}}></div>
             <p style={{color: 'grey'}}> o cargalo manualmente</p>

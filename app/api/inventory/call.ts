@@ -41,6 +41,19 @@ export const createInventory = async (body: Object) => {
     }
 }
 
+export const createManyInventories = async (body: any) => {
+    
+    try{
+        const response: any = await axios.post("/inventory/load", {items: [...body] });
+        if(response?.data?.item !== undefined){
+            return true;
+        } else return false;
+    }
+    catch(error){
+        return false;
+    }
+}
+
 export const editInventory = async (body: Object) => {
     
     try{
