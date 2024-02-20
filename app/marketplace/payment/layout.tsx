@@ -91,7 +91,7 @@ const LayoutMarketPlacePayment: FunctionComponent<MarketPlacePaymentLayoutType> 
 
                     </div>
                 </div>
-                {paymentSelected === 0 ? <BankOptions/> : <></>}
+                {paymentSelected === 0 ? BankOptions() : <></>}
                 <h1 style={{marginTop: '2rem', marginBottom: '2rem'}}>3. Revisa tu orden</h1>
 
                 {cart?.map((e, index) => {
