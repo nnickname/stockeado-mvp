@@ -13,6 +13,7 @@ export interface OrderModel extends Document {
   lastname: string;
   direction: string;
   maxDate: Date;
+  payType: Number;
   state: Number;
   shop_id: string
   items: CartProps[]
@@ -52,6 +53,10 @@ const UserSchema = new Schema({
   items: {
     type: Object,
     required: [true, "Please provide a items."],
+  },
+  payType: {
+    type: Number,
+    required: [true, "Please provide a pay type."],
   },
 });
 export default  mongoose.models.Orders || model<OrderModel>("Orders", UserSchema);

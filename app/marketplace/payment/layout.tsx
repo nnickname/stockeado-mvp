@@ -7,9 +7,48 @@ import IonIcon from '@reacticons/ionicons';
 import Cookie  from 'universal-cookie';
 import { getTotalPrice } from '@/components/marketplace/header';
 import Logo from '../../../public/images/logo/logopreferente.png';
-export const OrderStates = ['Pendiente', 'Enviando', 'Entregado'];
+
+
+import BBVA from '../../../public/images/logo/BBVA_2019.svg.png';
+import Interbank from '../../../public/images/logo/Interbank_logo.svg.png';
+import BCP from '../../../public/images/logo/Logo-bcp-vector.svg.png';
+import Plin from '../../../public/images/logo/plin-logo-0C4106153C-seeklogo.com.png';
+import Tunki from '../../../public/images/logo/tunki.png';
+import Yape from '../../../public/images/logo/Yape_text_app_icon.png';
+
+export const OrderStates = ['Pendiente', 'Confirmado', 'Enviando', 'Entregado'];
 type MarketPlacePaymentLayoutType = {
     cartItems: CartProps[]
+}
+
+export const BankOptions = () => {
+    const [copied, setCopied] = useState<string>('stockeado.shop.transfer');
+    const copyDirection = () => {
+        setCopied('Copiado');
+        navigator.clipboard.writeText('stockeado.shop.transfer');
+        setTimeout(() => {
+            setCopied('stockeado.shop.transfer');
+        }, 3000);
+    }
+    return <div>
+        <div style={{display: 'flex'}}>
+            <p style={{color: 'grey'}}>
+                Para confirmar el pedido necesitamos que transfieras el monto total a la siguiente dirección
+            </p>
+            <div>
+                <button onClick={() => copyDirection()} style={{color: 'black', border: '1px solid rgba(0,0,0, 0.2)', paddingTop: '.5rem', paddingLeft: '1rem', paddingRight: '1rem', display: 'flex', borderRadius: '.5rem'}}>{copied} <IonIcon style={{margin: '.2rem'}} name="clipboard-outline"/></button>
+
+            </div>
+        </div>
+        <div style={{display: 'inline-block'}}>
+            <img src={BBVA.src} alt="LOGOBVVA" style={{maxWidth: '50px', display: 'inline-block', margin: '.5rem'}}/>
+            <img src={Interbank.src} alt="LOGOINTERBANK" style={{maxWidth: '50px', display: 'inline-block', margin: '.5rem'}}/>
+            <img src={BCP.src} alt="LOGOBCP" style={{maxWidth: '50px', display: 'inline-block', margin: '.5rem'}}/>
+            <img src={Plin.src} alt="LOGOPLIN" style={{maxWidth: '50px', display: 'inline-block', margin: '.5rem'}}/>
+            <img src={Tunki.src} alt="LOGOTUNKI" style={{maxWidth: '50px', display: 'inline-block', margin: '.5rem'}}/>
+            <img src={Yape.src} alt="LOGOYAPE" style={{maxWidth: '50px', display: 'inline-block', margin: '.5rem'}}/>
+        </div>
+    </div>
 }
 const LayoutMarketPlacePayment: FunctionComponent<MarketPlacePaymentLayoutType> = ({cartItems}) => {
     const [name, setName] = useState<string>('');
@@ -20,17 +59,17 @@ const LayoutMarketPlacePayment: FunctionComponent<MarketPlacePaymentLayoutType> 
     
 
     const [paymentSelected, setPaymentSelected] = useState<Number>(0);
-    return <div>
-        <div >
-        </div>
+    return <div style={{margin: '0px', padding: '0px'}}>
+        <p style={{padding: '1rem', color: '#3662E3', cursor: 'pointer'}}><IonIcon name="chevron-back-outline"/> Marketplace</p>
+
         <div className="payment">
             <div className="selectPayment">
             <img style={{marginRight: 'auto', marginLeft: 'auto', maxWidth: '250px'}} src={Logo.src} alt='LogoStockeado'/>
 
-                <h1 style={{marginTop: '1rem', marginBottom: '1rem'}}>1. Introduce tus datos</h1>
+                <h1 style={{marginTop: '1rem', marginBottom: '1rem'}}>1. Introduce tus datos y la fecha maxima de envio</h1>
                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
                     <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Nombre"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
-                    <input value={lastname} onChange={(e) => setLastName(e.target.value)} placeholder="Apellido" type='number' className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+                    <input value={lastname} onChange={(e) => setLastName(e.target.value)} placeholder="Apellido" className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
                 </div>
                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
                     <input value={direction} onChange={(e) => setDirection(e.target.value)} placeholder="Dirección"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
@@ -51,6 +90,7 @@ const LayoutMarketPlacePayment: FunctionComponent<MarketPlacePaymentLayoutType> 
 
                     </div>
                 </div>
+                {paymentSelected === 0 ? <BankOptions/> : <></>}
                 <h1 style={{marginTop: '2rem', marginBottom: '2rem'}}>3. Revisa tu orden</h1>
 
                 {cart?.map((e, index) => {
@@ -77,8 +117,10 @@ const LayoutMarketPlacePayment: FunctionComponent<MarketPlacePaymentLayoutType> 
                     <p style={{fontSize: '1.1rem'}}>Total</p>
                     <p>s/. {getTotalPrice(cartItems)}</p>
                 </div>
-                <button style={{padding: '.5rem', textAlign: 'center', width:'100%', background: 'linear-gradient(180deg, #127FFF 0%, #3662E3 100%)', color: 'white'}}>Ir a pagar</button>
-
+                <button style={{padding: '.5rem', textAlign: 'center', width:'100%', background: 'linear-gradient(180deg, #127FFF 0%, #3662E3 100%)', color: 'white'}}>Confirmar</button>
+                <div style={{textAlign: 'center', width: '100%', color: 'green', marginTop: '3rem', fontSize: '2rem'}}>
+                    <IonIcon style={{cursor: 'pointer'}} name="logo-whatsapp"/>
+                </div>
                 
 
             </div>

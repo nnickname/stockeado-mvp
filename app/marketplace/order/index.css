@@ -1,0 +1,25 @@
+.steptsorders{
+    width: 100%;
+    display: flex;
+    margin-top: 1rem;
+}
+
+.steptsorders .marked{
+    width: 100%;
+    cursor: pointer;
+    margin-top: 1rem;
+    color: green;
+    font-size: 1.1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgb(97, 143, 97);;
+}
+
+.steptsorders .pending{
+    width: 100%;
+
+    margin-top: 1rem;
+    color: rgb(124, 124, 119);
+    font-size: 1.1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgb(213, 215, 194);
+}
