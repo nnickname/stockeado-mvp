@@ -1,5 +1,5 @@
 'use client';
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
 import './index.css';
 import { CartProps } from '@/models/ordersModel';
 import { TypeBrands } from '@/models/brands';
@@ -21,7 +21,10 @@ const LayoutMarketPlacePayment = () => {
     const [maxDate, setMaxDate] = useState<Date>(null);
     const [cart, setCart] = useState<CartProps[]>([]);
     
-
+    useEffect(() => {
+        console.log(sessionStorage.getItem('cart'));
+        setCart(JSON.parse(sessionStorage.getItem('cart')));
+    }, []);
     const [paymentSelected, setPaymentSelected] = useState<Number>(0);
     return <div style={{margin: '0px', padding: '0px'}}>
         <p style={{padding: '1rem', color: '#3662E3', cursor: 'pointer'}}><IonIcon name="chevron-back-outline"/> Marketplace</p>

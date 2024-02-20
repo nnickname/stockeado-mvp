@@ -27,9 +27,8 @@ const LayoutMarketPlaceOrderView = () => {
     
     
     useEffect(() => {
-        
-        
-
+        console.log(sessionStorage.getItem('cart'));
+        setCart(JSON.parse(sessionStorage.getItem('cart')));
     }, []);
     return <div>
     <p style={{padding: '1rem', color: '#3662E3', cursor: 'pointer'}}><IonIcon name="chevron-back-outline"/> Marketplace</p>
@@ -62,7 +61,7 @@ const LayoutMarketPlaceOrderView = () => {
                 <p style={{marginRight: '.5rem', fontWeight: '700'}}>
                     Dirección:
                 </p>
-                <p> Ejemplo de direccion la concha su madre</p>
+                <p> Avenida libertador 358</p>
 
             </div>
             <div style={{display:'flex', marginTop: '.5rem'}}>
