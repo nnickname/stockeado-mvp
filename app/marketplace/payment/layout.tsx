@@ -12,18 +12,14 @@ import { BankOptions } from './bank';
 
 
 
-type MarketPlacePaymentLayoutType = {
-    cartItems: CartProps[]
-}
 
 
-
-const LayoutMarketPlacePayment: FunctionComponent<MarketPlacePaymentLayoutType> = ({cartItems}) => {
+const LayoutMarketPlacePayment = () => {
     const [name, setName] = useState<string>('');
     const [lastname, setLastName] = useState<string>('');
     const [direction, setDirection] = useState<string>('');
     const [maxDate, setMaxDate] = useState<Date>(null);
-    const [cart, setCart] = useState<CartProps[]>(cartItems);
+    const [cart, setCart] = useState<CartProps[]>([]);
     
 
     const [paymentSelected, setPaymentSelected] = useState<Number>(0);
@@ -73,8 +69,8 @@ const LayoutMarketPlacePayment: FunctionComponent<MarketPlacePaymentLayoutType> 
                                 s/. {Number(e?.item?.price) * e?.ammount}</p>
                                 <button onClick={() => {
                                     const cookies = new Cookie();
-                                    setCart(cartItems.filter((obj, indexx) => index !== indexx))
-                                    cookies.set('cart', JSON.stringify(cartItems.filter((obj, indexx) => index !== indexx)), { path: '/' })
+                                    setCart(cart?.filter((obj, indexx) => index !== indexx))
+                                    cookies.set('cart', JSON.stringify(cart?.filter((obj, indexx) => index !== indexx)), { path: '/' })
 
                                 }} style={{color: '#ff6347'}}><IonIcon name="trash-outline" color='#ff6347'/></button>
                             </div>
@@ -83,7 +79,7 @@ const LayoutMarketPlacePayment: FunctionComponent<MarketPlacePaymentLayoutType> 
                 <p style={{color: 'grey', textAlign: 'center'}}>{cart?.length === 0 ? 'No encontramos nada' : 'No encontramos items'}</p>        
                 <div style={{marginTop: '2rem', display: 'flex', justifyContent: 'space-between'}}>
                     <p style={{fontSize: '1.1rem'}}>Total</p>
-                    <p>s/. {getTotalPrice(cartItems)}</p>
+                    <p>s/. {getTotalPrice(cart)}</p>
                 </div>
                 <button style={{padding: '.5rem', textAlign: 'center', width:'100%', background: 'linear-gradient(180deg, #127FFF 0%, #3662E3 100%)', color: 'white'}}>Confirmar</button>
                 <div style={{textAlign: 'center', width: '100%', color: 'green', marginTop: '3rem', fontSize: '2rem'}}>

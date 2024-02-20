@@ -6,7 +6,7 @@ export const dynamic='force-dynamic';
 
 const MarketPlaceURLPage: NextPage = () => {
     return <>
-        <LayoutMarketPlacePayment cartItems={[]}/>      
+        <LayoutMarketPlacePayment/>      
   </>
 }
 export default MarketPlaceURLPage;
