@@ -16,7 +16,6 @@ import Plin from '../../../public/images/logo/plin-logo-0C4106153C-seeklogo.com.
 import Tunki from '../../../public/images/logo/tunki.png';
 import Yape from '../../../public/images/logo/Yape_text_app_icon.png';
 
-export const OrderStates = ['Pendiente', 'Confirmado', 'Enviando', 'Entregado'];
 type MarketPlacePaymentLayoutType = {
     cartItems: CartProps[]
 }
@@ -50,6 +49,8 @@ export const BankOptions = () => {
         </div>
     </div>
 }
+export const OrderStates = ['Pendiente', 'Confirmado', 'Enviando', 'Entregado'];
+
 const LayoutMarketPlacePayment: FunctionComponent<MarketPlacePaymentLayoutType> = ({cartItems}) => {
     const [name, setName] = useState<string>('');
     const [lastname, setLastName] = useState<string>('');
