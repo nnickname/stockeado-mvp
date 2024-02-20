@@ -15,7 +15,7 @@ import { CartProps } from "@/models/ordersModel";
 import { useSearchParams } from 'next/navigation';
 import Logo from '../../../public/images/logo/logopreferente.png';
 import '../payment/index.css';
-import { OrderStates } from "../payment/layout";
+import { OrderStates } from "../payment/bank";
 import './index.css';
 import IonIcon from "@reacticons/ionicons";
 

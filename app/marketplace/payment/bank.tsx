@@ -7,6 +7,8 @@ import BCP from '../../../public/images/logo/Logo-bcp-vector.svg.png';
 import Plin from '../../../public/images/logo/plin-logo-0C4106153C-seeklogo.com.png';
 import Tunki from '../../../public/images/logo/tunki.png';
 import Yape from '../../../public/images/logo/Yape_text_app_icon.png';
+export const OrderStates = ['Pendiente', 'Confirmado', 'Enviando', 'Entregado'];
+
 export const BankOptions = () => {
     const [copied, setCopied] = useState<string>('stockeado.shop.transfer');
     const copyDirection = () => {
