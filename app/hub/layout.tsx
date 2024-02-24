@@ -8,9 +8,12 @@ import { useEffect, useState } from "react";
 import { getUser } from "../api/user/call";
 import Cookie from 'universal-cookie';
 import { UserModel } from '../../models/userModel';
+import { InventoryModel } from "@/models/inventoryModel";
+import { getInventory } from "../api/inventory/call";
 const LayouHubDashboardPage = () =>{
     const router = useRouter();
     const [user, setUser] = useState<UserModel>();
+    const [realInventory, setRealInventory] = useState<InventoryModel[]>([])
     const toUser = async () => {
         const userr = await getUser();
         console.log(userr);
@@ -19,14 +22,19 @@ const LayouHubDashboardPage = () =>{
         }
         setUser(userr);
     }
+    const MakeData = async () => {
+        const inventoryCast = await getInventory();
+        await setRealInventory(inventoryCast);
+    }
     useEffect(() => {
         toUser();
+        MakeData();
     }, []);
 
     return <SideBarComponent user={user} route='dashboard' frameContennt={
         <div>
             <SellResume/>
-            <InventoryResume/>
+            <InventoryResume items={realInventory}/>
 
         </div>
       }/>;

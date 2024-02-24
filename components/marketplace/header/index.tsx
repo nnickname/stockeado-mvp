@@ -16,7 +16,7 @@ type HeaderMarketPlaceProps = {
   setCart: any
 }
 
-export const getTotalPrice = (cartItems: CartProps[]) => {
+export const getTotalPrice = (cartItems: CartProps[] ) => {
   var price: number = 0;
   cartItems?.map((e) => {
     price = price + (Number(e?.item?.price) * e?.ammount);

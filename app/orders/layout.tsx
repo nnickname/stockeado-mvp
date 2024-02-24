@@ -47,7 +47,6 @@ const OrdersLayoutPage = () => {
       return <>  
         <SideBarComponent user={user} route='orders' frameContennt={
             <div className="resume" style={{overflow: 'hidden'}}>
-                <InventoryResume></InventoryResume>
                 <div style={{padding: '1rem'}}>
 
                     <CompactTable  pagination={pagination} columns={COLUMNS} data={{nodes: ordersData?.filter((item) =>

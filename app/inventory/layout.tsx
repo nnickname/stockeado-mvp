@@ -34,10 +34,7 @@ export type InventoryTableModel = {
 
   
 
-type TableRowParams = {
-  user: UserModel,
-  
-}
+
 type EditRowParams = {
   user: UserModel,
   item: InventoryModel,
@@ -90,6 +87,7 @@ const ModalEditProduct: FunctionComponent<EditRowParams> = ({user, item, makeDat
     };
   }
   return <div>
+
     <p style={{background: 'linear-gradient(89deg, var(--token-dc60c65c-2692-4b09-8d77-49a86f7aedee, rgb(24, 36, 61)) /* {"name":"Azul prinicipal"} */ 0%, var(--token-1632e6e1-d1e5-427f-b435-20cb1e67f695, rgb(54, 98, 227)) /* {"name":"Azul claro"} */ 123.5068681091516%)', width: '100%', padding: '1rem', color:'white'}}>Editar producto</p>
     <div style={{margin: '2rem'}}>
       
@@ -158,10 +156,16 @@ const ModalEditProduct: FunctionComponent<EditRowParams> = ({user, item, makeDat
     </div>
   </div>
 }
-const TableRow: FunctionComponent<TableRowParams> = ({user}) =>{
+type TableRowParams = {
+  user: UserModel,
+  inventoryData: InventoryTableModel[],
+  realInventoryData: InventoryModel[],
+  setInventoryRealData: any,
+  setInventory: any
+}
+const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realInventoryData, setInventoryRealData, setInventory}) =>{
   
-    const [inventoryData, setInventory] = useState<InventoryTableModel[]>([]);
-    const [realInventoryData, setRealInventoryData] = useState<InventoryModel[]>([]);
+    
     const pagination = usePagination({nodes: [...inventoryData ?? []]}, {
       state: {
         page: 0,
@@ -170,13 +174,14 @@ const TableRow: FunctionComponent<TableRowParams> = ({user}) =>{
     });
     const MakeData = async (putOpen: boolean) => {
       const inventoryCast = await getInventory();
-      await setRealInventoryData(inventoryCast);
       const inventoryy: InventoryTableModel[] = inventoryCast as InventoryTableModel[];
       inventoryy?.map((e: InventoryTableModel, index) => {
         inventoryy[index].id = index;
         inventoryy[index].sellings = inventoryCast[index]?.sellings?.length ?? 0;
       }) 
       setInventory(inventoryy !== null ? inventoryy : []);
+      setInventoryRealData(inventoryCast);
+
       if(putOpen) {
         setOpen(false);
         setOpenEdit(false);
@@ -184,7 +189,6 @@ const TableRow: FunctionComponent<TableRowParams> = ({user}) =>{
     }
     useEffect(() => {
       MakeData(false);
-      
     }, []); 
     
     const [itemSelected, setItemSelected] = useState<string>('');
@@ -328,7 +332,7 @@ const TableRow: FunctionComponent<TableRowParams> = ({user}) =>{
       <CompactTable  pagination={pagination} columns={COLUMNS} data={{nodes: inventoryData?.filter((item) =>
         item.name.toLowerCase().includes(search.toLowerCase()) || item.sku.toLowerCase().includes(search.toLowerCase())
         
-      )}} />
+      ) ?? []}} />
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <span style={{margin: '.5rem'}}>Paginas: {pagination.state.getTotalPages(inventoryData ?? [])}</span>
 
@@ -457,7 +461,21 @@ const TableRow: FunctionComponent<TableRowParams> = ({user}) =>{
     </>;
 };
 const LayoutHubInventoryPage = () => {
-  const router = useRouter();
+    const [realInventoryData, setRealInventoryData] = useState<InventoryModel[]>();
+    const [inventoryData, setInventory] = useState<InventoryTableModel[]>()
+
+    const router = useRouter();
+    const MakeData = async (putOpen: boolean) => {
+      const inventoryCast = await getInventory();
+      await setRealInventoryData(inventoryCast);
+      const inventoryy: InventoryTableModel[] = inventoryCast as InventoryTableModel[];
+      inventoryy?.map((e: InventoryTableModel, index) => {
+        inventoryy[index].id = index;
+        inventoryy[index].sellings = inventoryCast[index]?.sellings?.length ?? 0;
+      }) 
+      setInventory(inventoryy !== null ? inventoryy : []);
+      setRealInventoryData(inventoryCast);
+    }
     const [user, setUser] = useState<UserModel>();
     const toUser = async () => {
         const userr = await getUser();
@@ -465,24 +483,27 @@ const LayoutHubInventoryPage = () => {
             router.push('/');
         }
         setUser(userr);
+        await MakeData(true);
     }
     useEffect(() => {
         toUser();
     }, []);
     return <>
-          <NotificationContainer/>
+        <NotificationContainer/>
 
       <SideBarComponent user={user} route='inventory' frameContennt={
           <div className="resume" style={{overflow: 'hidden'}}>
-              <InventoryResume></InventoryResume>
-              <div style={{padding: '1rem'}}>
-                
-                <TableRow user={user}/>
+              <div>
+                <InventoryResume items={realInventoryData}/>
+                <div style={{padding: '1rem'}}>
+                  <TableRow user={user} inventoryData={inventoryData} realInventoryData={realInventoryData} setInventoryRealData={setRealInventoryData} setInventory={setInventory}/>
+                </div>
               </div>
               
 
           </div>
         }/>;
+      <div></div>
         
       </>
 }
