@@ -5,8 +5,7 @@ const brandsData: Brand[] = [
     id: 1,
     name: "UIdeck",
     href: "https://uideck.com",
-    image: "/images/brands/uideck.svg",
-    imageLight: "/images/brands/uideck-light.svg",
+    image: "/images/logo/bmw.webp",
   },
   {
     id: 2,
