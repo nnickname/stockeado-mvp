@@ -16,7 +16,6 @@ const LayouHubDashboardPage = () =>{
     const [realInventory, setRealInventory] = useState<InventoryModel[]>([])
     const toUser = async () => {
         const userr = await getUser();
-        console.log(userr);
         if(userr === undefined || userr === null){
             router.push('/signin');
         }

@@ -45,7 +45,7 @@ const LayoutMarketPlaceShop = () => {
     return <>
     <HeaderMarketPlace cartItems={cart} setCart={setCart}/>
     <div className="background" style={{backgroundPosition: '50%',backgroundImage: `url(${backgroundImage.src})`, height: '200px'}}>
-        <img alt="Logo" style={{margin: 'auto', marginTop: '3rem', height: '40px'}} src={user?.image}/>
+        <img alt="Logo" style={{margin: 'auto', marginTop: '3rem', height: '25px'}} src={user?.image}/>
     </div>
     <div className="marketplace">
 

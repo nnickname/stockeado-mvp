@@ -54,7 +54,7 @@ const ModalEditProduct: FunctionComponent<EditRowParams> = ({user, item, makeDat
     const validateForm = async () => {
       const imageToBuild = image === null ? item.image : image;
       var inMP;
-      if(onMP === null){
+      if(onMP !== null){
         inMP = onMP === 'on' ? true : false;
       } else inMP = item.inMP;
           item.name = name;

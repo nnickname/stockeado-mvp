@@ -22,6 +22,16 @@
     border-radius: .5rem;
     border: 1px solid rgba(128, 128, 128, 0.13);
 }
+.selectPayment .carddisabled{
+    color: grey;
+    cursor: none;
+    margin: .5rem;
+    padding: 1rem;
+    border-radius: .5rem;
+    border: 1px solid rgba(128, 128, 128, 0.13);
+    background-color: rgba(128, 128, 128, 0.13);
+}
+
 .selectPayment .card.selected{
     border: 1px solid rgb(103, 103, 150);
 }

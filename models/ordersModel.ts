@@ -15,7 +15,6 @@ export interface OrderModel extends Document {
   maxDate: Date;
   payType: Number;
   state: Number;
-  shop_id: string
   items: CartProps[]
 }
 
@@ -45,11 +44,7 @@ const UserSchema = new Schema({
     required: [true, "Please provide a state."],
     maxlength: [60, "Name cannot be more than 60 characters"],
   },
-  shop_id: {
-    type: String,
-    required: [true, "Please provide a shop id."],
-    maxlength: [60, "Name cannot be more than 60 characters"],
-  },
+  
   items: {
     type: Object,
     required: [true, "Please provide a items."],
