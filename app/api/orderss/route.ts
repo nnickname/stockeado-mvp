@@ -2,10 +2,18 @@ import dbConnect from "../db";
 import Order from "../../../models/ordersModel";
 import bcrypt from 'bcrypt';
 import { NextResponse } from "next/server";
-import middleware from "../_middleware";
+import { headers } from 'next/headers';
 
 
+export async function GET (req: Request | any, res: Response, next: any){
+  const token = headers().get('token');
+  if(token === null){
+   return NextResponse.json({message: 'Invalid token'});
+  }
+  var responseUser = await Order.findOne({_id: token});
+  return NextResponse.json({ message: "Order found", order: responseUser});
 
+}
 export async function POST(
   req: Request,
 ) {
@@ -14,7 +22,7 @@ export async function POST(
         let body = await req.json();
         
         const addingOrder = new Order(body);
-        addingOrder.markModified("Orders");
+        addingOrder.markModified("orders");
         addingOrder.save()
         if (addingOrder) {
           return NextResponse

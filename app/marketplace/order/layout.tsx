@@ -18,16 +18,19 @@ import '../payment/index.css';
 import { OrderStates } from "../payment/bank";
 import './index.css';
 import IonIcon from "@reacticons/ionicons";
+import { getOrder } from "@/app/api/orderss/call";
 
 
 const LayoutMarketPlaceOrderView = () => {
     const search = useSearchParams();
     const id = search.get('id');
     const [cart, setCart] = useState<CartProps[]>();
-    
+    const getStaticOrder = async () => {
+        console.log(await getOrder(id));
+    }
     
     useEffect(() => {
-        console.log(sessionStorage.getItem('cart'));
+        getStaticOrder();
         setCart(JSON.parse(sessionStorage.getItem('cart')));
     }, []);
     return <div>
