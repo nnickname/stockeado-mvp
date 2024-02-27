@@ -93,7 +93,7 @@ const Hero = () => {
           
         </div>
         <div style={{textAlign: 'center',}}>
-            <button style={{background: 'green', color: 'white', padding: '.5rem', margin: '.5rem', borderRadius: '.5rem'}} className="rounded-sm bg-primary px-8 py-4 text-base font-semibold text-white duration-300 ease-in-out hover:bg-primary/80">Enviar solicitud</button>
+            <button style={{background: '#1366D9', color: 'white', padding: '.5rem', margin: '.5rem', borderRadius: '.5rem', fontWeight: '500'}} className="rounded-sm bg-primary px-8 py-4 text-base font-semibold text-white duration-300 ease-in-out hover:bg-primary/80">Enviar solicitud</button>
           </div>
       </Modal>
 
