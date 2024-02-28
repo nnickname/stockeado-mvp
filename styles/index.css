@@ -3,7 +3,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+body{
+  background-color: #f5f3ed !important;
+}
 @layer base {
   body {
     font-family: "Inter", sans-serif;

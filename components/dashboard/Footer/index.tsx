@@ -15,24 +15,22 @@ const Footer = () => {
               <div className="mb-12 max-w-[360px] lg:mb-16">
                 <Link href="/" className="mb-8 inline-block">
                   <Image
-                    src="/images/logo/logo-2.svg"
+                    src="/images/logo/logopreferente.png"
                     alt="logo"
                     className="w-full dark:hidden"
                     width={140}
                     height={30}
+                    style={{transform: 'translateX(-15%)'}}
                   />
                   <Image
-                    src="/images/logo/logo.svg"
+                    src="/images/logo/logopreferente.png"
                     alt="logo"
                     className="hidden w-full dark:block"
                     width={140}
                     height={30}
                   />
                 </Link>
-                <p className="dark:text-body-color-dark mb-9 text-base leading-relaxed text-body-color">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Integer lobortis.
-                </p>
+                
                 <div className="flex items-center">
                   <a
                     href="/"
