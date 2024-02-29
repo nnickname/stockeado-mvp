@@ -41,3 +41,16 @@ export const editUser = async (body: Object) => {
         return false;
     }
 }
+export const createUser = async (body: Object) => {
+    
+    try{
+        const response: any = await axios.post("/user/edit/create", {...body});
+        if(response?.data?.user !== undefined){
+            return true;
+        } else return false;
+    }
+    catch(error){
+        return false;
+    }
+}
+

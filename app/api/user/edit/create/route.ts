@@ -8,10 +8,7 @@ import middleware from "../../../_middleware";
 export async function POST(
     req: Request,
   ) {
-  
-  
-    
-        try {  
+        try {
           await dbConnect();
           let body = await req.json();
           let encryptedrandPassword = bcrypt.hashSync(body?.password.toString(), 10);
