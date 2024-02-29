@@ -1,7 +1,28 @@
 import mongoose, {Date, model, ObjectId, Schema} from "mongoose";
 import { InventoryModel } from "./inventoryModel";
 
-export const OrderStates = ['Pendiente', 'Confirmado', 'Enviando', 'Entregado'];
+export const OrderStates: String[] = ['Pendiente', 'Confirmado', 'Enviando', 'Entregado'];
+
+export const getOrderState  = (id: number) => {
+  console.log(id);
+  switch ( id ) {
+    case 0:
+        return 'Pendiente';
+        break;
+    case 1:
+        return 'Confirmado'
+        break;
+    case 2:
+        return 'Enviando'
+        break;
+    case 3:
+      return 'Entregado'
+      break;
+    default: 
+        return 'Pendiente'
+        break;
+ }
+}
 export type CartProps = {
     item: InventoryModel,
     ammount: number
@@ -19,7 +40,7 @@ export interface OrderModel extends Document {
 }
 
 /* PetSchema will correspond to a collection in your MongoDB database. */
-const UserSchema = new Schema({
+const OrderSchema = new Schema({
   name: {
     type: String,
     required: [true, "Please provide a name."],
@@ -54,4 +75,4 @@ const UserSchema = new Schema({
     required: [true, "Please provide a pay type."],
   },
 });
-export default  mongoose.models.Orders || model<OrderModel>("Orders", UserSchema);
+export default  mongoose.models.orders || model<OrderModel>("orders", OrderSchema);

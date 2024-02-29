@@ -13,7 +13,18 @@ export const createOrder = async (body: object) => {
         return null;
     }
 }
-
+export const getOrders = async (id: string) => {
+    
+    try{
+        
+        const response: any = await axios.get("/orderss/edit", {headers: {'token': id}});
+        console.log(response);
+        return response?.data?.orders;
+    }
+    catch(error){
+        return null;
+    }
+}
 export const getOrder = async (id: string) => {
     
     try{

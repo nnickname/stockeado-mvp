@@ -29,7 +29,6 @@ const Home = () => {
       <Video />
       
       
-      <Pricing />
       <Contact />
       <Footer/>
       

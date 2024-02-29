@@ -11,11 +11,11 @@ import '../index.css';
 import HeaderMarketPlace, { getTotalPrice } from "@/components/marketplace/header";
 import { InventoryModel } from "@/models/inventoryModel";
 import '../../../components/marketplace/background/index.css';
-import { CartProps } from "@/models/ordersModel";
+import { CartProps, OrderModel } from "@/models/ordersModel";
 import { useSearchParams } from 'next/navigation';
 import Logo from '../../../public/images/logo/logopreferente.png';
 import '../payment/index.css';
-import { OrderStates } from "../payment/bank";
+import { BankOptions, OrderStates } from "../payment/bank";
 import './index.css';
 import IonIcon from "@reacticons/ionicons";
 import { getOrder } from "@/app/api/orderss/call";
@@ -25,8 +25,9 @@ const LayoutMarketPlaceOrderView = () => {
     const search = useSearchParams();
     const id = search.get('id');
     const [cart, setCart] = useState<CartProps[]>();
+    const [order, setOrder] = useState<OrderModel>();
     const getStaticOrder = async () => {
-        console.log(await getOrder(id));
+        setOrder(await getOrder(id) ?? {});
     }
     
     useEffect(() => {
@@ -40,7 +41,7 @@ const LayoutMarketPlaceOrderView = () => {
         <div className="selectPayment">
         <img style={{marginRight: 'auto', marginLeft: 'auto', maxWidth: '250px'}} src={Logo?.src} alt='LogoStockeado'/>
         <div className="steptsorders">
-                {OrderStates?.map((e, index) => <div className={index > 0 ? 'pending' : 'marked'} style={{cursor: 'none !important'}} key={index}>{e}</div>)}
+                {OrderStates?.map((e, index) => <div className={index > Number(order?.state) ? 'pending' : 'marked'} style={{cursor: 'none !important'}} key={index}>{e}</div>)}
 
             </div>
         <div style={{width: '100%'}}>
@@ -48,7 +49,7 @@ const LayoutMarketPlaceOrderView = () => {
                 <p style={{marginRight: '.5rem', fontWeight: '700'}}>
                     Nombre Completo:
                 </p>
-                <p> Bruno Rojas</p>
+                <p> {order?.name + ' ' + order?.lastname}</p>
 
             </div>
 
@@ -56,7 +57,7 @@ const LayoutMarketPlaceOrderView = () => {
                 <p style={{marginRight: '.5rem', fontWeight: '700'}}>
                     Fecha maxima de envio:
                 </p>
-                <p> 21/10/20024 09:00 hs Perú</p>
+                <p> {String(order?.maxDate)}</p>
 
             </div>
 
@@ -64,20 +65,23 @@ const LayoutMarketPlaceOrderView = () => {
                 <p style={{marginRight: '.5rem', fontWeight: '700'}}>
                     Dirección:
                 </p>
-                <p> Avenida libertador 358</p>
+                <p> {order?.direction}</p>
 
             </div>
             <div style={{display:'flex', marginTop: '.5rem'}}>
                 <p style={{marginRight: '.5rem', fontWeight: '700'}}>
                     Tipo de pago:
                 </p>
-                <p> Transferencia</p>
+                <p> {order?.payType === 0 ? 'Transferencia' : 'Efectivo'}</p>
+               
 
-            </div>
-            <p style={{marginRight: '.5rem', fontWeight: '700'}}>
+            </div>´
+            {order?.state === 0 ? (order?.payType === 0 ? <BankOptions/> : <></>)   : <></>}
+            
+            <p style={{marginRight: '.5rem', fontWeight: '700', marginBottom: '1rem', marginTop: '1rem'}}>
                     Pedido:
             </p>
-                {cart?.map((e, index) => {
+                {order?.items?.map((e, index) => {
                             return <div key={index}>
                             <div style={{display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(220, 220, 220, .3)'}}>
                                 <img style={{width: '35px', height: '35px'}} src={e?.item?.image} alt='Product Image' />
@@ -93,7 +97,7 @@ const LayoutMarketPlaceOrderView = () => {
                 <p style={{color: 'grey', textAlign: 'center'}}>{cart?.length === 0 ? 'No encontramos nada' : 'No encontramos items'}</p>        
                 <div style={{marginTop: '2rem', display: 'flex', justifyContent: 'space-between'}}>
                     <p style={{fontSize: '1.1rem'}}>Total</p>
-                    <p>s/. {getTotalPrice(cart)}</p>
+                    <p>s/. {getTotalPrice(order?.items)}</p>
                 </div>
                 <div style={{textAlign: 'center', width: '100%', color: 'green', marginTop: '3rem', fontSize: '2rem'}}>
                     <IonIcon style={{cursor: 'pointer'}} name="logo-whatsapp"/>

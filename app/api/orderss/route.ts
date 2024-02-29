@@ -6,10 +6,12 @@ import { headers } from 'next/headers';
 
 
 export async function GET (req: Request | any, res: Response, next: any){
+  await dbConnect();
   const token = headers().get('token');
   if(token === null){
    return NextResponse.json({message: 'Invalid token'});
   }
+  console.log(token);
   var responseUser = await Order.findOne({_id: token});
   return NextResponse.json({ message: "Order found", order: responseUser});
 
