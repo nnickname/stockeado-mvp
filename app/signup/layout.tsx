@@ -31,7 +31,7 @@ const LayoutSignUp = () => {
           const response = await createUser(body);
           if(response){
             NotificationManager.success('Creaste tu cuenta', 'Creada');
-            router.push('/signin');
+            setTimeout(() => router.push('/signin'), 1500);
           }
         }else NotificationManager.error('Completa el formulario', 'Error');
 

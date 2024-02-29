@@ -12,7 +12,7 @@ import HeaderMarketPlace, { getTotalPrice } from "@/components/marketplace/heade
 import { InventoryModel } from "@/models/inventoryModel";
 import '../../../components/marketplace/background/index.css';
 import { CartProps, OrderModel } from "@/models/ordersModel";
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Logo from '../../../public/images/logo/logopreferente.png';
 import '../payment/index.css';
 import { BankOptions, OrderStates } from "../payment/bank";
@@ -29,13 +29,14 @@ const LayoutMarketPlaceOrderView = () => {
     const getStaticOrder = async () => {
         setOrder(await getOrder(id) ?? {});
     }
+    const router = useRouter();
     
     useEffect(() => {
         getStaticOrder();
         setCart(JSON.parse(sessionStorage.getItem('cart')));
     }, []);
     return <div>
-    <p style={{padding: '1rem', color: '#3662E3', cursor: 'pointer'}}><IonIcon name="chevron-back-outline"/> Marketplace</p>
+    <p style={{padding: '1rem', color: '#3662E3', cursor: 'pointer'}}><IonIcon name="chevron-back-outline" onClick={() => router.push('/marketplace')}/> Marketplace</p>
 
     <div className="payment">
         <div className="selectPayment">
