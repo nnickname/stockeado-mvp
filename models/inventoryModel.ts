@@ -9,6 +9,7 @@ export interface InventoryModel extends Document {
   _id: String;
   name: string;
   price: string;
+  priceSelling: string;
   stars: number;
   owner_id: ObjectId;
   type: number;
@@ -106,6 +107,13 @@ const InventorySchema = new Schema({
 
     type: Boolean,
     required: [true, "Please provide a boolean."],
+  },
+  priceSelling: {
+    /* The name of this pet */
+
+    type: String,
+    required: [true, "Please provide a price of Selling."],
+    maxlength: [60, "Price cannot be more than 60 characters"],
   },
 });
 

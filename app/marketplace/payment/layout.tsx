@@ -42,7 +42,7 @@ const LayoutMarketPlacePayment = () => {
                 const response = await createOrder(body);
                 if(response !== null){
                     NotificationManager.success('Creaste un pedido, espera que sea confirmado', 'Creado');
-                    router.push('/order?id=' + response?._id);
+                    router.push('/marketplace/order?id=' + response?._id);
                 }
             } else NotificationManager.error('No tienes elementos en el carrito.', 'Error');
         } else NotificationManager.error('Completa el formulario.', 'Error');
@@ -53,7 +53,7 @@ const LayoutMarketPlacePayment = () => {
         setCart(JSON.parse(sessionStorage.getItem('cart')));
     }, []);
     return <div style={{margin: '0px', padding: '0px'}}>
-        <p style={{padding: '1rem', color: '#3662E3', cursor: 'pointer'}}><IonIcon name="chevron-back-outline" onClick={() => router.push('/marketplace')}/> Marketplace</p>
+        <p style={{padding: '1rem', color: '#3662E3', cursor: 'pointer'}} onClick={() => router.push('/marketplace')}><IonIcon name="chevron-back-outline"/> Marketplace</p>
 
         <div className="payment">
             <div className="selectPayment">
@@ -105,7 +105,7 @@ const LayoutMarketPlacePayment = () => {
                             </div>
                             </div>
                 })}
-                <p style={{color: 'grey', textAlign: 'center'}}>{cart?.length === 0 ? 'No encontramos nada' : 'No encontramos items'}</p>        
+                <p style={{color: 'grey', textAlign: 'center'}}>{cart?.length === 0 ? 'No encontramos nada' : ''}</p>        
                 <div style={{marginTop: '2rem', display: 'flex', justifyContent: 'space-between'}}>
                     <p style={{fontSize: '1.1rem'}}>Total</p>
                     <p>s/. {getTotalPrice(cart)}</p>

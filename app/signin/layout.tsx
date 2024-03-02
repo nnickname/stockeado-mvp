@@ -52,7 +52,7 @@ const LayoutSignIn = () =>{
                       onChange={(e) => setEmail(e.target.value)}
                       type="email"
                       name="email"
-                      placeholder="Enter your Email"
+                      placeholder=""
                       className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none"
                     />
                   </div>
@@ -67,7 +67,7 @@ const LayoutSignIn = () =>{
                       onChange={(e) => setPassword(e.target.value)}
                       type="password"
                       name="password"
-                      placeholder="Enter your Password"
+                      placeholder=""
                       className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none"
                     />
                   </div>

@@ -36,7 +36,7 @@ const LayoutMarketPlaceOrderView = () => {
         setCart(JSON.parse(sessionStorage.getItem('cart')));
     }, []);
     return <div>
-    <p style={{padding: '1rem', color: '#3662E3', cursor: 'pointer'}}><IonIcon name="chevron-back-outline" onClick={() => router.push('/marketplace')}/> Marketplace</p>
+    <p style={{padding: '1rem', color: '#3662E3', cursor: 'pointer'}} onClick={() => router.push('/marketplace')}><IonIcon name="chevron-back-outline"/> Marketplace</p>
 
     <div className="payment">
         <div className="selectPayment">
@@ -95,7 +95,7 @@ const LayoutMarketPlaceOrderView = () => {
                                 </div>
                             </div>
                 })}
-                <p style={{color: 'grey', textAlign: 'center'}}>{cart?.length === 0 ? 'No encontramos nada' : 'No encontramos items'}</p>        
+                <p style={{color: 'grey', textAlign: 'center'}}>{cart?.length === 0 ? 'No encontramos nada' : ''}</p>        
                 <div style={{marginTop: '2rem', display: 'flex', justifyContent: 'space-between'}}>
                     <p style={{fontSize: '1.1rem'}}>Total</p>
                     <p>s/. {getTotalPrice(order?.items)}</p>

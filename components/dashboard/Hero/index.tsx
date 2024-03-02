@@ -3,6 +3,7 @@
 import { TypeBrands } from "@/models/brands";
 import IonIcon from "@reacticons/ionicons";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {useState } from "react";
 import Modal from "react-responsive-modal";
 
@@ -12,7 +13,7 @@ import Modal from "react-responsive-modal";
 const Hero = () => {
   const [open, setOpen] = useState(false);
   const [openAdd, setOpenAdd] = useState(false);
-
+  const router = useRouter();
   return (
     <>
       <Modal closeIcon={<IonIcon name="close" color='white' />} styles={{
@@ -162,13 +163,13 @@ const Hero = () => {
                   >
                     Enviar una solicitud
                   </button>
-                  <Link
-                    href="https://github.com/NextJSTemplates/startup-nextjs"
+                  <button
+                    onClick={() => router.push('/signup')}
                     className="inline-block rounded-sm bg-black px-8 py-4 text-base font-semibold text-white duration-300 ease-in-out hover:bg-black/90 dark:bg-white/10 dark:text-white dark:hover:bg-white/5"
                     style={{color: '#3662E3', background: 'transparent'}}
                   >
                     Recibir solicitudes
-                  </Link>
+                  </button>
                 </div>
               </div>
             </div>

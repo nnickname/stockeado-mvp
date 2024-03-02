@@ -46,6 +46,8 @@ const ModalEditProduct: FunctionComponent<EditRowParams> = ({user, item, makeDat
   const [sku, setSku] = useState(item.sku);    
     const [ammount, setAmmount] = useState(String(item.ammount));    
     const [price, setPrice] = useState(item.price);    
+    const [priceSelling, setPriceSelling] = useState(item?.priceSelling);    
+
     const [brand, setBrand] = useState(item.brand);    
     const [categorie, setCategorie] = useState(item.categorie);    
     const [onMP, setOnMP] = useState(null);    
@@ -105,32 +107,29 @@ const ModalEditProduct: FunctionComponent<EditRowParams> = ({user, item, makeDat
         }}/>
         
         <div style={{marginTop: '4rem'}}>
-          <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Nombre de producto" className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
-        </div>
-        <div style={{display: 'flex', justifyContent: 'space-between'}}>
-          <input value={sku} onChange={(e) => setSku(e.target.value)} placeholder="SKU"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
-          <input value={ammount} onChange={(e) => setAmmount(e.target.value)} placeholder="Cantidad" type='number' className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
-        </div>
-        <select value={brand} onChange={(e) => setBrand(Number(e.target.value))} className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}>
-          <option value={-1}>Marca</option>
+              <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Nombre/Descripción de producto" className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+            </div>
+            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+              <input value={sku} onChange={(e) => setSku(e.target.value)} placeholder="SKU"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+              <input value={ammount} onChange={(e) => setAmmount(e.target.value)} placeholder="Cantidad" type='number' className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+            </div>
+            
+            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+              <select value={brand} onChange={(e) => setBrand(Number(e.target.value))} className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}>
+              <option value={-1}>Marca</option>
 
-          {TypeBrands.map((e, index) => <option key={index} value={index+1}>{e}</option>)}
+                {TypeBrands.map((e, index) => <option key={index} value={index+1}>{e}</option>)}
 
-        </select>
-        <div style={{display: 'flex', justifyContent: 'space-between'}}>
-          <input value={price} onChange={(e) => setPrice(e.target.value)} placeholder="Precio"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
-          <select value={categorie} onChange={(e) => setCategorie(Number(e.target.value))} className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}>
-            <option value={-1}>Categoria</option>
-            {TypeCategories.map((e, index) => <option key={index} value={index+1}>{e}</option>)}
-          </select>            
-        </div>
-        <div style={{display: 'flex', justifyContent: 'space-between'}}>
-          <input value={model} onChange={(e) => setModel(e.target.value)} placeholder="Modelo de auto" className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
-          <select value={type} onChange={(e) => setType(Number(e.target.value))} className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}>
-            <option value={-1}>Tipo de pieza</option>
-            {TypeOfPiece.map((e, index) => <option key={index} value={index+1}>{e}</option>)}
-          </select>            
-        </div>
+              </select>
+              <input value={model} onChange={(e) => setModel(e.target.value)} placeholder="Modelo de auto" className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+
+                        
+            </div>
+            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+              <input value={price} onChange={(e) => setPrice(e.target.value)} placeholder="Precio(ej 0.68)"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+              <input value={priceSelling} onChange={(e) => setPriceSelling(e.target.value)} placeholder="Precio de venta sin igv(ej 1.68)"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+
+            </div>
 
         <div style={{width: '100%', textAlign: 'left', margin: '.5rem', marginBottom: '0rem'}}>
           <p style={{fontSize: '.9rem', color: 'grey'}}>Actual: {item.inMP === true ? 'Publicado' : 'No esta publicado'}</p>
@@ -201,6 +200,8 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
     const [sku, setSku] = useState(null);    
     const [ammount, setAmmount] = useState(null);    
     const [price, setPrice] = useState(null);    
+    const [priceSelling, setPriceSelling] = useState(null);    
+
     const [brand, setBrand] = useState(-1);    
     const [categorie, setCategorie] = useState(-1);    
     const [onMP, setOnMP] = useState(null);    
@@ -273,15 +274,16 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
         sku,
         ammount,
         price,
+        priceSelling,
         brand,
-        categorie,
+        categorie: 0,
         inMP : onMP === 'on' ? true : false,
         model,
         stars: 0,
-        type,
+        type: 0,
         owner_id: user._id
       }
-      if(name !== "" && image !== null && sku !== null && ammount !== null && price !== null && brand !== -1 && categorie !== -1 && model !== null && type !== -1){
+      if(name !== "" && image !== null && sku !== null && ammount !== null && price !== null && brand !== -1 && priceSelling !== null && model !== null){
           const response = await createInventory(buildBody);
           if(response){
              NotificationManager.success('Añadiste un item.', 'Cargado');
@@ -363,8 +365,8 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
       }}  open={open} center onClose={() => setOpen(false) }>
         <p style={{background: 'linear-gradient(89deg, var(--token-dc60c65c-2692-4b09-8d77-49a86f7aedee, rgb(24, 36, 61)) /* {"name":"Azul prinicipal"} */ 0%, var(--token-1632e6e1-d1e5-427f-b435-20cb1e67f695, rgb(54, 98, 227)) /* {"name":"Azul claro"} */ 123.5068681091516%)', width: '100%', padding: '1rem', color:'white'}}>Cargar Inventario</p>
         <div style={{margin: '2rem'}}>
-          <p style={{color: 'grey'}}>Carga tu inventario desde los siguientes formatos: </p>
-          <CSVReader label='CSV' onFileLoaded={onConvertCsv} />
+          <p style={{color: 'grey'}}>Carga tu inventario desde los siguientes formatos{'(csv, xlsx)'}: </p>
+          <CSVReader onFileLoaded={onConvertCsv} />
           <div style={{width: '100%', textAlign: 'center'}}>
             <div style={{width: '1px', height: '53px', background: 'rgba(10, 10, 10, 0.2)', marginRight: 'auto', marginLeft: 'auto'}}></div>
             <p style={{color: 'grey'}}> o cargalo manualmente</p>
@@ -386,31 +388,28 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
               
             }}/>
             <div style={{marginTop: '4rem'}}>
-              <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Nombre de producto" className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+              <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Nombre/Descripción de producto" className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
             </div>
             <div style={{display: 'flex', justifyContent: 'space-between'}}>
               <input value={sku} onChange={(e) => setSku(e.target.value)} placeholder="SKU"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
               <input value={ammount} onChange={(e) => setAmmount(e.target.value)} placeholder="Cantidad" type='number' className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
             </div>
-            <select value={brand} onChange={(e) => setBrand(Number(e.target.value))} className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}>
+            
+            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+              <select value={brand} onChange={(e) => setBrand(Number(e.target.value))} className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}>
               <option value={-1}>Marca</option>
 
-              {TypeBrands.map((e, index) => <option key={index} value={index+1}>{e}</option>)}
+                {TypeBrands.map((e, index) => <option key={index} value={index+1}>{e}</option>)}
 
-            </select>
-            <div style={{display: 'flex', justifyContent: 'space-between'}}>
-              <input value={price} onChange={(e) => setPrice(e.target.value)} placeholder="Precio"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
-              <select value={categorie} onChange={(e) => setCategorie(Number(e.target.value))} className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}>
-                <option value={-1}>Categoria</option>
-                {TypeCategories.map((e, index) => <option key={index} value={index+1}>{e}</option>)}
-              </select>            
+              </select>
+              <input value={model} onChange={(e) => setModel(e.target.value)} placeholder="Modelo de auto" className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+
+                        
             </div>
             <div style={{display: 'flex', justifyContent: 'space-between'}}>
-              <input value={model} onChange={(e) => setModel(e.target.value)} placeholder="Modelo de auto" className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
-              <select value={type} onChange={(e) => setType(Number(e.target.value))} className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}>
-                <option value={-1}>Tipo de pieza</option>
-                {TypeOfPiece.map((e, index) => <option key={index} value={index+1}>{e}</option>)}
-              </select>            
+              <input value={price} onChange={(e) => setPrice(e.target.value)} placeholder="Precio(ej 0.68)"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+              <input value={priceSelling} onChange={(e) => setPriceSelling(e.target.value)} placeholder="Precio de venta sin igv(ej 1.68)"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+
             </div>
 
             

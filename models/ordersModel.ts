@@ -4,7 +4,6 @@ import { InventoryModel } from "./inventoryModel";
 export const OrderStates: String[] = ['Pendiente', 'Confirmado', 'Enviando', 'Entregado'];
 
 export const getOrderState  = (id: number) => {
-  console.log(id);
   switch ( id ) {
     case 0:
         return 'Pendiente';

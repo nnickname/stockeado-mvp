@@ -5,7 +5,44 @@ import Icon2 from '../../../public/images/logo/icon2.png';
 import Icon3 from '../../../public/images/logo/icon3.png';
 import Icon4 from '../../../public/images/logo/icon4.png';
 import Image from 'next/image';
-const SellResume = () => {
+import { OrderModel } from '@/models/ordersModel';
+import { FunctionComponent } from 'react';
+import { UserModel } from '@/models/userModel';
+export const getTotalSellings = (orders: OrderModel[]) => {
+    var counter=0;
+    orders?.map((e) => {
+        if(Number(e?.state) > 0) counter++;
+    })
+    return counter;
+}
+const getTotalEarning = (orders: OrderModel[], id: String) => {
+    var count = 0;
+    orders?.map((e) => {
+        if(Number(e?.state) > 0)
+        e?.items?.map((a) => {
+            if(a.item._id === id) count += Number(a.item?.price);
+        })
+    })
+    return count;
+}
+const getBenefitEarning = (orders: OrderModel[], id: String) => {
+    var count = 0;
+    orders?.map((e) => {
+        if(Number(e?.state) > 0)
+        e?.items?.map((a) => {
+            if(a.item._id === id) count += (Number(a.item?.priceSelling));
+        })
+    })
+    return count;
+}
+const calculatePercentage = (x: number, y: number) => {
+    return ((x - y) / y) * 100;
+}
+type SellResumeType = {
+    orders: OrderModel[],
+    user: UserModel
+}
+const SellResume: FunctionComponent<SellResumeType> = ({orders, user}) => {
     return <div className="content-frame-container resume">
         <div style={{width: '100%', textAlign: 'left'}}>
             <h1>Resumen de Ventas</h1>
@@ -18,7 +55,7 @@ const SellResume = () => {
                     </div>
                 </div>
                 <div style={{display: 'inline-block'}}>
-                    <p style={{display: 'inline-block'}} >832</p>
+                    <p style={{display: 'inline-block'}} >{getTotalSellings(orders)}</p>
                     <p style={{marginLeft: '1.5rem', color: 'grey', display:'inline-block'}}>Ventas</p>
                 </div>
             </div>
@@ -31,7 +68,7 @@ const SellResume = () => {
                     </div>
                 </div>
                 <div style={{display: 'inline-block'}}>
-                    <p style={{display: 'inline-block'}} >s/. 16,023</p>
+                    <p style={{display: 'inline-block'}} >s/. {getTotalEarning(orders, String(user?._id))}</p>
                     <p style={{marginLeft: '1.5rem', color: 'grey', display:'inline-block'}}>Ingresos</p>
                 </div>
             </div>
@@ -43,7 +80,7 @@ const SellResume = () => {
                     </div>
                 </div>
                 <div style={{display: 'inline-block'}}>
-                    <p style={{display: 'inline-block'}} >s/. 2,341</p>
+                    <p style={{display: 'inline-block'}} >s/. {getBenefitEarning(orders, String(user?._id))}</p>
                     <p style={{marginLeft: '1.5rem', color: 'grey', display:'inline-block'}}>Beneficio</p>
                 </div>
             </div>
@@ -55,7 +92,7 @@ const SellResume = () => {
                     </div>
                 </div>
                 <div style={{display: 'inline-block'}}>
-                    <p style={{display: 'inline-block'}} >75,10%</p>
+                    <p style={{display: 'inline-block'}} >{calculatePercentage(getTotalEarning(orders, String(user?._id)), getBenefitEarning(orders, String(user?._id))) ?? '0'}%</p>
                     <p style={{marginLeft: '1.5rem', color: 'grey', display:'inline-block'}}>Margen</p>
                 </div>
             </div>

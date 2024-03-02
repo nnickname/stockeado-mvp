@@ -82,7 +82,7 @@ const OrdersLayoutPage = () => {
         <SideBarComponent user={user} route='orders' frameContennt={
             <div className="resume" style={{overflow: 'hidden'}}>
                 <div>
-                    <SellResume/>
+                    <SellResume orders={ordersData} user={user}/>
                     <div style={{padding: '1rem'}}>
                       <div style={{width: '100%', display: 'flex', justifyContent: 'space-between'}}>
                           <h1 style={{marginBottom: '1rem', marginTop: '.5rem', fontSize: '1rem', fontWeight: '500'}}>Ordenes finales</h1>

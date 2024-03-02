@@ -28,8 +28,8 @@ const CardMarketPlace: FunctionComponent<CardProps> = ({item,setCart, setAmmount
         <div  className="card-content">
             <div style={{display: 'flex', justifyContent: 'space-between'}}>
                 <div>
-                    <p>{item.name} {TypeBrands[(item?.brand-1) ?? 0] + ' '} {item?.model }</p>
-                    <span style={{fontSize: '.9rem', color: 'green'}}> s/. {item?.price}</span>
+                    <p>{item.name} {TypeBrands[(item?.brand-1) ?? 0] + ' '} {item?.model ?? '' }</p>
+                    <span style={{fontSize: '.9rem', color: 'green'}}> s/. {item?.priceSelling}</span>
                 </div>
                 <div>
                 <Popover
@@ -68,9 +68,6 @@ const CardMarketPlace: FunctionComponent<CardProps> = ({item,setCart, setAmmount
                 </Popover>
                 </div>
             </div>
-            
-            <span style={{fontSize: '.8rem', color: 'grey'}}>  {TypeOfPiece[(item?.type -1) ?? 0] + ' - '} {TypeCategories[(item.categorie-1) ?? 0]}</span>
-
         </div>
     </div>
 }
