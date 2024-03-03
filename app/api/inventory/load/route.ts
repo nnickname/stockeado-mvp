@@ -1,6 +1,25 @@
 import { NextResponse } from "next/server";
 import dbConnect from "../../db";
 import Inventory from "../../../../models/inventoryModel";
+import { headers } from "next/headers";
+
+
+export async function GET (req: Request | any, res: Response, next: any){
+  try{
+    await dbConnect();
+    const id = headers().get('id');
+    const response = await Inventory.findOne({_id: id});
+    if(response !== undefined){
+      return NextResponse.json({message: 'Valid tokens', item: response});
+    }
+    return NextResponse.json({message: 'Invalid token'});
+  }
+  catch(error){
+    console.log(error);
+    return NextResponse.json({message: 'Invalid token'});
+  }
+  
+}
 
 export async function POST(
     req: Request,
@@ -14,7 +33,6 @@ export async function POST(
             ...e,
             sellings: []
           }})
-          console.log(object);
           const addingInventory = await Inventory.insertMany(object);
           if (addingInventory) {
             return NextResponse

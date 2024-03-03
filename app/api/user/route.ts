@@ -6,12 +6,20 @@ import middleware from "../_middleware";
 
 
 export async function GET (req: Request | any, res: Response, next: any){
-  const midd:any = await middleware(req, res, );
-  if(midd === null){
-   return NextResponse.json({message: 'Invalid token'});
+  try{
+    await dbConnect();
+    const midd:any = await middleware(req, res, );
+    if(midd === null){
+     return NextResponse.json({message: 'Invalid token'});
+    }
+    var responseUser = await User.findOne({_id: midd});
+    return NextResponse.json({ message: "User found", user: responseUser});
   }
-  var responseUser = await User.findOne({_id: midd});
-  return NextResponse.json({ message: "User found", user: responseUser});
+  catch(error){
+    return NextResponse.json({message: 'Invalid token'});
+
+  }
+  
 
 }
 

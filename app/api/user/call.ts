@@ -15,7 +15,16 @@ export const loginUser = async (email: string, password: string) => {
         return false;
     }
 }
-
+export const getUserById = async (id: string) => {
+    try{
+        const response: any = await axios.get("/user/login", {headers: {'token': id}});
+        console.log(response);
+        return response?.data?.user;
+    }
+    catch(error){
+        return null;
+    }
+}
 export const getUser = async () => {
     
     try{

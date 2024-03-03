@@ -1,15 +1,10 @@
 'use client';
 
-import { getCartCookies, getMarketPlace } from "@/app/api/inventory/call";
-import { getUser } from "@/app/api/user/call";
-import backgroundImage from '../../../public/images/logo/background3.webp';
-import CardMarketPlace from "@/components/marketplace/item";
-import { TypeCategories, TypeOfPiece, TypeBrands } from "@/models/brands";
-import { UserModel } from "@/models/userModel";
+
+import {TypeBrands } from "@/models/brands";
 import { useState, useEffect } from "react";
 import '../index.css';
 import HeaderMarketPlace, { getTotalPrice } from "@/components/marketplace/header";
-import { InventoryModel } from "@/models/inventoryModel";
 import '../../../components/marketplace/background/index.css';
 import { CartProps, OrderModel } from "@/models/ordersModel";
 import { useRouter, useSearchParams } from 'next/navigation';

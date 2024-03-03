@@ -1,0 +1,13 @@
+.viewitem{
+    text-align: left;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 75%;
+}
+.cardImage{
+    background-color: white;
+    display: flex;
+    border-radius: .5rem;
+    border: 1px solid rgba(128, 128, 128, 0.219);
+    padding: 1rem
+}

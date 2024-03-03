@@ -5,14 +5,12 @@ import axios from '../call';
 
 export const setCartCookies = (name: string, value: string) => {
     const cookies = new Cookie();
-    console.log(name, value);
     cookies.set(name, value, {path: '/'});
 }
 export const getCartCookies = () => {
     const cookies = new Cookie();
     
     const cart = cookies.getAll();
-    console.log(cart);
     return cart
 }
 export const deleteInventory = async (id: any) => {
@@ -31,7 +29,6 @@ export const createInventory = async (body: Object) => {
     
     try{
         const response: any = await axios.post("/inventory", {...body});
-        console.log(response.data);
         if(response?.data?.item !== undefined){
             return true;
         } else return false;
@@ -40,7 +37,19 @@ export const createInventory = async (body: Object) => {
         return false;
     }
 }
-
+export const getInventoryById = async (id: string) => {
+    
+    try{
+        const response: any = await axios.get("/inventory/load", {headers: {'id': id}});
+        console.log(response);
+        if(response?.data?.item !== undefined){
+            return response?.data?.item;
+        } else return null;
+    }
+    catch(error){
+        return null;
+    }
+}
 export const createManyInventories = async (body: any) => {
     
     try{
@@ -58,7 +67,6 @@ export const editInventory = async (body: Object) => {
     
     try{
         const response: any = await axios.post("/inventory/edit", {...body});
-        console.log(response.data);
         if(response?.data?.item !== undefined){
             return true;
         } else return false;
@@ -84,7 +92,6 @@ export const getMarketPlace = async (id: string) => {
     
     try{
         const response: any = await axios.get("/inventory/marketplace", {headers: {'id': id}});
-        console.log(response);
         return response?.data;
     }
     catch(error){

@@ -7,7 +7,7 @@ export async function GET (req: Request | any, res: Response, next: any){
   const deleted = headers().get('id');
   const response = await Inventory.findByIdAndDelete({_id: deleted});
   if(response !== undefined){
-    return NextResponse.json({message: 'Invalid tokens', deleted: true});
+    return NextResponse.json({message: 'Valid tokens', deleted: true});
   }
   return NextResponse.json({message: 'Invalid token'});
 }

@@ -1,0 +1,79 @@
+'use client';
+import { getInventoryById, getMarketPlace } from '@/app/api/inventory/call';
+import { getUser, getUserById } from '@/app/api/user/call';
+import HeaderMarketPlace from '@/components/marketplace/header';
+import { InventoryModel } from '@/models/inventoryModel';
+import { CartProps } from '@/models/ordersModel';
+import { UserModel } from '@/models/userModel';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import './index.css';
+import IonIcon from '@reacticons/ionicons';
+import { TypeBrands } from '@/models/brands';
+const LayoutMarketPlaceItem = () => {
+    const search = useSearchParams();
+    const id = search.get('id');
+    const [cart, setCart] = useState<CartProps[]>([]);
+    const [item, setItem] = useState<InventoryModel>();
+    const [shop, setShop] = useState<UserModel>();
+    const [ammount, setAmmount] = useState<number>(0);
+
+    const getData = async() => {
+        const responseItem = await getInventoryById(id);
+        const responseShop = await getUserById(responseItem?.owner_id);
+        setItem(responseItem);
+        setShop(responseShop);
+    }
+    useEffect(() => {
+        getData();
+        const cartCast = JSON.parse(sessionStorage.getItem("cart"));
+        if(cartCast !== undefined) setCart(cartCast ?? []);
+    }, []);
+    return <div>
+        <HeaderMarketPlace cartItems={cart} setCart={setCart}/>
+        <div className="viewitem">
+            <div style={{paddingRight: 'auto', paddingLeft: 'auto', marginTop: '7rem'}}>
+                <p style={{color: 'grey', fontSize: '.8rem', marginBottom: '1rem'}}> MarketPlace {'> ' + shop?.nameShop}</p>
+            </div>
+            <div className="cardImage">
+                <div style={{display: 'flex', width: '100%'}}>
+                    <img  style={{maxWidth: '300px', border: '1px solid rgba(128, 128, 128, 0.219', borderRadius: '.5rem'}} src={item?.image} alt="Image Item"/>
+                    <div style={{width: '100%', padding: '.5rem'}}>
+                        <div style={{display: 'flex', justifyContent: 'space-between', width: '100%'}}>
+                            <p style={{color: 'green', fontSize: '.8rem'}}><IonIcon name="checkmark-outline"/> En stock</p>
+                            <p style={{color: 'grey', fontSize: '.8rem'}}> SKU: {item?.sku}</p>
+                        </div>
+                        <p style={{fontWeight: '500', fontSize: '1.1rem', marginTop: '1rem'}}>{item?.name} {(TypeBrands[(item?.brand-1) ?? 0] + ' ') ?? ''} {item?.model ?? '' }</p>
+                        <p style={{color: 'grey', fontSize: '.8rem', marginTop: '1rem'}}>Vendido por: <span style={{cursor: 'pointer', marginLeft: '.5rem', color: '#0E7AFF'}}>{shop?.nameShop}</span></p>
+                        <p style={{fontWeight: '500', fontSize: '1rem', marginTop: '1rem'}}>s/. {item?.priceSelling ?? item?.price}</p>
+                        <div style={{backgroundColor: 'rgba(0, 0, 0, 0.1)', width: '100%', height: '1px', marginTop: '1rem'}}></div>
+
+                    </div>
+                </div>
+                <div style={{margin: '.2rem'}}>
+                <div style={{border: '1px solid rgba(128, 128, 128, 0.219', borderRadius: '.5rem', padding: '1rem', minWidth: '180px'}}>
+                    <p>Cantidad</p>
+                    <input
+                      value={String(ammount)}
+                      onChange={(e) => setAmmount(Number(e.target.value))}
+                      type="number"
+                      name="name"
+                      placeholder=""
+                      className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border bg-[#f8f8f8] px-3 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none"
+                      style={{padding: '.5rem', borderLeft: 'transparent', borderRight: 'transparent', borderTop: 'transparent'}}
+                    />
+                    <p style={{marginTop: '1rem', color: '#8B96A5', fontSize: '.8rem'}}>Lima, Perú</p>
+                    <p style={{marginTop: '.5rem', color: '#8B96A5', fontSize: '.8rem'}}>Envío a domicilio</p>
+                    <p style={{marginTop: '.5rem', color: '#8B96A5', fontSize: '.8rem'}}>Enviado por <span style={{fontWeight: '700'}}>Stockeado</span></p>
+                    <button style={{marginTop: '1rem', borderRadius: '.5rem', backgroundColor: '#127FFF', padding: '.5rem', color: 'white', width: '100%'}}>Comprar ahora</button>
+                    <button style={{marginTop: '.5rem', borderRadius: '.5rem', backgroundColor: 'transparent', padding: '.5rem', color: '#127FFF', border: '1px solid rgba(0, 0,0, .2)', width: '100%'}}>Añadir al carrito</button>
+
+                </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+}
+export default LayoutMarketPlaceItem;
