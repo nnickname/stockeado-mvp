@@ -4,8 +4,8 @@ import Header from "@/components/dashboard/Header";
 import { useState } from "react";
 
 export const metadata: Metadata = {
-  title: "Sign In Page | Free Next.js Template for Startup and SaaS",
-  description: "This is Sign In Page for Startup Nextjs Template",
+  title: "Stockeado | Iniciar sesión",
+  description: "Inicia sesión en tu cuenta de Stockeado",
   // other metadata
 };
 import LayoutSignIn from "./layout";

@@ -35,6 +35,7 @@ const LayoutMarketPlaceOrderView = () => {
         getStaticOrder();
         setCart(JSON.parse(sessionStorage.getItem('cart')));
     }, []);
+
     return <div>
     <p style={{padding: '1rem', color: '#3662E3', cursor: 'pointer'}} onClick={() => router.push('/marketplace')}><IonIcon name="chevron-back-outline"/> Marketplace</p>
 

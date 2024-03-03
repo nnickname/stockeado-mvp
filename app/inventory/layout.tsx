@@ -493,7 +493,7 @@ const LayoutHubInventoryPage = () => {
       <SideBarComponent user={user} route='inventory' frameContennt={
           <div className="resume" style={{overflow: 'hidden'}}>
               <div>
-                <InventoryResume items={realInventoryData}/>
+                <InventoryResume items={realInventoryData} orders={[]} user={user}/>
                 <div style={{padding: '1rem'}}>
                   <TableRow user={user} inventoryData={inventoryData} realInventoryData={realInventoryData} setInventoryRealData={setRealInventoryData} setInventory={setInventory}/>
                 </div>

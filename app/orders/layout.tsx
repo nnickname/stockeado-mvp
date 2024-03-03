@@ -14,20 +14,25 @@ import { getOrders } from "../api/orderss/call";
 import SellResume from "@/components/panel/sellresume";
 import IonIcon from "@reacticons/ionicons";
 import Link from "next/link";
+import Modal from "react-responsive-modal";
+import EditModalOrder from './editModal';
 const OrdersLayoutPage = () => {
     const router = useRouter();
-      const [user, setUser] = useState<UserModel>();
-      const [ordersData, setOrderData] = useState<OrderModel[]>([]);
-      const [realOrdersData, setRealOrderData] = useState<[]>([]);
-      const [search, setSearch] = useState("");
-      const pagination = usePagination({nodes: [...ordersData ?? []]}, {
-        state: {
-          page: 0,
-          size: 12,
-        },
-      });
+    const [user, setUser] = useState<UserModel>();
+    const [open, setOpen] = useState<boolean>();
+    const [orderSelected, setOrderSelected] = useState<OrderModel>();
+
+    const [ordersData, setOrderData] = useState<OrderModel[]>([]);
+    const [realOrdersData, setRealOrderData] = useState<[]>([]);
+    const [search, setSearch] = useState("");
+    const pagination = usePagination({nodes: [...ordersData ?? []]}, {
+      state: {
+        page: 0,
+        size: 12,
+      },
+    });
       
-      const COLUMNS = [
+    const COLUMNS = [
         { label: 'Nombre', renderCell: (item) => <p>{item?.name + ' ' + item?.lastname}</p> },
         
         { label: 'Dirección', renderCell: (item) => <p>{item?.direction}</p> },
@@ -47,11 +52,11 @@ const OrdersLayoutPage = () => {
             //setOpenEdit(true);
             
           }} style={{cursor: 'pointer', marginRight: '.5rem'}}>
-            <Link style={{fontSize: '1rem', color: '#3662E3', marginLeft: '.5rem'}} href={'https://stockeado-mvp.vercel.app/marketplace/shop?id=' + user?._id}><IonIcon name='open-outline'/></Link>
+            <Link style={{fontSize: '1rem', color: '#3662E3', marginLeft: '.5rem'}} href={'https://stockeado-mvp.vercel.app/marketplace/order?id=' + item?._id}><IonIcon name='eye-outline'/></Link>
 
           </div><div onClick={() => {
-            //setItemSelected(item._id);
-            //setOpenEdit(true);
+            setOrderSelected(item);
+            setOpen(true);
             
           }} style={{color: 'orange', cursor: 'pointer'}}>
                 <IonIcon name="pencil-outline"/>
@@ -136,6 +141,16 @@ const OrdersLayoutPage = () => {
   
             </div>
           }/>;
+          <Modal closeIcon={<IonIcon name="close"/>} styles={{
+              modal : {borderRadius: '1rem', minWidth: '500px', padding: '0rem'},
+              closeIcon: {color: 'white !important'},
+              overlay: {backgroundColor: 'rgba(220, 217, 217, 0.5)'}
+            }}  open={open} center onClose={() => setOpen(false) }>
+              <div style={{padding: '1rem'}}>
+                <EditModalOrder order={orderSelected} />
+
+              </div>
+          </Modal>
           
         </>
   }
