@@ -20,6 +20,8 @@ export interface InventoryModel extends Document {
   ammount: number;
   image: string;
   model: string;
+  description: string;
+  numberPart: string;
   inMP: boolean;
 }
 

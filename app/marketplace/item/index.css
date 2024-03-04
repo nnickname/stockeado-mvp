@@ -11,3 +11,10 @@
     border: 1px solid rgba(128, 128, 128, 0.219);
     padding: 1rem
 }
+.cardImage img{
+    cursor: pointer;
+}
+.cardImage img:hover{
+    transition: 1s ease;
+    transform: scale(1.2);
+}
