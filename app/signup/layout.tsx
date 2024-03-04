@@ -48,7 +48,7 @@ const LayoutSignUp = () => {
                   Crea tu cuenta
                 </h3>
                 <p className="mb-11 text-center text-base font-medium text-body-color">
-                  Ingresa gratis
+                  Crea tu cuenta gratis para explorar todas las funcionalidades de Stockeado.
                 </p>
                 <form>
                   <div className="mb-8">

@@ -24,12 +24,12 @@ const Brands = () => {
               data-wow-delay=".1s"
               style={{justifyContent: 'space-between'}}
             >
-              <img style={{maxWidth: '100px'}} src={audiLogo.src}/>
-              <img style={{maxWidth: '100px'}} src={bmwLogo.src}/>
-              <img style={{maxWidth: '100px'}} src={geelyLogo.src}/>
-              <img style={{maxWidth: '100px'}} src={hyundaiLogo.src}/>
-              <img style={{maxWidth: '100px'}} src={seatLogo.src}/>
-              <img style={{maxWidth: '100px'}} src={peugeotLogo.src}/>
+              <img style={{maxWidth: '100px', filter: 'grayscale(100%)'}} src={audiLogo.src}/>
+              <img style={{maxWidth: '100px', filter: 'grayscale(100%)'}} src={bmwLogo.src}/>
+              <img style={{maxWidth: '100px', filter: 'grayscale(100%)'}} src={geelyLogo.src}/>
+              <img style={{maxWidth: '100px', filter: 'grayscale(100%)'}} src={hyundaiLogo.src}/>
+              <img style={{maxWidth: '100px', filter: 'grayscale(100%)'}} src={seatLogo.src}/>
+              <img style={{maxWidth: '100px', filter: 'grayscale(100%)'}} src={peugeotLogo.src}/>
 
             </div>
           </div>

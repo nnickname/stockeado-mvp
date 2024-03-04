@@ -85,7 +85,9 @@ const LayoutMarketPlaceShop = () => {
 
 
       <div className="contentM">
-        
+        <div style={{paddingRight: 'auto', paddingLeft: 'auto', marginTop: '1rem'}}>
+            <p style={{color: 'grey', fontSize: '.8rem', marginBottom: '1rem'}}> MarketPlace {'> ' + user?.nameShop}</p>
+        </div>
         <div style={{marginTop: '0rem', padding: '.6rem', width: '100%', borderRadius: '.5rem', border: '1px solid rgba(0, 0, 0, 0.2)'}}>
           <p>Se encontraron <span style={{fontWeight: '700'}}>{inventoryData?.length} productos</span></p>
         </div>
