@@ -10,15 +10,21 @@ import Cookie from 'universal-cookie';
 import { UserModel } from '../../models/userModel';
 import { InventoryModel } from "@/models/inventoryModel";
 import { getInventory } from "../api/inventory/call";
+import { OrderModel } from "@/models/ordersModel";
+import { getOrders } from "../api/orderss/call";
 const LayouHubDashboardPage = () =>{
     const router = useRouter();
     const [user, setUser] = useState<UserModel>();
-    const [realInventory, setRealInventory] = useState<InventoryModel[]>([])
+    const [realInventory, setRealInventory] = useState<InventoryModel[]>([]);
+    const [ordersData, setOrderData] = useState<OrderModel[]>([]);
+
     const toUser = async () => {
         const userr = await getUser();
         if(userr === undefined || userr === null){
             router.push('/signin');
         }
+        const ordersCast = await getOrders(userr?._id);
+        setOrderData(ordersCast);
         setUser(userr);
     }
     const MakeData = async () => {
@@ -32,8 +38,8 @@ const LayouHubDashboardPage = () =>{
 
     return <SideBarComponent user={user} route='dashboard' frameContennt={
         <div>
-            <SellResume/>
-            <InventoryResume items={realInventory}/>
+            <SellResume orders={ordersData} user={user}/>
+            <InventoryResume items={realInventory} orders={ordersData} user={user}/>
 
         </div>
       }/>;
