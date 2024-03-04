@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import './index.css';
 import IonIcon from '@reacticons/ionicons';
 import { TypeBrands } from '@/models/brands';
+import Link from 'next/link';
 const LayoutMarketPlaceItem = () => {
     const search = useSearchParams();
     const id = search.get('id');
@@ -48,7 +49,7 @@ const LayoutMarketPlaceItem = () => {
                         <p style={{color: 'grey', fontSize: '.8rem'}}> SKU: {item?.sku}</p>
                     </div>
                     <p style={{fontWeight: '500', fontSize: '1.1rem', marginTop: '1rem'}}>{item?.name} {(TypeBrands[(item?.brand) ?? 0] + '') ?? ''} {item?.model ?? '' }</p>
-                    <p style={{color: 'grey', fontSize: '.8rem', marginTop: '1rem'}}>Vendido por: <span style={{cursor: 'pointer', marginLeft: '.5rem', color: '#0E7AFF'}}>{shop?.nameShop}</span></p>
+                    <p style={{color: 'grey', fontSize: '.8rem', marginTop: '1rem'}}>Vendido por: <Link style={{cursor: 'pointer', marginLeft: '.5rem', color: '#0E7AFF'}} href={'https://stockeado-mvp.vercel.app/marketplace/shop?id=' + shop?._id}>{shop?.nameShop}</Link></p>
                     <p style={{fontWeight: '500', fontSize: '1.2rem', marginTop: '1rem'}}>s/. {item?.priceSelling ?? item?.price}</p>
                     <div style={{backgroundColor: 'rgba(0, 0, 0, 0.1)', width: '100%', height: '1px', marginTop: '1rem'}}></div>
                     <p style={{color: 'grey', fontSize: '.9rem', marginTop: '1rem'}}>Marca: <span style={{cursor: 'pointer', marginLeft: '.5rem', color: 'black'}}>{TypeBrands[item?.brand] ?? 'No definido'}</span></p>
