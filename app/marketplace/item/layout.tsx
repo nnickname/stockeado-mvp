@@ -53,7 +53,7 @@ const LayoutMarketPlaceItem = () => {
                     <div style={{backgroundColor: 'rgba(0, 0, 0, 0.1)', width: '100%', height: '1px', marginTop: '1rem'}}></div>
                     <p style={{color: 'grey', fontSize: '.9rem', marginTop: '1rem'}}>Marca: <span style={{cursor: 'pointer', marginLeft: '.5rem', color: 'black'}}>{TypeBrands[item?.brand] ?? 'No definido'}</span></p>
                     <div style={{backgroundColor: 'rgba(0, 0, 0, 0.1)', width: '100%', height: '1px', marginTop: '1rem'}}></div>
-                    <p style={{color: 'grey', fontSize: '.9rem', marginTop: '1rem'}}>Número de parte: <span style={{cursor: 'pointer', marginLeft: '.5rem', color: 'black'}}>{item?.sku ?? 'No definido'}</span></p>
+                    <p style={{color: 'grey', fontSize: '.9rem', marginTop: '1rem'}}>Número de parte: <span style={{cursor: 'pointer', marginLeft: '.5rem', color: 'black'}}>{item?.numberPart ?? 'No definido'}</span></p>
                     <p style={{color: 'grey', fontSize: '.9rem', marginTop: '1rem'}}>Aplica para: <span style={{cursor: 'pointer', marginLeft: '.5rem', color: 'black'}}>{TypeBrands[item?.brand] ?? 'No definido'}</span></p>
 
                 </div>
@@ -66,6 +66,7 @@ const LayoutMarketPlaceItem = () => {
                   onChange={(e) => setAmmount(Number(e.target.value))}
                   type="number"
                   max={Number(item?.ammount)}
+                  min={0}
                   name="name"
                   placeholder=""
                   className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border bg-[#f8f8f8] px-3 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none"
@@ -80,7 +81,7 @@ const LayoutMarketPlaceItem = () => {
             </div>
             </div>
         </div>
-        <div style={{marginTop: '1rem', width: '70%', 
+        <div style={{marginTop: '1rem', width: '80%', 
             backgroundColor: 'white',
             borderRadius: '.5rem',
             border: '1px solid rgba(128, 128, 128, 0.219)',
@@ -90,7 +91,7 @@ const LayoutMarketPlaceItem = () => {
                 <p style={{borderBottom: '1px solid grey', width: '100%', padding: '.5rem'}}>{}</p>
             </div>
             <p style={{ width: '100%', marginTop: '1rem', fontSize: '.9rem'}}>{item?.description ?? 'No se encontro una descripción'}</p>
-            <div style={{boxSizing: 'border-box', width: '100%'}}>
+            <div style={{boxSizing: 'border-box', width: '100%', marginTop: '1rem'}}>
                 <div style={{display:'flex', width: '100%'}}>
                     <p style={{width: '100%', backgroundColor: '#EFF2F4', padding: '.3rem', border: '1px solid rgba(0,0,0, 0.1)'}}>
                         Marca

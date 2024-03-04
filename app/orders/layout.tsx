@@ -133,8 +133,6 @@ const OrdersLayoutPage = () => {
                           ))}
                           </span>
                       </div>
-                    
-                    
                   </div>
                 </div>
                 

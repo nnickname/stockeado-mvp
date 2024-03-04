@@ -228,6 +228,15 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
     
           </div>
           <div onClick={() => {
+            //setItemSelected(item._id);
+            //setOpenEdit(true);
+            
+          }} style={{cursor: 'pointer', marginRight: '.5rem'}}>
+            <Link style={{fontSize: '1rem', color: '#3662E3', marginLeft: '.5rem', marginRight: '.5rem'}} href={'https://stockeado-mvp.vercel.app/marketplace/item?id=' + item?._id}><IonIcon name='eye-outline'/></Link>
+
+          </div>
+          
+          <div onClick={() => {
             setItemSelected(item._id);
             setOpenEdit(true);
             
