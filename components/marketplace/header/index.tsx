@@ -10,7 +10,7 @@ import productImage from '../../../public/images/logo/productImage.png';
 import { TypeBrands } from "@/models/brands";
 import { CartProps } from "@/models/ordersModel";
 import Cookie from 'universal-cookie';
-
+import { findProduct } from "@/app/api/marketplacee/call";
 type HeaderMarketPlaceProps = {
   cartItems: CartProps[];
   setCart: any
@@ -54,8 +54,14 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
     }
   };
   const [isPopoverOpen, setIsPopoverOpen] = useState<boolean>(false);
-
-
+  const [keywordFind, setKeyword] = useState<string>('');
+  const findProductAndSet = async () => {
+    if(keywordFind?.length > 3){
+      var keywordCast = keywordFind?.replace(/%20/g, " ");
+      //console.log("/marketplace/find?name=" + keywordCast);
+      router.push("/marketplace/search?name=" + keywordCast);  
+    }
+  }
   return (
     <>
       <header
@@ -93,8 +99,8 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
             </div>
             <div className="input-search">
                 <IonIcon name="search-outline" className="iconinput"/>
-                <input placeholder="Busca por SKU, nombre de producto, marcas y tiendas" type='text'/>
-                <button >
+                <input value={keywordFind} onChange={(e) => setKeyword(e.target.value)} placeholder="Busca por SKU, nombre de producto, marcas y tiendas" type='text'/>
+                <button onClick={() => findProductAndSet()}>
                     Buscar
                 </button>
 

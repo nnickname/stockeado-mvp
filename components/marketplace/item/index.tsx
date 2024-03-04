@@ -23,13 +23,13 @@ const CardMarketPlace: FunctionComponent<CardProps> = ({item,setCart, setAmmount
     const [isPopoverOpen, setIsPopoverOpen] = useState<boolean>(false);
     return <div  className="cardMarketPlace">
         <div className="contentImage">
-            <img  src={item.image} alt="Item Image"/>
+            <img  src={item?.image} alt="Item Image"/>
         </div>
         <div  className="card-content">
             <div style={{display: 'flex', justifyContent: 'space-between'}}>
                 <div>
-                    <p>{item.name} {TypeBrands[(item?.brand-1) ?? 0] + ' '} {item?.model ?? '' }</p>
-                    <span style={{fontSize: '.9rem', color: 'green'}}> s/. {item?.priceSelling}</span>
+                    <p>{item?.name} {TypeBrands[(item?.brand) ?? 0] + ' '} {item?.model ?? '' }</p>
+                    <span style={{fontSize: '.9rem', color: 'green'}}> s/. {item?.priceSelling ?? 0}</span>
                 </div>
                 <div>
                 <Popover
