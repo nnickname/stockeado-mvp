@@ -13,3 +13,29 @@ export const findProduct = async (keyword: string) => {
         return null;
     }
 }
+
+export const findRandomProducts = async () => {
+    
+    try{
+        const response: any = await axios.get("/marketplacee/random");
+        if(response?.data?.items !== undefined){
+            return response?.data?.items;
+        } else return null;
+    }
+    catch(error){
+        return null;
+    }
+}
+
+export const findMostViewedShops = async () => {
+    
+    try{
+        const response: any = await axios.get("/marketplacee/mostviewed");
+        if(response?.data?.items !== undefined){
+            return response?.data?.items;
+        } else return null;
+    }
+    catch(error){
+        return null;
+    }
+}

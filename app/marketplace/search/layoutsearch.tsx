@@ -22,7 +22,7 @@ const LayoutMarketPlaceFindItem = () => {
     const findStaticProducts = async() => {
       if(name?.length > 3) {
         const response = await findProduct(name);
-        setItems(response ?? []);
+        if(response !== null) setItems(response ?? []);
       }
     }
     useEffect(() => {
