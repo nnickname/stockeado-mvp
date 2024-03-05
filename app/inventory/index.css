@@ -4,3 +4,9 @@ th{
 td{
     padding: 1rem !important;
 }
+
+@media screen and (max-width: 720px) {
+    .buttonsWithouthPadding{
+        padding: .2rem !important;
+    }
+  }

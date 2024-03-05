@@ -75,7 +75,7 @@ const LayoutConfigurationPage = () =>{
     return <SideBarComponent user={user} route='configuration' frameContennt={
         <div className="configurationContent">
             <div className="banner">
-                <label  htmlFor="imageBanner" style={{cursor: 'pointer'}}>
+                <label  htmlFor="imageBanner" style={{cursor: 'pointer', width: '100%', padding: '1rem'}}>
                     <img src={(image ?? user?.image) ?? backgroundImage.src} alt="Banner" style={{marginRight: 'auto', marginLeft: 'auto'}}/>
                     <input accept="image" id="imageBanner" onChange={onChangeImage} type='file' placeholder='Subir archivo' style={{
                         visibility: 'hidden', display: 'none'}}/>

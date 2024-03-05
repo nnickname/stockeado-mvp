@@ -324,8 +324,8 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
       <div style={{width: '100%', display: 'flex', justifyContent: 'space-between'}}>
         <h1 style={{marginBottom: '1rem', marginTop: '.5rem', fontSize: '1rem', fontWeight: '500'}}>Productos en MarketPlace <Link style={{fontSize: '1rem', color: '#3662E3', marginLeft: '.5rem'}} href={'https://stockeado-mvp.vercel.app/marketplace/shop?id=' + user?._id}>Mi URL<IonIcon name='open-outline'/></Link></h1>
         <div style={{display: 'flex'}}>
-          <button onClick={() => setOpen(true)} style={{fontSize: '.8rem', borderRadius: '.5rem', padding: '.2rem', paddingLeft: '1rem', paddingRight: '1rem', marginRight: '1rem', backgroundColor: '#1366D9', color: 'white'}}>Cargar productos</button>
-          <button style={{fontSize: '.8rem', border: '1px solid grey', borderRadius: '.5rem', padding: '.2rem', paddingLeft: '1rem', paddingRight: '1rem', backgroundColor: 'transparent', color: 'grey'}}>Descargar todo</button>
+          <button className="buttonsWithouthPadding" onClick={() => setOpen(true)} style={{fontSize: '.8rem', borderRadius: '.5rem', padding: '.2rem', paddingLeft: '1rem', paddingRight: '1rem', marginRight: '1rem', backgroundColor: '#1366D9', color: 'white'}}>Cargar productos</button>
+          <button className="buttonsWithouthPadding" style={{fontSize: '.8rem', border: '1px solid grey', borderRadius: '.5rem', padding: '.2rem', paddingLeft: '1rem', paddingRight: '1rem', backgroundColor: 'transparent', color: 'grey'}}>Descargar todo</button>
         </div>
       </div>
       <div className="input-search" style={{marginTop: '1rem', marginBottom: '1rem'}}>

@@ -4,7 +4,7 @@ import Logo from '../../../public/images/logo/logopreferente.png';
 import './index.css';
 import Image from "next/image";
 import IonIcon from "@reacticons/ionicons";
-import { FunctionComponent, ReactNode } from "react";
+import { FunctionComponent, ReactNode, useState } from "react";
 import { UserModel } from "@/models/userModel";
 import Cookie from "universal-cookie";
 import { useRouter } from "next/navigation";
@@ -17,12 +17,18 @@ type SideBarProps = {
 const SideBarComponent: FunctionComponent<SideBarProps> = ({user, frameContennt, route}) => {
     const router = useRouter();
     const cookies = new Cookie();
-    return <div className="sideBar">
-        <div className="sidebarCustomStyle">
-            <Image src={Logo}  alt="Logo" />
-            <div className="avatar">
+    const [open, setOpen] = useState<boolean>(true);
+    
+    return <div>
+        <div style={{width: '100%', textAlign: 'right'}}>
+                <button style={{fontSize: '.9rem', color: 'grey', position: 'absolute', top: '1rem', right: '1rem'}} onClick={() => setOpen(!open)}>{open ? 'Esconder barra de navegación' : 'Mostrar barra de navegación'}</button>
+        </div>
+        <div className="sideBar">
+        <div className="sidebarCustomStyle" style={{display: open ? 'block' : 'none'}}>
+            
+            <Image style={{marginTop: '1.5rem'}} src={Logo}  alt="Logo" />
+            <img className="avatar" alt="Avatar" src={user?.imageLogo}/>
 
-            </div>
             <h1 className="title">{user?.nameShop}</h1>
             <div style={{marginTop: '3rem'}}></div>
 
@@ -63,5 +69,9 @@ const SideBarComponent: FunctionComponent<SideBarProps> = ({user, frameContennt,
         {frameContennt}
     </div>
 </div>
+    </div>
+    
+    
+    
 }
 export default SideBarComponent

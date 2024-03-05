@@ -4,20 +4,24 @@
 .sideBarContainer{
     background-color: rgb(242, 242, 242);
     padding: 1rem;
-    width: 80%;
+    padding-top: 3rem;
+    width: 100%;
 
 }
 
 .sidebarCustomStyle{
-    width: 20%;
+    z-index: 99;
+    transition: 1s ease;
+    background-color: rgb(253, 249, 249);
+    min-width: 200px;
+    max-width: 250px;
     padding: 1rem;
     text-align: center;
 }
 .sidebarCustomStyle .avatar{
     margin-top: 1.5rem;
-    width: 50px;
-    height: 50px;
-    background-color: #3662E3;
+    width: 70px;
+    height: 70px;
     border-radius: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -72,3 +76,12 @@
     background-color: white;
     margin: 1rem;
 }
+
+
+
+@media screen and (max-width: 720px) {
+    .sidebarCustomStyle{
+        position: fixed;
+        border-right: 1px solid grey;
+    }
+  }

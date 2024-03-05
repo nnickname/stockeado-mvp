@@ -79,7 +79,7 @@ const InventoryResume: FunctionComponent<InventoryResume> = ({items, orders, use
     return <div className="content-frame-container resume">
         <div style={{width: '100%', textAlign: 'left'}}>
             <h1>Resumen de Inventario</h1>
-            <div className="resumeContainer" style={{display: 'flex'}}>
+            <div className="resumeContainer displayGridResponsive" style={{display: 'flex'}}>
 
                 <div style={{padding: '1rem', paddingRight: '3rem', borderRight: '1px solid rgba(230, 230, 230, 0.5)'}}>
                     <h1 style={{color: '#1570EF', marginBottom: '.3rem'}}>Marcas</h1>
