@@ -253,7 +253,7 @@ const LayoutMarketPlaceNative = () => {
 
         <div className="contentM">
           <p> Tiendas mas visitadas</p>
-          <div  style={{marginTop: '3rem' ,display: 'flex', justifyContent: 'space-between'}}>
+          <div  style={{marginTop: '5rem' ,display: 'flex', justifyContent: 'space-between'}}>
 
             {mostViewed?.map((e) => {
               {
@@ -263,7 +263,7 @@ const LayoutMarketPlaceNative = () => {
               }
             })}
           </div>
-          <div style={{marginTop: '3rem', padding: '.6rem', width: '100%', borderRadius: '.5rem', border: '1px solid rgba(0, 0, 0, 0.2)'}}>
+          <div style={{marginTop: '6rem', padding: '.6rem', width: '100%', borderRadius: '.5rem', border: '1px solid rgba(0, 0, 0, 0.2)'}}>
             <p>Se encontraron <span style={{fontWeight: '700'}}>{items?.length} productos</span></p>
           </div>
           <div className="gridItems">

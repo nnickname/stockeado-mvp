@@ -20,7 +20,8 @@ import './index.css';
 import '../../components/marketplace/header/index.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import { InventoryModel } from "@/models/inventoryModel";
-import CSVReader from "react-csv-reader";
+import {ExcelRenderer} from 'react-excel-renderer';
+
 
 export type InventoryTableModel = {
     id: number;
@@ -220,6 +221,7 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
       },
       { label: 'Ventas', renderCell: (item) => item.sellings},
       { label: 'Precio', renderCell: (item) => 's/.' + item.price },
+      { label: 'Precio venta', renderCell: (item) => 's/.' + item.priceSelling },
       { label: '', pinRigth: true , renderCell: (item) =>     
         <div style={{display: 'flex', fontSize: '1.2rem'}}>
           <div style={{color: 'tomato', marginRight: '.5rem', cursor: 'pointer'}} onClick={() => {
@@ -305,25 +307,42 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
           } else NotificationManager.error('Ocurrio un error', 'Error');
         } else NotificationManager.error('Completa el formulario.', 'Error');
     }
-    const onConvertCsv = async (data, fileInfo, originalFile) => {
-      var mapping = data?.map((e, index) => {return {
-        sku: e[0], 
-        name: e[1], 
-        ammount: e[2],
-        image: 'https://d2t1xqejof9utc.cloudfront.net/screenshots/pics/45807e95436336cce6fa477075468176/large.png',
-        price: '0.00',
-        brand: 0,
-        categorie: 0,
-        inMP : false,
-        model: 'Toyota',
-        stars: 0,
-        type: 0,
-        owner_id: user._id
-      } });
-      delete mapping[0];
-      if(await createManyInventories(mapping)){
-        NotificationManager.success('Logramos cargar tu inventario con exito, recuerda editarlo correctamente', 'Cargado');
-      } else NotificationManager.error('Ocurrio un error cargando tu CSV, recorda que tu csv debe tener los encabezados SKU, description y cantidad', 'Error');
+    const onConvertExcel = async (event) => {
+      let fileObj = event.target.files[0];
+      //just pass the fileObj as parameter
+      ExcelRenderer(fileObj, async (err, resp) => {
+        if(err){
+          console.log(err);            
+        }
+        else{
+          const body =  resp.rows?.map((e, index) => {return {
+              sku: String(e[0]), 
+              name: String(e[2]), 
+              ammount: String(e[3]),
+              image: String(e[5]),
+              price: String(0),
+              priceSelling: String(e[4]),
+              brand: 0,
+              categorie: 0,
+              inMP : false,
+              description: 'No definido',
+              numberPart: 'No definido',
+              model: String(e[1]),
+              stars: 0,
+              type: 0,
+              owner_id: user._id
+          } });         
+          body.splice(0, 1);
+          body.splice(body?.length -1, 1);
+          console.log(body);
+          if(await createManyInventories(body)){
+            NotificationManager.success('Logramos cargar tu inventario con exito, recuerda editarlo correctamente', 'Cargado');
+          } else NotificationManager.error('Ocurrio un error cargando tu CSV, recorda que tu csv debe tener los encabezados SKU, description y cantidad', 'Error');
+        
+          
+        }
+      });  
+      
     }
     return <>
       <div style={{width: '100%', display: 'flex', justifyContent: 'space-between'}}>
@@ -380,7 +399,8 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
         <p style={{background: 'linear-gradient(89deg, var(--token-dc60c65c-2692-4b09-8d77-49a86f7aedee, rgb(24, 36, 61)) /* {"name":"Azul prinicipal"} */ 0%, var(--token-1632e6e1-d1e5-427f-b435-20cb1e67f695, rgb(54, 98, 227)) /* {"name":"Azul claro"} */ 123.5068681091516%)', width: '100%', padding: '1rem', color:'white'}}>Cargar Inventario</p>
         <div style={{margin: '2rem'}}>
           <p style={{color: 'grey'}}>Carga tu inventario desde los siguientes formatos{'(csv, xlsx)'}: </p>
-          <CSVReader onFileLoaded={onConvertCsv} />
+          <input type="file" id="fileUpload" onChange={onConvertExcel}/>
+
           <div style={{width: '100%', textAlign: 'center'}}>
             <div style={{width: '1px', height: '53px', background: 'rgba(10, 10, 10, 0.2)', marginRight: 'auto', marginLeft: 'auto'}}></div>
             <p style={{color: 'grey'}}> o cargalo manualmente</p>

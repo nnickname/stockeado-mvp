@@ -25,7 +25,7 @@ const CardMarketPlace: FunctionComponent<CardProps> = ({item,setCart, setAmmount
     const router = useRouter();
     return <div  className="cardMarketPlace">
         <div className="contentImage">
-            <img  style={{cursor: 'pointer'}} onClick={() => router.push('/marketplace/item?id=' + item._id)} src={item?.image} alt="Item Image"/>
+            <img  style={{cursor: 'pointer', maxHeight: '200px'}} onClick={() => router.push('/marketplace/item?id=' + item._id)} src={item?.image} alt="Item Image"/>
         </div>
         <div  className="card-content">
             <div style={{display: 'flex', justifyContent: 'space-between'}}>

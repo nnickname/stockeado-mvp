@@ -33,7 +33,7 @@ const InventorySchema = new Schema({
 
     type: String,
     required: [true, "Please provide a name."],
-    maxlength: [60, "Name cannot be more than 60 characters"],
+    maxlength: [160, "Name cannot be more than 60 characters"],
   },
   price: {
     /* The name of this pet */
@@ -122,13 +122,13 @@ const InventorySchema = new Schema({
 
     type: String,
     required: [true, "Please provide a price of Selling."],
-    maxlength: [60, "Price cannot be more than 60 characters"],
+    maxlength: [160, "Price cannot be more than 60 characters"],
   },
   description: {
     /* The name of this pet */
     type: String,
     required: [true, "Please provide a price of Selling."],
-    maxlength: [60, "Price cannot be more than 60 characters"],
+    maxlength: [260, "Price cannot be more than 60 characters"],
   },
 });
 
