@@ -66,7 +66,9 @@ const LayoutMarketPlaceNative = () => {
       } else setItems(realItems);
     }
     return <div>
-        <HeaderMarketPlace cartItems={cart} setCart={setCart}/>
+        {items?.length === 0 ? <p style={{position: 'absolute', top: '50%', left: '50%'}}> Cargando...</p> :
+        <div>
+          <HeaderMarketPlace cartItems={cart} setCart={setCart}/>
         <BackgroundImage/>
          <div className="marketplace">
 
@@ -159,7 +161,7 @@ const LayoutMarketPlaceNative = () => {
           </div>
         </div>
       </div>
-
+        </div>} 
     </div>
 }
 export default LayoutMarketPlaceNative;

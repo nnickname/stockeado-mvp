@@ -63,7 +63,9 @@ const LayoutMarketPlaceShop = () => {
         if(cartCast !== undefined) setCart(cartCast ?? []);
     }, []);
     return <>
-    <HeaderMarketPlace cartItems={cart} setCart={setCart}/>
+      {inventoryData?.length === 0 ? <p style={{position: 'absolute', top: '50%', left: '50%'}}> Cargando...</p> : 
+        <div>
+<HeaderMarketPlace cartItems={cart} setCart={setCart}/>
     <img alt="Logo" style={{margin: 'auto', marginTop: '7rem', borderTop: '1px solid rgba(0,0,0, 0.2)', borderBottom: '1px solid rgba(0,0,0, 0.2)'}} src={user?.image}/>
     <div className="marketplace">
 
@@ -144,6 +146,10 @@ const LayoutMarketPlaceShop = () => {
         </div>
       </div>
     </div>
+        </div>
+      }
+
+    
     </>
 }
 export default LayoutMarketPlaceShop;

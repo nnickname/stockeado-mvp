@@ -52,6 +52,8 @@ const LayoutMarketPlaceFindItem = () => {
       } else setItems(realItems);
     }
     return <div>
+      {items?.length === 0 ? <p style={{position: 'absolute', top: '50%', left: '50%'}}> Cargando...</p> :
+      <div>
         <HeaderMarketPlace cartItems={cart} setCart={setCart}/>
         <BackgroundImage/>
          <div className="marketplace">
@@ -131,6 +133,8 @@ const LayoutMarketPlaceFindItem = () => {
           </div>
         </div>
       </div>
+      </div>}
+        
     </div>
 }
 export default LayoutMarketPlaceFindItem;
