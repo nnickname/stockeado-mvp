@@ -28,8 +28,6 @@ const LayoutMarketPlaceShop = () => {
     const [ammountItem, setAmmountItem] = useState<number>(0);
 
     const toUser = async () => {
-        
-        
         const userr = await getMarketPlace(id);
         setInventoryRealData(userr?.items ?? []);
         setInventoryData(userr?.items ?? []);
@@ -40,13 +38,10 @@ const LayoutMarketPlaceShop = () => {
         toUser();
         const cartCast = JSON.parse(sessionStorage.getItem("cart"));
         if(cartCast !== undefined) setCart(cartCast ?? []);
-        console.log(cartCast);
     }, []);
     return <>
     <HeaderMarketPlace cartItems={cart} setCart={setCart}/>
-    <div className="background" style={{backgroundPosition: '50%',backgroundImage: `url(${backgroundImage.src})`, height: '200px'}}>
-        <img alt="Logo" style={{margin: 'auto', marginTop: '3rem', height: '25px'}} src={user?.image}/>
-    </div>
+    <img alt="Logo" style={{margin: 'auto', marginTop: '7rem', borderTop: '1px solid rgba(0,0,0, 0.2)', borderBottom: '1px solid rgba(0,0,0, 0.2)'}} src={user?.image}/>
     <div className="marketplace">
 
 

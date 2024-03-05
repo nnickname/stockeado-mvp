@@ -7,6 +7,7 @@ export interface UserModel extends Document {
   nameShop: string;
   phone: string;
   image: string;
+  imageLogo: string;
   direction: string;
   password: string;
   email: string;
@@ -63,6 +64,10 @@ const UserSchema = new Schema({
   image: {
     type: String,
     required: [true, "Please provide the image"],
+  },
+  imageLogo: {
+    type: String,
+    required: [true, "Please provide the imageBanner"],
   },
 });
 export default  mongoose.models.Users || model<UserModel>("Users", UserSchema);
