@@ -1,19 +1,26 @@
+'use client';
 import { TypeBrands } from "@/models/brands"
 import { OrderModel } from "@/models/ordersModel"
-import { FunctionComponent } from "react"
+import { FunctionComponent, useState } from "react"
 import { BankOptions, OrderStates } from "../marketplace/payment/bank";
 import 'react-responsive-modal/styles.css';
 import './../marketplace/order/index.css';
 import { getTotalPrice } from "@/components/marketplace/header";
+import { updateOrderState } from "../api/orderss/call";
 type editModalProps = {
     order: OrderModel
 }
 const EditModalOrder: FunctionComponent<editModalProps> = ({order}) => {
     const time = new Date(String(order?.maxDate));
+    const [orderState, setOrderState] = useState<number>(Number(order?.state));
+    const modifyState = async (index: number) => {
+        const response = await updateOrderState({_id: order?._id, state: index});
+        if(response !== null) setOrderState(index);
+    }
     return <div>
         <p style={{color: 'grey', fontSize: '.8rem' }}>Toca para cambiar el estado de la orden</p>
         <div className="steptsorders" style={{marginTop: '0rem'}}>
-            {OrderStates?.map((e, index) => <div className={index > Number(order?.state) ? 'pending' : 'marked'} key={index}>{e}</div>)}
+            {OrderStates?.map((e, index) => <div style={{cursor: 'pointer'}} onClick={() => modifyState(index)} className={index > orderState ? 'pending' : 'marked'} key={index}>{e}</div>)}
         </div>
         <div style={{display:'flex', marginTop: '3.5rem'}}>
                 <p style={{marginRight: '.5rem', fontWeight: '700'}}>

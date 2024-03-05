@@ -25,6 +25,19 @@ export const getOrders = async (id: string) => {
         return null;
     }
 }
+export const updateOrderState = async (body: object) => {
+    
+    try{
+        
+        const response: any = await axios.post("/orderss/edit", body);
+        if(response?.data?.order !== undefined){
+            return response?.data?.order;
+        } else return null;
+    }
+    catch(error){
+        return null;
+    }
+}
 export const getOrder = async (id: string) => {
     
     try{
