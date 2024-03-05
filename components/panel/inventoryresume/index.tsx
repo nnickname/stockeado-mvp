@@ -18,7 +18,8 @@ export const getTotalPriceInventory = (cartItems: InventoryModel[] ) => {
     cartItems?.map((e) => {
       price = price + (Number(e?.priceSelling) * e?.ammount);
     })
-        return String(price);
+    
+        return String(price.toFixed(16));
 }
 
 
