@@ -28,7 +28,7 @@
 .input-search button{
     background: linear-gradient(180deg, #127FFF 0%, #3662E3 100%);
     padding: .7rem;
-    padding-left: 1em;
+    padding-left: 1rem;
     padding-right: 1rem;
     color: white;
     border: 1px solid #3662E3;
@@ -45,4 +45,12 @@
 .cart p{
     font-size:  .9rem;
     color: grey;
+}
+
+@media screen and (max-width: 720px) {
+    .input-search{
+        
+        margin-right: 1rem;
+    }
+    
 }

@@ -26,7 +26,7 @@ const SideBarComponent: FunctionComponent<SideBarProps> = ({user, frameContennt,
         <div className="sideBar">
         <div className="sidebarCustomStyle" style={{display: open ? 'block' : 'none'}}>
             
-            <Image style={{marginTop: '1.5rem'}} src={Logo}  alt="Logo" />
+            <Image src={Logo}  alt="Logo" />
             <img className="avatar" alt="Avatar" src={user?.imageLogo}/>
 
             <h1 className="title">{user?.nameShop}</h1>

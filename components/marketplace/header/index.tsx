@@ -73,7 +73,7 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
       >
         <div className="container">
           <div className="relative -mx-4 flex items-center justify-between">
-            <div className=" px-4 xl:mr-12">
+            <div className=" px-4">
               <Link
                 href="/"
                 className={`header-logo block w-full ${

@@ -38,7 +38,7 @@ const LayoutMarketPlaceItem = () => {
             <p style={{color: 'grey', fontSize: '.8rem', marginBottom: '1rem'}}> MarketPlace {'> ' + shop?.nameShop}</p>
         </div>
         <div className="cardImage">
-            <div style={{display: 'flex', width: '100%'}}>
+            <div style={{display: 'flex', width: '100%'}} className='displayBlockResponsive'>
                 <div>
                     <img  style={{maxWidth: '350px' , minHeight: '250px', border: '1px solid rgba(128, 128, 128, 0.219', borderRadius: '.8rem'}} src={item?.image} alt="Image Item"/>
 
@@ -60,26 +60,26 @@ const LayoutMarketPlaceItem = () => {
                 </div>
             </div>
             <div >
-            <div style={{border: '1px solid rgba(128, 128, 128, 0.219 !important', borderRadius: '.5rem', padding: '1rem', minWidth: '180px'}}>
-                <p>Cantidad</p>
-                <input
-                  value={String(ammount)}
-                  onChange={(e) => setAmmount(Number(e.target.value))}
-                  type="number"
-                  max={Number(item?.ammount)}
-                  min={0}
-                  name="name"
-                  placeholder=""
-                  className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border bg-[#f8f8f8] px-3 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none"
-                  style={{padding: '.5rem', borderLeft: 'transparent', borderRight: 'transparent', borderTop: 'transparent'}}
-                />
-                <p style={{marginTop: '1rem', color: '#8B96A5', fontSize: '.8rem'}}>Lima, Perú</p>
-                <p style={{marginTop: '.5rem', color: '#8B96A5', fontSize: '.8rem'}}>Envío a domicilio</p>
-                <p style={{marginTop: '.5rem', color: '#8B96A5', fontSize: '.8rem'}}>Enviado por <span style={{fontWeight: '700'}}>Stockeado</span></p>
-                <button style={{marginTop: '1rem', borderRadius: '.5rem', backgroundColor: '#127FFF', padding: '.5rem', color: 'white', width: '100%'}}>Comprar ahora</button>
-                <button style={{marginTop: '.5rem', borderRadius: '.5rem', backgroundColor: 'transparent', padding: '.5rem', color: '#127FFF', border: '1px solid rgba(0, 0,0, .2)', width: '100%'}}>Añadir al carrito</button>
+                <div style={{border: '1px solid rgba(128, 128, 128, 0.219 !important', borderRadius: '.5rem', padding: '1rem', minWidth: '180px'}}>
+                    <p>Cantidad</p>
+                    <input
+                    value={String(ammount)}
+                    onChange={(e) => setAmmount(Number(e.target.value))}
+                    type="number"
+                    max={Number(item?.ammount)}
+                    min={0}
+                    name="name"
+                    placeholder=""
+                    className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border bg-[#f8f8f8] px-3 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none"
+                    style={{padding: '.5rem', borderLeft: 'transparent', borderRight: 'transparent', borderTop: 'transparent'}}
+                    />
+                    <p style={{marginTop: '1rem', color: '#8B96A5', fontSize: '.8rem'}}>Lima, Perú</p>
+                    <p style={{marginTop: '.5rem', color: '#8B96A5', fontSize: '.8rem'}}>Envío a domicilio</p>
+                    <p style={{marginTop: '.5rem', color: '#8B96A5', fontSize: '.8rem'}}>Enviado por <span style={{fontWeight: '700'}}>Stockeado</span></p>
+                    <button style={{marginTop: '1rem', borderRadius: '.5rem', backgroundColor: '#127FFF', padding: '.5rem', color: 'white', width: '100%'}}>Comprar ahora</button>
+                    <button style={{marginTop: '.5rem', borderRadius: '.5rem', backgroundColor: 'transparent', padding: '.5rem', color: '#127FFF', border: '1px solid rgba(0, 0,0, .2)', width: '100%'}}>Añadir al carrito</button>
 
-            </div>
+                </div>
             </div>
         </div>
         <div style={{marginTop: '1rem', width: '80%', 

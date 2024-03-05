@@ -20,13 +20,14 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import IonIcon from "@reacticons/ionicons";
 import Modal from "react-responsive-modal";
+import { Popover } from "react-tiny-popover";
 
 const LayoutMarketPlaceNative = () => {
     const [open, setOpen] = useState(false);
     const [openAdd, setOpenAdd] = useState(false);
     const [cart, setCart] = useState<CartProps[]>([]);
     const [realItems, setRealItems] = useState<InventoryModel[]>([]);
-    const [items, setItems] = useState<InventoryModel[]>([]);
+    const [items, setItems] = useState<InventoryModel[]>(null);
     const [ammountItem, setAmmountItem] = useState<number>(0);
     const [mostViewed, setMostViewed] = useState<UserModel[]>([]);
     
@@ -65,15 +66,18 @@ const LayoutMarketPlaceNative = () => {
         setItems(response ?? []);
       } else setItems(realItems);
     }
+
+    const [isPopoverOpenBrand, setPopoverOpenBrand] = useState<boolean>(false);
+    const [isPopoverOpenCategorie, setPopoverOpenCategorie] = useState<boolean>(false);
+    const [isPopoverOpenType, setPopoverOpenType] = useState<boolean>(false);
+
     return <div>
-        {items?.length === 0 ? <p style={{position: 'absolute', top: '50%', left: '50%'}}> Cargando...</p> :
+        {items === null ? <p style={{position: 'absolute', top: '50%', left: '50%'}}> Cargando...</p> :
         <div>
           <HeaderMarketPlace cartItems={cart} setCart={setCart}/>
         <BackgroundImage/>
-         <div className="marketplace">
-
-
-        <div className="sidebarM">
+         <div className="marketplace displayBlockResponsive">
+         <div className="sidebarM hideResponsive">
           <div style={{display: 'flex'}}>
             <div>
               <input
@@ -138,6 +142,113 @@ const LayoutMarketPlaceNative = () => {
           </form>
         
         </div>
+        <div className="sidebarM showResponsive" style={{display: 'none'}}>
+          <div style={{display: 'flex'}}>
+              <div>
+                <input
+                        style={{
+                          marginTop: 'auto',
+                          width: '100%',
+                          padding: '1.1rem',
+                          height: '40px',
+                          border: '1px solid grey'
+                        }}
+                        onChange={(e) => setKeyword(e.target.value)}
+                        type="text"
+                        name="email"
+                        placeholder="Buscar por SKU"
+                        value={keywordFind}
+                      />
+              </div>
+            <div>
+                <button style={{
+                          
+                          height: '40px',
+                          paddingLeft: '1rem',
+                          paddingRight: '1rem',
+                          border: '1px solid grey'
+                        }} onClick={() => findProductAndSet()}>
+                      Buscar
+                </button>
+                </div>
+            </div>
+          <div className="displayFlexResponsive" style={{marginTop: '2rem'}}>
+            
+
+
+            
+            <Popover
+              onClickOutside={()=> setPopoverOpenCategorie(false)}
+              containerStyle={{
+                backgroundColor: 'white',
+                padding: '1.3rem',
+                border: '1px solid rgba(0, 0, 0, 0.2)',
+                borderRadius: '.5rem'
+              }}
+              isOpen={isPopoverOpenCategorie}
+              positions={['bottom', 'top', 'left', 'right']} // preferred positions by priority
+              content={
+                <form>
+                  {TypeCategories.map((e, index) => {
+                    return <div onClick={()=> setPopoverOpenCategorie(false)} key={index} style={{cursor: 'pointer', display: 'flex', marginTop: '.4rem'}}>
+                      <input onChange={(e) => filterByCategorie(index, e.target.checked)} type='checkbox' style={{marginRight: '.5rem'}}/>
+                      <p>{e}</p>
+                      
+                    </div>
+                  })}
+                </form>
+              }>
+                <h1 style={{cursor: 'pointer'}} onClick={()=> setPopoverOpenCategorie(true)}>Categorias</h1>
+            </Popover>
+            <Popover
+              onClickOutside={()=> setPopoverOpenType(false)}
+              containerStyle={{
+                backgroundColor: 'white',
+                padding: '1.3rem',
+                border: '1px solid rgba(0, 0, 0, 0.2)',
+                borderRadius: '.5rem'
+              }}
+              isOpen={isPopoverOpenType}
+              positions={['bottom', 'top', 'left', 'right']} // preferred positions by priority
+              content={
+                <form>
+                  {TypeOfPiece.map((e, index) => {
+                    return <div onClick={()=> setPopoverOpenType(false)} key={index} style={{cursor: 'pointer', display: 'flex', marginTop: '.4rem'}}>
+                      <input onChange={(e) => filterByType(index, e.target.checked)} type='checkbox' style={{marginRight: '.5rem'}}/>
+                      <p>{e}</p>
+                      
+                    </div>
+                  })}
+                </form>
+              }>
+                <h1 style={{cursor: 'pointer'}} onClick={()=> setPopoverOpenType(true)}>Tipo de pieza</h1>
+            </Popover>
+            <Popover
+              onClickOutside={()=> setPopoverOpenBrand(false)}
+              containerStyle={{
+                backgroundColor: 'white',
+                padding: '1.3rem',
+                border: '1px solid rgba(0, 0, 0, 0.2)',
+                borderRadius: '.5rem'
+              }}
+              isOpen={isPopoverOpenBrand}
+              positions={['bottom', 'top', 'left', 'right']} // preferred positions by priority
+              content={
+                <form>
+                  {TypeBrands.map((e, index) => {
+                    return <div onClick={()=> setPopoverOpenBrand(false)}  key={index} style={{cursor: 'pointer', display: 'flex', marginTop: '.4rem'}}>
+                      <input name="colors" onChange={(e) => filterByBrand(index, e.target.checked)} type='checkbox' id='colors' style={{marginRight: '.5rem'}}/>
+                      <p>{e}</p>
+                      
+                    </div>
+                  })}
+                </form>
+              }>
+                <h1 style={{cursor: 'pointer'}} onClick={()=> setPopoverOpenBrand(true)}>Marcas</h1>
+            </Popover>
+          </div>
+        </div>
+        
 
 
         <div className="contentM">

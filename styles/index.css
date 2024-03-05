@@ -43,8 +43,18 @@ h1, h2, h3, h4 {
   .displayBlockResponsive{
     display: block !important;
   }
+  .displayFlexResponsive{
+    display: flex !important;
+    justify-content: space-between;
+  }
   .displayGridResponsive{
     display: grid !important;
     grid-template-columns: 50% 50% !important;
+  }
+  .showResponsive{
+    display: block !important;
+  }
+  .hideResponsive{
+    display: none !important;
   }
 }
