@@ -25,6 +25,29 @@ const LayoutMarketPlaceItem = () => {
         setItem(responseItem);
         setShop(responseShop);
     }
+    const router = useRouter();
+    const shopCart = () => {
+        if(ammount > 0){
+            const cartCast = [...cart, {
+                item: item ?? {},
+                ammount: ammount
+            }];
+            setCart(cartCast as CartProps[]);
+            sessionStorage.setItem("cart", String(JSON.stringify(cartCast)));
+            router.push('/marketplace/payment');
+        }
+    }
+    const addToCart = () => {
+        if(ammount > 0){
+            const cartCast = [...cart, {
+                item: item ?? {},
+                ammount: ammount
+            }];
+            setCart(cartCast as CartProps[]);
+            sessionStorage.setItem("cart", String(JSON.stringify(cartCast)));
+        }
+        
+    }
     useEffect(() => {
         getData();
         const cartCast = JSON.parse(sessionStorage.getItem("cart"));
@@ -33,11 +56,11 @@ const LayoutMarketPlaceItem = () => {
     return <div>
         <HeaderMarketPlace cartItems={cart} setCart={setCart}/>
         {shop === null ? <p style={{position: 'absolute', top: '50%', left: '50%'}}> Cargando...</p> : 
-        <div className="viewitem">
+        <div className="viewitem ">
         <div style={{paddingRight: 'auto', paddingLeft: 'auto', marginTop: '7rem'}}>
             <p style={{color: 'grey', fontSize: '.8rem', marginBottom: '1rem'}}> MarketPlace {'> ' + shop?.nameShop}</p>
         </div>
-        <div className="cardImage">
+        <div className="cardImage displayBlockResponsive">
             <div style={{display: 'flex', width: '100%'}} className='displayBlockResponsive'>
                 <div>
                     <img  style={{maxWidth: '350px' , minHeight: '250px', border: '1px solid rgba(128, 128, 128, 0.219', borderRadius: '.8rem'}} src={item?.image} alt="Image Item"/>
@@ -76,8 +99,8 @@ const LayoutMarketPlaceItem = () => {
                     <p style={{marginTop: '1rem', color: '#8B96A5', fontSize: '.8rem'}}>Lima, Perú</p>
                     <p style={{marginTop: '.5rem', color: '#8B96A5', fontSize: '.8rem'}}>Envío a domicilio</p>
                     <p style={{marginTop: '.5rem', color: '#8B96A5', fontSize: '.8rem'}}>Enviado por <span style={{fontWeight: '700'}}>Stockeado</span></p>
-                    <button style={{marginTop: '1rem', borderRadius: '.5rem', backgroundColor: '#127FFF', padding: '.5rem', color: 'white', width: '100%'}}>Comprar ahora</button>
-                    <button style={{marginTop: '.5rem', borderRadius: '.5rem', backgroundColor: 'transparent', padding: '.5rem', color: '#127FFF', border: '1px solid rgba(0, 0,0, .2)', width: '100%'}}>Añadir al carrito</button>
+                    <button onClick={() => shopCart()} style={{marginTop: '1rem', borderRadius: '.5rem', backgroundColor: '#127FFF', padding: '.5rem', color: 'white', width: '100%'}}>Comprar ahora</button>
+                    <button  onClick={() => addToCart()} style={{marginTop: '.5rem', borderRadius: '.5rem', backgroundColor: 'transparent', padding: '.5rem', color: '#127FFF', border: '1px solid rgba(0, 0,0, .2)', width: '100%'}}>Añadir al carrito</button>
 
                 </div>
             </div>
@@ -86,7 +109,7 @@ const LayoutMarketPlaceItem = () => {
             backgroundColor: 'white',
             borderRadius: '.5rem',
             border: '1px solid rgba(128, 128, 128, 0.219)',
-            padding: '1rem'}}>
+            padding: '1rem'}} className='w100Responsive'>
             <div style={{display: 'flex', width: '100%'}}>
                 <p style={{color: '#0D6EFD', borderBottom: '1px solid #0D6EFD', width: '100%', padding: '.5rem'}}>Descripción del producto</p>
                 <p style={{borderBottom: '1px solid grey', width: '100%', padding: '.5rem'}}>{}</p>

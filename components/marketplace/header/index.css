@@ -55,5 +55,13 @@
     .cart.cartResponsive{
         max-width: 40px !important;
     }
+    .cart p{
+        font-size:  .6rem;
+    }
+    .input-search input{
+        padding: .5rem;
+        padding-left: 1rem !important;
+        padding-right: 1rem;
+    }
     
 }

@@ -57,4 +57,7 @@ h1, h2, h3, h4 {
   .hideResponsive{
     display: none !important;
   }
+  .w100Responsive{
+    width: 100% !important;
+  }
 }

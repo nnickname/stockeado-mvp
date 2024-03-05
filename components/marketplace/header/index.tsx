@@ -19,7 +19,7 @@ type HeaderMarketPlaceProps = {
 export const getTotalPrice = (cartItems: CartProps[] ) => {
   var price: number = 0;
   cartItems?.map((e) => {
-    price = price + (Number(e?.item?.price) * e?.ammount);
+    price = price + (Number(e?.item?.priceSelling) * e?.ammount);
   })
       return String(price);
 }
@@ -76,7 +76,7 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
             <div className="py-8 px-4">
               <Link
                 href="/dashboard"
-                className={`header-logo block w-full`}
+                className={`header-logo block w-full hideResponsive`}
               >
                 <Image
                   src="/images/logo/color.png"
@@ -95,7 +95,7 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
               </Link>
             </div>
             <div className="input-search">
-                <IonIcon name="search-outline" className="iconinput"/>
+                <IonIcon name="search-outline" className="iconinput hideResponsive"/>
                 <input value={keywordFind} onChange={(e) => setKeyword(e.target.value)} placeholder="Busca por nombre de producto" type='text'/>
                 <button onClick={() => findProductAndSet()}>
                     Buscar
@@ -137,7 +137,6 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
                         {cartItems?.length === 0 ? <p style={{textAlign: 'center', color: 'grey'}}>Todavia no añadiste nada</p> : ''}
 
                         {cartItems?.map((e, index) => {
-                          console.log(e);
                           const nameString = e?.item?.name + ' ' + TypeBrands[e?.item?.brand-1] + ' ' + e?.item?.model;
                           return <div key={index}>
                           <div style={{width: '100%', display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(220, 220, 220, .3)'}}>
@@ -148,7 +147,7 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
                             <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
                             {String(e?.ammount)}</p>
                             <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                            s/. {Number(e?.item?.price) * e?.ammount}</p>
+                            s/. {Number(e?.item?.priceSelling)}</p>
                             <button onClick={() => {
                                 setCart(cartItems.filter((obj, indexx) => index !== indexx));
                                 sessionStorage.setItem('cart', JSON.stringify(cartItems.filter((obj, indexx) => index !== indexx)))

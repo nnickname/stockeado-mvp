@@ -50,13 +50,15 @@ const CardMarketPlace: FunctionComponent<CardProps> = ({item,setCart, setAmmount
                         <input value={ammountItem} onChange={(e) => setAmmountItem(Number(e?.target?.value))} min='0' max={item?.ammount} style={{padding: '.5rem', border: '1px solid rgba(0,0,0, 0.1)', width: '100%'}} type='number' placeholder='Cantidad'/>
                         <br/>
                         <button onClick={() => {
-                            const cartCast = [...cart, {
-                                item: item ?? {},
-                                ammount: ammountItem
-                            }];
-                            setCart(cartCast);
-                            sessionStorage.setItem("cart", String(JSON.stringify(cartCast)));
-                            setIsPopoverOpen(false);
+                            if(ammountItem > 0 ){
+                                const cartCast = [...cart, {
+                                    item: item ?? {},
+                                    ammount: ammountItem
+                                }];
+                                setCart(cartCast);
+                                sessionStorage.setItem("cart", String(JSON.stringify(cartCast)));
+                                setIsPopoverOpen(false);
+                            }
                         }} style={{marginTop: '1rem', padding: '.5rem', textAlign: 'center', width: '100%', background: 'green', color: 'white'}}>Añadir al carrito</button>
 
                     </div>

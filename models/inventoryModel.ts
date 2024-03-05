@@ -117,6 +117,19 @@ const InventorySchema = new Schema({
     required: [true, "Please provide a price of Selling."],
     maxlength: [60, "Price cannot be more than 60 characters"],
   },
+  numberPart: {
+    /* The name of this pet */
+
+    type: String,
+    required: [true, "Please provide a price of Selling."],
+    maxlength: [60, "Price cannot be more than 60 characters"],
+  },
+  description: {
+    /* The name of this pet */
+    type: String,
+    required: [true, "Please provide a price of Selling."],
+    maxlength: [60, "Price cannot be more than 60 characters"],
+  },
 });
 
 export default  mongoose.models.Inventories || model<InventoryModel>("Inventories", InventorySchema);

@@ -44,6 +44,9 @@ const ModalEditProduct: FunctionComponent<EditRowParams> = ({user, item, makeDat
   const [name, setName] = useState(item.name);
   const [image, setImage] = useState(null);
   const [sku, setSku] = useState(item.sku);    
+  const [numberPart, setNumberPart] = useState(item?.numberPart ?? 'No definido');    
+  const [description, setDescription] = useState(item?.description ?? 'No definido');    
+
     const [ammount, setAmmount] = useState(String(item.ammount));    
     const [price, setPrice] = useState(item.price);    
     const [priceSelling, setPriceSelling] = useState(item?.priceSelling);    
@@ -54,19 +57,18 @@ const ModalEditProduct: FunctionComponent<EditRowParams> = ({user, item, makeDat
     const [model, setModel] = useState(item.model);    
     const [type, setType] = useState(item.type);    
     const validateForm = async () => {
-      const imageToBuild = image === null ? item.image : image;
-      var inMP;
-      if(onMP !== null){
-        inMP = onMP === 'on' ? true : false;
-      } else inMP = item.inMP;
+          const imageToBuild = image === null ? item.image : image;
+      
           item.name = name;
           item.image = imageToBuild;
           item.sku = sku;
           item.ammount = Number(ammount);
+          item.description = description;
+          item.numberPart = numberPart;
           item.price = price;
           item.brand = brand;
           item.categorie = categorie;
-          item.inMP = inMP;
+          item.inMP = onMP === 'on' ? true : false;;
           item.model = model;
           item.type = type;
           item._id = String(item._id);
@@ -130,6 +132,10 @@ const ModalEditProduct: FunctionComponent<EditRowParams> = ({user, item, makeDat
               <input value={priceSelling} onChange={(e) => setPriceSelling(e.target.value)} placeholder="Precio de venta sin igv(ej 1.68)"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
 
             </div>
+            <input value={numberPart} onChange={(e) => setNumberPart(e.target.value)} placeholder="Número de parte" className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+            <input value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Descripción" className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+
+                        
 
         <div style={{width: '100%', textAlign: 'left', margin: '.5rem', marginBottom: '0rem'}}>
           <p style={{fontSize: '.9rem', color: 'grey'}}>Actual: {item.inMP === true ? 'Publicado' : 'No esta publicado'}</p>
@@ -201,12 +207,9 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
     const [ammount, setAmmount] = useState(null);    
     const [price, setPrice] = useState(null);    
     const [priceSelling, setPriceSelling] = useState(null);    
-
     const [brand, setBrand] = useState(-1);    
-    const [categorie, setCategorie] = useState(-1);    
     const [onMP, setOnMP] = useState(null);    
     const [model, setModel] = useState(null);    
-    const [type, setType] = useState(-1);    
     const COLUMNS = [
       { label: 'SKU', renderCell: (item) => item.sku },
       
@@ -273,10 +276,10 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
         window.location.reload();
       } else NotificationManager.error('Ocurrio un error', 'Error');
     }
+    const [numberPart, setNumberPart] = useState(null);    
+    const [description, setDescription] = useState(null); 
     const validateForm = async () => {
-      if(onMP === null ){
-        await setOnMP('in');
-      }
+      
       const buildBody = {
         name,
         image,
@@ -285,6 +288,8 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
         price,
         priceSelling,
         brand,
+        numberPart,
+        description,
         categorie: 0,
         inMP : onMP === 'on' ? true : false,
         model,
@@ -420,6 +425,8 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
               <input value={priceSelling} onChange={(e) => setPriceSelling(e.target.value)} placeholder="Precio de venta sin igv(ej 1.68)"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
 
             </div>
+            <input value={numberPart} onChange={(e) => setNumberPart(e.target.value)} placeholder="Número de parte" className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+            <input value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Descripción" className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
 
             
             <div style={{display: 'flex', margin: '.5rem'}}>
