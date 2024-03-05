@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FunctionComponent, useEffect, useState } from "react";
 import './index.css';
 import IonIcon from "@reacticons/ionicons";
@@ -58,8 +58,7 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
   const findProductAndSet = async () => {
     if(keywordFind?.length > 3){
       var keywordCast = keywordFind?.replace(/%20/g, " ");
-      //console.log("/marketplace/find?name=" + keywordCast);
-      router.push("/marketplace/search?name=" + keywordCast);  
+      router.push("/marketplace/search?name=" + String(keywordCast));  
     }
   }
   return (
@@ -99,7 +98,7 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
             </div>
             <div className="input-search">
                 <IonIcon name="search-outline" className="iconinput"/>
-                <input value={keywordFind} onChange={(e) => setKeyword(e.target.value)} placeholder="Busca por SKU, nombre de producto, marcas y tiendas" type='text'/>
+                <input value={keywordFind} onChange={(e) => setKeyword(e.target.value)} placeholder="Busca por nombre de producto" type='text'/>
                 <button onClick={() => findProductAndSet()}>
                     Buscar
                 </button>

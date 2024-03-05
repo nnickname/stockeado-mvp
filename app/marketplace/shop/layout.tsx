@@ -13,6 +13,7 @@ import { InventoryModel } from "@/models/inventoryModel";
 import '../../../components/marketplace/background/index.css';
 import { CartProps } from "@/models/ordersModel";
 import { useSearchParams } from 'next/navigation';
+import { findProduct } from "@/app/api/marketplacee/call";
 
 
 
@@ -33,6 +34,28 @@ const LayoutMarketPlaceShop = () => {
         setInventoryData(userr?.items ?? []);
         setUser(userr?.user);
     }
+    const filterByBrand = (brand: number, checked: boolean) => {
+      if(checked){
+        setInventoryData(inventoryRealData.filter((item) => Number(item.brand === brand)))
+      } else setInventoryData(inventoryRealData);
+    }
+    const filterByType = (type: number, checked: boolean) => {
+      if(checked){
+        setInventoryData(inventoryRealData.filter((item) => Number(item.type === type)))
+      } else setInventoryData(inventoryRealData);
+    }
+    const filterByCategorie = (categorie: number, checked: boolean) => {
+      if(checked){
+        setInventoryData(inventoryRealData.filter((item) => Number(item.categorie === categorie)))
+      } else setInventoryData(inventoryRealData);
+    }
+    const [keywordFind, setKeyword] = useState<string>('');
+    const findProductAndSet = async () => {
+      if(keywordFind?.length > 1){
+        const response = await findProduct(keywordFind);
+        setInventoryData(response ?? []);
+      } else setInventoryData(inventoryRealData);
+    }
     useEffect(() => {
         
         toUser();
@@ -46,10 +69,39 @@ const LayoutMarketPlaceShop = () => {
 
 
       <div className="sidebarM">
-        <h1>Categorias</h1>
+          <div style={{display: 'flex'}}>
+              <div>
+              <input
+                      style={{
+                        marginTop: 'auto',
+                        width: '100%',
+                        padding: '1.1rem',
+                        height: '40px',
+                        border: '1px solid grey'
+                      }}
+                      onChange={(e) => setKeyword(e.target.value)}
+                      type="text"
+                      name="email"
+                      placeholder="Buscar por SKU"
+                      value={keywordFind}
+                    />
+              </div>
+              <div>
+              <button style={{
+                        
+                        height: '40px',
+                        paddingLeft: '1rem',
+                        paddingRight: '1rem',
+                        border: '1px solid grey'
+                      }} onClick={() => findProductAndSet()}>
+                    Buscar
+              </button>
+            </div>
+        </div>
+        <h1 style={{marginTop: '1rem'}}>Categorias</h1>
         {TypeCategories.map((e, index) => {
           return <div key={index} style={{display: 'flex', marginTop: '.4rem'}}>
-            <input type='checkbox' style={{marginRight: '.5rem'}}/>
+            <input onChange={(e) => filterByCategorie(index, e.target.checked)} type='checkbox' style={{marginRight: '.5rem'}}/>
             <p>{e}</p>
             
           </div>
@@ -59,7 +111,7 @@ const LayoutMarketPlaceShop = () => {
         <h1>Tipo de pieza</h1>
         {TypeOfPiece.map((e, index) => {
           return <div key={index} style={{display: 'flex', marginTop: '.4rem'}}>
-            <input type='checkbox' style={{marginRight: '.5rem'}}/>
+            <input onChange={(e) => filterByType(index, e.target.checked)} type='checkbox' style={{marginRight: '.5rem'}}/>
             <p>{e}</p>
             
           </div>
@@ -70,7 +122,7 @@ const LayoutMarketPlaceShop = () => {
         <h1>Marcas</h1>
         {TypeBrands.map((e, index) => {
           return <div key={index} style={{display: 'flex', marginTop: '.4rem'}}>
-            <input type='checkbox' style={{marginRight: '.5rem'}}/>
+            <input onChange={(e) => filterByBrand(index, e.target.checked)} type='checkbox' style={{marginRight: '.5rem'}}/>
             <p>{e}</p>
             
           </div>

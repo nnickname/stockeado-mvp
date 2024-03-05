@@ -1,4 +1,4 @@
-
+'use client';
 import Image from 'next/image';
 import ProductImage from '../../../public/images/logo/productImage.png';
 import './index.css';
@@ -10,6 +10,7 @@ import { TypeBrands, TypeCategories, TypeOfPiece } from '@/models/brands';
 import { CartProps } from '@/models/ordersModel';
 import Cookie from 'universal-cookie';
 import { setCartCookies } from '@/app/api/inventory/call';
+import { useRouter } from 'next/navigation';
 
 type CardProps = {
     item: InventoryModel,
@@ -21,15 +22,17 @@ type CardProps = {
 
 const CardMarketPlace: FunctionComponent<CardProps> = ({item,setCart, setAmmountItem, ammountItem, cart}) => {
     const [isPopoverOpen, setIsPopoverOpen] = useState<boolean>(false);
+    const router = useRouter();
     return <div  className="cardMarketPlace">
         <div className="contentImage">
-            <img  src={item?.image} alt="Item Image"/>
+            <img  style={{cursor: 'pointer'}} onClick={() => router.push('/marketplace/item?id=' + item._id)} src={item?.image} alt="Item Image"/>
         </div>
         <div  className="card-content">
             <div style={{display: 'flex', justifyContent: 'space-between'}}>
                 <div>
-                    <p>{item?.name} {TypeBrands[(item?.brand) ?? 0] + ' '} {item?.model ?? '' }</p>
-                    <span style={{fontSize: '.9rem', color: 'green'}}> s/. {item?.priceSelling ?? 0}</span>
+                <span style={{fontSize: '1rem', color: '#3e9c35'}}> s/. {item?.priceSelling ?? 0}</span>
+
+                    <p style={{cursor: 'pointer'}} onClick={() => router.push('/marketplace/item?id=' + item._id)} >{item?.name} {TypeBrands[(item?.brand) ?? 0] + ' '} {item?.model ?? '' }</p>
                 </div>
                 <div>
                 <Popover

@@ -13,28 +13,58 @@ import MpLogo4 from '../../public/images/logo/mplogo4.png';
 import CardMarketPlace from "@/components/marketplace/item";
 import { useEffect, useState } from "react";
 import { CartProps } from "@/models/ordersModel";
-import { findMostViewedShops, findRandomProducts } from "../api/marketplacee/call";
+import { findMostViewedShops, findProduct, findRandomProducts } from "../api/marketplacee/call";
 import { InventoryModel } from "@/models/inventoryModel";
 import { UserModel } from "@/models/userModel";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import IonIcon from "@reacticons/ionicons";
+import Modal from "react-responsive-modal";
 
 const LayoutMarketPlaceNative = () => {
+    const [open, setOpen] = useState(false);
+    const [openAdd, setOpenAdd] = useState(false);
     const [cart, setCart] = useState<CartProps[]>([]);
+    const [realItems, setRealItems] = useState<InventoryModel[]>([]);
     const [items, setItems] = useState<InventoryModel[]>([]);
     const [ammountItem, setAmmountItem] = useState<number>(0);
     const [mostViewed, setMostViewed] = useState<UserModel[]>([]);
-
+    
     const findStaticProducts = async () => {
       const response = await findRandomProducts();
       const responseMostViewed = await findMostViewedShops() ?? [];
       if(responseMostViewed !== null) setMostViewed(responseMostViewed);
       if(response !== null) setItems(response);
+      if(response !== null) setRealItems(response);
+
+    }
+    const filterByBrand = (brand: number, checked: boolean) => {
+      if(checked){
+        setItems(realItems.filter((item) => Number(item.brand === brand)))
+      } else setItems(realItems);
+    }
+    const filterByType = (type: number, checked: boolean) => {
+      if(checked){
+        setItems(realItems.filter((item) => Number(item.type === type)))
+      } else setItems(realItems);
+    }
+    const filterByCategorie = (categorie: number, checked: boolean) => {
+      if(checked){
+        setItems(realItems.filter((item) => Number(item.categorie === categorie)))
+      } else setItems(realItems);
     }
     useEffect(() => {
       findStaticProducts();
       const cartCast = JSON.parse(sessionStorage.getItem("cart"));
       if(cartCast !== undefined) setCart(cartCast ?? []);
     }, []);
+    const [keywordFind, setKeyword] = useState<string>('');
+    const findProductAndSet = async () => {
+      if(keywordFind?.length > 1){
+        const response = await findProduct(keywordFind);
+        setItems(response ?? []);
+      } else setItems(realItems);
+    }
     return <div>
         <HeaderMarketPlace cartItems={cart} setCart={setCart}/>
         <BackgroundImage/>
@@ -42,10 +72,41 @@ const LayoutMarketPlaceNative = () => {
 
 
         <div className="sidebarM">
-          <h1>Categorias</h1>
+          <div style={{display: 'flex'}}>
+            <div>
+              <input
+                      style={{
+                        marginTop: 'auto',
+                        width: '100%',
+                        padding: '1.1rem',
+                        height: '40px',
+                        border: '1px solid grey'
+                      }}
+                      onChange={(e) => setKeyword(e.target.value)}
+                      type="text"
+                      name="email"
+                      placeholder="Buscar por SKU"
+                      value={keywordFind}
+                    />
+            </div>
+          <div>
+              <button style={{
+                        
+                        height: '40px',
+                        paddingLeft: '1rem',
+                        paddingRight: '1rem',
+                        border: '1px solid grey'
+                      }} onClick={() => findProductAndSet()}>
+                    Buscar
+              </button>
+              </div>
+              </div>
+
+
+          <h1 style={{marginTop: '1rem'}}>Categorias</h1>
           {TypeCategories.map((e, index) => {
             return <div key={index} style={{display: 'flex', marginTop: '.4rem'}}>
-              <input type='checkbox' style={{marginRight: '.5rem'}}/>
+              <input onChange={(e) => filterByCategorie(index, e.target.checked)} type='checkbox' style={{marginRight: '.5rem'}}/>
               <p>{e}</p>
               
             </div>
@@ -55,7 +116,7 @@ const LayoutMarketPlaceNative = () => {
           <h1>Tipo de pieza</h1>
           {TypeOfPiece.map((e, index) => {
             return <div key={index} style={{display: 'flex', marginTop: '.4rem'}}>
-              <input type='checkbox' style={{marginRight: '.5rem'}}/>
+              <input onChange={(e) => filterByType(index, e.target.checked)} type='checkbox' style={{marginRight: '.5rem'}}/>
               <p>{e}</p>
               
             </div>
@@ -64,13 +125,15 @@ const LayoutMarketPlaceNative = () => {
           <div style={{marginTop:'.5rem', marginBottom: '.5rem', width: '100%', height: '1px', background: 'rgba(0,0,0, 0.2)'}}></div>
         
           <h1>Marcas</h1>
+          <form>
           {TypeBrands.map((e, index) => {
             return <div key={index} style={{display: 'flex', marginTop: '.4rem'}}>
-              <input type='checkbox' style={{marginRight: '.5rem'}}/>
+              <input name="colors" onChange={(e) => filterByBrand(index, e.target.checked)} type='checkbox' id='colors' style={{marginRight: '.5rem'}}/>
               <p>{e}</p>
               
             </div>
           })}
+          </form>
         
         </div>
 
@@ -96,6 +159,7 @@ const LayoutMarketPlaceNative = () => {
           </div>
         </div>
       </div>
+
     </div>
 }
 export default LayoutMarketPlaceNative;

@@ -12,7 +12,9 @@ export async function GET (req: Request | any, res: Response, next: any){
      return NextResponse.json({message: 'Invalid keyword'});
     }
     var responseItems = await Inventory.find({ name: {$regex: token, $options: 'i'}});
-    return NextResponse.json({ message: "Item's found", items: responseItems});
+    var responseItemsTwo = await Inventory.find({ sku: {$regex: token, $options: 'i'}});
+
+    return NextResponse.json({ message: "Item's found", items: [...responseItems, ...responseItemsTwo]});
   }
   catch(error){
     console.log(error);
