@@ -73,12 +73,10 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
       >
         <div className="container">
           <div className="relative -mx-4 flex items-center justify-between">
-            <div className=" px-4">
+            <div className="py-8 px-4">
               <Link
-                href="/"
-                className={`header-logo block w-full ${
-                  sticky ? "py-5 lg:py-2" : "py-8"
-                } `}
+                href="/dashboard"
+                className={`header-logo block w-full`}
               >
                 <Image
                   src="/images/logo/color.png"
@@ -104,6 +102,10 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
                 </button>
 
 
+            </div>
+            <div className="cart cartResponsive" onClick={() => router.push('/signin')}>
+                <IonIcon name="person-outline"/>
+                <p>Cuenta</p>
             </div>
             <Popover
                     containerStyle={{
@@ -169,11 +171,13 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
                     </div>
                 }
                     >
-                    <div className="cart" onClick={() => setIsPopoverOpen(!isPopoverOpen)}>
+                    
+                    <div className="cart cartResponsive" style={{minWidth: '130px'}} onClick={() => setIsPopoverOpen(!isPopoverOpen)}>
                         <IonIcon name="cart-outline"/>
                         <p>Mi Carrito{' (' + (cartItems?.length ?? 0) + ')'}</p>
                     </div>
               </Popover>
+              
             
             
           </div>

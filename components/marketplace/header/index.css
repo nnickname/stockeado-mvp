@@ -52,5 +52,8 @@
         
         margin-right: 1rem;
     }
+    .cart.cartResponsive{
+        max-width: 40px !important;
+    }
     
 }
