@@ -18,7 +18,7 @@ const LayoutConfigurationPage = () =>{
     const router = useRouter();
     const [user, setUser] = useState<UserModel>();
     const [image, setImage] = useState(null);
-    const [imageBanner, setImageBanner] = useState(null);
+    const [imageLogo, setImageLogo] = useState(null);
 
     const [direction, setDirection] = useState(null);    
     const [name, setName] = useState(null); 
@@ -40,6 +40,7 @@ const LayoutConfigurationPage = () =>{
         const body = {
             _id: user?._id,
             image: image ?? user?.image,
+            imageLogo: imageLogo ?? user?.imageLogo,
             direction: direction ?? user?.direction,
             name: name ?? user?.name,
             lastName: lastName ?? user?.lastname,
@@ -60,12 +61,12 @@ const LayoutConfigurationPage = () =>{
           console.log(error);
         };
     }
-    const onChangeImageBanner = async (event) => {
+    const onChangeImageLogo = async (event) => {
         const file = event.target.files[0];
         const fileReader = new FileReader();
         fileReader.readAsDataURL(file);
         fileReader.onload = () => {
-          setImageBanner(fileReader.result);
+          setImageLogo(fileReader.result);
         };
         fileReader.onerror = (error) => {
           console.log(error);
@@ -75,13 +76,18 @@ const LayoutConfigurationPage = () =>{
         <div className="configurationContent">
             <div className="banner">
                 <label  htmlFor="imageBanner" style={{cursor: 'pointer'}}>
-                    <img src={(image ?? user?.image) ?? backgroundImage.src} alt="Banner"/>
+                    <img src={(image ?? user?.image) ?? backgroundImage.src} alt="Banner" style={{marginRight: 'auto', marginLeft: 'auto'}}/>
                     <input accept="image" id="imageBanner" onChange={onChangeImage} type='file' placeholder='Subir archivo' style={{
                         visibility: 'hidden', display: 'none'}}/>
                 </label>
                 
             </div>
             <div className="container">
+                <label  htmlFor="imageLogo" style={{cursor: 'pointer'}}>
+                    <img style={{maxWidth: '150px', padding: '1rem', marginRight: 'auto', marginLeft: 'auto'}} src={(imageLogo ?? user?.imageLogo) ?? ImageLogo.src} alt="Logo"/>
+                    <input accept="image" id="imageLogo" onChange={onChangeImageLogo} type='file' placeholder='Subir archivo' style={{
+                        visibility: 'hidden', display: 'none'}}/>
+                </label>
                 <h1 style={{color: 'rgba(0,0,0, 0.8)', fontSize: '1.2rem', marginTop: '1rem'}}>Configura tu usuario</h1>
                 <div style={{marginTop: '1rem'}}>
                     <input value={nameShop} onChange={(e) => setNameShop(e.target.value)} placeholder={"Nombre de tienda (" + user?.nameShop + ")"} className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
