@@ -16,7 +16,7 @@ type InventoryResume = {
 export const getTotalPriceInventory = (cartItems: InventoryModel[] ) => {
     var price: number = 0;
     cartItems?.map((e) => {
-      price = price + ((Number(e?.price) ?? Number(e?.priceSelling)) * e?.ammount);
+      price = price + (Number(e?.priceSelling) * e?.ammount);
     })
         return String(price);
 }
