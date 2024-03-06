@@ -14,7 +14,8 @@ import 'react-responsive-modal/styles.css';
 
 export const metadata: Metadata = {
   title: "Stockeado | Inicio",
-  // other metadata
+  description: "Stockeado | Inicio",
+
 };
 const Home = () => {
   const { theme, setTheme } = useTheme();

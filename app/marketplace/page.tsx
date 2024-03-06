@@ -4,7 +4,8 @@ import LayoutMarketPlaceNative from './layoutMP';
 import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: "Stockeado | Marketplace",
-  // other metadata
+  description: "Stockeado | Marketplace",
+
 };
 const PageMarketPlaceNative = () => {
   

@@ -2,7 +2,8 @@ import { Metadata } from "next";
 import OrdersLayoutPage from "./layout";
 export const metadata: Metadata = {
     title: "Stockeado - Solicitudes finales",
-    // other metadata
+    description: "Stockeado | Solicitudes finales",
+
 };
 const OrdersPage = () => {
     return <OrdersLayoutPage/>;
