@@ -19,11 +19,9 @@ export const metadata: Metadata = {
 
 };
 const Home = () => {
-  const { theme, setTheme } = useTheme();
 
   return (
     <>
-      {setTheme('light')}
       <Header/>
       <ScrollUp />
       <Hero />
