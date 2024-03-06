@@ -1,4 +1,4 @@
-'use client';
+
 import Brands from "@/components/dashboard/Brands";
 import ScrollUp from "@/components/dashboard/Common/ScrollUp";
 import Contact from "@/components/dashboard/Contact";
