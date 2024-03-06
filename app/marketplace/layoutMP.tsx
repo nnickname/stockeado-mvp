@@ -21,6 +21,7 @@ import { useRouter } from "next/navigation";
 import IonIcon from "@reacticons/ionicons";
 import Modal from "react-responsive-modal";
 import { Popover } from "react-tiny-popover";
+import { SkewLoader } from "react-spinners";
 
 const LayoutMarketPlaceNative = () => {
     const [open, setOpen] = useState(false);
@@ -72,10 +73,10 @@ const LayoutMarketPlaceNative = () => {
     const [isPopoverOpenType, setPopoverOpenType] = useState<boolean>(false);
 
     return <div>
-        {items === null ? <p style={{position: 'absolute', top: '50%', left: '50%'}}> Cargando...</p> :
+        {items === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
         <div>
           <HeaderMarketPlace cartItems={cart} setCart={setCart}/>
-        <BackgroundImage/>
+          <BackgroundImage/>
          <div className="marketplace displayBlockResponsive">
          <div className="sidebarM hideResponsive">
           <div style={{display: 'flex'}}>

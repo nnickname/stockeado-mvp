@@ -497,7 +497,7 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
 };
 const LayoutHubInventoryPage = () => {
     const [realInventoryData, setRealInventoryData] = useState<InventoryModel[]>();
-    const [inventoryData, setInventory] = useState<InventoryTableModel[]>()
+    const [inventoryData, setInventory] = useState<InventoryTableModel[]>(null)
 
     const router = useRouter();
     const MakeData = async (putOpen: boolean) => {
@@ -525,21 +525,21 @@ const LayoutHubInventoryPage = () => {
     }, []);
     return <>
         <NotificationContainer/>
-
-      <SideBarComponent user={user} route='inventory' frameContennt={
-          <div className="resume" style={{overflow: 'hidden'}}>
-              <div>
-                <InventoryResume items={realInventoryData} orders={[]} user={user}/>
-                <div style={{padding: '1rem'}}>
-                  <TableRow user={user} inventoryData={inventoryData} realInventoryData={realInventoryData} setInventoryRealData={setRealInventoryData} setInventory={setInventory}/>
+        {inventoryData === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
+        <div>
+          <SideBarComponent user={user} route='inventory' frameContennt={
+            <div className="resume" style={{overflow: 'hidden'}}>
+                <div>
+                  <InventoryResume items={realInventoryData} orders={[]} user={user}/>
+                  <div style={{padding: '1rem'}}>
+                    <TableRow user={user} inventoryData={inventoryData} realInventoryData={realInventoryData} setInventoryRealData={setRealInventoryData} setInventory={setInventory}/>
+                  </div>
                 </div>
-              </div>
-              
+                
 
-          </div>
-        }/>;
-      <div></div>
-        
+            </div>
+          }/>;
+        </div>}        
       </>
 }
 

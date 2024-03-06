@@ -18,7 +18,7 @@ import Modal from "react-responsive-modal";
 import EditModalOrder from './editModal';
 const OrdersLayoutPage = () => {
     const router = useRouter();
-    const [user, setUser] = useState<UserModel>();
+    const [user, setUser] = useState<UserModel>(null);
     const [open, setOpen] = useState<boolean>();
     const [orderSelected, setOrderSelected] = useState<OrderModel>();
 
@@ -69,7 +69,7 @@ const OrdersLayoutPage = () => {
       ];
       const toUser = async () => {
           const userr = await getUser();
-          if(userr === undefined || user === null){
+          if(userr === undefined || userr === null){
               router.push('/');
           }
           const ordersCast = await getOrders(userr?._id);
@@ -84,61 +84,64 @@ const OrdersLayoutPage = () => {
 
       }
       return <>  
+        {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
         <SideBarComponent user={user} route='orders' frameContennt={
-            <div className="resume" style={{overflow: 'hidden'}}>
-                <div>
-                    <SellResume orders={ordersData} user={user}/>
-                    <div style={{padding: '1rem'}}>
-                      <div style={{width: '100%', display: 'flex', justifyContent: 'space-between'}}>
-                          <h1 style={{marginBottom: '1rem', marginTop: '.5rem', fontSize: '1rem', fontWeight: '500'}}>Ordenes finales</h1>
-                          <div style={{display: 'flex'}}>
-                            <button style={{fontSize: '.8rem', border: '1px solid grey', borderRadius: '.5rem', padding: '.2rem', paddingLeft: '1rem', paddingRight: '1rem', backgroundColor: 'transparent', color: 'grey'}}>Crear manual</button>
-                          </div>
-                      </div>
-                      <div className="input-search" style={{marginTop: '1rem', marginBottom: '1rem'}}>
-                        <div className="iconinput">
-                          <IonIcon name="search-outline"/>
-
+          <div className="resume" style={{overflow: 'hidden'}}>
+              <div>
+                  <SellResume orders={ordersData} user={user}/>
+                  <div style={{padding: '1rem'}}>
+                    <div style={{width: '100%', display: 'flex', justifyContent: 'space-between'}}>
+                        <h1 style={{marginBottom: '1rem', marginTop: '.5rem', fontSize: '1rem', fontWeight: '500'}}>Ordenes finales</h1>
+                        <div style={{display: 'flex'}}>
+                          <button style={{fontSize: '.8rem', border: '1px solid grey', borderRadius: '.5rem', padding: '.2rem', paddingLeft: '1rem', paddingRight: '1rem', backgroundColor: 'transparent', color: 'grey'}}>Crear manual</button>
                         </div>
-                        <input placeholder="Busca por nombre de cliente" type='text' value={search} onChange={handleSearch} />
-                        <button >
-                          Buscar
-                        </button>
-
+                    </div>
+                    <div className="input-search" style={{marginTop: '1rem', marginBottom: '1rem'}}>
+                      <div className="iconinput">
+                        <IonIcon name="search-outline"/>
 
                       </div>
-                      <CompactTable  pagination={pagination} columns={COLUMNS} data={{nodes: ordersData?.filter((item) =>
-                          item?.name.toLowerCase().includes(search.toLowerCase())
-                          
-                      )}} />
-                      <div style={{ display: "flex", justifyContent: "space-between" }}>
-                          <span style={{margin: '.5rem'}}>Paginas: {pagination.state.getTotalPages(ordersData ?? [])}</span>
+                      <input placeholder="Busca por nombre de cliente" type='text' value={search} onChange={handleSearch} />
+                      <button >
+                        Buscar
+                      </button>
 
-                          <span>
-                          Actual:{"  "}
-                          {pagination.state.getPages(ordersData ?? []).map((_, index) => (
-                              <button
-                              key={index}
-                              type="button"
-                              style={{
 
-                                  fontWeight: pagination.state.page === index ? "bold" : "normal",
-                                  color: pagination.state.page === index ? "#3662E3" : "black",
-                                  margin: '.5rem'
-                              }}
-                              onClick={() => pagination.fns.onSetPage(index)}
-                              >
-                              {index + 1} {'  '}
-                              </button>
-                          ))}
-                          </span>
-                      </div>
-                  </div>
+                    </div>
+                    <CompactTable  pagination={pagination} columns={COLUMNS} data={{nodes: ordersData?.filter((item) =>
+                        item?.name.toLowerCase().includes(search.toLowerCase())
+                        
+                    )}} />
+                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                        <span style={{margin: '.5rem'}}>Paginas: {pagination.state.getTotalPages(ordersData ?? [])}</span>
+
+                        <span>
+                        Actual:{"  "}
+                        {pagination.state.getPages(ordersData ?? []).map((_, index) => (
+                            <button
+                            key={index}
+                            type="button"
+                            style={{
+
+                                fontWeight: pagination.state.page === index ? "bold" : "normal",
+                                color: pagination.state.page === index ? "#3662E3" : "black",
+                                margin: '.5rem'
+                            }}
+                            onClick={() => pagination.fns.onSetPage(index)}
+                            >
+                            {index + 1} {'  '}
+                            </button>
+                        ))}
+                        </span>
+                    </div>
                 </div>
-                
-  
-            </div>
-          }/>;
+              </div>
+              
+
+          </div>
+        }/>
+        }
+        
           <Modal closeIcon={<IonIcon name="close"/>} styles={{
               modal : {borderRadius: '1rem', minWidth: '500px', padding: '0rem'},
               closeIcon: {color: 'white !important'},

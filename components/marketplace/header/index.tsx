@@ -6,7 +6,7 @@ import { FunctionComponent, useEffect, useState } from "react";
 import './index.css';
 import IonIcon from "@reacticons/ionicons";
 import { Popover } from "react-tiny-popover";
-import productImage from '../../../public/images/logo/productImage.png';
+import LogoFavicon from '../../../public/images/favicon.png';
 import { TypeBrands } from "@/models/brands";
 import { CartProps } from "@/models/ordersModel";
 import Cookie from 'universal-cookie';
@@ -74,6 +74,7 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
         <div className="container">
           <div className="relative -mx-4 flex items-center justify-between">
             <div className="py-8 px-4">
+              <img onClick={() => router.push("/dashboard")} style={{cursor: 'pointer', display: 'none', width: '50px'}} className="showResponsive" src={LogoFavicon.src} alt='logo'/>
               <Link
                 href="/dashboard"
                 className={`header-logo block w-full hideResponsive`}

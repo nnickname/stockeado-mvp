@@ -15,6 +15,7 @@ import { CartProps } from "@/models/ordersModel";
 import { useSearchParams } from 'next/navigation';
 import { findProduct } from "@/app/api/marketplacee/call";
 import { Popover } from "react-tiny-popover";
+import IonIcon from "@reacticons/ionicons";
 
 
 
@@ -67,10 +68,10 @@ const LayoutMarketPlaceShop = () => {
         if(cartCast !== undefined) setCart(cartCast ?? []);
     }, []);
     return <>
-      {inventoryData === null ? <p style={{position: 'absolute', top: '50%', left: '50%'}}> Cargando...</p> : 
+      {inventoryData === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> : 
         <div>
 <HeaderMarketPlace cartItems={cart} setCart={setCart}/>
-    <img alt="Logo" style={{margin: 'auto', marginTop: '7rem', borderTop: '1px solid rgba(0,0,0, 0.2)', borderBottom: '1px solid rgba(0,0,0, 0.2)'}} src={user?.image}/>
+    <img alt="Logo" className="noTopResponsive" style={{margin: 'auto', marginTop: '7rem', borderTop: '1px solid rgba(0,0,0, 0.2)', borderBottom: '1px solid rgba(0,0,0, 0.2)'}} src={user?.image}/>
     <div className="marketplace displayBlockResponsive">
 
 

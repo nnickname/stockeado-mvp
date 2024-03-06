@@ -1,5 +1,3 @@
-'use client';
-
 import Brands from "@/components/dashboard/Brands";
 import ScrollUp from "@/components/dashboard/Common/ScrollUp";
 import Contact from "@/components/dashboard/Contact";
@@ -10,10 +8,14 @@ import Hero from "@/components/dashboard/Hero";
 
 import Pricing from "@/components/dashboard/Pricing";
 import Video from "@/components/dashboard/Video";
+import { Metadata } from "next";
 import { useTheme } from "next-themes";
 import 'react-responsive-modal/styles.css';
 
-
+export const metadata: Metadata = {
+  title: "Stockeado | Inicio",
+  // other metadata
+};
 const Home = () => {
   const { theme, setTheme } = useTheme();
 

@@ -5,7 +5,7 @@ export async function GET (req: Request | any, res: Response, next: any){
   try{
     await dbConnect();
     
-    var responseItems = await Inventory.aggregate([{$sample: {size: 55}}]);
+    var responseItems = await Inventory.aggregate([{$sample: {size: 125}}]);
     return NextResponse.json({ message: "Item's found", items: responseItems});
   }
   catch(error){

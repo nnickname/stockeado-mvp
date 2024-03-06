@@ -14,9 +14,10 @@ import ImageLogo from '../../public/images/logo/mplogo1.png';
 import Image from "next/image";
 import { editUser } from "../api/user/call";
 import BackgroundImage from "@/components/marketplace/background/background";
+import IonIcon from "@reacticons/ionicons";
 const LayoutConfigurationPage = () =>{
     const router = useRouter();
-    const [user, setUser] = useState<UserModel>();
+    const [user, setUser] = useState<UserModel>(null);
     const [image, setImage] = useState(null);
     const [imageLogo, setImageLogo] = useState(null);
 
@@ -72,7 +73,10 @@ const LayoutConfigurationPage = () =>{
           console.log(error);
         };
     }
-    return <SideBarComponent user={user} route='configuration' frameContennt={
+    return <div>
+        {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
+            
+    <SideBarComponent user={user} route='configuration' frameContennt={
         <div className="configurationContent">
             <div className="banner">
                 <label  htmlFor="imageBanner" style={{cursor: 'pointer', width: '100%', padding: '1rem'}}>
@@ -112,7 +116,9 @@ const LayoutConfigurationPage = () =>{
             </div>
 
         </div>
-      }/>;
+      }/>
+        }
+    </div>;
 }
 
 export default LayoutConfigurationPage;

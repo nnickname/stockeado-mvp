@@ -56,9 +56,17 @@
 
 @media screen and (max-width: 720px) {
     .gridItems{
-        
         grid-template-rows: auto auto;
         grid-template-columns: repeat(2, 1fr);
+    }
+    
+}
+
+@media screen and (max-width: 520px) {
+    .gridItems{
+        grid-template-rows: auto;
+        grid-template-columns: repeat(1, 1fr);
+        padding-right: 1rem;
     }
     
 }

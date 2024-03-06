@@ -21,3 +21,9 @@
     margin: 2rem;
     border-radius: .3rem;
 }
+@media screen and (max-width: 720px) {
+    .background{
+        margin-top: 5rem;
+    }
+    
+}

@@ -12,6 +12,7 @@ import { useSearchParams } from "next/navigation";
 import { findProduct } from "../../api/marketplacee/call";
 import CardMarketPlace from "@/components/marketplace/item";
 import { Popover } from "react-tiny-popover";
+import IonIcon from "@reacticons/ionicons";
 
 
 const LayoutMarketPlaceFindItem = () => {
@@ -56,7 +57,7 @@ const LayoutMarketPlaceFindItem = () => {
     const [isPopoverOpenCategorie, setPopoverOpenCategorie] = useState<boolean>(false);
     const [isPopoverOpenType, setPopoverOpenType] = useState<boolean>(false);
     return <div>
-      {items === null ? <p style={{position: 'absolute', top: '50%', left: '50%'}}> Cargando...</p> :
+      {items === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
       <div>
         <HeaderMarketPlace cartItems={cart} setCart={setCart}/>
         <BackgroundImage/>

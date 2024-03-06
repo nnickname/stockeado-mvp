@@ -35,6 +35,7 @@
     "react-multistep": "^5.5.9",
     "react-notifications": "^1.7.4",
     "react-responsive-modal": "^6.4.2",
+    "react-spinners": "^0.13.8",
     "react-tiny-popover": "^8.0.4",
     "universal-cookie": "^4.0.4"
   },

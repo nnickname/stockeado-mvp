@@ -33,7 +33,7 @@ const LayoutMarketPlaceOrderView = () => {
     }, []);
 
     return <div>
-        {order === null ? <p style={{position: 'absolute', top: '50%', left: '50%'}}> Cargando...</p> : 
+        {order === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> : 
         <div>
             <p style={{padding: '1rem', color: '#3662E3', cursor: 'pointer'}} onClick={() => router.push('/marketplace')}><IonIcon name="chevron-back-outline"/> Marketplace</p>
 

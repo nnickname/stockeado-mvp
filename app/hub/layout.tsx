@@ -12,9 +12,10 @@ import { InventoryModel } from "@/models/inventoryModel";
 import { getInventory } from "../api/inventory/call";
 import { OrderModel } from "@/models/ordersModel";
 import { getOrders } from "../api/orderss/call";
+import IonIcon from "@reacticons/ionicons";
 const LayouHubDashboardPage = () =>{
     const router = useRouter();
-    const [user, setUser] = useState<UserModel>();
+    const [user, setUser] = useState<UserModel>(null);
     const [realInventory, setRealInventory] = useState<InventoryModel[]>([]);
     const [ordersData, setOrderData] = useState<OrderModel[]>([]);
 
@@ -36,13 +37,17 @@ const LayouHubDashboardPage = () =>{
         MakeData();
     }, []);
 
-    return <SideBarComponent user={user} route='dashboard' frameContennt={
-        <div>
-            <SellResume orders={ordersData} user={user}/>
-            <InventoryResume items={realInventory} orders={ordersData} user={user}/>
-
-        </div>
-      }/>;
+    return <div>
+        {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
+        <SideBarComponent user={user} route='dashboard' frameContennt={
+            <div>
+                <SellResume orders={ordersData} user={user}/>
+                <InventoryResume items={realInventory} orders={ordersData} user={user}/>
+    
+            </div>
+          }/>
+        }
+    </div> ;
 }
 
 export default LayouHubDashboardPage;
