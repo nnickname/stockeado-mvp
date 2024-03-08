@@ -30,7 +30,7 @@ const CardMarketPlace: FunctionComponent<CardProps> = ({item,setCart, setAmmount
         <div  className="card-content">
             <div style={{display: 'flex', justifyContent: 'space-between'}}>
                 <div>
-                <span style={{fontSize: '1rem', color: '#3e9c35'}}> s/. {item?.priceSelling ?? 0}</span>
+                <span style={{fontSize: '1rem', color: '#3e9c35'}}> s/. {Number(item?.priceSelling).toFixed(2) ?? 0}</span>
 
                     <p style={{cursor: 'pointer'}} onClick={() => router.push('/marketplace/item?id=' + item._id)} >{item?.name + ' '}  {item?.model ?? '' }</p>
                 </div>

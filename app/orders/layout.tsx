@@ -16,6 +16,8 @@ import IonIcon from "@reacticons/ionicons";
 import Link from "next/link";
 import Modal from "react-responsive-modal";
 import EditModalOrder from './editModal';
+import { useTheme } from "@table-library/react-table-library/theme";
+import { getTheme } from "@table-library/react-table-library/baseline";
 const OrdersLayoutPage = () => {
     const router = useRouter();
     const [user, setUser] = useState<UserModel>(null);
@@ -83,6 +85,14 @@ const OrdersLayoutPage = () => {
       const handleSearch = () => {
 
       }
+      const theme = useTheme([
+        getTheme(),
+        {
+          Table: `
+            --data-table-library_grid-template-columns: 100px 200px 100px 100px 100px 100px 100px
+          `,
+        },
+      ]);
       return <>  
         {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
         <SideBarComponent user={user} route='orders' frameContennt={
@@ -108,7 +118,7 @@ const OrdersLayoutPage = () => {
 
 
                     </div>
-                    <CompactTable  pagination={pagination} columns={COLUMNS} data={{nodes: ordersData?.filter((item) =>
+                    <CompactTable  theme={theme} layout={{ custom: true, horizontalScroll: true }}  pagination={pagination} columns={COLUMNS} data={{nodes: ordersData?.filter((item) =>
                         item?.name.toLowerCase().includes(search.toLowerCase())
                         
                     )}} />

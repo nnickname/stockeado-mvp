@@ -325,12 +325,12 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
               sku: String(e[0]), 
               name: String(e[2]), 
               ammount: String(e[3]),
-              image: String(e[5]),
-              price: String(0),
-              priceSelling: String(e[4]),
+              image: String(e[7]) ?? '',
+              price: String(e[5]),
+              priceSelling: String(e[6]),
               brand: 0,
               categorie: 0,
-              inMP : false,
+              inMP : true,
               description: 'No definido',
               numberPart: 'No definido',
               model: String(e[1]),
@@ -342,6 +342,7 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
           body.splice(body?.length -1, 1);
           console.log(body);
           if(await createManyInventories(body)){
+            window.location.reload();
             NotificationManager.success('Logramos cargar tu inventario con exito, recuerda editarlo correctamente', 'Cargado');
           } else NotificationManager.error('Ocurrio un error cargando tu CSV, recorda que tu csv debe tener los encabezados SKU, description y cantidad', 'Error');
         
@@ -350,14 +351,7 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
       });  
       
     }
-    const theme = useTheme([
-      getTheme(),
-      {
-        Table: `
-          --data-table-library_grid-template-columns: 100px 200px 100px 100px 100px 100px 100px
-        `,
-      },
-    ]);
+   
     return <>
       <div style={{width: '100%', display: 'flex', justifyContent: 'space-between'}}>
         <h1 style={{marginBottom: '1rem', marginTop: '.5rem', fontSize: '1rem', fontWeight: '500'}}>Productos en MarketPlace <Link style={{fontSize: '1rem', color: '#3662E3', marginLeft: '.5rem'}} href={'https://stockeado-mvp.vercel.app/marketplace/shop?id=' + user?._id}>Mi URL<IonIcon name='open-outline'/></Link></h1>
@@ -378,10 +372,12 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
 
 
       </div>
-      <CompactTable   theme={theme} layout={{ custom: true, horizontalScroll: true }} pagination={pagination} columns={COLUMNS} data={{nodes: inventoryData?.filter((item) =>
+      <div style={{background: 'white'}}>
+        <CompactTable layout={{ custom: true, horizontalScroll: true }} pagination={pagination} columns={COLUMNS} data={{nodes: inventoryData?.filter((item) =>
         item.name.toLowerCase().includes(search.toLowerCase()) || item.sku.toLowerCase().includes(search.toLowerCase())
         
       ) ?? []}} />
+      </div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <span style={{margin: '.5rem'}}>Paginas: {pagination.state.getTotalPages(inventoryData ?? [])}</span>
 

@@ -20,7 +20,7 @@ const SideBarComponent: FunctionComponent<SideBarProps> = ({user, frameContennt,
     const [open, setOpen] = useState<boolean>(true);
     
     return <div>
-        <div style={{width: '100%', textAlign: 'right'}}>
+        <div className="responsiveButtonViewNavigation" style={{display: 'none', width: '100%', textAlign: 'right'}}>
                 <button style={{fontSize: '.9rem', color: 'grey', position: 'absolute', top: '1rem', right: '1rem'}} onClick={() => setOpen(!open)}>{open ? 'Esconder barra de navegación' : 'Mostrar barra de navegación'}</button>
         </div>
         <div className="sideBar">

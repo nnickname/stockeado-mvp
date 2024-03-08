@@ -1,11 +1,12 @@
 .sideBar{
     display: flex;
+    width: 100% !important;
 }
 .sideBarContainer{
     background-color: rgb(242, 242, 242);
     padding: 1rem;
     padding-top: 3rem;
-    width: 100%;
+    width: 100% !important;
 
 }
 
@@ -80,9 +81,14 @@
 
 
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 920px) {
     .sidebarCustomStyle{
+        
         position: fixed;
         border-right: 1px solid grey;
     }
+    .responsiveButtonViewNavigation{
+        display: block !important;
+    }
+    
   }
