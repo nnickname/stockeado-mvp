@@ -91,7 +91,7 @@ const LayoutMarketPlacePayment = () => {
                             <div style={{width: '100%', display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(220, 220, 220, .3)'}}>
                                 <img style={{width: '35px', height: '35px'}} src={e?.item?.image} alt='Product Image' />
                                 <p style={{maxWidth: '100px', margin: 'auto'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                                <p style={{minWidth: '250px', margin: 'auto'}}>{e?.item?.name} {TypeBrands[e?.item.brand-1] + ' '} {e?.item?.model }</p></p>
+                                <p style={{minWidth: '250px', margin: 'auto'}}>{e?.item?.name + ' '}  {e?.item?.model }</p></p>
                                 <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
                                 {String(e?.ammount)}</p>
                                 <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" style={{marginLeft: '4rem', maxWidth: '100px'}}>

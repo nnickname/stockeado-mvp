@@ -32,7 +32,7 @@ const CardMarketPlace: FunctionComponent<CardProps> = ({item,setCart, setAmmount
                 <div>
                 <span style={{fontSize: '1rem', color: '#3e9c35'}}> s/. {item?.priceSelling ?? 0}</span>
 
-                    <p style={{cursor: 'pointer'}} onClick={() => router.push('/marketplace/item?id=' + item._id)} >{item?.name} {TypeBrands[(item?.brand) ?? 0] + ' '} {item?.model ?? '' }</p>
+                    <p style={{cursor: 'pointer'}} onClick={() => router.push('/marketplace/item?id=' + item._id)} >{item?.name + ' '}  {item?.model ?? '' }</p>
                 </div>
                 <div>
                 <Popover

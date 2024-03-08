@@ -10,7 +10,7 @@ import { NextResponse } from "next/server";
 
 const corsOptions ={
   
-  origin:'https://stockeado-mvp.vercel.app/',
+  origin:'http://localhost:3000/',
   credentials:true, 
   optionSuccessStatus:200,
   

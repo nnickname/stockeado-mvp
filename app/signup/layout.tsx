@@ -23,6 +23,7 @@ const LayoutSignUp = () => {
             nameShop,
             phone: 'Complete',
             image: 'Complete',
+            imageLogo: 'Complete',
             direction: 'Complete',
             password,
             email,

@@ -15,7 +15,13 @@ import { useRouter } from "next/navigation";
 import { createInventory, createManyInventories, deleteInventory, editInventory, getInventory } from "../api/inventory/call";
 import { getUser } from "../api/user/call";
 import { usePagination } from "@table-library/react-table-library/pagination";
+
+
 import { CompactTable } from '@table-library/react-table-library/compact';
+import { useTheme } from "@table-library/react-table-library/theme";
+import { getTheme } from "@table-library/react-table-library/baseline";
+
+
 import './index.css';
 import '../../components/marketplace/header/index.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
@@ -344,6 +350,14 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
       });  
       
     }
+    const theme = useTheme([
+      getTheme(),
+      {
+        Table: `
+          --data-table-library_grid-template-columns: 100px 200px 100px 100px 100px 100px 100px
+        `,
+      },
+    ]);
     return <>
       <div style={{width: '100%', display: 'flex', justifyContent: 'space-between'}}>
         <h1 style={{marginBottom: '1rem', marginTop: '.5rem', fontSize: '1rem', fontWeight: '500'}}>Productos en MarketPlace <Link style={{fontSize: '1rem', color: '#3662E3', marginLeft: '.5rem'}} href={'https://stockeado-mvp.vercel.app/marketplace/shop?id=' + user?._id}>Mi URL<IonIcon name='open-outline'/></Link></h1>
@@ -364,7 +378,7 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
 
 
       </div>
-      <CompactTable  pagination={pagination} columns={COLUMNS} data={{nodes: inventoryData?.filter((item) =>
+      <CompactTable   theme={theme} layout={{ custom: true, horizontalScroll: true }} pagination={pagination} columns={COLUMNS} data={{nodes: inventoryData?.filter((item) =>
         item.name.toLowerCase().includes(search.toLowerCase()) || item.sku.toLowerCase().includes(search.toLowerCase())
         
       ) ?? []}} />
