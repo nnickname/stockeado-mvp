@@ -55,8 +55,8 @@ const LayoutMarketPlaceItem = () => {
     }, []);
     return <div>
         <HeaderMarketPlace cartItems={cart} setCart={setCart}/>
-        {shop === null ? <p style={{position: 'absolute', top: '50%', left: '50%'}}> Cargando...</p> : 
-        <div className="viewitem ">
+        {shop === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> : 
+        <div className="viewitem">
         <div style={{paddingRight: 'auto', paddingLeft: 'auto', marginTop: '7rem'}}>
             <p style={{color: 'grey', fontSize: '.8rem', marginBottom: '1rem'}}> MarketPlace {'> ' + shop?.nameShop}</p>
         </div>
@@ -73,12 +73,12 @@ const LayoutMarketPlaceItem = () => {
                     </div>
                     <p style={{fontWeight: '500', fontSize: '1.1rem', marginTop: '1rem'}}>{item?.name} {(TypeBrands[(item?.brand) ?? 0] + '') ?? ''} {item?.model ?? '' }</p>
                     <p style={{color: 'grey', fontSize: '.8rem', marginTop: '1rem'}}>Vendido por: <Link style={{cursor: 'pointer', marginLeft: '.5rem', color: '#0E7AFF'}} href={'https://stockeado-mvp.vercel.app/marketplace/shop?id=' + shop?._id}>{shop?.nameShop}</Link></p>
-                    <p style={{fontWeight: '500', fontSize: '1.2rem', marginTop: '1rem'}}>s/. {Number(item?.priceSelling).toFixed(2) ?? Number(item?.price).toFixed(2)}</p>
+                    <p style={{fontWeight: '500', fontSize: '1.2rem', marginTop: '1rem'}}>s/. {Number(item?.priceSelling).toFixed(2) ?? 0}</p>
                     <div style={{backgroundColor: 'rgba(0, 0, 0, 0.1)', width: '100%', height: '1px', marginTop: '1rem'}}></div>
                     <p style={{color: 'grey', fontSize: '.9rem', marginTop: '1rem'}}>Marca: <span style={{cursor: 'pointer', marginLeft: '.5rem', color: 'black'}}>{TypeBrands[item?.brand] ?? 'No definido'}</span></p>
                     <div style={{backgroundColor: 'rgba(0, 0, 0, 0.1)', width: '100%', height: '1px', marginTop: '1rem'}}></div>
                     <p style={{color: 'grey', fontSize: '.9rem', marginTop: '1rem'}}>Número de parte: <span style={{cursor: 'pointer', marginLeft: '.5rem', color: 'black'}}>{item?.sku ?? 'No definido'}</span></p>
-                    <p style={{color: 'grey', fontSize: '.9rem', marginTop: '1rem'}}>Aplica para: <span style={{cursor: 'pointer', marginLeft: '.5rem', color: 'black'}}>{TypeBrands[item?.brand] ?? 'No definido'}</span></p>
+                    <p style={{color: 'grey', fontSize: '.9rem', marginTop: '1rem'}}>Aplica para: <span style={{cursor: 'pointer', marginLeft: '.5rem', color: 'black'}}>{TypeBrands[item?.brand ?? 0] ?? 'No definido'}</span></p>
 
                 </div>
             </div>

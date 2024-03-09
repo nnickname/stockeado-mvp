@@ -259,7 +259,7 @@ const LayoutMarketPlaceNative = () => {
             {mostViewed?.map((e) => {
               {
                 return <Link href={'https://stockeado-mvp.vercel.app/marketplace/shop?id=' + e._id} className="brands">
-                  <img src={e.imageLogo ?? e.image} alt="Logo"/>
+                  <img style={{maxHeight: '150px'}} src={e.imageLogo ?? e.image} alt="Logo"/>
                 </Link>
               }
             })}
