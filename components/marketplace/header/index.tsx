@@ -58,7 +58,7 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
   const findProductAndSet = async () => {
     if(keywordFind?.length > 3){
       var keywordCast = keywordFind?.replace(/%20/g, " ");
-      router.push("/marketplace/search?name=" + String(keywordCast));  
+      router.push("/marketplace/searchus?name=" + String(keywordCast));  
     }
   }
   return (
