@@ -18,7 +18,7 @@ export async function GET (req: Request | any, res: Response, next: any){
   }
   catch(error){
     console.log(error);
-    return NextResponse.json({message: 'Invalid token'});
+    return NextResponse.json({message: 'Invalid token', error});
 
   }
 }

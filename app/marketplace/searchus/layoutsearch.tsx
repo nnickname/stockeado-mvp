@@ -51,7 +51,7 @@ const LayoutMarketPlaceFindItem = () => {
       if(keywordFind?.length > 1){
         const response = await findProduct(keywordFind);
         setItems(response ?? []);
-      } else setItems(realItems);
+      } else setItems(realItems ?? []);
     }
     const [isPopoverOpenBrand, setPopoverOpenBrand] = useState<boolean>(false);
     const [isPopoverOpenCategorie, setPopoverOpenCategorie] = useState<boolean>(false);
