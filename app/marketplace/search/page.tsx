@@ -13,3 +13,4 @@ const MarketPlaceFind = () => {
 }
 
 export default MarketPlaceFind;
+export const dynamic = 'force-dynamic';
