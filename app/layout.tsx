@@ -5,6 +5,7 @@ import Header from "@/components/dashboard/Header";
 import { Inter } from "next/font/google";
 import "node_modules/react-modal-video/css/modal-video.css";
 import "../styles/index.css";
+import {NotificationContainer} from 'react-notifications';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,6 +27,7 @@ export default async function RootLayout({
         <Providers>
           {children}
         </Providers>
+        <NotificationContainer/>
       </body>
     </html>
   );

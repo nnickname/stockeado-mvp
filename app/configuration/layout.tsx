@@ -9,6 +9,7 @@ import { getUser } from "../api/user/call";
 import Cookie from 'universal-cookie';
 import { UserModel } from '../../models/userModel';
 import './index.css';
+import blueImage from '../../public/images/logo/blueimage.png';
 import backgroundImage from '../../public/images/logo/background2.jpeg';
 import ImageLogo from '../../public/images/logo/mplogo1.png';
 import Image from "next/image";
@@ -32,7 +33,9 @@ const LayoutConfigurationPage = () =>{
             router.push('/signin');
         }
         setUser(userr);
-        setImage(user?.image);
+        setImage(user?.image ?? '');
+        setImageLogo(user?.imageLogo ?? '');
+
     }
     useEffect(() => {
         toUser();
@@ -80,7 +83,7 @@ const LayoutConfigurationPage = () =>{
         <div className="configurationContent">
             <div className="banner">
                 <label  htmlFor="imageBanner" style={{cursor: 'pointer', width: '100%', padding: '1rem'}}>
-                    <img src={(image ?? user?.image) ?? backgroundImage.src} alt="Banner" style={{marginRight: 'auto', marginLeft: 'auto'}}/>
+                    <img src={image !== '' ? image : backgroundImage.src} alt="Banner" style={{marginRight: 'auto', marginLeft: 'auto'}}/>
                     <input accept="image" id="imageBanner" onChange={onChangeImage} type='file' placeholder='Subir archivo' style={{
                         visibility: 'hidden', display: 'none'}}/>
                 </label>
@@ -88,7 +91,7 @@ const LayoutConfigurationPage = () =>{
             </div>
             <div className="container">
                 <label  htmlFor="imageLogo" style={{cursor: 'pointer'}}>
-                    <img style={{maxWidth: '150px', padding: '1rem', marginRight: 'auto', marginLeft: 'auto'}} src={(imageLogo ?? user?.imageLogo) ?? ImageLogo.src} alt="Logo"/>
+                    <img style={{width: '150px', height: '150px', borderRadius: '100%', padding: '1rem', marginRight: 'auto', marginLeft: 'auto'}} src={imageLogo !== '' ? imageLogo : blueImage.src } alt="Logo"/>
                     <input accept="image" id="imageLogo" onChange={onChangeImageLogo} type='file' placeholder='Subir archivo' style={{
                         visibility: 'hidden', display: 'none'}}/>
                 </label>

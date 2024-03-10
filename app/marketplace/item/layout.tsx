@@ -71,7 +71,7 @@ const LayoutMarketPlaceItem = () => {
                         <p style={{color: 'green', fontSize: '.8rem'}}><IonIcon name="checkmark-outline"/> En stock {'(' + item?.ammount + ')'}</p>
                         <p style={{color: 'grey', fontSize: '.8rem'}}> SKU: {item?.sku}</p>
                     </div>
-                    <p style={{fontWeight: '500', fontSize: '1.1rem', marginTop: '1rem'}}>{item?.name} {(TypeBrands[(item?.brand) ?? 0] + '') ?? ''} {item?.model ?? '' }</p>
+                    <p style={{fontWeight: '500', fontSize: '1.1rem', marginTop: '1rem'}}>{item?.name + ' '} {item?.model ?? '' }</p>
                     <p style={{color: 'grey', fontSize: '.8rem', marginTop: '1rem'}}>Vendido por: <Link style={{cursor: 'pointer', marginLeft: '.5rem', color: '#0E7AFF'}} href={'https://stockeado-mvp.vercel.app/marketplace/shop?id=' + shop?._id}>{shop?.nameShop}</Link></p>
                     <p style={{fontWeight: '500', fontSize: '1.2rem', marginTop: '1rem'}}>s/. {Number(item?.priceSelling).toFixed(2) ?? 0}</p>
                     <div style={{backgroundColor: 'rgba(0, 0, 0, 0.1)', width: '100%', height: '1px', marginTop: '1rem'}}></div>

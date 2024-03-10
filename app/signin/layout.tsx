@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getUser, loginUser } from "../api/user/call";
 import { useRouter } from "next/navigation";
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import {NotificationManager} from 'react-notifications';
 import { UserModel } from "@/models/userModel";
 import  Cookie  from "universal-cookie";
 import CSVReader from 'react-csv-reader'
@@ -26,7 +26,7 @@ const LayoutSignIn = () =>{
     }, []);
   return (
     <div>
-      <NotificationContainer/>
+      
       <Header/>
       <section className="relative z-10 overflow-hidden pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[180px]">
         <div className="container">

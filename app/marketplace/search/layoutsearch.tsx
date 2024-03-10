@@ -79,7 +79,7 @@ const LayoutMarketPlaceFindItem = () => {
                       type="text"
                       name="email"
                       placeholder="Buscar por SKU"
-                      value={keywordFind}
+                      value={keywordFind ?? ''}
                     />
             </div>
           <div>
@@ -144,7 +144,7 @@ const LayoutMarketPlaceFindItem = () => {
                         type="text"
                         name="email"
                         placeholder="Buscar por SKU"
-                        value={keywordFind}
+                        value={keywordFind ?? ''}
                       />
               </div>
             <div>

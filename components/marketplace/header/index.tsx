@@ -148,7 +148,7 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
                             <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
                             {String(e?.ammount)}</p>
                             <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                            s/. {Number(e?.item?.priceSelling)}</p>
+                            s/. {Number(e?.item?.priceSelling).toFixed(2)}</p>
                             <button onClick={() => {
                                 setCart(cartItems.filter((obj, indexx) => index !== indexx));
                                 sessionStorage.setItem('cart', JSON.stringify(cartItems.filter((obj, indexx) => index !== indexx)))
@@ -165,7 +165,7 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
                       </div>
                       <div style={{marginTop: '1rem', display: 'flex', justifyContent: 'space-between'}}>
                         <p style={{fontSize: '1.1rem'}}>Total</p>
-                        <p>s/. {getTotalPrice(cartItems)}</p>
+                        <p>s/. {Number(getTotalPrice(cartItems)).toFixed(2)}</p>
                       </div>
                       <button onClick={() => router.push('/marketplace/payment')} style={{padding: '.5rem', textAlign: 'center', width:'100%', background: 'linear-gradient(180deg, #127FFF 0%, #3662E3 100%)', color: 'white'}}>Ir a pagar</button>
                     </div>

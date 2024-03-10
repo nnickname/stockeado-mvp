@@ -1,6 +1,8 @@
 'use client';
 import Link from "next/link";
 import Logo from '../../../public/images/logo/logopreferente.png';
+import blueImage from '../../../public/images/logo/blueimage.png';
+
 import './index.css';
 import Image from "next/image";
 import IonIcon from "@reacticons/ionicons";
@@ -8,6 +10,7 @@ import { FunctionComponent, ReactNode, useState } from "react";
 import { UserModel } from "@/models/userModel";
 import Cookie from "universal-cookie";
 import { useRouter } from "next/navigation";
+
 type SideBarProps = {
     frameContennt: ReactNode,
     route: string,
@@ -27,7 +30,7 @@ const SideBarComponent: FunctionComponent<SideBarProps> = ({user, frameContennt,
         <div className="sidebarCustomStyle" style={{display: open ? 'block' : 'none'}}>
             
             <Image src={Logo}  alt="Logo" />
-            <img className="avatar" alt="Avatar" src={user?.imageLogo}/>
+            <img className="avatar" alt="" src={user?.imageLogo !== '' ? user?.imageLogo : blueImage.src}/>
 
             <h1 className="title">{user?.nameShop}</h1>
             <div style={{marginTop: '3rem'}}></div>

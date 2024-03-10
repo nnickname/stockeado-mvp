@@ -4,3 +4,17 @@ th{
 td{
     padding: 1rem !important;
 }
+
+.table{
+    --data-table-library_grid-template-columns: 20% 20% 20% 20% 20% !important;
+}
+
+@media screen and (max-width: 920px) {
+    .buttonsWithouthPadding{
+        padding: .2rem !important;
+    }
+    .table{
+        --data-table-library_grid-template-columns: 100px 200px 200px 100px 100px !important;
+    }
+    
+}

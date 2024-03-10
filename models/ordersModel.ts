@@ -32,7 +32,7 @@ export interface OrderModel extends Document {
   name: string;
   lastname: string;
   direction: string;
-  maxDate: Date;
+  maxDate: string;
   payType: Number;
   state: Number;
   items: CartProps[]
@@ -56,7 +56,7 @@ const OrderSchema = new Schema({
     maxlength: [60, "Name cannot be more than 60 characters"],
   },
   maxDate: {
-    type: Date,
+    type: String,
     required: [true, "Please provide a Date."],
   },
   state: {

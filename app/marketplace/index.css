@@ -1,5 +1,6 @@
 .marketplace{
     display: flex;
+    position: relative;
 }
 .marketplace .sidebarM{
     padding: 2rem;
@@ -7,6 +8,7 @@
     height: 100%;
     background-color: #edeef0;
 }
+
 .sidebarM h1{
     margin-bottom: 1rem;
     font-weight: 500;

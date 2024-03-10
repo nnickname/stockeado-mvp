@@ -57,7 +57,9 @@ const LayoutMarketPlaceOrderView = () => {
                         <p style={{marginRight: '.5rem', fontWeight: '700'}}>
                             Fecha maxima de envio:
                         </p>
-                        <p> {String(order?.maxDate)}</p>
+                        <p> {new Date(order.maxDate).getDay()}/
+                            {new Date(order.maxDate).getMonth()}/
+                            {new Date(order.maxDate).getFullYear()}</p>
 
                     </div>
 
@@ -86,18 +88,18 @@ const LayoutMarketPlaceOrderView = () => {
                                     <div style={{display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(220, 220, 220, .3)'}}>
                                         <img style={{width: '35px', height: '35px'}} src={e?.item?.image} alt='Product Image' />
                                         <p style={{maxWidth: '100px'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                                        <p>{e?.item?.name+ ' '} {e?.item?.model }</p></p>
+                                        {e?.item?.name+ ' '} {e?.item?.model }</p>
                                         <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
                                         {String(e?.ammount)}</p>
                                         <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                                        s/. {Number(e?.item?.price) * e?.ammount}</p>
+                                        s/. {Number(e?.item?.price).toFixed(2)}</p>
                                         </div>
                                     </div>
                         })}
                         <p style={{color: 'grey', textAlign: 'center'}}>{cart?.length === 0 ? 'No encontramos nada' : ''}</p>        
                         <div style={{marginTop: '2rem', display: 'flex', justifyContent: 'space-between'}}>
                             <p style={{fontSize: '1.1rem'}}>Total</p>
-                            <p>s/. {getTotalPrice(order?.items)}</p>
+                            <p>s/. {Number(getTotalPrice(order?.items)).toFixed(2)}</p>
                         </div>
                         <div style={{textAlign: 'center', width: '100%', color: 'green', marginTop: '3rem', fontSize: '2rem'}}>
                             <IonIcon style={{cursor: 'pointer'}} name="logo-whatsapp"/>

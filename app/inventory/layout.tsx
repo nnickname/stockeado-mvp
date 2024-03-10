@@ -24,7 +24,7 @@ import { getTheme } from "@table-library/react-table-library/baseline";
 
 import './index.css';
 import '../../components/marketplace/header/index.css';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import {NotificationManager} from 'react-notifications';
 import { InventoryModel } from "@/models/inventoryModel";
 import {ExcelRenderer} from 'react-excel-renderer';
 
@@ -73,6 +73,7 @@ const ModalEditProduct: FunctionComponent<EditRowParams> = ({user, item, makeDat
           item.description = description;
           item.numberPart = numberPart;
           item.price = price;
+          item.priceSelling = priceSelling;
           item.brand = brand;
           item.categorie = categorie;
           item.inMP = onMP === 'on' ? true : false;;
@@ -534,7 +535,6 @@ const LayoutHubInventoryPage = () => {
         toUser();
     }, []);
     return <>
-        <NotificationContainer/>
         {inventoryData === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
         <div>
           <SideBarComponent user={user} route='inventory' frameContennt={

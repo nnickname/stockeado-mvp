@@ -36,7 +36,11 @@ const getBenefitEarning = (orders: OrderModel[], id: String) => {
     return count;
 }
 const calculatePercentage = (x: number, y: number) => {
-    return ((x - y) / y) * 100;
+    const ammount = (((x - y) / y) * 100);
+    if(Number.isNaN(ammount)){
+        return 0;
+    }
+    return (((x - y) / y) * 100) ?? '';
 }
 type SellResumeType = {
     orders: OrderModel[],
@@ -80,7 +84,7 @@ const SellResume: FunctionComponent<SellResumeType> = ({orders, user}) => {
                     </div>
                 </div>
                 <div style={{display: 'inline-block'}}>
-                    <p style={{display: 'inline-block'}} >s/. {getBenefitEarning(orders, String(user?._id))}</p>
+                    <p style={{display: 'inline-block'}} >s/. {getBenefitEarning(orders, String(user?._id)) ?? 0}</p>
                     <p style={{marginLeft: '1.5rem', color: 'grey', display:'inline-block'}}>Beneficio</p>
                 </div>
             </div>

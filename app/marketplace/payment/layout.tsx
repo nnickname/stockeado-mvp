@@ -8,7 +8,7 @@ import Cookie  from 'universal-cookie';
 import { getTotalPrice } from '@/components/marketplace/header';
 import Logo from '../../../public/images/logo/logopreferente.png';
 import { BankOptions } from './bank';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import { NotificationManager} from 'react-notifications';
 import { createOrder } from '@/app/api/orderss/call';
 import { Router } from 'next/router';
 import { useRouter } from 'next/navigation';
@@ -89,25 +89,25 @@ const LayoutMarketPlacePayment = () => {
                 {cart?.map((e, index) => {
                             return <div key={index}>
                             <div style={{width: '100%', display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(220, 220, 220, .3)'}}>
-                                <img style={{width: '35px', height: '35px'}} src={e?.item?.image} alt='Product Image' />
-                                <p style={{maxWidth: '100px', margin: 'auto'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+                                <img style={{width: '105px', height: '105px'}} src={e?.item?.image} alt='Product Image' />
+                                <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
                                 <p style={{minWidth: '250px', margin: 'auto'}}>{e?.item?.name + ' '}  {e?.item?.model }</p></p>
                                 <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
                                 {String(e?.ammount)}</p>
-                                <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" style={{marginLeft: '4rem', maxWidth: '100px'}}>
-                                s/. {Number(e?.item?.price) * e?.ammount}</p>
-                                <button onClick={() => {
+                                <p  className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" style={{marginLeft: '4rem', maxWidth: '100px'}}>
+                                s/. {Number(e?.item?.price).toFixed(2)}</p>
+                                <button  onClick={() => {
                                     setCart(cart?.filter((obj, indexx) => index !== indexx))
                                     sessionStorage.setItem('cart', JSON.stringify(cart?.filter((obj, indexx) => index !== indexx)));
 
-                                }} style={{color: '#ff6347'}}><IonIcon name="trash-outline" color='#ff6347'/></button>
+                                }} style={{color: '#ff6347', marginLeft: '2rem', minWidth: '100px'}}><IonIcon name="trash-outline" color='#ff6347'/></button>
                             </div>
                             </div>
                 })}
                 <p style={{color: 'grey', textAlign: 'center'}}>{cart?.length === 0 ? 'No encontramos nada' : ''}</p>        
                 <div style={{marginTop: '2rem', display: 'flex', justifyContent: 'space-between'}}>
                     <p style={{fontSize: '1.1rem'}}>Total</p>
-                    <p>s/. {getTotalPrice(cart)}</p>
+                    <p >s/. {Number(getTotalPrice(cart)).toFixed(2)}</p>
                 </div>
                 <button type='button' onClick={() => buildForm()} style={{padding: '.5rem', textAlign: 'center', width:'100%', background: 'linear-gradient(180deg, #127FFF 0%, #3662E3 100%)', color: 'white'}}>Confirmar</button>
                 <div style={{textAlign: 'center', width: '100%', color: 'green', marginTop: '3rem', fontSize: '2rem'}}>
@@ -118,7 +118,6 @@ const LayoutMarketPlacePayment = () => {
             </div>
 
         </div>
-        <NotificationContainer/>
 
     </div>
 }

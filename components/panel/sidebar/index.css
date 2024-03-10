@@ -27,6 +27,7 @@
     border-radius: 100%;
     margin-left: auto;
     margin-right: auto;
+    background-color: rgb(33, 33, 105);
 }
 
 .sidebarCustomStyle .title{

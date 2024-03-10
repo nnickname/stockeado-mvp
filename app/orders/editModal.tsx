@@ -66,14 +66,14 @@ const EditModalOrder: FunctionComponent<editModalProps> = ({order}) => {
                     <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
                     {String(e?.ammount)}</p>
                     <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" style={{marginLeft: '4rem', maxWidth: '100px'}}>
-                    s/. {Number(e?.item?.price) * e?.ammount}</p>
+                    s/. {Number(e?.item?.priceSelling).toFixed(2)}</p>
                 </div>
             </div>
         })}
         <p style={{color: 'grey', textAlign: 'center'}}>{order?.items?.length === 0 ? 'No encontramos nada' : ''}</p>        
         <div style={{marginTop: '2rem', display: 'flex', justifyContent: 'space-between'}}>
             <p style={{fontSize: '1.1rem'}}>Total</p>
-            <p>s/. {getTotalPrice(order?.items)}</p>
+            <p>s/. {Number(getTotalPrice(order?.items)).toFixed(2)}</p>
         </div>
     </div>
 }

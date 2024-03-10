@@ -2,7 +2,7 @@
 import Header from "@/components/dashboard/Header"
 import Link from "next/link"
 import { useState } from "react";
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import {NotificationManager} from 'react-notifications';
 import { createUser } from "../api/user/call";
 import { useRouter } from "next/navigation";
 
@@ -187,7 +187,6 @@ const LayoutSignUp = () => {
           
         </div>
       </section>
-      <NotificationContainer/>
     </div>
 }
 
