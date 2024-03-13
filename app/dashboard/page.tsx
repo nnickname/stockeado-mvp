@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   description: "Stockeado | Inicio",
 
 };
-const Home = () => {
+const Page = () => {
 
   return (
     <>
@@ -37,4 +37,4 @@ const Home = () => {
   );
 }
 
-export default Home;
+export default Page;

@@ -12,11 +12,11 @@ import LayoutHubInventoryPage from './layout';
 
 
 
-const InventoryPage: NextPage = () => {
+const Page: NextPage = () => {
   return <>
       <LayoutHubInventoryPage/>
     
   </>
 };
 
-export default InventoryPage;
+export default Page;

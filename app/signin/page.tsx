@@ -9,8 +9,8 @@ export const metadata: Metadata = {
   // other metadata
 };
 import LayoutSignIn from "./layout";
-const SigninPage = () => {
+const Page = () => {
   return <LayoutSignIn/>;
 };
 
-export default SigninPage;
+export default Page;

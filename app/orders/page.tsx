@@ -5,8 +5,8 @@ export const metadata: Metadata = {
     description: "Stockeado | Solicitudes finales",
 
 };
-const OrdersPage = () => {
+const Page = () => {
     return <OrdersLayoutPage/>;
 }
 
-export default OrdersPage
+export default Page

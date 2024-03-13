@@ -1,1 +1,299 @@
-"use strict";(()=>{var e={};e.id=9365,e.ids=[9365],e.modules={66860:e=>{e.exports=require("express")},11185:e=>{e.exports=require("mongoose")},30517:e=>{e.exports=require("next/dist/compiled/next-server/app-route.runtime.prod.js")},25528:e=>{e.exports=require("next/dist\\client\\components\\action-async-storage.external.js")},91877:e=>{e.exports=require("next/dist\\client\\components\\request-async-storage.external.js")},25319:e=>{e.exports=require("next/dist\\client\\components\\static-generation-async-storage.external.js")},50852:e=>{e.exports=require("async_hooks")},14300:e=>{e.exports=require("buffer")},6113:e=>{e.exports=require("crypto")},82361:e=>{e.exports=require("events")},57147:e=>{e.exports=require("fs")},41808:e=>{e.exports=require("net")},71017:e=>{e.exports=require("path")},63477:e=>{e.exports=require("querystring")},12781:e=>{e.exports=require("stream")},71576:e=>{e.exports=require("string_decoder")},76224:e=>{e.exports=require("tty")},73837:e=>{e.exports=require("util")},59796:e=>{e.exports=require("zlib")},83715:(e,t,r)=>{r.r(t),r.d(t,{headerHooks:()=>v,originalPathname:()=>q,requestAsyncStorage:()=>c,routeModule:()=>l,serverHooks:()=>m,staticGenerationAsyncStorage:()=>x,staticGenerationBailout:()=>g});var o={};r.r(o),r.d(o,{GET:()=>GET,POST:()=>POST}),r(78976);var s=r(10884),i=r(16132),n=r(66408),a=r(95798),d=r(76655),p=r(97168),u=r(24596);async function GET(e,t,r){try{await (0,n.Z)();let e=(0,u.headers)().get("id");console.log(e);let t=await p.Z.findById({_id:e}),r=await d.Z.find({owner_id:e,inMP:!0});if(t?.visits!==void 0?await p.Z.findOneAndUpdate({_id:e},{visits:t?.visits+1}):await p.Z.findOneAndUpdate({_id:e}),void 0!==t)return a.Z.json({message:"Valid tokens",user:t??{},items:r??[]});return a.Z.json({message:"Invalid token"})}catch(e){return console.log(e),a.Z.json({message:"Invalid token",error:e})}}async function POST(e){try{await (0,n.Z)();let t=await e.json();if(null==t)return a.Z.json({message:"Invalid body men and yes, I didn't take the trouble to validate the body"});let r=await d.Z.findOneAndUpdate({_id:t._id},{...t});return a.Z.json({message:"Item updated",item:r})}catch(e){return console.log(e),a.Z.json({message:"Invalid body or error"})}}let l=new s.AppRouteRouteModule({definition:{kind:i.x.APP_ROUTE,page:"/api/inventory/marketplace/route",pathname:"/api/inventory/marketplace",filename:"route",bundlePath:"app/api/inventory/marketplace/route"},resolvedPagePath:"C:\\Users\\barto\\OneDrive\\Desktop\\stockeado\\stockeado-mvp\\app\\api\\inventory\\marketplace\\route.ts",nextConfigOutput:"",userland:o}),{requestAsyncStorage:c,staticGenerationAsyncStorage:x,serverHooks:m,headerHooks:v,staticGenerationBailout:g}=l,q="/api/inventory/marketplace/route"}};var t=require("../../../../webpack-runtime.js");t.C(e);var __webpack_exec__=e=>t(t.s=e),r=t.X(0,[657,1788,4596,6408,6655,7168],()=>__webpack_exec__(83715));module.exports=r})();
+(() => {
+var exports = {};
+exports.id = 9365;
+exports.ids = [9365];
+exports.modules = {
+
+/***/ 66860:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("express");
+
+/***/ }),
+
+/***/ 11185:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("mongoose");
+
+/***/ }),
+
+/***/ 50852:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("async_hooks");
+
+/***/ }),
+
+/***/ 14300:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("buffer");
+
+/***/ }),
+
+/***/ 6113:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("crypto");
+
+/***/ }),
+
+/***/ 82361:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("events");
+
+/***/ }),
+
+/***/ 57147:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("fs");
+
+/***/ }),
+
+/***/ 41808:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("net");
+
+/***/ }),
+
+/***/ 22037:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("os");
+
+/***/ }),
+
+/***/ 71017:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("path");
+
+/***/ }),
+
+/***/ 63477:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("querystring");
+
+/***/ }),
+
+/***/ 12781:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("stream");
+
+/***/ }),
+
+/***/ 71576:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("string_decoder");
+
+/***/ }),
+
+/***/ 76224:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("tty");
+
+/***/ }),
+
+/***/ 73837:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("util");
+
+/***/ }),
+
+/***/ 59796:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("zlib");
+
+/***/ }),
+
+/***/ 51412:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  headerHooks: () => (/* binding */ headerHooks),
+  originalPathname: () => (/* binding */ originalPathname),
+  requestAsyncStorage: () => (/* binding */ requestAsyncStorage),
+  routeModule: () => (/* binding */ routeModule),
+  serverHooks: () => (/* binding */ serverHooks),
+  staticGenerationAsyncStorage: () => (/* binding */ staticGenerationAsyncStorage),
+  staticGenerationBailout: () => (/* binding */ staticGenerationBailout)
+});
+
+// NAMESPACE OBJECT: ./app/api/inventory/marketplace/route.ts
+var route_namespaceObject = {};
+__webpack_require__.r(route_namespaceObject);
+__webpack_require__.d(route_namespaceObject, {
+  GET: () => (GET),
+  POST: () => (POST)
+});
+
+// EXTERNAL MODULE: ./node_modules/next/dist/server/node-polyfill-headers.js
+var node_polyfill_headers = __webpack_require__(42394);
+// EXTERNAL MODULE: ./node_modules/next/dist/server/future/route-modules/app-route/module.js
+var app_route_module = __webpack_require__(69692);
+// EXTERNAL MODULE: ./node_modules/next/dist/server/future/route-kind.js
+var route_kind = __webpack_require__(19513);
+// EXTERNAL MODULE: ./app/api/db.ts
+var db = __webpack_require__(66971);
+// EXTERNAL MODULE: ./node_modules/next/dist/server/web/exports/next-response.js
+var next_response = __webpack_require__(89335);
+// EXTERNAL MODULE: ./models/inventoryModel.ts
+var inventoryModel = __webpack_require__(93928);
+// EXTERNAL MODULE: ./models/userModel.ts
+var userModel = __webpack_require__(17486);
+// EXTERNAL MODULE: ./node_modules/next/headers.js
+var headers = __webpack_require__(40063);
+;// CONCATENATED MODULE: ./app/api/inventory/marketplace/route.ts
+
+
+
+
+
+async function GET(req, res, next) {
+    try {
+        await (0,db/* default */.Z)();
+        const shop = (0,headers.headers)().get("id");
+        console.log(shop);
+        const response = await userModel/* default */.Z.findById({
+            _id: shop
+        });
+        const responseInventory = await inventoryModel/* default */.Z.find({
+            owner_id: shop,
+            inMP: true
+        });
+        var responseUpdate;
+        if (response?.visits !== undefined) {
+            responseUpdate = await userModel/* default */.Z.findOneAndUpdate({
+                _id: shop
+            }, {
+                visits: response?.visits + 1
+            });
+        } else responseUpdate = await userModel/* default */.Z.findOneAndUpdate({
+            _id: shop
+        });
+        if (response !== undefined) {
+            return next_response/* default */.Z.json({
+                message: "Valid tokens",
+                user: response ?? {},
+                items: responseInventory ?? []
+            });
+        }
+        return next_response/* default */.Z.json({
+            message: "Invalid token"
+        });
+    } catch (error) {
+        console.log(error);
+        return next_response/* default */.Z.json({
+            message: "Invalid token",
+            error
+        });
+    }
+}
+async function POST(req) {
+    try {
+        await (0,db/* default */.Z)();
+        let body = await req.json();
+        if (body === undefined || body === null) return next_response/* default */.Z.json({
+            message: "Invalid body men and yes, I didn't take the trouble to validate the body"
+        });
+        const response = await inventoryModel/* default */.Z.findOneAndUpdate({
+            _id: body._id
+        }, {
+            ...body
+        });
+        return next_response/* default */.Z.json({
+            message: "Item updated",
+            item: response
+        });
+    } catch (errors) {
+        console.log(errors);
+        return next_response/* default */.Z.json({
+            message: "Invalid body or error"
+        });
+    }
+}
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?page=%2Fapi%2Finventory%2Fmarketplace%2Froute&name=app%2Fapi%2Finventory%2Fmarketplace%2Froute&pagePath=private-next-app-dir%2Fapi%2Finventory%2Fmarketplace%2Froute.ts&appDir=C%3A%5CUsers%5Cbarto%5COneDrive%5CDesktop%5Cstockeado%5Cstockeado-mvp%5Capp&appPaths=%2Fapi%2Finventory%2Fmarketplace%2Froute&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!
+
+// @ts-ignore this need to be imported from next/dist to be external
+
+
+// @ts-expect-error - replaced by webpack/turbopack loader
+
+const AppRouteRouteModule = app_route_module.AppRouteRouteModule;
+// We inject the nextConfigOutput here so that we can use them in the route
+// module.
+const nextConfigOutput = ""
+const routeModule = new AppRouteRouteModule({
+    definition: {
+        kind: route_kind.RouteKind.APP_ROUTE,
+        page: "/api/inventory/marketplace/route",
+        pathname: "/api/inventory/marketplace",
+        filename: "route",
+        bundlePath: "app/api/inventory/marketplace/route"
+    },
+    resolvedPagePath: "C:\\Users\\barto\\OneDrive\\Desktop\\stockeado\\stockeado-mvp\\app\\api\\inventory\\marketplace\\route.ts",
+    nextConfigOutput,
+    userland: route_namespaceObject
+});
+// Pull out the exports that we need to expose from the module. This should
+// be eliminated when we've moved the other routes to the new format. These
+// are used to hook into the route.
+const { requestAsyncStorage , staticGenerationAsyncStorage , serverHooks , headerHooks , staticGenerationBailout  } = routeModule;
+const originalPathname = "/api/inventory/marketplace/route";
+
+
+//# sourceMappingURL=app-route.js.map
+
+/***/ }),
+
+/***/ 40063:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__(74937);
+
+
+/***/ })
+
+};
+;
+
+// load runtime
+var __webpack_require__ = require("../../../../webpack-runtime.js");
+__webpack_require__.C(exports);
+var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
+var __webpack_exports__ = __webpack_require__.X(0, [8478,9735,6971,3928,7486], () => (__webpack_exec__(51412)));
+module.exports = __webpack_exports__;
+
+})();

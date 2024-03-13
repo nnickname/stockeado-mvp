@@ -7,11 +7,11 @@ export const metadata: Metadata = {
   description: "Stockeado | Marketplace",
 
 };
-const PageMarketPlaceNative = () => {
+const Page = () => {
   
   return (
     <LayoutMarketPlaceNative/>
   );
 }
 
-export default PageMarketPlaceNative;
+export default Page;

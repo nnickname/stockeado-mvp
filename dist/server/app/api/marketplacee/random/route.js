@@ -1,1 +1,225 @@
-"use strict";(()=>{var e={};e.id=9242,e.ids=[9242],e.modules={66860:e=>{e.exports=require("express")},11185:e=>{e.exports=require("mongoose")},30517:e=>{e.exports=require("next/dist/compiled/next-server/app-route.runtime.prod.js")},50852:e=>{e.exports=require("async_hooks")},14300:e=>{e.exports=require("buffer")},6113:e=>{e.exports=require("crypto")},82361:e=>{e.exports=require("events")},57147:e=>{e.exports=require("fs")},41808:e=>{e.exports=require("net")},71017:e=>{e.exports=require("path")},63477:e=>{e.exports=require("querystring")},12781:e=>{e.exports=require("stream")},71576:e=>{e.exports=require("string_decoder")},76224:e=>{e.exports=require("tty")},73837:e=>{e.exports=require("util")},59796:e=>{e.exports=require("zlib")},56991:(e,r,t)=>{t.r(r),t.d(r,{headerHooks:()=>x,originalPathname:()=>l,requestAsyncStorage:()=>d,routeModule:()=>u,serverHooks:()=>m,staticGenerationAsyncStorage:()=>c,staticGenerationBailout:()=>P});var a={};t.r(a),t.d(a,{GET:()=>GET}),t(78976);var o=t(10884),s=t(16132),i=t(66408),n=t(76655),p=t(95798);async function GET(e,r,t){try{await (0,i.Z)();var a=await n.Z.aggregate([{$sample:{size:125}}]);return p.Z.json({message:"Item's found",items:a})}catch(e){return p.Z.json({message:"Invalid token"})}}let u=new o.AppRouteRouteModule({definition:{kind:s.x.APP_ROUTE,page:"/api/marketplacee/random/route",pathname:"/api/marketplacee/random",filename:"route",bundlePath:"app/api/marketplacee/random/route"},resolvedPagePath:"C:\\Users\\barto\\OneDrive\\Desktop\\stockeado\\stockeado-mvp\\app\\api\\marketplacee\\random\\route.ts",nextConfigOutput:"",userland:a}),{requestAsyncStorage:d,staticGenerationAsyncStorage:c,serverHooks:m,headerHooks:x,staticGenerationBailout:P}=u,l="/api/marketplacee/random/route"},16132:(e,r)=>{var t;Object.defineProperty(r,"x",{enumerable:!0,get:function(){return t}}),function(e){e.PAGES="PAGES",e.PAGES_API="PAGES_API",e.APP_PAGE="APP_PAGE",e.APP_ROUTE="APP_ROUTE"}(t||(t={}))}};var r=require("../../../../webpack-runtime.js");r.C(e);var __webpack_exec__=e=>r(r.s=e),t=r.X(0,[1788,6408,6655],()=>__webpack_exec__(56991));module.exports=t})();
+"use strict";
+(() => {
+var exports = {};
+exports.id = 9242;
+exports.ids = [9242];
+exports.modules = {
+
+/***/ 66860:
+/***/ ((module) => {
+
+module.exports = require("express");
+
+/***/ }),
+
+/***/ 11185:
+/***/ ((module) => {
+
+module.exports = require("mongoose");
+
+/***/ }),
+
+/***/ 50852:
+/***/ ((module) => {
+
+module.exports = require("async_hooks");
+
+/***/ }),
+
+/***/ 14300:
+/***/ ((module) => {
+
+module.exports = require("buffer");
+
+/***/ }),
+
+/***/ 6113:
+/***/ ((module) => {
+
+module.exports = require("crypto");
+
+/***/ }),
+
+/***/ 82361:
+/***/ ((module) => {
+
+module.exports = require("events");
+
+/***/ }),
+
+/***/ 57147:
+/***/ ((module) => {
+
+module.exports = require("fs");
+
+/***/ }),
+
+/***/ 41808:
+/***/ ((module) => {
+
+module.exports = require("net");
+
+/***/ }),
+
+/***/ 22037:
+/***/ ((module) => {
+
+module.exports = require("os");
+
+/***/ }),
+
+/***/ 71017:
+/***/ ((module) => {
+
+module.exports = require("path");
+
+/***/ }),
+
+/***/ 63477:
+/***/ ((module) => {
+
+module.exports = require("querystring");
+
+/***/ }),
+
+/***/ 12781:
+/***/ ((module) => {
+
+module.exports = require("stream");
+
+/***/ }),
+
+/***/ 71576:
+/***/ ((module) => {
+
+module.exports = require("string_decoder");
+
+/***/ }),
+
+/***/ 76224:
+/***/ ((module) => {
+
+module.exports = require("tty");
+
+/***/ }),
+
+/***/ 73837:
+/***/ ((module) => {
+
+module.exports = require("util");
+
+/***/ }),
+
+/***/ 59796:
+/***/ ((module) => {
+
+module.exports = require("zlib");
+
+/***/ }),
+
+/***/ 17224:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  headerHooks: () => (/* binding */ headerHooks),
+  originalPathname: () => (/* binding */ originalPathname),
+  requestAsyncStorage: () => (/* binding */ requestAsyncStorage),
+  routeModule: () => (/* binding */ routeModule),
+  serverHooks: () => (/* binding */ serverHooks),
+  staticGenerationAsyncStorage: () => (/* binding */ staticGenerationAsyncStorage),
+  staticGenerationBailout: () => (/* binding */ staticGenerationBailout)
+});
+
+// NAMESPACE OBJECT: ./app/api/marketplacee/random/route.ts
+var route_namespaceObject = {};
+__webpack_require__.r(route_namespaceObject);
+__webpack_require__.d(route_namespaceObject, {
+  GET: () => (GET)
+});
+
+// EXTERNAL MODULE: ./node_modules/next/dist/server/node-polyfill-headers.js
+var node_polyfill_headers = __webpack_require__(42394);
+// EXTERNAL MODULE: ./node_modules/next/dist/server/future/route-modules/app-route/module.js
+var app_route_module = __webpack_require__(69692);
+// EXTERNAL MODULE: ./node_modules/next/dist/server/future/route-kind.js
+var route_kind = __webpack_require__(19513);
+// EXTERNAL MODULE: ./app/api/db.ts
+var db = __webpack_require__(66971);
+// EXTERNAL MODULE: ./models/inventoryModel.ts
+var inventoryModel = __webpack_require__(93928);
+// EXTERNAL MODULE: ./node_modules/next/dist/server/web/exports/next-response.js
+var next_response = __webpack_require__(89335);
+;// CONCATENATED MODULE: ./app/api/marketplacee/random/route.ts
+
+
+
+async function GET(req, res, next) {
+    try {
+        await (0,db/* default */.Z)();
+        var responseItems = await inventoryModel/* default */.Z.aggregate([
+            {
+                $sample: {
+                    size: 125
+                }
+            }
+        ]);
+        return next_response/* default */.Z.json({
+            message: "Item's found",
+            items: responseItems
+        });
+    } catch (error) {
+        return next_response/* default */.Z.json({
+            message: "Invalid token"
+        });
+    }
+}
+
+;// CONCATENATED MODULE: ./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?page=%2Fapi%2Fmarketplacee%2Frandom%2Froute&name=app%2Fapi%2Fmarketplacee%2Frandom%2Froute&pagePath=private-next-app-dir%2Fapi%2Fmarketplacee%2Frandom%2Froute.ts&appDir=C%3A%5CUsers%5Cbarto%5COneDrive%5CDesktop%5Cstockeado%5Cstockeado-mvp%5Capp&appPaths=%2Fapi%2Fmarketplacee%2Frandom%2Froute&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!
+
+// @ts-ignore this need to be imported from next/dist to be external
+
+
+// @ts-expect-error - replaced by webpack/turbopack loader
+
+const AppRouteRouteModule = app_route_module.AppRouteRouteModule;
+// We inject the nextConfigOutput here so that we can use them in the route
+// module.
+const nextConfigOutput = ""
+const routeModule = new AppRouteRouteModule({
+    definition: {
+        kind: route_kind.RouteKind.APP_ROUTE,
+        page: "/api/marketplacee/random/route",
+        pathname: "/api/marketplacee/random",
+        filename: "route",
+        bundlePath: "app/api/marketplacee/random/route"
+    },
+    resolvedPagePath: "C:\\Users\\barto\\OneDrive\\Desktop\\stockeado\\stockeado-mvp\\app\\api\\marketplacee\\random\\route.ts",
+    nextConfigOutput,
+    userland: route_namespaceObject
+});
+// Pull out the exports that we need to expose from the module. This should
+// be eliminated when we've moved the other routes to the new format. These
+// are used to hook into the route.
+const { requestAsyncStorage , staticGenerationAsyncStorage , serverHooks , headerHooks , staticGenerationBailout  } = routeModule;
+const originalPathname = "/api/marketplacee/random/route";
+
+
+//# sourceMappingURL=app-route.js.map
+
+/***/ })
+
+};
+;
+
+// load runtime
+var __webpack_require__ = require("../../../../webpack-runtime.js");
+__webpack_require__.C(exports);
+var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
+var __webpack_exports__ = __webpack_require__.X(0, [8478,9735,6971,3928], () => (__webpack_exec__(17224)));
+module.exports = __webpack_exports__;
+
+})();

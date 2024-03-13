@@ -6,9 +6,9 @@ export const metadata: Metadata = {
   description: "Mira tu orden en linea con Stockeado",
   // other metadata
 };
-const OrderMarketPlaceViewPage: NextPage = () => {
+const Page: NextPage = () => {
     return <>
         <LayoutMarketPlaceOrderView />      
   </>
 }
-export default OrderMarketPlaceViewPage;
+export default Page;

@@ -1,1 +1,724 @@
-exports.id=3800,exports.ids=[3800],exports.modules={11440:(t,e,o)=>{t.exports=o(30614)},24204:function(t,e,o){"use strict";var r=this&&this.__assign||function(){return(r=Object.assign||function(t){for(var e,o=1,r=arguments.length;o<r;o++)for(var n in e=arguments[o])Object.prototype.hasOwnProperty.call(e,n)&&(t[n]=e[n]);return t}).apply(this,arguments)};Object.defineProperty(e,"__esModule",{value:!0}),e.ArrowContainer=void 0;var n=o(30784),i=o(9885),a=o(96150);e.ArrowContainer=function(t){var e=t.childRect,o=t.popoverRect,c=t.position,u=t.arrowColor,l=t.arrowSize,d=t.arrowClassName,s=t.arrowStyle,p=t.className,f=t.children,v=t.style,h=(0,a.useArrowContainer)({childRect:e,popoverRect:o,position:c,arrowColor:u,arrowSize:l}),g=h.arrowContainerStyle,b=h.arrowStyle,m=(0,i.useMemo)(function(){return r(r({},g),v)},[g,v]),R=(0,i.useMemo)(function(){return r(r({},b),s)},[b,s]);return(0,n.jsxs)("div",{className:p,style:m,children:[(0,n.jsx)("div",{style:R,className:d}),f]})}},36413:function(t,e,o){"use strict";var r=this&&this.__assign||function(){return(r=Object.assign||function(t){for(var e,o=1,r=arguments.length;o<r;o++)for(var n in e=arguments[o])Object.prototype.hasOwnProperty.call(e,n)&&(t[n]=e[n]);return t}).apply(this,arguments)};Object.defineProperty(e,"__esModule",{value:!0}),e.Popover=e.usePopover=e.ArrowContainer=e.useArrowContainer=void 0;var n=o(30784),i=o(9885),a=o(78680),c=o(76019),u=o(74618);Object.defineProperty(e,"usePopover",{enumerable:!0,get:function(){return u.usePopover}});var l=o(50157),d=o(96150);Object.defineProperty(e,"useArrowContainer",{enumerable:!0,get:function(){return d.useArrowContainer}});var s=o(24204);Object.defineProperty(e,"ArrowContainer",{enumerable:!0,get:function(){return s.ArrowContainer}});var p=["top","left","right","bottom"],f=(0,i.forwardRef)(function(t,e){var o=t.isOpen,r=t.children,d=t.content,s=t.positions,f=void 0===s?p:s,v=t.align,h=void 0===v?"center":v,g=t.padding,b=void 0===g?0:g,m=t.reposition,R=void 0===m||m,y=t.parentElement,w=void 0===y?window.document.body:y,P=t.boundaryElement,C=void 0===P?w:P,E=t.containerClassName,x=t.containerStyle,M=t.transform,_=t.transformMode,O=t.boundaryInset,j=void 0===O?0:O,T=t.onClickOutside,N=t.clickOutsideCapture,A=void 0!==N&&N,L=(0,l.useMemoizedArray)(Array.isArray(f)?f:[f]),S=(0,i.useRef)(!1),k=(0,i.useRef)(),B=(0,i.useRef)(R),I=(0,i.useRef)(),Y=(0,i.useState)({align:h,nudgedLeft:0,nudgedTop:0,position:L[0],padding:b,childRect:c.EMPTY_RECT,popoverRect:c.EMPTY_RECT,parentRect:c.EMPTY_RECT,boundaryRect:c.EMPTY_RECT,boundaryInset:j,violations:c.EMPTY_RECT,hasViolations:!1}),z=Y[0],F=Y[1],q=(0,i.useCallback)(function(t){return F(t)},[]),V=(0,u.usePopover)({isOpen:o,childRef:I,containerClassName:E,parentElement:w,boundaryElement:C,transform:M,transformMode:void 0===_?"absolute":_,positions:L,align:h,padding:b,boundaryInset:j,reposition:R,onPositionPopover:q}),D=V.positionPopover,G=V.popoverRef,H=V.scoutRef;(0,i.useLayoutEffect)(function(){var t=!0,updatePopover=function(){var e,r;if(o&&t){var n=null===(e=null==I?void 0:I.current)||void 0===e?void 0:e.getBoundingClientRect(),i=null===(r=null==G?void 0:G.current)||void 0===r?void 0:r.getBoundingClientRect();null==n||null==i||(0,c.rectsAreEqual)(n,z.childRect)&&i.width===z.popoverRect.width&&i.height===z.popoverRect.height&&z.padding===b&&z.align===h&&L===k.current&&R===B.current||D(),L!==k.current&&(k.current=L),R!==B.current&&(B.current=R),t&&window.requestAnimationFrame(updatePopover)}S.current=o};return window.requestAnimationFrame(updatePopover),function(){t=!1}},[h,o,b,G,z.align,z.childRect,z.padding,z.popoverRect.height,z.popoverRect.width,D,L,R]),(0,i.useEffect)(function(){var t=G.current;return Object.assign(t.style,x),function(){Object.keys(null!=x?x:{}).forEach(function(e){return delete t.style[e]})}},[x,o,G]);var J=(0,i.useCallback)(function(t){var e,r;!o||(null===(e=G.current)||void 0===e?void 0:e.contains(t.target))||(null===(r=I.current)||void 0===r?void 0:r.contains(t.target))||null==T||T(t)},[o,T,G]),K=(0,i.useCallback)(function(){I.current&&window.requestAnimationFrame(function(){return D()})},[D]);(0,i.useEffect)(function(){var t=w.ownerDocument.body;return t.addEventListener("click",J,A),t.addEventListener("contextmenu",J,A),t.addEventListener("resize",K),function(){t.removeEventListener("click",J,A),t.removeEventListener("contextmenu",J,A),t.removeEventListener("resize",K)}},[A,J,K,w]);var Q=(0,i.useCallback)(function(t){I.current=t,null!=e&&("object"==typeof e?e.current=t:"function"==typeof e&&e(t))},[e]);return(0,n.jsxs)(n.Fragment,{children:[(0,i.cloneElement)(r,{ref:Q}),o?(0,n.jsx)(a.PopoverPortal,{element:G.current,scoutElement:H.current,container:w,children:"function"==typeof d?d(z):d}):null]})});e.Popover=(0,i.forwardRef)(function(t,e){return"undefined"==typeof window?t.children:(0,n.jsx)(f,r({},t,{ref:e}))})},78680:(t,e,o)=>{"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.PopoverPortal=void 0;var r=o(9885),n=o(88908);e.PopoverPortal=function(t){var e=t.container,o=t.element,i=t.scoutElement,a=t.children;return(0,r.useLayoutEffect)(function(){return e.appendChild(o),e.appendChild(i),function(){e.removeChild(o),e.removeChild(i)}},[e,o,i]),(0,n.createPortal)(a,o)}},96150:function(t,e,o){"use strict";var r=this&&this.__assign||function(){return(r=Object.assign||function(t){for(var e,o=1,r=arguments.length;o<r;o++)for(var n in e=arguments[o])Object.prototype.hasOwnProperty.call(e,n)&&(t[n]=e[n]);return t}).apply(this,arguments)};Object.defineProperty(e,"__esModule",{value:!0}),e.useArrowContainer=void 0;var n=o(9885);e.useArrowContainer=function(t){var e=t.childRect,o=t.popoverRect,i=t.position,a=t.arrowSize,c=t.arrowColor;return{arrowContainerStyle:(0,n.useMemo)(function(){return{padding:a}},[a]),arrowStyle:(0,n.useMemo)(function(){return r({position:"absolute"},function(){var t=2*a,r=e.top-o.top+e.height/2-t/2,n=e.left-o.left+e.width/2-t/2,u=o.width-a,l=o.height-a;switch(n=(n=n<a?a:n)+t>u?u-t:n,r=Number.isNaN(r=(r=r<a?a:r)+t>l?l-t:r)?0:r,n=Number.isNaN(n)?0:n,i){case"right":return{borderTop:"".concat(a,"px solid transparent"),borderBottom:"".concat(a,"px solid transparent"),borderRight:"".concat(a,"px solid ").concat(c),left:0,top:r};case"left":return{borderTop:"".concat(a,"px solid transparent"),borderBottom:"".concat(a,"px solid transparent"),borderLeft:"".concat(a,"px solid ").concat(c),right:0,top:r};case"bottom":return{borderLeft:"".concat(a,"px solid transparent"),borderRight:"".concat(a,"px solid transparent"),borderBottom:"".concat(a,"px solid ").concat(c),top:0,left:n};case"top":return{borderLeft:"".concat(a,"px solid transparent"),borderRight:"".concat(a,"px solid transparent"),borderTop:"".concat(a,"px solid ").concat(c),bottom:0,left:n};default:return{display:"hidden"}}}())},[c,a,e.height,e.left,e.top,e.width,o.height,o.left,o.top,o.width,i])}}},49251:(t,e,o)=>{"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.useElementRef=void 0;var r=o(9885),n=o(76019);e.useElementRef=function(t){var e=t.containerClassName,o=t.containerStyle,i=t.id,a=(0,r.useRef)(),c=(0,r.useMemo)(function(){return(0,n.createContainer)({containerStyle:o,containerClassName:e,id:i})},[e,o,i]);return a.current=c,a}},50157:(t,e,o)=>{"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.useMemoizedArray=void 0;var r=o(9885);e.useMemoizedArray=function(t){var e=(0,r.useRef)(t);return(0,r.useMemo)(function(){if(e.current===t)return e.current;if(e.current.length!==t.length)return e.current=t,t;for(var o=0;o<t.length;o+=1)if(t[o]!==e.current[o])return e.current=t,t;return e.current},[t])}},74618:(t,e,o)=>{"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.usePopover=void 0;var r=o(9885),n=o(76019),i=o(49251),a={position:"fixed",overflow:"visible",top:"0px",left:"0px"},c={position:"fixed",top:"0px",left:"0px",width:"0px",height:"0px",visibility:"hidden"};e.usePopover=function(t){var e=t.isOpen,o=t.childRef,u=t.positions,l=t.containerClassName,d=t.parentElement,s=t.transform,p=t.transformMode,f=t.align,v=t.padding,h=t.reposition,g=t.boundaryInset,b=t.boundaryElement,m=t.onPositionPopover,R=(0,i.useElementRef)({id:"react-tiny-popover-scout",containerStyle:c}),y=(0,i.useElementRef)({id:"react-tiny-popover-container",containerClassName:l,containerStyle:a}),w=(0,r.useCallback)(function(t){var r,i,a=void 0===t?{}:t,c=a.positionIndex,l=void 0===c?0:c,P=a.parentRect,C=void 0===P?d.getBoundingClientRect():P,E=a.childRect,x=void 0===E?null===(r=null==o?void 0:o.current)||void 0===r?void 0:r.getBoundingClientRect():E,M=a.scoutRect,_=void 0===M?null===(i=null==R?void 0:R.current)||void 0===i?void 0:i.getBoundingClientRect():M,O=a.popoverRect,j=void 0===O?y.current.getBoundingClientRect():O,T=a.boundaryRect,N=void 0===T?b===d?C:b.getBoundingClientRect():T;if(x&&C&&e){if(s&&"absolute"===p){var A="function"==typeof s?s({childRect:x,popoverRect:j,parentRect:C,boundaryRect:N,padding:v,align:f,nudgedTop:0,nudgedLeft:0,boundaryInset:g,violations:n.EMPTY_RECT,hasViolations:!1}):s,L=A.top,S=A.left,k=Math.round(C.left+S-_.left),B=Math.round(C.top+L-_.top);y.current.style.transform="translate(".concat(k,"px, ").concat(B,"px)"),m({childRect:x,popoverRect:(0,n.createRect)({left:k,top:B,width:j.width,height:j.height}),parentRect:C,boundaryRect:N,padding:v,align:f,transform:{top:L,left:S},nudgedTop:0,nudgedLeft:0,boundaryInset:g,violations:n.EMPTY_RECT,hasViolations:!1});return}var I=l===u.length,Y=I?u[0]:u[l],z=(0,n.getNewPopoverRect)({childRect:x,popoverRect:j,boundaryRect:N,position:Y,align:f,padding:v,reposition:h},g),F=z.rect;if(z.boundaryViolation&&h&&!I){w({positionIndex:l+1,childRect:x,popoverRect:j,parentRect:C,boundaryRect:N});return}var q=F.top,V=F.left,D=F.width,G=F.height,H=h&&!I,J=(0,n.getNudgedPopoverRect)(F,N,g),K=J.left,Q=J.top,U=q,W=V;H&&(U=Q,W=K),U=Math.round(U-_.top),W=Math.round(W-_.left),y.current.style.transform="translate(".concat(W,"px, ").concat(U,"px)");var X={top:N.top+g-U,left:N.left+g-W,right:W+D-N.right+g,bottom:U+G-N.bottom+g},Z={childRect:x,popoverRect:(0,n.createRect)({left:W,top:U,width:D,height:G}),parentRect:C,boundaryRect:N,position:Y,align:f,padding:v,nudgedTop:Q-q,nudgedLeft:K-V,boundaryInset:g,violations:{top:X.top<=0?0:X.top,left:X.left<=0?0:X.left,right:X.right<=0?0:X.right,bottom:X.bottom<=0?0:X.bottom},hasViolations:X.top>0||X.left>0||X.right>0||X.bottom>0};if(s){m(Z);var $="function"==typeof s?s(Z):s,tt=$.top,te=$.left;y.current.style.transform="translate(".concat(Math.round(W+(null!=te?te:0)),"px, ").concat(Math.round(U+(null!=tt?tt:0)),"px)"),Z.nudgedLeft+=null!=te?te:0,Z.nudgedTop+=null!=tt?tt:0,Z.transform={top:tt,left:te}}m(Z)}},[d,o,R,y,b,e,s,p,u,f,v,h,g,m]);return{positionPopover:w,popoverRef:y,scoutRef:R}}},76019:function(t,e){"use strict";var o=this&&this.__assign||function(){return(o=Object.assign||function(t){for(var e,o=1,r=arguments.length;o<r;o++)for(var n in e=arguments[o])Object.prototype.hasOwnProperty.call(e,n)&&(t[n]=e[n]);return t}).apply(this,arguments)};Object.defineProperty(e,"__esModule",{value:!0}),e.getNudgedPopoverRect=e.getNewPopoverRect=e.popoverRectForPosition=e.createContainer=e.rectsAreEqual=e.createRect=e.EMPTY_RECT=void 0,e.EMPTY_RECT={top:0,left:0,right:0,bottom:0,width:0,height:0},e.createRect=function(t){var e=t.top,o=t.left,r=t.width,n=t.height;return{top:e,left:o,width:r,height:n,right:o+r,bottom:e+n}},e.rectsAreEqual=function(t,e){return t===e||(null==t?void 0:t.bottom)===(null==e?void 0:e.bottom)&&(null==t?void 0:t.height)===(null==e?void 0:e.height)&&(null==t?void 0:t.left)===(null==e?void 0:e.left)&&(null==t?void 0:t.right)===(null==e?void 0:e.right)&&(null==t?void 0:t.top)===(null==e?void 0:e.top)&&(null==t?void 0:t.width)===(null==e?void 0:e.width)},e.createContainer=function(t){var e=t.containerStyle,o=t.containerClassName,r=t.id,n=window.document.createElement("div");return n.id=r,o&&(n.className=o),Object.assign(n.style,e),n},e.popoverRectForPosition=function(t,o,r,n,i){var a,c,u=o.left+o.width/2,l=o.top+o.height/2,d=r.width,s=r.height;switch(t){case"left":a=l-s/2,c=o.left-n-d,"start"===i&&(a=o.top),"end"===i&&(a=o.bottom-s);break;case"bottom":a=o.bottom+n,c=u-d/2,"start"===i&&(c=o.left),"end"===i&&(c=o.right-d);break;case"right":a=l-s/2,c=o.right+n,"start"===i&&(a=o.top),"end"===i&&(a=o.bottom-s);break;default:a=o.top-s-n,c=u-d/2,"start"===i&&(c=o.left),"end"===i&&(c=o.right-d)}return(0,e.createRect)({left:c,top:a,width:d,height:s})},e.getNewPopoverRect=function(t,o){var r=t.position,n=t.align,i=t.childRect,a=t.popoverRect,c=t.boundaryRect,u=t.padding,l=t.reposition,d=(0,e.popoverRectForPosition)(r,i,a,u,n),s=l&&("top"===r&&d.top<c.top+o||"left"===r&&d.left<c.left+o||"right"===r&&d.right>c.right-o||"bottom"===r&&d.bottom>c.bottom-o);return{rect:d,boundaryViolation:s}},e.getNudgedPopoverRect=function(t,r,n){var i=r.top+n,a=r.left+n,c=r.right-n,u=r.bottom-n,l=t.top<i?i:t.top;l=l+t.height>u?u-t.height:l;var d=t.left<a?a:t.left;return d=d+t.width>c?c-t.width:d,(0,e.createRect)(o(o({},t),{top:l,left:d}))}}};
+exports.id = 3800;
+exports.ids = [3800];
+exports.modules = {
+
+/***/ 11440:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__(50954)
+
+
+/***/ }),
+
+/***/ 24204:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ArrowContainer = void 0;
+var jsx_runtime_1 = __webpack_require__(76931);
+var react_1 = __webpack_require__(17640);
+var useArrowContainer_1 = __webpack_require__(96150);
+var ArrowContainer = function (_a) {
+    var childRect = _a.childRect, popoverRect = _a.popoverRect, position = _a.position, arrowColor = _a.arrowColor, arrowSize = _a.arrowSize, arrowClassName = _a.arrowClassName, externalArrowStyle = _a.arrowStyle, className = _a.className, children = _a.children, externalArrowContainerStyle = _a.style;
+    var _b = (0, useArrowContainer_1.useArrowContainer)({
+        childRect: childRect,
+        popoverRect: popoverRect,
+        position: position,
+        arrowColor: arrowColor,
+        arrowSize: arrowSize,
+    }), arrowContainerStyle = _b.arrowContainerStyle, arrowStyle = _b.arrowStyle;
+    var mergedContainerStyle = (0, react_1.useMemo)(function () { return (__assign(__assign({}, arrowContainerStyle), externalArrowContainerStyle)); }, [arrowContainerStyle, externalArrowContainerStyle]);
+    var mergedArrowStyle = (0, react_1.useMemo)(function () { return (__assign(__assign({}, arrowStyle), externalArrowStyle)); }, [arrowStyle, externalArrowStyle]);
+    return ((0, jsx_runtime_1.jsxs)("div", { className: className, style: mergedContainerStyle, children: [(0, jsx_runtime_1.jsx)("div", { style: mergedArrowStyle, className: arrowClassName }), children] }));
+};
+exports.ArrowContainer = ArrowContainer;
+//# sourceMappingURL=ArrowContainer.js.map
+
+/***/ }),
+
+/***/ 36413:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Popover = exports.usePopover = exports.ArrowContainer = exports.useArrowContainer = void 0;
+var jsx_runtime_1 = __webpack_require__(76931);
+var react_1 = __webpack_require__(17640);
+var PopoverPortal_1 = __webpack_require__(78680);
+var util_1 = __webpack_require__(76019);
+var usePopover_1 = __webpack_require__(74618);
+Object.defineProperty(exports, "usePopover", ({ enumerable: true, get: function () { return usePopover_1.usePopover; } }));
+var useMemoizedArray_1 = __webpack_require__(50157);
+var useArrowContainer_1 = __webpack_require__(96150);
+Object.defineProperty(exports, "useArrowContainer", ({ enumerable: true, get: function () { return useArrowContainer_1.useArrowContainer; } }));
+var ArrowContainer_1 = __webpack_require__(24204);
+Object.defineProperty(exports, "ArrowContainer", ({ enumerable: true, get: function () { return ArrowContainer_1.ArrowContainer; } }));
+var DEFAULT_POSITIONS = ['top', 'left', 'right', 'bottom'];
+var PopoverInternal = (0, react_1.forwardRef)(function (_a, externalRef) {
+    var isOpen = _a.isOpen, children = _a.children, content = _a.content, _b = _a.positions, externalPositions = _b === void 0 ? DEFAULT_POSITIONS : _b, _c = _a.align, align = _c === void 0 ? 'center' : _c, _d = _a.padding, padding = _d === void 0 ? 0 : _d, _e = _a.reposition, reposition = _e === void 0 ? true : _e, _f = _a.parentElement, parentElement = _f === void 0 ? window.document.body : _f, _g = _a.boundaryElement, boundaryElement = _g === void 0 ? parentElement : _g, containerClassName = _a.containerClassName, containerStyle = _a.containerStyle, transform = _a.transform, _h = _a.transformMode, transformMode = _h === void 0 ? 'absolute' : _h, _j = _a.boundaryInset, boundaryInset = _j === void 0 ? 0 : _j, onClickOutside = _a.onClickOutside, _k = _a.clickOutsideCapture, clickOutsideCapture = _k === void 0 ? false : _k;
+    var positions = (0, useMemoizedArray_1.useMemoizedArray)(Array.isArray(externalPositions) ? externalPositions : [externalPositions]);
+    // TODO: factor prevs out into a custom prevs hook
+    var prevIsOpen = (0, react_1.useRef)(false);
+    var prevPositions = (0, react_1.useRef)();
+    var prevReposition = (0, react_1.useRef)(reposition);
+    var childRef = (0, react_1.useRef)();
+    var _l = (0, react_1.useState)({
+        align: align,
+        nudgedLeft: 0,
+        nudgedTop: 0,
+        position: positions[0],
+        padding: padding,
+        childRect: util_1.EMPTY_RECT,
+        popoverRect: util_1.EMPTY_RECT,
+        parentRect: util_1.EMPTY_RECT,
+        boundaryRect: util_1.EMPTY_RECT,
+        boundaryInset: boundaryInset,
+        violations: util_1.EMPTY_RECT,
+        hasViolations: false,
+    }), popoverState = _l[0], setPopoverState = _l[1];
+    var onPositionPopover = (0, react_1.useCallback)(function (popoverState) { return setPopoverState(popoverState); }, []);
+    var _m = (0, usePopover_1.usePopover)({
+        isOpen: isOpen,
+        childRef: childRef,
+        containerClassName: containerClassName,
+        parentElement: parentElement,
+        boundaryElement: boundaryElement,
+        transform: transform,
+        transformMode: transformMode,
+        positions: positions,
+        align: align,
+        padding: padding,
+        boundaryInset: boundaryInset,
+        reposition: reposition,
+        onPositionPopover: onPositionPopover,
+    }), positionPopover = _m.positionPopover, popoverRef = _m.popoverRef, scoutRef = _m.scoutRef;
+    (0, react_1.useLayoutEffect)(function () {
+        var shouldUpdate = true;
+        var updatePopover = function () {
+            var _a, _b;
+            if (isOpen && shouldUpdate) {
+                var childRect = (_a = childRef === null || childRef === void 0 ? void 0 : childRef.current) === null || _a === void 0 ? void 0 : _a.getBoundingClientRect();
+                var popoverRect = (_b = popoverRef === null || popoverRef === void 0 ? void 0 : popoverRef.current) === null || _b === void 0 ? void 0 : _b.getBoundingClientRect();
+                if (childRect != null &&
+                    popoverRect != null &&
+                    (!(0, util_1.rectsAreEqual)(childRect, popoverState.childRect) ||
+                        popoverRect.width !== popoverState.popoverRect.width ||
+                        popoverRect.height !== popoverState.popoverRect.height ||
+                        popoverState.padding !== padding ||
+                        popoverState.align !== align ||
+                        positions !== prevPositions.current ||
+                        reposition !== prevReposition.current)) {
+                    positionPopover();
+                }
+                // TODO: factor prev checks out into the custom prevs hook
+                if (positions !== prevPositions.current) {
+                    prevPositions.current = positions;
+                }
+                if (reposition !== prevReposition.current) {
+                    prevReposition.current = reposition;
+                }
+                if (shouldUpdate) {
+                    window.requestAnimationFrame(updatePopover);
+                }
+            }
+            prevIsOpen.current = isOpen;
+        };
+        window.requestAnimationFrame(updatePopover);
+        return function () {
+            shouldUpdate = false;
+        };
+    }, [
+        align,
+        isOpen,
+        padding,
+        popoverRef,
+        popoverState.align,
+        popoverState.childRect,
+        popoverState.padding,
+        popoverState.popoverRect.height,
+        popoverState.popoverRect.width,
+        positionPopover,
+        positions,
+        reposition,
+    ]);
+    (0, react_1.useEffect)(function () {
+        var popoverElement = popoverRef.current;
+        Object.assign(popoverElement.style, containerStyle);
+        return function () {
+            Object.keys(containerStyle !== null && containerStyle !== void 0 ? containerStyle : {}).forEach(function (key) {
+                return delete popoverElement.style[key];
+            });
+        };
+    }, [containerStyle, isOpen, popoverRef]);
+    var handleOnClickOutside = (0, react_1.useCallback)(function (e) {
+        var _a, _b;
+        if (isOpen &&
+            !((_a = popoverRef.current) === null || _a === void 0 ? void 0 : _a.contains(e.target)) &&
+            !((_b = childRef.current) === null || _b === void 0 ? void 0 : _b.contains(e.target))) {
+            onClickOutside === null || onClickOutside === void 0 ? void 0 : onClickOutside(e);
+        }
+    }, [isOpen, onClickOutside, popoverRef]);
+    var handleWindowResize = (0, react_1.useCallback)(function () {
+        if (childRef.current) {
+            window.requestAnimationFrame(function () { return positionPopover(); });
+        }
+    }, [positionPopover]);
+    (0, react_1.useEffect)(function () {
+        var body = parentElement.ownerDocument.body;
+        body.addEventListener('click', handleOnClickOutside, clickOutsideCapture);
+        body.addEventListener('contextmenu', handleOnClickOutside, clickOutsideCapture);
+        body.addEventListener('resize', handleWindowResize);
+        return function () {
+            body.removeEventListener('click', handleOnClickOutside, clickOutsideCapture);
+            body.removeEventListener('contextmenu', handleOnClickOutside, clickOutsideCapture);
+            body.removeEventListener('resize', handleWindowResize);
+        };
+    }, [clickOutsideCapture, handleOnClickOutside, handleWindowResize, parentElement]);
+    var handleRef = (0, react_1.useCallback)(function (node) {
+        childRef.current = node;
+        if (externalRef != null) {
+            if (typeof externalRef === 'object') {
+                externalRef.current = node;
+            }
+            else if (typeof externalRef === 'function') {
+                externalRef(node);
+            }
+        }
+    }, [externalRef]);
+    var renderChild = function () { return (0, react_1.cloneElement)(children, { ref: handleRef }); };
+    var renderPopover = function () {
+        if (!isOpen)
+            return null;
+        return ((0, jsx_runtime_1.jsx)(PopoverPortal_1.PopoverPortal, { element: popoverRef.current, scoutElement: scoutRef.current, container: parentElement, children: typeof content === 'function' ? content(popoverState) : content }));
+    };
+    return ((0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [renderChild(), renderPopover()] }));
+});
+exports.Popover = (0, react_1.forwardRef)(function (props, ref) {
+    if (typeof window === 'undefined')
+        return props.children;
+    return (0, jsx_runtime_1.jsx)(PopoverInternal, __assign({}, props, { ref: ref }));
+});
+//# sourceMappingURL=Popover.js.map
+
+/***/ }),
+
+/***/ 78680:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PopoverPortal = void 0;
+var react_1 = __webpack_require__(17640);
+var react_dom_1 = __webpack_require__(55752);
+var PopoverPortal = function (_a) {
+    var container = _a.container, element = _a.element, scoutElement = _a.scoutElement, children = _a.children;
+    (0, react_1.useLayoutEffect)(function () {
+        container.appendChild(element);
+        container.appendChild(scoutElement);
+        return function () {
+            container.removeChild(element);
+            container.removeChild(scoutElement);
+        };
+    }, [container, element, scoutElement]);
+    return (0, react_dom_1.createPortal)(children, element);
+};
+exports.PopoverPortal = PopoverPortal;
+//# sourceMappingURL=PopoverPortal.js.map
+
+/***/ }),
+
+/***/ 96150:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.useArrowContainer = void 0;
+var react_1 = __webpack_require__(17640);
+var useArrowContainer = function (_a) {
+    var childRect = _a.childRect, popoverRect = _a.popoverRect, position = _a.position, arrowSize = _a.arrowSize, arrowColor = _a.arrowColor;
+    var arrowContainerStyle = (0, react_1.useMemo)(function () {
+        return ({
+            padding: arrowSize,
+        });
+    }, [arrowSize]);
+    var arrowStyle = (0, react_1.useMemo)(function () {
+        return (__assign({ position: 'absolute' }, (function () {
+            var arrowWidth = arrowSize * 2;
+            var top = childRect.top - popoverRect.top + childRect.height / 2 - arrowWidth / 2;
+            var left = childRect.left - popoverRect.left + childRect.width / 2 - arrowWidth / 2;
+            var lowerBound = arrowSize;
+            var leftUpperBound = popoverRect.width - arrowSize;
+            var topUpperBound = popoverRect.height - arrowSize;
+            left = left < lowerBound ? lowerBound : left;
+            left = left + arrowWidth > leftUpperBound ? leftUpperBound - arrowWidth : left;
+            top = top < lowerBound ? lowerBound : top;
+            top = top + arrowWidth > topUpperBound ? topUpperBound - arrowWidth : top;
+            top = Number.isNaN(top) ? 0 : top;
+            left = Number.isNaN(left) ? 0 : left;
+            switch (position) {
+                case 'right':
+                    return {
+                        borderTop: "".concat(arrowSize, "px solid transparent"),
+                        borderBottom: "".concat(arrowSize, "px solid transparent"),
+                        borderRight: "".concat(arrowSize, "px solid ").concat(arrowColor),
+                        left: 0,
+                        top: top,
+                    };
+                case 'left':
+                    return {
+                        borderTop: "".concat(arrowSize, "px solid transparent"),
+                        borderBottom: "".concat(arrowSize, "px solid transparent"),
+                        borderLeft: "".concat(arrowSize, "px solid ").concat(arrowColor),
+                        right: 0,
+                        top: top,
+                    };
+                case 'bottom':
+                    return {
+                        borderLeft: "".concat(arrowSize, "px solid transparent"),
+                        borderRight: "".concat(arrowSize, "px solid transparent"),
+                        borderBottom: "".concat(arrowSize, "px solid ").concat(arrowColor),
+                        top: 0,
+                        left: left,
+                    };
+                case 'top':
+                    return {
+                        borderLeft: "".concat(arrowSize, "px solid transparent"),
+                        borderRight: "".concat(arrowSize, "px solid transparent"),
+                        borderTop: "".concat(arrowSize, "px solid ").concat(arrowColor),
+                        bottom: 0,
+                        left: left,
+                    };
+                default:
+                    return {
+                        display: 'hidden',
+                    };
+            }
+        })()));
+    }, [
+        arrowColor,
+        arrowSize,
+        childRect.height,
+        childRect.left,
+        childRect.top,
+        childRect.width,
+        popoverRect.height,
+        popoverRect.left,
+        popoverRect.top,
+        popoverRect.width,
+        position,
+    ]);
+    return {
+        arrowContainerStyle: arrowContainerStyle,
+        arrowStyle: arrowStyle,
+    };
+};
+exports.useArrowContainer = useArrowContainer;
+//# sourceMappingURL=useArrowContainer.js.map
+
+/***/ }),
+
+/***/ 55161:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.useElementRef = void 0;
+var react_1 = __webpack_require__(17640);
+var util_1 = __webpack_require__(76019);
+var useElementRef = function (_a) {
+    var containerClassName = _a.containerClassName, containerStyle = _a.containerStyle, id = _a.id;
+    var ref = (0, react_1.useRef)();
+    var element = (0, react_1.useMemo)(function () { return (0, util_1.createContainer)({ containerStyle: containerStyle, containerClassName: containerClassName, id: id }); }, [containerClassName, containerStyle, id]);
+    ref.current = element;
+    return ref;
+};
+exports.useElementRef = useElementRef;
+//# sourceMappingURL=useElementRef.js.map
+
+/***/ }),
+
+/***/ 50157:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.useMemoizedArray = void 0;
+var react_1 = __webpack_require__(17640);
+var useMemoizedArray = function (externalArray) {
+    var prevArrayRef = (0, react_1.useRef)(externalArray);
+    var array = (0, react_1.useMemo)(function () {
+        if (prevArrayRef.current === externalArray)
+            return prevArrayRef.current;
+        if (prevArrayRef.current.length !== externalArray.length) {
+            prevArrayRef.current = externalArray;
+            return externalArray;
+        }
+        for (var i = 0; i < externalArray.length; i += 1) {
+            if (externalArray[i] !== prevArrayRef.current[i]) {
+                prevArrayRef.current = externalArray;
+                return externalArray;
+            }
+        }
+        return prevArrayRef.current;
+    }, [externalArray]);
+    return array;
+};
+exports.useMemoizedArray = useMemoizedArray;
+//# sourceMappingURL=useMemoizedArray.js.map
+
+/***/ }),
+
+/***/ 74618:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.usePopover = void 0;
+var react_1 = __webpack_require__(17640);
+var util_1 = __webpack_require__(76019);
+var useElementRef_1 = __webpack_require__(55161);
+var POPOVER_STYLE = {
+    position: 'fixed',
+    overflow: 'visible',
+    top: '0px',
+    left: '0px',
+};
+var SCOUT_STYLE = {
+    position: 'fixed',
+    top: '0px',
+    left: '0px',
+    width: '0px',
+    height: '0px',
+    visibility: 'hidden',
+};
+var usePopover = function (_a) {
+    var isOpen = _a.isOpen, childRef = _a.childRef, positions = _a.positions, containerClassName = _a.containerClassName, parentElement = _a.parentElement, transform = _a.transform, transformMode = _a.transformMode, align = _a.align, padding = _a.padding, reposition = _a.reposition, boundaryInset = _a.boundaryInset, boundaryElement = _a.boundaryElement, onPositionPopover = _a.onPositionPopover;
+    var scoutRef = (0, useElementRef_1.useElementRef)({ id: 'react-tiny-popover-scout', containerStyle: SCOUT_STYLE });
+    var popoverRef = (0, useElementRef_1.useElementRef)({
+        id: 'react-tiny-popover-container',
+        containerClassName: containerClassName,
+        containerStyle: POPOVER_STYLE,
+    });
+    var positionPopover = (0, react_1.useCallback)(function (_a) {
+        var _b, _c;
+        var _d = _a === void 0 ? {} : _a, _e = _d.positionIndex, positionIndex = _e === void 0 ? 0 : _e, _f = _d.parentRect, parentRect = _f === void 0 ? parentElement.getBoundingClientRect() : _f, _g = _d.childRect, childRect = _g === void 0 ? (_b = childRef === null || childRef === void 0 ? void 0 : childRef.current) === null || _b === void 0 ? void 0 : _b.getBoundingClientRect() : _g, _h = _d.scoutRect, scoutRect = _h === void 0 ? (_c = scoutRef === null || scoutRef === void 0 ? void 0 : scoutRef.current) === null || _c === void 0 ? void 0 : _c.getBoundingClientRect() : _h, _j = _d.popoverRect, popoverRect = _j === void 0 ? popoverRef.current.getBoundingClientRect() : _j, _k = _d.boundaryRect, boundaryRect = _k === void 0 ? boundaryElement === parentElement
+            ? parentRect
+            : boundaryElement.getBoundingClientRect() : _k;
+        if (!childRect || !parentRect || !isOpen) {
+            return;
+        }
+        if (transform && transformMode === 'absolute') {
+            var _l = typeof transform === 'function'
+                ? transform({
+                    childRect: childRect,
+                    popoverRect: popoverRect,
+                    parentRect: parentRect,
+                    boundaryRect: boundaryRect,
+                    padding: padding,
+                    align: align,
+                    nudgedTop: 0,
+                    nudgedLeft: 0,
+                    boundaryInset: boundaryInset,
+                    violations: util_1.EMPTY_RECT,
+                    hasViolations: false,
+                })
+                : transform, inputTop = _l.top, inputLeft = _l.left;
+            var finalLeft_1 = Math.round(parentRect.left + inputLeft - scoutRect.left);
+            var finalTop_1 = Math.round(parentRect.top + inputTop - scoutRect.top);
+            popoverRef.current.style.transform = "translate(".concat(finalLeft_1, "px, ").concat(finalTop_1, "px)");
+            onPositionPopover({
+                childRect: childRect,
+                popoverRect: (0, util_1.createRect)({
+                    left: finalLeft_1,
+                    top: finalTop_1,
+                    width: popoverRect.width,
+                    height: popoverRect.height,
+                }),
+                parentRect: parentRect,
+                boundaryRect: boundaryRect,
+                padding: padding,
+                align: align,
+                transform: { top: inputTop, left: inputLeft },
+                nudgedTop: 0,
+                nudgedLeft: 0,
+                boundaryInset: boundaryInset,
+                violations: util_1.EMPTY_RECT,
+                hasViolations: false,
+            });
+            return;
+        }
+        var isExhausted = positionIndex === positions.length;
+        var position = isExhausted ? positions[0] : positions[positionIndex];
+        var _m = (0, util_1.getNewPopoverRect)({
+            childRect: childRect,
+            popoverRect: popoverRect,
+            boundaryRect: boundaryRect,
+            position: position,
+            align: align,
+            padding: padding,
+            reposition: reposition,
+        }, boundaryInset), rect = _m.rect, boundaryViolation = _m.boundaryViolation;
+        if (boundaryViolation && reposition && !isExhausted) {
+            positionPopover({
+                positionIndex: positionIndex + 1,
+                childRect: childRect,
+                popoverRect: popoverRect,
+                parentRect: parentRect,
+                boundaryRect: boundaryRect,
+            });
+            return;
+        }
+        var top = rect.top, left = rect.left, width = rect.width, height = rect.height;
+        var shouldNudge = reposition && !isExhausted;
+        var _o = (0, util_1.getNudgedPopoverRect)(rect, boundaryRect, boundaryInset), nudgedLeft = _o.left, nudgedTop = _o.top;
+        var finalTop = top;
+        var finalLeft = left;
+        if (shouldNudge) {
+            finalTop = nudgedTop;
+            finalLeft = nudgedLeft;
+        }
+        finalTop = Math.round(finalTop - scoutRect.top);
+        finalLeft = Math.round(finalLeft - scoutRect.left);
+        popoverRef.current.style.transform = "translate(".concat(finalLeft, "px, ").concat(finalTop, "px)");
+        var potentialViolations = {
+            top: boundaryRect.top + boundaryInset - finalTop,
+            left: boundaryRect.left + boundaryInset - finalLeft,
+            right: finalLeft + width - boundaryRect.right + boundaryInset,
+            bottom: finalTop + height - boundaryRect.bottom + boundaryInset,
+        };
+        var popoverState = {
+            childRect: childRect,
+            popoverRect: (0, util_1.createRect)({ left: finalLeft, top: finalTop, width: width, height: height }),
+            parentRect: parentRect,
+            boundaryRect: boundaryRect,
+            position: position,
+            align: align,
+            padding: padding,
+            nudgedTop: nudgedTop - top,
+            nudgedLeft: nudgedLeft - left,
+            boundaryInset: boundaryInset,
+            violations: {
+                top: potentialViolations.top <= 0 ? 0 : potentialViolations.top,
+                left: potentialViolations.left <= 0 ? 0 : potentialViolations.left,
+                right: potentialViolations.right <= 0 ? 0 : potentialViolations.right,
+                bottom: potentialViolations.bottom <= 0 ? 0 : potentialViolations.bottom,
+            },
+            hasViolations: potentialViolations.top > 0 ||
+                potentialViolations.left > 0 ||
+                potentialViolations.right > 0 ||
+                potentialViolations.bottom > 0,
+        };
+        if (transform) {
+            onPositionPopover(popoverState);
+            var _p = typeof transform === 'function' ? transform(popoverState) : transform, transformTop = _p.top, transformLeft = _p.left;
+            popoverRef.current.style.transform = "translate(".concat(Math.round(finalLeft + (transformLeft !== null && transformLeft !== void 0 ? transformLeft : 0)), "px, ").concat(Math.round(finalTop + (transformTop !== null && transformTop !== void 0 ? transformTop : 0)), "px)");
+            popoverState.nudgedLeft += transformLeft !== null && transformLeft !== void 0 ? transformLeft : 0;
+            popoverState.nudgedTop += transformTop !== null && transformTop !== void 0 ? transformTop : 0;
+            popoverState.transform = { top: transformTop, left: transformLeft };
+        }
+        onPositionPopover(popoverState);
+    }, [
+        parentElement,
+        childRef,
+        scoutRef,
+        popoverRef,
+        boundaryElement,
+        isOpen,
+        transform,
+        transformMode,
+        positions,
+        align,
+        padding,
+        reposition,
+        boundaryInset,
+        onPositionPopover,
+    ]);
+    return { positionPopover: positionPopover, popoverRef: popoverRef, scoutRef: scoutRef };
+};
+exports.usePopover = usePopover;
+//# sourceMappingURL=usePopover.js.map
+
+/***/ }),
+
+/***/ 76019:
+/***/ (function(__unused_webpack_module, exports) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getNudgedPopoverRect = exports.getNewPopoverRect = exports.popoverRectForPosition = exports.createContainer = exports.rectsAreEqual = exports.createRect = exports.EMPTY_RECT = void 0;
+exports.EMPTY_RECT = {
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: 0,
+    height: 0,
+};
+var createRect = function (_a) {
+    var top = _a.top, left = _a.left, width = _a.width, height = _a.height;
+    return ({
+        top: top,
+        left: left,
+        width: width,
+        height: height,
+        right: left + width,
+        bottom: top + height,
+    });
+};
+exports.createRect = createRect;
+var rectsAreEqual = function (rectA, rectB) {
+    return rectA === rectB ||
+        ((rectA === null || rectA === void 0 ? void 0 : rectA.bottom) === (rectB === null || rectB === void 0 ? void 0 : rectB.bottom) &&
+            (rectA === null || rectA === void 0 ? void 0 : rectA.height) === (rectB === null || rectB === void 0 ? void 0 : rectB.height) &&
+            (rectA === null || rectA === void 0 ? void 0 : rectA.left) === (rectB === null || rectB === void 0 ? void 0 : rectB.left) &&
+            (rectA === null || rectA === void 0 ? void 0 : rectA.right) === (rectB === null || rectB === void 0 ? void 0 : rectB.right) &&
+            (rectA === null || rectA === void 0 ? void 0 : rectA.top) === (rectB === null || rectB === void 0 ? void 0 : rectB.top) &&
+            (rectA === null || rectA === void 0 ? void 0 : rectA.width) === (rectB === null || rectB === void 0 ? void 0 : rectB.width));
+};
+exports.rectsAreEqual = rectsAreEqual;
+var createContainer = function (_a) {
+    var containerStyle = _a.containerStyle, containerClassName = _a.containerClassName, id = _a.id;
+    var container = window.document.createElement('div');
+    container.id = id;
+    if (containerClassName)
+        container.className = containerClassName;
+    Object.assign(container.style, containerStyle);
+    return container;
+};
+exports.createContainer = createContainer;
+var popoverRectForPosition = function (position, childRect, popoverRect, padding, align) {
+    var targetMidX = childRect.left + childRect.width / 2;
+    var targetMidY = childRect.top + childRect.height / 2;
+    var width = popoverRect.width, height = popoverRect.height;
+    var top;
+    var left;
+    switch (position) {
+        case 'left':
+            top = targetMidY - height / 2;
+            left = childRect.left - padding - width;
+            if (align === 'start') {
+                top = childRect.top;
+            }
+            if (align === 'end') {
+                top = childRect.bottom - height;
+            }
+            break;
+        case 'bottom':
+            top = childRect.bottom + padding;
+            left = targetMidX - width / 2;
+            if (align === 'start') {
+                left = childRect.left;
+            }
+            if (align === 'end') {
+                left = childRect.right - width;
+            }
+            break;
+        case 'right':
+            top = targetMidY - height / 2;
+            left = childRect.right + padding;
+            if (align === 'start') {
+                top = childRect.top;
+            }
+            if (align === 'end') {
+                top = childRect.bottom - height;
+            }
+            break;
+        default:
+            top = childRect.top - height - padding;
+            left = targetMidX - width / 2;
+            if (align === 'start') {
+                left = childRect.left;
+            }
+            if (align === 'end') {
+                left = childRect.right - width;
+            }
+            break;
+    }
+    return (0, exports.createRect)({ left: left, top: top, width: width, height: height });
+};
+exports.popoverRectForPosition = popoverRectForPosition;
+var getNewPopoverRect = function (_a, boundaryInset) {
+    var position = _a.position, align = _a.align, childRect = _a.childRect, popoverRect = _a.popoverRect, boundaryRect = _a.boundaryRect, padding = _a.padding, reposition = _a.reposition;
+    var rect = (0, exports.popoverRectForPosition)(position, childRect, popoverRect, padding, align);
+    var boundaryViolation = reposition &&
+        ((position === 'top' && rect.top < boundaryRect.top + boundaryInset) ||
+            (position === 'left' && rect.left < boundaryRect.left + boundaryInset) ||
+            (position === 'right' && rect.right > boundaryRect.right - boundaryInset) ||
+            (position === 'bottom' && rect.bottom > boundaryRect.bottom - boundaryInset));
+    return {
+        rect: rect,
+        boundaryViolation: boundaryViolation,
+    };
+};
+exports.getNewPopoverRect = getNewPopoverRect;
+var getNudgedPopoverRect = function (popoverRect, boundaryRect, boundaryInset) {
+    var topBoundary = boundaryRect.top + boundaryInset;
+    var leftBoundary = boundaryRect.left + boundaryInset;
+    var rightBoundary = boundaryRect.right - boundaryInset;
+    var bottomBoundary = boundaryRect.bottom - boundaryInset;
+    var top = popoverRect.top < topBoundary ? topBoundary : popoverRect.top;
+    top = top + popoverRect.height > bottomBoundary ? bottomBoundary - popoverRect.height : top;
+    var left = popoverRect.left < leftBoundary ? leftBoundary : popoverRect.left;
+    left = left + popoverRect.width > rightBoundary ? rightBoundary - popoverRect.width : left;
+    return (0, exports.createRect)(__assign(__assign({}, popoverRect), { top: top, left: left }));
+};
+exports.getNudgedPopoverRect = getNudgedPopoverRect;
+//# sourceMappingURL=util.js.map
+
+/***/ })
+
+};
+;

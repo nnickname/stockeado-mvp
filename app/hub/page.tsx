@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: "Mira tu Resumen en Stockeado",
   // other metadata
 };
-const HubExample: NextPage = () => {
+const Page: NextPage = () => {
   return (
     <>
       <LayouHubDashboardPage/>
@@ -19,4 +19,4 @@ const HubExample: NextPage = () => {
   );
 };
 
-export default HubExample;
+export default Page;

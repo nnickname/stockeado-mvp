@@ -1,1 +1,1022 @@
-(()=>{var e={};e.id=4644,e.ids=[4644],e.modules={55403:e=>{"use strict";e.exports=require("next/dist/client/components/request-async-storage.external")},94749:e=>{"use strict";e.exports=require("next/dist/client/components/static-generation-async-storage.external")},41790:e=>{"use strict";e.exports=require("next/dist/compiled/next-server/app-page-experimental.runtime.prod.js")},25528:e=>{"use strict";e.exports=require("next/dist\\client\\components\\action-async-storage.external.js")},91877:e=>{"use strict";e.exports=require("next/dist\\client\\components\\request-async-storage.external.js")},25319:e=>{"use strict";e.exports=require("next/dist\\client\\components\\static-generation-async-storage.external.js")},39491:e=>{"use strict";e.exports=require("assert")},82361:e=>{"use strict";e.exports=require("events")},57147:e=>{"use strict";e.exports=require("fs")},13685:e=>{"use strict";e.exports=require("http")},95687:e=>{"use strict";e.exports=require("https")},41808:e=>{"use strict";e.exports=require("net")},71017:e=>{"use strict";e.exports=require("path")},12781:e=>{"use strict";e.exports=require("stream")},76224:e=>{"use strict";e.exports=require("tty")},57310:e=>{"use strict";e.exports=require("url")},73837:e=>{"use strict";e.exports=require("util")},59796:e=>{"use strict";e.exports=require("zlib")},81944:(e,r,t)=>{"use strict";t.r(r),t.d(r,{GlobalError:()=>a.a,__next_app__:()=>m,originalPathname:()=>c,pages:()=>p,routeModule:()=>h,tree:()=>d});var s=t(67096),i=t(16132),o=t(37284),a=t.n(o),n=t(32564),l={};for(let e in n)0>["default","tree","pages","GlobalError","originalPathname","__next_app__","routeModule"].indexOf(e)&&(l[e]=()=>n[e]);t.d(r,l);let d=["",{children:["marketplace",{children:["shop",{children:["__PAGE__",{},{page:[()=>Promise.resolve().then(t.bind(t,65587)),"C:\\Users\\barto\\OneDrive\\Desktop\\stockeado\\stockeado-mvp\\app\\marketplace\\shop\\page.tsx"]}]},{layout:[()=>Promise.resolve().then(t.bind(t,13637)),"C:\\Users\\barto\\OneDrive\\Desktop\\stockeado\\stockeado-mvp\\app\\marketplace\\shop\\layout.tsx"]}]},{}]},{layout:[()=>Promise.resolve().then(t.bind(t,35345)),"C:\\Users\\barto\\OneDrive\\Desktop\\stockeado\\stockeado-mvp\\app\\layout.tsx"],"not-found":[()=>Promise.resolve().then(t.t.bind(t,9291,23)),"next/dist/client/components/not-found-error"]}],p=["C:\\Users\\barto\\OneDrive\\Desktop\\stockeado\\stockeado-mvp\\app\\marketplace\\shop\\page.tsx"],c="/marketplace/shop/page",m={require:t,loadChunk:()=>Promise.resolve()},h=new s.AppPageRouteModule({definition:{kind:i.x.APP_PAGE,page:"/marketplace/shop/page",pathname:"/marketplace/shop",bundlePath:"",filename:"",appPaths:[]},userland:{loaderTree:d}})},5789:(e,r,t)=>{Promise.resolve().then(t.bind(t,52615))},60277:(e,r,t)=>{Promise.resolve().then(t.bind(t,52615))},52615:(e,r,t)=>{"use strict";t.r(r),t.d(r,{default:()=>__WEBPACK_DEFAULT_EXPORT__});var s=t(30784),i=t(42018),o=t(77491),a=t(81668),n=t(9885);t(35514);var l=t(61);t(2032);var d=t(57114),p=t(30098),c=t(36413),m=t(99816),h=t.n(m);let __WEBPACK_DEFAULT_EXPORT__=()=>{let e=(0,d.useSearchParams)(),r=e.get("id"),[t,m]=(0,n.useState)(),[u,x]=(0,n.useState)([]),[g,y]=(0,n.useState)(null),[j,v]=(0,n.useState)([]),[b,k]=(0,n.useState)(0),toUser=async()=>{let e=await (0,i.RF)(r);x(e?.items??[]),y(e?.items??[]),m(e?.user)},filterByBrand=(e,r)=>{r?y(u.filter(r=>Number(r.brand===e))):y(u)},filterByType=(e,r)=>{r?y(u.filter(r=>Number(r.type===e))):y(u)},filterByCategorie=(e,r)=>{r?y(u.filter(r=>Number(r.categorie===e))):y(u)},[f,_]=(0,n.useState)(""),findProductAndSet=async()=>{if(f?.length>1){let e=await (0,p.V_)(f);y(e??[])}else y(u)},[C,P]=(0,n.useState)(!1),[T,S]=(0,n.useState)(!1),[B,R]=(0,n.useState)(!1);return(0,n.useEffect)(()=>{toUser();let e=JSON.parse(sessionStorage.getItem("cart"));void 0!==e&&v(e??[])},[]),s.jsx(s.Fragment,{children:null===g?s.jsx(h(),{name:"chevron-collapse-outline",className:"rotateItem",color:"#1366D9",style:{fontSize:"1.5rem",position:"absolute",top:"50%",left:"50%",transform:"translate(-50%, -50%)"}}):(0,s.jsxs)("div",{children:[s.jsx(l.Z,{cartItems:j,setCart:v}),s.jsx("img",{alt:"Logo",className:"noTopResponsive",style:{margin:"auto",marginTop:"7rem",borderTop:"1px solid rgba(0,0,0, 0.2)",borderBottom:"1px solid rgba(0,0,0, 0.2)"},src:t?.image}),(0,s.jsxs)("div",{className:"marketplace displayBlockResponsive",children:[(0,s.jsxs)("div",{className:"sidebarM hideResponsive",children:[(0,s.jsxs)("div",{style:{display:"flex"},children:[s.jsx("div",{children:s.jsx("input",{style:{marginTop:"auto",width:"100%",padding:"1.1rem",height:"40px",border:"1px solid grey"},onChange:e=>_(e.target.value),type:"text",name:"email",placeholder:"Buscar por SKU",value:f})}),s.jsx("div",{children:s.jsx("button",{style:{height:"40px",paddingLeft:"1rem",paddingRight:"1rem",border:"1px solid grey"},onClick:()=>findProductAndSet(),children:"Buscar"})})]}),s.jsx("h1",{style:{marginTop:"1rem"},children:"Categorias"}),a.FM.map((e,r)=>(0,s.jsxs)("div",{style:{display:"flex",marginTop:".4rem"},children:[s.jsx("input",{onChange:e=>filterByCategorie(r,e.target.checked),type:"checkbox",style:{marginRight:".5rem"}}),s.jsx("p",{children:e})]},r)),s.jsx("div",{style:{marginTop:".5rem",marginBottom:".5rem",width:"100%",height:"1px",background:"rgba(0,0,0, 0.2)"}}),s.jsx("h1",{children:"Tipo de pieza"}),a.rM.map((e,r)=>(0,s.jsxs)("div",{style:{display:"flex",marginTop:".4rem"},children:[s.jsx("input",{onChange:e=>filterByType(r,e.target.checked),type:"checkbox",style:{marginRight:".5rem"}}),s.jsx("p",{children:e})]},r)),s.jsx("div",{style:{marginTop:".5rem",marginBottom:".5rem",width:"100%",height:"1px",background:"rgba(0,0,0, 0.2)"}}),s.jsx("h1",{children:"Marcas"}),s.jsx("form",{children:a.PX.map((e,r)=>(0,s.jsxs)("div",{style:{display:"flex",marginTop:".4rem"},children:[s.jsx("input",{name:"colors",onChange:e=>filterByBrand(r,e.target.checked),type:"checkbox",id:"colors",style:{marginRight:".5rem"}}),s.jsx("p",{children:e})]},r))})]}),(0,s.jsxs)("div",{className:"sidebarM showResponsive",style:{display:"none"},children:[(0,s.jsxs)("div",{style:{display:"flex"},children:[s.jsx("div",{children:s.jsx("input",{style:{marginTop:"auto",width:"100%",padding:"1.1rem",height:"40px",border:"1px solid grey"},onChange:e=>_(e.target.value),type:"text",name:"email",placeholder:"Buscar por SKU",value:f})}),s.jsx("div",{children:s.jsx("button",{style:{height:"40px",paddingLeft:"1rem",paddingRight:"1rem",border:"1px solid grey"},onClick:()=>findProductAndSet(),children:"Buscar"})})]}),(0,s.jsxs)("div",{className:"displayFlexResponsive",style:{marginTop:"2rem"},children:[s.jsx(c.Popover,{onClickOutside:()=>S(!1),containerStyle:{backgroundColor:"white",padding:"1.3rem",border:"1px solid rgba(0, 0, 0, 0.2)",borderRadius:".5rem"},isOpen:T,positions:["bottom","top","left","right"],content:s.jsx("form",{children:a.FM.map((e,r)=>(0,s.jsxs)("div",{onClick:()=>S(!1),style:{cursor:"pointer",display:"flex",marginTop:".4rem"},children:[s.jsx("input",{onChange:e=>filterByCategorie(r,e.target.checked),type:"checkbox",style:{marginRight:".5rem"}}),s.jsx("p",{children:e})]},r))}),children:s.jsx("h1",{style:{cursor:"pointer"},onClick:()=>S(!0),children:"Categorias"})}),s.jsx(c.Popover,{onClickOutside:()=>R(!1),containerStyle:{backgroundColor:"white",padding:"1.3rem",border:"1px solid rgba(0, 0, 0, 0.2)",borderRadius:".5rem"},isOpen:B,positions:["bottom","top","left","right"],content:s.jsx("form",{children:a.rM.map((e,r)=>(0,s.jsxs)("div",{onClick:()=>R(!1),style:{cursor:"pointer",display:"flex",marginTop:".4rem"},children:[s.jsx("input",{onChange:e=>filterByType(r,e.target.checked),type:"checkbox",style:{marginRight:".5rem"}}),s.jsx("p",{children:e})]},r))}),children:s.jsx("h1",{style:{cursor:"pointer"},onClick:()=>R(!0),children:"Tipo de pieza"})}),s.jsx(c.Popover,{onClickOutside:()=>P(!1),containerStyle:{backgroundColor:"white",padding:"1.3rem",border:"1px solid rgba(0, 0, 0, 0.2)",borderRadius:".5rem"},isOpen:C,positions:["bottom","top","left","right"],content:s.jsx("form",{children:a.PX.map((e,r)=>(0,s.jsxs)("div",{onClick:()=>P(!1),style:{cursor:"pointer",display:"flex",marginTop:".4rem"},children:[s.jsx("input",{name:"colors",onChange:e=>filterByBrand(r,e.target.checked),type:"checkbox",id:"colors",style:{marginRight:".5rem"}}),s.jsx("p",{children:e})]},r))}),children:s.jsx("h1",{style:{cursor:"pointer"},onClick:()=>P(!0),children:"Marcas"})})]})]}),(0,s.jsxs)("div",{className:"contentM",children:[s.jsx("div",{style:{paddingRight:"auto",paddingLeft:"auto",marginTop:"1rem"},children:(0,s.jsxs)("p",{style:{color:"grey",fontSize:".8rem",marginBottom:"1rem"},children:[" MarketPlace ","> "+t?.nameShop]})}),s.jsx("div",{style:{marginTop:"0rem",padding:".6rem",width:"100%",borderRadius:".5rem",border:"1px solid rgba(0, 0, 0, 0.2)"},children:(0,s.jsxs)("p",{children:["Se encontraron ",(0,s.jsxs)("span",{style:{fontWeight:"700"},children:[g?.length," productos"]})]})}),s.jsx("div",{className:"gridItems",children:g?.map((e,r)=>s.jsx(o.Z,{item:e,setCart:v,setAmmountItem:k,ammountItem:b,cart:j},r))})]})]})]})})}},13637:(e,r,t)=>{"use strict";t.r(r),t.d(r,{$$typeof:()=>a,__esModule:()=>o,default:()=>l});var s=t(95153);let i=(0,s.createProxy)(String.raw`C:\Users\barto\OneDrive\Desktop\stockeado\stockeado-mvp\app\marketplace\shop\layout.tsx`),{__esModule:o,$$typeof:a}=i,n=i.default,l=n},65587:(e,r,t)=>{"use strict";t.r(r),t.d(r,{default:()=>__WEBPACK_DEFAULT_EXPORT__,dynamic:()=>o,metadata:()=>a});var s=t(4656);t(34355);var i=t(13637);let o="force-dynamic",a={title:"Stockeado | Marketplace",description:"Stockeado | Marketplace"},__WEBPACK_DEFAULT_EXPORT__=()=>s.jsx(s.Fragment,{children:s.jsx(i.default,{})})},34355:()=>{}};var r=require("../../../webpack-runtime.js");r.C(e);var __webpack_exec__=e=>r(r.s=e),t=r.X(0,[657,3431,4670,4185,4997,9816,3800,8284,6903,1231,9601,2018],()=>__webpack_exec__(81944));module.exports=t})();
+(() => {
+var exports = {};
+exports.id = 4644;
+exports.ids = [4644];
+exports.modules = {
+
+/***/ 55752:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/compiled/react-dom-experimental/server-rendering-stub");
+
+/***/ }),
+
+/***/ 17640:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/compiled/react-experimental");
+
+/***/ }),
+
+/***/ 76931:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/compiled/react-experimental/jsx-runtime");
+
+/***/ }),
+
+/***/ 67597:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/compiled/react-server-dom-webpack-experimental/client");
+
+/***/ }),
+
+/***/ 5868:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/server/app-render/app-render");
+
+/***/ }),
+
+/***/ 41844:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/server/app-render/get-segment-param");
+
+/***/ }),
+
+/***/ 96624:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/server/future/helpers/interception-routes");
+
+/***/ }),
+
+/***/ 75281:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/server/future/route-modules/route-module");
+
+/***/ }),
+
+/***/ 57085:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/app-router-context");
+
+/***/ }),
+
+/***/ 1830:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/get-img-props");
+
+/***/ }),
+
+/***/ 20199:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/hash");
+
+/***/ }),
+
+/***/ 66864:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/head");
+
+/***/ }),
+
+/***/ 39569:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/hooks-client-context");
+
+/***/ }),
+
+/***/ 52210:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/image-config");
+
+/***/ }),
+
+/***/ 35359:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/image-config-context");
+
+/***/ }),
+
+/***/ 17160:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router-context");
+
+/***/ }),
+
+/***/ 30893:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/add-path-prefix");
+
+/***/ }),
+
+/***/ 12336:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/format-url");
+
+/***/ }),
+
+/***/ 17887:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/handle-smooth-scroll");
+
+/***/ }),
+
+/***/ 98735:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/is-bot");
+
+/***/ }),
+
+/***/ 60120:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/is-local-url");
+
+/***/ }),
+
+/***/ 68231:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/parse-path");
+
+/***/ }),
+
+/***/ 54614:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/path-has-prefix");
+
+/***/ }),
+
+/***/ 53750:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/remove-trailing-slash");
+
+/***/ }),
+
+/***/ 70982:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/router/utils/resolve-href");
+
+/***/ }),
+
+/***/ 79618:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/server-inserted-html");
+
+/***/ }),
+
+/***/ 78423:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/utils");
+
+/***/ }),
+
+/***/ 98658:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("next/dist/shared/lib/utils/warn-once");
+
+/***/ }),
+
+/***/ 39491:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("assert");
+
+/***/ }),
+
+/***/ 82361:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("events");
+
+/***/ }),
+
+/***/ 57147:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("fs");
+
+/***/ }),
+
+/***/ 13685:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("http");
+
+/***/ }),
+
+/***/ 95687:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("https");
+
+/***/ }),
+
+/***/ 41808:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("net");
+
+/***/ }),
+
+/***/ 71017:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("path");
+
+/***/ }),
+
+/***/ 12781:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("stream");
+
+/***/ }),
+
+/***/ 76224:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("tty");
+
+/***/ }),
+
+/***/ 57310:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("url");
+
+/***/ }),
+
+/***/ 73837:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("util");
+
+/***/ }),
+
+/***/ 59796:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("zlib");
+
+/***/ }),
+
+/***/ 81944:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   GlobalError: () => (/* reexport default from dynamic */ next_dist_client_components_error_boundary__WEBPACK_IMPORTED_MODULE_2___default.a),
+/* harmony export */   __next_app__: () => (/* binding */ __next_app__),
+/* harmony export */   originalPathname: () => (/* binding */ originalPathname),
+/* harmony export */   pages: () => (/* binding */ pages),
+/* harmony export */   routeModule: () => (/* binding */ routeModule),
+/* harmony export */   tree: () => (/* binding */ tree)
+/* harmony export */ });
+/* harmony import */ var next_dist_server_future_route_modules_app_page_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7262);
+/* harmony import */ var next_dist_server_future_route_modules_app_page_module__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_dist_server_future_route_modules_app_page_module__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var next_dist_server_future_route_kind__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(19513);
+/* harmony import */ var next_dist_client_components_error_boundary__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(31823);
+/* harmony import */ var next_dist_client_components_error_boundary__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_dist_client_components_error_boundary__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var next_dist_server_app_render_entry_base__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(12502);
+/* harmony import */ var next_dist_server_app_render_entry_base__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_dist_server_app_render_entry_base__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony reexport (unknown) */ var __WEBPACK_REEXPORT_OBJECT__ = {};
+/* harmony reexport (unknown) */ for(const __WEBPACK_IMPORT_KEY__ in next_dist_server_app_render_entry_base__WEBPACK_IMPORTED_MODULE_3__) if(["default","tree","pages","GlobalError","originalPathname","__next_app__","routeModule"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = () => next_dist_server_app_render_entry_base__WEBPACK_IMPORTED_MODULE_3__[__WEBPACK_IMPORT_KEY__]
+/* harmony reexport (unknown) */ __webpack_require__.d(__webpack_exports__, __WEBPACK_REEXPORT_OBJECT__);
+// @ts-ignore this need to be imported from next/dist to be external
+
+
+const AppPageRouteModule = next_dist_server_future_route_modules_app_page_module__WEBPACK_IMPORTED_MODULE_0__.AppPageRouteModule;
+// We inject the tree and pages here so that we can use them in the route
+// module.
+const tree = {
+        children: [
+        '',
+        {
+        children: [
+        'marketplace',
+        {
+        children: [
+        'shop',
+        {
+        children: ['__PAGE__', {}, {
+          page: [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 69459)), "C:\\Users\\barto\\OneDrive\\Desktop\\stockeado\\stockeado-mvp\\app\\marketplace\\shop\\page.tsx"],
+          
+        }]
+      },
+        {
+        'layout': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 63742)), "C:\\Users\\barto\\OneDrive\\Desktop\\stockeado\\stockeado-mvp\\app\\marketplace\\shop\\layout.tsx"],
+        
+      }
+      ]
+      },
+        {
+        
+        
+      }
+      ]
+      },
+        {
+        'layout': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 51921)), "C:\\Users\\barto\\OneDrive\\Desktop\\stockeado\\stockeado-mvp\\app\\layout.tsx"],
+'not-found': [() => Promise.resolve(/* import() eager */).then(__webpack_require__.t.bind(__webpack_require__, 95493, 23)), "next/dist/client/components/not-found-error"],
+        
+      }
+      ]
+      }.children;
+const pages = ["C:\\Users\\barto\\OneDrive\\Desktop\\stockeado\\stockeado-mvp\\app\\marketplace\\shop\\page.tsx"];
+
+// @ts-expect-error - replaced by webpack/turbopack loader
+
+const __next_app_require__ = __webpack_require__
+const __next_app_load_chunk__ = () => Promise.resolve()
+const originalPathname = "/marketplace/shop/page";
+const __next_app__ = {
+    require: __next_app_require__,
+    loadChunk: __next_app_load_chunk__
+};
+
+// Create and export the route module that will be consumed.
+const routeModule = new AppPageRouteModule({
+    definition: {
+        kind: next_dist_server_future_route_kind__WEBPACK_IMPORTED_MODULE_1__.RouteKind.APP_PAGE,
+        page: "/marketplace/shop/page",
+        pathname: "/marketplace/shop",
+        // The following aren't used in production.
+        bundlePath: "",
+        filename: "",
+        appPaths: []
+    },
+    userland: {
+        loaderTree: tree
+    }
+});
+
+//# sourceMappingURL=app-page.js.map
+
+/***/ }),
+
+/***/ 24118:
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 47213))
+
+/***/ }),
+
+/***/ 60277:
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 47213))
+
+/***/ }),
+
+/***/ 47213:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76931);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _app_api_inventory_call__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(18888);
+/* harmony import */ var _components_marketplace_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(34884);
+/* harmony import */ var _models_brands__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(15431);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(17640);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(35514);
+/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_index_css__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_marketplace_header__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(71142);
+/* harmony import */ var _components_marketplace_background_index_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(2032);
+/* harmony import */ var _components_marketplace_background_index_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_components_marketplace_background_index_css__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(57114);
+/* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_navigation__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _app_api_marketplacee_call__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(53315);
+/* harmony import */ var react_tiny_popover__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(36413);
+/* harmony import */ var react_tiny_popover__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_tiny_popover__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _reacticons_ionicons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(99816);
+/* harmony import */ var _reacticons_ionicons__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_10__);
+/* __next_internal_client_entry_do_not_use__ default auto */ 
+
+
+
+
+
+
+
+
+
+
+
+const LayoutMarketPlaceShop = ()=>{
+    const search = (0,next_navigation__WEBPACK_IMPORTED_MODULE_7__.useSearchParams)();
+    const id = search.get("id");
+    const [user, setUser] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)();
+    const [inventoryRealData, setInventoryRealData] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)([]);
+    const [inventoryData, setInventoryData] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(null);
+    const [cart, setCart] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)([]);
+    const [ammountItem, setAmmountItem] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(0);
+    const toUser = async ()=>{
+        const userr = await (0,_app_api_inventory_call__WEBPACK_IMPORTED_MODULE_1__/* .getMarketPlace */ .RF)(id);
+        setInventoryRealData(userr?.items ?? []);
+        setInventoryData(userr?.items ?? []);
+        setUser(userr?.user);
+    };
+    const filterByBrand = (brand, checked)=>{
+        if (checked) {
+            setInventoryData(inventoryRealData.filter((item)=>Number(item.brand === brand)));
+        } else setInventoryData(inventoryRealData);
+    };
+    const filterByType = (type, checked)=>{
+        if (checked) {
+            setInventoryData(inventoryRealData.filter((item)=>Number(item.type === type)));
+        } else setInventoryData(inventoryRealData);
+    };
+    const filterByCategorie = (categorie, checked)=>{
+        if (checked) {
+            setInventoryData(inventoryRealData.filter((item)=>Number(item.categorie === categorie)));
+        } else setInventoryData(inventoryRealData);
+    };
+    const [keywordFind, setKeyword] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)("");
+    const findProductAndSet = async ()=>{
+        if (keywordFind?.length > 1) {
+            const response = await (0,_app_api_marketplacee_call__WEBPACK_IMPORTED_MODULE_8__/* .findProduct */ .V_)(keywordFind);
+            setInventoryData(response ?? []);
+        } else setInventoryData(inventoryRealData);
+    };
+    const [isPopoverOpenBrand, setPopoverOpenBrand] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(false);
+    const [isPopoverOpenCategorie, setPopoverOpenCategorie] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(false);
+    const [isPopoverOpenType, setPopoverOpenType] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(false);
+    (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(()=>{
+        toUser();
+        const cartCast = JSON.parse(sessionStorage.getItem("cart"));
+        if (cartCast !== undefined) setCart(cartCast ?? []);
+    }, []);
+    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+        children: inventoryData === null ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_10___default()), {
+            name: "chevron-collapse-outline",
+            className: "rotateItem",
+            color: "#1366D9",
+            style: {
+                fontSize: "1.5rem",
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)"
+            }
+        }) : /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+            children: [
+                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_marketplace_header__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z, {
+                    cartItems: cart,
+                    setCart: setCart
+                }),
+                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
+                    alt: "Logo",
+                    className: "noTopResponsive",
+                    style: {
+                        margin: "auto",
+                        marginTop: "7rem",
+                        borderTop: "1px solid rgba(0,0,0, 0.2)",
+                        borderBottom: "1px solid rgba(0,0,0, 0.2)"
+                    },
+                    src: user?.image
+                }),
+                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                    className: "marketplace displayBlockResponsive",
+                    children: [
+                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                            className: "sidebarM hideResponsive",
+                            children: [
+                                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                    style: {
+                                        display: "flex"
+                                    },
+                                    children: [
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
+                                                style: {
+                                                    marginTop: "auto",
+                                                    width: "100%",
+                                                    padding: "1.1rem",
+                                                    height: "40px",
+                                                    border: "1px solid grey"
+                                                },
+                                                onChange: (e)=>setKeyword(e.target.value),
+                                                type: "text",
+                                                name: "email",
+                                                placeholder: "Buscar por SKU",
+                                                value: keywordFind
+                                            })
+                                        }),
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
+                                                style: {
+                                                    height: "40px",
+                                                    paddingLeft: "1rem",
+                                                    paddingRight: "1rem",
+                                                    border: "1px solid grey"
+                                                },
+                                                onClick: ()=>findProductAndSet(),
+                                                children: "Buscar"
+                                            })
+                                        })
+                                    ]
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
+                                    style: {
+                                        marginTop: "1rem"
+                                    },
+                                    children: "Categorias"
+                                }),
+                                _models_brands__WEBPACK_IMPORTED_MODULE_11__/* .TypeCategories */ .FM.map((e, index)=>{
+                                    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                        style: {
+                                            display: "flex",
+                                            marginTop: ".4rem"
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
+                                                onChange: (e)=>filterByCategorie(index, e.target.checked),
+                                                type: "checkbox",
+                                                style: {
+                                                    marginRight: ".5rem"
+                                                }
+                                            }),
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                                children: e
+                                            })
+                                        ]
+                                    }, index);
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                    style: {
+                                        marginTop: ".5rem",
+                                        marginBottom: ".5rem",
+                                        width: "100%",
+                                        height: "1px",
+                                        background: "rgba(0,0,0, 0.2)"
+                                    }
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
+                                    children: "Tipo de pieza"
+                                }),
+                                _models_brands__WEBPACK_IMPORTED_MODULE_11__/* .TypeOfPiece */ .rM.map((e, index)=>{
+                                    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                        style: {
+                                            display: "flex",
+                                            marginTop: ".4rem"
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
+                                                onChange: (e)=>filterByType(index, e.target.checked),
+                                                type: "checkbox",
+                                                style: {
+                                                    marginRight: ".5rem"
+                                                }
+                                            }),
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                                children: e
+                                            })
+                                        ]
+                                    }, index);
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                    style: {
+                                        marginTop: ".5rem",
+                                        marginBottom: ".5rem",
+                                        width: "100%",
+                                        height: "1px",
+                                        background: "rgba(0,0,0, 0.2)"
+                                    }
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
+                                    children: "Marcas"
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("form", {
+                                    children: _models_brands__WEBPACK_IMPORTED_MODULE_11__/* .TypeBrands */ .PX.map((e, index)=>{
+                                        return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                            style: {
+                                                display: "flex",
+                                                marginTop: ".4rem"
+                                            },
+                                            children: [
+                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
+                                                    name: "colors",
+                                                    onChange: (e)=>filterByBrand(index, e.target.checked),
+                                                    type: "checkbox",
+                                                    id: "colors",
+                                                    style: {
+                                                        marginRight: ".5rem"
+                                                    }
+                                                }),
+                                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                                    children: e
+                                                })
+                                            ]
+                                        }, index);
+                                    })
+                                })
+                            ]
+                        }),
+                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                            className: "sidebarM showResponsive",
+                            style: {
+                                display: "none"
+                            },
+                            children: [
+                                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                    style: {
+                                        display: "flex"
+                                    },
+                                    children: [
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
+                                                style: {
+                                                    marginTop: "auto",
+                                                    width: "100%",
+                                                    padding: "1.1rem",
+                                                    height: "40px",
+                                                    border: "1px solid grey"
+                                                },
+                                                onChange: (e)=>setKeyword(e.target.value),
+                                                type: "text",
+                                                name: "email",
+                                                placeholder: "Buscar por SKU",
+                                                value: keywordFind
+                                            })
+                                        }),
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
+                                                style: {
+                                                    height: "40px",
+                                                    paddingLeft: "1rem",
+                                                    paddingRight: "1rem",
+                                                    border: "1px solid grey"
+                                                },
+                                                onClick: ()=>findProductAndSet(),
+                                                children: "Buscar"
+                                            })
+                                        })
+                                    ]
+                                }),
+                                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                    className: "displayFlexResponsive",
+                                    style: {
+                                        marginTop: "2rem"
+                                    },
+                                    children: [
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_tiny_popover__WEBPACK_IMPORTED_MODULE_9__.Popover, {
+                                            onClickOutside: ()=>setPopoverOpenCategorie(false),
+                                            containerStyle: {
+                                                backgroundColor: "white",
+                                                padding: "1.3rem",
+                                                border: "1px solid rgba(0, 0, 0, 0.2)",
+                                                borderRadius: ".5rem"
+                                            },
+                                            isOpen: isPopoverOpenCategorie,
+                                            positions: [
+                                                "bottom",
+                                                "top",
+                                                "left",
+                                                "right"
+                                            ],
+                                            content: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("form", {
+                                                children: _models_brands__WEBPACK_IMPORTED_MODULE_11__/* .TypeCategories */ .FM.map((e, index)=>{
+                                                    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                                        onClick: ()=>setPopoverOpenCategorie(false),
+                                                        style: {
+                                                            cursor: "pointer",
+                                                            display: "flex",
+                                                            marginTop: ".4rem"
+                                                        },
+                                                        children: [
+                                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
+                                                                onChange: (e)=>filterByCategorie(index, e.target.checked),
+                                                                type: "checkbox",
+                                                                style: {
+                                                                    marginRight: ".5rem"
+                                                                }
+                                                            }),
+                                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                                                children: e
+                                                            })
+                                                        ]
+                                                    }, index);
+                                                })
+                                            }),
+                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
+                                                style: {
+                                                    cursor: "pointer"
+                                                },
+                                                onClick: ()=>setPopoverOpenCategorie(true),
+                                                children: "Categorias"
+                                            })
+                                        }),
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_tiny_popover__WEBPACK_IMPORTED_MODULE_9__.Popover, {
+                                            onClickOutside: ()=>setPopoverOpenType(false),
+                                            containerStyle: {
+                                                backgroundColor: "white",
+                                                padding: "1.3rem",
+                                                border: "1px solid rgba(0, 0, 0, 0.2)",
+                                                borderRadius: ".5rem"
+                                            },
+                                            isOpen: isPopoverOpenType,
+                                            positions: [
+                                                "bottom",
+                                                "top",
+                                                "left",
+                                                "right"
+                                            ],
+                                            content: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("form", {
+                                                children: _models_brands__WEBPACK_IMPORTED_MODULE_11__/* .TypeOfPiece */ .rM.map((e, index)=>{
+                                                    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                                        onClick: ()=>setPopoverOpenType(false),
+                                                        style: {
+                                                            cursor: "pointer",
+                                                            display: "flex",
+                                                            marginTop: ".4rem"
+                                                        },
+                                                        children: [
+                                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
+                                                                onChange: (e)=>filterByType(index, e.target.checked),
+                                                                type: "checkbox",
+                                                                style: {
+                                                                    marginRight: ".5rem"
+                                                                }
+                                                            }),
+                                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                                                children: e
+                                                            })
+                                                        ]
+                                                    }, index);
+                                                })
+                                            }),
+                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
+                                                style: {
+                                                    cursor: "pointer"
+                                                },
+                                                onClick: ()=>setPopoverOpenType(true),
+                                                children: "Tipo de pieza"
+                                            })
+                                        }),
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_tiny_popover__WEBPACK_IMPORTED_MODULE_9__.Popover, {
+                                            onClickOutside: ()=>setPopoverOpenBrand(false),
+                                            containerStyle: {
+                                                backgroundColor: "white",
+                                                padding: "1.3rem",
+                                                border: "1px solid rgba(0, 0, 0, 0.2)",
+                                                borderRadius: ".5rem"
+                                            },
+                                            isOpen: isPopoverOpenBrand,
+                                            positions: [
+                                                "bottom",
+                                                "top",
+                                                "left",
+                                                "right"
+                                            ],
+                                            content: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("form", {
+                                                children: _models_brands__WEBPACK_IMPORTED_MODULE_11__/* .TypeBrands */ .PX.map((e, index)=>{
+                                                    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                                        onClick: ()=>setPopoverOpenBrand(false),
+                                                        style: {
+                                                            cursor: "pointer",
+                                                            display: "flex",
+                                                            marginTop: ".4rem"
+                                                        },
+                                                        children: [
+                                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
+                                                                name: "colors",
+                                                                onChange: (e)=>filterByBrand(index, e.target.checked),
+                                                                type: "checkbox",
+                                                                id: "colors",
+                                                                style: {
+                                                                    marginRight: ".5rem"
+                                                                }
+                                                            }),
+                                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                                                children: e
+                                                            })
+                                                        ]
+                                                    }, index);
+                                                })
+                                            }),
+                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
+                                                style: {
+                                                    cursor: "pointer"
+                                                },
+                                                onClick: ()=>setPopoverOpenBrand(true),
+                                                children: "Marcas"
+                                            })
+                                        })
+                                    ]
+                                })
+                            ]
+                        }),
+                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                            className: "contentM",
+                            children: [
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                    style: {
+                                        paddingRight: "auto",
+                                        paddingLeft: "auto",
+                                        marginTop: "1rem"
+                                    },
+                                    children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+                                        style: {
+                                            color: "grey",
+                                            fontSize: ".8rem",
+                                            marginBottom: "1rem"
+                                        },
+                                        children: [
+                                            " MarketPlace ",
+                                            "> " + user?.nameShop
+                                        ]
+                                    })
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                    style: {
+                                        marginTop: "0rem",
+                                        padding: ".6rem",
+                                        width: "100%",
+                                        borderRadius: ".5rem",
+                                        border: "1px solid rgba(0, 0, 0, 0.2)"
+                                    },
+                                    children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+                                        children: [
+                                            "Se encontraron ",
+                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
+                                                style: {
+                                                    fontWeight: "700"
+                                                },
+                                                children: [
+                                                    inventoryData?.length,
+                                                    " productos"
+                                                ]
+                                            })
+                                        ]
+                                    })
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                    className: "gridItems",
+                                    children: inventoryData?.map((e, index)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_marketplace_item__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z, {
+                                            item: e,
+                                            setCart: setCart,
+                                            setAmmountItem: setAmmountItem,
+                                            ammountItem: ammountItem,
+                                            cart: cart
+                                        }, index))
+                                })
+                            ]
+                        })
+                    ]
+                })
+            ]
+        })
+    });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LayoutMarketPlaceShop);
+
+
+/***/ }),
+
+/***/ 63742:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   $$typeof: () => (/* binding */ $$typeof),
+/* harmony export */   __esModule: () => (/* binding */ __esModule),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(61363);
+
+const proxy = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`C:\Users\barto\OneDrive\Desktop\stockeado\stockeado-mvp\app\marketplace\shop\layout.tsx`)
+
+// Accessing the __esModule property and exporting $$typeof are required here.
+// The __esModule getter forces the proxy target to create the default export
+// and the $$typeof value is for rendering logic to determine if the module
+// is a client boundary.
+const { __esModule, $$typeof } = proxy;
+const __default__ = proxy.default;
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__default__);
+
+/***/ }),
+
+/***/ 69459:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   dynamic: () => (/* binding */ dynamic),
+/* harmony export */   metadata: () => (/* binding */ metadata)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76931);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(34355);
+/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_index_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(63742);
+
+
+
+const dynamic = "force-dynamic";
+const metadata = {
+    title: "Stockeado | Marketplace",
+    description: "Stockeado | Marketplace"
+};
+const Page = ()=>{
+    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_layout__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+    });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Page);
+
+
+/***/ }),
+
+/***/ 34355:
+/***/ (() => {
+
+
+
+/***/ })
+
+};
+;
+
+// load runtime
+var __webpack_require__ = require("../../../webpack-runtime.js");
+__webpack_require__.C(exports);
+var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,3800,8284,9636,4328,1142,560,8888], () => (__webpack_exec__(81944)));
+module.exports = __webpack_exports__;
+
+})();

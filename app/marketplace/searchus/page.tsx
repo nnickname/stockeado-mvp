@@ -5,11 +5,11 @@ export const metadata: Metadata = {
   title: "Stockeado | Marketplace - Buscar",
   // other metadata
 };
-const MarketPlaceFind = () => {
+const Page = () => {
   
   return (
     <LayoutMarketPlaceFindItem/>
   );
 }
 
-export default MarketPlaceFind;
+export default Page;

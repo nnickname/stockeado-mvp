@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   // other metadata
 };
 
-const ErrorPage = () => {
+const Page = () => {
   return (
     <>
       <section className="relative z-10 pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[180px]">
@@ -535,4 +535,4 @@ const ErrorPage = () => {
   );
 };
 
-export default ErrorPage;
+export default Page;

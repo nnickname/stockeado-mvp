@@ -8,9 +8,9 @@ export const metadata: Metadata = {
   description: "Confirma tu orden",
   // other metadata
 };
-const MarketPlaceURLPage: NextPage = () => {
+const Page: NextPage = () => {
     return <>
         <LayoutMarketPlacePayment/>      
   </>
 }
-export default MarketPlaceURLPage;
+export default Page;

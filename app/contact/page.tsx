@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   // other metadata
 };
 
-const ContactPage = () => {
+const Page = () => {
   return (
     <>
       <Breadcrumb
@@ -22,4 +22,4 @@ const ContactPage = () => {
   );
 };
 
-export default ContactPage;
+export default Page;

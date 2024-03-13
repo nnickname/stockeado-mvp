@@ -8,9 +8,9 @@ export const metadata: Metadata = {
   description: "Stockeado | Marketplace",
 
 };
-const MarketPlaceURLPage: NextPage = () => {
+const Page: NextPage = () => {
     return <>
         <LayoutMarketPlaceShop/>      
   </>
 }
-export default MarketPlaceURLPage;
+export default Page;

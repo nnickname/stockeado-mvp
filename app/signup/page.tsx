@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   // other metadata
 };
 
-const SignupPage = () => {
+const Page = () => {
   return (
     <>
       <LayoutSignUp/>
@@ -17,4 +17,4 @@ const SignupPage = () => {
   );
 };
 
-export default SignupPage;
+export default Page;
