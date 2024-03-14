@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  webpack5: false,
   distDir: './dist/',
   experimental: {serverActions: true},
   eslint: { 
