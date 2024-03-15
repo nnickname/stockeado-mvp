@@ -146,7 +146,8 @@ var route_namespaceObject = {};
 __webpack_require__.r(route_namespaceObject);
 __webpack_require__.d(route_namespaceObject, {
   GET: () => (GET),
-  POST: () => (POST)
+  POST: () => (POST),
+  dynamic: () => (dynamic)
 });
 
 // EXTERNAL MODULE: ./node_modules/next/dist/server/node-polyfill-headers.js
@@ -167,6 +168,7 @@ var next_response = __webpack_require__(89335);
 // EXTERNAL MODULE: ./app/api/_middleware.ts
 var _middleware = __webpack_require__(33088);
 ;// CONCATENATED MODULE: ./app/api/user/route.ts
+const dynamic = "force-dynamic";
 
 
 

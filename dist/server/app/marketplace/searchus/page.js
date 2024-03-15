@@ -914,6 +914,7 @@ __webpack_require__.r(__webpack_exports__);
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
   "default": () => (/* binding */ page),
+  dynamic: () => (/* binding */ dynamic),
   metadata: () => (/* binding */ metadata)
 });
 
@@ -938,6 +939,7 @@ const __default__ = proxy.default;
 /* harmony default export */ const layoutsearch = (__default__);
 ;// CONCATENATED MODULE: ./app/marketplace/searchus/page.tsx
 
+const dynamic = "force-dynamic";
 
 
 const metadata = {
@@ -958,7 +960,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,3800,7654,2708,4328,1142,560,3933], () => (__webpack_exec__(29634)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,3800,7654,9636,4328,1142,560,3933], () => (__webpack_exec__(29634)));
 module.exports = __webpack_exports__;
 
 })();

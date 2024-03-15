@@ -1,7 +1,14 @@
 {
   "version": 1,
   "functions": {
+    "/api/inventory/load": {},
+    "/api/inventory": {},
+    "/api/orderss": {},
     "/api/marketplacee": {},
+    "/api/user/edit/create": {},
+    "/api/user/edit": {},
+    "/api/user/login": {},
+    "/api/user": {},
     "/about": {},
     "/configuration": {},
     "/contact": {},
@@ -9,15 +16,15 @@
     "/error": {},
     "/hub": {},
     "/inventory": {},
-    "/marketplace/item": {},
     "/marketplace/order": {},
+    "/marketplace/item": {},
     "/marketplace": {},
     "/marketplace/payment": {},
     "/marketplace/searchus": {},
-    "/marketplace/shop": {},
     "/orders": {},
+    "/marketplace/shop": {},
     "/": {},
-    "/signin": {},
-    "/signup": {}
+    "/signup": {},
+    "/signin": {}
   }
 }

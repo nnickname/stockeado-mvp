@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import type { Metadata, NextPage } from "next";
 import '../index.css';
 import LayoutMarketPlaceItem from "./layout";

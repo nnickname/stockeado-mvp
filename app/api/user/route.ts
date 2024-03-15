@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import dbConnect from "../db";
 import User from "../../../models/userModel";
 import bcrypt from 'bcrypt';

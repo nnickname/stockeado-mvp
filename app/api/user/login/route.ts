@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "../../db";
 import bcrypt from 'bcrypt';

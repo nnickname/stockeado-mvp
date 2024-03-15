@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import 'react-responsive-modal/styles.css';
 import LayoutMarketPlaceFindItem from './layoutsearch';
 import { Metadata } from 'next';
