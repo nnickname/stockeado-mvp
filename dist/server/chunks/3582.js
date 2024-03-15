@@ -5,6 +5,8 @@ exports.modules = {
 /***/ 53316:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
+"use strict";
+
 var w = Object.create;
 var l = Object.defineProperty;
 var c = Object.getOwnPropertyDescriptor;

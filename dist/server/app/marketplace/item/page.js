@@ -719,7 +719,7 @@ const LayoutMarketPlaceItem = ()=>{
                                                             marginLeft: ".5rem",
                                                             color: "black"
                                                         },
-                                                        children: _models_brands__WEBPACK_IMPORTED_MODULE_9__/* .TypeBrands */ .PX[item?.brand ?? 0] ?? "No definido"
+                                                        children: item?.brand !== 0 ? _models_brands__WEBPACK_IMPORTED_MODULE_9__/* .TypeBrands */ .PX[item?.brand] : "No definido"
                                                     })
                                                 ]
                                             })

@@ -4885,7 +4885,9 @@ const createProxy = _serveredge.createClientModuleProxy; //# sourceMappingURL=mo
 /***/ 38225:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-/* __next_internal_client_entry_do_not_use__  cjs */ const { createProxy } = __webpack_require__(61363);
+"use strict";
+/* __next_internal_client_entry_do_not_use__  cjs */ 
+const { createProxy } = __webpack_require__(61363);
 module.exports = createProxy("C:\\Users\\barto\\OneDrive\\Desktop\\stockeado\\stockeado-mvp\\node_modules\\next\\dist\\client\\components\\app-router.js");
  //# sourceMappingURL=app-router.js.map
 
@@ -4895,7 +4897,9 @@ module.exports = createProxy("C:\\Users\\barto\\OneDrive\\Desktop\\stockeado\\st
 /***/ 31823:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-/* __next_internal_client_entry_do_not_use__  cjs */ const { createProxy } = __webpack_require__(61363);
+"use strict";
+/* __next_internal_client_entry_do_not_use__  cjs */ 
+const { createProxy } = __webpack_require__(61363);
 module.exports = createProxy("C:\\Users\\barto\\OneDrive\\Desktop\\stockeado\\stockeado-mvp\\node_modules\\next\\dist\\client\\components\\error-boundary.js");
  //# sourceMappingURL=error-boundary.js.map
 
@@ -4905,7 +4909,9 @@ module.exports = createProxy("C:\\Users\\barto\\OneDrive\\Desktop\\stockeado\\st
 /***/ 97149:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-/* __next_internal_client_entry_do_not_use__  cjs */ const { createProxy } = __webpack_require__(61363);
+"use strict";
+/* __next_internal_client_entry_do_not_use__  cjs */ 
+const { createProxy } = __webpack_require__(61363);
 module.exports = createProxy("C:\\Users\\barto\\OneDrive\\Desktop\\stockeado\\stockeado-mvp\\node_modules\\next\\dist\\client\\components\\layout-router.js");
  //# sourceMappingURL=layout-router.js.map
 
@@ -4915,7 +4921,9 @@ module.exports = createProxy("C:\\Users\\barto\\OneDrive\\Desktop\\stockeado\\st
 /***/ 26966:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-/* __next_internal_client_entry_do_not_use__  cjs */ const { createProxy } = __webpack_require__(61363);
+"use strict";
+/* __next_internal_client_entry_do_not_use__  cjs */ 
+const { createProxy } = __webpack_require__(61363);
 module.exports = createProxy("C:\\Users\\barto\\OneDrive\\Desktop\\stockeado\\stockeado-mvp\\node_modules\\next\\dist\\client\\components\\not-found-boundary.js");
  //# sourceMappingURL=not-found-boundary.js.map
 
@@ -5010,7 +5018,9 @@ if ((typeof exports.default === "function" || typeof exports.default === "object
 /***/ 79278:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-/* __next_internal_client_entry_do_not_use__  cjs */ const { createProxy } = __webpack_require__(61363);
+"use strict";
+/* __next_internal_client_entry_do_not_use__  cjs */ 
+const { createProxy } = __webpack_require__(61363);
 module.exports = createProxy("C:\\Users\\barto\\OneDrive\\Desktop\\stockeado\\stockeado-mvp\\node_modules\\next\\dist\\client\\components\\render-from-template-context.js");
  //# sourceMappingURL=render-from-template-context.js.map
 
@@ -5056,7 +5066,9 @@ if ((typeof exports.default === "function" || typeof exports.default === "object
 /***/ 26345:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-/* __next_internal_client_entry_do_not_use__  cjs */ const { createProxy } = __webpack_require__(61363);
+"use strict";
+/* __next_internal_client_entry_do_not_use__  cjs */ 
+const { createProxy } = __webpack_require__(61363);
 module.exports = createProxy("C:\\Users\\barto\\OneDrive\\Desktop\\stockeado\\stockeado-mvp\\node_modules\\next\\dist\\client\\components\\static-generation-searchparams-bailout-provider.js");
  //# sourceMappingURL=static-generation-searchparams-bailout-provider.js.map
 

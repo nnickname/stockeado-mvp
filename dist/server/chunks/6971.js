@@ -25,7 +25,7 @@ exports.modules = {
 
 
 const corsOptions = {
-    origin: "https://stockeado-mvp.vercel.app/",
+    origin: "https://stockeado.com/",
     credentials: true,
     optionSuccessStatus: 200
 };

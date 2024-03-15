@@ -1037,7 +1037,9 @@ const Page = ()=>{
 /***/ 3097:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-/* __next_internal_client_entry_do_not_use__  cjs */ const { createProxy } = __webpack_require__(61363);
+"use strict";
+/* __next_internal_client_entry_do_not_use__  cjs */ 
+const { createProxy } = __webpack_require__(61363);
 module.exports = createProxy("C:\\Users\\barto\\OneDrive\\Desktop\\stockeado\\stockeado-mvp\\node_modules\\next\\dist\\client\\link.js");
  //# sourceMappingURL=link.js.map
 
@@ -1046,6 +1048,8 @@ module.exports = createProxy("C:\\Users\\barto\\OneDrive\\Desktop\\stockeado\\st
 
 /***/ 25124:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
 
 module.exports = __webpack_require__(3097);
 

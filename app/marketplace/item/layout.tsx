@@ -78,7 +78,7 @@ const LayoutMarketPlaceItem = () => {
                     <p style={{color: 'grey', fontSize: '.9rem', marginTop: '1rem'}}>Marca: <span style={{cursor: 'pointer', marginLeft: '.5rem', color: 'black'}}>{TypeBrands[item?.brand] ?? 'No definido'}</span></p>
                     <div style={{backgroundColor: 'rgba(0, 0, 0, 0.1)', width: '100%', height: '1px', marginTop: '1rem'}}></div>
                     <p style={{color: 'grey', fontSize: '.9rem', marginTop: '1rem'}}>Número de parte: <span style={{cursor: 'pointer', marginLeft: '.5rem', color: 'black'}}>{item?.sku ?? 'No definido'}</span></p>
-                    <p style={{color: 'grey', fontSize: '.9rem', marginTop: '1rem'}}>Aplica para: <span style={{cursor: 'pointer', marginLeft: '.5rem', color: 'black'}}>{TypeBrands[item?.brand ?? 0] ?? 'No definido'}</span></p>
+                    <p style={{color: 'grey', fontSize: '.9rem', marginTop: '1rem'}}>Aplica para: <span style={{cursor: 'pointer', marginLeft: '.5rem', color: 'black'}}>{item?.brand !== 0 ? TypeBrands[item?.brand] : 'No definido'}</span></p>
 
                 </div>
             </div>

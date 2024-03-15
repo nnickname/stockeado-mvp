@@ -214,6 +214,8 @@ module.exports = getParamBytesForAlg;
 /***/ 27701:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
+"use strict";
+
 var jws = __webpack_require__(64837);
 module.exports = function(jwt, options) {
     options = options || {};
@@ -250,6 +252,8 @@ module.exports = function(jwt, options) {
 /***/ 69877:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
+"use strict";
+
 module.exports = {
     decode: __webpack_require__(27701),
     verify: __webpack_require__(45258),
@@ -264,6 +268,8 @@ module.exports = {
 
 /***/ 19615:
 /***/ ((module) => {
+
+"use strict";
 
 var JsonWebTokenError = function(message, error) {
     Error.call(this, message);
@@ -284,6 +290,8 @@ module.exports = JsonWebTokenError;
 /***/ 68214:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
+"use strict";
+
 var JsonWebTokenError = __webpack_require__(19615);
 var NotBeforeError = function(message, date) {
     JsonWebTokenError.call(this, message);
@@ -299,6 +307,8 @@ module.exports = NotBeforeError;
 
 /***/ 19448:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
 
 var JsonWebTokenError = __webpack_require__(19615);
 var TokenExpiredError = function(message, expiredAt) {
@@ -316,6 +326,8 @@ module.exports = TokenExpiredError;
 /***/ 21757:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
+"use strict";
+
 var semver = __webpack_require__(76217);
 module.exports = semver.satisfies(process.version, "^6.12.0 || >=8.0.0");
 
@@ -324,6 +336,8 @@ module.exports = semver.satisfies(process.version, "^6.12.0 || >=8.0.0");
 
 /***/ 51068:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
 
 var ms = __webpack_require__(99542);
 module.exports = function(time, iat) {
@@ -347,9 +361,11 @@ module.exports = function(time, iat) {
 /***/ 99542:
 /***/ ((module) => {
 
+"use strict";
 /**
  * Helpers.
- */ var s = 1000;
+ */ 
+var s = 1000;
 var m = s * 60;
 var h = m * 60;
 var d = h * 24;
@@ -493,6 +509,8 @@ var y = d * 365.25;
 
 /***/ 76217:
 /***/ ((module, exports) => {
+
+"use strict";
 
 exports = module.exports = SemVer;
 var debug;
@@ -1738,6 +1756,8 @@ function coerce(version) {
 /***/ 80327:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
+"use strict";
+
 var timespan = __webpack_require__(51068);
 var PS_SUPPORTED = __webpack_require__(21757);
 var jws = __webpack_require__(64837);
@@ -1985,6 +2005,8 @@ module.exports = function(payload, secretOrPrivateKey, options, callback) {
 /***/ 45258:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
+"use strict";
+
 var JsonWebTokenError = __webpack_require__(19615);
 var NotBeforeError = __webpack_require__(68214);
 var TokenExpiredError = __webpack_require__(19448);
@@ -2187,6 +2209,8 @@ module.exports = function(jwtString, secretOrPublicKey, options, callback) {
 
 /***/ 29328:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
 
 var bufferEqual = __webpack_require__(93038);
 var Buffer = (__webpack_require__(28569).Buffer);
@@ -2438,7 +2462,9 @@ exports.createVerify = function createVerify(opts) {
 /***/ 86612:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-/*global module, process*/ var Buffer = (__webpack_require__(28569).Buffer);
+"use strict";
+/*global module, process*/ 
+var Buffer = (__webpack_require__(28569).Buffer);
 var Stream = __webpack_require__(12781);
 var util = __webpack_require__(73837);
 function DataStream(data) {
@@ -2493,7 +2519,9 @@ module.exports = DataStream;
 /***/ 22845:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-/*global module*/ var Buffer = (__webpack_require__(28569).Buffer);
+"use strict";
+/*global module*/ 
+var Buffer = (__webpack_require__(28569).Buffer);
 var DataStream = __webpack_require__(86612);
 var jwa = __webpack_require__(29328);
 var Stream = __webpack_require__(12781);
@@ -2562,7 +2590,9 @@ module.exports = SignStream;
 /***/ 88472:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-/*global module*/ var Buffer = (__webpack_require__(14300).Buffer);
+"use strict";
+/*global module*/ 
+var Buffer = (__webpack_require__(14300).Buffer);
 module.exports = function toString(obj) {
     if (typeof obj === "string") return obj;
     if (typeof obj === "number" || Buffer.isBuffer(obj)) return obj.toString();
@@ -2575,7 +2605,9 @@ module.exports = function toString(obj) {
 /***/ 51796:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-/*global module*/ var Buffer = (__webpack_require__(28569).Buffer);
+"use strict";
+/*global module*/ 
+var Buffer = (__webpack_require__(28569).Buffer);
 var DataStream = __webpack_require__(86612);
 var jwa = __webpack_require__(29328);
 var Stream = __webpack_require__(12781);
@@ -2680,6 +2712,7 @@ module.exports = VerifyStream;
 /***/ 70333:
 /***/ ((module) => {
 
+"use strict";
 /**
  * lodash (Custom Build) <https://lodash.com/>
  * Build: `lodash modularize exports="npm" -o ./`
@@ -2687,7 +2720,8 @@ module.exports = VerifyStream;
  * Released under MIT license <https://lodash.com/license>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- */ /** Used as references for various `Number` constants. */ var INFINITY = 1 / 0, MAX_SAFE_INTEGER = 9007199254740991, MAX_INTEGER = 1.7976931348623157e+308, NAN = 0 / 0;
+ */ /** Used as references for various `Number` constants. */ 
+var INFINITY = 1 / 0, MAX_SAFE_INTEGER = 9007199254740991, MAX_INTEGER = 1.7976931348623157e+308, NAN = 0 / 0;
 /** `Object#toString` result references. */ var argsTag = "[object Arguments]", funcTag = "[object Function]", genTag = "[object GeneratorFunction]", stringTag = "[object String]", symbolTag = "[object Symbol]";
 /** Used to match leading and trailing whitespace. */ var reTrim = /^\s+|\s+$/g;
 /** Used to detect bad signed hexadecimal string values. */ var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
@@ -3312,6 +3346,7 @@ module.exports = includes;
 /***/ 93002:
 /***/ ((module) => {
 
+"use strict";
 /**
  * lodash 3.0.3 (Custom Build) <https://lodash.com/>
  * Build: `lodash modularize exports="npm" -o ./`
@@ -3319,7 +3354,8 @@ module.exports = includes;
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright 2009-2016 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <https://lodash.com/license>
- */ /** `Object#toString` result references. */ var boolTag = "[object Boolean]";
+ */ /** `Object#toString` result references. */ 
+var boolTag = "[object Boolean]";
 /** Used for built-in method references. */ var objectProto = Object.prototype;
 /**
  * Used to resolve the [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
@@ -3376,6 +3412,7 @@ module.exports = isBoolean;
 /***/ 10857:
 /***/ ((module) => {
 
+"use strict";
 /**
  * lodash (Custom Build) <https://lodash.com/>
  * Build: `lodash modularize exports="npm" -o ./`
@@ -3383,7 +3420,8 @@ module.exports = isBoolean;
  * Released under MIT license <https://lodash.com/license>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- */ /** Used as references for various `Number` constants. */ var INFINITY = 1 / 0, MAX_INTEGER = 1.7976931348623157e+308, NAN = 0 / 0;
+ */ /** Used as references for various `Number` constants. */ 
+var INFINITY = 1 / 0, MAX_INTEGER = 1.7976931348623157e+308, NAN = 0 / 0;
 /** `Object#toString` result references. */ var symbolTag = "[object Symbol]";
 /** Used to match leading and trailing whitespace. */ var reTrim = /^\s+|\s+$/g;
 /** Used to detect bad signed hexadecimal string values. */ var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
@@ -3607,6 +3645,7 @@ module.exports = isInteger;
 /***/ 26417:
 /***/ ((module) => {
 
+"use strict";
 /**
  * lodash 3.0.3 (Custom Build) <https://lodash.com/>
  * Build: `lodash modularize exports="npm" -o ./`
@@ -3614,7 +3653,8 @@ module.exports = isInteger;
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright 2009-2016 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <https://lodash.com/license>
- */ /** `Object#toString` result references. */ var numberTag = "[object Number]";
+ */ /** `Object#toString` result references. */ 
+var numberTag = "[object Number]";
 /** Used for built-in method references. */ var objectProto = Object.prototype;
 /**
  * Used to resolve the [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
@@ -3680,6 +3720,7 @@ module.exports = isNumber;
 /***/ 22557:
 /***/ ((module) => {
 
+"use strict";
 /**
  * lodash (Custom Build) <https://lodash.com/>
  * Build: `lodash modularize exports="npm" -o ./`
@@ -3687,7 +3728,8 @@ module.exports = isNumber;
  * Released under MIT license <https://lodash.com/license>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- */ /** `Object#toString` result references. */ var objectTag = "[object Object]";
+ */ /** `Object#toString` result references. */ 
+var objectTag = "[object Object]";
 /**
  * Checks if `value` is a host object in IE < 9.
  *
@@ -3799,6 +3841,7 @@ module.exports = isPlainObject;
 /***/ 94172:
 /***/ ((module) => {
 
+"use strict";
 /**
  * lodash 4.0.1 (Custom Build) <https://lodash.com/>
  * Build: `lodash modularize exports="npm" -o ./`
@@ -3806,7 +3849,8 @@ module.exports = isPlainObject;
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright 2009-2016 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <https://lodash.com/license>
- */ /** `Object#toString` result references. */ var stringTag = "[object String]";
+ */ /** `Object#toString` result references. */ 
+var stringTag = "[object String]";
 /** Used for built-in method references. */ var objectProto = Object.prototype;
 /**
  * Used to resolve the [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
@@ -3886,6 +3930,7 @@ module.exports = isString;
 /***/ 40373:
 /***/ ((module) => {
 
+"use strict";
 /**
  * lodash (Custom Build) <https://lodash.com/>
  * Build: `lodash modularize exports="npm" -o ./`
@@ -3893,7 +3938,8 @@ module.exports = isString;
  * Released under MIT license <https://lodash.com/license>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- */ /** Used as the `TypeError` message for "Functions" methods. */ var FUNC_ERROR_TEXT = "Expected a function";
+ */ /** Used as the `TypeError` message for "Functions" methods. */ 
+var FUNC_ERROR_TEXT = "Expected a function";
 /** Used as references for various `Number` constants. */ var INFINITY = 1 / 0, MAX_INTEGER = 1.7976931348623157e+308, NAN = 0 / 0;
 /** `Object#toString` result references. */ var symbolTag = "[object Symbol]";
 /** Used to match leading and trailing whitespace. */ var reTrim = /^\s+|\s+$/g;
@@ -4142,6 +4188,8 @@ module.exports = once;
 /***/ 40063:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
+"use strict";
+
 module.exports = __webpack_require__(74937);
 
 
@@ -4150,7 +4198,9 @@ module.exports = __webpack_require__(74937);
 /***/ 28569:
 /***/ ((module, exports, __webpack_require__) => {
 
-/*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */ /* eslint-disable node/no-deprecated-api */ var buffer = __webpack_require__(14300);
+"use strict";
+/*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */ /* eslint-disable node/no-deprecated-api */ 
+var buffer = __webpack_require__(14300);
 var Buffer = buffer.Buffer;
 // alternative to using Object.keys for old browsers
 function copyProps(src, dst) {

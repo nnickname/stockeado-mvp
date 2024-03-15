@@ -1,3 +1,4 @@
+"use strict";
 exports.id = 1013;
 exports.ids = [1013];
 exports.modules = {
@@ -5,7 +6,6 @@ exports.modules = {
 /***/ 98384:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ZP: () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
@@ -112,6 +112,7 @@ const getOrderState = (id)=>{
 
 /***/ 40063:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
 
 module.exports = __webpack_require__(74937);
 
