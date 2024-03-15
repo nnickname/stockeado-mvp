@@ -3,9 +3,9 @@
   "functions": {
     "/api/marketplacee": {},
     "/about": {},
+    "/configuration": {},
     "/contact": {},
     "/dashboard": {},
-    "/configuration": {},
     "/error": {},
     "/hub": {},
     "/inventory": {},
@@ -14,10 +14,10 @@
     "/marketplace": {},
     "/marketplace/payment": {},
     "/marketplace/searchus": {},
-    "/orders": {},
     "/marketplace/shop": {},
-    "/signin": {},
+    "/orders": {},
     "/": {},
+    "/signin": {},
     "/signup": {}
   }
 }
