@@ -1,5 +1,6 @@
 .cardMarketPlace{
     width: 100%;
+    height: 100% !important;
     margin-top: 1rem;
 }
 .cardMarketPlace .contentImage{

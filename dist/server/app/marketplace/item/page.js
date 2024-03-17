@@ -454,10 +454,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_index_css__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _reacticons_ionicons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(99816);
 /* harmony import */ var _reacticons_ionicons__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _models_brands__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(15431);
+/* harmony import */ var _models_brands__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(15431);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(11440);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _components_dashboard_Footer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(90507);
 /* __next_internal_client_entry_do_not_use__ default auto */ 
+
 
 
 
@@ -675,7 +677,7 @@ const LayoutMarketPlaceItem = ()=>{
                                                             marginLeft: ".5rem",
                                                             color: "black"
                                                         },
-                                                        children: item?.brand === 0 ? "No definido" : _models_brands__WEBPACK_IMPORTED_MODULE_9__/* .TypeBrands */ .PX[(item?.brand) ?? 0]
+                                                        children: item?.brand === 0 ? "No definido" : _models_brands__WEBPACK_IMPORTED_MODULE_10__/* .TypeBrands */ .PX[(item?.brand) ?? 0]
                                                     })
                                                 ]
                                             }),
@@ -719,7 +721,7 @@ const LayoutMarketPlaceItem = ()=>{
                                                             marginLeft: ".5rem",
                                                             color: "black"
                                                         },
-                                                        children: item?.brand !== 0 ? _models_brands__WEBPACK_IMPORTED_MODULE_9__/* .TypeBrands */ .PX[item?.brand] : "No definido"
+                                                        children: item?.brand !== 0 ? _models_brands__WEBPACK_IMPORTED_MODULE_10__/* .TypeBrands */ .PX[item?.brand] : "No definido"
                                                     })
                                                 ]
                                             })
@@ -890,7 +892,7 @@ const LayoutMarketPlaceItem = ()=>{
                                                     padding: ".3rem",
                                                     border: "1px solid rgba(0,0,0, 0.1)"
                                                 },
-                                                children: item?.brand === 0 ? "No definido" : _models_brands__WEBPACK_IMPORTED_MODULE_9__/* .TypeBrands */ .PX[(item?.brand) ?? 0]
+                                                children: item?.brand === 0 ? "No definido" : _models_brands__WEBPACK_IMPORTED_MODULE_10__/* .TypeBrands */ .PX[(item?.brand) ?? 0]
                                             })
                                         ]
                                     }),
@@ -1002,59 +1004,14 @@ const LayoutMarketPlaceItem = ()=>{
                                 ]
                             })
                         ]
-                    })
+                    }),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_dashboard_Footer__WEBPACK_IMPORTED_MODULE_9__["default"], {})
                 ]
             })
         ]
     });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LayoutMarketPlaceItem);
-
-
-/***/ }),
-
-/***/ 15431:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   FM: () => (/* binding */ TypeCategories),
-/* harmony export */   PX: () => (/* binding */ TypeBrands),
-/* harmony export */   rM: () => (/* binding */ TypeOfPiece)
-/* harmony export */ });
-const TypeBrands = [
-    "Toyota",
-    "Nissan",
-    "Hyundai",
-    "BMW",
-    "Mercedes Benz",
-    "Kia",
-    "Chevrolet",
-    "Mitsubishi",
-    "Peugeot",
-    "Suzuki",
-    "Mazda",
-    "Volkswagen",
-    "Audi",
-    "Jeep",
-    "Land Rover",
-    "Volvo",
-    "Mini",
-    "Porsche",
-    "Geely",
-    "Otro"
-];
-const TypeCategories = [
-    "Partes de motor",
-    "Neumaticos",
-    "Otro"
-];
-const TypeOfPiece = [
-    "Genuino",
-    "Original",
-    "Alternativo",
-    "Segunda"
-];
 
 
 /***/ }),
@@ -1139,7 +1096,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,3800,8284,9636,4328,1142,4939,8888], () => (__webpack_exec__(46534)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,3800,8284,2113,4328,1142,4939,3878,8888], () => (__webpack_exec__(46534)));
 module.exports = __webpack_exports__;
 
 })();

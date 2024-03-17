@@ -6,7 +6,7 @@
     padding: 2rem;
     min-width: 250px;
     height: 100%;
-    background-color: #edeef0;
+    background-color: #f6f7fa;
 }
 
 .sidebarM h1{
@@ -56,12 +56,11 @@
     width: 100%;
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 920px) {
     .gridItems{
         grid-template-rows: auto auto;
         grid-template-columns: repeat(2, 1fr);
     }
-    
 }
 
 @media screen and (max-width: 520px) {

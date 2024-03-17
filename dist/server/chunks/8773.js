@@ -290,6 +290,51 @@ const InventoryResume = ({ items, orders, user })=>{
 
 /***/ }),
 
+/***/ 15431:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   FM: () => (/* binding */ TypeCategories),
+/* harmony export */   PX: () => (/* binding */ TypeBrands),
+/* harmony export */   rM: () => (/* binding */ TypeOfPiece)
+/* harmony export */ });
+const TypeBrands = [
+    "Toyota",
+    "Nissan",
+    "Hyundai",
+    "BMW",
+    "Mercedes Benz",
+    "Kia",
+    "Chevrolet",
+    "Mitsubishi",
+    "Peugeot",
+    "Suzuki",
+    "Mazda",
+    "Volkswagen",
+    "Audi",
+    "Jeep",
+    "Land Rover",
+    "Volvo",
+    "Mini",
+    "Porsche",
+    "Geely",
+    "Otro"
+];
+const TypeCategories = [
+    "Partes de motor",
+    "Neumaticos",
+    "Otro"
+];
+const TypeOfPiece = [
+    "Genuino",
+    "Original",
+    "Alternativo"
+];
+
+
+/***/ }),
+
 /***/ 3579:
 /***/ (() => {
 

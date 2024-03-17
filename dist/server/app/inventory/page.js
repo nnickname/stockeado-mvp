@@ -1586,52 +1586,6 @@ const LayoutHubInventoryPage = ()=>{
 
 /***/ }),
 
-/***/ 15431:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   FM: () => (/* binding */ TypeCategories),
-/* harmony export */   PX: () => (/* binding */ TypeBrands),
-/* harmony export */   rM: () => (/* binding */ TypeOfPiece)
-/* harmony export */ });
-const TypeBrands = [
-    "Toyota",
-    "Nissan",
-    "Hyundai",
-    "BMW",
-    "Mercedes Benz",
-    "Kia",
-    "Chevrolet",
-    "Mitsubishi",
-    "Peugeot",
-    "Suzuki",
-    "Mazda",
-    "Volkswagen",
-    "Audi",
-    "Jeep",
-    "Land Rover",
-    "Volvo",
-    "Mini",
-    "Porsche",
-    "Geely",
-    "Otro"
-];
-const TypeCategories = [
-    "Partes de motor",
-    "Neumaticos",
-    "Otro"
-];
-const TypeOfPiece = [
-    "Genuino",
-    "Original",
-    "Alternativo",
-    "Segunda"
-];
-
-
-/***/ }),
-
 /***/ 47957:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -1707,7 +1661,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,8284,7654,894,6127,9636,4328,4939,8088,8888,8773], () => (__webpack_exec__(91694)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,8284,7654,894,6127,2113,4328,4939,8088,8888,8773], () => (__webpack_exec__(91694)));
 module.exports = __webpack_exports__;
 
 })();

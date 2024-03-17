@@ -11,6 +11,7 @@ import './index.css';
 import IonIcon from '@reacticons/ionicons';
 import { TypeBrands } from '@/models/brands';
 import Link from 'next/link';
+import Footer from '@/components/dashboard/Footer';
 const LayoutMarketPlaceItem = () => {
     const search = useSearchParams();
     const id = search.get('id');
@@ -149,6 +150,7 @@ const LayoutMarketPlaceItem = () => {
                 </div>
             </div>
         </div>
+        <Footer/>
     </div>}
         
         

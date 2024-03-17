@@ -3,8 +3,8 @@
   "functions": {
     "/api/inventory/load": {},
     "/api/inventory": {},
-    "/api/orderss": {},
     "/api/marketplacee": {},
+    "/api/orderss": {},
     "/api/user/edit/create": {},
     "/api/user/edit": {},
     "/api/user/login": {},
@@ -16,15 +16,15 @@
     "/error": {},
     "/hub": {},
     "/inventory": {},
-    "/marketplace/order": {},
     "/marketplace/item": {},
+    "/marketplace/order": {},
     "/marketplace": {},
     "/marketplace/payment": {},
     "/marketplace/searchus": {},
-    "/orders": {},
     "/marketplace/shop": {},
+    "/orders": {},
     "/": {},
-    "/signup": {},
-    "/signin": {}
+    "/signin": {},
+    "/signup": {}
   }
 }

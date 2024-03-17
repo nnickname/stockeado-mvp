@@ -163,7 +163,7 @@ async function GET(req, res, next) {
         var responseItems = await inventoryModel/* default */.Z.aggregate([
             {
                 $sample: {
-                    size: 125
+                    size: 1125
                 }
             }
         ]);

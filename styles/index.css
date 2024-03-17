@@ -67,6 +67,29 @@ h1, h2, h3, h4 {
 .rotateItem {
   animation: spin 3s infinite linear;
 }
+.pagination_div{
+  display: flex;
+  justify-content: center;
+  gap: 2%;
+}
+
+.pagination_div p{
+  padding: 1%;
+  cursor: pointer;
+}
+
+.active_pagenumber{
+  background-color: #3662E3;
+  color: white;
+}
+@media screen and (max-width: 1120px) {
+  .responsiveNavMarketplace{
+    max-width: 100% !important;
+    overflow-y: scroll;
+    display: inline-block;
+  }
+}
+
 @keyframes spin {
   from {
     transform: rotate(0deg);

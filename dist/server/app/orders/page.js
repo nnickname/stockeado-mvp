@@ -459,8 +459,6 @@ var next_link = __webpack_require__(11440);
 var link_default = /*#__PURE__*/__webpack_require__.n(next_link);
 // EXTERNAL MODULE: ./node_modules/react-responsive-modal/dist/index.js
 var dist = __webpack_require__(7654);
-// EXTERNAL MODULE: ./models/brands.ts
-var brands = __webpack_require__(15431);
 // EXTERNAL MODULE: ./app/marketplace/payment/bank.tsx + 6 modules
 var bank = __webpack_require__(544);
 // EXTERNAL MODULE: ./node_modules/react-responsive-modal/styles.css
@@ -469,7 +467,6 @@ var styles = __webpack_require__(42055);
 var order = __webpack_require__(49462);
 ;// CONCATENATED MODULE: ./app/orders/editModal.tsx
 /* __next_internal_client_entry_do_not_use__ default auto */ 
-
 
 
 
@@ -634,13 +631,11 @@ const EditModalOrder = ({ order })=>{
                                 className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
                                 children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
                                     style: {
-                                        minWidth: "250px",
+                                        minWidth: "200px",
                                         margin: "auto"
                                     },
                                     children: [
                                         e?.item?.name,
-                                        " ",
-                                        brands/* TypeBrands */.PX[e?.item?.brand - 1] + " ",
                                         " ",
                                         e?.item?.model
                                     ]
@@ -1102,7 +1097,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,3800,8284,7654,894,5655,9636,4328,1142,4939,8088,9198,544,6322], () => (__webpack_exec__(18688)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,3800,8284,7654,894,5655,2113,4328,1142,4939,8088,9198,544,1270], () => (__webpack_exec__(18688)));
 module.exports = __webpack_exports__;
 
 })();

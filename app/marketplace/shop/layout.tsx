@@ -16,6 +16,8 @@ import { useSearchParams } from 'next/navigation';
 import { findProduct } from "@/app/api/marketplacee/call";
 import { Popover } from "react-tiny-popover";
 import IonIcon from "@reacticons/ionicons";
+import Pagination from "@/components/marketplace/pagination";
+import Footer from "@/components/dashboard/Footer";
 
 
 
@@ -67,6 +69,9 @@ const LayoutMarketPlaceShop = () => {
         const cartCast = JSON.parse(sessionStorage.getItem("cart"));
         if(cartCast !== undefined) setCart(cartCast ?? []);
     }, []);
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const postPerPage = 18;
     return <>
       {inventoryData === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> : 
         <div>
@@ -89,7 +94,7 @@ const LayoutMarketPlaceShop = () => {
                       onChange={(e) => setKeyword(e.target.value)}
                       type="text"
                       name="email"
-                      placeholder="Buscar por SKU"
+                      placeholder="Número de parte"
                       value={keywordFind}
                     />
             </div>
@@ -154,7 +159,7 @@ const LayoutMarketPlaceShop = () => {
                         onChange={(e) => setKeyword(e.target.value)}
                         type="text"
                         name="email"
-                        placeholder="Buscar por SKU"
+                        placeholder="Número de parte"
                         value={keywordFind}
                       />
               </div>
@@ -255,12 +260,25 @@ const LayoutMarketPlaceShop = () => {
         <div style={{marginTop: '0rem', padding: '.6rem', width: '100%', borderRadius: '.5rem', border: '1px solid rgba(0, 0, 0, 0.2)'}}>
           <p>Se encontraron <span style={{fontWeight: '700'}}>{inventoryData?.length} productos</span></p>
         </div>
-        <div className="gridItems">
-          {inventoryData?.map((e, index) => <CardMarketPlace key={index} item={e} setCart={setCart} setAmmountItem={setAmmountItem} ammountItem={ammountItem} cart={cart}/>)}
- 
-        </div>
+        {inventoryData?.length > 0 ? <div>
+            <div className="gridItems">
+            {inventoryData?.slice(
+                  currentPage * postPerPage - postPerPage,
+                  currentPage * postPerPage
+            ).map((e, index) => <CardMarketPlace key={index} item={e} setCart={setCart} setAmmountItem={setAmmountItem} ammountItem={ammountItem} cart={cart}/>)}
+
+          </div>
+          <Pagination
+              setCurrentPage={setCurrentPage}
+              currentPage={currentPage}
+              postPerPage={postPerPage}
+              postData={inventoryData ?? []}
+            />
+            </div>
+          : <div> </div>}
       </div>
     </div>
+    <Footer/>
         </div>
       }
 

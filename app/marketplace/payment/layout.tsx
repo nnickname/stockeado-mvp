@@ -95,7 +95,7 @@ const LayoutMarketPlacePayment = () => {
                                 <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
                                 {String(e?.ammount)}</p>
                                 <p  className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" style={{marginLeft: '4rem', maxWidth: '100px'}}>
-                                s/. {Number(e?.item?.price).toFixed(2)}</p>
+                                s/. {Number(e?.item?.priceSelling).toFixed(2)}</p>
                                 <button  onClick={() => {
                                     setCart(cart?.filter((obj, indexx) => index !== indexx))
                                     sessionStorage.setItem('cart', JSON.stringify(cart?.filter((obj, indexx) => index !== indexx)));

@@ -10,7 +10,9 @@ export const metadata: Metadata = {
 const Page = () => {
   
   return (
-    <LayoutMarketPlaceNative/>
+    <div>
+      <LayoutMarketPlaceNative/>
+    </div>
   );
 }
 

@@ -442,7 +442,9 @@ const metadata = {
     description: "Stockeado | Marketplace"
 };
 const Page = ()=>{
-    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_layoutMP__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .ZP, {});
+    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_layoutMP__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .ZP, {})
+    });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Page);
 
@@ -463,7 +465,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,3800,7654,9636,4328,1142,560,3933,210], () => (__webpack_exec__(79641)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,3800,7654,2113,4328,1142,3878,8239,3933,210], () => (__webpack_exec__(79641)));
 module.exports = __webpack_exports__;
 
 })();

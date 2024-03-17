@@ -119,7 +119,7 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
                     isOpen={isPopoverOpen}
                     positions={['bottom', 'left', 'right', 'top']} // preferred positions by priority
                     content={
-                    <div>
+                    <div style={{marginTop: '1.5rem'}}>
 
                     <div>
                         <div style={{display: 'flex', justifyContent: 'space-between', paddingBottom: '1rem'}}>

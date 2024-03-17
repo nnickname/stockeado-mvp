@@ -13,6 +13,8 @@ import { findProduct } from "../../api/marketplacee/call";
 import CardMarketPlace from "@/components/marketplace/item";
 import { Popover } from "react-tiny-popover";
 import IonIcon from "@reacticons/ionicons";
+import Pagination from "@/components/marketplace/pagination";
+import Footer from "@/components/dashboard/Footer";
 
 
 const LayoutMarketPlaceFindItem = () => {
@@ -56,6 +58,8 @@ const LayoutMarketPlaceFindItem = () => {
     const [isPopoverOpenBrand, setPopoverOpenBrand] = useState<boolean>(false);
     const [isPopoverOpenCategorie, setPopoverOpenCategorie] = useState<boolean>(false);
     const [isPopoverOpenType, setPopoverOpenType] = useState<boolean>(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const postPerPage = 18;
     return <div>
       {items === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
       <div>
@@ -78,7 +82,7 @@ const LayoutMarketPlaceFindItem = () => {
                       onChange={(e) => setKeyword(e.target.value)}
                       type="text"
                       name="email"
-                      placeholder="Buscar por SKU"
+                      placeholder="Buscar por número de parte"
                       value={keywordFind ?? ''}
                     />
             </div>
@@ -143,7 +147,7 @@ const LayoutMarketPlaceFindItem = () => {
                         onChange={(e) => setKeyword(e.target.value)}
                         type="text"
                         name="email"
-                        placeholder="Buscar por SKU"
+                        placeholder="Número de parte"
                         value={keywordFind ?? ''}
                       />
               </div>
@@ -241,13 +245,25 @@ const LayoutMarketPlaceFindItem = () => {
           <div style={{marginTop: '0rem', padding: '.6rem', width: '100%', borderRadius: '.5rem', border: '1px solid rgba(0, 0, 0, 0.2)'}}>
             <p>Se encontraron <span style={{fontWeight: '700'}}>{items?.length ?? 0} productos</span></p>
           </div>
-          <div className="gridItems">
-            {items?.map((e, index) => <CardMarketPlace key={index} item={e} setCart={setCart} setAmmountItem={setAmmountItem} ammountItem={ammountItem} cart={cart}/>)}
-
+          {items?.length > 0 ? <div>
+            <div className="gridItems">
+            {items?.slice(
+                  currentPage * postPerPage - postPerPage,
+                  currentPage * postPerPage
+            ).map((e, index) => <CardMarketPlace key={index} item={e} setCart={setCart} setAmmountItem={setAmmountItem} ammountItem={ammountItem} cart={cart}/>)}
 
           </div>
+          <Pagination
+              setCurrentPage={setCurrentPage}
+              currentPage={currentPage}
+              postPerPage={postPerPage}
+              postData={items ?? []}
+            />
+            </div>
+          : <div> </div>}
         </div>
       </div>
+      <Footer/>
       </div>}
         
     </div>

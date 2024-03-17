@@ -181,6 +181,9 @@ const HeaderMarketPlace = ({ cartItems, setCart })=>{
                                 "top"
                             ],
                             content: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                style: {
+                                    marginTop: "1.5rem"
+                                },
                                 children: [
                                     /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                                         children: [

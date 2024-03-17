@@ -20,27 +20,27 @@ const getTotalEarning = (orders: OrderModel[], id: String) => {
     orders?.map((e) => {
         if(Number(e?.state) > 0)
         e?.items?.map((a) => {
-            if(a.item._id === id) count += Number(a.item?.price);
+            if(String(a.item.owner_id) === id) count = count + (Number(a.item?.priceSelling) * a.ammount);
         })
     })
-    return count;
+    return count.toFixed(2);
 }
 const getBenefitEarning = (orders: OrderModel[], id: String) => {
     var count = 0;
     orders?.map((e) => {
         if(Number(e?.state) > 0)
         e?.items?.map((a) => {
-            if(a.item._id === id) count += (Number(a.item?.priceSelling));
+            if(String(a.item.owner_id) === id) count = count + (Number(a.item?.price) * a.ammount);
         })
     })
-    return count;
+    return count.toFixed(2);
 }
 const calculatePercentage = (x: number, y: number) => {
     const ammount = (((x - y) / y) * 100);
     if(Number.isNaN(ammount)){
         return 0;
     }
-    return (((x - y) / y) * 100) ?? '';
+    return Number((((x - y) / y) * 100) ?? 0).toFixed(1);
 }
 type SellResumeType = {
     orders: OrderModel[],
@@ -96,7 +96,7 @@ const SellResume: FunctionComponent<SellResumeType> = ({orders, user}) => {
                     </div>
                 </div>
                 <div style={{display: 'inline-block'}}>
-                    <p style={{display: 'inline-block'}} >{calculatePercentage(getTotalEarning(orders, String(user?._id)), getBenefitEarning(orders, String(user?._id))) ?? '0'}%</p>
+                    <p style={{display: 'inline-block'}} >{calculatePercentage(Number(getTotalEarning(orders, String(user?._id))), Number(getBenefitEarning(orders, String(user?._id)))) ?? '0'}%</p>
                     <p style={{marginLeft: '1.5rem', color: 'grey', display:'inline-block'}}>Margen</p>
                 </div>
             </div>
