@@ -138,8 +138,7 @@ __webpack_require__.d(__webpack_exports__, {
 var route_namespaceObject = {};
 __webpack_require__.r(route_namespaceObject);
 __webpack_require__.d(route_namespaceObject, {
-  POST: () => (POST),
-  dynamic: () => (dynamic)
+  POST: () => (POST)
 });
 
 // EXTERNAL MODULE: ./node_modules/next/dist/server/node-polyfill-headers.js
@@ -155,7 +154,6 @@ var db = __webpack_require__(66971);
 // EXTERNAL MODULE: ./models/userModel.ts
 var userModel = __webpack_require__(17486);
 ;// CONCATENATED MODULE: ./app/api/user/edit/route.ts
-const dynamic = "force-dynamic";
 
 
 

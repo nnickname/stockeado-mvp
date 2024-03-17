@@ -1,4 +1,3 @@
-export const dynamic = 'force-dynamic';
 
 import dbConnect from "../db";
 import Order from "../../../models/ordersModel";

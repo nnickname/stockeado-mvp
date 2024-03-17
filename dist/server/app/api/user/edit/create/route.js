@@ -145,8 +145,7 @@ __webpack_require__.d(__webpack_exports__, {
 var route_namespaceObject = {};
 __webpack_require__.r(route_namespaceObject);
 __webpack_require__.d(route_namespaceObject, {
-  POST: () => (POST),
-  dynamic: () => (dynamic)
+  POST: () => (POST)
 });
 
 // EXTERNAL MODULE: ./node_modules/next/dist/server/node-polyfill-headers.js
@@ -165,7 +164,6 @@ var external_bcrypt_default = /*#__PURE__*/__webpack_require__.n(external_bcrypt
 // EXTERNAL MODULE: ./node_modules/next/dist/server/web/exports/next-response.js
 var next_response = __webpack_require__(89335);
 ;// CONCATENATED MODULE: ./app/api/user/edit/create/route.ts
-const dynamic = "force-dynamic";
 
 
 
