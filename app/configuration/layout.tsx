@@ -5,7 +5,6 @@ import SellResume from "@/components/panel/sellresume";
 import SideBarComponent from "@/components/panel/sidebar";
 import { createConnection } from "mongoose";
 import { useEffect, useState } from "react";
-import { getUser } from "../api/user/call";
 import Cookie from 'universal-cookie';
 import { UserModel } from '../../models/userModel';
 import './index.css';
@@ -13,7 +12,7 @@ import blueImage from '../../public/images/logo/blueimage.png';
 import backgroundImage from '../../public/images/logo/background2.jpeg';
 import ImageLogo from '../../public/images/logo/mplogo1.png';
 import Image from "next/image";
-import { editUser } from "../api/user/call";
+import { editUser, getUser} from "../api/userr/call";
 import BackgroundImage from "@/components/marketplace/background/background";
 import IonIcon from "@reacticons/ionicons";
 const LayoutConfigurationPage = () =>{

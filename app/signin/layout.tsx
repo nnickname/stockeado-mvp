@@ -2,7 +2,7 @@
 import Header from "@/components/dashboard/Header";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { getUser, loginUser } from "../api/user/call";
+import { getUser, loginUser } from "../api/userr/call";
 import { useRouter } from "next/navigation";
 import {NotificationManager} from 'react-notifications';
 import { UserModel } from "@/models/userModel";

@@ -439,8 +439,8 @@ var compact = __webpack_require__(77761);
 var navigation = __webpack_require__(57114);
 // EXTERNAL MODULE: external "next/dist/compiled/react-experimental"
 var react_experimental_ = __webpack_require__(17640);
-// EXTERNAL MODULE: ./app/api/user/call.ts
-var call = __webpack_require__(14939);
+// EXTERNAL MODULE: ./app/api/userr/call.ts
+var call = __webpack_require__(310);
 // EXTERNAL MODULE: ./node_modules/@table-library/react-table-library/pagination.js + 1 modules
 var react_table_library_pagination = __webpack_require__(17252);
 // EXTERNAL MODULE: ./components/marketplace/header/index.tsx + 1 modules
@@ -1097,7 +1097,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,3800,8284,7654,894,5655,9636,4328,1142,4939,8088,9198,544,1270], () => (__webpack_exec__(18688)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,3800,8284,7654,894,5655,9636,4328,1142,310,8088,9198,544,1270], () => (__webpack_exec__(18688)));
 module.exports = __webpack_exports__;
 
 })();

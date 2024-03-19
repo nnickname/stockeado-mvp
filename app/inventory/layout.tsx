@@ -12,8 +12,8 @@ import Link from "next/link";
 import { UserModel } from "@/models/userModel";
 import Cookie from 'universal-cookie';
 import { useRouter } from "next/navigation";
-import { createInventory, createManyInventories, deleteInventory, editInventory, getInventory } from "../api/inventory/call";
-import { getUser } from "../api/user/call";
+import { createInventory, createManyInventories, deleteInventory, editInventory, getInventory } from "../api/inventoryy/call";
+import { getUser } from "../api/userr/call";
 import { usePagination } from "@table-library/react-table-library/pagination";
 
 

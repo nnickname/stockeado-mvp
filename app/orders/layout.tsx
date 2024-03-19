@@ -5,7 +5,7 @@ import { UserModel } from "@/models/userModel";
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { getUser } from "../api/user/call";
+import { getUser } from "../api/userr/call";
 import { usePagination } from "@table-library/react-table-library/pagination";
 import { OrderModel, OrderStates, getOrderState } from "@/models/ordersModel";
 import { getTotalPrice } from "@/components/marketplace/header";

@@ -441,8 +441,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(57114);
 /* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(next_navigation__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _api_inventory_call__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(18888);
-/* harmony import */ var _api_user_call__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(14939);
+/* harmony import */ var _api_inventoryy_call__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(627);
+/* harmony import */ var _api_userr_call__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(310);
 /* harmony import */ var _table_library_react_table_library_pagination__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(17252);
 /* harmony import */ var _table_library_react_table_library_compact__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(77761);
 /* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(86751);
@@ -500,7 +500,7 @@ const ModalEditProduct = ({ user, item, makeData })=>{
         item.model = model;
         item.type = type;
         item._id = String(item._id);
-        const response = await (0,_api_inventory_call__WEBPACK_IMPORTED_MODULE_9__/* .editInventory */ .Dk)(item);
+        const response = await (0,_api_inventoryy_call__WEBPACK_IMPORTED_MODULE_9__/* .editInventory */ .Dk)(item);
         if (response) {
             react_notifications__WEBPACK_IMPORTED_MODULE_15__/* .NotificationManager */ .fn.success("Editaste un item.", "Success");
             await makeData(true);
@@ -766,7 +766,7 @@ const TableRow = ({ user, inventoryData, realInventoryData, setInventoryRealData
         }
     });
     const MakeData = async (putOpen)=>{
-        const inventoryCast = await (0,_api_inventory_call__WEBPACK_IMPORTED_MODULE_9__/* .getInventory */ .$v)();
+        const inventoryCast = await (0,_api_inventoryy_call__WEBPACK_IMPORTED_MODULE_9__/* .getInventory */ .$v)();
         const inventoryy = inventoryCast;
         inventoryy?.map((e, index)=>{
             inventoryy[index].id = index;
@@ -903,7 +903,7 @@ const TableRow = ({ user, inventoryData, realInventoryData, setInventoryRealData
         };
     };
     const deleteVisualInventory = async ()=>{
-        if (await (0,_api_inventory_call__WEBPACK_IMPORTED_MODULE_9__/* .deleteInventory */ .qU)(itemSelected)) {
+        if (await (0,_api_inventoryy_call__WEBPACK_IMPORTED_MODULE_9__/* .deleteInventory */ .qU)(itemSelected)) {
             setOpenDelete(false);
             react_notifications__WEBPACK_IMPORTED_MODULE_15__/* .NotificationManager */ .fn.success("Eliminaste el item", "Success");
             window.location.reload();
@@ -930,7 +930,7 @@ const TableRow = ({ user, inventoryData, realInventoryData, setInventoryRealData
             owner_id: user._id
         };
         if (name !== "" && image !== null && sku !== null && ammount !== null && price !== null && brand !== -1 && priceSelling !== null && model !== null) {
-            const response = await (0,_api_inventory_call__WEBPACK_IMPORTED_MODULE_9__/* .createInventory */ .Rd)(buildBody);
+            const response = await (0,_api_inventoryy_call__WEBPACK_IMPORTED_MODULE_9__/* .createInventory */ .Rd)(buildBody);
             if (response) {
                 react_notifications__WEBPACK_IMPORTED_MODULE_15__/* .NotificationManager */ .fn.success("A\xf1adiste un item.", "Cargado");
                 window.location.reload();
@@ -966,7 +966,7 @@ const TableRow = ({ user, inventoryData, realInventoryData, setInventoryRealData
                 body.splice(0, 1);
                 body.splice(body?.length - 1, 1);
                 console.log(body);
-                if (await (0,_api_inventory_call__WEBPACK_IMPORTED_MODULE_9__/* .createManyInventories */ .RZ)(body)) {
+                if (await (0,_api_inventoryy_call__WEBPACK_IMPORTED_MODULE_9__/* .createManyInventories */ .RZ)(body)) {
                     window.location.reload();
                     react_notifications__WEBPACK_IMPORTED_MODULE_15__/* .NotificationManager */ .fn.success("Logramos cargar tu inventario con exito, recuerda editarlo correctamente", "Cargado");
                 } else react_notifications__WEBPACK_IMPORTED_MODULE_15__/* .NotificationManager */ .fn.error("Ocurrio un error cargando tu CSV, recorda que tu csv debe tener los encabezados SKU, description y cantidad", "Error");
@@ -1509,7 +1509,7 @@ const LayoutHubInventoryPage = ()=>{
     const [inventoryData, setInventory] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(null);
     const router = (0,next_navigation__WEBPACK_IMPORTED_MODULE_8__.useRouter)();
     const MakeData = async (putOpen)=>{
-        const inventoryCast = await (0,_api_inventory_call__WEBPACK_IMPORTED_MODULE_9__/* .getInventory */ .$v)();
+        const inventoryCast = await (0,_api_inventoryy_call__WEBPACK_IMPORTED_MODULE_9__/* .getInventory */ .$v)();
         await setRealInventoryData(inventoryCast);
         const inventoryy = inventoryCast;
         inventoryy?.map((e, index)=>{
@@ -1521,7 +1521,7 @@ const LayoutHubInventoryPage = ()=>{
     };
     const [user, setUser] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)();
     const toUser = async ()=>{
-        const userr = await (0,_api_user_call__WEBPACK_IMPORTED_MODULE_10__/* .getUser */ .PR)();
+        const userr = await (0,_api_userr_call__WEBPACK_IMPORTED_MODULE_10__/* .getUser */ .PR)();
         if (userr === undefined || user === null) {
             router.push("/");
         }
@@ -1661,7 +1661,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,8284,7654,894,6127,9636,4328,4939,8088,8888,8773], () => (__webpack_exec__(91694)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,8284,7654,894,6127,9636,4328,310,8088,627,8773], () => (__webpack_exec__(91694)));
 module.exports = __webpack_exports__;
 
 })();

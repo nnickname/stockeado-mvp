@@ -433,7 +433,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(17640);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react_notifications__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(78644);
-/* harmony import */ var _api_user_call__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(14939);
+/* harmony import */ var _api_userr_call__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(310);
 /* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(57114);
 /* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_navigation__WEBPACK_IMPORTED_MODULE_6__);
 /* __next_internal_client_entry_do_not_use__ default auto */ 
@@ -466,7 +466,7 @@ const LayoutSignUp = ()=>{
                     email,
                     visits: 0
                 };
-                const response = await (0,_api_user_call__WEBPACK_IMPORTED_MODULE_5__/* .createUser */ .r4)(body);
+                const response = await (0,_api_userr_call__WEBPACK_IMPORTED_MODULE_5__/* .createUser */ .r4)(body);
                 if (response) {
                     react_notifications__WEBPACK_IMPORTED_MODULE_4__/* .NotificationManager */ .fn.success("Creaste tu cuenta", "Creada");
                     setTimeout(()=>router.push("/signin"), 1500);
@@ -761,7 +761,7 @@ module.exports = __webpack_require__(50954)
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,8284,9636,4328,4939,8407], () => (__webpack_exec__(76916)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,8284,9636,4328,310,8407], () => (__webpack_exec__(76916)));
 module.exports = __webpack_exports__;
 
 })();

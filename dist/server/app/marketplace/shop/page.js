@@ -443,7 +443,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76931);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _app_api_inventory_call__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(18888);
+/* harmony import */ var _app_api_inventoryy_call__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(627);
 /* harmony import */ var _components_marketplace_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(34884);
 /* harmony import */ var _models_brands__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(15431);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(17640);
@@ -485,7 +485,7 @@ const LayoutMarketPlaceShop = ()=>{
     const [cart, setCart] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)([]);
     const [ammountItem, setAmmountItem] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(0);
     const toUser = async ()=>{
-        const userr = await (0,_app_api_inventory_call__WEBPACK_IMPORTED_MODULE_1__/* .getMarketPlace */ .RF)(id);
+        const userr = await (0,_app_api_inventoryy_call__WEBPACK_IMPORTED_MODULE_1__/* .getMarketPlace */ .RF)(id);
         setInventoryRealData(userr?.items ?? []);
         setInventoryData(userr?.items ?? []);
         setUser(userr?.user);
@@ -1033,7 +1033,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,3800,8284,9636,4328,1142,3878,8239,8888], () => (__webpack_exec__(81944)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,3800,8284,9636,4328,1142,3878,8239,627], () => (__webpack_exec__(81944)));
 module.exports = __webpack_exports__;
 
 })();

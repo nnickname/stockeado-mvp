@@ -402,8 +402,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_panel_sidebar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(28088);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(17640);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _api_user_call__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(14939);
-/* harmony import */ var _api_inventory_call__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(18888);
+/* harmony import */ var _api_userr_call__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(310);
+/* harmony import */ var _api_inventoryy_call__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(627);
 /* harmony import */ var _api_orderss_call__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(59198);
 /* harmony import */ var _reacticons_ionicons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(99816);
 /* harmony import */ var _reacticons_ionicons__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_9__);
@@ -423,7 +423,7 @@ const LayouHubDashboardPage = ()=>{
     const [realInventory, setRealInventory] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)([]);
     const [ordersData, setOrderData] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)([]);
     const toUser = async ()=>{
-        const userr = await (0,_api_user_call__WEBPACK_IMPORTED_MODULE_6__/* .getUser */ .PR)();
+        const userr = await (0,_api_userr_call__WEBPACK_IMPORTED_MODULE_6__/* .getUser */ .PR)();
         if (userr === undefined || userr === null) {
             router.push("/signin");
         }
@@ -432,7 +432,7 @@ const LayouHubDashboardPage = ()=>{
         setUser(userr);
     };
     const MakeData = async ()=>{
-        const inventoryCast = await (0,_api_inventory_call__WEBPACK_IMPORTED_MODULE_7__/* .getInventory */ .$v)();
+        const inventoryCast = await (0,_api_inventoryy_call__WEBPACK_IMPORTED_MODULE_7__/* .getInventory */ .$v)();
         await setRealInventory(inventoryCast);
     };
     (0,react__WEBPACK_IMPORTED_MODULE_5__.useEffect)(()=>{
@@ -536,7 +536,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,4185,4997,9816,8284,9636,4328,4939,8088,8888,9198,1270,8773], () => (__webpack_exec__(59413)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,4185,4997,9816,8284,9636,4328,310,8088,627,9198,1270,8773], () => (__webpack_exec__(59413)));
 module.exports = __webpack_exports__;
 
 })();

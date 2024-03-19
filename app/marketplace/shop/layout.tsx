@@ -1,7 +1,7 @@
 'use client';
 
-import { getCartCookies, getMarketPlace } from "@/app/api/inventory/call";
-import { getUser } from "@/app/api/user/call";
+import { getCartCookies, getMarketPlace } from "@/app/api/inventoryy/call";
+import { getUser } from "@/app/api/userr/call";
 import backgroundImage from '../../../public/images/logo/background3.webp';
 import CardMarketPlace from "@/components/marketplace/item";
 import { TypeCategories, TypeOfPiece, TypeBrands } from "@/models/brands";

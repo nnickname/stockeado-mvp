@@ -3,7 +3,7 @@ import Header from "@/components/dashboard/Header"
 import Link from "next/link"
 import { useState } from "react";
 import {NotificationManager} from 'react-notifications';
-import { createUser } from "../api/user/call";
+import { createUser } from "../api/userr/call";
 import { useRouter } from "next/navigation";
 
 const LayoutSignUp = () => {

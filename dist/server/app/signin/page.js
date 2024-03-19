@@ -432,7 +432,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(17640);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _api_user_call__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(14939);
+/* harmony import */ var _api_userr_call__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(310);
 /* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(57114);
 /* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_navigation__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var react_notifications__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(78644);
@@ -449,7 +449,7 @@ const LayoutSignIn = ()=>{
     const [password, setPassword] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)("");
     const [user, setUser] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)();
     const toUser = async ()=>{
-        const userr = await (0,_api_user_call__WEBPACK_IMPORTED_MODULE_4__/* .getUser */ .PR)();
+        const userr = await (0,_api_userr_call__WEBPACK_IMPORTED_MODULE_4__/* .getUser */ .PR)();
         if (userr !== undefined && userr !== null) {
             router.push("/hub");
         }
@@ -524,7 +524,7 @@ const LayoutSignIn = ()=>{
                                                         onClick: async ()=>{
                                                             if (password !== "" && email !== "") {
                                                                 react_notifications__WEBPACK_IMPORTED_MODULE_6__/* .NotificationManager */ .fn.info("Estamos validando los datos.", "Espera");
-                                                                const response = await (0,_api_user_call__WEBPACK_IMPORTED_MODULE_4__/* .loginUser */ .pH)(email ?? "", password ?? "");
+                                                                const response = await (0,_api_userr_call__WEBPACK_IMPORTED_MODULE_4__/* .loginUser */ .pH)(email ?? "", password ?? "");
                                                                 if (response) {
                                                                     router.push("/hub");
                                                                 } else react_notifications__WEBPACK_IMPORTED_MODULE_6__/* .NotificationManager */ .fn.error("La contrase\xf1a o el email no coinciden.", "Error");
@@ -713,7 +713,7 @@ module.exports = __webpack_require__(50954)
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,8284,9636,4328,4939,8407], () => (__webpack_exec__(80199)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,8284,9636,4328,310,8407], () => (__webpack_exec__(80199)));
 module.exports = __webpack_exports__;
 
 })();

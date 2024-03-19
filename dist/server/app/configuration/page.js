@@ -405,20 +405,19 @@ var navigation = __webpack_require__(57114);
 var sidebar = __webpack_require__(28088);
 // EXTERNAL MODULE: external "next/dist/compiled/react-experimental"
 var react_experimental_ = __webpack_require__(17640);
-// EXTERNAL MODULE: ./app/api/user/call.ts
-var call = __webpack_require__(14939);
 // EXTERNAL MODULE: ./app/configuration/index.css
 var configuration = __webpack_require__(38630);
 // EXTERNAL MODULE: ./public/images/logo/blueimage.png
 var blueimage = __webpack_require__(23360);
 ;// CONCATENATED MODULE: ./public/images/logo/background2.jpeg
 /* harmony default export */ const background2 = ({"src":"/_next/static/media/background2.205c3b96.jpeg","height":256,"width":1024,"blurDataURL":"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoKCgoKCgsMDAsPEA4QDxYUExMUFiIYGhgaGCIzICUgICUgMy03LCksNy1RQDg4QFFeT0pPXnFlZXGPiI+7u/sBCgoKCgoKCwwMCw8QDhAPFhQTExQWIhgaGBoYIjMgJSAgJSAzLTcsKSw3LVFAODhAUV5PSk9ecWVlcY+Ij7u7+//CABEIAAIACAMBIgACEQEDEQH/xAAnAAEBAAAAAAAAAAAAAAAAAAAABgEBAAAAAAAAAAAAAAAAAAAAAv/aAAwDAQACEAMQAAAAmg3/AP/EABkQAAEFAAAAAAAAAAAAAAAAAAABBAU0Qf/aAAgBAQABPwCHrO0w/8QAFxEAAwEAAAAAAAAAAAAAAAAAAAJBcf/aAAgBAgEBPwBbp//EABcRAAMBAAAAAAAAAAAAAAAAAAABAjH/2gAIAQMBAT8AnEf/2Q==","blurWidth":8,"blurHeight":2});
+// EXTERNAL MODULE: ./app/api/userr/call.ts
+var call = __webpack_require__(310);
 // EXTERNAL MODULE: ./node_modules/@reacticons/ionicons/lib/IonIcon.js
 var IonIcon = __webpack_require__(99816);
 var IonIcon_default = /*#__PURE__*/__webpack_require__.n(IonIcon);
 ;// CONCATENATED MODULE: ./app/configuration/layout.tsx
 /* __next_internal_client_entry_do_not_use__ default auto */ 
-
 
 
 
@@ -741,7 +740,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,4185,4997,9816,8284,9636,4328,4939,8088], () => (__webpack_exec__(74792)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,4185,4997,9816,8284,9636,4328,310,8088], () => (__webpack_exec__(74792)));
 module.exports = __webpack_exports__;
 
 })();

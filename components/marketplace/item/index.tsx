@@ -9,7 +9,6 @@ import { InventoryModel } from '@/models/inventoryModel';
 import { TypeBrands, TypeCategories, TypeOfPiece } from '@/models/brands';
 import { CartProps } from '@/models/ordersModel';
 import Cookie from 'universal-cookie';
-import { setCartCookies } from '@/app/api/inventory/call';
 import { useRouter } from 'next/navigation';
 
 type CardProps = {
