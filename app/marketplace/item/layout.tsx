@@ -5,7 +5,7 @@ import HeaderMarketPlace from '@/components/marketplace/header';
 import { InventoryModel } from '@/models/inventoryModel';
 import { CartProps } from '@/models/ordersModel';
 import { UserModel } from '@/models/userModel';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import './index.css';
 import IonIcon from '@reacticons/ionicons';
@@ -90,7 +90,7 @@ const LayoutMarketPlaceItem = () => {
                     value={String(ammount)}
                     onChange={(e) => setAmmount(Number(e.target.value))}
                     type="number"
-                    max={Number(item?.ammount)}
+                    max={Number(item?.ammount ?? 0)}
                     min={0}
                     name="name"
                     placeholder=""

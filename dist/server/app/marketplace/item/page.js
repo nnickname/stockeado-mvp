@@ -745,7 +745,7 @@ const LayoutMarketPlaceItem = ()=>{
                                             value: String(ammount),
                                             onChange: (e)=>setAmmount(Number(e.target.value)),
                                             type: "number",
-                                            max: Number(item?.ammount),
+                                            max: Number(item?.ammount ?? 0),
                                             min: 0,
                                             name: "name",
                                             placeholder: "",
@@ -1049,7 +1049,6 @@ const __default__ = proxy.default;
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   dynamic: () => (/* binding */ dynamic),
 /* harmony export */   metadata: () => (/* binding */ metadata)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76931);
@@ -1058,7 +1057,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_index_css__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(27536);
 
-const dynamic = "force-dynamic";
 
 
 const metadata = {

@@ -9,10 +9,13 @@ export async function GET (req: Request | any, res: Response, next: any){
   try{
     await dbConnect();
     const id = headers().get('id');
-    const response = await Inventory.findOne({_id: id});
-    if(response !== undefined){
-      return NextResponse.json({message: 'Valid tokens', item: response});
+    if(id?.length === 24){
+      const response = await Inventory.findOne({_id: id});
+      if(response !== undefined){
+        return NextResponse.json({message: 'Valid tokens', item: response});
+      }
     }
+    
     return NextResponse.json({message: 'Invalid token'});
   }
   catch(error){

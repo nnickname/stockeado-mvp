@@ -165,14 +165,16 @@ async function GET(req, res, next) {
     try {
         await (0,db/* default */.Z)();
         const id = (0,headers.headers)().get("id");
-        const response = await inventoryModel/* default */.Z.findOne({
-            _id: id
-        });
-        if (response !== undefined) {
-            return next_response/* default */.Z.json({
-                message: "Valid tokens",
-                item: response
+        if (id?.length === 24) {
+            const response = await inventoryModel/* default */.Z.findOne({
+                _id: id
             });
+            if (response !== undefined) {
+                return next_response/* default */.Z.json({
+                    message: "Valid tokens",
+                    item: response
+                });
+            }
         }
         return next_response/* default */.Z.json({
             message: "Invalid token"

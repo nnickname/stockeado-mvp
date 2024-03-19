@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic';
-
 import HeaderMarketPlace from "@/components/marketplace/header";
 import type { Metadata, NextPage } from "next";
 import '../index.css';
