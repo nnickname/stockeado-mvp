@@ -1,10 +1,7 @@
 
 import dbConnect from "../db";
-import bcrypt from 'bcrypt';
 import { NextResponse } from "next/server";
 import middleware from "../_middleware";
-
-import User from "../../../models/userModel";
 import Inventory from "../../../models/inventoryModel";
 
 export async function GET (req: Request | any, res: Response, next: any){

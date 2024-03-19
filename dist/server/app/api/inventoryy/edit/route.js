@@ -163,20 +163,22 @@ var headers = __webpack_require__(40063);
 
 async function GET(req, res, next) {
     const deleted = (0,headers.headers)().get("id");
-    const response = await inventoryModel/* default */.Z.findByIdAndDelete({
-        _id: deleted
-    });
-    if (response !== undefined) {
-        return next_response/* default */.Z.json({
-            message: "Valid tokens",
-            deleted: true
+    if (deleted?.length > 10) {
+        const response = await inventoryModel/* default */.Z.findByIdAndDelete({
+            _id: deleted
         });
+        if (response !== undefined) {
+            return next_response/* default */.Z.json({
+                message: "Valid tokens",
+                deleted: true
+            });
+        }
     }
     return next_response/* default */.Z.json({
         message: "Invalid token"
     });
 }
-async function POST(req) {
+async function POST(req, res, next) {
     await (0,db/* default */.Z)();
     try {
         let body = await req.json();

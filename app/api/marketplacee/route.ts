@@ -1,4 +1,5 @@
 
+export const dynamic = 'force-dynamic'
 import dbConnect from "../db";
 import Inventory from "../../../models/inventoryModel";
 import { NextResponse } from "next/server";

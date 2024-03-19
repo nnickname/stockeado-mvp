@@ -5,15 +5,17 @@ import { headers } from "next/headers";
 
 export async function GET (req: Request | any, res: Response, next: any){
   const deleted = headers().get('id');
-  const response = await Inventory.findByIdAndDelete({_id: deleted});
-  if(response !== undefined){
-    return NextResponse.json({message: 'Valid tokens', deleted: true});
+  if(deleted?.length > 10){
+    const response = await Inventory.findByIdAndDelete({_id: deleted});
+    if(response !== undefined){
+      return NextResponse.json({message: 'Valid tokens', deleted: true});
+    }
   }
   return NextResponse.json({message: 'Invalid token'});
 }
 
 export async function POST(
-    req: Request,
+    req: Request, res: Response, next: any
   ) {
     await dbConnect();
         try {  

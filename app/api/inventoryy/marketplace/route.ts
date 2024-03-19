@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 import Inventory from "../../../../models/inventoryModel";
 import Users from "../../../../models/userModel";
 import { headers } from "next/headers";
-import middleware from "../../_middleware";
 
 export async function GET (req: Request | any, res: Response, next: any){
     try{

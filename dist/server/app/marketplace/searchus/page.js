@@ -933,7 +933,6 @@ __webpack_require__.r(__webpack_exports__);
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
   "default": () => (/* binding */ page),
-  dynamic: () => (/* binding */ dynamic),
   metadata: () => (/* binding */ metadata)
 });
 
@@ -958,7 +957,6 @@ const __default__ = proxy.default;
 /* harmony default export */ const layoutsearch = (__default__);
 ;// CONCATENATED MODULE: ./app/marketplace/searchus/page.tsx
 
-const dynamic = "force-dynamic";
 
 
 const metadata = {
