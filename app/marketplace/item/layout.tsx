@@ -29,7 +29,7 @@ const LayoutMarketPlaceItem = () => {
     const router = useRouter();
     const shopCart = () => {
         if(ammount > 0){
-            const cartCast = [...cart, {
+            const cartCast = [{
                 item: item ?? {},
                 ammount: ammount
             }];
@@ -73,7 +73,7 @@ const LayoutMarketPlaceItem = () => {
                         <p style={{color: 'grey', fontSize: '.8rem'}}> SKU: {item?.sku}</p>
                     </div>
                     <p style={{fontWeight: '500', fontSize: '1.1rem', marginTop: '1rem'}}>{item?.name + ' '} {item?.model ?? '' }</p>
-                    <p style={{color: 'grey', fontSize: '.8rem', marginTop: '1rem'}}>Vendido por: <Link style={{cursor: 'pointer', marginLeft: '.5rem', color: '#0E7AFF'}} href={'https://stockeado-mvp.vercel.app/marketplace/shop?id=' + shop?._id}>{shop?.nameShop}</Link></p>
+                    <p style={{color: 'grey', fontSize: '.8rem', marginTop: '1rem'}}>Vendido por: <span style={{cursor: 'pointer', marginLeft: '.5rem', color: '#0E7AFF'}} onClick={() => router.push('/marketplace/shop?id=' + shop?._id)}>{shop?.nameShop}</span></p>
                     <p style={{fontWeight: '500', fontSize: '1.2rem', marginTop: '1rem'}}>s/. {Number(item?.priceSelling).toFixed(2) ?? 0}</p>
                     <div style={{backgroundColor: 'rgba(0, 0, 0, 0.1)', width: '100%', height: '1px', marginTop: '1rem'}}></div>
                     <p style={{color: 'grey', fontSize: '.9rem', marginTop: '1rem'}}>Marca: <span style={{cursor: 'pointer', marginLeft: '.5rem', color: 'black'}}>{item?.brand === 0 ? 'No definido' : TypeBrands[(item?.brand) ?? 0]}</span></p>

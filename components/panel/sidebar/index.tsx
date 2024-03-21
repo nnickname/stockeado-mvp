@@ -39,7 +39,12 @@ const SideBarComponent: FunctionComponent<SideBarProps> = ({user, frameContennt,
                 <IonIcon style={{color: route === 'dashboard' ? '#1570EF' : 'black'}} className="icon" name="home-outline" />
                 <p style={{color: route === 'dashboard' ? '#1570EF' : 'black'}} className="text">Dashboard</p>
             </div>
-            <div className="list" onClick={() => router.push('/inventory')}>
+            <div className="list" onClick={() => {
+                router.push('/inventory', {});
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1500);
+                }}>
                 <IonIcon style={{color: route === 'inventory' ? '#1570EF' : 'black'}} className="icon" name="cart-outline" />
                 <p style={{color: route === 'inventory' ? '#1570EF' : 'black'}} className="text">Inventario Web</p>
             </div>

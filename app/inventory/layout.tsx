@@ -218,6 +218,7 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
     const [brand, setBrand] = useState(-1);    
     const [onMP, setOnMP] = useState(null);    
     const [model, setModel] = useState(null);    
+    const router = useRouter();
     const COLUMNS = [
       { label: 'SKU', renderCell: (item) => item.sku },
       
@@ -244,7 +245,7 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
             //setOpenEdit(true);
             
           }} style={{cursor: 'pointer', marginRight: '.5rem'}}>
-            <Link style={{fontSize: '1rem', color: '#3662E3', marginLeft: '.5rem', marginRight: '.5rem'}} href={'https://stockeado-mvp.vercel.app/marketplace/item?id=' + item?._id}><IonIcon name='eye-outline'/></Link>
+            <span style={{fontSize: '1rem', color: '#3662E3', marginLeft: '.5rem', marginRight: '.5rem'}} onClick={() => router.push('/marketplace/item?id=' + item?._id)}><IonIcon name='eye-outline'/></span>
 
           </div>
           
@@ -355,7 +356,7 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
    
     return <>
       <div style={{width: '100%', display: 'flex', justifyContent: 'space-between'}}>
-        <h1 style={{marginBottom: '1rem', marginTop: '.5rem', fontSize: '1rem', fontWeight: '500'}}>Productos en MarketPlace <Link style={{fontSize: '1rem', color: '#3662E3', marginLeft: '.5rem'}} href={'https://stockeado-mvp.vercel.app/marketplace/shop?id=' + user?._id}>Mi URL<IonIcon name='open-outline'/></Link></h1>
+        <h1 style={{marginBottom: '1rem', marginTop: '.5rem', fontSize: '1rem', fontWeight: '500'}}>Productos en MarketPlace <span style={{fontSize: '1rem', color: '#3662E3', marginLeft: '.5rem'}} onClick={() => router.push('/marketplace/shop?id=' + user?._id)}>Mi URL<IonIcon name='open-outline'/></span></h1>
         <div style={{display: 'flex'}}>
           <button className="buttonsWithouthPadding" onClick={() => setOpen(true)} style={{fontSize: '.8rem', borderRadius: '.5rem', padding: '.2rem', paddingLeft: '1rem', paddingRight: '1rem', marginRight: '1rem', backgroundColor: '#1366D9', color: 'white'}}>Cargar productos</button>
           <button className="buttonsWithouthPadding" style={{fontSize: '.8rem', border: '1px solid grey', borderRadius: '.5rem', padding: '.2rem', paddingLeft: '1rem', paddingRight: '1rem', backgroundColor: 'transparent', color: 'grey'}}>Descargar todo</button>
