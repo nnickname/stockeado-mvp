@@ -12,6 +12,7 @@ import { NotificationManager} from 'react-notifications';
 import { createOrder } from '@/app/api/orderss/call';
 import { Router } from 'next/router';
 import { useRouter } from 'next/navigation';
+import Footer from '@/components/dashboard/Footer';
 
 
 
@@ -89,7 +90,7 @@ const LayoutMarketPlacePayment = () => {
                 {cart?.map((e, index) => {
                             return <div key={index}>
                             <div style={{width: '100%', display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(220, 220, 220, .3)'}}>
-                                <img style={{width: '105px', height: '105px'}} src={e?.item?.image} alt='Product Image' />
+                                <img style={{width: '105px', maxHeight: '105px'}} src={e?.item?.image} alt='Product Image' />
                                 <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
                                 <p style={{minWidth: '250px', margin: 'auto'}}>{e?.item?.name + ' '}  {e?.item?.model }</p></p>
                                 <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
@@ -110,14 +111,19 @@ const LayoutMarketPlacePayment = () => {
                     <p >s/. {Number(getTotalPrice(cart)).toFixed(2)}</p>
                 </div>
                 <button type='button' onClick={() => buildForm()} style={{padding: '.5rem', textAlign: 'center', width:'100%', background: 'linear-gradient(180deg, #127FFF 0%, #3662E3 100%)', color: 'white'}}>Confirmar</button>
-                <div style={{textAlign: 'center', width: '100%', color: 'green', marginTop: '3rem', fontSize: '2rem'}}>
-                    <IonIcon style={{cursor: 'pointer'}} name="logo-whatsapp"/>
+                <div style={{textAlign: 'center'}}>
+                    <button className="btn-whatsapp">
+                        
+                        <IonIcon style={{marginRight: '1rem'}} name="logo-whatsapp"/>
+                        ¿Necesitas ayuda?
+                    </button>
                 </div>
                 
 
             </div>
 
         </div>
+        <Footer/>
 
     </div>
 }

@@ -21,6 +21,26 @@ export const getTotalPriceInventory = (cartItems: InventoryModel[] ) => {
     
         return String(price.toFixed(2));
 }
+const getTotalItems = (orders: OrderModel[], id: String) => {
+    var count = 0;
+    orders?.map((e) => {
+        if(Number(e?.state) > 0)
+        e?.items?.map((a) => {
+            if(String(a.item.owner_id) === id) count = count + Number(a.ammount);
+        })
+    })
+    return count;
+}
+const getTotalValueinS = (orders: OrderModel[], id: String) => {
+    var count = 0;
+    orders?.map((e) => {
+        if(Number(e?.state) > 0)
+        e?.items?.map((a) => {
+            if(String(a.item.owner_id) === id) count = count + (Number(a.item?.priceSelling) * Number(a.ammount));
+        })
+    })
+    return count.toFixed(2);
+}
 
 
 export const getNoneStock = (cartItems: InventoryModel[] ) => {
@@ -40,27 +60,6 @@ export const getLowStockAmmount = (cartItems: InventoryModel[] ) => {
       }
     })
         return String(low);
-}
-
-const getTotalItemsSellings = (orders: OrderModel[], id: String) => {
-    var count = 0;
-    orders?.map((e) => {
-        if(Number(e?.state) > 0)
-        e?.items?.map((a) => {
-            if(a.item._id === id) count =+ Number(a?.ammount);
-        })
-    })
-    return count;
-}
-const getTotalItemsSellingsValue = (orders: OrderModel[], id: String) => {
-    var count = 0;
-    orders?.map((e) => {
-        if(Number(e?.state) > 0)
-        e?.items?.map((a) => {
-            if(a.item._id === id) count =+ (Number(a?.ammount) * Number(a?.item?.priceSelling));
-        })
-    })
-    return count;
 }
 export const getTotalBrands = (cartItems: InventoryModel[] ) => {
     var brands: String[] = [];
@@ -104,8 +103,8 @@ const InventoryResume: FunctionComponent<InventoryResume> = ({items, orders, use
                 <div style={{padding: '1rem', width: '100%', borderRight: '1px solid rgba(230, 230, 230, 0.5)'}}>
                     <h1 style={{color: '#58D365', marginBottom: '.3rem'}}>Total ventas</h1>
                     <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '.3rem'}}>
-                        <p>{getTotalItemsSellings(orders, String(user?._id))}</p>
-                        <p> {getTotalItemsSellingsValue(orders, String(user?._id))}</p>
+                        <p>{getTotalItems(orders, String(user?._id))}</p>
+                        <p> {getTotalValueinS(orders, String(user?._id))}</p>
                     </div>
                     <div style={{display: 'flex', justifyContent: 'space-between'}}>
                         <p style={{color: '#858D9D', fontSize: '.8rem'}}>Unidades</p>

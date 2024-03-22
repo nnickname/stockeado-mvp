@@ -27,6 +27,8 @@ import '../../components/marketplace/header/index.css';
 import {NotificationManager} from 'react-notifications';
 import { InventoryModel } from "@/models/inventoryModel";
 import {ExcelRenderer} from 'react-excel-renderer';
+import { getOrders } from "../api/orderss/call";
+import { OrderModel } from "@/models/ordersModel";
 
 
 export type InventoryTableModel = {
@@ -228,7 +230,7 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
         renderCell: (item) => <p style={{color: item.ammount < 4 ? 'tomato' : 'black'}}>{item.ammount}</p> ,
       },
       { label: 'Ventas', renderCell: (item) => item.sellings},
-      { label: 'Precio', renderCell: (item) => 's/.' + item.price },
+      { label: 'Precio sin igv', renderCell: (item) => 's/.' + item.price },
       { label: 'Precio venta', renderCell: (item) => 's/.' + item.priceSelling },
       { label: '', pinRigth: true , renderCell: (item) =>     
         <div style={{display: 'flex', fontSize: '1.2rem'}}>
@@ -356,7 +358,7 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
    
     return <>
       <div style={{width: '100%', display: 'flex', justifyContent: 'space-between'}}>
-        <h1 style={{marginBottom: '1rem', marginTop: '.5rem', fontSize: '1rem', fontWeight: '500'}}>Productos en MarketPlace <span style={{fontSize: '1rem', color: '#3662E3', marginLeft: '.5rem'}} onClick={() => router.push('/marketplace/shop?id=' + user?._id)}>Mi URL<IonIcon name='open-outline'/></span></h1>
+        <h1 style={{marginBottom: '1rem', marginTop: '.5rem', fontSize: '1rem', fontWeight: '500'}}>Productos en MarketPlace <Link target="_blank" style={{fontSize: '1rem', color: '#3662E3', marginLeft: '.5rem'}} href={'/marketplace/shop?id=' + user?._id}>Mi URL<IonIcon name='open-outline'/></Link></h1>
         <div style={{display: 'flex'}}>
           <button className="buttonsWithouthPadding" onClick={() => setOpen(true)} style={{fontSize: '.8rem', borderRadius: '.5rem', padding: '.2rem', paddingLeft: '1rem', paddingRight: '1rem', marginRight: '1rem', backgroundColor: '#1366D9', color: 'white'}}>Cargar productos</button>
           <button className="buttonsWithouthPadding" style={{fontSize: '.8rem', border: '1px solid grey', borderRadius: '.5rem', padding: '.2rem', paddingLeft: '1rem', paddingRight: '1rem', backgroundColor: 'transparent', color: 'grey'}}>Descargar todo</button>
@@ -437,28 +439,36 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
               <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Nombre/Descripción de producto" className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
             </div>
             <div style={{display: 'flex', justifyContent: 'space-between'}}>
-              <input value={sku} onChange={(e) => setSku(e.target.value)} placeholder="SKU"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+              <input value={sku} onChange={(e) => setSku(e.target.value)} placeholder="SKU/id"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
               <input value={ammount} onChange={(e) => setAmmount(e.target.value)} placeholder="Cantidad" type='number' className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
             </div>
             
             <div style={{display: 'flex', justifyContent: 'space-between'}}>
               <select value={brand} onChange={(e) => setBrand(Number(e.target.value))} className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}>
-              <option value={-1}>Marca</option>
+              <option value={-1}>Marca Producto</option>
 
                 {TypeBrands.map((e, index) => <option key={index} value={index+1}>{e}</option>)}
 
               </select>
-              <input value={model} onChange={(e) => setModel(e.target.value)} placeholder="Modelo de auto" className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+              <input value={numberPart} onChange={(e) => setNumberPart(e.target.value)} placeholder="Número de parte(Ej: L33D15241)" className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
 
                         
             </div>
             <div style={{display: 'flex', justifyContent: 'space-between'}}>
-              <input value={price} onChange={(e) => setPrice(e.target.value)} placeholder="Precio(ej 0.68)"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
-              <input value={priceSelling} onChange={(e) => setPriceSelling(e.target.value)} placeholder="Precio de venta sin igv(ej 1.68)"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+              <input value={price} onChange={(e) => {
+                function getPerc(num, percent) {
+                  return Number(num) - ((Number(percent) / 100) * Number(num));
+                }
+                setPrice(e.target.value);
+                setPriceSelling( (Number(e.target.value) + getPerc(Number(e.target.value), 82)).toFixed(2));
+              }} placeholder="Precio sin IGV(ej 0.68)"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+              <input value={priceSelling} disabled placeholder="Precio venta con IGV"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
 
             </div>
-            <input value={numberPart} onChange={(e) => setNumberPart(e.target.value)} placeholder="Número de parte" className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
-            <input value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Descripción" className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+            <input value={model} onChange={(e) => setModel(e.target.value)} placeholder="Modelo de auto(Ej: Suzuki Vitara del 2006 al 2018)" className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+
+
+            <input value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Opcional" className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
 
             
             <div style={{display: 'flex', margin: '.5rem'}}>
@@ -510,7 +520,7 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
 const LayoutHubInventoryPage = () => {
     const [realInventoryData, setRealInventoryData] = useState<InventoryModel[]>();
     const [inventoryData, setInventory] = useState<InventoryTableModel[]>(null)
-
+    const [ordersData, setOrderData] = useState<OrderModel[]>([]);
     const router = useRouter();
     const MakeData = async (putOpen: boolean) => {
       const inventoryCast = await getInventory();
@@ -522,6 +532,7 @@ const LayoutHubInventoryPage = () => {
       }) 
       setInventory(inventoryy !== null ? inventoryy : []);
       setRealInventoryData(inventoryCast);
+      
     }
     const [user, setUser] = useState<UserModel>();
     const toUser = async () => {
@@ -530,6 +541,8 @@ const LayoutHubInventoryPage = () => {
             router.push('/');
         }
         setUser(userr);
+        const ordersCast = await getOrders(userr?._id);
+      setOrderData(ordersCast);
         await MakeData(true);
     }
     useEffect(() => {
@@ -541,7 +554,7 @@ const LayoutHubInventoryPage = () => {
           <SideBarComponent user={user} route='inventory' frameContennt={
             <div className="resume" style={{overflow: 'hidden'}}>
                 <div>
-                  <InventoryResume items={realInventoryData} orders={[]} user={user}/>
+                  <InventoryResume items={realInventoryData} orders={ordersData} user={user}/>
                   <div style={{padding: '1rem'}}>
                     <TableRow user={user} inventoryData={inventoryData} realInventoryData={realInventoryData} setInventoryRealData={setRealInventoryData} setInventory={setInventory}/>
                   </div>

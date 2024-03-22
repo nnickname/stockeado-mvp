@@ -141,7 +141,7 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
                           const nameString = e?.item?.name +  ' ' + e?.item?.model;
                           return <div key={index}>
                           <div style={{width: '100%', display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(220, 220, 220, .3)'}}>
-                            <img style={{width: '35px', height: '35px'}} src={e?.item?.image} alt='Product Image' />
+                            <img style={{width: '35px', maxHeight: '35px'}} src={e?.item?.image} alt='Product Image' />
                             <p style={{maxWidth: '100px',}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
                             {nameString.substring(0, 30)}...
                             </p>

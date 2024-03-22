@@ -12,6 +12,15 @@ body{
   }
 }
 
+.btn-whatsapp{
+  margin: 1rem;
+  border: 1px solid #25d366;
+  border-radius: 1rem;
+  padding: 1rem;
+  color: #25d366;
+  font-size: 1rem;
+
+}
 @layer components {
   input[type="checkbox"]:checked ~ label span svg {
     @apply inline-flex;
