@@ -456,7 +456,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_api_orderss_call__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(59198);
 /* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(57114);
 /* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(next_navigation__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _components_dashboard_Footer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(90507);
 /* __next_internal_client_entry_do_not_use__ default auto */ 
+
 
 
 
@@ -646,7 +648,7 @@ const LayoutMarketPlacePayment = ()=>{
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
                                             style: {
                                                 width: "105px",
-                                                height: "105px"
+                                                maxHeight: "105px"
                                             },
                                             src: e?.item?.image,
                                             alt: "Product Image"
@@ -741,22 +743,25 @@ const LayoutMarketPlacePayment = ()=>{
                         }),
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                             style: {
-                                textAlign: "center",
-                                width: "100%",
-                                color: "green",
-                                marginTop: "3rem",
-                                fontSize: "2rem"
+                                textAlign: "center"
                             },
-                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_3___default()), {
-                                style: {
-                                    cursor: "pointer"
-                                },
-                                name: "logo-whatsapp"
+                            children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("button", {
+                                className: "btn-whatsapp",
+                                children: [
+                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_3___default()), {
+                                        style: {
+                                            marginRight: "1rem"
+                                        },
+                                        name: "logo-whatsapp"
+                                    }),
+                                    "\xbfNecesitas ayuda?"
+                                ]
                             })
                         })
                     ]
                 })
-            })
+            }),
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_dashboard_Footer__WEBPACK_IMPORTED_MODULE_10__["default"], {})
         ]
     });
 };
@@ -822,17 +827,6 @@ const Page = ()=>{
 
 /***/ }),
 
-/***/ 57286:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"src":"/_next/static/media/logopreferente.bbc72056.png","height":200,"width":640,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAADCAYAAACuyE5IAAAAYElEQVR42g3HOxKCMBSG0e8nN+Irlkgtu3C0Y+duwYYZVkHBmwROd/SsPkFyArpr8c6BKX9U3MvaA4tJ+qa01Znd2rj2l1N4eTuXY9yGwvnQGOgH8S9ljhRngQcZR4BxB15DGcQuhSZBAAAAAElFTkSuQmCC","blurWidth":8,"blurHeight":3});
-
-/***/ }),
-
 /***/ 34355:
 /***/ (() => {
 
@@ -854,7 +848,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,3800,9636,4328,1142,9198,544], () => (__webpack_exec__(97268)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,3800,1885,4328,1142,507,4892,544], () => (__webpack_exec__(97268)));
 module.exports = __webpack_exports__;
 
 })();

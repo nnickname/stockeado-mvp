@@ -25,6 +25,24 @@ const getTotalPriceInventory = (cartItems)=>{
     });
     return String(price.toFixed(2));
 };
+const getTotalItems = (orders, id)=>{
+    var count = 0;
+    orders?.map((e)=>{
+        if (Number(e?.state) > 0) e?.items?.map((a)=>{
+            if (String(a.item.owner_id) === id) count = count + Number(a.ammount);
+        });
+    });
+    return count;
+};
+const getTotalValueinS = (orders, id)=>{
+    var count = 0;
+    orders?.map((e)=>{
+        if (Number(e?.state) > 0) e?.items?.map((a)=>{
+            if (String(a.item.owner_id) === id) count = count + Number(a.item?.priceSelling) * Number(a.ammount);
+        });
+    });
+    return count.toFixed(2);
+};
 const getNoneStock = (cartItems)=>{
     var low = 0;
     cartItems?.map((e)=>{
@@ -42,24 +60,6 @@ const getLowStockAmmount = (cartItems)=>{
         }
     });
     return String(low);
-};
-const getTotalItemsSellings = (orders, id)=>{
-    var count = 0;
-    orders?.map((e)=>{
-        if (Number(e?.state) > 0) e?.items?.map((a)=>{
-            if (a.item._id === id) count = +Number(a?.ammount);
-        });
-    });
-    return count;
-};
-const getTotalItemsSellingsValue = (orders, id)=>{
-    var count = 0;
-    orders?.map((e)=>{
-        if (Number(e?.state) > 0) e?.items?.map((a)=>{
-            if (a.item._id === id) count = +(Number(a?.ammount) * Number(a?.item?.priceSelling));
-        });
-    });
-    return count;
 };
 const getTotalBrands = (cartItems)=>{
     var brands = [];
@@ -187,12 +187,12 @@ const InventoryResume = ({ items, orders, user })=>{
                                     },
                                     children: [
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                            children: getTotalItemsSellings(orders, String(user?._id))
+                                            children: getTotalItems(orders, String(user?._id))
                                         }),
                                         /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
                                             children: [
                                                 " ",
-                                                getTotalItemsSellingsValue(orders, String(user?._id))
+                                                getTotalValueinS(orders, String(user?._id))
                                             ]
                                         })
                                     ]

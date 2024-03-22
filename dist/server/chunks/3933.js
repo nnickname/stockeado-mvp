@@ -15,7 +15,7 @@ __webpack_require__.d(__webpack_exports__, {
 // EXTERNAL MODULE: external "next/dist/compiled/react-experimental/jsx-runtime"
 var jsx_runtime_ = __webpack_require__(76931);
 ;// CONCATENATED MODULE: ./public/images/logo/background.jpeg
-/* harmony default export */ const background = ({"src":"/_next/static/media/background.7d2b71fd.jpeg","height":1080,"width":1920,"blurDataURL":"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoKCgoKCgsMDAsPEA4QDxYUExMUFiIYGhgaGCIzICUgICUgMy03LCksNy1RQDg4QFFeT0pPXnFlZXGPiI+7u/sBCgoKCgoKCwwMCw8QDhAPFhQTExQWIhgaGBoYIjMgJSAgJSAzLTcsKSw3LVFAODhAUV5PSk9ecWVlcY+Ij7u7+//CABEIAAUACAMBIgACEQEDEQH/xAAoAAEBAAAAAAAAAAAAAAAAAAAABgEBAQAAAAAAAAAAAAAAAAAABQb/2gAMAwEAAhADEAAAAIcVYf8A/8QAFxABAAMAAAAAAAAAAAAAAAAAAgAEIf/aAAgBAQABPwCmlk//xAAXEQADAQAAAAAAAAAAAAAAAAAAAQQz/9oACAECAQE/AI8Uf//EABcRAAMBAAAAAAAAAAAAAAAAAAAEM4H/2gAIAQMBAT8AZph//9k=","blurWidth":8,"blurHeight":5});
+/* harmony default export */ const background = ({"src":"/_next/static/media/background.7d2b71fd.jpeg","height":1080,"width":1920,"blurDataURL":"data:image/jpeg;base64,/9j/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIfIiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/wAARCAAFAAgDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAZEAACAwEAAAAAAAAAAAAAAAAAAQIFESH/xAAVAQEBAAAAAAAAAAAAAAAAAAAFBv/EABgRAAMBAQAAAAAAAAAAAAAAAAABBCIz/9oADAMBAAIRAxEAPwCJr5yePegArZeaAqFs/9k=","blurWidth":8,"blurHeight":5});
 // EXTERNAL MODULE: ./components/marketplace/background/index.css
 var marketplace_background = __webpack_require__(2032);
 // EXTERNAL MODULE: ./models/brands.ts

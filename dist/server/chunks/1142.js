@@ -33,7 +33,7 @@ var IonIcon_default = /*#__PURE__*/__webpack_require__.n(IonIcon);
 // EXTERNAL MODULE: ./node_modules/react-tiny-popover/dist/Popover.js
 var Popover = __webpack_require__(36413);
 ;// CONCATENATED MODULE: ./public/images/favicon.png
-/* harmony default export */ const favicon = ({"src":"/_next/static/media/favicon.8adc2b25.png","height":32,"width":32,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAABE0lEQVR4nAEIAff+AS1QtOYBAQEZ0uD6/zgmCAH9/v8Ay8/3/y0sCAEBAP/nATJOpv/O5/r/q30yAUZAJgAEBAMA0dXmAE93wv8YCgIBAQAzj/5XNBQBqJhcALi80ADKz+IAKygYAF+IyAAfCwP/ARQ2gf8uHQwArZ1nAAoKCQDO0NwAnKXDAJ254QAsGggAASo9df/W3vYAMSoPAHNjPQBGQzYAEhEQAF1ojgCnvuAAAQAKWP5iYCwBgXtmAL/BywAfHRgAPjwyAGlwiQCYkc3/AQAdTP9IMhz/eHNfASgmIwD/AP8Au73EAF5bmP8kMQ8BAR4pRebi5fMZAPLI/wAADQEAAAUAAAD0/xsnPAH9/gDmDQlhHKeUbNEAAAAASUVORK5CYII=","blurWidth":8,"blurHeight":8});
+/* harmony default export */ const favicon = ({"src":"/_next/static/media/favicon.8adc2b25.png","height":32,"width":32,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAMAAADz0U65AAAAYFBMVEUtULQqSqYxVLgmP4EiP5EZJkMaJkMkSbEXK14LGTjy9frV2OAVI0FBUoAZKlEnRJREW54bMm////+dqMZ7iKiDk7+ruN9hdq6Km840S4yotNMjOnTj5u+do7J4gZcvPWAv54iwAAAACnRSTlPf/////t/f/v7+FeL47QAAAAlwSFlzAAALEwAACxMBAJqcGAAAAEVJREFUeJwFwQUCwCAMBLArnQAtztz+/8slgJmNmQ1AtHu/EmHItW1LSuDj9mdmxlW4iw8FNkhvNVjE7xF5Y8SkTtXp+ANjfgMd507WMgAAAABJRU5ErkJggg==","blurWidth":8,"blurHeight":8});
 ;// CONCATENATED MODULE: ./components/marketplace/header/index.tsx
 /* __next_internal_client_entry_do_not_use__ getTotalPrice,default auto */ 
 
@@ -237,7 +237,7 @@ const HeaderMarketPlace = ({ cartItems, setCart })=>{
                                                             /*#__PURE__*/ jsx_runtime_.jsx("img", {
                                                                 style: {
                                                                     width: "35px",
-                                                                    height: "35px"
+                                                                    maxHeight: "35px"
                                                                 },
                                                                 src: e?.item?.image,
                                                                 alt: "Product Image"

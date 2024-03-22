@@ -108,7 +108,12 @@ const SideBarComponent = ({ user, frameContennt, route })=>{
                             }),
                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                 className: "list",
-                                onClick: ()=>router.push("/inventory"),
+                                onClick: ()=>{
+                                    router.push("/inventory", {});
+                                    setTimeout(()=>{
+                                        window.location.reload();
+                                    }, 1500);
+                                },
                                 children: [
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_5___default()), {
                                         style: {
@@ -232,18 +237,7 @@ const SideBarComponent = ({ user, frameContennt, route })=>{
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"src":"/_next/static/media/blueimage.a34531f7.png","height":194,"width":259,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAGAQMAAADEy024AAAAA1BMVEUAAP79f+LBAAAACklEQVR42mNAAgAADAABbcxrYQAAAABJRU5ErkJggg==","blurWidth":8,"blurHeight":6});
-
-/***/ }),
-
-/***/ 57286:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"src":"/_next/static/media/logopreferente.bbc72056.png","height":200,"width":640,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAADCAYAAACuyE5IAAAAYElEQVR42g3HOxKCMBSG0e8nN+Irlkgtu3C0Y+duwYYZVkHBmwROd/SsPkFyArpr8c6BKX9U3MvaA4tJ+qa01Znd2rj2l1N4eTuXY9yGwvnQGOgH8S9ljhRngQcZR4BxB15DGcQuhSZBAAAAAElFTkSuQmCC","blurWidth":8,"blurHeight":3});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"src":"/_next/static/media/blueimage.a34531f7.png","height":194,"width":259,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAGCAMAAADJ2y/JAAAAA1BMVEUAAP+KeNJXAAAACXBIWXMAAAsTAAALEwEAmpwYAAAADElEQVR4nGNgIAcAAAA2AAG2dLktAAAAAElFTkSuQmCC","blurWidth":8,"blurHeight":6});
 
 /***/ }),
 

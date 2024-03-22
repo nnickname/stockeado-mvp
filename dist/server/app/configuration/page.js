@@ -410,7 +410,7 @@ var configuration = __webpack_require__(38630);
 // EXTERNAL MODULE: ./public/images/logo/blueimage.png
 var blueimage = __webpack_require__(23360);
 ;// CONCATENATED MODULE: ./public/images/logo/background2.jpeg
-/* harmony default export */ const background2 = ({"src":"/_next/static/media/background2.205c3b96.jpeg","height":256,"width":1024,"blurDataURL":"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoKCgoKCgsMDAsPEA4QDxYUExMUFiIYGhgaGCIzICUgICUgMy03LCksNy1RQDg4QFFeT0pPXnFlZXGPiI+7u/sBCgoKCgoKCwwMCw8QDhAPFhQTExQWIhgaGBoYIjMgJSAgJSAzLTcsKSw3LVFAODhAUV5PSk9ecWVlcY+Ij7u7+//CABEIAAIACAMBIgACEQEDEQH/xAAnAAEBAAAAAAAAAAAAAAAAAAAABgEBAAAAAAAAAAAAAAAAAAAAAv/aAAwDAQACEAMQAAAAmg3/AP/EABkQAAEFAAAAAAAAAAAAAAAAAAABBAU0Qf/aAAgBAQABPwCHrO0w/8QAFxEAAwEAAAAAAAAAAAAAAAAAAAJBcf/aAAgBAgEBPwBbp//EABcRAAMBAAAAAAAAAAAAAAAAAAABAjH/2gAIAQMBAT8AnEf/2Q==","blurWidth":8,"blurHeight":2});
+/* harmony default export */ const background2 = ({"src":"/_next/static/media/background2.205c3b96.jpeg","height":256,"width":1024,"blurDataURL":"data:image/jpeg;base64,/9j/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIfIiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/wAARCAACAAgDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAbEAACAQUAAAAAAAAAAAAAAAAAAQQFERUhUf/EABUBAQEAAAAAAAAAAAAAAAAAAAAD/8QAFxEAAwEAAAAAAAAAAAAAAAAAAAECMf/aAAwDAQACEQMRAD8AlaM3jJavrgAKwHiP/9k=","blurWidth":8,"blurHeight":2});
 // EXTERNAL MODULE: ./app/api/userr/call.ts
 var call = __webpack_require__(310);
 // EXTERNAL MODULE: ./node_modules/@reacticons/ionicons/lib/IonIcon.js
@@ -726,6 +726,17 @@ const Page = ()=>{
 
 /***/ }),
 
+/***/ 57286:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"src":"/_next/static/media/logopreferente.bbc72056.png","height":200,"width":640,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAADCAMAAACZFr56AAAAHlBMVEUrQY0bK0ssU7ktSaUdMWEzXNUYJDsYIzwqS6wnQoxrmA7DAAAACnRSTlMEGSAOboSRcmx7+e+bqwAAAAlwSFlzAAALEwAACxMBAJqcGAAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAgSURBVHicY2BkYGBmAGE2dhYWTg5WVgZGRkZGJiYmJgADaQBE56VQMAAAAABJRU5ErkJggg==","blurWidth":8,"blurHeight":3});
+
+/***/ }),
+
 /***/ 38630:
 /***/ (() => {
 
@@ -740,7 +751,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,4185,4997,9816,8284,9636,4328,310,8088], () => (__webpack_exec__(74792)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,4185,4997,9816,8284,1885,4328,310,8088], () => (__webpack_exec__(74792)));
 module.exports = __webpack_exports__;
 
 })();

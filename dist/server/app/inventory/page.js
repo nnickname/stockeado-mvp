@@ -436,7 +436,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_responsive_modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(7654);
 /* harmony import */ var react_responsive_modal_styles_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(42055);
 /* harmony import */ var react_responsive_modal_styles_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_responsive_modal_styles_css__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _models_brands__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(15431);
+/* harmony import */ var _models_brands__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(15431);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(11440);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(57114);
@@ -452,7 +452,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_notifications__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(78644);
 /* harmony import */ var react_excel_renderer__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(37208);
 /* harmony import */ var react_excel_renderer__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(react_excel_renderer__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var _api_orderss_call__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(59198);
 /* __next_internal_client_entry_do_not_use__ default auto */ 
+
 
 
 
@@ -629,7 +631,7 @@ const ModalEditProduct = ({ user, item, makeData })=>{
                                                 value: -1,
                                                 children: "Marca"
                                             }),
-                                            _models_brands__WEBPACK_IMPORTED_MODULE_17__/* .TypeBrands */ .PX.map((e, index)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("option", {
+                                            _models_brands__WEBPACK_IMPORTED_MODULE_18__/* .TypeBrands */ .PX.map((e, index)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("option", {
                                                     value: index + 1,
                                                     children: e
                                                 }, index))
@@ -796,6 +798,7 @@ const TableRow = ({ user, inventoryData, realInventoryData, setInventoryRealData
     const [brand, setBrand] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(-1);
     const [onMP, setOnMP] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(null);
     const [model, setModel] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(null);
+    const router = (0,next_navigation__WEBPACK_IMPORTED_MODULE_8__.useRouter)();
     const COLUMNS = [
         {
             label: "SKU",
@@ -819,7 +822,7 @@ const TableRow = ({ user, inventoryData, realInventoryData, setInventoryRealData
             renderCell: (item)=>item.sellings
         },
         {
-            label: "Precio",
+            label: "Precio sin igv",
             renderCell: (item)=>"s/." + item.price
         },
         {
@@ -858,14 +861,14 @@ const TableRow = ({ user, inventoryData, realInventoryData, setInventoryRealData
                                 cursor: "pointer",
                                 marginRight: ".5rem"
                             },
-                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((next_link__WEBPACK_IMPORTED_MODULE_7___default()), {
+                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
                                 style: {
                                     fontSize: "1rem",
                                     color: "#3662E3",
                                     marginLeft: ".5rem",
                                     marginRight: ".5rem"
                                 },
-                                href: "https://stockeado-mvp.vercel.app/marketplace/item?id=" + item?._id,
+                                onClick: ()=>router.push("/marketplace/item?id=" + item?._id),
                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_3___default()), {
                                     name: "eye-outline"
                                 })
@@ -992,12 +995,13 @@ const TableRow = ({ user, inventoryData, realInventoryData, setInventoryRealData
                         children: [
                             "Productos en MarketPlace ",
                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)((next_link__WEBPACK_IMPORTED_MODULE_7___default()), {
+                                target: "_blank",
                                 style: {
                                     fontSize: "1rem",
                                     color: "#3662E3",
                                     marginLeft: ".5rem"
                                 },
-                                href: "https://stockeado-mvp.vercel.app/marketplace/shop?id=" + user?._id,
+                                href: "/marketplace/shop?id=" + user?._id,
                                 children: [
                                     "Mi URL",
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_3___default()), {
@@ -1249,7 +1253,7 @@ const TableRow = ({ user, inventoryData, realInventoryData, setInventoryRealData
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
                                                 value: sku,
                                                 onChange: (e)=>setSku(e.target.value),
-                                                placeholder: "SKU",
+                                                placeholder: "SKU/id",
                                                 className: "border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none",
                                                 style: {
                                                     background: "transparent"
@@ -1283,18 +1287,18 @@ const TableRow = ({ user, inventoryData, realInventoryData, setInventoryRealData
                                                 children: [
                                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("option", {
                                                         value: -1,
-                                                        children: "Marca"
+                                                        children: "Marca Producto"
                                                     }),
-                                                    _models_brands__WEBPACK_IMPORTED_MODULE_17__/* .TypeBrands */ .PX.map((e, index)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("option", {
+                                                    _models_brands__WEBPACK_IMPORTED_MODULE_18__/* .TypeBrands */ .PX.map((e, index)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("option", {
                                                             value: index + 1,
                                                             children: e
                                                         }, index))
                                                 ]
                                             }),
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
-                                                value: model,
-                                                onChange: (e)=>setModel(e.target.value),
-                                                placeholder: "Modelo de auto",
+                                                value: numberPart,
+                                                onChange: (e)=>setNumberPart(e.target.value),
+                                                placeholder: "N\xfamero de parte(Ej: L33D15241)",
                                                 className: "border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none",
                                                 style: {
                                                     background: "transparent"
@@ -1310,8 +1314,14 @@ const TableRow = ({ user, inventoryData, realInventoryData, setInventoryRealData
                                         children: [
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
                                                 value: price,
-                                                onChange: (e)=>setPrice(e.target.value),
-                                                placeholder: "Precio(ej 0.68)",
+                                                onChange: (e)=>{
+                                                    function getPerc(num, percent) {
+                                                        return Number(num) - Number(percent) / 100 * Number(num);
+                                                    }
+                                                    setPrice(e.target.value);
+                                                    setPriceSelling((Number(e.target.value) + getPerc(Number(e.target.value), 82)).toFixed(2));
+                                                },
+                                                placeholder: "Precio sin IGV(ej 0.68)",
                                                 className: "border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none",
                                                 style: {
                                                     background: "transparent"
@@ -1319,8 +1329,8 @@ const TableRow = ({ user, inventoryData, realInventoryData, setInventoryRealData
                                             }),
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
                                                 value: priceSelling,
-                                                onChange: (e)=>setPriceSelling(e.target.value),
-                                                placeholder: "Precio de venta sin igv(ej 1.68)",
+                                                disabled: true,
+                                                placeholder: "Precio venta con IGV",
                                                 className: "border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none",
                                                 style: {
                                                     background: "transparent"
@@ -1329,9 +1339,9 @@ const TableRow = ({ user, inventoryData, realInventoryData, setInventoryRealData
                                         ]
                                     }),
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
-                                        value: numberPart,
-                                        onChange: (e)=>setNumberPart(e.target.value),
-                                        placeholder: "N\xfamero de parte",
+                                        value: model,
+                                        onChange: (e)=>setModel(e.target.value),
+                                        placeholder: "Modelo de auto(Ej: Suzuki Vitara del 2006 al 2018)",
                                         className: "border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none",
                                         style: {
                                             background: "transparent"
@@ -1340,7 +1350,7 @@ const TableRow = ({ user, inventoryData, realInventoryData, setInventoryRealData
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
                                         value: description,
                                         onChange: (e)=>setDescription(e.target.value),
-                                        placeholder: "Descripci\xf3n",
+                                        placeholder: "Opcional",
                                         className: "border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none",
                                         style: {
                                             background: "transparent"
@@ -1507,6 +1517,7 @@ const TableRow = ({ user, inventoryData, realInventoryData, setInventoryRealData
 const LayoutHubInventoryPage = ()=>{
     const [realInventoryData, setRealInventoryData] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)();
     const [inventoryData, setInventory] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(null);
+    const [ordersData, setOrderData] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)([]);
     const router = (0,next_navigation__WEBPACK_IMPORTED_MODULE_8__.useRouter)();
     const MakeData = async (putOpen)=>{
         const inventoryCast = await (0,_api_inventoryy_call__WEBPACK_IMPORTED_MODULE_9__/* .getInventory */ .$v)();
@@ -1526,6 +1537,8 @@ const LayoutHubInventoryPage = ()=>{
             router.push("/");
         }
         setUser(userr);
+        const ordersCast = await (0,_api_orderss_call__WEBPACK_IMPORTED_MODULE_17__/* .getOrders */ .AU)(userr?._id);
+        setOrderData(ordersCast);
         await MakeData(true);
     };
     (0,react__WEBPACK_IMPORTED_MODULE_4__.useEffect)(()=>{
@@ -1557,7 +1570,7 @@ const LayoutHubInventoryPage = ()=>{
                             children: [
                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_panel_inventoryresume__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .ZP, {
                                     items: realInventoryData,
-                                    orders: [],
+                                    orders: ordersData,
                                     user: user
                                 }),
                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
@@ -1661,7 +1674,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,8284,7654,894,6127,9636,4328,310,8088,627,8773], () => (__webpack_exec__(91694)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,8284,7654,894,6127,1885,4328,310,4892,8088,627,8773], () => (__webpack_exec__(91694)));
 module.exports = __webpack_exports__;
 
 })();

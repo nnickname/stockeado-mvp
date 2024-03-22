@@ -799,17 +799,6 @@ const Page = ()=>{
 
 /***/ }),
 
-/***/ 57286:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"src":"/_next/static/media/logopreferente.bbc72056.png","height":200,"width":640,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAADCAYAAACuyE5IAAAAYElEQVR42g3HOxKCMBSG0e8nN+Irlkgtu3C0Y+duwYYZVkHBmwROd/SsPkFyArpr8c6BKX9U3MvaA4tJ+qa01Znd2rj2l1N4eTuXY9yGwvnQGOgH8S9ljhRngQcZR4BxB15DGcQuhSZBAAAAAElFTkSuQmCC","blurWidth":8,"blurHeight":3});
-
-/***/ }),
-
 /***/ 34355:
 /***/ (() => {
 
@@ -852,7 +841,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,3800,9636,4328,1142,9198,544], () => (__webpack_exec__(13165)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,3800,1885,4328,1142,4892,544], () => (__webpack_exec__(13165)));
 module.exports = __webpack_exports__;
 
 })();
