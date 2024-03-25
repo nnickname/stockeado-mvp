@@ -12,7 +12,7 @@ import HeaderMarketPlace from "@/components/marketplace/header";
 import { InventoryModel } from "@/models/inventoryModel";
 import '../../../components/marketplace/background/index.css';
 import { CartProps } from "@/models/ordersModel";
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { findProduct } from "@/app/api/marketplacee/call";
 import { Popover } from "react-tiny-popover";
 import IonIcon from "@reacticons/ionicons";
@@ -24,6 +24,7 @@ import Footer from "@/components/dashboard/Footer";
 
 
 const LayoutMarketPlaceShop = () => {
+    const router = useRouter();
     const search = useSearchParams();
     const id = search.get('id');
     const [user, setUser] = useState<UserModel>();
@@ -33,10 +34,13 @@ const LayoutMarketPlaceShop = () => {
     const [ammountItem, setAmmountItem] = useState<number>(0);
 
     const toUser = async () => {
+      if(id !== null && id?.length > 0){
         const userr = await getMarketPlace(id);
         setInventoryRealData(userr?.items ?? []);
         setInventoryData(userr?.items ?? []);
         setUser(userr?.user);
+      }
+
     }
     const filterByBrand = (brand: number, checked: boolean) => {
       if(checked){

@@ -477,6 +477,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const LayoutMarketPlaceShop = ()=>{
+    const router = (0,next_navigation__WEBPACK_IMPORTED_MODULE_7__.useRouter)();
     const search = (0,next_navigation__WEBPACK_IMPORTED_MODULE_7__.useSearchParams)();
     const id = search.get("id");
     const [user, setUser] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)();
@@ -485,10 +486,12 @@ const LayoutMarketPlaceShop = ()=>{
     const [cart, setCart] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)([]);
     const [ammountItem, setAmmountItem] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(0);
     const toUser = async ()=>{
-        const userr = await (0,_app_api_inventoryy_call__WEBPACK_IMPORTED_MODULE_1__/* .getMarketPlace */ .RF)(id);
-        setInventoryRealData(userr?.items ?? []);
-        setInventoryData(userr?.items ?? []);
-        setUser(userr?.user);
+        if (id !== null && id?.length > 0) {
+            const userr = await (0,_app_api_inventoryy_call__WEBPACK_IMPORTED_MODULE_1__/* .getMarketPlace */ .RF)(id);
+            setInventoryRealData(userr?.items ?? []);
+            setInventoryData(userr?.items ?? []);
+            setUser(userr?.user);
+        }
     };
     const filterByBrand = (brand, checked)=>{
         if (checked) {

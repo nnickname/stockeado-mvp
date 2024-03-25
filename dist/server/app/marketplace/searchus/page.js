@@ -473,14 +473,17 @@ const LayoutMarketPlaceFindItem = ()=>{
     const [realItems, setRealItems] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)([]);
     const [items, setItems] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(null);
     const [cart, setCart] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)([]);
+    const router = (0,next_navigation__WEBPACK_IMPORTED_MODULE_6__.useRouter)();
     const search = (0,next_navigation__WEBPACK_IMPORTED_MODULE_6__.useSearchParams)();
     const name = search.get("name");
     const [ammountItem, setAmmountItem] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(0);
     const findStaticProducts = async ()=>{
-        if (name?.length > 3) {
-            const response = await (0,_api_marketplacee_call__WEBPACK_IMPORTED_MODULE_7__/* .findProduct */ .V_)(name);
-            if (response !== null) setItems(response ?? []);
-            if (response !== null) setRealItems(response);
+        if (name !== null) {
+            if (name?.length > 3) {
+                const response = await (0,_api_marketplacee_call__WEBPACK_IMPORTED_MODULE_7__/* .findProduct */ .V_)(name);
+                if (response !== null) setItems(response ?? []);
+                if (response !== null) setRealItems(response);
+            }
         }
     };
     const filterByBrand = (brand, checked)=>{

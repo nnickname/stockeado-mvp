@@ -1310,14 +1310,16 @@ const ConfirmedPaymentView = ({ cartItems, order })=>{
 
 
 const LayoutMarketPlaceOrderView = ()=>{
+    const router = (0,navigation.useRouter)();
     const search = (0,navigation.useSearchParams)();
     const id = search.get("id");
     const [cart, setCart] = (0,react_experimental_.useState)();
     const [order, setOrder] = (0,react_experimental_.useState)(null);
     const getStaticOrder = async ()=>{
-        setOrder(await (0,call/* getOrder */.co)(id) ?? {});
+        if (id !== null && id?.length > 0) {
+            setOrder(await (0,call/* getOrder */.co)(id) ?? {});
+        }
     };
-    const router = (0,navigation.useRouter)();
     (0,react_experimental_.useEffect)(()=>{
         setCart(JSON.parse(sessionStorage.getItem("cart")));
         getStaticOrder();

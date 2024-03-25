@@ -8,7 +8,7 @@ import '../index.css';
 import { useEffect, useState } from "react";
 import { InventoryModel } from "@/models/inventoryModel";
 import { CartProps } from "@/models/ordersModel";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { findProduct } from "../../api/marketplacee/call";
 import CardMarketPlace from "@/components/marketplace/item";
 import { Popover } from "react-tiny-popover";
@@ -21,14 +21,17 @@ const LayoutMarketPlaceFindItem = () => {
     const [realItems, setRealItems] = useState<InventoryModel[]>([]);
     const [items, setItems] = useState<InventoryModel[]>(null);
     const [cart, setCart] = useState<CartProps[]>([]);
+    const router = useRouter();
     const search = useSearchParams();
     const name = search.get('name');
     const [ammountItem, setAmmountItem] = useState<number>(0);
     const findStaticProducts = async() => {
-      if(name?.length > 3) {
-        const response = await findProduct(name);
-        if(response !== null) setItems(response ?? []);
-        if(response !== null) setRealItems(response);
+      if(name !== null){
+        if(name?.length > 3) {
+          const response = await findProduct(name);
+          if(response !== null) setItems(response ?? []);
+          if(response !== null) setRealItems(response);
+        }
       }
     }
     const filterByBrand = (brand: number, checked: boolean) => {

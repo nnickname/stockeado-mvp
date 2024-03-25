@@ -13,6 +13,7 @@ import { TypeBrands } from '@/models/brands';
 import Link from 'next/link';
 import Footer from '@/components/dashboard/Footer';
 const LayoutMarketPlaceItem = () => {
+    const router = useRouter();
     const search = useSearchParams();
     const id = search.get('id');
     const [cart, setCart] = useState<CartProps[]>([]);
@@ -21,12 +22,13 @@ const LayoutMarketPlaceItem = () => {
     const [ammount, setAmmount] = useState<number>(0);
 
     const getData = async() => {
-        const responseItem = await getInventoryById(id);
-        const responseShop = await getUserById(responseItem?.owner_id);
-        setItem(responseItem);
-        setShop(responseShop);
+        if(id !== null && id?.length > 0){
+            const responseItem = await getInventoryById(id);
+            const responseShop = await getUserById(responseItem?.owner_id);
+            setItem(responseItem);
+            setShop(responseShop);
+        }
     }
-    const router = useRouter();
     const shopCart = () => {
         if(ammount > 0){
             const cartCast = [{

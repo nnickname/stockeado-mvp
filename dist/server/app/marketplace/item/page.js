@@ -467,6 +467,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const LayoutMarketPlaceItem = ()=>{
+    const router = (0,next_navigation__WEBPACK_IMPORTED_MODULE_4__.useRouter)();
     const search = (0,next_navigation__WEBPACK_IMPORTED_MODULE_4__.useSearchParams)();
     const id = search.get("id");
     const [cart, setCart] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)([]);
@@ -474,12 +475,13 @@ const LayoutMarketPlaceItem = ()=>{
     const [shop, setShop] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(null);
     const [ammount, setAmmount] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(0);
     const getData = async ()=>{
-        const responseItem = await (0,_app_api_inventoryy_call__WEBPACK_IMPORTED_MODULE_1__/* .getInventoryById */ .SI)(id);
-        const responseShop = await (0,_app_api_userr_call__WEBPACK_IMPORTED_MODULE_2__/* .getUserById */ .GA)(responseItem?.owner_id);
-        setItem(responseItem);
-        setShop(responseShop);
+        if (id !== null && id?.length > 0) {
+            const responseItem = await (0,_app_api_inventoryy_call__WEBPACK_IMPORTED_MODULE_1__/* .getInventoryById */ .SI)(id);
+            const responseShop = await (0,_app_api_userr_call__WEBPACK_IMPORTED_MODULE_2__/* .getUserById */ .GA)(responseItem?.owner_id);
+            setItem(responseItem);
+            setShop(responseShop);
+        }
     };
-    const router = (0,next_navigation__WEBPACK_IMPORTED_MODULE_4__.useRouter)();
     const shopCart = ()=>{
         if (ammount > 0) {
             const cartCast = [

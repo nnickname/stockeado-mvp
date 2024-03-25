@@ -19,14 +19,16 @@ import ConfirmedPaymentView from "./confirmedPayment";
 
 
 const LayoutMarketPlaceOrderView = () => {
+    const router = useRouter();
     const search = useSearchParams();
     const id = search.get('id');
     const [cart, setCart] = useState<CartProps[]>();
     const [order, setOrder] = useState<OrderModel>(null);
     const getStaticOrder = async () => {
-        setOrder(await getOrder(id) ?? {});
+        if(id !== null && id?.length > 0){
+            setOrder(await getOrder(id) ?? {});
+        }
     }
-    const router = useRouter();
     
     useEffect(() => {
         setCart(JSON.parse(sessionStorage.getItem('cart')));
