@@ -16,8 +16,9 @@ type HeaderMarketPlaceProps = {
   setCart: any
 }
 
-export const getTotalPrice = (cartItems: CartProps[] ) => {
+export const getTotalPrice = (cartItems: CartProps[], deliveried: boolean) => {
   var price: number = 0;
+  if(deliveried) price = 15.0;
   cartItems?.map((e) => {
     price = price + (Number(e?.item?.priceSelling) * e?.ammount);
   })
@@ -165,7 +166,7 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
                       </div>
                       <div style={{marginTop: '1rem', display: 'flex', justifyContent: 'space-between'}}>
                         <p style={{fontSize: '1.1rem'}}>Total</p>
-                        <p>s/. {Number(getTotalPrice(cartItems)).toFixed(2)}</p>
+                        <p>s/. {Number(getTotalPrice(cartItems, false)).toFixed(2)}</p>
                       </div>
                       <button onClick={() => router.push('/marketplace/payment')} style={{padding: '.5rem', textAlign: 'center', width:'100%', background: 'linear-gradient(180deg, #127FFF 0%, #3662E3 100%)', color: 'white'}}>Ir a pagar</button>
                     </div>

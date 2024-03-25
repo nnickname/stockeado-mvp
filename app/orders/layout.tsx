@@ -40,11 +40,11 @@ const OrdersLayoutPage = () => {
         { label: 'Dirección', renderCell: (item) => <p>{item?.direction}</p> },
         {
           label: 'Total',
-          renderCell: (item) => <p>{'s/. ' + Number(getTotalPrice(item?.items)).toFixed(2)}</p>,
+          renderCell: (item) => <p>{'s/. ' + Number(getTotalPrice(item?.items, true)).toFixed(2)}</p>,
         },
         { label: 'Fecha maxima', renderCell: (item) => <p>{new Date(item.maxDate).getDay()}/
         {new Date(item.maxDate).getMonth()}/
-        {new Date(item.maxDate).getFullYear()} <span style={{color: 'red'}}>{item.state < 2 ? <IonIcon name="alert-outline"/>: ''}</span> 
+        {new Date(item.maxDate).getFullYear()} <span style={{color: 'red'}}>{item.state < 3 ? <IonIcon name="alert-outline"/>: ''}</span> 
         </p>},
         {
           label: '',

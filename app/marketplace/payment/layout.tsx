@@ -23,13 +23,17 @@ const LayoutMarketPlacePayment = () => {
     const router = useRouter();
     const [name, setName] = useState<string>('');
     const [lastname, setLastName] = useState<string>('');
+    const [nameShop, setNameShop] = useState<string>('');
+    const [phone, setPhone] = useState<string>('');
+
+    const [ruc, setRuc] = useState<string>('');
     const [direction, setDirection] = useState<string>('');
     const [maxDate, setMaxDate] = useState<string>(null);
     const [cart, setCart] = useState<CartProps[]>([]);
     const [paymentSelected, setPaymentSelected] = useState<Number>(0);
 
     const buildForm = async () => {
-        if(name !== '' && lastname !== '' && direction !== '' && maxDate !== null){
+        if(phone !== '' && ruc !== '' && nameShop !== '' && name !== '' && lastname !== '' && direction !== '' && maxDate !== null){
             if(cart?.length > 0){
                 const body = {
                     name,
@@ -38,11 +42,14 @@ const LayoutMarketPlacePayment = () => {
                     maxDate,
                     payType: paymentSelected,
                     state: 0,
+                    nameShop,
+                    ruc,
+                    phone,
                     items: cart
                 }
                 const response = await createOrder(body);
                 if(response !== null){
-                    NotificationManager.success('Creaste un pedido, espera que sea confirmado', 'Creado');
+                    NotificationManager.success('Creaste una nueva orden', 'Creado');
                     router.push('/marketplace/order?id=' + response?._id);
                 }
             } else NotificationManager.error('No tienes elementos en el carrito.', 'Error');
@@ -54,14 +61,18 @@ const LayoutMarketPlacePayment = () => {
         setCart(JSON.parse(sessionStorage.getItem('cart')));
     }, []);
     return <div style={{margin: '0px', padding: '0px'}}>
-        <p style={{padding: '1rem', color: '#3662E3', cursor: 'pointer'}} onClick={() => router.push('/marketplace')}><IonIcon name="chevron-back-outline"/> Marketplace</p>
+        <p style={{padding: '1rem', color: '#3662E3', cursor: 'pointer'}} onClick={() => router.push('/marketplace')}><IonIcon name="chevron-back-outline"/> Regresar al Marketplace</p>
 
         <div className="payment">
             <div className="selectPayment">
             <img style={{marginRight: 'auto', marginLeft: 'auto', maxWidth: '250px'}} src={Logo.src} alt='LogoStockeado'/>
 
-                <h1 style={{marginTop: '1rem', marginBottom: '1rem'}}>1. Introduce tus datos y la fecha maxima de envio</h1>
+                <h1 style={{marginTop: '1rem', marginBottom: '1rem'}}>1. Introduce tus datos y la fecha máxima de envío. </h1>
                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                    <input value={nameShop} onChange={(e) => setNameShop(e.target.value)} placeholder="Nombre del taller"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+                    <input value={ruc} onChange={(e) => setRuc(e.target.value)} placeholder="RUC" className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+                </div>
+                <div style={{marginTop: '1rem', display: 'flex', justifyContent: 'space-between'}}>
                     <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Nombre"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
                     <input value={lastname} onChange={(e) => setLastName(e.target.value)} placeholder="Apellido" className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
                 </div>
@@ -69,23 +80,11 @@ const LayoutMarketPlacePayment = () => {
                     <input value={direction} onChange={(e) => setDirection(e.target.value)} placeholder="Dirección"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
                     <input value={maxDate} onChange={(e) => setMaxDate(e.target.value)} placeholder="Fecha maxima" type='datetime-local' className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
                 </div>
+                <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Celular"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+
                 
-                <h1 style={{marginTop: '2rem', marginBottom: '2rem'}}>2. Selecciona un medio de pago</h1>
-                <div className="cards">
-                    <div  className={'card ' + (paymentSelected === 0 ? 'selected': '')} onClick={() => setPaymentSelected(0)}>
-                        <p>Transferencia</p>
-                    </div>
-                    <div className={'carddisabled ' + (paymentSelected === 1 ? 'selected': '')} onClick={() => setPaymentSelected(1)}>
-                        <p>Tarjeta de credito o debito</p>
-
-                    </div>
-                    <div  className={'card ' + (paymentSelected === 2 ? 'selected': '')} onClick={() => setPaymentSelected(2)}>
-                        <p>Efectivo</p>
-
-                    </div>
-                </div>
-                {paymentSelected === 0 ? <BankOptions/> : <></>}
-                <h1 style={{marginTop: '2rem', marginBottom: '2rem'}}>3. Revisa tu orden</h1>
+                <h1 style={{marginTop: '2rem', marginBottom: '1rem'}}>2. Revisa tu orden. </h1>
+                <p style={{color: 'grey', marginBottom: '2rem', fontSize: '.9rem'}}>Antes de realizar la compra, confirma el pedido para poder calcular la fecha, monto de envío y hora confirmada por el proveedor. Al colocar “Confirmar Pedido” se le notificará al proveedor, Tiempo estimado de 5 a 10 minutos para confirmar orden.</p>
 
                 {cart?.map((e, index) => {
                             return <div key={index}>
@@ -106,16 +105,18 @@ const LayoutMarketPlacePayment = () => {
                             </div>
                 })}
                 <p style={{color: 'grey', textAlign: 'center'}}>{cart?.length === 0 ? 'No encontramos nada' : ''}</p>        
-                <div style={{marginTop: '2rem', display: 'flex', justifyContent: 'space-between'}}>
+                <div style={{marginTop: '3rem', display: 'flex', justifyContent: 'space-between'}}>
                     <p style={{fontSize: '1.1rem'}}>Total</p>
-                    <p >s/. {Number(getTotalPrice(cart)).toFixed(2)}</p>
+                    <p >s/. {Number(getTotalPrice(cart, false)).toFixed(2)}</p>
                 </div>
-                <button type='button' onClick={() => buildForm()} style={{padding: '.5rem', textAlign: 'center', width:'100%', background: 'linear-gradient(180deg, #127FFF 0%, #3662E3 100%)', color: 'white'}}>Confirmar</button>
+                <button type='button' onClick={() => buildForm()} style={{marginTop: '1rem', padding: '.5rem', textAlign: 'center', width:'100%', background: 'linear-gradient(180deg, #127FFF 0%, #3662E3 100%)', color: 'white'}}>Confirmar Pedido</button>
+                
                 <div style={{textAlign: 'center'}}>
+                    <p style={{marginTop: '3rem', fontSize: '1rem'}}>¿Tenes alguna duda?</p>
                     <button className="btn-whatsapp">
                         
                         <IonIcon style={{marginRight: '1rem'}} name="logo-whatsapp"/>
-                        ¿Necesitas ayuda?
+                        Escribenos por WhatsApp
                     </button>
                 </div>
                 

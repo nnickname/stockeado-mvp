@@ -2,6 +2,7 @@
     width: 100%;
     display: flex;
     margin-top: 1rem;
+    text-align: center;
 }
 
 .steptsorders .marked{
@@ -11,9 +12,20 @@
     color: green;
     font-size: 1.1rem;
     padding-bottom: 1rem;
-    border-bottom: 2px solid rgb(97, 143, 97);;
 }
+.steptsorders .marked p{
+    border-bottom: 2px solid rgb(97, 143, 97);
+    padding: 1rem;
+    margin-bottom: 1rem;
 
+}
+.steptsorders .pending p{
+    border-bottom: 2px solid rgb(213, 215, 194);
+    padding: 1rem;
+    margin-bottom: 1rem;
+
+
+}
 .steptsorders .pending{
     width: 100%;
     cursor: pointer;
@@ -21,5 +33,6 @@
     color: rgb(124, 124, 119);
     font-size: 1.1rem;
     padding-bottom: 1rem;
-    border-bottom: 2px solid rgb(213, 215, 194);
 }
+
+

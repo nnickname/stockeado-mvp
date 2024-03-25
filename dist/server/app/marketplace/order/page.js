@@ -422,45 +422,882 @@ const routeModule = new AppPageRouteModule({
 /***/ 89125:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 51475))
+Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 64867))
 
 /***/ }),
 
 /***/ 27583:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 51475))
+Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 64867))
 
 /***/ }),
 
-/***/ 51475:
+/***/ 64867:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
+// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76931);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(17640);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(35514);
-/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_index_css__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _components_marketplace_header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(71142);
-/* harmony import */ var _components_marketplace_background_index_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(2032);
-/* harmony import */ var _components_marketplace_background_index_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_components_marketplace_background_index_css__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(57114);
-/* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_navigation__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _public_images_logo_logopreferente_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(57286);
-/* harmony import */ var _payment_index_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(68890);
-/* harmony import */ var _payment_index_css__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_payment_index_css__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _payment_bank__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(544);
-/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(49462);
-/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_index_css__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _reacticons_ionicons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(99816);
-/* harmony import */ var _reacticons_ionicons__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _app_api_orderss_call__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(59198);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "default": () => (/* binding */ layout)
+});
+
+// EXTERNAL MODULE: external "next/dist/compiled/react-experimental/jsx-runtime"
+var jsx_runtime_ = __webpack_require__(76931);
+// EXTERNAL MODULE: external "next/dist/compiled/react-experimental"
+var react_experimental_ = __webpack_require__(17640);
+// EXTERNAL MODULE: ./app/marketplace/index.css
+var marketplace = __webpack_require__(35514);
+// EXTERNAL MODULE: ./components/marketplace/background/index.css
+var background = __webpack_require__(2032);
+// EXTERNAL MODULE: ./node_modules/next/navigation.js
+var navigation = __webpack_require__(57114);
+// EXTERNAL MODULE: ./app/marketplace/payment/index.css
+var payment = __webpack_require__(68890);
+// EXTERNAL MODULE: ./app/marketplace/order/index.css
+var order = __webpack_require__(49462);
+// EXTERNAL MODULE: ./node_modules/@reacticons/ionicons/lib/IonIcon.js
+var IonIcon = __webpack_require__(99816);
+var IonIcon_default = /*#__PURE__*/__webpack_require__.n(IonIcon);
+// EXTERNAL MODULE: ./app/api/orderss/call.ts
+var call = __webpack_require__(59198);
+// EXTERNAL MODULE: ./components/marketplace/header/index.tsx + 1 modules
+var header = __webpack_require__(71142);
+// EXTERNAL MODULE: ./public/images/logo/logopreferente.png
+var logopreferente = __webpack_require__(57286);
+// EXTERNAL MODULE: ./app/marketplace/payment/bank.tsx + 2 modules
+var bank = __webpack_require__(35889);
+// EXTERNAL MODULE: ./node_modules/react-responsive-modal/dist/index.js
+var dist = __webpack_require__(7654);
+// EXTERNAL MODULE: ./node_modules/react-responsive-modal/styles.css
+var styles = __webpack_require__(42055);
+;// CONCATENATED MODULE: ./app/marketplace/order/awaitPayment.tsx
+/* __next_internal_client_entry_do_not_use__ default auto */ 
+
+
+
+
+
+
+
+
+
+const AwaitPaymentView = ({ cartItems, order })=>{
+    const router = (0,navigation.useRouter)();
+    const [open, setOpen] = (0,react_experimental_.useState)();
+    const confirmPayment = async ()=>{
+        const response = await (0,call/* updateOrderState */.oW)({
+            _id: order?._id,
+            state: 2
+        });
+        if (response !== null) {
+            window.location.reload();
+        }
+    };
+    return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+        children: [
+            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                children: [
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
+                        style: {
+                            padding: "1rem",
+                            color: "#3662E3",
+                            cursor: "pointer"
+                        },
+                        onClick: ()=>router.push("/marketplace"),
+                        children: [
+                            /*#__PURE__*/ jsx_runtime_.jsx((IonIcon_default()), {
+                                name: "chevron-back-outline"
+                            }),
+                            " Regresar al Marketplace"
+                        ]
+                    }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                        className: "payment",
+                        children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                            className: "selectPayment",
+                            children: [
+                                /*#__PURE__*/ jsx_runtime_.jsx("img", {
+                                    style: {
+                                        marginRight: "auto",
+                                        marginLeft: "auto",
+                                        maxWidth: "250px",
+                                        marginBottom: "2rem"
+                                    },
+                                    src: logopreferente/* default */.Z?.src,
+                                    alt: "LogoStockeado"
+                                }),
+                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                    style: {
+                                        display: "flex",
+                                        justifyContent: "space-between"
+                                    },
+                                    children: [
+                                        /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                            style: {
+                                                display: "flex",
+                                                marginRight: "auto"
+                                            },
+                                            children: [
+                                                Number(order?.state) > 0 ? /*#__PURE__*/ jsx_runtime_.jsx((IonIcon_default()), {
+                                                    style: {
+                                                        color: "green",
+                                                        fontSize: "1.7rem"
+                                                    },
+                                                    name: "checkmark-circle"
+                                                }) : /*#__PURE__*/ jsx_runtime_.jsx((IonIcon_default()), {
+                                                    style: {
+                                                        color: "#F29339",
+                                                        fontSize: "1.7rem"
+                                                    },
+                                                    name: "warning-outline"
+                                                }),
+                                                /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                                    style: {
+                                                        fontWeight: "500",
+                                                        marginLeft: ".5rem",
+                                                        fontSize: "1.2rem"
+                                                    },
+                                                    children: Number(order?.state) > 0 ? "Pedido Confirmado" : "Pedido Pendiente"
+                                                })
+                                            ]
+                                        }),
+                                        /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
+                                            style: {
+                                                fontWeight: "500",
+                                                marginRight: "auto",
+                                                color: "tomato"
+                                            },
+                                            children: [
+                                                " ",
+                                                Number(order?.state) >= 1 ? "Pendiente Pago" : ""
+                                            ]
+                                        })
+                                    ]
+                                }),
+                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                    style: {
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                        marginTop: "1rem"
+                                    },
+                                    children: [
+                                        /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
+                                            style: {
+                                                fontWeight: "500"
+                                            },
+                                            children: [
+                                                "Taller: ",
+                                                /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                                    style: {
+                                                        marginLeft: ".5rem",
+                                                        fontWeight: "300"
+                                                    },
+                                                    children: order?.nameShop
+                                                })
+                                            ]
+                                        }),
+                                        /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
+                                            style: {
+                                                fontWeight: "500"
+                                            },
+                                            children: [
+                                                " Direcci\xf3n: ",
+                                                /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                                    style: {
+                                                        marginLeft: ".5rem",
+                                                        fontWeight: "300"
+                                                    },
+                                                    children: order?.direction
+                                                })
+                                            ]
+                                        })
+                                    ]
+                                }),
+                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                    style: {
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                        marginTop: ".8rem"
+                                    },
+                                    children: [
+                                        /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
+                                            style: {
+                                                fontWeight: "500"
+                                            },
+                                            children: [
+                                                "Nombre: ",
+                                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("span", {
+                                                    style: {
+                                                        marginLeft: ".5rem",
+                                                        fontWeight: "300"
+                                                    },
+                                                    children: [
+                                                        order?.name + " " + order?.lastname,
+                                                        " "
+                                                    ]
+                                                })
+                                            ]
+                                        }),
+                                        /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
+                                            style: {
+                                                fontWeight: "500"
+                                            },
+                                            children: [
+                                                " Fecha y hora de env\xedo: ",
+                                                /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                                    style: {
+                                                        marginLeft: ".5rem",
+                                                        fontWeight: "300"
+                                                    },
+                                                    children: order?.maxDate
+                                                })
+                                            ]
+                                        })
+                                    ]
+                                }),
+                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                    children: [
+                                        /*#__PURE__*/ jsx_runtime_.jsx("h2", {
+                                            style: {
+                                                fontWeight: "600",
+                                                marginTop: "1rem",
+                                                marginBottom: ".5rem"
+                                            },
+                                            children: "Productos:"
+                                        }),
+                                        /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                            style: {
+                                                width: "100%",
+                                                height: "1px",
+                                                background: "rgba(0, 0, 0, 0.2)"
+                                            }
+                                        }),
+                                        /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                            style: {
+                                                display: "flex",
+                                                justifyContent: "space-between",
+                                                paddingBottom: "1rem",
+                                                marginTop: "1rem"
+                                            },
+                                            children: [
+                                                /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                                    className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
+                                                    children: "Imagen"
+                                                }),
+                                                /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                                    className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
+                                                    children: "Nombre"
+                                                }),
+                                                /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                                    className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
+                                                    children: "Cantidad"
+                                                }),
+                                                /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                                    className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
+                                                    children: "Precio"
+                                                })
+                                            ]
+                                        }),
+                                        cartItems?.length === 0 ? /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                            style: {
+                                                textAlign: "center",
+                                                color: "grey"
+                                            },
+                                            children: "Todavia no a\xf1adiste nada"
+                                        }) : "",
+                                        cartItems?.map((e, index)=>{
+                                            const nameString = e?.item?.name + " " + e?.item?.model;
+                                            return /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                                children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                                    style: {
+                                                        width: "100%",
+                                                        display: "flex",
+                                                        justifyContent: "space-between",
+                                                        borderBottom: "1px solid rgba(220, 220, 220, .3)"
+                                                    },
+                                                    children: [
+                                                        /*#__PURE__*/ jsx_runtime_.jsx("img", {
+                                                            style: {
+                                                                width: "85px",
+                                                                maxHeight: "85px"
+                                                            },
+                                                            src: e?.item?.image,
+                                                            alt: "Product Image"
+                                                        }),
+                                                        /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
+                                                            style: {
+                                                                maxWidth: "200px"
+                                                            },
+                                                            className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
+                                                            children: [
+                                                                nameString.substring(0, 30),
+                                                                "..."
+                                                            ]
+                                                        }),
+                                                        /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                                            className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
+                                                            children: String(e?.ammount)
+                                                        }),
+                                                        /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
+                                                            className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
+                                                            children: [
+                                                                "s/. ",
+                                                                (Number(e?.item?.priceSelling) * e?.ammount).toFixed(2)
+                                                            ]
+                                                        })
+                                                    ]
+                                                })
+                                            }, index);
+                                        })
+                                    ]
+                                }),
+                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                    style: {
+                                        marginTop: "2rem",
+                                        display: "flex",
+                                        justifyContent: "space-between"
+                                    },
+                                    children: [
+                                        /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                            style: {
+                                                fontSize: ".9rem"
+                                            },
+                                            children: "Costo env\xedo"
+                                        }),
+                                        /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                            style: {
+                                                fontSize: ".9rem"
+                                            },
+                                            children: "s/. 15.0"
+                                        })
+                                    ]
+                                }),
+                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                    style: {
+                                        marginTop: ".2rem",
+                                        display: "flex",
+                                        justifyContent: "space-between"
+                                    },
+                                    children: [
+                                        /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                            style: {
+                                                fontSize: "1.1rem"
+                                            },
+                                            children: "Total"
+                                        }),
+                                        /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
+                                            children: [
+                                                "s/. ",
+                                                Number((0,header/* getTotalPrice */.m)(cartItems, true)).toFixed(2)
+                                            ]
+                                        })
+                                    ]
+                                }),
+                                /*#__PURE__*/ jsx_runtime_.jsx(bank/* BankOptions */.l, {}),
+                                /*#__PURE__*/ jsx_runtime_.jsx("button", {
+                                    onClick: ()=>setOpen(true),
+                                    style: {
+                                        marginTop: "2rem",
+                                        padding: ".5rem",
+                                        textAlign: "center",
+                                        width: "100%",
+                                        background: "linear-gradient(180deg, #127FFF 0%, #3662E3 100%)",
+                                        color: "white"
+                                    },
+                                    children: "Confirmar Pago"
+                                })
+                            ]
+                        })
+                    }),
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                        style: {
+                            textAlign: "center"
+                        },
+                        children: [
+                            /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                style: {
+                                    marginTop: "2rem",
+                                    fontSize: "1rem"
+                                },
+                                children: "\xbfTenes alguna duda?"
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("button", {
+                                className: "btn-whatsapp",
+                                children: [
+                                    /*#__PURE__*/ jsx_runtime_.jsx((IonIcon_default()), {
+                                        style: {
+                                            marginRight: "1rem"
+                                        },
+                                        name: "logo-whatsapp"
+                                    }),
+                                    "Escribenos por WhatsApp"
+                                ]
+                            })
+                        ]
+                    })
+                ]
+            }),
+            /*#__PURE__*/ (0,jsx_runtime_.jsxs)(dist["default"], {
+                closeIcon: /*#__PURE__*/ jsx_runtime_.jsx((IonIcon_default()), {
+                    name: "close"
+                }),
+                styles: {
+                    modal: {
+                        borderRadius: "1rem",
+                        minWidth: "500px",
+                        padding: "0rem"
+                    },
+                    closeIcon: {
+                        color: "white !important"
+                    },
+                    overlay: {
+                        backgroundColor: "rgba(220, 217, 217, 0.5)"
+                    }
+                },
+                open: open,
+                center: true,
+                onClose: ()=>setOpen(false),
+                children: [
+                    /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                        style: {
+                            background: 'linear-gradient(89deg, var(--token-dc60c65c-2692-4b09-8d77-49a86f7aedee, rgb(24, 36, 61)) /* {"name":"Azul prinicipal"} */ 0%, var(--token-1632e6e1-d1e5-427f-b435-20cb1e67f695, rgb(54, 98, 227)) /* {"name":"Azul claro"} */ 123.5068681091516%)',
+                            width: "100%",
+                            padding: "1rem",
+                            color: "white"
+                        },
+                        children: "Confirmar Pago"
+                    }),
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                        style: {
+                            marginTop: "2rem",
+                            padding: "1rem"
+                        },
+                        children: [
+                            /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                children: " \xbfEstas seguro que quieres confirmar el pago?"
+                            }),
+                            /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                style: {
+                                    marginTop: ".2rem",
+                                    color: "grey"
+                                },
+                                children: " Recuerda que para acelerar el proceso puedes enviar el comprobante por WhatsApp"
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                style: {
+                                    display: "flex",
+                                    padding: "2rem",
+                                    textAlign: "center"
+                                },
+                                children: [
+                                    /*#__PURE__*/ jsx_runtime_.jsx("button", {
+                                        onClick: ()=>setOpen(false),
+                                        style: {
+                                            width: "100%",
+                                            fontSize: "1rem",
+                                            borderRadius: ".5rem",
+                                            padding: ".2rem",
+                                            paddingLeft: "1rem",
+                                            paddingRight: "1rem",
+                                            marginRight: "1rem",
+                                            backgroundColor: "#1366D9",
+                                            color: "white"
+                                        },
+                                        children: "Cancelar"
+                                    }),
+                                    /*#__PURE__*/ jsx_runtime_.jsx("button", {
+                                        onClick: ()=>{
+                                            confirmPayment();
+                                        },
+                                        style: {
+                                            width: "100%",
+                                            fontSize: "1rem",
+                                            borderRadius: ".5rem",
+                                            padding: ".2rem",
+                                            paddingLeft: "1rem",
+                                            paddingRight: "1rem",
+                                            marginRight: "1rem",
+                                            backgroundColor: "green",
+                                            color: "white"
+                                        },
+                                        children: "Confirmar"
+                                    })
+                                ]
+                            })
+                        ]
+                    })
+                ]
+            })
+        ]
+    });
+};
+/* harmony default export */ const awaitPayment = (AwaitPaymentView);
+
+;// CONCATENATED MODULE: ./app/marketplace/order/confirmedPayment.tsx
+/* __next_internal_client_entry_do_not_use__ default auto */ 
+
+
+
+
+
+
+const ConfirmedPaymentView = ({ cartItems, order })=>{
+    const router = (0,navigation.useRouter)();
+    return /*#__PURE__*/ jsx_runtime_.jsx("div", {
+        children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+            children: [
+                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
+                    style: {
+                        padding: "1rem",
+                        color: "#3662E3",
+                        cursor: "pointer"
+                    },
+                    onClick: ()=>router.push("/marketplace"),
+                    children: [
+                        /*#__PURE__*/ jsx_runtime_.jsx((IonIcon_default()), {
+                            name: "chevron-back-outline"
+                        }),
+                        " Regresar al Marketplace"
+                    ]
+                }),
+                /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                    className: "payment",
+                    children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                        className: "selectPayment",
+                        children: [
+                            /*#__PURE__*/ jsx_runtime_.jsx("img", {
+                                style: {
+                                    marginRight: "auto",
+                                    marginLeft: "auto",
+                                    maxWidth: "250px"
+                                },
+                                src: logopreferente/* default */.Z?.src,
+                                alt: "LogoStockeado"
+                            }),
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                style: {
+                                    display: "flex",
+                                    justifyContent: "space-between"
+                                },
+                                children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                    style: {
+                                        display: "flex",
+                                        marginRight: "auto"
+                                    },
+                                    children: [
+                                        Number(order?.state) > 0 ? /*#__PURE__*/ jsx_runtime_.jsx((IonIcon_default()), {
+                                            style: {
+                                                color: "green",
+                                                fontSize: "1.7rem"
+                                            },
+                                            name: "checkmark-circle"
+                                        }) : /*#__PURE__*/ jsx_runtime_.jsx((IonIcon_default()), {
+                                            style: {
+                                                color: "#F29339",
+                                                fontSize: "1.7rem"
+                                            },
+                                            name: "warning-outline"
+                                        }),
+                                        /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                            style: {
+                                                fontWeight: "500",
+                                                marginLeft: ".5rem",
+                                                fontSize: "1.2rem"
+                                            },
+                                            children: Number(order?.state) > 1 ? "Pago Confirmado" : "Pedido Pendiente"
+                                        })
+                                    ]
+                                })
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                style: {
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    marginTop: "1rem"
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
+                                        style: {
+                                            fontWeight: "500"
+                                        },
+                                        children: [
+                                            "Taller: ",
+                                            /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                                style: {
+                                                    marginLeft: ".5rem",
+                                                    fontWeight: "300"
+                                                },
+                                                children: order?.nameShop
+                                            })
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
+                                        style: {
+                                            fontWeight: "500"
+                                        },
+                                        children: [
+                                            " Direcci\xf3n: ",
+                                            /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                                style: {
+                                                    marginLeft: ".5rem",
+                                                    fontWeight: "300"
+                                                },
+                                                children: order?.direction
+                                            })
+                                        ]
+                                    })
+                                ]
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                style: {
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    marginTop: ".8rem"
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
+                                        style: {
+                                            fontWeight: "500"
+                                        },
+                                        children: [
+                                            "Nombre: ",
+                                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("span", {
+                                                style: {
+                                                    marginLeft: ".5rem",
+                                                    fontWeight: "300"
+                                                },
+                                                children: [
+                                                    order?.name + " " + order?.lastname,
+                                                    " "
+                                                ]
+                                            })
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
+                                        style: {
+                                            fontWeight: "500"
+                                        },
+                                        children: [
+                                            " Fecha y hora de env\xedo: ",
+                                            /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                                style: {
+                                                    marginLeft: ".5rem",
+                                                    fontWeight: "300"
+                                                },
+                                                children: order?.maxDate
+                                            })
+                                        ]
+                                    })
+                                ]
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                children: [
+                                    /*#__PURE__*/ jsx_runtime_.jsx("h2", {
+                                        style: {
+                                            fontWeight: "600",
+                                            marginTop: "1rem",
+                                            marginBottom: ".5rem"
+                                        },
+                                        children: "Productos:"
+                                    }),
+                                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                        style: {
+                                            width: "100%",
+                                            height: "1px",
+                                            background: "rgba(0, 0, 0, 0.2)"
+                                        }
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                        style: {
+                                            display: "flex",
+                                            justifyContent: "space-between",
+                                            paddingBottom: "1rem",
+                                            marginTop: "1rem"
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                                className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
+                                                children: "Imagen"
+                                            }),
+                                            /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                                className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
+                                                children: "Nombre"
+                                            }),
+                                            /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                                className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
+                                                children: "Cantidad"
+                                            }),
+                                            /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                                className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
+                                                children: "Precio"
+                                            })
+                                        ]
+                                    }),
+                                    cartItems?.length === 0 ? /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                        style: {
+                                            textAlign: "center",
+                                            color: "grey"
+                                        },
+                                        children: "Todavia no a\xf1adiste nada"
+                                    }) : "",
+                                    cartItems?.map((e, index)=>{
+                                        const nameString = e?.item?.name + " " + e?.item?.model;
+                                        return /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                            children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                                style: {
+                                                    width: "100%",
+                                                    display: "flex",
+                                                    justifyContent: "space-between",
+                                                    borderBottom: "1px solid rgba(220, 220, 220, .3)"
+                                                },
+                                                children: [
+                                                    /*#__PURE__*/ jsx_runtime_.jsx("img", {
+                                                        style: {
+                                                            width: "85px",
+                                                            maxHeight: "85px"
+                                                        },
+                                                        src: e?.item?.image,
+                                                        alt: "Product Image"
+                                                    }),
+                                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
+                                                        style: {
+                                                            maxWidth: "200px"
+                                                        },
+                                                        className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
+                                                        children: [
+                                                            nameString.substring(0, 30),
+                                                            "..."
+                                                        ]
+                                                    }),
+                                                    /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                                        className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
+                                                        children: String(e?.ammount)
+                                                    }),
+                                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
+                                                        className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
+                                                        children: [
+                                                            "s/. ",
+                                                            (Number(e?.item?.priceSelling) * e?.ammount).toFixed(2)
+                                                        ]
+                                                    })
+                                                ]
+                                            })
+                                        }, index);
+                                    })
+                                ]
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                style: {
+                                    marginTop: "2rem",
+                                    display: "flex",
+                                    justifyContent: "space-between"
+                                },
+                                children: [
+                                    /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                        style: {
+                                            fontSize: ".9rem"
+                                        },
+                                        children: "Costo env\xedo"
+                                    }),
+                                    /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                        style: {
+                                            fontSize: ".9rem"
+                                        },
+                                        children: "s/. 15.0"
+                                    })
+                                ]
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                style: {
+                                    marginTop: ".2rem",
+                                    display: "flex",
+                                    justifyContent: "space-between"
+                                },
+                                children: [
+                                    /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                        style: {
+                                            fontSize: "1.1rem"
+                                        },
+                                        children: "Total"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
+                                        children: [
+                                            "s/. ",
+                                            Number((0,header/* getTotalPrice */.m)(cartItems, true)).toFixed(2)
+                                        ]
+                                    })
+                                ]
+                            }),
+                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                className: "steptsorders",
+                                style: {
+                                    marginTop: "0rem"
+                                },
+                                children: bank/* OrderStates */.C?.map((e, index)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                        className: Number(order?.state) < index ? "pending" : "marked",
+                                        children: [
+                                            /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                                children: e
+                                            }),
+                                            Number(order?.state) >= index ? /*#__PURE__*/ jsx_runtime_.jsx((IonIcon_default()), {
+                                                style: {
+                                                    fontSize: "2rem",
+                                                    margin: "auto"
+                                                },
+                                                name: "checkmark-circle"
+                                            }) : /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                                style: {
+                                                    marginLeft: "auto",
+                                                    marginRight: "auto",
+                                                    width: "1.5rem",
+                                                    height: "1.5rem",
+                                                    borderRadius: "100%",
+                                                    background: "rgba(0,0,0, 0.2)"
+                                                }
+                                            })
+                                        ]
+                                    }, index))
+                            }),
+                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                style: {
+                                    textAlign: "center"
+                                },
+                                children: [
+                                    /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                        style: {
+                                            marginTop: "2rem",
+                                            fontSize: "1rem"
+                                        },
+                                        children: "\xbfTenes alguna duda?"
+                                    }),
+                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("button", {
+                                        className: "btn-whatsapp",
+                                        children: [
+                                            /*#__PURE__*/ jsx_runtime_.jsx((IonIcon_default()), {
+                                                style: {
+                                                    marginRight: "1rem"
+                                                },
+                                                name: "logo-whatsapp"
+                                            }),
+                                            "Escribenos por WhatsApp"
+                                        ]
+                                    })
+                                ]
+                            })
+                        ]
+                    })
+                })
+            ]
+        })
+    });
+};
+/* harmony default export */ const confirmedPayment = (ConfirmedPaymentView);
+
+;// CONCATENATED MODULE: ./app/marketplace/order/layout.tsx
 /* __next_internal_client_entry_do_not_use__ default auto */ 
 
 
@@ -472,22 +1309,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 const LayoutMarketPlaceOrderView = ()=>{
-    const search = (0,next_navigation__WEBPACK_IMPORTED_MODULE_5__.useSearchParams)();
+    const search = (0,navigation.useSearchParams)();
     const id = search.get("id");
-    const [cart, setCart] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)();
-    const [order, setOrder] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
+    const [cart, setCart] = (0,react_experimental_.useState)();
+    const [order, setOrder] = (0,react_experimental_.useState)(null);
     const getStaticOrder = async ()=>{
-        setOrder(await (0,_app_api_orderss_call__WEBPACK_IMPORTED_MODULE_11__/* .getOrder */ .co)(id) ?? {});
+        setOrder(await (0,call/* getOrder */.co)(id) ?? {});
     };
-    const router = (0,next_navigation__WEBPACK_IMPORTED_MODULE_5__.useRouter)();
-    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
+    const router = (0,navigation.useRouter)();
+    (0,react_experimental_.useEffect)(()=>{
         setCart(JSON.parse(sessionStorage.getItem("cart")));
         getStaticOrder();
     }, []);
-    return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-        children: order === null ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_10___default()), {
+    return /*#__PURE__*/ jsx_runtime_.jsx("div", {
+        children: order === null ? /*#__PURE__*/ jsx_runtime_.jsx((IonIcon_default()), {
             name: "chevron-collapse-outline",
             className: "rotateItem",
             color: "#1366D9",
@@ -498,246 +1334,18 @@ const LayoutMarketPlaceOrderView = ()=>{
                 left: "50%",
                 transform: "translate(-50%, -50%)"
             }
-        }) : /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-            children: [
-                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
-                    style: {
-                        padding: "1rem",
-                        color: "#3662E3",
-                        cursor: "pointer"
-                    },
-                    onClick: ()=>router.push("/marketplace"),
-                    children: [
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_10___default()), {
-                            name: "chevron-back-outline"
-                        }),
-                        " Marketplace"
-                    ]
-                }),
-                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                    className: "payment",
-                    children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                        className: "selectPayment",
-                        children: [
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
-                                style: {
-                                    marginRight: "auto",
-                                    marginLeft: "auto",
-                                    maxWidth: "250px"
-                                },
-                                src: _public_images_logo_logopreferente_png__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z?.src,
-                                alt: "LogoStockeado"
-                            }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                className: "steptsorders",
-                                children: _payment_bank__WEBPACK_IMPORTED_MODULE_8__/* .OrderStates */ .C?.map((e, index)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                        className: index > Number(order?.state) ? "pending" : "marked",
-                                        style: {
-                                            cursor: "none !important"
-                                        },
-                                        children: e
-                                    }, index))
-                            }),
-                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                style: {
-                                    width: "100%"
-                                },
-                                children: [
-                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                        style: {
-                                            display: "flex",
-                                            marginTop: "3.5rem"
-                                        },
-                                        children: [
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                                style: {
-                                                    marginRight: ".5rem",
-                                                    fontWeight: "700"
-                                                },
-                                                children: "Nombre Completo:"
-                                            }),
-                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
-                                                children: [
-                                                    " ",
-                                                    order?.name + " " + order?.lastname
-                                                ]
-                                            })
-                                        ]
-                                    }),
-                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                        style: {
-                                            display: "flex",
-                                            marginTop: ".5rem"
-                                        },
-                                        children: [
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                                style: {
-                                                    marginRight: ".5rem",
-                                                    fontWeight: "700"
-                                                },
-                                                children: "Fecha maxima de envio:"
-                                            }),
-                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
-                                                children: [
-                                                    " ",
-                                                    new Date(order.maxDate).getDay(),
-                                                    "/",
-                                                    new Date(order.maxDate).getMonth(),
-                                                    "/",
-                                                    new Date(order.maxDate).getFullYear()
-                                                ]
-                                            })
-                                        ]
-                                    }),
-                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                        style: {
-                                            display: "flex",
-                                            marginTop: ".5rem"
-                                        },
-                                        children: [
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                                style: {
-                                                    marginRight: ".5rem",
-                                                    fontWeight: "700"
-                                                },
-                                                children: "Direcci\xf3n:"
-                                            }),
-                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
-                                                children: [
-                                                    " ",
-                                                    order?.direction
-                                                ]
-                                            })
-                                        ]
-                                    }),
-                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                        style: {
-                                            display: "flex",
-                                            marginTop: ".5rem"
-                                        },
-                                        children: [
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                                style: {
-                                                    marginRight: ".5rem",
-                                                    fontWeight: "700"
-                                                },
-                                                children: "Tipo de pago:"
-                                            }),
-                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
-                                                children: [
-                                                    " ",
-                                                    order?.payType === 0 ? "Transferencia" : "Efectivo"
-                                                ]
-                                            })
-                                        ]
-                                    }),
-                                    "\xb4",
-                                    order?.state === 0 ? order?.payType === 0 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_payment_bank__WEBPACK_IMPORTED_MODULE_8__/* .BankOptions */ .l, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {}),
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                        style: {
-                                            marginRight: ".5rem",
-                                            fontWeight: "700",
-                                            marginBottom: "1rem",
-                                            marginTop: "1rem"
-                                        },
-                                        children: "Pedido:"
-                                    }),
-                                    order?.items?.map((e, index)=>{
-                                        return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                            children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                                style: {
-                                                    display: "flex",
-                                                    justifyContent: "space-between",
-                                                    borderBottom: "1px solid rgba(220, 220, 220, .3)"
-                                                },
-                                                children: [
-                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
-                                                        style: {
-                                                            width: "35px",
-                                                            height: "35px"
-                                                        },
-                                                        src: e?.item?.image,
-                                                        alt: "Product Image"
-                                                    }),
-                                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
-                                                        style: {
-                                                            maxWidth: "100px"
-                                                        },
-                                                        className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                                        children: [
-                                                            e?.item?.name + " ",
-                                                            " ",
-                                                            e?.item?.model
-                                                        ]
-                                                    }),
-                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                                        className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                                        children: String(e?.ammount)
-                                                    }),
-                                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
-                                                        className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                                        children: [
-                                                            "s/. ",
-                                                            Number(e?.item?.price).toFixed(2)
-                                                        ]
-                                                    })
-                                                ]
-                                            })
-                                        }, index);
-                                    }),
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                        style: {
-                                            color: "grey",
-                                            textAlign: "center"
-                                        },
-                                        children: cart?.length === 0 ? "No encontramos nada" : ""
-                                    }),
-                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                        style: {
-                                            marginTop: "2rem",
-                                            display: "flex",
-                                            justifyContent: "space-between"
-                                        },
-                                        children: [
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                                style: {
-                                                    fontSize: "1.1rem"
-                                                },
-                                                children: "Total"
-                                            }),
-                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
-                                                children: [
-                                                    "s/. ",
-                                                    Number((0,_components_marketplace_header__WEBPACK_IMPORTED_MODULE_3__/* .getTotalPrice */ .m)(order?.items)).toFixed(2)
-                                                ]
-                                            })
-                                        ]
-                                    }),
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                        style: {
-                                            textAlign: "center",
-                                            width: "100%",
-                                            color: "green",
-                                            marginTop: "3rem",
-                                            fontSize: "2rem"
-                                        },
-                                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_10___default()), {
-                                            style: {
-                                                cursor: "pointer"
-                                            },
-                                            name: "logo-whatsapp"
-                                        })
-                                    })
-                                ]
-                            })
-                        ]
-                    })
-                })
-            ]
+        }) : /*#__PURE__*/ jsx_runtime_.jsx("div", {
+            children: Number(order?.state) < 2 ? /*#__PURE__*/ jsx_runtime_.jsx(awaitPayment, {
+                cartItems: order.items,
+                order: order
+            }) : /*#__PURE__*/ jsx_runtime_.jsx(confirmedPayment, {
+                cartItems: order.items,
+                order: order
+            })
         })
     });
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LayoutMarketPlaceOrderView);
+/* harmony default export */ const layout = (LayoutMarketPlaceOrderView);
 
 
 /***/ }),
@@ -813,13 +1421,6 @@ const Page = ()=>{
 
 /***/ }),
 
-/***/ 49462:
-/***/ (() => {
-
-
-
-/***/ }),
-
 /***/ 68890:
 /***/ (() => {
 
@@ -828,6 +1429,13 @@ const Page = ()=>{
 /***/ }),
 
 /***/ 2032:
+/***/ (() => {
+
+
+
+/***/ }),
+
+/***/ 42055:
 /***/ (() => {
 
 
@@ -841,7 +1449,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,3800,1885,4328,1142,4892,544], () => (__webpack_exec__(13165)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,3800,7654,9636,4328,1142,4892,74], () => (__webpack_exec__(13165)));
 module.exports = __webpack_exports__;
 
 })();

@@ -25,7 +25,7 @@ exports.modules = {
 
 
 const corsOptions = {
-    origin: "https://stockeado.com/",
+    origin: "*",
     credentials: true,
     optionSuccessStatus: 200
 };

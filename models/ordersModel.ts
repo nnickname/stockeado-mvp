@@ -1,7 +1,7 @@
 import mongoose, {Date, model, ObjectId, Schema} from "mongoose";
 import { InventoryModel } from "./inventoryModel";
 
-export const OrderStates: String[] = ['Pendiente', 'Confirmado', 'Enviando', 'Entregado'];
+export const OrderStates: String[] = ['Pendiente', 'Confirmado', 'Pagado', 'Enviando', 'Entregado'];
 
 export const getOrderState  = (id: number) => {
   switch ( id ) {
@@ -12,9 +12,12 @@ export const getOrderState  = (id: number) => {
         return 'Confirmado'
         break;
     case 2:
-        return 'Enviando'
+        return 'Pagado'
         break;
     case 3:
+        return 'Enviando'
+        break;
+    case 4:
       return 'Entregado'
       break;
     default: 
@@ -35,11 +38,26 @@ export interface OrderModel extends Document {
   maxDate: string;
   payType: Number;
   state: Number;
+  nameShop: string;
+  ruc: string;
+  phone: string;
   items: CartProps[]
 }
 
 /* PetSchema will correspond to a collection in your MongoDB database. */
 const OrderSchema = new Schema({
+  nameShop: {
+    type: String,
+    required: [true],
+  },
+  ruc: {
+    type: String,
+    required: [true],
+  },
+  phone: {
+    type: String,
+    required: [true],
+  },
   name: {
     type: String,
     required: [true, "Please provide a name."],

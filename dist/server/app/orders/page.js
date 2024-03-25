@@ -459,14 +459,15 @@ var next_link = __webpack_require__(11440);
 var link_default = /*#__PURE__*/__webpack_require__.n(next_link);
 // EXTERNAL MODULE: ./node_modules/react-responsive-modal/dist/index.js
 var dist = __webpack_require__(7654);
-// EXTERNAL MODULE: ./app/marketplace/payment/bank.tsx + 6 modules
-var bank = __webpack_require__(544);
+// EXTERNAL MODULE: ./app/marketplace/payment/bank.tsx + 2 modules
+var bank = __webpack_require__(35889);
 // EXTERNAL MODULE: ./node_modules/react-responsive-modal/styles.css
 var styles = __webpack_require__(42055);
 // EXTERNAL MODULE: ./app/marketplace/order/index.css
 var order = __webpack_require__(49462);
 ;// CONCATENATED MODULE: ./app/orders/editModal.tsx
 /* __next_internal_client_entry_do_not_use__ default auto */ 
+
 
 
 
@@ -491,6 +492,40 @@ const EditModalOrder = ({ order })=>{
                     fontSize: ".8rem"
                 },
                 children: "Toca para cambiar el estado de la orden"
+            }),
+            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                className: "steptsorders",
+                style: {
+                    marginTop: "0rem"
+                },
+                children: bank/* OrderStates */.C?.map((e, index)=>/*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                        style: {
+                            cursor: "pointer"
+                        },
+                        onClick: ()=>modifyState(index),
+                        className: orderState < index ? "pending" : "marked",
+                        children: [
+                            /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                children: e
+                            }),
+                            Number(orderState) >= index ? /*#__PURE__*/ jsx_runtime_.jsx((IonIcon_default()), {
+                                style: {
+                                    fontSize: "2rem",
+                                    margin: "auto"
+                                },
+                                name: "checkmark-circle"
+                            }) : /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                style: {
+                                    marginLeft: "auto",
+                                    marginRight: "auto",
+                                    width: "1.5rem",
+                                    height: "1.5rem",
+                                    borderRadius: "100%",
+                                    background: "rgba(0,0,0, 0.2)"
+                                }
+                            })
+                        ]
+                    }, index))
             }),
             /*#__PURE__*/ jsx_runtime_.jsx("div", {
                 className: "steptsorders",
@@ -543,11 +578,7 @@ const EditModalOrder = ({ order })=>{
                     /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
                         children: [
                             " ",
-                            time?.getDay(),
-                            "/",
-                            time?.getMonth(),
-                            "/",
-                            time?.getFullYear()
+                            time.getTime()
                         ]
                     })
                 ]
@@ -573,28 +604,6 @@ const EditModalOrder = ({ order })=>{
                     })
                 ]
             }),
-            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                style: {
-                    display: "flex",
-                    marginTop: ".5rem"
-                },
-                children: [
-                    /*#__PURE__*/ jsx_runtime_.jsx("p", {
-                        style: {
-                            marginRight: ".5rem",
-                            fontWeight: "700"
-                        },
-                        children: "Tipo de pago:"
-                    }),
-                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
-                        children: [
-                            " ",
-                            order?.payType === 0 ? "Transferencia" : "Efectivo"
-                        ]
-                    })
-                ]
-            }),
-            "\xb4",
             order?.state === 0 ? Number(order?.payType) === 0 ? /*#__PURE__*/ jsx_runtime_.jsx(bank/* BankOptions */.l, {}) : /*#__PURE__*/ jsx_runtime_.jsx(jsx_runtime_.Fragment, {}) : /*#__PURE__*/ jsx_runtime_.jsx(jsx_runtime_.Fragment, {}),
             /*#__PURE__*/ jsx_runtime_.jsx("p", {
                 style: {
@@ -606,6 +615,7 @@ const EditModalOrder = ({ order })=>{
                 children: "Pedido:"
             }),
             order?.items?.map((e, index)=>{
+                const nameString = e?.item?.name + " " + e?.item?.model;
                 return /*#__PURE__*/ jsx_runtime_.jsx("div", {
                     children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                         style: {
@@ -617,29 +627,21 @@ const EditModalOrder = ({ order })=>{
                         children: [
                             /*#__PURE__*/ jsx_runtime_.jsx("img", {
                                 style: {
-                                    width: "35px",
-                                    height: "35px"
+                                    width: "85px",
+                                    maxHeight: "85px"
                                 },
                                 src: e?.item?.image,
                                 alt: "Product Image"
                             }),
-                            /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
                                 style: {
-                                    maxWidth: "100px",
-                                    margin: "auto"
+                                    maxWidth: "200px"
                                 },
                                 className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
-                                    style: {
-                                        minWidth: "200px",
-                                        margin: "auto"
-                                    },
-                                    children: [
-                                        e?.item?.name,
-                                        " ",
-                                        e?.item?.model
-                                    ]
-                                })
+                                children: [
+                                    nameString.substring(0, 30),
+                                    "..."
+                                ]
                             }),
                             /*#__PURE__*/ jsx_runtime_.jsx("p", {
                                 className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
@@ -647,13 +649,9 @@ const EditModalOrder = ({ order })=>{
                             }),
                             /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
                                 className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                style: {
-                                    marginLeft: "4rem",
-                                    maxWidth: "100px"
-                                },
                                 children: [
                                     "s/. ",
-                                    Number(e?.item?.priceSelling).toFixed(2)
+                                    (Number(e?.item?.priceSelling) * e?.ammount).toFixed(2)
                                 ]
                             })
                         ]
@@ -676,6 +674,27 @@ const EditModalOrder = ({ order })=>{
                 children: [
                     /*#__PURE__*/ jsx_runtime_.jsx("p", {
                         style: {
+                            fontSize: ".9rem"
+                        },
+                        children: "Costo env\xedo"
+                    }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                        style: {
+                            fontSize: ".9rem"
+                        },
+                        children: "s/. 15.0"
+                    })
+                ]
+            }),
+            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                style: {
+                    marginTop: "2rem",
+                    display: "flex",
+                    justifyContent: "space-between"
+                },
+                children: [
+                    /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                        style: {
                             fontSize: "1.1rem"
                         },
                         children: "Total"
@@ -683,7 +702,7 @@ const EditModalOrder = ({ order })=>{
                     /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
                         children: [
                             "s/. ",
-                            Number((0,header/* getTotalPrice */.m)(order?.items)).toFixed(2)
+                            Number((0,header/* getTotalPrice */.m)(order?.items, true)).toFixed(2)
                         ]
                     })
                 ]
@@ -749,7 +768,7 @@ const OrdersLayoutPage = ()=>{
         {
             label: "Total",
             renderCell: (item)=>/*#__PURE__*/ jsx_runtime_.jsx("p", {
-                    children: "s/. " + Number((0,header/* getTotalPrice */.m)(item?.items)).toFixed(2)
+                    children: "s/. " + Number((0,header/* getTotalPrice */.m)(item?.items, true)).toFixed(2)
                 })
         },
         {
@@ -766,7 +785,7 @@ const OrdersLayoutPage = ()=>{
                             style: {
                                 color: "red"
                             },
-                            children: item.state < 2 ? /*#__PURE__*/ jsx_runtime_.jsx((IonIcon_default()), {
+                            children: item.state < 3 ? /*#__PURE__*/ jsx_runtime_.jsx((IonIcon_default()), {
                                 name: "alert-outline"
                             }) : ""
                         })
@@ -1076,13 +1095,6 @@ const Page = ()=>{
 
 /***/ }),
 
-/***/ 49462:
-/***/ (() => {
-
-
-
-/***/ }),
-
 /***/ 88677:
 /***/ (() => {
 
@@ -1097,7 +1109,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,3800,8284,7654,894,5655,1885,4328,1142,310,4892,8088,544,1270], () => (__webpack_exec__(18688)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,3800,8284,7654,894,5655,9636,4328,1142,310,4892,8088,74,1270], () => (__webpack_exec__(18688)));
 module.exports = __webpack_exports__;
 
 })();

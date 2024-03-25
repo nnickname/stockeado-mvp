@@ -451,12 +451,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reacticons_ionicons__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _components_marketplace_header__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(71142);
 /* harmony import */ var _public_images_logo_logopreferente_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(57286);
-/* harmony import */ var _bank__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(544);
-/* harmony import */ var react_notifications__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(78644);
-/* harmony import */ var _app_api_orderss_call__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(59198);
-/* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(57114);
-/* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(next_navigation__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _components_dashboard_Footer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(90507);
+/* harmony import */ var react_notifications__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(78644);
+/* harmony import */ var _app_api_orderss_call__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(59198);
+/* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(57114);
+/* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(next_navigation__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _components_dashboard_Footer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(90507);
 /* __next_internal_client_entry_do_not_use__ default auto */ 
 
 
@@ -467,17 +466,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 const LayoutMarketPlacePayment = ()=>{
-    const router = (0,next_navigation__WEBPACK_IMPORTED_MODULE_9__.useRouter)();
+    const router = (0,next_navigation__WEBPACK_IMPORTED_MODULE_8__.useRouter)();
     const [name, setName] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("");
     const [lastname, setLastName] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("");
+    const [nameShop, setNameShop] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("");
+    const [phone, setPhone] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("");
+    const [ruc, setRuc] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("");
     const [direction, setDirection] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("");
     const [maxDate, setMaxDate] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
     const [cart, setCart] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
     const [paymentSelected, setPaymentSelected] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
     const buildForm = async ()=>{
-        if (name !== "" && lastname !== "" && direction !== "" && maxDate !== null) {
+        if (phone !== "" && ruc !== "" && nameShop !== "" && name !== "" && lastname !== "" && direction !== "" && maxDate !== null) {
             if (cart?.length > 0) {
                 const body = {
                     name,
@@ -486,15 +487,18 @@ const LayoutMarketPlacePayment = ()=>{
                     maxDate,
                     payType: paymentSelected,
                     state: 0,
+                    nameShop,
+                    ruc,
+                    phone,
                     items: cart
                 };
-                const response = await (0,_app_api_orderss_call__WEBPACK_IMPORTED_MODULE_8__/* .createOrder */ .LV)(body);
+                const response = await (0,_app_api_orderss_call__WEBPACK_IMPORTED_MODULE_7__/* .createOrder */ .LV)(body);
                 if (response !== null) {
-                    react_notifications__WEBPACK_IMPORTED_MODULE_7__/* .NotificationManager */ .fn.success("Creaste un pedido, espera que sea confirmado", "Creado");
+                    react_notifications__WEBPACK_IMPORTED_MODULE_6__/* .NotificationManager */ .fn.success("Creaste una nueva orden", "Creado");
                     router.push("/marketplace/order?id=" + response?._id);
                 }
-            } else react_notifications__WEBPACK_IMPORTED_MODULE_7__/* .NotificationManager */ .fn.error("No tienes elementos en el carrito.", "Error");
-        } else react_notifications__WEBPACK_IMPORTED_MODULE_7__/* .NotificationManager */ .fn.error("Completa el formulario.", "Error");
+            } else react_notifications__WEBPACK_IMPORTED_MODULE_6__/* .NotificationManager */ .fn.error("No tienes elementos en el carrito.", "Error");
+        } else react_notifications__WEBPACK_IMPORTED_MODULE_6__/* .NotificationManager */ .fn.error("Completa el formulario.", "Error");
     };
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
         console.log(sessionStorage.getItem("cart"));
@@ -517,7 +521,7 @@ const LayoutMarketPlacePayment = ()=>{
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_3___default()), {
                         name: "chevron-back-outline"
                     }),
-                    " Marketplace"
+                    " Regresar al Marketplace"
                 ]
             }),
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
@@ -539,10 +543,37 @@ const LayoutMarketPlacePayment = ()=>{
                                 marginTop: "1rem",
                                 marginBottom: "1rem"
                             },
-                            children: "1. Introduce tus datos y la fecha maxima de envio"
+                            children: "1. Introduce tus datos y la fecha m\xe1xima de env\xedo. "
                         }),
                         /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                             style: {
+                                display: "flex",
+                                justifyContent: "space-between"
+                            },
+                            children: [
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
+                                    value: nameShop,
+                                    onChange: (e)=>setNameShop(e.target.value),
+                                    placeholder: "Nombre del taller",
+                                    className: "border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none",
+                                    style: {
+                                        background: "transparent"
+                                    }
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
+                                    value: ruc,
+                                    onChange: (e)=>setRuc(e.target.value),
+                                    placeholder: "RUC",
+                                    className: "border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none",
+                                    style: {
+                                        background: "transparent"
+                                    }
+                                })
+                            ]
+                        }),
+                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                            style: {
+                                marginTop: "1rem",
                                 display: "flex",
                                 justifyContent: "space-between"
                             },
@@ -594,46 +625,29 @@ const LayoutMarketPlacePayment = ()=>{
                                 })
                             ]
                         }),
+                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
+                            value: phone,
+                            onChange: (e)=>setPhone(e.target.value),
+                            placeholder: "Celular",
+                            className: "border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none",
+                            style: {
+                                background: "transparent"
+                            }
+                        }),
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
                             style: {
                                 marginTop: "2rem",
-                                marginBottom: "2rem"
+                                marginBottom: "1rem"
                             },
-                            children: "2. Selecciona un medio de pago"
+                            children: "2. Revisa tu orden. "
                         }),
-                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                            className: "cards",
-                            children: [
-                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                    className: "card " + (paymentSelected === 0 ? "selected" : ""),
-                                    onClick: ()=>setPaymentSelected(0),
-                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                        children: "Transferencia"
-                                    })
-                                }),
-                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                    className: "carddisabled " + (paymentSelected === 1 ? "selected" : ""),
-                                    onClick: ()=>setPaymentSelected(1),
-                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                        children: "Tarjeta de credito o debito"
-                                    })
-                                }),
-                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                    className: "card " + (paymentSelected === 2 ? "selected" : ""),
-                                    onClick: ()=>setPaymentSelected(2),
-                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                        children: "Efectivo"
-                                    })
-                                })
-                            ]
-                        }),
-                        paymentSelected === 0 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_bank__WEBPACK_IMPORTED_MODULE_6__/* .BankOptions */ .l, {}) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {}),
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
+                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
                             style: {
-                                marginTop: "2rem",
-                                marginBottom: "2rem"
+                                color: "grey",
+                                marginBottom: "2rem",
+                                fontSize: ".9rem"
                             },
-                            children: "3. Revisa tu orden"
+                            children: "Antes de realizar la compra, confirma el pedido para poder calcular la fecha, monto de env\xedo y hora confirmada por el proveedor. Al colocar “Confirmar Pedido” se le notificar\xe1 al proveedor, Tiempo estimado de 5 a 10 minutos para confirmar orden."
                         }),
                         cart?.map((e, index)=>{
                             return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
@@ -710,7 +724,7 @@ const LayoutMarketPlacePayment = ()=>{
                         }),
                         /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                             style: {
-                                marginTop: "2rem",
+                                marginTop: "3rem",
                                 display: "flex",
                                 justifyContent: "space-between"
                             },
@@ -724,7 +738,7 @@ const LayoutMarketPlacePayment = ()=>{
                                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
                                     children: [
                                         "s/. ",
-                                        Number((0,_components_marketplace_header__WEBPACK_IMPORTED_MODULE_4__/* .getTotalPrice */ .m)(cart)).toFixed(2)
+                                        Number((0,_components_marketplace_header__WEBPACK_IMPORTED_MODULE_4__/* .getTotalPrice */ .m)(cart, false)).toFixed(2)
                                     ]
                                 })
                             ]
@@ -733,35 +747,45 @@ const LayoutMarketPlacePayment = ()=>{
                             type: "button",
                             onClick: ()=>buildForm(),
                             style: {
+                                marginTop: "1rem",
                                 padding: ".5rem",
                                 textAlign: "center",
                                 width: "100%",
                                 background: "linear-gradient(180deg, #127FFF 0%, #3662E3 100%)",
                                 color: "white"
                             },
-                            children: "Confirmar"
+                            children: "Confirmar Pedido"
                         }),
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                             style: {
                                 textAlign: "center"
                             },
-                            children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("button", {
-                                className: "btn-whatsapp",
-                                children: [
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_3___default()), {
-                                        style: {
-                                            marginRight: "1rem"
-                                        },
-                                        name: "logo-whatsapp"
-                                    }),
-                                    "\xbfNecesitas ayuda?"
-                                ]
-                            })
+                            children: [
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                    style: {
+                                        marginTop: "3rem",
+                                        fontSize: "1rem"
+                                    },
+                                    children: "\xbfTenes alguna duda?"
+                                }),
+                                /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("button", {
+                                    className: "btn-whatsapp",
+                                    children: [
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_3___default()), {
+                                            style: {
+                                                marginRight: "1rem"
+                                            },
+                                            name: "logo-whatsapp"
+                                        }),
+                                        "Escribenos por WhatsApp"
+                                    ]
+                                })
+                            ]
                         })
                     ]
                 })
             }),
-            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_dashboard_Footer__WEBPACK_IMPORTED_MODULE_10__["default"], {})
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_dashboard_Footer__WEBPACK_IMPORTED_MODULE_9__["default"], {})
         ]
     });
 };
@@ -848,7 +872,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,3800,1885,4328,1142,507,4892,544], () => (__webpack_exec__(97268)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,3800,9636,4328,1142,507,4892], () => (__webpack_exec__(97268)));
 module.exports = __webpack_exports__;
 
 })();

@@ -7,6 +7,7 @@ import 'react-responsive-modal/styles.css';
 import './../marketplace/order/index.css';
 import { getTotalPrice } from "@/components/marketplace/header";
 import { updateOrderState } from "../api/orderss/call";
+import IonIcon from "@reacticons/ionicons";
 type editModalProps = {
     order: OrderModel
 }
@@ -19,6 +20,12 @@ const EditModalOrder: FunctionComponent<editModalProps> = ({order}) => {
     }
     return <div>
         <p style={{color: 'grey', fontSize: '.8rem' }}>Toca para cambiar el estado de la orden</p>
+        <div className="steptsorders" style={{marginTop: '0rem'}}>
+                {OrderStates?.map((e, index) => <div style={{cursor: 'pointer'}} onClick={() => modifyState(index)} className={orderState < index ? 'pending' : 'marked'}  key={index}>
+                <p>{e}</p>
+                {Number(orderState) >= index ? <IonIcon style={{fontSize: '2rem', margin: 'auto'}} name='checkmark-circle'/> : <div style={{marginLeft: 'auto', marginRight: 'auto', width: '1.5rem', height: '1.5rem', borderRadius: '100%', background: 'rgba(0,0,0, 0.2)'}}/>}
+           </div>)}
+        </div>
         <div className="steptsorders" style={{marginTop: '0rem'}}>
             {OrderStates?.map((e, index) => <div style={{cursor: 'pointer'}} onClick={() => modifyState(index)} className={index > orderState ? 'pending' : 'marked'} key={index}>{e}</div>)}
         </div>
@@ -33,7 +40,7 @@ const EditModalOrder: FunctionComponent<editModalProps> = ({order}) => {
                 <p style={{marginRight: '.5rem', fontWeight: '700'}}>
                     Fecha maxima de envio:
                 </p>
-                <p> {time?.getDay()}/{time?.getMonth()}/{time?.getFullYear()}</p>
+                <p> {time.getTime()}</p>
 
             </div>
 
@@ -44,36 +51,36 @@ const EditModalOrder: FunctionComponent<editModalProps> = ({order}) => {
                 <p> {order?.direction}</p>
 
             </div>
-            <div style={{display:'flex', marginTop: '.5rem'}}>
-                <p style={{marginRight: '.5rem', fontWeight: '700'}}>
-                    Tipo de pago:
-                </p>
-                <p> {order?.payType === 0 ? 'Transferencia' : 'Efectivo'}</p>
-               
-
-        </div>´
+            
         {order?.state === 0 ? (Number(order?.payType) === 0 ? <BankOptions/> : <></>)   : <></>}
             
         <p style={{marginRight: '.5rem', fontWeight: '700', marginBottom: '1rem', marginTop: '1rem'}}>
             Pedido:
         </p>
         {order?.items?.map((e, index) => {
-            return <div key={index}>
-                <div style={{width: '100%', display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(220, 220, 220, .3)'}}>
-                    <img style={{width: '35px', height: '35px'}} src={e?.item?.image} alt='Product Image' />
-                    <p style={{maxWidth: '100px', margin: 'auto'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                    <p style={{minWidth: '200px', margin: 'auto'}}>{e?.item?.name} {e?.item?.model }</p></p>
-                    <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                    {String(e?.ammount)}</p>
-                    <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" style={{marginLeft: '4rem', maxWidth: '100px'}}>
-                    s/. {Number(e?.item?.priceSelling).toFixed(2)}</p>
-                </div>
-            </div>
-        })}
+                        const nameString = e?.item?.name +  ' ' + e?.item?.model;
+                        return <div key={index}>
+                            <div style={{width: '100%', display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(220, 220, 220, .3)'}}>
+                                <img style={{width: '85px', maxHeight: '85px'}} src={e?.item?.image} alt='Product Image' />
+                                <p style={{maxWidth: '200px',}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+                                {nameString.substring(0, 30)}...
+                                </p>
+                                <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+                                {String(e?.ammount)}</p>
+                                <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+                                s/. {(Number(e?.item?.priceSelling) * e?.ammount).toFixed(2)}</p>
+                                    
+                            </div>
+                        </div>
+                    })}
         <p style={{color: 'grey', textAlign: 'center'}}>{order?.items?.length === 0 ? 'No encontramos nada' : ''}</p>        
         <div style={{marginTop: '2rem', display: 'flex', justifyContent: 'space-between'}}>
+                    <p style={{fontSize: '.9rem'}}>Costo envío</p>
+                    <p style={{fontSize: '.9rem'}}>s/. 15.0</p>
+        </div>
+        <div style={{marginTop: '2rem', display: 'flex', justifyContent: 'space-between'}}>
             <p style={{fontSize: '1.1rem'}}>Total</p>
-            <p>s/. {Number(getTotalPrice(order?.items)).toFixed(2)}</p>
+            <p>s/. {Number(getTotalPrice(order?.items, true)).toFixed(2)}</p>
         </div>
     </div>
 }

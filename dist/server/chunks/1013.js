@@ -16,6 +16,7 @@ exports.modules = {
 const OrderStates = (/* unused pure expression or super */ null && ([
     "Pendiente",
     "Confirmado",
+    "Pagado",
     "Enviando",
     "Entregado"
 ]));
@@ -28,9 +29,12 @@ const getOrderState = (id)=>{
             return "Confirmado";
             break;
         case 2:
-            return "Enviando";
+            return "Pagado";
             break;
         case 3:
+            return "Enviando";
+            break;
+        case 4:
             return "Entregado";
             break;
         default:
@@ -39,6 +43,24 @@ const getOrderState = (id)=>{
     }
 };
 /* PetSchema will correspond to a collection in your MongoDB database. */ const OrderSchema = new mongoose__WEBPACK_IMPORTED_MODULE_0__.Schema({
+    nameShop: {
+        type: String,
+        required: [
+            true
+        ]
+    },
+    ruc: {
+        type: String,
+        required: [
+            true
+        ]
+    },
+    phone: {
+        type: String,
+        required: [
+            true
+        ]
+    },
     name: {
         type: String,
         required: [
