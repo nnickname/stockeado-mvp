@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  //distDir: './dist/',
-  experimental: {serverActions: true},
+  distDir: './dist/',
+  experimental: {
+    serverActions: true,
+    missingSuspenseWithCSRBailout: false,
+  },
   eslint: { 
     ignoreDuringBuilds: true, 
   }, 

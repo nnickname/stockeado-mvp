@@ -1,10 +1,12 @@
 {
   "/page": "/",
   "/about/page": "/about",
-  "/dashboard/page": "/dashboard",
   "/contact/page": "/contact",
+  "/dashboard/page": "/dashboard",
   "/marketplace/page": "/marketplace",
+  "/privacy/page": "/privacy",
   "/error/page": "/error",
+  "/terms/page": "/terms",
   "/api/inventoryy/route": "/api/inventoryy",
   "/api/orderss/route": "/api/orderss",
   "/api/userr/route": "/api/userr",

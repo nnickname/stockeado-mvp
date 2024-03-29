@@ -1,10 +1,12 @@
 {
   "/page": "app/page.js",
   "/about/page": "app/about/page.js",
-  "/dashboard/page": "app/dashboard/page.js",
   "/contact/page": "app/contact/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
   "/marketplace/page": "app/marketplace/page.js",
+  "/privacy/page": "app/privacy/page.js",
   "/error/page": "app/error/page.js",
+  "/terms/page": "app/terms/page.js",
   "/api/inventoryy/route": "app/api/inventoryy/route.js",
   "/api/orderss/route": "app/api/orderss/route.js",
   "/api/userr/route": "app/api/userr/route.js",

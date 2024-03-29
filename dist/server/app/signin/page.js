@@ -489,7 +489,7 @@ const LayoutSignIn = ()=>{
                                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("label", {
                                                             htmlFor: "email",
                                                             className: "mb-3 block text-sm text-dark dark:text-white",
-                                                            children: "Email"
+                                                            children: "Correo electr\xf3nico"
                                                         }),
                                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
                                                             onChange: (e)=>setEmail(e.target.value),

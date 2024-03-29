@@ -46,7 +46,7 @@ const LayoutSignIn = () =>{
                       htmlFor="email"
                       className="mb-3 block text-sm text-dark dark:text-white"
                     >
-                      Email
+                      Correo electrónico
                     </label>
                     <input
                       onChange={(e) => setEmail(e.target.value)}

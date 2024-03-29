@@ -33,8 +33,20 @@ const Footer = () => {
                 </Link>
                 
                 <div className="flex items-center">
-                  <IonIcon style={{color: 'grey', fontSize: '1.5rem', margin: '1rem', cursor: 'pointer'}} name="logo-linkedin"/>
-                  <IonIcon style={{color: 'grey', fontSize: '1.5rem', margin: '1rem', cursor: 'pointer'}} name="logo-instagram"/>
+                  <a
+                      target="_blank"
+                      href="https://www.linkedin.com/company/stockeado/"
+                      className="dark:text-body-color-dark mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:hover:text-primary"
+                    >
+                      <IonIcon style={{color: 'grey', fontSize: '1.5rem', margin: '1rem', cursor: 'pointer'}} name="logo-linkedin"/>
+                    </a>
+                    <a
+                      target="_blank"
+                      href="https://www.instagram.com/stockeado_/"
+                      className="dark:text-body-color-dark mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:hover:text-primary"
+                    >
+                      <IonIcon style={{color: 'grey', fontSize: '1.5rem', margin: '1rem', cursor: 'pointer'}} name="logo-instagram"/>
+                    </a>
 
                 </div>
               </div>

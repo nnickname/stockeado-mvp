@@ -92,7 +92,7 @@ const LayoutSignUp = () => {
                       className="mb-3 block text-sm text-dark dark:text-white"
                     >
                       {" "}
-                      Email{" "}
+                      Correo electrónico{" "}
                     </label>
                     <input
                       value={email}
@@ -109,7 +109,7 @@ const LayoutSignUp = () => {
                       className="mb-3 block text-sm text-dark dark:text-white"
                     >
                       {" "}
-                      Password{" "}
+                      Contraseña{" "}
                     </label>
                     <input
                       value={password}
@@ -155,12 +155,12 @@ const LayoutSignUp = () => {
                       </div>
                       <span>
                         Al crear esta cuenta aceptas nuestros
-                        <a href="#0" className="text-primary hover:underline">
+                        <a href="/terms" target="_blank"  className="text-primary hover:underline">
                           {" "}
                           Terminos y condiciones{" "}
                         </a>
                         y nuestra
-                        <a href="#0" className="text-primary hover:underline">
+                        <a href="/privacy" target="_blank" className="text-primary hover:underline">
                           {" "}
                           Politica de privacidad{" "}
                         </a>

@@ -273,7 +273,7 @@ const tree = {
         'dashboard',
         {
         children: ['__PAGE__', {}, {
-          page: [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 21127)), "C:\\Users\\barto\\OneDrive\\Desktop\\stockeado\\stockeado-mvp\\app\\dashboard\\page.tsx"],
+          page: [() => Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 57355)), "C:\\Users\\barto\\OneDrive\\Desktop\\stockeado\\stockeado-mvp\\app\\dashboard\\page.tsx"],
           
         }]
       },
@@ -322,7 +322,7 @@ const routeModule = new AppPageRouteModule({
 
 /***/ }),
 
-/***/ 22917:
+/***/ 68674:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 92684));
@@ -334,8 +334,8 @@ Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_re
 Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 86496));
 Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 90507));
 Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 48407));
-Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 32242));
-Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 93147))
+Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 93147));
+Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 32242))
 
 /***/ }),
 
@@ -905,7 +905,7 @@ const TypeOfPiece = [
 
 /***/ }),
 
-/***/ 21127:
+/***/ 57355:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -1160,32 +1160,10 @@ const Features = ()=>{
 };
 /* harmony default export */ const dashboard_Features = (Features);
 
-;// CONCATENATED MODULE: ./components/dashboard/Footer/index.tsx
-
-const Footer_proxy = (0,module_proxy.createProxy)(String.raw`C:\Users\barto\OneDrive\Desktop\stockeado\stockeado-mvp\components\dashboard\Footer\index.tsx`)
-
-// Accessing the __esModule property and exporting $$typeof are required here.
-// The __esModule getter forces the proxy target to create the default export
-// and the $$typeof value is for rendering logic to determine if the module
-// is a client boundary.
-const { __esModule: Footer_esModule, $$typeof: Footer_$$typeof } = Footer_proxy;
-const Footer_default_ = Footer_proxy.default;
-
-
-/* harmony default export */ const Footer = (Footer_default_);
-;// CONCATENATED MODULE: ./components/dashboard/Header/index.tsx
-
-const Header_proxy = (0,module_proxy.createProxy)(String.raw`C:\Users\barto\OneDrive\Desktop\stockeado\stockeado-mvp\components\dashboard\Header\index.tsx`)
-
-// Accessing the __esModule property and exporting $$typeof are required here.
-// The __esModule getter forces the proxy target to create the default export
-// and the $$typeof value is for rendering logic to determine if the module
-// is a client boundary.
-const { __esModule: Header_esModule, $$typeof: Header_$$typeof } = Header_proxy;
-const Header_default_ = Header_proxy.default;
-
-
-/* harmony default export */ const Header = (Header_default_);
+// EXTERNAL MODULE: ./components/dashboard/Footer/index.tsx
+var Footer = __webpack_require__(47051);
+// EXTERNAL MODULE: ./components/dashboard/Header/index.tsx
+var Header = __webpack_require__(99689);
 ;// CONCATENATED MODULE: ./components/dashboard/Hero/index.tsx
 
 const Hero_proxy = (0,module_proxy.createProxy)(String.raw`C:\Users\barto\OneDrive\Desktop\stockeado\stockeado-mvp\components\dashboard\Hero\index.tsx`)
@@ -1231,13 +1209,13 @@ const metadata = {
 const Page = ()=>{
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
         children: [
-            /*#__PURE__*/ jsx_runtime_.jsx(Header, {}),
+            /*#__PURE__*/ jsx_runtime_.jsx(Header/* default */.ZP, {}),
             /*#__PURE__*/ jsx_runtime_.jsx(ScrollUp, {}),
             /*#__PURE__*/ jsx_runtime_.jsx(Hero, {}),
             /*#__PURE__*/ jsx_runtime_.jsx(dashboard_Brands, {}),
             /*#__PURE__*/ jsx_runtime_.jsx(dashboard_Features, {}),
             /*#__PURE__*/ jsx_runtime_.jsx(Video, {}),
-            /*#__PURE__*/ jsx_runtime_.jsx(Footer, {})
+            /*#__PURE__*/ jsx_runtime_.jsx(Footer/* default */.ZP, {})
         ]
     });
 };
@@ -1325,7 +1303,7 @@ __webpack_require__.r(__webpack_exports__);
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,9816,7654,3582,9636,507,8407], () => (__webpack_exec__(86305)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,9816,7654,3582,9636,507,8407,8638], () => (__webpack_exec__(86305)));
 module.exports = __webpack_exports__;
 
 })();

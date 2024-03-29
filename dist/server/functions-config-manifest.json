@@ -3,21 +3,23 @@
   "functions": {
     "/api/marketplacee": {},
     "/about": {},
+    "/configuration": {},
     "/contact": {},
     "/dashboard": {},
-    "/configuration": {},
     "/error": {},
     "/hub": {},
+    "/marketplace/item": {},
     "/inventory": {},
     "/marketplace/order": {},
-    "/marketplace/item": {},
     "/marketplace": {},
     "/marketplace/searchus": {},
     "/marketplace/payment": {},
     "/orders": {},
     "/marketplace/shop": {},
     "/": {},
+    "/privacy": {},
+    "/signin": {},
     "/signup": {},
-    "/signin": {}
+    "/terms": {}
   }
 }

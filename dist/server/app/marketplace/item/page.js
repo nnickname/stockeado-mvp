@@ -563,6 +563,7 @@ const LayoutMarketPlaceItem = ()=>{
                                 children: [
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                         children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
+                                            className: "responsiveItemImage",
                                             style: {
                                                 maxWidth: "350px",
                                                 minHeight: "250px",
@@ -929,7 +930,7 @@ const LayoutMarketPlaceItem = ()=>{
                                                     padding: ".3rem",
                                                     border: "1px solid rgba(0,0,0, 0.1)"
                                                 },
-                                                children: "N\xfamero de parte / VIN"
+                                                children: "N\xfamero de parte"
                                             }),
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
                                                 style: {
@@ -1133,7 +1134,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,4997,9816,3800,8284,9636,4328,1142,507,310,627], () => (__webpack_exec__(46534)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,9816,4997,3800,8284,9636,4328,507,1142,310,627], () => (__webpack_exec__(46534)));
 module.exports = __webpack_exports__;
 
 })();

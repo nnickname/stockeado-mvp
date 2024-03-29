@@ -551,7 +551,7 @@ const LayoutSignUp = ()=>{
                                                             className: "mb-3 block text-sm text-dark dark:text-white",
                                                             children: [
                                                                 " ",
-                                                                "Email",
+                                                                "Correo electr\xf3nico",
                                                                 " "
                                                             ]
                                                         }),
@@ -573,7 +573,7 @@ const LayoutSignUp = ()=>{
                                                             className: "mb-3 block text-sm text-dark dark:text-white",
                                                             children: [
                                                                 " ",
-                                                                "Password",
+                                                                "Contrase\xf1a",
                                                                 " "
                                                             ]
                                                         }),
@@ -628,7 +628,8 @@ const LayoutSignUp = ()=>{
                                                                 children: [
                                                                     "Al crear esta cuenta aceptas nuestros",
                                                                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("a", {
-                                                                        href: "#0",
+                                                                        href: "/terms",
+                                                                        target: "_blank",
                                                                         className: "text-primary hover:underline",
                                                                         children: [
                                                                             " ",
@@ -638,7 +639,8 @@ const LayoutSignUp = ()=>{
                                                                     }),
                                                                     "y nuestra",
                                                                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("a", {
-                                                                        href: "#0",
+                                                                        href: "/privacy",
+                                                                        target: "_blank",
                                                                         className: "text-primary hover:underline",
                                                                         children: [
                                                                             " ",

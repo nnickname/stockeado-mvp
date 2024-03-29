@@ -1,7 +1,7 @@
 
 import axios from "axios";
 export default axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: "https://stockeado.com/api",
   
   withCredentials: true,
   headers: {
