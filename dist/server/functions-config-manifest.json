@@ -6,20 +6,20 @@
     "/configuration": {},
     "/contact": {},
     "/dashboard": {},
-    "/hub": {},
     "/error": {},
+    "/hub": {},
     "/inventory": {},
-    "/marketplace/order": {},
     "/marketplace/item": {},
+    "/marketplace/order": {},
     "/marketplace": {},
-    "/marketplace/searchus": {},
     "/marketplace/payment": {},
-    "/orders": {},
+    "/marketplace/searchus": {},
     "/marketplace/shop": {},
     "/": {},
     "/privacy": {},
     "/signin": {},
     "/signup": {},
-    "/terms": {}
+    "/terms": {},
+    "/orders": {}
   }
 }
