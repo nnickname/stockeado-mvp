@@ -66,7 +66,7 @@ const LayoutMarketPlaceItem = () => {
         <div className="cardImage displayBlockResponsive">
             <div style={{display: 'flex', width: '100%'}} className='displayBlockResponsive'>
                 <div>
-                    <img  style={{maxWidth: '350px' , minHeight: '250px', border: '1px solid rgba(128, 128, 128, 0.219', borderRadius: '.8rem'}} src={item?.image} alt="Image Item"/>
+                    <img className="responsiveItemImage"  style={{maxWidth: '350px' , minHeight: '250px', border: '1px solid rgba(128, 128, 128, 0.219', borderRadius: '.8rem'}} src={item?.image} alt="Image Item"/>
 
                 </div>
                 <div style={{width: '100%', padding: '1rem'}}>
@@ -134,7 +134,7 @@ const LayoutMarketPlaceItem = () => {
                 </div>
                 <div style={{display:'flex', width: '100%'}}>
                     <p style={{width: '100%',backgroundColor: '#EFF2F4', padding: '.3rem', border: '1px solid rgba(0,0,0, 0.1)'}}>
-                        Número de parte / VIN
+                        Número de parte
                     </p>
                     <p style={{width: '100%', backgroundColor: 'transparent', padding: '.3rem', border: '1px solid rgba(0,0,0, 0.1)'}}>{item?.numberPart ?? 'No definido'}</p>
                 </div>

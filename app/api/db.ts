@@ -10,7 +10,7 @@ import { NextResponse } from "next/server";
 
 const corsOptions ={
   
-  origin:'http://64.225.62.133',
+  origin:'http://localhost:3000',
   credentials:true, 
   optionSuccessStatus:200,
   

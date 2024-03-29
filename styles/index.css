@@ -48,7 +48,7 @@ h1, h2, h3, h4 {
 
 
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 920px) {
   .displayBlockResponsive{
     display: block !important;
   }

@@ -18,3 +18,11 @@
     transition: 1s ease;
     transform: scale(1.2);
 }
+
+
+@media screen and (max-width: 520px) {
+    .responsiveItemImage{
+        width: 100% !important;
+    }
+    
+}

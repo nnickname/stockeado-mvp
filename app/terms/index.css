@@ -1,0 +1,18 @@
+.termsTitle{
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: .5rem;
+    font-weight: 600;
+}
+.termsSubTitle{
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+.termsText{
+    font-size: 1rem;
+    margin-top: .7rem;
+    margin-bottom: .5rem;
+    color: rgb(20, 20, 20);
+}
