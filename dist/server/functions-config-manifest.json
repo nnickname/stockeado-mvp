@@ -12,14 +12,14 @@
     "/marketplace/item": {},
     "/marketplace/order": {},
     "/marketplace": {},
-    "/marketplace/payment": {},
     "/marketplace/searchus": {},
+    "/marketplace/payment": {},
+    "/orders": {},
     "/marketplace/shop": {},
     "/": {},
     "/privacy": {},
     "/signin": {},
     "/signup": {},
-    "/terms": {},
-    "/orders": {}
+    "/terms": {}
   }
 }

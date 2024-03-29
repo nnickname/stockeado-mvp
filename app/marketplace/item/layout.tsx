@@ -14,14 +14,14 @@ import Link from 'next/link';
 import Footer from '@/components/dashboard/Footer';
 const LayoutMarketPlaceItem = () => {
     const router = useRouter();
-    const search = useSearchParams();
-    const id = search.get('id');
     const [cart, setCart] = useState<CartProps[]>([]);
     const [item, setItem] = useState<InventoryModel>();
     const [shop, setShop] = useState<UserModel>(null);
     const [ammount, setAmmount] = useState<number>(0);
 
     const getData = async() => {
+        const search = useSearchParams();
+        const id = search.get('id');
         if(id !== null && id?.length > 0){
             const responseItem = await getInventoryById(id);
             const responseShop = await getUserById(responseItem?.owner_id);
