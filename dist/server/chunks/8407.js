@@ -14,8 +14,8 @@ __webpack_require__.d(__webpack_exports__, {
   "default": () => (/* binding */ dashboard_Header)
 });
 
-// EXTERNAL MODULE: external "next/dist/compiled/react-experimental/jsx-runtime"
-var jsx_runtime_ = __webpack_require__(76931);
+// EXTERNAL MODULE: external "next/dist/compiled/react/jsx-runtime"
+var jsx_runtime_ = __webpack_require__(56786);
 // EXTERNAL MODULE: ./node_modules/next/image.js
 var next_image = __webpack_require__(52451);
 var image_default = /*#__PURE__*/__webpack_require__.n(next_image);
@@ -24,8 +24,8 @@ var next_link = __webpack_require__(11440);
 var link_default = /*#__PURE__*/__webpack_require__.n(next_link);
 // EXTERNAL MODULE: ./node_modules/next/navigation.js
 var navigation = __webpack_require__(57114);
-// EXTERNAL MODULE: external "next/dist/compiled/react-experimental"
-var react_experimental_ = __webpack_require__(17640);
+// EXTERNAL MODULE: external "next/dist/compiled/react"
+var react_ = __webpack_require__(18038);
 ;// CONCATENATED MODULE: ./components/dashboard/Header/menuData.tsx
 const menuData = [
     {
@@ -58,12 +58,12 @@ const menuData = [
 
 const Header = ()=>{
     // Navbar toggle
-    const [navbarOpen, setNavbarOpen] = (0,react_experimental_.useState)(false);
+    const [navbarOpen, setNavbarOpen] = (0,react_.useState)(false);
     const navbarToggleHandler = ()=>{
         setNavbarOpen(!navbarOpen);
     };
     // Sticky Navbar
-    const [sticky, setSticky] = (0,react_experimental_.useState)(false);
+    const [sticky, setSticky] = (0,react_.useState)(false);
     const handleStickyNavbar = ()=>{
         if (window.scrollY >= 80) {
             setSticky(true);
@@ -71,11 +71,11 @@ const Header = ()=>{
             setSticky(false);
         }
     };
-    (0,react_experimental_.useEffect)(()=>{
+    (0,react_.useEffect)(()=>{
         window.addEventListener("scroll", handleStickyNavbar);
     });
     // submenu handler
-    const [openIndex, setOpenIndex] = (0,react_experimental_.useState)(-1);
+    const [openIndex, setOpenIndex] = (0,react_.useState)(-1);
     const handleSubmenu = (index)=>{
         if (openIndex === index) {
             setOpenIndex(-1);

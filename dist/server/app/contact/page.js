@@ -4,35 +4,35 @@ exports.id = 1327;
 exports.ids = [1327];
 exports.modules = {
 
-/***/ 55752:
+/***/ 18038:
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("next/dist/compiled/react-dom-experimental/server-rendering-stub");
+module.exports = require("next/dist/compiled/react");
 
 /***/ }),
 
-/***/ 17640:
+/***/ 98704:
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("next/dist/compiled/react-experimental");
+module.exports = require("next/dist/compiled/react-dom/server-rendering-stub");
 
 /***/ }),
 
-/***/ 76931:
+/***/ 97897:
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("next/dist/compiled/react-experimental/jsx-runtime");
+module.exports = require("next/dist/compiled/react-server-dom-webpack/client");
 
 /***/ }),
 
-/***/ 67597:
+/***/ 56786:
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("next/dist/compiled/react-server-dom-webpack-experimental/client");
+module.exports = require("next/dist/compiled/react/jsx-runtime");
 
 /***/ }),
 
@@ -302,8 +302,8 @@ __webpack_require__.d(__webpack_exports__, {
   metadata: () => (/* binding */ metadata)
 });
 
-// EXTERNAL MODULE: external "next/dist/compiled/react-experimental/jsx-runtime"
-var jsx_runtime_ = __webpack_require__(76931);
+// EXTERNAL MODULE: external "next/dist/compiled/react/jsx-runtime"
+var jsx_runtime_ = __webpack_require__(56786);
 // EXTERNAL MODULE: ./node_modules/next/link.js
 var next_link = __webpack_require__(25124);
 var link_default = /*#__PURE__*/__webpack_require__.n(next_link);

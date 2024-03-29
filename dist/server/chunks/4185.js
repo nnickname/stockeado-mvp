@@ -18,8 +18,8 @@ Object.defineProperty(exports, "Image", ({
 }));
 const _interop_require_default = __webpack_require__(82147);
 const _interop_require_wildcard = __webpack_require__(4009);
-const _react = /*#__PURE__*/ _interop_require_wildcard._(__webpack_require__(17640));
-const _reactdom = __webpack_require__(55752);
+const _react = /*#__PURE__*/ _interop_require_wildcard._(__webpack_require__(18038));
+const _reactdom = __webpack_require__(98704);
 const _head = /*#__PURE__*/ _interop_require_default._(__webpack_require__(66864));
 const _getimgprops = __webpack_require__(1830);
 const _imageconfig = __webpack_require__(52210);

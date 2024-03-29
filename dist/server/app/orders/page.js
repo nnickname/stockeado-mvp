@@ -4,35 +4,35 @@ exports.id = 1569;
 exports.ids = [1569];
 exports.modules = {
 
-/***/ 55752:
+/***/ 18038:
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("next/dist/compiled/react-dom-experimental/server-rendering-stub");
+module.exports = require("next/dist/compiled/react");
 
 /***/ }),
 
-/***/ 17640:
+/***/ 98704:
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("next/dist/compiled/react-experimental");
+module.exports = require("next/dist/compiled/react-dom/server-rendering-stub");
 
 /***/ }),
 
-/***/ 76931:
+/***/ 97897:
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("next/dist/compiled/react-experimental/jsx-runtime");
+module.exports = require("next/dist/compiled/react-server-dom-webpack/client");
 
 /***/ }),
 
-/***/ 67597:
+/***/ 56786:
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("next/dist/compiled/react-server-dom-webpack-experimental/client");
+module.exports = require("next/dist/compiled/react/jsx-runtime");
 
 /***/ }),
 
@@ -429,16 +429,16 @@ __webpack_require__.d(__webpack_exports__, {
   "default": () => (/* binding */ layout)
 });
 
-// EXTERNAL MODULE: external "next/dist/compiled/react-experimental/jsx-runtime"
-var jsx_runtime_ = __webpack_require__(76931);
+// EXTERNAL MODULE: external "next/dist/compiled/react/jsx-runtime"
+var jsx_runtime_ = __webpack_require__(56786);
 // EXTERNAL MODULE: ./components/panel/sidebar/index.tsx
 var sidebar = __webpack_require__(28088);
 // EXTERNAL MODULE: ./node_modules/@table-library/react-table-library/compact.js + 26 modules
 var compact = __webpack_require__(77761);
 // EXTERNAL MODULE: ./node_modules/next/navigation.js
 var navigation = __webpack_require__(57114);
-// EXTERNAL MODULE: external "next/dist/compiled/react-experimental"
-var react_experimental_ = __webpack_require__(17640);
+// EXTERNAL MODULE: external "next/dist/compiled/react"
+var react_ = __webpack_require__(18038);
 // EXTERNAL MODULE: ./app/api/userr/call.ts
 var call = __webpack_require__(310);
 // EXTERNAL MODULE: ./node_modules/@table-library/react-table-library/pagination.js + 1 modules
@@ -476,7 +476,7 @@ var order = __webpack_require__(49462);
 
 const EditModalOrder = ({ order })=>{
     const time = new Date(String(order?.maxDate));
-    const [orderState, setOrderState] = (0,react_experimental_.useState)(Number(order?.state));
+    const [orderState, setOrderState] = (0,react_.useState)(Number(order?.state));
     const modifyState = async (index)=>{
         const response = await (0,orderss_call/* updateOrderState */.oW)({
             _id: order?._id,
@@ -736,12 +736,12 @@ var baseline = __webpack_require__(35655);
 
 const OrdersLayoutPage = ()=>{
     const router = (0,navigation.useRouter)();
-    const [user, setUser] = (0,react_experimental_.useState)(null);
-    const [open, setOpen] = (0,react_experimental_.useState)();
-    const [orderSelected, setOrderSelected] = (0,react_experimental_.useState)();
-    const [ordersData, setOrderData] = (0,react_experimental_.useState)([]);
-    const [realOrdersData, setRealOrderData] = (0,react_experimental_.useState)([]);
-    const [search, setSearch] = (0,react_experimental_.useState)("");
+    const [user, setUser] = (0,react_.useState)(null);
+    const [open, setOpen] = (0,react_.useState)();
+    const [orderSelected, setOrderSelected] = (0,react_.useState)();
+    const [ordersData, setOrderData] = (0,react_.useState)([]);
+    const [realOrdersData, setRealOrderData] = (0,react_.useState)([]);
+    const [search, setSearch] = (0,react_.useState)("");
     const pagination = (0,react_table_library_pagination/* usePagination */.h)({
         nodes: [
             ...ordersData ?? []
@@ -847,7 +847,7 @@ const OrdersLayoutPage = ()=>{
         setOrderData(ordersCast);
         setUser(userr);
     };
-    (0,react_experimental_.useEffect)(()=>{
+    (0,react_.useEffect)(()=>{
         toUser();
     }, []);
     const handleSearch = ()=>{};
@@ -1078,7 +1078,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   metadata: () => (/* binding */ metadata)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76931);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(56786);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(97939);
 

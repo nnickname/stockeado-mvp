@@ -12,8 +12,8 @@ __webpack_require__.d(__webpack_exports__, {
   Z: () => (/* binding */ background_background)
 });
 
-// EXTERNAL MODULE: external "next/dist/compiled/react-experimental/jsx-runtime"
-var jsx_runtime_ = __webpack_require__(76931);
+// EXTERNAL MODULE: external "next/dist/compiled/react/jsx-runtime"
+var jsx_runtime_ = __webpack_require__(56786);
 ;// CONCATENATED MODULE: ./public/images/logo/background.jpeg
 /* harmony default export */ const background = ({"src":"/_next/static/media/background.7d2b71fd.jpeg","height":1080,"width":1920,"blurDataURL":"data:image/jpeg;base64,/9j/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIfIiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/wAARCAAFAAgDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAZEAACAwEAAAAAAAAAAAAAAAAAAQIFESH/xAAVAQEBAAAAAAAAAAAAAAAAAAAFBv/EABgRAAMBAQAAAAAAAAAAAAAAAAABBCIz/9oADAMBAAIRAxEAPwCJr5yePegArZeaAqFs/9k=","blurWidth":8,"blurHeight":5});
 // EXTERNAL MODULE: ./components/marketplace/background/index.css
@@ -25,8 +25,8 @@ var IonIcon = __webpack_require__(99816);
 var IonIcon_default = /*#__PURE__*/__webpack_require__.n(IonIcon);
 // EXTERNAL MODULE: ./node_modules/react-responsive-modal/dist/index.js
 var dist = __webpack_require__(7654);
-// EXTERNAL MODULE: external "next/dist/compiled/react-experimental"
-var react_experimental_ = __webpack_require__(17640);
+// EXTERNAL MODULE: external "next/dist/compiled/react"
+var react_ = __webpack_require__(18038);
 ;// CONCATENATED MODULE: ./components/marketplace/background/background.tsx
 /* __next_internal_client_entry_do_not_use__ default auto */ 
 
@@ -36,8 +36,8 @@ var react_experimental_ = __webpack_require__(17640);
 
 
 const BackgroundImage = ()=>{
-    const [open, setOpen] = (0,react_experimental_.useState)(false);
-    const [openAdd, setOpenAdd] = (0,react_experimental_.useState)(false);
+    const [open, setOpen] = (0,react_.useState)(false);
+    const [openAdd, setOpenAdd] = (0,react_.useState)(false);
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
         children: [
             /*#__PURE__*/ jsx_runtime_.jsx("div", {

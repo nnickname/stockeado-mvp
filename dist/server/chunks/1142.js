@@ -13,8 +13,8 @@ __webpack_require__.d(__webpack_exports__, {
   m: () => (/* binding */ getTotalPrice)
 });
 
-// EXTERNAL MODULE: external "next/dist/compiled/react-experimental/jsx-runtime"
-var jsx_runtime_ = __webpack_require__(76931);
+// EXTERNAL MODULE: external "next/dist/compiled/react/jsx-runtime"
+var jsx_runtime_ = __webpack_require__(56786);
 // EXTERNAL MODULE: ./node_modules/next/image.js
 var next_image = __webpack_require__(52451);
 var image_default = /*#__PURE__*/__webpack_require__.n(next_image);
@@ -23,8 +23,8 @@ var next_link = __webpack_require__(11440);
 var link_default = /*#__PURE__*/__webpack_require__.n(next_link);
 // EXTERNAL MODULE: ./node_modules/next/navigation.js
 var navigation = __webpack_require__(57114);
-// EXTERNAL MODULE: external "next/dist/compiled/react-experimental"
-var react_experimental_ = __webpack_require__(17640);
+// EXTERNAL MODULE: external "next/dist/compiled/react"
+var react_ = __webpack_require__(18038);
 // EXTERNAL MODULE: ./components/marketplace/header/index.css
 var header = __webpack_require__(79999);
 // EXTERNAL MODULE: ./node_modules/@reacticons/ionicons/lib/IonIcon.js
@@ -55,12 +55,12 @@ const getTotalPrice = (cartItems, deliveried)=>{
 const HeaderMarketPlace = ({ cartItems, setCart })=>{
     const router = (0,navigation.useRouter)();
     // Navbar toggle
-    const [navbarOpen, setNavbarOpen] = (0,react_experimental_.useState)(false);
+    const [navbarOpen, setNavbarOpen] = (0,react_.useState)(false);
     const navbarToggleHandler = ()=>{
         setNavbarOpen(!navbarOpen);
     };
     // Sticky Navbar
-    const [sticky, setSticky] = (0,react_experimental_.useState)(false);
+    const [sticky, setSticky] = (0,react_.useState)(false);
     const handleStickyNavbar = ()=>{
         if (window.scrollY >= 80) {
             setSticky(true);
@@ -68,11 +68,11 @@ const HeaderMarketPlace = ({ cartItems, setCart })=>{
             setSticky(false);
         }
     };
-    (0,react_experimental_.useEffect)(()=>{
+    (0,react_.useEffect)(()=>{
         window.addEventListener("scroll", handleStickyNavbar);
     });
     // submenu handler
-    const [openIndex, setOpenIndex] = (0,react_experimental_.useState)(-1);
+    const [openIndex, setOpenIndex] = (0,react_.useState)(-1);
     const handleSubmenu = (index)=>{
         if (openIndex === index) {
             setOpenIndex(-1);
@@ -80,8 +80,8 @@ const HeaderMarketPlace = ({ cartItems, setCart })=>{
             setOpenIndex(index);
         }
     };
-    const [isPopoverOpen, setIsPopoverOpen] = (0,react_experimental_.useState)(false);
-    const [keywordFind, setKeyword] = (0,react_experimental_.useState)("");
+    const [isPopoverOpen, setIsPopoverOpen] = (0,react_.useState)(false);
+    const [keywordFind, setKeyword] = (0,react_.useState)("");
     const findProductAndSet = async ()=>{
         if (keywordFind?.length > 3) {
             var keywordCast = keywordFind?.replace(/%20/g, " ");

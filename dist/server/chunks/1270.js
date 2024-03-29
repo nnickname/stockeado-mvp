@@ -14,8 +14,8 @@ __webpack_require__.d(__webpack_exports__, {
 
 // UNUSED EXPORTS: getTotalSellings
 
-// EXTERNAL MODULE: external "next/dist/compiled/react-experimental/jsx-runtime"
-var jsx_runtime_ = __webpack_require__(76931);
+// EXTERNAL MODULE: external "next/dist/compiled/react/jsx-runtime"
+var jsx_runtime_ = __webpack_require__(56786);
 // EXTERNAL MODULE: ./components/panel/sellresume/index.css
 var sellresume = __webpack_require__(64739);
 ;// CONCATENATED MODULE: ./public/images/logo/icon1.png

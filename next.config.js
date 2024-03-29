@@ -2,7 +2,7 @@
 const nextConfig = {
   distDir: './dist/',
   experimental: {
-    serverActions: true,
+    
     missingSuspenseWithCSRBailout: false,
   },
   eslint: { 

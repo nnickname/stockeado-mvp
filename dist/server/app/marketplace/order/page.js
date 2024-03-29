@@ -4,35 +4,35 @@ exports.id = 4828;
 exports.ids = [4828];
 exports.modules = {
 
-/***/ 55752:
+/***/ 18038:
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("next/dist/compiled/react-dom-experimental/server-rendering-stub");
+module.exports = require("next/dist/compiled/react");
 
 /***/ }),
 
-/***/ 17640:
+/***/ 98704:
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("next/dist/compiled/react-experimental");
+module.exports = require("next/dist/compiled/react-dom/server-rendering-stub");
 
 /***/ }),
 
-/***/ 76931:
+/***/ 97897:
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("next/dist/compiled/react-experimental/jsx-runtime");
+module.exports = require("next/dist/compiled/react-server-dom-webpack/client");
 
 /***/ }),
 
-/***/ 67597:
+/***/ 56786:
 /***/ ((module) => {
 
 "use strict";
-module.exports = require("next/dist/compiled/react-server-dom-webpack-experimental/client");
+module.exports = require("next/dist/compiled/react/jsx-runtime");
 
 /***/ }),
 
@@ -445,10 +445,10 @@ __webpack_require__.d(__webpack_exports__, {
   "default": () => (/* binding */ layout)
 });
 
-// EXTERNAL MODULE: external "next/dist/compiled/react-experimental/jsx-runtime"
-var jsx_runtime_ = __webpack_require__(76931);
-// EXTERNAL MODULE: external "next/dist/compiled/react-experimental"
-var react_experimental_ = __webpack_require__(17640);
+// EXTERNAL MODULE: external "next/dist/compiled/react/jsx-runtime"
+var jsx_runtime_ = __webpack_require__(56786);
+// EXTERNAL MODULE: external "next/dist/compiled/react"
+var react_ = __webpack_require__(18038);
 // EXTERNAL MODULE: ./app/marketplace/index.css
 var marketplace = __webpack_require__(35514);
 // EXTERNAL MODULE: ./components/marketplace/background/index.css
@@ -487,7 +487,7 @@ var styles = __webpack_require__(42055);
 
 const AwaitPaymentView = ({ cartItems, order })=>{
     const router = (0,navigation.useRouter)();
-    const [open, setOpen] = (0,react_experimental_.useState)();
+    const [open, setOpen] = (0,react_.useState)();
     const confirmPayment = async ()=>{
         const response = await (0,call/* updateOrderState */.oW)({
             _id: order?._id,
@@ -1313,14 +1313,14 @@ const LayoutMarketPlaceOrderView = ()=>{
     const router = (0,navigation.useRouter)();
     const search = (0,navigation.useSearchParams)();
     const id = search.get("id");
-    const [cart, setCart] = (0,react_experimental_.useState)();
-    const [order, setOrder] = (0,react_experimental_.useState)(null);
+    const [cart, setCart] = (0,react_.useState)();
+    const [order, setOrder] = (0,react_.useState)(null);
     const getStaticOrder = async ()=>{
         if (id !== null && id?.length > 0) {
             setOrder(await (0,call/* getOrder */.co)(id) ?? {});
         }
     };
-    (0,react_experimental_.useEffect)(()=>{
+    (0,react_.useEffect)(()=>{
         setCart(JSON.parse(sessionStorage.getItem("cart")));
         getStaticOrder();
     }, []);
@@ -1387,7 +1387,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   metadata: () => (/* binding */ metadata)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76931);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(56786);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(34355);
 /* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_index_css__WEBPACK_IMPORTED_MODULE_1__);

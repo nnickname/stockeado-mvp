@@ -80,7 +80,7 @@ Object.defineProperty(exports, "default", ({
     }
 }));
 const _interop_require_default = __webpack_require__(82147);
-const _react = /*#__PURE__*/ _interop_require_default._(__webpack_require__(17640));
+const _react = /*#__PURE__*/ _interop_require_default._(__webpack_require__(18038));
 const _resolvehref = __webpack_require__(70982);
 const _islocalurl = __webpack_require__(60120);
 const _formaturl = __webpack_require__(12336);
@@ -423,7 +423,7 @@ Object.defineProperty(exports, "useIntersection", ({
         return useIntersection;
     }
 }));
-const _react = __webpack_require__(17640);
+const _react = __webpack_require__(18038);
 const _requestidlecallback = __webpack_require__(39029);
 const hasIntersectionObserver = typeof IntersectionObserver === "function";
 const observers = new Map();

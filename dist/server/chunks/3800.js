@@ -28,8 +28,8 @@ var __assign = (this && this.__assign) || function () {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ArrowContainer = void 0;
-var jsx_runtime_1 = __webpack_require__(76931);
-var react_1 = __webpack_require__(17640);
+var jsx_runtime_1 = __webpack_require__(56786);
+var react_1 = __webpack_require__(18038);
 var useArrowContainer_1 = __webpack_require__(96150);
 var ArrowContainer = function (_a) {
     var childRect = _a.childRect, popoverRect = _a.popoverRect, position = _a.position, arrowColor = _a.arrowColor, arrowSize = _a.arrowSize, arrowClassName = _a.arrowClassName, externalArrowStyle = _a.arrowStyle, className = _a.className, children = _a.children, externalArrowContainerStyle = _a.style;
@@ -67,8 +67,8 @@ var __assign = (this && this.__assign) || function () {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Popover = exports.usePopover = exports.ArrowContainer = exports.useArrowContainer = void 0;
-var jsx_runtime_1 = __webpack_require__(76931);
-var react_1 = __webpack_require__(17640);
+var jsx_runtime_1 = __webpack_require__(56786);
+var react_1 = __webpack_require__(18038);
 var PopoverPortal_1 = __webpack_require__(78680);
 var util_1 = __webpack_require__(76019);
 var usePopover_1 = __webpack_require__(74618);
@@ -234,8 +234,8 @@ exports.Popover = (0, react_1.forwardRef)(function (props, ref) {
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PopoverPortal = void 0;
-var react_1 = __webpack_require__(17640);
-var react_dom_1 = __webpack_require__(55752);
+var react_1 = __webpack_require__(18038);
+var react_dom_1 = __webpack_require__(98704);
 var PopoverPortal = function (_a) {
     var container = _a.container, element = _a.element, scoutElement = _a.scoutElement, children = _a.children;
     (0, react_1.useLayoutEffect)(function () {
@@ -271,7 +271,7 @@ var __assign = (this && this.__assign) || function () {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.useArrowContainer = void 0;
-var react_1 = __webpack_require__(17640);
+var react_1 = __webpack_require__(18038);
 var useArrowContainer = function (_a) {
     var childRect = _a.childRect, popoverRect = _a.popoverRect, position = _a.position, arrowSize = _a.arrowSize, arrowColor = _a.arrowColor;
     var arrowContainerStyle = (0, react_1.useMemo)(function () {
@@ -362,7 +362,7 @@ exports.useArrowContainer = useArrowContainer;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.useElementRef = void 0;
-var react_1 = __webpack_require__(17640);
+var react_1 = __webpack_require__(18038);
 var util_1 = __webpack_require__(76019);
 var useElementRef = function (_a) {
     var containerClassName = _a.containerClassName, containerStyle = _a.containerStyle, id = _a.id;
@@ -383,7 +383,7 @@ exports.useElementRef = useElementRef;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.useMemoizedArray = void 0;
-var react_1 = __webpack_require__(17640);
+var react_1 = __webpack_require__(18038);
 var useMemoizedArray = function (externalArray) {
     var prevArrayRef = (0, react_1.useRef)(externalArray);
     var array = (0, react_1.useMemo)(function () {
@@ -415,7 +415,7 @@ exports.useMemoizedArray = useMemoizedArray;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.usePopover = void 0;
-var react_1 = __webpack_require__(17640);
+var react_1 = __webpack_require__(18038);
 var util_1 = __webpack_require__(76019);
 var useElementRef_1 = __webpack_require__(55161);
 var POPOVER_STYLE = {

@@ -13,13 +13,13 @@ __webpack_require__.d(__webpack_exports__, {
   C: () => (/* binding */ OrderStates)
 });
 
-// EXTERNAL MODULE: external "next/dist/compiled/react-experimental/jsx-runtime"
-var jsx_runtime_ = __webpack_require__(76931);
+// EXTERNAL MODULE: external "next/dist/compiled/react/jsx-runtime"
+var jsx_runtime_ = __webpack_require__(56786);
 // EXTERNAL MODULE: ./node_modules/@reacticons/ionicons/lib/IonIcon.js
 var IonIcon = __webpack_require__(99816);
 var IonIcon_default = /*#__PURE__*/__webpack_require__.n(IonIcon);
-// EXTERNAL MODULE: external "next/dist/compiled/react-experimental"
-var react_experimental_ = __webpack_require__(17640);
+// EXTERNAL MODULE: external "next/dist/compiled/react"
+var react_ = __webpack_require__(18038);
 ;// CONCATENATED MODULE: ./public/images/logo/plin-logo-0C4106153C-seeklogo.com.png
 /* harmony default export */ const plin_logo_0C4106153C_seeklogo_com = ({"src":"/_next/static/media/plin-logo-0C4106153C-seeklogo.com.5b229474.png","height":300,"width":300,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAMAAADz0U65AAAAaVBMVEVMaXETwOUMyN4Oz9ogpukil/YQx94C39EH3NEC4dEf1uMD19gU1dYG188F5c4Vr+MOtfA7yOQlivQQu99JyNMK4tkhtOcO4tUn5Nqe7u4K7OCQ5e137OiJ7Owbrv+H2fkH2eda5eKa5POPTQxeAAAAGXRSTlMA+K4tusT+8v2w/ur5LSzh/fmk4/6q8uHgtMDlrgAAAAlwSFlzAAALEwAACxMBAJqcGAAAAEVJREFUeJwFwYUBwCAQBLBDH68LVtt/yCZAtEQ2AcIXYwolcBfelYoFqz3X3A/sX825tRPynrQLZYO6RqYfHzErOSxc4AeH1wPcqyzAgAAAAABJRU5ErkJggg==","blurWidth":8,"blurHeight":8});
 ;// CONCATENATED MODULE: ./public/images/logo/Yape_text_app_icon.png
@@ -38,7 +38,7 @@ const OrderStates = [
     "Entregado"
 ];
 const BankOptions = ()=>{
-    const [copied, setCopied] = (0,react_experimental_.useState)("stockeado.shop.transfer");
+    const [copied, setCopied] = (0,react_.useState)("stockeado.shop.transfer");
     const copyDirection = ()=>{
         setCopied("Copiado");
         navigator.clipboard.writeText("stockeado.shop.transfer");
