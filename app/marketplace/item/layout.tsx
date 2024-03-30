@@ -19,9 +19,8 @@ const LayoutMarketPlaceItem = () => {
     const [shop, setShop] = useState<UserModel>(null);
     const [ammount, setAmmount] = useState<number>(0);
 
-    const getData = async() => {
-        const search = useSearchParams();
-        const id = search.get('id');
+    const getData = async(id: string) => {
+        
         if(id !== null && id?.length > 0){
             const responseItem = await getInventoryById(id);
             const responseShop = await getUserById(responseItem?.owner_id);
@@ -51,11 +50,14 @@ const LayoutMarketPlaceItem = () => {
         }
         
     }
+    const search = useSearchParams();
+
     useEffect(() => {
-        getData();
+        const id = search.get('id');
+        if(id) getData(id);
         const cartCast = JSON.parse(sessionStorage.getItem("cart"));
         if(cartCast !== undefined) setCart(cartCast ?? []);
-    }, []);
+    }, [search]);
     return <div>
         <HeaderMarketPlace cartItems={cart} setCart={setCart}/>
         {shop === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> : 
