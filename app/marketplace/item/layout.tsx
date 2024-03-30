@@ -5,7 +5,7 @@ import HeaderMarketPlace from '@/components/marketplace/header';
 import { InventoryModel } from '@/models/inventoryModel';
 import { CartProps } from '@/models/ordersModel';
 import { UserModel } from '@/models/userModel';
-import { useParams, useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import './index.css';
 import IonIcon from '@reacticons/ionicons';
@@ -19,8 +19,10 @@ const LayoutMarketPlaceItem = () => {
     const [shop, setShop] = useState<UserModel>(null);
     const [ammount, setAmmount] = useState<number>(0);
 
-    const getData = async(id: string) => {
+    const getData = async() => {
         
+        const urlParams = new URLSearchParams(window.location.search);
+        let id = urlParams.get('id');
         if(id !== null && id?.length > 0){
             const responseItem = await getInventoryById(id);
             const responseShop = await getUserById(responseItem?.owner_id);
@@ -50,14 +52,13 @@ const LayoutMarketPlaceItem = () => {
         }
         
     }
-    const search = useSearchParams();
 
     useEffect(() => {
-        const id = search.get('id');
-        if(id) getData(id);
+        
+        getData();
         const cartCast = JSON.parse(sessionStorage.getItem("cart"));
         if(cartCast !== undefined) setCart(cartCast ?? []);
-    }, [search]);
+    }, []);
     return <div>
         <HeaderMarketPlace cartItems={cart} setCart={setCart}/>
         {shop === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> : 

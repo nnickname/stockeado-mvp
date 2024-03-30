@@ -472,7 +472,9 @@ const LayoutMarketPlaceItem = ()=>{
     const [item, setItem] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)();
     const [shop, setShop] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(null);
     const [ammount, setAmmount] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(0);
-    const getData = async (id)=>{
+    const getData = async ()=>{
+        const urlParams = new URLSearchParams(window.location.search);
+        let id = urlParams.get("id");
         if (id !== null && id?.length > 0) {
             const responseItem = await (0,_app_api_inventoryy_call__WEBPACK_IMPORTED_MODULE_1__/* .getInventoryById */ .SI)(id);
             const responseShop = await (0,_app_api_userr_call__WEBPACK_IMPORTED_MODULE_2__/* .getUserById */ .GA)(responseItem?.owner_id);
@@ -506,15 +508,11 @@ const LayoutMarketPlaceItem = ()=>{
             sessionStorage.setItem("cart", String(JSON.stringify(cartCast)));
         }
     };
-    const search = (0,next_navigation__WEBPACK_IMPORTED_MODULE_4__.useSearchParams)();
     (0,react__WEBPACK_IMPORTED_MODULE_5__.useEffect)(()=>{
-        const id = search.get("id");
-        if (id) getData(id);
+        getData();
         const cartCast = JSON.parse(sessionStorage.getItem("cart"));
         if (cartCast !== undefined) setCart(cartCast ?? []);
-    }, [
-        search
-    ]);
+    }, []);
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         children: [
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_marketplace_header__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z, {
