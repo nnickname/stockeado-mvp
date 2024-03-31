@@ -71,11 +71,12 @@ const OrdersLayoutPage = () => {
       ];
       const toUser = async () => {
           const userr = await getUser();
+          console.log(user);
           if(userr === undefined || userr === null){
               router.push('/');
+              return;
           }
           const ordersCast = await getOrders(userr?._id);
-          console.log(ordersCast);
           setOrderData(ordersCast);
           setUser(userr);
       }

@@ -7,6 +7,7 @@ import IonIcon from "@reacticons/ionicons";
 import { getTotalPrice } from "@/components/marketplace/header";
 import { OrderStates } from "../payment/bank";
 import './index.css';
+import Link from "next/link";
 const ConfirmedPaymentView: FunctionComponent<StepsOfPaymentType> = ({cartItems, order}) => {
     const router = useRouter();
     return <div>
@@ -86,13 +87,14 @@ const ConfirmedPaymentView: FunctionComponent<StepsOfPaymentType> = ({cartItems,
                         </div>)}
                     </div>
                     <div style={{textAlign: 'center'}}>
-                        <p style={{marginTop: '2rem', fontSize: '1rem'}}>¿Tenes alguna duda?</p>
-                        <button className="btn-whatsapp">
-                            
-                            <IonIcon style={{marginRight: '1rem'}} name="logo-whatsapp"/>
-                            Escribenos por WhatsApp
-                        </button>
-                    </div>
+                    <p style={{marginTop: '2rem', fontSize: '1rem'}}>¿Tenes alguna duda?</p>
+                    <button className="btn-whatsapp">
+                        <Link target='_blank' href="https://api.whatsapp.com/send?phone=+51941531016&text=¿En que podemos ayudarte?">
+                        <IonIcon style={{marginRight: '1rem'}} name="logo-whatsapp"/>
+                        Escribenos por WhatsApp
+                        </Link>
+                    </button>
+                </div>
                 </div>
                 
             </div>

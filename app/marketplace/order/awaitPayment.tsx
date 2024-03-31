@@ -9,6 +9,7 @@ import { BankOptions } from "../payment/bank";
 import Modal from "react-responsive-modal";
 import 'react-responsive-modal/styles.css';
 import { updateOrderState } from "@/app/api/orderss/call";
+import Link from "next/link";
 
 export type StepsOfPaymentType = {
     cartItems: CartProps[]
@@ -37,7 +38,7 @@ const AwaitPaymentView: FunctionComponent<StepsOfPaymentType> = ({cartItems, ord
                             
                             <p style={{fontWeight: '500', marginLeft: '.5rem', fontSize: '1.2rem'}}>{Number(order?.state) > 0 ? 'Pedido Confirmado' : 'Pedido Pendiente'}</p>
                         </div>
-                        <p style={{fontWeight: '500', marginRight: 'auto', color: 'tomato'}}> {Number(order?.state) >= 1 ? 'Pendiente Pago' : ''}</p>
+                        <p style={{fontWeight: '500', marginRight: 'auto', color: 'tomato'}}> {Number(order?.state) >= 2 ? '' : 'Pendiente Pago'}</p>
                     </div>
 
                     <div style={{display: 'flex', justifyContent: 'space-between', marginTop: '1rem'}}>
@@ -95,16 +96,17 @@ const AwaitPaymentView: FunctionComponent<StepsOfPaymentType> = ({cartItems, ord
                     <p>s/. {(Number(getTotalPrice(cartItems, true)).toFixed(2))}</p>
                 </div>
 
-                <BankOptions/>
+                <BankOptions {...order}/>
                 <button onClick={() => setOpen(true)} style={{marginTop: '2rem', padding: '.5rem', textAlign: 'center', width:'100%', background: 'linear-gradient(180deg, #127FFF 0%, #3662E3 100%)', color: 'white'}}>Confirmar Pago</button>
                     </div>
                 </div>
                 <div style={{textAlign: 'center'}}>
                     <p style={{marginTop: '2rem', fontSize: '1rem'}}>¿Tenes alguna duda?</p>
                     <button className="btn-whatsapp">
-                        
+                        <Link target='_blank' href="https://api.whatsapp.com/send?phone=+51941531016&text=¿En que podemos ayudarte?">
                         <IonIcon style={{marginRight: '1rem'}} name="logo-whatsapp"/>
                         Escribenos por WhatsApp
+                        </Link>
                     </button>
                 </div>
             </div>

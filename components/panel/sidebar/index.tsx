@@ -63,10 +63,8 @@ const SideBarComponent: FunctionComponent<SideBarProps> = ({user, frameContennt,
                 <p style={{color: route === 'configuration' ? '#1570EF' : 'black'}} className="text">Configuración</p>
             </div>
             <div className="list logout" onClick={async () => {
-                await cookies.remove('access_token');
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1500);
+                cookies.remove('access_token');
+                router.push('/signin');
                 
             }}>
                 <IonIcon className="icon" name="log-out-outline" />

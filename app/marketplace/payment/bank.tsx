@@ -7,9 +7,11 @@ import BCP from '../../../public/images/logo/Logo-bcp-vector.svg.png';
 import Plin from '../../../public/images/logo/plin-logo-0C4106153C-seeklogo.com.png';
 import Tunki from '../../../public/images/logo/tunki.png';
 import Yape from '../../../public/images/logo/Yape_text_app_icon.png';
+import Link from "next/link";
+import { OrderModel } from "@/models/ordersModel";
 export const OrderStates = ['Pendiente', 'Confirmado', 'Pagado', 'Enviando', 'Entregado'];
 
-export const BankOptions = () => {
+export const BankOptions = (order: OrderModel) => {
     const [copied, setCopied] = useState<string>('stockeado.shop.transfer');
     const copyDirection = () => {
         setCopied('Copiado');
@@ -61,7 +63,9 @@ export const BankOptions = () => {
         </div>
         <div style={{display: 'flex', width: '100%', marginTop: '1rem'}}>
             <p style={{color: 'grey', marginRight: '1rem'}}>Enviar depósito a Whatsapp</p>
-            <IonIcon name="logo-whatsapp" size="large" style={{color: '#25d366', cursor: 'pointer'}} />
+            <Link  target='_blank' href={"https://api.whatsapp.com/send?phone=+51941531016&text=¡Hola! Necesito confirmar el depósito de la orden - " + order?._id + " -"}>
+                <IonIcon name="logo-whatsapp" size="large" style={{color: '#25d366', cursor: 'pointer'}} />
+            </Link>
         </div>
     </div>
 }

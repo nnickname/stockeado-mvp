@@ -19,7 +19,14 @@
     transform: scale(1.2);
 }
 
-
+.whatsappItem{
+    width: 100% !important;
+    border: 1px solid green;
+    color: green;
+    background: transparent;
+    border-radius: .5rem;
+    padding: .5rem;
+}
 @media screen and (max-width: 520px) {
     .responsiveItemImage{
         width: 100% !important;

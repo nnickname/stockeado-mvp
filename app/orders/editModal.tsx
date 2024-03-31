@@ -36,7 +36,7 @@ const EditModalOrder: FunctionComponent<editModalProps> = ({order}) => {
                             
                             <p style={{fontWeight: '500', marginLeft: '.5rem', fontSize: '1.2rem'}}>{Number(order?.state) > 0 ? 'Pedido Confirmado' : 'Pedido Pendiente'}</p>
                         </div>
-                        <p style={{fontWeight: '500', marginRight: 'auto', color: 'tomato'}}> {Number(order?.state) >= 1 ? 'Pendiente Pago' : ''}</p>
+                        <p style={{fontWeight: '500', marginRight: 'auto', color: 'tomato'}}> {Number(order?.state) >= 2 ? '' : 'Pendiente Pago'}</p>
                     </div>
 
                     <div style={{display: 'flex', justifyContent: 'space-between', marginTop: '1rem'}}>

@@ -1,6 +1,5 @@
 'use client';
 import HeaderMarketPlace from "@/components/marketplace/header";
-import 'react-responsive-modal/styles.css';
 import Image from "next/image";
 import BackgroundImage from "@/components/marketplace/background/background";
 import { TypeBrands, TypeCategories, TypeOfPiece } from "@/models/brands";
@@ -19,7 +18,6 @@ import { UserModel } from "@/models/userModel";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import IonIcon from "@reacticons/ionicons";
-import Modal from "react-responsive-modal";
 import { Popover } from "react-tiny-popover";
 import { SkewLoader } from "react-spinners";
 import ArrayPagination from '@vlsergey/react-bootstrap-array-pagination';

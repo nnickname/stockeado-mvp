@@ -72,7 +72,7 @@ const LayoutMarketPlaceItem = () => {
             <p style={{color: 'grey', fontSize: '.8rem', marginBottom: '1rem'}}> MarketPlace {'> ' + shop?.nameShop}</p>
         </div>
         <div className="cardImage displayBlockResponsive">
-            <div style={{display: 'flex', width: '100%'}} className='displayBlockResponsive'>
+            <div style={{display: 'flex', width: '100%',}} className='displayBlockResponsive'>
                 <div>
                     <img className="responsiveItemImage"  style={{maxWidth: '350px' , minHeight: '250px', border: '1px solid rgba(128, 128, 128, 0.219', borderRadius: '.8rem'}} src={item?.image} alt="Image Item"/>
 
@@ -112,8 +112,9 @@ const LayoutMarketPlaceItem = () => {
                     <p style={{marginTop: '.5rem', color: '#8B96A5', fontSize: '.8rem'}}>Enviado por <span style={{fontWeight: '700'}}>Stockeado</span></p>
                     <button onClick={() => shopCart()} style={{marginTop: '1rem', borderRadius: '.5rem', backgroundColor: '#127FFF', padding: '.5rem', color: 'white', width: '100%'}}>Comprar ahora</button>
                     <button  onClick={() => addToCart()} style={{marginTop: '.5rem', borderRadius: '.5rem', backgroundColor: 'transparent', padding: '.5rem', color: '#127FFF', border: '1px solid rgba(0, 0,0, .2)', width: '100%'}}>Añadir al carrito</button>
-                    <button  onClick={() => addToCart()} style={{marginTop: '.5rem', borderRadius: '.5rem', backgroundColor: 'transparent', padding: '.5rem', color: '#25d366', border: '1px solid #25d366', width: '100%'}}>                        <IonIcon style={{marginRight: '1rem'}} name="logo-whatsapp"/>WhatsApp</button>
-
+                    <div className="whatsappItem" style={{ marginTop: '1.5rem', width: '100%', textAlign: 'center'}}>
+                        <Link target='_blank' href="https://api.whatsapp.com/send?phone=+51941531016&text=¿En que podemos ayudarte?" ><IonIcon style={{marginRight: '1rem'}} name="logo-whatsapp"/>WhatsApp</Link>
+                    </div>
                     
                 </div>
             </div>
