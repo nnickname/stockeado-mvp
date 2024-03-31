@@ -24,9 +24,6 @@ import Footer from "@/components/dashboard/Footer";
 
 
 const LayoutMarketPlaceShop = () => {
-    const router = useRouter();
-    const search = useSearchParams();
-    const id = search.get('id');
     const [user, setUser] = useState<UserModel>();
     const [inventoryRealData, setInventoryRealData] = useState<InventoryModel[]>([]);
     const [inventoryData, setInventoryData] = useState<InventoryModel[]>(null);
@@ -34,6 +31,8 @@ const LayoutMarketPlaceShop = () => {
     const [ammountItem, setAmmountItem] = useState<number>(0);
 
     const toUser = async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      let id = urlParams.get('id');
       if(id !== null && id?.length > 0){
         const userr = await getMarketPlace(id);
         setInventoryRealData(userr?.items ?? []);

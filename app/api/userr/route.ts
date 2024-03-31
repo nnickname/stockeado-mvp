@@ -14,7 +14,7 @@ export async function GET (req: Request | any, res: Response, next: any){
      return NextResponse.json({message: 'Invalid token'});
     }
     var responseUser = await User.findOne({_id: midd});
-    return NextResponse.json({ message: "User found", user: responseUser});
+    return NextResponse.json({ message: "User found", user: responseUser ?? null});
   }
   catch(error){
     return NextResponse.json({message: 'Invalid token'});

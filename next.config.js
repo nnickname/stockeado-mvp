@@ -1,10 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  distDir: './dist/',
-  experimental: {
-    
-    missingSuspenseWithCSRBailout: false,
-  },
+  //distDir: './dist/',
+  
   eslint: { 
     ignoreDuringBuilds: true, 
   }, 

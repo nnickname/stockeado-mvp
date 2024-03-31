@@ -44,7 +44,7 @@ const OrdersLayoutPage = () => {
         },
         { label: 'Fecha maxima', renderCell: (item) => <p>{new Date(item.maxDate).getDay()}/
         {new Date(item.maxDate).getMonth()}/
-        {new Date(item.maxDate).getFullYear()} <span style={{color: 'red'}}>{item.state < 3 ? <IonIcon name="alert-outline"/>: ''}</span> 
+        {new Date(item.maxDate).getFullYear()} <span style={{color: 'red'}}>{item.state < 4 ? <IonIcon name="alert-outline"/>: ''}</span> 
         </p>},
         {
           label: '',
@@ -54,7 +54,7 @@ const OrdersLayoutPage = () => {
             //setOpenEdit(true);
             
           }} style={{cursor: 'pointer', marginRight: '.5rem'}}>
-            <Link style={{fontSize: '1rem', color: '#3662E3', marginLeft: '.5rem'}} href={'https://stockeado-mvp.vercel.app/marketplace/order?id=' + item?._id}><IonIcon name='eye-outline'/></Link>
+            <Link target='_blank' style={{fontSize: '1rem', color: '#3662E3', marginLeft: '.5rem'}} href={'/marketplace/order?id=' + item?._id}><IonIcon name='eye-outline'/></Link>
 
           </div><div onClick={() => {
             setOrderSelected(item);
@@ -79,11 +79,17 @@ const OrdersLayoutPage = () => {
           setOrderData(ordersCast);
           setUser(userr);
       }
+
+      const [width, setWidth] = useState(0)
+      const handleResize = () => setWidth(window.innerWidth)
       useEffect(() => {
           toUser();
+          handleResize()
+         window.addEventListener('resize', handleResize)
+          return () => window.removeEventListener('resize', handleResize);
       }, []);
-      const handleSearch = () => {
-
+      const handleSearch = (event: any) => {
+        setSearch(event.target.value);
       }
       const theme = useTheme([
         getTheme(),
@@ -93,6 +99,7 @@ const OrdersLayoutPage = () => {
           `,
         },
       ]);
+      
       return <>  
         {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
         <SideBarComponent user={user} route='orders' frameContennt={
@@ -103,7 +110,6 @@ const OrdersLayoutPage = () => {
                     <div style={{width: '100%', display: 'flex', justifyContent: 'space-between'}}>
                         <h1 style={{marginBottom: '1rem', marginTop: '.5rem', fontSize: '1rem', fontWeight: '500'}}>Ordenes finales</h1>
                         <div style={{display: 'flex'}}>
-                          <button style={{fontSize: '.8rem', border: '1px solid grey', borderRadius: '.5rem', padding: '.2rem', paddingLeft: '1rem', paddingRight: '1rem', backgroundColor: 'transparent', color: 'grey'}}>Crear manual</button>
                         </div>
                     </div>
                     <div className="input-search" style={{marginTop: '1rem', marginBottom: '1rem'}}>
@@ -153,7 +159,7 @@ const OrdersLayoutPage = () => {
         }
         
           <Modal closeIcon={<IonIcon name="close"/>} styles={{
-              modal : {borderRadius: '1rem', minWidth: '500px', padding: '0rem'},
+              modal : {borderRadius: '1rem', padding: '0rem', maxWidth: width < 921 ? '90%' : '600px'},
               closeIcon: {color: 'white !important'},
               overlay: {backgroundColor: 'rgba(220, 217, 217, 0.5)'}
             }}  open={open} center onClose={() => setOpen(false) }>

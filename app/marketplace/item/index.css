@@ -24,5 +24,7 @@
     .responsiveItemImage{
         width: 100% !important;
     }
-    
+    .viewitem{
+        width: 100% !important;
+    }
 }

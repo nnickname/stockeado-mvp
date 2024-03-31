@@ -18,8 +18,8 @@ import IonIcon from "@reacticons/ionicons";
 const LayoutConfigurationPage = () =>{
     const router = useRouter();
     const [user, setUser] = useState<UserModel>(null);
-    const [image, setImage] = useState(null);
-    const [imageLogo, setImageLogo] = useState(null);
+    const [image, setImage] = useState('');
+    const [imageLogo, setImageLogo] = useState('');
 
     const [direction, setDirection] = useState(null);    
     const [name, setName] = useState(null); 
@@ -58,7 +58,7 @@ const LayoutConfigurationPage = () =>{
         const fileReader = new FileReader();
         fileReader.readAsDataURL(file);
         fileReader.onload = () => {
-          setImage(fileReader.result);
+          setImage(String(fileReader.result));
         };
         fileReader.onerror = (error) => {
           console.log(error);
@@ -69,7 +69,7 @@ const LayoutConfigurationPage = () =>{
         const fileReader = new FileReader();
         fileReader.readAsDataURL(file);
         fileReader.onload = () => {
-          setImageLogo(fileReader.result);
+          setImageLogo(String(fileReader.result));
         };
         fileReader.onerror = (error) => {
           console.log(error);

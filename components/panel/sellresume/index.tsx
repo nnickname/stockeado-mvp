@@ -11,14 +11,14 @@ import { UserModel } from '@/models/userModel';
 export const getTotalSellings = (orders: OrderModel[]) => {
     var counter=0;
     orders?.map((e) => {
-        if(Number(e?.state) > 0) counter++;
+        if(Number(e?.state) > 3) counter++;
     })
     return counter;
 }
 const getTotalEarning = (orders: OrderModel[], id: String) => {
     var count = 0;
     orders?.map((e) => {
-        if(Number(e?.state) > 0)
+        if(Number(e?.state) > 3)
         e?.items?.map((a) => {
             if(String(a.item.owner_id) === id) count = count + (Number(a.item?.priceSelling) * a.ammount);
         })
@@ -28,7 +28,7 @@ const getTotalEarning = (orders: OrderModel[], id: String) => {
 const getBenefitEarning = (orders: OrderModel[], id: String) => {
     var count = 0;
     orders?.map((e) => {
-        if(Number(e?.state) > 0)
+        if(Number(e?.state) > 3)
         e?.items?.map((a) => {
             if(String(a.item.owner_id) === id) count = count + (Number(a.item?.price) * a.ammount);
         })
@@ -36,11 +36,11 @@ const getBenefitEarning = (orders: OrderModel[], id: String) => {
     return count.toFixed(2);
 }
 const calculatePercentage = (x: number, y: number) => {
-    const ammount = (((x - y) / y) * 100);
+    const ammount = ((y / x) * 100);
     if(Number.isNaN(ammount)){
         return 0;
     }
-    return Number((((x - y) / y) * 100) ?? 0).toFixed(1);
+    return ammount.toFixed(1);
 }
 type SellResumeType = {
     orders: OrderModel[],

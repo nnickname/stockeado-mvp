@@ -16,15 +16,17 @@ import IonIcon from "@reacticons/ionicons";
 import { getOrder } from "@/app/api/orderss/call";
 import AwaitPaymentView from "./awaitPayment";
 import ConfirmedPaymentView from "./confirmedPayment";
+import Footer from "@/components/dashboard/Footer";
 
 
 const LayoutMarketPlaceOrderView = () => {
     const router = useRouter();
-    const search = useSearchParams();
-    const id = search.get('id');
+    
     const [cart, setCart] = useState<CartProps[]>();
     const [order, setOrder] = useState<OrderModel>(null);
     const getStaticOrder = async () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        let id = urlParams.get('id');
         if(id !== null && id?.length > 0){
             setOrder(await getOrder(id) ?? {});
         }
@@ -40,7 +42,7 @@ const LayoutMarketPlaceOrderView = () => {
         {order === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> : 
         <div>
             {Number(order?.state) < 2 ? <AwaitPaymentView cartItems={order.items} order={order}/> : <ConfirmedPaymentView cartItems={order.items} order={order}/>}
-            
+            <Footer/>
         </div>}
     
 </div>

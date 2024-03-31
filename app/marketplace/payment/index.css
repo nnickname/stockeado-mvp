@@ -36,3 +36,10 @@
 .selectPayment .card.selected{
     border: 1px solid rgb(103, 103, 150);
 }
+
+@media screen and (max-width: 920px) {
+    .responsiveItems{
+        overflow-x: scroll !important;
+    }
+    
+}

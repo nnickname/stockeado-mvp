@@ -21,12 +21,11 @@ const LayoutMarketPlaceFindItem = () => {
     const [realItems, setRealItems] = useState<InventoryModel[]>([]);
     const [items, setItems] = useState<InventoryModel[]>(null);
     const [cart, setCart] = useState<CartProps[]>([]);
-    const router = useRouter();
-    const search = useSearchParams();
-    const name = search.get('name');
     const [ammountItem, setAmmountItem] = useState<number>(0);
     const findStaticProducts = async() => {
       if(name !== null){
+        const urlParams = new URLSearchParams(window.location.search);
+        let name = urlParams.get('name');
         if(name?.length > 3) {
           const response = await findProduct(name);
           if(response !== null) setItems(response ?? []);

@@ -138,8 +138,14 @@ const ModalEditProduct: FunctionComponent<EditRowParams> = ({user, item, makeDat
                         
             </div>
             <div style={{display: 'flex', justifyContent: 'space-between'}}>
-              <input value={price} onChange={(e) => setPrice(e.target.value)} placeholder="Precio(ej 0.68)"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
-              <input value={priceSelling} onChange={(e) => setPriceSelling(e.target.value)} placeholder="Precio de venta sin igv(ej 1.68)"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+              <input value={price} onChange={(e) => {
+                function getPerc(num, percent) {
+                  return Number(num) - ((Number(percent) / 100) * Number(num));
+                }
+                setPrice(e.target.value);
+                setPriceSelling( (Number(e.target.value) + getPerc(Number(e.target.value), 82)).toFixed(2));
+              }} placeholder="Precio(ej 0.68)"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+              <input disabled value={priceSelling} onChange={(e) => setPriceSelling(e.target.value)} placeholder="Precio de venta sin igv(ej 1.68)"  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
 
             </div>
             <input value={numberPart} onChange={(e) => setNumberPart(e.target.value)} placeholder="Número de parte" className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>

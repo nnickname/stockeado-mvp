@@ -86,6 +86,7 @@ const LayoutMarketPlacePayment = () => {
                 <h1 style={{marginTop: '2rem', marginBottom: '1rem'}}>2. Revisa tu orden. </h1>
                 <p style={{color: 'grey', marginBottom: '2rem', fontSize: '.9rem'}}>Antes de realizar la compra, confirma el pedido para poder calcular la fecha, monto de envío y hora confirmada por el proveedor. Al colocar “Confirmar Pedido” se le notificará al proveedor, Tiempo estimado de 5 a 10 minutos para confirmar orden.</p>
 
+                <div className="responsiveItems">
                 {cart?.map((e, index) => {
                             return <div key={index}>
                             <div style={{width: '100%', display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(220, 220, 220, .3)'}}>
@@ -104,6 +105,7 @@ const LayoutMarketPlacePayment = () => {
                             </div>
                             </div>
                 })}
+                </div>
                 <p style={{color: 'grey', textAlign: 'center'}}>{cart?.length === 0 ? 'No encontramos nada' : ''}</p>        
                 <div style={{marginTop: '3rem', display: 'flex', justifyContent: 'space-between'}}>
                     <p style={{fontSize: '1.1rem'}}>Total</p>
