@@ -8,7 +8,6 @@ import '../index.css';
 import { useEffect, useState } from "react";
 import { InventoryModel } from "@/models/inventoryModel";
 import { CartProps } from "@/models/ordersModel";
-import { useRouter, useSearchParams } from "next/navigation";
 import { findProduct } from "../../api/marketplacee/call";
 import CardMarketPlace from "@/components/marketplace/item";
 import { Popover } from "react-tiny-popover";
@@ -23,16 +22,16 @@ const LayoutMarketPlaceFindItem = () => {
     const [cart, setCart] = useState<CartProps[]>([]);
     const [ammountItem, setAmmountItem] = useState<number>(0);
     const findStaticProducts = async() => {
-      const urlParams = new URLSearchParams(window.location.search);
-        let name = urlParams.get('name');
-      if(name !== null){
-      
-        if(name?.length > 3) {
-          const response = await findProduct(name);
-          if(response !== null) setItems(response ?? []);
-          if(response !== null) setRealItems(response);
+        const urlParams = new URLSearchParams(window.location.search);
+        var name = urlParams.get('name');
+        if(name !== null){
+        
+          if(name?.length > 3) {
+            const response = await findProduct(name);
+            if(response !== null) setItems(response ?? []);
+            if(response !== null) setRealItems(response);
+          }
         }
-      }
     }
     const filterByBrand = (brand: number, checked: boolean) => {
       if(checked)
@@ -50,7 +49,7 @@ const LayoutMarketPlaceFindItem = () => {
         const cartCast = JSON.parse(sessionStorage.getItem("cart"));
         if(cartCast !== undefined) setCart(cartCast ?? []);
         findStaticProducts();
-    }, [name]);
+    }, []);
     const [keywordFind, setKeyword] = useState<string>('');
     const findProductAndSet = async () => {
       if(keywordFind?.length > 1){

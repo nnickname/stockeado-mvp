@@ -473,10 +473,10 @@ const LayoutMarketPlaceFindItem = ()=>{
     const [ammountItem, setAmmountItem] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(0);
     const findStaticProducts = async ()=>{
         const urlParams = new URLSearchParams(window.location.search);
-        let name1 = urlParams.get("name");
-        if (name1 !== null) {
-            if (name1?.length > 3) {
-                const response = await (0,_api_marketplacee_call__WEBPACK_IMPORTED_MODULE_6__/* .findProduct */ .V_)(name1);
+        var name = urlParams.get("name");
+        if (name !== null) {
+            if (name?.length > 3) {
+                const response = await (0,_api_marketplacee_call__WEBPACK_IMPORTED_MODULE_6__/* .findProduct */ .V_)(name);
                 if (response !== null) setItems(response ?? []);
                 if (response !== null) setRealItems(response);
             }
@@ -495,9 +495,7 @@ const LayoutMarketPlaceFindItem = ()=>{
         const cartCast = JSON.parse(sessionStorage.getItem("cart"));
         if (cartCast !== undefined) setCart(cartCast ?? []);
         findStaticProducts();
-    }, [
-        name
-    ]);
+    }, []);
     const [keywordFind, setKeyword] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)("");
     const findProductAndSet = async ()=>{
         if (keywordFind?.length > 1) {
