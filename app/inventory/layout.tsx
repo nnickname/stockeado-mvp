@@ -338,9 +338,9 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
               brand: String(e[1]),
               categorie: 0,
               inMP : true,
-              description: String(e[8]),
+              description: String(e[8]) ?? '',
               numberPart: String(e[0]),
-              model: String(e[7]),
+              model: String(e[7]) ?? '',
               stars: 0,
               type: 0,
               owner_id: user._id
