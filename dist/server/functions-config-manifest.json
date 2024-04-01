@@ -3,8 +3,8 @@
   "functions": {
     "/api/marketplacee": {},
     "/about": {},
-    "/contact": {},
     "/configuration": {},
+    "/contact": {},
     "/dashboard": {},
     "/error": {},
     "/hub": {},

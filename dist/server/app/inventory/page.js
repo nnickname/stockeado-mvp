@@ -948,6 +948,7 @@ const TableRow = ({ user, inventoryData, realInventoryData, setInventoryRealData
         } else react_notifications__WEBPACK_IMPORTED_MODULE_15__/* .NotificationManager */ .fn.error("Completa el formulario.", "Error");
     };
     const onConvertExcel = async (event)=>{
+        //marca de auto texto
         let fileObj = event.target.files[0];
         //just pass the fileObj as parameter
         (0,react_excel_renderer__WEBPACK_IMPORTED_MODULE_16__.ExcelRenderer)(fileObj, async (err, resp)=>{

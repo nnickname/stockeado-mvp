@@ -324,6 +324,7 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
         } else NotificationManager.error('Completa el formulario.', 'Error');
     }
     const onConvertExcel = async (event) => {
+      //marca de auto texto
       let fileObj = event.target.files[0];
       //just pass the fileObj as parameter
       ExcelRenderer(fileObj, async (err, resp) => {
