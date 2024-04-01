@@ -1,8 +1,8 @@
 1:HL["/_next/static/css/202278cab01dd41d.css",{"as":"style"}]
-0:["fGxKUPEE9LBSF0cLp9cmE",[[["",{"children":["marketplace",{"children":["payment",{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],"$L2",[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/202278cab01dd41d.css","precedence":"next"}]],"$L3"]]]]
+0:["nX5psRX_JsOSKCIvNQrpZ",[[["",{"children":["marketplace",{"children":["payment",{"children":["__PAGE__",{}]}]}]},"$undefined","$undefined",true],"$L2",[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/202278cab01dd41d.css","precedence":"next"}]],"$L3"]]]]
 4:HL["/_next/static/css/5ed46b106f8e6bd5.css",{"as":"style"}]
 5:HL["/_next/static/css/4050d582616eb2cc.css",{"as":"style"}]
-6:I{"id":3172,"chunks":["6:static/chunks/6-62efab7d77004be8.js","7483:static/chunks/7483-252d2d0d17fcfcbf.js","3185:static/chunks/app/layout-988158f71d54da07.js"],"name":"","async":false}
+6:I{"id":3172,"chunks":["6:static/chunks/6-62efab7d77004be8.js","7483:static/chunks/7483-252d2d0d17fcfcbf.js","3185:static/chunks/app/layout-ffb368f7dd883c6d.js"],"name":"","async":false}
 7:I{"id":7767,"chunks":["2272:static/chunks/webpack-45ab31d56d49f940.js","2971:static/chunks/fd9d1056-f861531bd2b0fe9c.js","596:static/chunks/596-54229f63080b6dbe.js"],"name":"default","async":false}
 8:I{"id":7920,"chunks":["2272:static/chunks/webpack-45ab31d56d49f940.js","2971:static/chunks/fd9d1056-f861531bd2b0fe9c.js","596:static/chunks/596-54229f63080b6dbe.js"],"name":"default","async":false}
 9:I{"id":3472,"chunks":["8153:static/chunks/fbc17664-39a79ceb943bdb85.js","6352:static/chunks/6352-a66f1f8215db08ff.js","6685:static/chunks/6685-a90c9d59ed51a1bd.js","2173:static/chunks/2173-a77b441e68726da1.js","8821:static/chunks/8821-43ad225704e745b8.js","6:static/chunks/6-62efab7d77004be8.js","7483:static/chunks/7483-252d2d0d17fcfcbf.js","96:static/chunks/96-d5f84f2d5fbef9ac.js","7575:static/chunks/7575-58a83cd1694816e5.js","3973:static/chunks/app/marketplace/payment/layout-8bc49d1546378af8.js"],"name":"","async":false}
