@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "functions": {
+    "/api/marketplacee": {},
+    "/about": {},
+    "/contact": {},
+    "/configuration": {},
+    "/dashboard": {},
+    "/error": {},
+    "/hub": {},
+    "/inventory": {},
+    "/marketplace/item": {},
+    "/marketplace/order": {},
+    "/marketplace": {},
+    "/marketplace/payment": {},
+    "/marketplace/searchus": {},
+    "/orders": {},
+    "/marketplace/shop": {},
+    "/": {},
+    "/privacy": {},
+    "/signup": {},
+    "/signin": {},
+    "/terms": {}
+  }
+}

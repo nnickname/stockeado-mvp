@@ -21,7 +21,7 @@ exports.modules = {
 const getTotalPriceInventory = (cartItems)=>{
     var price = 0;
     cartItems?.map((e)=>{
-        price = price + Number(e?.priceSelling) * e?.ammount;
+        price = price + Number(e?.priceSelling) * Number(e?.ammount);
     });
     return String(price.toFixed(2));
 };
@@ -46,7 +46,7 @@ const getTotalValueinS = (orders, id)=>{
 const getNoneStock = (cartItems)=>{
     var low = 0;
     cartItems?.map((e)=>{
-        if (e?.ammount < 1) {
+        if (Number(e?.ammount) < 1) {
             low++;
         }
     });
@@ -55,7 +55,7 @@ const getNoneStock = (cartItems)=>{
 const getLowStockAmmount = (cartItems)=>{
     var low = 0;
     cartItems?.map((e)=>{
-        if (e?.ammount < 5) {
+        if (Number(e?.ammount) < 5) {
             low++;
         }
     });

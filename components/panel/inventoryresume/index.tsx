@@ -16,7 +16,7 @@ type InventoryResume = {
 export const getTotalPriceInventory = (cartItems: InventoryModel[] ) => {
     var price: number = 0;
     cartItems?.map((e) => {
-      price = price + (Number(e?.priceSelling) * e?.ammount);
+      price = price + (Number(e?.priceSelling) * Number(e?.ammount));
     })
     
         return String(price.toFixed(2));
@@ -46,7 +46,7 @@ const getTotalValueinS = (orders: OrderModel[], id: String) => {
 export const getNoneStock = (cartItems: InventoryModel[] ) => {
     var low: number = 0;
     cartItems?.map((e) => {
-      if(e?.ammount < 1){
+      if(Number(e?.ammount) < 1){
         low++;
       }
     })
@@ -55,7 +55,7 @@ export const getNoneStock = (cartItems: InventoryModel[] ) => {
 export const getLowStockAmmount = (cartItems: InventoryModel[] ) => {
     var low: number = 0;
     cartItems?.map((e) => {
-      if(e?.ammount < 5){
+      if(Number(e?.ammount) < 5){
         low++;
       }
     })
