@@ -13,7 +13,7 @@ export interface InventoryModel extends Document {
   stars: number;
   owner_id: ObjectId;
   type: number;
-  brand: number;
+  brand: string;
   categorie: number;
   sellings: SellingsModel[];
   sku: string;
@@ -64,8 +64,8 @@ const InventorySchema = new Schema({
   brand: {
     /* The name of this pet */
 
-    type: Number,
-    required: [true, "Please provide a type."],
+    type: String,
+    required: [true, "Please provide a brand."],
   },
   categorie: {
     /* The name of this pet */
@@ -85,7 +85,7 @@ const InventorySchema = new Schema({
     /* The name of this pet */
 
     type: String,
-    required: [true, "Please provide a Categorie."],
+    required: [true, "Please provide a sku."],
     
   },
   sellings: {

@@ -41,9 +41,9 @@ const LayoutMarketPlaceNative = () => {
       if(response !== null) setRealItems(response);
       setLoading(true);
     }
-    const filterByBrand = (brand: number, checked: boolean) => {
+    const filterByBrand = (brand: string, checked: boolean) => {
       if(checked){
-        setItems(realItems.filter((item) => Number(item.brand === brand)))
+        setItems(realItems.filter((item) => item.brand === brand))
       } else setItems(realItems);
     }
     const filterByType = (type: number, checked: boolean) => {
@@ -141,7 +141,7 @@ const LayoutMarketPlaceNative = () => {
           <form>
           {TypeBrands.map((e, index) => {
             return <div key={index} style={{display: 'flex', marginTop: '.4rem'}}>
-              <input name="colors" onChange={(e) => filterByBrand(index, e.target.checked)} type='checkbox' id='colors' style={{marginRight: '.5rem'}}/>
+              <input name="colors" onChange={(e) => filterByBrand(TypeBrands[index], e.target.checked)} type='checkbox' id='colors' style={{marginRight: '.5rem'}}/>
               <p>{e}</p>
               
             </div>
@@ -244,7 +244,7 @@ const LayoutMarketPlaceNative = () => {
                 <form>
                   {TypeBrands.map((e, index) => {
                     return <div onClick={()=> setPopoverOpenBrand(false)}  key={index} style={{cursor: 'pointer', display: 'flex', marginTop: '.4rem'}}>
-                      <input name="colors" onChange={(e) => filterByBrand(index, e.target.checked)} type='checkbox' id='colors' style={{marginRight: '.5rem'}}/>
+                      <input name="colors" onChange={(e) => filterByBrand(TypeBrands[index], e.target.checked)} type='checkbox' id='colors' style={{marginRight: '.5rem'}}/>
                       <p>{e}</p>
                       
                     </div>

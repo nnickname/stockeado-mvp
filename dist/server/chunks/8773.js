@@ -28,7 +28,7 @@ const getTotalPriceInventory = (cartItems)=>{
 const getTotalItems = (orders, id)=>{
     var count = 0;
     orders?.map((e)=>{
-        if (Number(e?.state) > 0) e?.items?.map((a)=>{
+        if (Number(e?.state) > 3) e?.items?.map((a)=>{
             if (String(a.item.owner_id) === id) count = count + Number(a.ammount);
         });
     });
@@ -37,7 +37,7 @@ const getTotalItems = (orders, id)=>{
 const getTotalValueinS = (orders, id)=>{
     var count = 0;
     orders?.map((e)=>{
-        if (Number(e?.state) > 0) e?.items?.map((a)=>{
+        if (Number(e?.state) > 3) e?.items?.map((a)=>{
             if (String(a.item.owner_id) === id) count = count + Number(a.item?.priceSelling) * Number(a.ammount);
         });
     });

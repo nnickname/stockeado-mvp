@@ -454,12 +454,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_index_css__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _reacticons_ionicons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(99816);
 /* harmony import */ var _reacticons_ionicons__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _models_brands__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(15431);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(11440);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _components_dashboard_Footer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(90507);
 /* __next_internal_client_entry_do_not_use__ default auto */ 
-
 
 
 
@@ -674,7 +672,7 @@ const LayoutMarketPlaceItem = ()=>{
                                                             marginLeft: ".5rem",
                                                             color: "black"
                                                         },
-                                                        children: item?.brand === 20 ? item.description : _models_brands__WEBPACK_IMPORTED_MODULE_10__/* .TypeBrands */ .PX[Number(item?.brand) - 1] ?? "No definido"
+                                                        children: item?.brand ?? "No definido"
                                                     })
                                                 ]
                                             }),
@@ -914,7 +912,7 @@ const LayoutMarketPlaceItem = ()=>{
                                                     padding: ".3rem",
                                                     border: "1px solid rgba(0,0,0, 0.1)"
                                                 },
-                                                children: item?.brand === 20 ? item.description : _models_brands__WEBPACK_IMPORTED_MODULE_10__/* .TypeBrands */ .PX[Number(item?.brand) - 1] ?? "No definido"
+                                                children: item?.brand ?? "No definido"
                                             })
                                         ]
                                     }),
@@ -1008,51 +1006,6 @@ const LayoutMarketPlaceItem = ()=>{
     });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LayoutMarketPlaceItem);
-
-
-/***/ }),
-
-/***/ 15431:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   FM: () => (/* binding */ TypeCategories),
-/* harmony export */   PX: () => (/* binding */ TypeBrands),
-/* harmony export */   rM: () => (/* binding */ TypeOfPiece)
-/* harmony export */ });
-const TypeBrands = [
-    "Toyota",
-    "Nissan",
-    "Hyundai",
-    "BMW",
-    "Mercedes Benz",
-    "Kia",
-    "Chevrolet",
-    "Mitsubishi",
-    "Peugeot",
-    "Suzuki",
-    "Mazda",
-    "Volkswagen",
-    "Audi",
-    "Jeep",
-    "Land Rover",
-    "Volvo",
-    "Mini",
-    "Porsche",
-    "Geely",
-    "Otro"
-];
-const TypeCategories = [
-    "Partes de motor",
-    "Neumaticos",
-    "Otro"
-];
-const TypeOfPiece = [
-    "Genuino",
-    "Original",
-    "Alternativo"
-];
 
 
 /***/ }),

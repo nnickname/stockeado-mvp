@@ -54,7 +54,7 @@ export const createUser = async (body: Object) => {
     
     try{
         const response: any = await axios.post("/userr/edit/create", {...body});
-        if(response?.data?.user !== undefined){
+        if(response?.data?.user !== undefined && response?.data?.user !== null){
             return true;
         } else return false;
     }

@@ -483,7 +483,7 @@ const LayoutMarketPlaceFindItem = ()=>{
         }
     };
     const filterByBrand = (brand, checked)=>{
-        if (checked) setItems(realItems.filter((item)=>Number(item.brand === brand)));
+        if (checked) setItems(realItems.filter((item)=>item.brand === brand));
     };
     const filterByType = (type, checked)=>{
         if (checked) setItems(realItems.filter((item)=>Number(item.type === type)));
@@ -648,7 +648,7 @@ const LayoutMarketPlaceFindItem = ()=>{
                                             children: [
                                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
                                                     name: "colors",
-                                                    onChange: (e)=>filterByBrand(index, e.target.checked),
+                                                    onChange: (e)=>filterByBrand(_models_brands__WEBPACK_IMPORTED_MODULE_12__/* .TypeBrands */ .PX[index], e.target.checked),
                                                     type: "checkbox",
                                                     id: "colors",
                                                     style: {
@@ -832,7 +832,7 @@ const LayoutMarketPlaceFindItem = ()=>{
                                                         children: [
                                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
                                                                 name: "colors",
-                                                                onChange: (e)=>filterByBrand(index, e.target.checked),
+                                                                onChange: (e)=>filterByBrand(_models_brands__WEBPACK_IMPORTED_MODULE_12__/* .TypeBrands */ .PX[index], e.target.checked),
                                                                 type: "checkbox",
                                                                 id: "colors",
                                                                 style: {

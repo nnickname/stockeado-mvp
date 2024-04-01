@@ -436,7 +436,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_responsive_modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(7654);
 /* harmony import */ var react_responsive_modal_styles_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(42055);
 /* harmony import */ var react_responsive_modal_styles_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_responsive_modal_styles_css__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _models_brands__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(15431);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(11440);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(57114);
@@ -454,7 +453,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_excel_renderer__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(react_excel_renderer__WEBPACK_IMPORTED_MODULE_16__);
 /* harmony import */ var _api_orderss_call__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(59198);
 /* __next_internal_client_entry_do_not_use__ default auto */ 
-
 
 
 
@@ -619,23 +617,14 @@ const ModalEditProduct = ({ user, item, makeData })=>{
                                     justifyContent: "space-between"
                                 },
                                 children: [
-                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("select", {
+                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
+                                        placeholder: "Marca",
                                         value: brand,
-                                        onChange: (e)=>setBrand(Number(e.target.value)),
+                                        onChange: (e)=>setBrand(e.target.value),
                                         className: "border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none",
                                         style: {
                                             background: "transparent"
-                                        },
-                                        children: [
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("option", {
-                                                value: -1,
-                                                children: "Marca"
-                                            }),
-                                            _models_brands__WEBPACK_IMPORTED_MODULE_18__/* .TypeBrands */ .PX.map((e, index)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("option", {
-                                                    value: index + 1,
-                                                    children: e
-                                                }, index))
-                                        ]
+                                        }
                                     }),
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
                                         value: model,
@@ -802,7 +791,7 @@ const TableRow = ({ user, inventoryData, realInventoryData, setInventoryRealData
     const [ammount, setAmmount] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(null);
     const [price, setPrice] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(null);
     const [priceSelling, setPriceSelling] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(null);
-    const [brand, setBrand] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(-1);
+    const [brand, setBrand] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(null);
     const [onMP, setOnMP] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(null);
     const [model, setModel] = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(null);
     const router = (0,next_navigation__WEBPACK_IMPORTED_MODULE_8__.useRouter)();
@@ -939,7 +928,7 @@ const TableRow = ({ user, inventoryData, realInventoryData, setInventoryRealData
             type: 0,
             owner_id: user._id
         };
-        if (name !== "" && image !== null && sku !== null && ammount !== null && price !== null && brand !== -1 && priceSelling !== null && model !== null) {
+        if (name !== "" && image !== null && sku !== null && ammount !== null && price !== null && brand !== null && priceSelling !== null && model !== null) {
             const response = await (0,_api_inventoryy_call__WEBPACK_IMPORTED_MODULE_9__/* .createInventory */ .Rd)(buildBody);
             if (response) {
                 react_notifications__WEBPACK_IMPORTED_MODULE_15__/* .NotificationManager */ .fn.success("A\xf1adiste un item.", "Cargado");
@@ -960,15 +949,15 @@ const TableRow = ({ user, inventoryData, realInventoryData, setInventoryRealData
                         sku: String(e[0]),
                         name: String(e[2]),
                         ammount: String(e[3]),
-                        image: String(e[7]) ?? "",
-                        price: String(e[5]),
-                        priceSelling: String(e[6]),
-                        brand: 0,
+                        image: String(e[6]) ?? "",
+                        price: String(e[4]),
+                        priceSelling: String(e[5]),
+                        brand: String(e[1]),
                         categorie: 0,
                         inMP: true,
-                        description: "No definido",
-                        numberPart: "No definido",
-                        model: String(e[1]),
+                        description: String(e[8]),
+                        numberPart: String(e[0]),
+                        model: String(e[7]),
                         stars: 0,
                         type: 0,
                         owner_id: user._id
@@ -1285,23 +1274,14 @@ const TableRow = ({ user, inventoryData, realInventoryData, setInventoryRealData
                                             justifyContent: "space-between"
                                         },
                                         children: [
-                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("select", {
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
+                                                placeholder: "Marca",
                                                 value: brand,
-                                                onChange: (e)=>setBrand(Number(e.target.value)),
+                                                onChange: (e)=>setBrand(e.target.value),
                                                 className: "border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none",
                                                 style: {
                                                     background: "transparent"
-                                                },
-                                                children: [
-                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("option", {
-                                                        value: -1,
-                                                        children: "Marca Producto"
-                                                    }),
-                                                    _models_brands__WEBPACK_IMPORTED_MODULE_18__/* .TypeBrands */ .PX.map((e, index)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("option", {
-                                                            value: index + 1,
-                                                            children: e
-                                                        }, index))
-                                                ]
+                                                }
                                             }),
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
                                                 value: numberPart,

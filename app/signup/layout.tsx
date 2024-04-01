@@ -33,7 +33,7 @@ const LayoutSignUp = () => {
           if(response){
             NotificationManager.success('Creaste tu cuenta', 'Creada');
             setTimeout(() => router.push('/signin'), 1500);
-          }
+          } else NotificationManager.error('Usuario ya registrado', 'Error');
         }else NotificationManager.error('Completa el formulario', 'Error');
 
       } else NotificationManager.error('Tienes que aceptar nuestros terminos y condiciones', 'Error');

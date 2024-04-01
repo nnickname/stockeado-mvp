@@ -79,7 +79,7 @@ const createUser = async (body)=>{
         const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.post("/userr/edit/create", {
             ...body
         });
-        if (response?.data?.user !== undefined) {
+        if (response?.data?.user !== undefined && response?.data?.user !== null) {
             return true;
         } else return false;
     } catch (error) {

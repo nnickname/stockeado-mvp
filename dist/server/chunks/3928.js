@@ -62,10 +62,10 @@ exports.modules = {
         ]
     },
     brand: {
-        /* The name of this pet */ type: Number,
+        /* The name of this pet */ type: String,
         required: [
             true,
-            "Please provide a type."
+            "Please provide a brand."
         ]
     },
     categorie: {
@@ -86,7 +86,7 @@ exports.modules = {
         /* The name of this pet */ type: String,
         required: [
             true,
-            "Please provide a Categorie."
+            "Please provide a sku."
         ]
     },
     sellings: {

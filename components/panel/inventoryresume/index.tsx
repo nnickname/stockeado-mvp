@@ -24,7 +24,7 @@ export const getTotalPriceInventory = (cartItems: InventoryModel[] ) => {
 const getTotalItems = (orders: OrderModel[], id: String) => {
     var count = 0;
     orders?.map((e) => {
-        if(Number(e?.state) > 0)
+        if(Number(e?.state) > 3)
         e?.items?.map((a) => {
             if(String(a.item.owner_id) === id) count = count + Number(a.ammount);
         })
@@ -34,7 +34,7 @@ const getTotalItems = (orders: OrderModel[], id: String) => {
 const getTotalValueinS = (orders: OrderModel[], id: String) => {
     var count = 0;
     orders?.map((e) => {
-        if(Number(e?.state) > 0)
+        if(Number(e?.state) > 3)
         e?.items?.map((a) => {
             if(String(a.item.owner_id) === id) count = count + (Number(a.item?.priceSelling) * Number(a.ammount));
         })

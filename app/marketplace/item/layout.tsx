@@ -86,7 +86,7 @@ const LayoutMarketPlaceItem = () => {
                     <p style={{color: 'grey', fontSize: '.8rem', marginTop: '1rem'}}>Vendido por: <span style={{cursor: 'pointer', marginLeft: '.5rem', color: '#0E7AFF'}} onClick={() => router.push('/marketplace/shop?id=' + shop?._id)}>{shop?.nameShop}</span></p>
                     <p style={{fontWeight: '500', fontSize: '1.2rem', marginTop: '1rem'}}>s/. {Number(item?.priceSelling).toFixed(2) ?? 0}</p>
                     <div style={{backgroundColor: 'rgba(0, 0, 0, 0.1)', width: '100%', height: '1px', marginTop: '1rem'}}></div>
-                    <p style={{color: 'grey', fontSize: '.9rem', marginTop: '1rem'}}>Marca: <span style={{cursor: 'pointer', marginLeft: '.5rem', color: 'black'}}>{item?.brand === 20 ? item.description : (TypeBrands[Number(item?.brand) -1] ?? 'No definido')}</span></p>
+                    <p style={{color: 'grey', fontSize: '.9rem', marginTop: '1rem'}}>Marca: <span style={{cursor: 'pointer', marginLeft: '.5rem', color: 'black'}}>{item?.brand ?? 'No definido'}</span></p>
                     <div style={{backgroundColor: 'rgba(0, 0, 0, 0.1)', width: '100%', height: '1px', marginTop: '1rem'}}></div>
                     <p style={{color: 'grey', fontSize: '.9rem', marginTop: '1rem'}}>Número de parte: <span style={{cursor: 'pointer', marginLeft: '.5rem', color: 'black'}}>{item?.numberPart !== '' ? item?.numberPart : item?.sku}</span></p>
                     <p style={{color: 'grey', fontSize: '.9rem', marginTop: '1rem'}}>Aplica para: <span style={{cursor: 'pointer', marginLeft: '.5rem', color: 'black'}}>{item?.model ?? 'No definido'}</span></p>
@@ -135,7 +135,7 @@ const LayoutMarketPlaceItem = () => {
                     <p style={{width: '100%', backgroundColor: '#EFF2F4', padding: '.3rem', border: '1px solid rgba(0,0,0, 0.1)'}}>
                         Marca
                     </p>
-                    <p style={{width: '100%',backgroundColor: 'transparent', padding: '.3rem', border: '1px solid rgba(0,0,0, 0.1)'}}>{item?.brand === 20 ? item.description : (TypeBrands[Number(item?.brand) -1] ?? 'No definido')}</p>
+                    <p style={{width: '100%',backgroundColor: 'transparent', padding: '.3rem', border: '1px solid rgba(0,0,0, 0.1)'}}>{item?.brand ?? 'No definido'}</p>
                 </div>
                 <div style={{display:'flex', width: '100%'}}>
                     <p style={{width: '100%',backgroundColor: '#EFF2F4', padding: '.3rem', border: '1px solid rgba(0,0,0, 0.1)'}}>

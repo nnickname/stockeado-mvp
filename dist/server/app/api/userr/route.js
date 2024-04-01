@@ -207,6 +207,13 @@ async function POST(req) {
             ...body,
             password: encryptedrandPassword
         };
+        var responseUser = await userModel/* default */.Z.findOne({
+            email: body.email
+        });
+        console.log(responseUser);
+        if (responseUser !== null) return next_response/* default */.Z.json({
+            message: "User already registered"
+        });
         const addingUser = new userModel/* default */.Z(object);
         addingUser.markModified("users");
         addingUser.save();

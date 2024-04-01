@@ -17,6 +17,8 @@ export async function POST(
             ...body,
             password: encryptedrandPassword
           }
+          var responseUser = await User.findOne({email: body.email});
+          if(responseUser !== null) return NextResponse.json({ message: "User already registered" });
           const addingUser = new User(object);
           addingUser.markModified("users");
           addingUser.save()

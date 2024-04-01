@@ -127,12 +127,8 @@ const ModalEditProduct: FunctionComponent<EditRowParams> = ({user, item, makeDat
             </div>
             
             <div style={{display: 'flex', justifyContent: 'space-between'}}>
-              <select value={brand} onChange={(e) => setBrand(Number(e.target.value))} className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}>
-              <option value={-1}>Marca</option>
+              <input placeholder="Marca" value={brand} onChange={(e) => setBrand(e.target.value)} className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
 
-                {TypeBrands.map((e, index) => <option key={index} value={index+1}>{e}</option>)}
-
-              </select>
               <input value={model} onChange={(e) => setModel(e.target.value)} placeholder="Modelo de auto" className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
 
                         
@@ -223,7 +219,7 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
     const [ammount, setAmmount] = useState(null);    
     const [price, setPrice] = useState(null);    
     const [priceSelling, setPriceSelling] = useState(null);    
-    const [brand, setBrand] = useState(-1);    
+    const [brand, setBrand] = useState(null);    
     const [onMP, setOnMP] = useState(null);    
     const [model, setModel] = useState(null);    
     const router = useRouter();
@@ -315,7 +311,7 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
         type: 0,
         owner_id: user._id
       }
-      if(name !== "" && image !== null && sku !== null && ammount !== null && price !== null && brand !== -1 && priceSelling !== null && model !== null){
+      if(name !== "" && image !== null && sku !== null && ammount !== null && price !== null && brand !== null && priceSelling !== null && model !== null){
           const response = await createInventory(buildBody);
           if(response){
              NotificationManager.success('Añadiste un item.', 'Cargado');
@@ -336,15 +332,15 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
               sku: String(e[0]), 
               name: String(e[2]), 
               ammount: String(e[3]),
-              image: String(e[7]) ?? '',
-              price: String(e[5]),
-              priceSelling: String(e[6]),
-              brand: 0,
+              image: String(e[6]) ?? '',
+              price: String(e[4]),
+              priceSelling: String(e[5]),
+              brand: String(e[1]),
               categorie: 0,
               inMP : true,
-              description: 'No definido',
-              numberPart: 'No definido',
-              model: String(e[1]),
+              description: String(e[8]),
+              numberPart: String(e[0]),
+              model: String(e[7]),
               stars: 0,
               type: 0,
               owner_id: user._id
@@ -451,12 +447,8 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
             </div>
             
             <div style={{display: 'flex', justifyContent: 'space-between'}}>
-              <select value={brand} onChange={(e) => setBrand(Number(e.target.value))} className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}>
-              <option value={-1}>Marca Producto</option>
+              <input placeholder="Marca" value={brand} onChange={(e) => setBrand(e.target.value)} className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
 
-                {TypeBrands.map((e, index) => <option key={index} value={index+1}>{e}</option>)}
-
-              </select>
               <input value={numberPart} onChange={(e) => setNumberPart(e.target.value)} placeholder="Número de parte(Ej: L33D15241)" className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
 
                         
