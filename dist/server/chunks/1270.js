@@ -40,14 +40,14 @@ var image_default = /*#__PURE__*/__webpack_require__.n(next_image);
 const getTotalSellings = (orders)=>{
     var counter = 0;
     orders?.map((e)=>{
-        if (Number(e?.state) > 0) counter++;
+        if (Number(e?.state) > 3) counter++;
     });
     return counter;
 };
 const getTotalEarning = (orders, id)=>{
     var count = 0;
     orders?.map((e)=>{
-        if (Number(e?.state) > 0) e?.items?.map((a)=>{
+        if (Number(e?.state) > 3) e?.items?.map((a)=>{
             if (String(a.item.owner_id) === id) count = count + Number(a.item?.priceSelling) * a.ammount;
         });
     });
@@ -56,18 +56,18 @@ const getTotalEarning = (orders, id)=>{
 const getBenefitEarning = (orders, id)=>{
     var count = 0;
     orders?.map((e)=>{
-        if (Number(e?.state) > 0) e?.items?.map((a)=>{
+        if (Number(e?.state) > 3) e?.items?.map((a)=>{
             if (String(a.item.owner_id) === id) count = count + Number(a.item?.price) * a.ammount;
         });
     });
     return count.toFixed(2);
 };
 const calculatePercentage = (x, y)=>{
-    const ammount = (x - y) / y * 100;
+    const ammount = y / x * 100;
     if (Number.isNaN(ammount)) {
         return 0;
     }
-    return Number(((x - y) / y * 100) ?? 0).toFixed(1);
+    return ammount.toFixed(1);
 };
 const SellResume = ({ orders, user })=>{
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {

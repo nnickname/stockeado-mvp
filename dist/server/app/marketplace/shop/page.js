@@ -445,7 +445,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _app_api_inventoryy_call__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(627);
 /* harmony import */ var _components_marketplace_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(34884);
-/* harmony import */ var _models_brands__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(15431);
+/* harmony import */ var _models_brands__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(15431);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(18038);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(35514);
@@ -453,15 +453,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_marketplace_header__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(71142);
 /* harmony import */ var _components_marketplace_background_index_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(2032);
 /* harmony import */ var _components_marketplace_background_index_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_components_marketplace_background_index_css__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(57114);
-/* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_navigation__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _app_api_marketplacee_call__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(53315);
-/* harmony import */ var react_tiny_popover__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(36413);
-/* harmony import */ var react_tiny_popover__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_tiny_popover__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _reacticons_ionicons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(99816);
-/* harmony import */ var _reacticons_ionicons__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _components_marketplace_pagination__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(92526);
-/* harmony import */ var _components_dashboard_Footer__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(90507);
+/* harmony import */ var _app_api_marketplacee_call__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(53315);
+/* harmony import */ var react_tiny_popover__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(36413);
+/* harmony import */ var react_tiny_popover__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_tiny_popover__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _reacticons_ionicons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(99816);
+/* harmony import */ var _reacticons_ionicons__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _components_marketplace_pagination__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(92526);
+/* harmony import */ var _components_dashboard_Footer__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(90507);
 /* __next_internal_client_entry_do_not_use__ default auto */ 
 
 
@@ -475,17 +473,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 const LayoutMarketPlaceShop = ()=>{
-    const router = (0,next_navigation__WEBPACK_IMPORTED_MODULE_7__.useRouter)();
-    const search = (0,next_navigation__WEBPACK_IMPORTED_MODULE_7__.useSearchParams)();
-    const id = search.get("id");
     const [user, setUser] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)();
     const [inventoryRealData, setInventoryRealData] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)([]);
     const [inventoryData, setInventoryData] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(null);
     const [cart, setCart] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)([]);
     const [ammountItem, setAmmountItem] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(0);
     const toUser = async ()=>{
+        const urlParams = new URLSearchParams(window.location.search);
+        let id = urlParams.get("id");
         if (id !== null && id?.length > 0) {
             const userr = await (0,_app_api_inventoryy_call__WEBPACK_IMPORTED_MODULE_1__/* .getMarketPlace */ .RF)(id);
             setInventoryRealData(userr?.items ?? []);
@@ -511,7 +507,7 @@ const LayoutMarketPlaceShop = ()=>{
     const [keywordFind, setKeyword] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)("");
     const findProductAndSet = async ()=>{
         if (keywordFind?.length > 1) {
-            const response = await (0,_app_api_marketplacee_call__WEBPACK_IMPORTED_MODULE_8__/* .findProduct */ .V_)(keywordFind);
+            const response = await (0,_app_api_marketplacee_call__WEBPACK_IMPORTED_MODULE_7__/* .findProduct */ .V_)(keywordFind);
             setInventoryData(response ?? []);
         } else setInventoryData(inventoryRealData);
     };
@@ -526,7 +522,7 @@ const LayoutMarketPlaceShop = ()=>{
     const [currentPage, setCurrentPage] = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(1);
     const postPerPage = 18;
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-        children: inventoryData === null ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_10___default()), {
+        children: inventoryData === null ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_9___default()), {
             name: "chevron-collapse-outline",
             className: "rotateItem",
             color: "#1366D9",
@@ -601,7 +597,7 @@ const LayoutMarketPlaceShop = ()=>{
                                     },
                                     children: "Categorias"
                                 }),
-                                _models_brands__WEBPACK_IMPORTED_MODULE_13__/* .TypeCategories */ .FM.map((e, index)=>{
+                                _models_brands__WEBPACK_IMPORTED_MODULE_12__/* .TypeCategories */ .FM.map((e, index)=>{
                                     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                         style: {
                                             display: "flex",
@@ -633,7 +629,7 @@ const LayoutMarketPlaceShop = ()=>{
                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
                                     children: "Tipo de pieza"
                                 }),
-                                _models_brands__WEBPACK_IMPORTED_MODULE_13__/* .TypeOfPiece */ .rM.map((e, index)=>{
+                                _models_brands__WEBPACK_IMPORTED_MODULE_12__/* .TypeOfPiece */ .rM.map((e, index)=>{
                                     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                         style: {
                                             display: "flex",
@@ -666,7 +662,7 @@ const LayoutMarketPlaceShop = ()=>{
                                     children: "Marcas"
                                 }),
                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("form", {
-                                    children: _models_brands__WEBPACK_IMPORTED_MODULE_13__/* .TypeBrands */ .PX.map((e, index)=>{
+                                    children: _models_brands__WEBPACK_IMPORTED_MODULE_12__/* .TypeBrands */ .PX.map((e, index)=>{
                                         return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                             style: {
                                                 display: "flex",
@@ -738,7 +734,7 @@ const LayoutMarketPlaceShop = ()=>{
                                         marginTop: "2rem"
                                     },
                                     children: [
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_tiny_popover__WEBPACK_IMPORTED_MODULE_9__.Popover, {
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_tiny_popover__WEBPACK_IMPORTED_MODULE_8__.Popover, {
                                             onClickOutside: ()=>setPopoverOpenCategorie(false),
                                             containerStyle: {
                                                 backgroundColor: "white",
@@ -754,7 +750,7 @@ const LayoutMarketPlaceShop = ()=>{
                                                 "right"
                                             ],
                                             content: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("form", {
-                                                children: _models_brands__WEBPACK_IMPORTED_MODULE_13__/* .TypeCategories */ .FM.map((e, index)=>{
+                                                children: _models_brands__WEBPACK_IMPORTED_MODULE_12__/* .TypeCategories */ .FM.map((e, index)=>{
                                                     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                                         onClick: ()=>setPopoverOpenCategorie(false),
                                                         style: {
@@ -785,7 +781,7 @@ const LayoutMarketPlaceShop = ()=>{
                                                 children: "Categorias"
                                             })
                                         }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_tiny_popover__WEBPACK_IMPORTED_MODULE_9__.Popover, {
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_tiny_popover__WEBPACK_IMPORTED_MODULE_8__.Popover, {
                                             onClickOutside: ()=>setPopoverOpenType(false),
                                             containerStyle: {
                                                 backgroundColor: "white",
@@ -801,7 +797,7 @@ const LayoutMarketPlaceShop = ()=>{
                                                 "right"
                                             ],
                                             content: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("form", {
-                                                children: _models_brands__WEBPACK_IMPORTED_MODULE_13__/* .TypeOfPiece */ .rM.map((e, index)=>{
+                                                children: _models_brands__WEBPACK_IMPORTED_MODULE_12__/* .TypeOfPiece */ .rM.map((e, index)=>{
                                                     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                                         onClick: ()=>setPopoverOpenType(false),
                                                         style: {
@@ -832,7 +828,7 @@ const LayoutMarketPlaceShop = ()=>{
                                                 children: "Tipo de pieza"
                                             })
                                         }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_tiny_popover__WEBPACK_IMPORTED_MODULE_9__.Popover, {
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_tiny_popover__WEBPACK_IMPORTED_MODULE_8__.Popover, {
                                             onClickOutside: ()=>setPopoverOpenBrand(false),
                                             containerStyle: {
                                                 backgroundColor: "white",
@@ -848,7 +844,7 @@ const LayoutMarketPlaceShop = ()=>{
                                                 "right"
                                             ],
                                             content: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("form", {
-                                                children: _models_brands__WEBPACK_IMPORTED_MODULE_13__/* .TypeBrands */ .PX.map((e, index)=>{
+                                                children: _models_brands__WEBPACK_IMPORTED_MODULE_12__/* .TypeBrands */ .PX.map((e, index)=>{
                                                     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                                         onClick: ()=>setPopoverOpenBrand(false),
                                                         style: {
@@ -941,7 +937,7 @@ const LayoutMarketPlaceShop = ()=>{
                                                     cart: cart
                                                 }, index))
                                         }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_marketplace_pagination__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z, {
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_marketplace_pagination__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z, {
                                             setCurrentPage: setCurrentPage,
                                             currentPage: currentPage,
                                             postPerPage: postPerPage,
@@ -955,7 +951,7 @@ const LayoutMarketPlaceShop = ()=>{
                         })
                     ]
                 }),
-                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_dashboard_Footer__WEBPACK_IMPORTED_MODULE_12__["default"], {})
+                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_dashboard_Footer__WEBPACK_IMPORTED_MODULE_11__["default"], {})
             ]
         })
     });

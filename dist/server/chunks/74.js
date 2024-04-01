@@ -24,7 +24,11 @@ var react_ = __webpack_require__(18038);
 /* harmony default export */ const plin_logo_0C4106153C_seeklogo_com = ({"src":"/_next/static/media/plin-logo-0C4106153C-seeklogo.com.5b229474.png","height":300,"width":300,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAMAAADz0U65AAAAaVBMVEVMaXETwOUMyN4Oz9ogpukil/YQx94C39EH3NEC4dEf1uMD19gU1dYG188F5c4Vr+MOtfA7yOQlivQQu99JyNMK4tkhtOcO4tUn5Nqe7u4K7OCQ5e137OiJ7Owbrv+H2fkH2eda5eKa5POPTQxeAAAAGXRSTlMA+K4tusT+8v2w/ur5LSzh/fmk4/6q8uHgtMDlrgAAAAlwSFlzAAALEwAACxMBAJqcGAAAAEVJREFUeJwFwYUBwCAQBLBDH68LVtt/yCZAtEQ2AcIXYwolcBfelYoFqz3X3A/sX825tRPynrQLZYO6RqYfHzErOSxc4AeH1wPcqyzAgAAAAABJRU5ErkJggg==","blurWidth":8,"blurHeight":8});
 ;// CONCATENATED MODULE: ./public/images/logo/Yape_text_app_icon.png
 /* harmony default export */ const Yape_text_app_icon = ({"src":"/_next/static/media/Yape_text_app_icon.f5385f88.png","height":511,"width":515,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAMAAADz0U65AAAATlBMVEV1I4WGO5TTuNl7LIu4kMF0JIV4J4lyHoPLrtKRTp+eZal3IYdyH4J8MoyIRJaQTp6KQ5hkCHbZyd7Cmsp0HIXEosuhZ63avuB+JZDCnctol24xAAAAFHRSTlPC/v7O/Eb80P79y/ze39/dzNM+ukc5mHoAAAAJcEhZcwAACxMAAAsTAQCanBgAAABBSURBVHicHcGHEYAwDASwT7UdOriE/RflDgkNvwbMRVWVQNqTiB8obmYcO0Zm5vpuOKNyrr7iCZHUZ8E9LiKi9gFc9QK4fxmKMwAAAABJRU5ErkJggg==","blurWidth":8,"blurHeight":8});
+// EXTERNAL MODULE: ./node_modules/next/link.js
+var next_link = __webpack_require__(11440);
+var link_default = /*#__PURE__*/__webpack_require__.n(next_link);
 ;// CONCATENATED MODULE: ./app/marketplace/payment/bank.tsx
+
 
 
 
@@ -37,7 +41,7 @@ const OrderStates = [
     "Enviando",
     "Entregado"
 ];
-const BankOptions = ()=>{
+const BankOptions = (order)=>{
     const [copied, setCopied] = (0,react_.useState)("stockeado.shop.transfer");
     const copyDirection = ()=>{
         setCopied("Copiado");
@@ -285,13 +289,17 @@ const BankOptions = ()=>{
                         },
                         children: "Enviar dep\xf3sito a Whatsapp"
                     }),
-                    /*#__PURE__*/ jsx_runtime_.jsx((IonIcon_default()), {
-                        name: "logo-whatsapp",
-                        size: "large",
-                        style: {
-                            color: "#25d366",
-                            cursor: "pointer"
-                        }
+                    /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
+                        target: "_blank",
+                        href: "https://api.whatsapp.com/send?phone=+51941531016&text=\xa1Hola! Necesito confirmar el dep\xf3sito de la orden - " + order?._id + " -",
+                        children: /*#__PURE__*/ jsx_runtime_.jsx((IonIcon_default()), {
+                            name: "logo-whatsapp",
+                            size: "large",
+                            style: {
+                                color: "#25d366",
+                                cursor: "pointer"
+                            }
+                        })
                     })
                 ]
             })

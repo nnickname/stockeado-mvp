@@ -649,71 +649,74 @@ const LayoutMarketPlacePayment = ()=>{
                             },
                             children: "Antes de realizar la compra, confirma el pedido para poder calcular la fecha, monto de env\xedo y hora confirmada por el proveedor. Al colocar “Confirmar Pedido” se le notificar\xe1 al proveedor, Tiempo estimado de 5 a 10 minutos para confirmar orden."
                         }),
-                        cart?.map((e, index)=>{
-                            return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                    style: {
-                                        width: "100%",
-                                        display: "flex",
-                                        justifyContent: "space-between",
-                                        borderBottom: "1px solid rgba(220, 220, 220, .3)"
-                                    },
-                                    children: [
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
-                                            style: {
-                                                width: "105px",
-                                                maxHeight: "105px"
-                                            },
-                                            src: e?.item?.image,
-                                            alt: "Product Image"
-                                        }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                            className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                            children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                            className: "responsiveItems",
+                            children: cart?.map((e, index)=>{
+                                return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                    children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                        style: {
+                                            width: "100%",
+                                            display: "flex",
+                                            justifyContent: "space-between",
+                                            borderBottom: "1px solid rgba(220, 220, 220, .3)"
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
                                                 style: {
-                                                    minWidth: "250px",
-                                                    margin: "auto"
+                                                    width: "105px",
+                                                    maxHeight: "105px"
+                                                },
+                                                src: e?.item?.image,
+                                                alt: "Product Image"
+                                            }),
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                                className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
+                                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+                                                    style: {
+                                                        minWidth: "250px",
+                                                        margin: "auto"
+                                                    },
+                                                    children: [
+                                                        e?.item?.name + " ",
+                                                        "  ",
+                                                        e?.item?.model
+                                                    ]
+                                                })
+                                            }),
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                                className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
+                                                children: String(e?.ammount)
+                                            }),
+                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+                                                className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
+                                                style: {
+                                                    marginLeft: "4rem",
+                                                    maxWidth: "100px"
                                                 },
                                                 children: [
-                                                    e?.item?.name + " ",
-                                                    "  ",
-                                                    e?.item?.model
+                                                    "s/. ",
+                                                    Number(e?.item?.priceSelling).toFixed(2)
                                                 ]
+                                            }),
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
+                                                onClick: ()=>{
+                                                    setCart(cart?.filter((obj, indexx)=>index !== indexx));
+                                                    sessionStorage.setItem("cart", JSON.stringify(cart?.filter((obj, indexx)=>index !== indexx)));
+                                                },
+                                                style: {
+                                                    color: "#ff6347",
+                                                    marginLeft: "2rem",
+                                                    minWidth: "100px"
+                                                },
+                                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_3___default()), {
+                                                    name: "trash-outline",
+                                                    color: "#ff6347"
+                                                })
                                             })
-                                        }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                            className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                            children: String(e?.ammount)
-                                        }),
-                                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
-                                            className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                            style: {
-                                                marginLeft: "4rem",
-                                                maxWidth: "100px"
-                                            },
-                                            children: [
-                                                "s/. ",
-                                                Number(e?.item?.priceSelling).toFixed(2)
-                                            ]
-                                        }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-                                            onClick: ()=>{
-                                                setCart(cart?.filter((obj, indexx)=>index !== indexx));
-                                                sessionStorage.setItem("cart", JSON.stringify(cart?.filter((obj, indexx)=>index !== indexx)));
-                                            },
-                                            style: {
-                                                color: "#ff6347",
-                                                marginLeft: "2rem",
-                                                minWidth: "100px"
-                                            },
-                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_3___default()), {
-                                                name: "trash-outline",
-                                                color: "#ff6347"
-                                            })
-                                        })
-                                    ]
-                                })
-                            }, index);
+                                        ]
+                                    })
+                                }, index);
+                            })
                         }),
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
                             style: {

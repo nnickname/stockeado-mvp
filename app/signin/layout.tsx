@@ -82,7 +82,7 @@ const LayoutSignIn = () =>{
                               } else NotificationManager.error('La contraseña o el email no coinciden.', 'Error');
                             } else NotificationManager.error('Completa el formulario.', 'Error');
                         }} className=" flex w-full items-center justify-center rounded-sm bg-primary px-9 py-4 text-base font-medium text-white duration-300 hover:bg-primary/90">
-                      Sign in
+                      Continuar
                     </button>
                   </div>
                 </form>

@@ -656,7 +656,13 @@ const ModalEditProduct = ({ user, item, makeData })=>{
                                 children: [
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
                                         value: price,
-                                        onChange: (e)=>setPrice(e.target.value),
+                                        onChange: (e)=>{
+                                            function getPerc(num, percent) {
+                                                return Number(num) - Number(percent) / 100 * Number(num);
+                                            }
+                                            setPrice(e.target.value);
+                                            setPriceSelling((Number(e.target.value) + getPerc(Number(e.target.value), 82)).toFixed(2));
+                                        },
                                         placeholder: "Precio(ej 0.68)",
                                         className: "border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none",
                                         style: {
@@ -664,6 +670,7 @@ const ModalEditProduct = ({ user, item, makeData })=>{
                                         }
                                     }),
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
+                                        disabled: true,
                                         value: priceSelling,
                                         onChange: (e)=>setPriceSelling(e.target.value),
                                         placeholder: "Precio de venta sin igv(ej 1.68)",

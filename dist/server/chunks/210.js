@@ -13,22 +13,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(56786);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_marketplace_header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(71142);
-/* harmony import */ var react_responsive_modal_styles_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(42055);
-/* harmony import */ var react_responsive_modal_styles_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_responsive_modal_styles_css__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _components_marketplace_background_background__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(72549);
-/* harmony import */ var _models_brands__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(15431);
-/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(35514);
-/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_index_css__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _components_marketplace_item__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(34884);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(18038);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _api_marketplacee_call__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(53315);
-/* harmony import */ var _reacticons_ionicons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(99816);
-/* harmony import */ var _reacticons_ionicons__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var react_tiny_popover__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(36413);
-/* harmony import */ var react_tiny_popover__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_tiny_popover__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _components_marketplace_pagination__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(92526);
-/* harmony import */ var _components_dashboard_Footer__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(90507);
+/* harmony import */ var _components_marketplace_background_background__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(72549);
+/* harmony import */ var _models_brands__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(15431);
+/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(35514);
+/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_index_css__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_marketplace_item__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(34884);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(18038);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _api_marketplacee_call__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(53315);
+/* harmony import */ var _reacticons_ionicons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(99816);
+/* harmony import */ var _reacticons_ionicons__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var react_tiny_popover__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(36413);
+/* harmony import */ var react_tiny_popover__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_tiny_popover__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _components_marketplace_pagination__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(92526);
+/* harmony import */ var _components_dashboard_Footer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(90507);
 /* __next_internal_client_entry_do_not_use__ default auto */ 
 
 
@@ -41,18 +39,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 const LayoutMarketPlaceNative = ()=>{
-    const [open, setOpen] = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)(false);
-    const [openAdd, setOpenAdd] = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)(false);
-    const [cart, setCart] = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)([]);
-    const [realItems, setRealItems] = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)([]);
-    const [items, setItems] = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)(null);
-    const [ammountItem, setAmmountItem] = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)(0);
-    const [mostViewed, setMostViewed] = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)([]);
+    const [open, setOpen] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(false);
+    const [openAdd, setOpenAdd] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(false);
+    const [cart, setCart] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)([]);
+    const [realItems, setRealItems] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)([]);
+    const [items, setItems] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(null);
+    const [ammountItem, setAmmountItem] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(0);
+    const [mostViewed, setMostViewed] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)([]);
     const findStaticProducts = async ()=>{
-        const response = await (0,_api_marketplacee_call__WEBPACK_IMPORTED_MODULE_7__/* .findRandomProducts */ .Kb)();
-        const responseMostViewed = await (0,_api_marketplacee_call__WEBPACK_IMPORTED_MODULE_7__/* .findMostViewedShops */ .li)() ?? [];
+        const response = await (0,_api_marketplacee_call__WEBPACK_IMPORTED_MODULE_6__/* .findRandomProducts */ .Kb)();
+        const responseMostViewed = await (0,_api_marketplacee_call__WEBPACK_IMPORTED_MODULE_6__/* .findMostViewedShops */ .li)() ?? [];
         if (responseMostViewed !== null) setMostViewed(responseMostViewed);
         if (response !== null) setItems(response);
         if (response !== null) setRealItems(response);
@@ -73,26 +70,26 @@ const LayoutMarketPlaceNative = ()=>{
             setItems(realItems.filter((item)=>Number(item.categorie === categorie)));
         } else setItems(realItems);
     };
-    (0,react__WEBPACK_IMPORTED_MODULE_6__.useEffect)(()=>{
+    (0,react__WEBPACK_IMPORTED_MODULE_5__.useEffect)(()=>{
         findStaticProducts();
         const cartCast = JSON.parse(sessionStorage.getItem("cart"));
         if (cartCast !== undefined) setCart(cartCast ?? []);
     }, []);
-    const [keywordFind, setKeyword] = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)("");
+    const [keywordFind, setKeyword] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)("");
     const findProductAndSet = async ()=>{
         if (keywordFind?.length > 1) {
-            const response = await (0,_api_marketplacee_call__WEBPACK_IMPORTED_MODULE_7__/* .findProduct */ .V_)(keywordFind);
+            const response = await (0,_api_marketplacee_call__WEBPACK_IMPORTED_MODULE_6__/* .findProduct */ .V_)(keywordFind);
             setItems(response ?? []);
         } else setItems(realItems);
     };
-    const [isPopoverOpenBrand, setPopoverOpenBrand] = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)(false);
-    const [isPopoverOpenCategorie, setPopoverOpenCategorie] = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)(false);
-    const [isPopoverOpenType, setPopoverOpenType] = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)(false);
-    const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)(false);
-    const [currentPage, setCurrentPage] = (0,react__WEBPACK_IMPORTED_MODULE_6__.useState)(1);
+    const [isPopoverOpenBrand, setPopoverOpenBrand] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(false);
+    const [isPopoverOpenCategorie, setPopoverOpenCategorie] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(false);
+    const [isPopoverOpenType, setPopoverOpenType] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(false);
+    const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(false);
+    const [currentPage, setCurrentPage] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(1);
     const postPerPage = 18;
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-        children: items === null ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_8___default()), {
+        children: items === null ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_7___default()), {
             name: "chevron-collapse-outline",
             className: "rotateItem",
             color: "#1366D9",
@@ -109,7 +106,7 @@ const LayoutMarketPlaceNative = ()=>{
                     cartItems: cart,
                     setCart: setCart
                 }),
-                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_marketplace_background_background__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z, {}),
+                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_marketplace_background_background__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z, {}),
                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                     className: "marketplace displayBlockResponsive",
                     children: [
@@ -157,7 +154,7 @@ const LayoutMarketPlaceNative = ()=>{
                                     },
                                     children: "Categorias"
                                 }),
-                                _models_brands__WEBPACK_IMPORTED_MODULE_12__/* .TypeCategories */ .FM.map((e, index)=>{
+                                _models_brands__WEBPACK_IMPORTED_MODULE_11__/* .TypeCategories */ .FM.map((e, index)=>{
                                     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                         style: {
                                             display: "flex",
@@ -189,7 +186,7 @@ const LayoutMarketPlaceNative = ()=>{
                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
                                     children: "Tipo de pieza"
                                 }),
-                                _models_brands__WEBPACK_IMPORTED_MODULE_12__/* .TypeOfPiece */ .rM.map((e, index)=>{
+                                _models_brands__WEBPACK_IMPORTED_MODULE_11__/* .TypeOfPiece */ .rM.map((e, index)=>{
                                     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                         style: {
                                             display: "flex",
@@ -222,7 +219,7 @@ const LayoutMarketPlaceNative = ()=>{
                                     children: "Marcas"
                                 }),
                                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("form", {
-                                    children: _models_brands__WEBPACK_IMPORTED_MODULE_12__/* .TypeBrands */ .PX.map((e, index)=>{
+                                    children: _models_brands__WEBPACK_IMPORTED_MODULE_11__/* .TypeBrands */ .PX.map((e, index)=>{
                                         return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                             style: {
                                                 display: "flex",
@@ -294,7 +291,7 @@ const LayoutMarketPlaceNative = ()=>{
                                         marginTop: "2rem"
                                     },
                                     children: [
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_tiny_popover__WEBPACK_IMPORTED_MODULE_9__.Popover, {
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_tiny_popover__WEBPACK_IMPORTED_MODULE_8__.Popover, {
                                             onClickOutside: ()=>setPopoverOpenCategorie(false),
                                             containerStyle: {
                                                 backgroundColor: "white",
@@ -310,7 +307,7 @@ const LayoutMarketPlaceNative = ()=>{
                                                 "right"
                                             ],
                                             content: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("form", {
-                                                children: _models_brands__WEBPACK_IMPORTED_MODULE_12__/* .TypeCategories */ .FM.map((e, index)=>{
+                                                children: _models_brands__WEBPACK_IMPORTED_MODULE_11__/* .TypeCategories */ .FM.map((e, index)=>{
                                                     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                                         onClick: ()=>setPopoverOpenCategorie(false),
                                                         style: {
@@ -341,7 +338,7 @@ const LayoutMarketPlaceNative = ()=>{
                                                 children: "Categorias"
                                             })
                                         }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_tiny_popover__WEBPACK_IMPORTED_MODULE_9__.Popover, {
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_tiny_popover__WEBPACK_IMPORTED_MODULE_8__.Popover, {
                                             onClickOutside: ()=>setPopoverOpenType(false),
                                             containerStyle: {
                                                 backgroundColor: "white",
@@ -357,7 +354,7 @@ const LayoutMarketPlaceNative = ()=>{
                                                 "right"
                                             ],
                                             content: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("form", {
-                                                children: _models_brands__WEBPACK_IMPORTED_MODULE_12__/* .TypeOfPiece */ .rM.map((e, index)=>{
+                                                children: _models_brands__WEBPACK_IMPORTED_MODULE_11__/* .TypeOfPiece */ .rM.map((e, index)=>{
                                                     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                                         onClick: ()=>setPopoverOpenType(false),
                                                         style: {
@@ -388,7 +385,7 @@ const LayoutMarketPlaceNative = ()=>{
                                                 children: "Tipo de pieza"
                                             })
                                         }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_tiny_popover__WEBPACK_IMPORTED_MODULE_9__.Popover, {
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_tiny_popover__WEBPACK_IMPORTED_MODULE_8__.Popover, {
                                             onClickOutside: ()=>setPopoverOpenBrand(false),
                                             containerStyle: {
                                                 backgroundColor: "white",
@@ -404,7 +401,7 @@ const LayoutMarketPlaceNative = ()=>{
                                                 "right"
                                             ],
                                             content: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("form", {
-                                                children: _models_brands__WEBPACK_IMPORTED_MODULE_12__/* .TypeBrands */ .PX.map((e, index)=>{
+                                                children: _models_brands__WEBPACK_IMPORTED_MODULE_11__/* .TypeBrands */ .PX.map((e, index)=>{
                                                     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                                         onClick: ()=>setPopoverOpenBrand(false),
                                                         style: {
@@ -472,7 +469,7 @@ const LayoutMarketPlaceNative = ()=>{
                                     children: [
                                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                             className: "gridItems",
-                                            children: items?.slice(currentPage * postPerPage - postPerPage, currentPage * postPerPage).map((e, index)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_marketplace_item__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z, {
+                                            children: items?.slice(currentPage * postPerPage - postPerPage, currentPage * postPerPage).map((e, index)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_marketplace_item__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z, {
                                                     item: e,
                                                     setCart: setCart,
                                                     setAmmountItem: setAmmountItem,
@@ -480,7 +477,7 @@ const LayoutMarketPlaceNative = ()=>{
                                                     cart: cart
                                                 }, index))
                                         }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_marketplace_pagination__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z, {
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_marketplace_pagination__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z, {
                                             setCurrentPage: setCurrentPage,
                                             currentPage: currentPage,
                                             postPerPage: postPerPage,
@@ -494,7 +491,7 @@ const LayoutMarketPlaceNative = ()=>{
                         })
                     ]
                 }),
-                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_dashboard_Footer__WEBPACK_IMPORTED_MODULE_11__["default"], {})
+                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_dashboard_Footer__WEBPACK_IMPORTED_MODULE_10__["default"], {})
             ]
         })
     });

@@ -474,8 +474,12 @@ var bank = __webpack_require__(35889);
 var dist = __webpack_require__(7654);
 // EXTERNAL MODULE: ./node_modules/react-responsive-modal/styles.css
 var styles = __webpack_require__(42055);
+// EXTERNAL MODULE: ./node_modules/next/link.js
+var next_link = __webpack_require__(11440);
+var link_default = /*#__PURE__*/__webpack_require__.n(next_link);
 ;// CONCATENATED MODULE: ./app/marketplace/order/awaitPayment.tsx
 /* __next_internal_client_entry_do_not_use__ default auto */ 
+
 
 
 
@@ -573,7 +577,7 @@ const AwaitPaymentView = ({ cartItems, order })=>{
                                             },
                                             children: [
                                                 " ",
-                                                Number(order?.state) >= 1 ? "Pendiente Pago" : ""
+                                                Number(order?.state) >= 2 ? "" : "Pendiente Pago"
                                             ]
                                         })
                                     ]
@@ -797,7 +801,9 @@ const AwaitPaymentView = ({ cartItems, order })=>{
                                         })
                                     ]
                                 }),
-                                /*#__PURE__*/ jsx_runtime_.jsx(bank/* BankOptions */.l, {}),
+                                /*#__PURE__*/ jsx_runtime_.jsx(bank/* BankOptions */.l, {
+                                    ...order
+                                }),
                                 /*#__PURE__*/ jsx_runtime_.jsx("button", {
                                     onClick: ()=>setOpen(true),
                                     style: {
@@ -825,17 +831,21 @@ const AwaitPaymentView = ({ cartItems, order })=>{
                                 },
                                 children: "\xbfTenes alguna duda?"
                             }),
-                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("button", {
+                            /*#__PURE__*/ jsx_runtime_.jsx("button", {
                                 className: "btn-whatsapp",
-                                children: [
-                                    /*#__PURE__*/ jsx_runtime_.jsx((IonIcon_default()), {
-                                        style: {
-                                            marginRight: "1rem"
-                                        },
-                                        name: "logo-whatsapp"
-                                    }),
-                                    "Escribenos por WhatsApp"
-                                ]
+                                children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)((link_default()), {
+                                    target: "_blank",
+                                    href: "https://api.whatsapp.com/send?phone=+51941531016&text=\xbfEn que podemos ayudarte?",
+                                    children: [
+                                        /*#__PURE__*/ jsx_runtime_.jsx((IonIcon_default()), {
+                                            style: {
+                                                marginRight: "1rem"
+                                            },
+                                            name: "logo-whatsapp"
+                                        }),
+                                        "Escribenos por WhatsApp"
+                                    ]
+                                })
                             })
                         ]
                     })
@@ -939,6 +949,7 @@ const AwaitPaymentView = ({ cartItems, order })=>{
 
 ;// CONCATENATED MODULE: ./app/marketplace/order/confirmedPayment.tsx
 /* __next_internal_client_entry_do_not_use__ default auto */ 
+
 
 
 
@@ -1144,49 +1155,62 @@ const ConfirmedPaymentView = ({ cartItems, order })=>{
                                         },
                                         children: "Todavia no a\xf1adiste nada"
                                     }) : "",
-                                    cartItems?.map((e, index)=>{
-                                        const nameString = e?.item?.name + " " + e?.item?.model;
-                                        return /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                                            children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
-                                                style: {
-                                                    width: "100%",
-                                                    display: "flex",
-                                                    justifyContent: "space-between",
-                                                    borderBottom: "1px solid rgba(220, 220, 220, .3)"
-                                                },
-                                                children: [
-                                                    /*#__PURE__*/ jsx_runtime_.jsx("img", {
-                                                        style: {
-                                                            width: "85px",
-                                                            maxHeight: "85px"
-                                                        },
-                                                        src: e?.item?.image,
-                                                        alt: "Product Image"
-                                                    }),
-                                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
-                                                        style: {
-                                                            maxWidth: "200px"
-                                                        },
-                                                        className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                                        children: [
-                                                            nameString.substring(0, 30),
-                                                            "..."
-                                                        ]
-                                                    }),
-                                                    /*#__PURE__*/ jsx_runtime_.jsx("p", {
-                                                        className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                                        children: String(e?.ammount)
-                                                    }),
-                                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
-                                                        className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                                        children: [
-                                                            "s/. ",
-                                                            (Number(e?.item?.priceSelling) * e?.ammount).toFixed(2)
-                                                        ]
-                                                    })
-                                                ]
-                                            })
-                                        }, index);
+                                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                        className: "responsiveItems",
+                                        children: cartItems?.map((e, index)=>{
+                                            return /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                                children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                                    style: {
+                                                        width: "100%",
+                                                        display: "flex",
+                                                        justifyContent: "space-between",
+                                                        borderBottom: "1px solid rgba(220, 220, 220, .3)"
+                                                    },
+                                                    children: [
+                                                        /*#__PURE__*/ jsx_runtime_.jsx("img", {
+                                                            style: {
+                                                                width: "105px",
+                                                                maxHeight: "105px"
+                                                            },
+                                                            src: e?.item?.image,
+                                                            alt: "Product Image"
+                                                        }),
+                                                        /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                                            className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
+                                                            children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
+                                                                style: {
+                                                                    minWidth: "200px",
+                                                                    marginLeft: ".5rem"
+                                                                },
+                                                                children: [
+                                                                    e?.item?.name + " ",
+                                                                    "  ",
+                                                                    e?.item?.model
+                                                                ]
+                                                            })
+                                                        }),
+                                                        /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                                            style: {
+                                                                marginLeft: ".5rem"
+                                                            },
+                                                            className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
+                                                            children: String(e?.ammount)
+                                                        }),
+                                                        /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
+                                                            className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
+                                                            style: {
+                                                                marginLeft: "4rem",
+                                                                maxWidth: "100px"
+                                                            },
+                                                            children: [
+                                                                "s/. ",
+                                                                Number(e?.item?.priceSelling).toFixed(2)
+                                                            ]
+                                                        })
+                                                    ]
+                                                })
+                                            }, index);
+                                        })
                                     })
                                 ]
                             }),
@@ -1274,17 +1298,21 @@ const ConfirmedPaymentView = ({ cartItems, order })=>{
                                         },
                                         children: "\xbfTenes alguna duda?"
                                     }),
-                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("button", {
+                                    /*#__PURE__*/ jsx_runtime_.jsx("button", {
                                         className: "btn-whatsapp",
-                                        children: [
-                                            /*#__PURE__*/ jsx_runtime_.jsx((IonIcon_default()), {
-                                                style: {
-                                                    marginRight: "1rem"
-                                                },
-                                                name: "logo-whatsapp"
-                                            }),
-                                            "Escribenos por WhatsApp"
-                                        ]
+                                        children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)((link_default()), {
+                                            target: "_blank",
+                                            href: "https://api.whatsapp.com/send?phone=+51941531016&text=\xbfEn que podemos ayudarte?",
+                                            children: [
+                                                /*#__PURE__*/ jsx_runtime_.jsx((IonIcon_default()), {
+                                                    style: {
+                                                        marginRight: "1rem"
+                                                    },
+                                                    name: "logo-whatsapp"
+                                                }),
+                                                "Escribenos por WhatsApp"
+                                            ]
+                                        })
                                     })
                                 ]
                             })
@@ -1297,6 +1325,8 @@ const ConfirmedPaymentView = ({ cartItems, order })=>{
 };
 /* harmony default export */ const confirmedPayment = (ConfirmedPaymentView);
 
+// EXTERNAL MODULE: ./components/dashboard/Footer/index.tsx
+var Footer = __webpack_require__(90507);
 ;// CONCATENATED MODULE: ./app/marketplace/order/layout.tsx
 /* __next_internal_client_entry_do_not_use__ default auto */ 
 
@@ -1309,13 +1339,14 @@ const ConfirmedPaymentView = ({ cartItems, order })=>{
 
 
 
+
 const LayoutMarketPlaceOrderView = ()=>{
     const router = (0,navigation.useRouter)();
-    const search = (0,navigation.useSearchParams)();
-    const id = search.get("id");
     const [cart, setCart] = (0,react_.useState)();
     const [order, setOrder] = (0,react_.useState)(null);
     const getStaticOrder = async ()=>{
+        const urlParams = new URLSearchParams(window.location.search);
+        let id = urlParams.get("id");
         if (id !== null && id?.length > 0) {
             setOrder(await (0,call/* getOrder */.co)(id) ?? {});
         }
@@ -1336,14 +1367,17 @@ const LayoutMarketPlaceOrderView = ()=>{
                 left: "50%",
                 transform: "translate(-50%, -50%)"
             }
-        }) : /*#__PURE__*/ jsx_runtime_.jsx("div", {
-            children: Number(order?.state) < 2 ? /*#__PURE__*/ jsx_runtime_.jsx(awaitPayment, {
-                cartItems: order.items,
-                order: order
-            }) : /*#__PURE__*/ jsx_runtime_.jsx(confirmedPayment, {
-                cartItems: order.items,
-                order: order
-            })
+        }) : /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+            children: [
+                Number(order?.state) < 2 ? /*#__PURE__*/ jsx_runtime_.jsx(awaitPayment, {
+                    cartItems: order.items,
+                    order: order
+                }) : /*#__PURE__*/ jsx_runtime_.jsx(confirmedPayment, {
+                    cartItems: order.items,
+                    order: order
+                }),
+                /*#__PURE__*/ jsx_runtime_.jsx(Footer["default"], {})
+            ]
         })
     });
 };
@@ -1451,7 +1485,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,9816,4997,3800,7654,9636,4328,1142,4892,74], () => (__webpack_exec__(13165)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,9816,4997,3800,7654,9636,4328,507,1142,4892,74], () => (__webpack_exec__(13165)));
 module.exports = __webpack_exports__;
 
 })();

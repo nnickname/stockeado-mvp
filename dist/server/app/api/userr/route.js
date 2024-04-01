@@ -186,7 +186,7 @@ async function GET(req, res, next) {
         });
         return next_response/* default */.Z.json({
             message: "User found",
-            user: responseUser
+            user: responseUser ?? null
         });
     } catch (error) {
         return next_response/* default */.Z.json({

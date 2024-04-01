@@ -198,10 +198,8 @@ const SideBarComponent = ({ user, frameContennt, route })=>{
                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                 className: "list logout",
                                 onClick: async ()=>{
-                                    await cookies.remove("access_token");
-                                    setTimeout(()=>{
-                                        window.location.reload();
-                                    }, 1500);
+                                    cookies.remove("access_token");
+                                    router.push("/signin");
                                 },
                                 children: [
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_5___default()), {

@@ -429,8 +429,8 @@ var IonIcon_default = /*#__PURE__*/__webpack_require__.n(IonIcon);
 const LayoutConfigurationPage = ()=>{
     const router = (0,navigation.useRouter)();
     const [user, setUser] = (0,react_.useState)(null);
-    const [image, setImage] = (0,react_.useState)(null);
-    const [imageLogo, setImageLogo] = (0,react_.useState)(null);
+    const [image, setImage] = (0,react_.useState)("");
+    const [imageLogo, setImageLogo] = (0,react_.useState)("");
     const [direction, setDirection] = (0,react_.useState)(null);
     const [name, setName] = (0,react_.useState)(null);
     const [lastName, setLastname] = (0,react_.useState)(null);
@@ -467,7 +467,7 @@ const LayoutConfigurationPage = ()=>{
         const fileReader = new FileReader();
         fileReader.readAsDataURL(file);
         fileReader.onload = ()=>{
-            setImage(fileReader.result);
+            setImage(String(fileReader.result));
         };
         fileReader.onerror = (error)=>{
             console.log(error);
@@ -478,7 +478,7 @@ const LayoutConfigurationPage = ()=>{
         const fileReader = new FileReader();
         fileReader.readAsDataURL(file);
         fileReader.onload = ()=>{
-            setImageLogo(fileReader.result);
+            setImageLogo(String(fileReader.result));
         };
         fileReader.onerror = (error)=>{
             console.log(error);

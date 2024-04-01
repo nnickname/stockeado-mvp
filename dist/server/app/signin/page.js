@@ -531,7 +531,7 @@ const LayoutSignIn = ()=>{
                                                             } else react_notifications__WEBPACK_IMPORTED_MODULE_6__/* .NotificationManager */ .fn.error("Completa el formulario.", "Error");
                                                         },
                                                         className: " flex w-full items-center justify-center rounded-sm bg-primary px-9 py-4 text-base font-medium text-white duration-300 hover:bg-primary/90",
-                                                        children: "Sign in"
+                                                        children: "Continuar"
                                                     })
                                                 })
                                             ]

@@ -454,9 +454,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_index_css__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _reacticons_ionicons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(99816);
 /* harmony import */ var _reacticons_ionicons__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _models_brands__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(15431);
-/* harmony import */ var _components_dashboard_Footer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(90507);
+/* harmony import */ var _models_brands__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(15431);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(11440);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _components_dashboard_Footer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(90507);
 /* __next_internal_client_entry_do_not_use__ default auto */ 
+
 
 
 
@@ -469,7 +472,7 @@ __webpack_require__.r(__webpack_exports__);
 const LayoutMarketPlaceItem = ()=>{
     const router = (0,next_navigation__WEBPACK_IMPORTED_MODULE_4__.useRouter)();
     const [cart, setCart] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)([]);
-    const [item, setItem] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)();
+    const [item, setItem] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(null);
     const [shop, setShop] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(null);
     const [ammount, setAmmount] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(0);
     const getData = async ()=>{
@@ -477,7 +480,9 @@ const LayoutMarketPlaceItem = ()=>{
         let id = urlParams.get("id");
         if (id !== null && id?.length > 0) {
             const responseItem = await (0,_app_api_inventoryy_call__WEBPACK_IMPORTED_MODULE_1__/* .getInventoryById */ .SI)(id);
+            if (responseItem === null) router.push("/");
             const responseShop = await (0,_app_api_userr_call__WEBPACK_IMPORTED_MODULE_2__/* .getUserById */ .GA)(responseItem?.owner_id);
+            if (responseItem?.numberPart === "No definido") responseItem.numberPart = "";
             setItem(responseItem);
             setShop(responseShop);
         }
@@ -519,7 +524,7 @@ const LayoutMarketPlaceItem = ()=>{
                 cartItems: cart,
                 setCart: setCart
             }),
-            shop === null ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_7___default()), {
+            shop === null && item === null ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_7___default()), {
                 name: "chevron-collapse-outline",
                 className: "rotateItem",
                 color: "#1366D9",
@@ -600,15 +605,12 @@ const LayoutMarketPlaceItem = ()=>{
                                                             "(" + item?.ammount + ")"
                                                         ]
                                                     }),
-                                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
                                                         style: {
                                                             color: "grey",
                                                             fontSize: ".8rem"
                                                         },
-                                                        children: [
-                                                            " SKU/ID: ",
-                                                            item?._id
-                                                        ]
+                                                        children: item?._id
                                                     })
                                                 ]
                                             }),
@@ -672,7 +674,7 @@ const LayoutMarketPlaceItem = ()=>{
                                                             marginLeft: ".5rem",
                                                             color: "black"
                                                         },
-                                                        children: item?.brand === 0 ? "No definido" : _models_brands__WEBPACK_IMPORTED_MODULE_9__/* .TypeBrands */ .PX[(item?.brand) ?? 0]
+                                                        children: item?.brand === 20 ? item.description : _models_brands__WEBPACK_IMPORTED_MODULE_10__/* .TypeBrands */ .PX[Number(item?.brand) - 1] ?? "No definido"
                                                     })
                                                 ]
                                             }),
@@ -698,7 +700,7 @@ const LayoutMarketPlaceItem = ()=>{
                                                             marginLeft: ".5rem",
                                                             color: "black"
                                                         },
-                                                        children: item?.numberPart ?? "No definido"
+                                                        children: item?.numberPart !== "" ? item?.numberPart : item?.sku
                                                     })
                                                 ]
                                             }),
@@ -716,7 +718,7 @@ const LayoutMarketPlaceItem = ()=>{
                                                             marginLeft: ".5rem",
                                                             color: "black"
                                                         },
-                                                        children: item?.description ?? "No definido"
+                                                        children: item?.model ?? "No definido"
                                                     })
                                                 ]
                                             })
@@ -725,6 +727,10 @@ const LayoutMarketPlaceItem = ()=>{
                                 ]
                             }),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                style: {
+                                    width: "250px"
+                                },
+                                className: "w100Responsive",
                                 children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                     style: {
                                         border: "1px solid rgba(128, 128, 128, 0.219 !important",
@@ -808,6 +814,27 @@ const LayoutMarketPlaceItem = ()=>{
                                                 width: "100%"
                                             },
                                             children: "A\xf1adir al carrito"
+                                        }),
+                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                            className: "whatsappItem",
+                                            style: {
+                                                marginTop: "1.5rem",
+                                                width: "100%",
+                                                textAlign: "center"
+                                            },
+                                            children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)((next_link__WEBPACK_IMPORTED_MODULE_8___default()), {
+                                                target: "_blank",
+                                                href: "https://api.whatsapp.com/send?phone=+51941531016&text=\xbfEn que podemos ayudarte?",
+                                                children: [
+                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_7___default()), {
+                                                        style: {
+                                                            marginRight: "1rem"
+                                                        },
+                                                        name: "logo-whatsapp"
+                                                    }),
+                                                    "WhatsApp"
+                                                ]
+                                            })
                                         })
                                     ]
                                 })
@@ -887,7 +914,7 @@ const LayoutMarketPlaceItem = ()=>{
                                                     padding: ".3rem",
                                                     border: "1px solid rgba(0,0,0, 0.1)"
                                                 },
-                                                children: item?.brand === 0 ? "No definido" : _models_brands__WEBPACK_IMPORTED_MODULE_9__/* .TypeBrands */ .PX[(item?.brand) ?? 0]
+                                                children: item?.brand === 20 ? item.description : _models_brands__WEBPACK_IMPORTED_MODULE_10__/* .TypeBrands */ .PX[Number(item?.brand) - 1] ?? "No definido"
                                             })
                                         ]
                                     }),
@@ -939,33 +966,7 @@ const LayoutMarketPlaceItem = ()=>{
                                                     padding: ".3rem",
                                                     border: "1px solid rgba(0,0,0, 0.1)"
                                                 },
-                                                children: item?.numberPart ?? "No definido"
-                                            })
-                                        ]
-                                    }),
-                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                        style: {
-                                            display: "flex",
-                                            width: "100%"
-                                        },
-                                        children: [
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                                style: {
-                                                    width: "100%",
-                                                    backgroundColor: "#EFF2F4",
-                                                    padding: ".3rem",
-                                                    border: "1px solid rgba(0,0,0, 0.1)"
-                                                },
-                                                children: "SKU"
-                                            }),
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                                style: {
-                                                    width: "100%",
-                                                    backgroundColor: "transparent",
-                                                    padding: ".3rem",
-                                                    border: "1px solid rgba(0,0,0, 0.1)"
-                                                },
-                                                children: item?.sku ?? "No definido"
+                                                children: item?.numberPart !== "" ? item?.numberPart : item?.sku
                                             })
                                         ]
                                     }),
@@ -1000,7 +1001,7 @@ const LayoutMarketPlaceItem = ()=>{
                             })
                         ]
                     }),
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_dashboard_Footer__WEBPACK_IMPORTED_MODULE_8__["default"], {})
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_dashboard_Footer__WEBPACK_IMPORTED_MODULE_9__["default"], {})
                 ]
             })
         ]
