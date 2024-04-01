@@ -54,6 +54,7 @@ export const createManyInventories = async (body: any) => {
     
     try{
         const response: any = await axios.post("/inventoryy/load", {items: [...body] });
+        console.log(response)
         if(response?.data?.item !== undefined){
             return true;
         } else return false;

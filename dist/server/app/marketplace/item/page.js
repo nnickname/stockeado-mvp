@@ -710,13 +710,17 @@ const LayoutMarketPlaceItem = ()=>{
                                                 },
                                                 children: [
                                                     "Aplica para: ",
-                                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("span", {
+                                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", {
                                                         style: {
                                                             cursor: "pointer",
                                                             marginLeft: ".5rem",
                                                             color: "black"
                                                         },
-                                                        children: item?.model ?? "No definido"
+                                                        children: [
+                                                            item?.model ?? "No definido",
+                                                            " ",
+                                                            item?.model === " " ? "No definido" : ""
+                                                        ]
                                                     })
                                                 ]
                                             })
@@ -875,13 +879,17 @@ const LayoutMarketPlaceItem = ()=>{
                                     })
                                 ]
                             }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
                                 style: {
                                     width: "100%",
                                     marginTop: "1rem",
                                     fontSize: ".9rem"
                                 },
-                                children: item?.description ?? "No se encontro una descripci\xf3n"
+                                children: [
+                                    item?.description ?? "No se encontro una descripci\xf3n",
+                                    " ",
+                                    item?.description === " " ? "No se encontro una descripci\xf3n" : ""
+                                ]
                             }),
                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                 style: {
@@ -931,14 +939,18 @@ const LayoutMarketPlaceItem = ()=>{
                                                 },
                                                 children: "Modelo/Modelo de veh\xedculos compatibles"
                                             }),
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
                                                 style: {
                                                     width: "100%",
                                                     backgroundColor: "transparent",
                                                     padding: ".3rem",
                                                     border: "1px solid rgba(0,0,0, 0.1)"
                                                 },
-                                                children: item?.model ?? "No definido"
+                                                children: [
+                                                    item?.model ?? "No definido",
+                                                    " ",
+                                                    item?.model === " " ? "No definido" : ""
+                                                ]
                                             })
                                         ]
                                     }),

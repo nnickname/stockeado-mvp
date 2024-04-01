@@ -80,6 +80,7 @@ const createManyInventories = async (body)=>{
                 ...body
             ]
         });
+        console.log(response);
         if (response?.data?.item !== undefined) {
             return true;
         } else return false;

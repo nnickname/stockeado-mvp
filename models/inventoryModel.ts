@@ -17,7 +17,7 @@ export interface InventoryModel extends Document {
   categorie: number;
   sellings: SellingsModel[];
   sku: string;
-  ammount: number;
+  ammount: string;
   image: string;
   model: string;
   description: string;
@@ -77,7 +77,7 @@ const InventorySchema = new Schema({
   ammount: {
     /* The name of this pet */
 
-    type: Number,
+    type: String,
     required: [true, "Please provide a amount."],
     
   },
@@ -96,13 +96,10 @@ const InventorySchema = new Schema({
     /* The name of this pet */
 
     type: String,
-    required: [true, "Please provide a image."],
   },
   model: {
     /* The name of this pet */
-
     type: String,
-    required: [true, "Please provide a model."],
   },
   inMP: {
     /* The name of this pet */
@@ -127,7 +124,6 @@ const InventorySchema = new Schema({
   description: {
     /* The name of this pet */
     type: String,
-    required: [true, "Please provide a price of Selling."],
     maxlength: [260, "Price cannot be more than 60 characters"],
   },
 });

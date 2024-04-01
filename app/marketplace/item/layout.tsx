@@ -89,7 +89,7 @@ const LayoutMarketPlaceItem = () => {
                     <p style={{color: 'grey', fontSize: '.9rem', marginTop: '1rem'}}>Marca: <span style={{cursor: 'pointer', marginLeft: '.5rem', color: 'black'}}>{item?.brand ?? 'No definido'}</span></p>
                     <div style={{backgroundColor: 'rgba(0, 0, 0, 0.1)', width: '100%', height: '1px', marginTop: '1rem'}}></div>
                     <p style={{color: 'grey', fontSize: '.9rem', marginTop: '1rem'}}>Número de parte: <span style={{cursor: 'pointer', marginLeft: '.5rem', color: 'black'}}>{item?.numberPart !== '' ? item?.numberPart : item?.sku}</span></p>
-                    <p style={{color: 'grey', fontSize: '.9rem', marginTop: '1rem'}}>Aplica para: <span style={{cursor: 'pointer', marginLeft: '.5rem', color: 'black'}}>{item?.model ?? 'No definido'}</span></p>
+                    <p style={{color: 'grey', fontSize: '.9rem', marginTop: '1rem'}}>Aplica para: <span style={{cursor: 'pointer', marginLeft: '.5rem', color: 'black'}}>{item?.model ?? 'No definido'} {item?.model === ' ' ? 'No definido' : ''}</span></p>
 
                 </div>
             </div>
@@ -129,7 +129,7 @@ const LayoutMarketPlaceItem = () => {
                 <p style={{color: '#0D6EFD', borderBottom: '1px solid #0D6EFD', width: '100%', padding: '.5rem'}}>Descripción del producto</p>
                 <p style={{borderBottom: '1px solid grey', width: '100%', padding: '.5rem'}}>{}</p>
             </div>
-            <p style={{ width: '100%', marginTop: '1rem', fontSize: '.9rem'}}>{item?.description ?? 'No se encontro una descripción'}</p>
+            <p style={{ width: '100%', marginTop: '1rem', fontSize: '.9rem'}}>{item?.description ?? 'No se encontro una descripción'} {item?.description === ' ' ? 'No se encontro una descripción' : ''}</p>
             <div style={{boxSizing: 'border-box', width: '100%', marginTop: '1rem'}}>
                 <div style={{display:'flex', width: '100%'}}>
                     <p style={{width: '100%', backgroundColor: '#EFF2F4', padding: '.3rem', border: '1px solid rgba(0,0,0, 0.1)'}}>
@@ -141,7 +141,7 @@ const LayoutMarketPlaceItem = () => {
                     <p style={{width: '100%',backgroundColor: '#EFF2F4', padding: '.3rem', border: '1px solid rgba(0,0,0, 0.1)'}}>
                     Modelo/Modelo de vehículos compatibles
                     </p>
-                    <p style={{width: '100%', backgroundColor: 'transparent', padding: '.3rem', border: '1px solid rgba(0,0,0, 0.1)'}}>{item?.model ?? 'No definido'}</p>
+                    <p style={{width: '100%', backgroundColor: 'transparent', padding: '.3rem', border: '1px solid rgba(0,0,0, 0.1)'}}>{item?.model ?? 'No definido'} {item?.model === ' ' ? 'No definido' : ''}</p>
                 </div>
                 <div style={{display:'flex', width: '100%'}}>
                     <p style={{width: '100%',backgroundColor: '#EFF2F4', padding: '.3rem', border: '1px solid rgba(0,0,0, 0.1)'}}>

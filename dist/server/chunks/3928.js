@@ -76,7 +76,7 @@ exports.modules = {
         ]
     },
     ammount: {
-        /* The name of this pet */ type: Number,
+        /* The name of this pet */ type: String,
         required: [
             true,
             "Please provide a amount."
@@ -97,18 +97,10 @@ exports.modules = {
         ]
     },
     image: {
-        /* The name of this pet */ type: String,
-        required: [
-            true,
-            "Please provide a image."
-        ]
+        /* The name of this pet */ type: String
     },
     model: {
-        /* The name of this pet */ type: String,
-        required: [
-            true,
-            "Please provide a model."
-        ]
+        /* The name of this pet */ type: String
     },
     inMP: {
         /* The name of this pet */ type: Boolean,
@@ -141,10 +133,6 @@ exports.modules = {
     },
     description: {
         /* The name of this pet */ type: String,
-        required: [
-            true,
-            "Please provide a price of Selling."
-        ],
         maxlength: [
             260,
             "Price cannot be more than 60 characters"

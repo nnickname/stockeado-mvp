@@ -71,12 +71,12 @@ const ModalEditProduct: FunctionComponent<EditRowParams> = ({user, item, makeDat
           item.name = name;
           item.image = imageToBuild;
           item.sku = sku;
-          item.ammount = Number(ammount);
+          item.ammount = String(ammount);
           item.description = description;
           item.numberPart = numberPart;
           item.price = price;
           item.priceSelling = priceSelling;
-          item.brand = brand;
+          item.brand = String(brand);
           item.categorie = categorie;
           item.inMP = onMP === 'on' ? true : false;;
           item.model = model;
@@ -332,22 +332,21 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
               sku: String(e[0]), 
               name: String(e[2]), 
               ammount: String(e[3]),
-              image: String(e[6]) ?? '',
-              price: String(e[4]),
-              priceSelling: String(e[5]),
+              image: String(e[6]) ?? ' ',
+              price: String(e[4]) ?? '',
+              priceSelling: String(e[5]) ?? '',
               brand: String(e[1]),
               categorie: 0,
               inMP : true,
-              description: String(e[8]) ?? '',
+              description: String(e[8]) === 'undefined' ? ' ' : String(e[8]),
               numberPart: String(e[0]),
-              model: String(e[7]) ?? '',
+              model: String(e[7]) === 'undefined' ? ' ' : String(e[7]),
               stars: 0,
               type: 0,
-              owner_id: user._id
+              owner_id: user._id,
           } });         
           body.splice(0, 1);
           body.splice(body?.length -1, 1);
-          console.log(body);
           if(await createManyInventories(body)){
             window.location.reload();
             NotificationManager.success('Logramos cargar tu inventario con exito, recuerda editarlo correctamente', 'Cargado');
