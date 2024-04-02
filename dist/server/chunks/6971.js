@@ -25,7 +25,6 @@ exports.modules = {
 
 
 const corsOptions = {
-    origin: "http://64.225.62.133",
     credentials: true,
     optionSuccessStatus: 200
 };
@@ -37,10 +36,17 @@ function createServer() {
         extended: true
     }));
     app.use(cookie_parser__WEBPACK_IMPORTED_MODULE_3___default()());
+    app.use(cors__WEBPACK_IMPORTED_MODULE_4___default()({
+        origin: [
+            "http://64.225.62.133",
+            "https://davalos.pe",
+            "https://stockeado.com"
+        ]
+    }));
     app.use(cors__WEBPACK_IMPORTED_MODULE_4___default()(corsOptions));
     return app;
 }
-const MONGODB_URI = "mongodb+srv://canitrotbartolome:canitrotbartolome@cluster0.x5zoaac.mongodb.net/stockeado?retryWrites=true&w=majority";
+const MONGODB_URI = "mongodb+srv://canitrotbartolome:canitrotbartolome@cluster0.x5zoaac.mongodb.net/test?retryWrites=true&w=majority";
 if (!MONGODB_URI) {
     console.log("Error on connect MongoDb");
 }

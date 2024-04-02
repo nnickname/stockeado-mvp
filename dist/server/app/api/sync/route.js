@@ -181,38 +181,28 @@ async function POST(req) {
         const account = await userModel/* default */.Z.findOne({
             email: body?.email
         });
-        var count = 0;
         if (account) {
             if (external_bcrypt_default().compareSync(body?.password.toString(), account?.password.toString())) {
                 if (body?.items.length > 0) {
-                    const functionCustom = ()=>{
-                        count++;
-                        if (count === body?.items?.length) {
-                            return next_response/* default */.Z.json({
-                                message: "Items Synchronized",
-                                items: count
-                            });
-                        }
-                    };
-                    body?.items?.map(async (e)=>{
+                    body?.items?.map(async (e, index)=>{
                         var itemResponse = await inventoryModel/* default */.Z.findOne({
                             sku: e.Sku
                         });
-                        if (itemResponse === null) {} else {
+                        if (itemResponse !== null) {
                             if (String(itemResponse?.owner_id) === String(account?._id)) {
                                 let itemUpd = await inventoryModel/* default */.Z.findOneAndUpdate({
                                     _id: itemResponse?._id
                                 }, {
                                     ammount: e.Stock.Quantity,
+                                    price: String(e.Price.Price),
                                     priceSelling: String(e.Price.PriceWithTaxes)
                                 });
-                                if (itemUpd !== null) functionCustom();
                             }
                         }
                     });
                     return next_response/* default */.Z.json({
                         message: "Items Synchronized",
-                        items: count
+                        items: body?.items?.length
                     });
                 } else return next_response/* default */.Z.json({
                     message: "Invalid Items"

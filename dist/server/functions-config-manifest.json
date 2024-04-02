@@ -7,19 +7,19 @@
     "/contact": {},
     "/dashboard": {},
     "/error": {},
-    "/hub": {},
     "/inventory": {},
     "/marketplace/item": {},
     "/marketplace/order": {},
-    "/marketplace": {},
+    "/hub": {},
     "/marketplace/searchus": {},
+    "/marketplace": {},
     "/marketplace/payment": {},
-    "/orders": {},
     "/marketplace/shop": {},
+    "/orders": {},
     "/": {},
+    "/signup": {},
     "/privacy": {},
     "/signin": {},
-    "/signup": {},
     "/terms": {}
   }
 }

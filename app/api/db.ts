@@ -10,7 +10,6 @@ import { NextResponse } from "next/server";
 
 const corsOptions ={
   
-  origin:'http://64.225.62.133',
   credentials:true, 
   optionSuccessStatus:200,
   
@@ -21,15 +20,18 @@ function createServer() {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(cookieParser());
+  app.use(cors({
+    origin: ['http://64.225.62.133', 'https://davalos.pe', 'https://stockeado.com']
+  }))
   app.use(cors(corsOptions))
   return app;
 }
 
 
-const MONGODB_URI = 'mongodb+srv://canitrotbartolome:canitrotbartolome@cluster0.x5zoaac.mongodb.net/stockeado?retryWrites=true&w=majority';
+const MONGODB_URI = 'mongodb+srv://canitrotbartolome:canitrotbartolome@cluster0.x5zoaac.mongodb.net/test?retryWrites=true&w=majority';
 
 if (!MONGODB_URI) {
-  console.log('Error on connect MongoDb')
+  console.log('Error on connect MongoDb');
 }
 
 let cached = global.mongoose;
