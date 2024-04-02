@@ -232,8 +232,8 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
         renderCell: (item) => <p style={{color: item.ammount < 4 ? 'tomato' : 'black'}}>{item.ammount}</p> ,
       },
       { label: 'Ventas', renderCell: (item) => item.sellings},
-      { label: 'Precio sin igv', renderCell: (item) => 's/.' + item.price },
-      { label: 'Precio venta', renderCell: (item) => 's/.' + item.priceSelling },
+      { label: 'Precio sin igv', renderCell: (item) => 's/.' + Number(item.price).toFixed(2) },
+      { label: 'Precio venta', renderCell: (item) => 's/.' + Number(item.priceSelling).toFixed(2)},
       { label: '', pinRigth: true , renderCell: (item) =>     
         <div style={{display: 'flex', fontSize: '1.2rem'}}>
           <div style={{color: 'tomato', marginRight: '.5rem', cursor: 'pointer'}} onClick={() => {

@@ -819,11 +819,11 @@ const TableRow = ({ user, inventoryData, realInventoryData, setInventoryRealData
         },
         {
             label: "Precio sin igv",
-            renderCell: (item)=>"s/." + item.price
+            renderCell: (item)=>"s/." + Number(item.price).toFixed(2)
         },
         {
             label: "Precio venta",
-            renderCell: (item)=>"s/." + item.priceSelling
+            renderCell: (item)=>"s/." + Number(item.priceSelling).toFixed(2)
         },
         {
             label: "",

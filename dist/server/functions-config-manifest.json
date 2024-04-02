@@ -3,8 +3,8 @@
   "functions": {
     "/api/marketplacee": {},
     "/about": {},
-    "/contact": {},
     "/configuration": {},
+    "/contact": {},
     "/dashboard": {},
     "/error": {},
     "/hub": {},
@@ -12,14 +12,14 @@
     "/marketplace/item": {},
     "/marketplace/order": {},
     "/marketplace": {},
-    "/marketplace/payment": {},
     "/marketplace/searchus": {},
+    "/marketplace/payment": {},
     "/orders": {},
     "/marketplace/shop": {},
     "/": {},
     "/privacy": {},
-    "/signup": {},
     "/signin": {},
+    "/signup": {},
     "/terms": {}
   }
 }
