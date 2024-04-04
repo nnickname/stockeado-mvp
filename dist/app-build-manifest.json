@@ -53,7 +53,7 @@
       "static/chunks/8312-85f1db5783b71770.js",
       "static/chunks/516-99abad6ee0bb7869.js",
       "static/css/b4ef80af4316d518.css",
-      "static/chunks/app/dashboard/page-0a197e52d853a230.js"
+      "static/chunks/app/dashboard/page-8255dee3f92d2130.js"
     ],
     "/marketplace/page": [
       "static/chunks/webpack-45ab31d56d49f940.js",
@@ -79,9 +79,9 @@
       "static/chunks/fbc17664-39a79ceb943bdb85.js",
       "static/chunks/6352-a66f1f8215db08ff.js",
       "static/chunks/6685-a90c9d59ed51a1bd.js",
-      "static/chunks/5737-aa473b4efb8e24fd.js",
+      "static/chunks/3966-193b45d14d392020.js",
       "static/css/385730345b2747e6.css",
-      "static/chunks/app/privacy/page-3ebc8c96b9e7e1de.js"
+      "static/chunks/app/privacy/page-8620f74e206d3a4f.js"
     ],
     "/error/page": [
       "static/chunks/webpack-45ab31d56d49f940.js",
@@ -99,9 +99,9 @@
       "static/chunks/fbc17664-39a79ceb943bdb85.js",
       "static/chunks/6352-a66f1f8215db08ff.js",
       "static/chunks/6685-a90c9d59ed51a1bd.js",
-      "static/chunks/5737-aa473b4efb8e24fd.js",
+      "static/chunks/3966-193b45d14d392020.js",
       "static/css/385730345b2747e6.css",
-      "static/chunks/app/terms/page-f3095c58fb3164ef.js"
+      "static/chunks/app/terms/page-d2e0d5155f2f7e20.js"
     ],
     "/configuration/page": [
       "static/chunks/webpack-45ab31d56d49f940.js",
