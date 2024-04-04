@@ -268,8 +268,6 @@ const originalPathname = "/api/inventoryy/edit/route";
 
 function middlewareApi() {
     const token = (0,next_headers__WEBPACK_IMPORTED_MODULE_0__.headers)().get("Authorization");
-    console.log(token);
-    console.log("41212756478495-stockea2.token-auth");
     if (token === null) {
         return false;
     } else {
