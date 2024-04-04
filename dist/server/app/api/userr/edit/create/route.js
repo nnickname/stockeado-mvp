@@ -163,37 +163,45 @@ var external_bcrypt_ = __webpack_require__(67096);
 var external_bcrypt_default = /*#__PURE__*/__webpack_require__.n(external_bcrypt_);
 // EXTERNAL MODULE: ./node_modules/next/dist/server/web/exports/next-response.js
 var next_response = __webpack_require__(89335);
+// EXTERNAL MODULE: ./app/api/midd/_middleware.api.ts
+var _middleware_api = __webpack_require__(28342);
 ;// CONCATENATED MODULE: ./app/api/userr/edit/create/route.ts
+
 
 
 
 
 async function POST(req) {
     try {
-        await (0,db/* default */.Z)();
-        let body = await req.json();
-        let encryptedrandPassword = external_bcrypt_default().hashSync(body?.password.toString(), 10);
-        const object = {
-            ...body,
-            password: encryptedrandPassword
-        };
-        var responseUser = await userModel/* default */.Z.findOne({
-            email: body.email
-        });
-        if (responseUser !== null) return next_response/* default */.Z.json({
-            message: "User already registered"
-        });
-        const addingUser = new userModel/* default */.Z(object);
-        addingUser.markModified("users");
-        addingUser.save();
-        if (addingUser) {
-            return next_response/* default */.Z.json({
-                message: "User registered",
-                user: addingUser,
+        if ((0,_middleware_api/* default */.Z)()) {
+            await (0,db/* default */.Z)();
+            let body = await req.json();
+            let encryptedrandPassword = external_bcrypt_default().hashSync(body?.password.toString(), 10);
+            const object = {
+                ...body,
                 password: encryptedrandPassword
+            };
+            var responseUser = await userModel/* default */.Z.findOne({
+                email: body.email
             });
-        } else return next_response/* default */.Z.json({
-            message: "User not registered"
+            if (responseUser !== null) return next_response/* default */.Z.json({
+                message: "User already registered"
+            });
+            const addingUser = new userModel/* default */.Z(object);
+            addingUser.markModified("users");
+            addingUser.save();
+            if (addingUser) {
+                return next_response/* default */.Z.json({
+                    message: "User registered",
+                    user: addingUser,
+                    password: encryptedrandPassword
+                });
+            } else return next_response/* default */.Z.json({
+                message: "User not registered"
+            });
+        }
+        return next_response/* default */.Z.json({
+            message: "Invalid auth"
         });
     } catch (errors) {
         return next_response/* default */.Z.json({
@@ -233,6 +241,39 @@ const originalPathname = "/api/userr/edit/create/route";
 
 
 //# sourceMappingURL=app-route.js.map
+
+/***/ }),
+
+/***/ 28342:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (/* binding */ middlewareApi)
+/* harmony export */ });
+/* harmony import */ var next_headers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(40063);
+/* harmony import */ var next_headers__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_headers__WEBPACK_IMPORTED_MODULE_0__);
+
+function middlewareApi() {
+    const token = (0,next_headers__WEBPACK_IMPORTED_MODULE_0__.headers)().get("Authorization");
+    if (token === null) {
+        return false;
+    } else {
+        if (token === "4756478495-stockea2.token-auth") {
+            return true;
+        }
+        return false;
+    }
+}
+
+
+/***/ }),
+
+/***/ 40063:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+
+module.exports = __webpack_require__(74937);
+
 
 /***/ })
 

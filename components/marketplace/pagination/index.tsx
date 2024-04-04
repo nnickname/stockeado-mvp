@@ -4,7 +4,6 @@ import React from "react";
 const Pagination = ({ setCurrentPage, currentPage, postPerPage, postData }) => {
     const renderPages = [];
     for(var i=0;i<=(postData.length / postPerPage); i++) renderPages.push({});
-    console.log(postData.length);
   //on clicking next
   const nextHandle = () => {
     currentPage < postData.length / postPerPage &&

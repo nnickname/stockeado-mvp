@@ -12,7 +12,7 @@ exports.modules = {
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(54997);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (axios__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.create({
-    baseURL: "https://stockeado.com/api",
+    baseURL: "http://localhost:3000/api",
     withCredentials: true,
     headers: {
         "Content-type": "application/json",

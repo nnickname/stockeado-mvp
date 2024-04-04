@@ -156,42 +156,61 @@ var ordersModel = __webpack_require__(98384);
 var next_response = __webpack_require__(89335);
 // EXTERNAL MODULE: ./node_modules/next/headers.js
 var headers = __webpack_require__(40063);
+// EXTERNAL MODULE: ./app/api/midd/_middleware.api.ts
+var _middleware_api = __webpack_require__(28342);
 ;// CONCATENATED MODULE: ./app/api/orderss/route.ts
 
 
 
 
+
 async function GET(req, res, next) {
-    await (0,db/* default */.Z)();
-    const token = (0,headers.headers)().get("token");
-    if (token === null) {
+    try {
+        if ((0,_middleware_api/* default */.Z)()) {
+            await (0,db/* default */.Z)();
+            const token = (0,headers.headers)().get("token");
+            if (token === null) {
+                return next_response/* default */.Z.json({
+                    message: "Invalid token"
+                });
+            }
+            console.log(token);
+            var responseUser = await ordersModel/* default */.ZP.findOne({
+                _id: token
+            });
+            return next_response/* default */.Z.json({
+                message: "Order found",
+                order: responseUser
+            });
+        }
         return next_response/* default */.Z.json({
-            message: "Invalid token"
+            message: "Invalid auth"
+        });
+    } catch (error) {
+        return next_response/* default */.Z.json({
+            message: "Invalid auth"
         });
     }
-    console.log(token);
-    var responseUser = await ordersModel/* default */.ZP.findOne({
-        _id: token
-    });
-    return next_response/* default */.Z.json({
-        message: "Order found",
-        order: responseUser
-    });
 }
 async function POST(req) {
     try {
-        await (0,db/* default */.Z)();
-        let body = await req.json();
-        const addingOrder = new ordersModel/* default */.ZP(body);
-        addingOrder.markModified("orders");
-        addingOrder.save();
-        if (addingOrder) {
-            return next_response/* default */.Z.json({
-                message: "Order registered",
-                order: addingOrder
+        if ((0,_middleware_api/* default */.Z)()) {
+            await (0,db/* default */.Z)();
+            let body = await req.json();
+            const addingOrder = new ordersModel/* default */.ZP(body);
+            addingOrder.markModified("orders");
+            addingOrder.save();
+            if (addingOrder) {
+                return next_response/* default */.Z.json({
+                    message: "Order registered",
+                    order: addingOrder
+                });
+            } else return next_response/* default */.Z.json({
+                message: "User not registered"
             });
-        } else return next_response/* default */.Z.json({
-            message: "User not registered"
+        }
+        return next_response/* default */.Z.json({
+            message: "Invalid auth"
         });
     } catch (errors) {
         return next_response/* default */.Z.json({
@@ -241,7 +260,7 @@ const originalPathname = "/api/orderss/route";
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,9735,6971,1013], () => (__webpack_exec__(9489)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,9735,6971,1125], () => (__webpack_exec__(9489)));
 module.exports = __webpack_exports__;
 
 })();

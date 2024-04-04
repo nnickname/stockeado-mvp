@@ -152,51 +152,67 @@ var route_kind = __webpack_require__(19513);
 var db = __webpack_require__(66971);
 // EXTERNAL MODULE: ./node_modules/next/dist/server/web/exports/next-response.js
 var next_response = __webpack_require__(89335);
-// EXTERNAL MODULE: ./app/api/_middleware.ts
-var _middleware = __webpack_require__(33088);
+// EXTERNAL MODULE: ./app/api/midd/_middleware.ts
+var _middleware = __webpack_require__(60783);
 // EXTERNAL MODULE: ./models/inventoryModel.ts
 var inventoryModel = __webpack_require__(93928);
+// EXTERNAL MODULE: ./app/api/midd/_middleware.api.ts
+var _middleware_api = __webpack_require__(28342);
 ;// CONCATENATED MODULE: ./app/api/inventoryy/route.ts
 
 
 
 
+
 async function GET(req, res, next) {
-    const midd = await (0,_middleware/* default */.Z)(req, res);
-    if (midd === null) {
+    try {
+        if ((0,_middleware_api/* default */.Z)()) {
+            await (0,db/* default */.Z)();
+            const midd = await (0,_middleware/* default */.Z)(req, res);
+            if (midd === null) {
+                return next_response/* default */.Z.json({
+                    message: "Invalid token"
+                });
+            }
+            var response = await inventoryModel/* default */.Z.find({
+                owner_id: midd
+            });
+            return next_response/* default */.Z.json({
+                message: "Items found",
+                items: response
+            });
+        }
         return next_response/* default */.Z.json({
-            message: "Invalid token"
+            message: "Invalid auth"
         });
-    }
-    var response = await inventoryModel/* default */.Z.find({
-        owner_id: midd
-    });
-    return next_response/* default */.Z.json({
-        message: "Items found",
-        items: response
-    });
+    } catch (error) {}
 }
 async function POST(req) {
-    await (0,db/* default */.Z)();
     try {
-        let body = await req.json();
-        if (body === undefined || body === null) return next_response/* default */.Z.json({
-            message: "Invalid body men and yes, I didn't take the trouble to validate the body"
-        });
-        const object = {
-            ...body,
-            sellings: []
-        };
-        const addingInventory = new inventoryModel/* default */.Z(object);
-        addingInventory.markModified("inventory");
-        addingInventory.save();
-        if (addingInventory) {
-            return next_response/* default */.Z.json({
-                message: "Item registered",
-                item: addingInventory
+        if ((0,_middleware_api/* default */.Z)()) {
+            await (0,db/* default */.Z)();
+            let body = await req.json();
+            if (body === undefined || body === null) return next_response/* default */.Z.json({
+                message: "Invalid body men and yes, I didn't take the trouble to validate the body"
             });
-        } else return next_response/* default */.Z.json({
-            message: "Item not registered"
+            const object = {
+                ...body,
+                sellings: []
+            };
+            const addingInventory = new inventoryModel/* default */.Z(object);
+            addingInventory.markModified("inventory");
+            addingInventory.save();
+            if (addingInventory) {
+                return next_response/* default */.Z.json({
+                    message: "Item registered",
+                    item: addingInventory
+                });
+            } else return next_response/* default */.Z.json({
+                message: "Item not registered"
+            });
+        }
+        return next_response/* default */.Z.json({
+            message: "Invalid auth"
         });
     } catch (errors) {
         return next_response/* default */.Z.json({
@@ -239,7 +255,31 @@ const originalPathname = "/api/inventoryy/route";
 
 /***/ }),
 
-/***/ 33088:
+/***/ 28342:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (/* binding */ middlewareApi)
+/* harmony export */ });
+/* harmony import */ var next_headers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(40063);
+/* harmony import */ var next_headers__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_headers__WEBPACK_IMPORTED_MODULE_0__);
+
+function middlewareApi() {
+    const token = (0,next_headers__WEBPACK_IMPORTED_MODULE_0__.headers)().get("Authorization");
+    if (token === null) {
+        return false;
+    } else {
+        if (token === "4756478495-stockea2.token-auth") {
+            return true;
+        }
+        return false;
+    }
+}
+
+
+/***/ }),
+
+/***/ 60783:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -252,17 +292,13 @@ const originalPathname = "/api/inventoryy/route";
 /* harmony import */ var next_headers__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_headers__WEBPACK_IMPORTED_MODULE_1__);
 
 
-const allow_origin_lists = (/* unused pure expression or super */ null && ( true ? [
-    "https://another.com",
-    "http://localhost:3000"
-] : 0));
 async function middleware(req, res) {
     const token = (0,next_headers__WEBPACK_IMPORTED_MODULE_1__.headers)().get("token");
-    if (token === undefined) {
+    if (token === null) {
         return null;
     }
     try {
-        const data = jsonwebtoken__WEBPACK_IMPORTED_MODULE_0___default().verify(token, "SECRET_EXAMPLE_KEY");
+        const data = jsonwebtoken__WEBPACK_IMPORTED_MODULE_0___default().verify(token, process.env.JWT_KEY);
         if (data) {
             return data._id;
         }

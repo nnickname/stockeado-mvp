@@ -18,6 +18,10 @@ const createOrder = async (body)=>{
     try {
         const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.post("/orderss", {
             ...body
+        }, {
+            headers: {
+                authorization: "4756478495-stockea2.token-auth"
+            }
         });
         console.log(response);
         if (response?.data?.order !== undefined) {
@@ -31,7 +35,8 @@ const getOrders = async (id)=>{
     try {
         const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.get("/orderss/edit", {
             headers: {
-                "token": id
+                "token": id,
+                authorization: "4756478495-stockea2.token-auth"
             }
         });
         console.log(response);
@@ -42,7 +47,11 @@ const getOrders = async (id)=>{
 };
 const updateOrderState = async (body)=>{
     try {
-        const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.post("/orderss/edit", body);
+        const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.post("/orderss/edit", body, {
+            headers: {
+                authorization: "4756478495-stockea2.token-auth"
+            }
+        });
         if (response?.data?.order !== undefined) {
             return response?.data?.order;
         } else return null;
@@ -54,7 +63,8 @@ const getOrder = async (id)=>{
     try {
         const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.get("/orderss", {
             headers: {
-                "token": id
+                "token": id,
+                authorization: "4756478495-stockea2.token-auth"
             }
         });
         return response?.data?.order;

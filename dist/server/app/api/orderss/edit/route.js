@@ -156,41 +156,61 @@ var ordersModel = __webpack_require__(98384);
 var next_response = __webpack_require__(89335);
 // EXTERNAL MODULE: ./node_modules/next/headers.js
 var headers = __webpack_require__(40063);
+// EXTERNAL MODULE: ./app/api/midd/_middleware.api.ts
+var _middleware_api = __webpack_require__(28342);
 ;// CONCATENATED MODULE: ./app/api/orderss/edit/route.ts
 
 
 
 
+
 async function GET(req, res, next) {
-    const token = (0,headers.headers)().get("token");
-    if (token === null) {
+    try {
+        if ((0,_middleware_api/* default */.Z)()) {
+            await (0,db/* default */.Z)();
+            const token = (0,headers.headers)().get("token");
+            if (token === null) {
+                return next_response/* default */.Z.json({
+                    message: "Invalid token"
+                });
+            }
+            var responseUser = await ordersModel/* default */.ZP.find({
+                "items.item.owner_id": token
+            });
+            return next_response/* default */.Z.json({
+                message: "Orders found",
+                orders: responseUser
+            });
+        }
         return next_response/* default */.Z.json({
-            message: "Invalid token"
+            message: "Invalid auth"
+        });
+    } catch (error) {
+        return next_response/* default */.Z.json({
+            message: "Invalid auth"
         });
     }
-    var responseUser = await ordersModel/* default */.ZP.find({
-        "items.item.owner_id": token
-    });
-    return next_response/* default */.Z.json({
-        message: "Orders found",
-        orders: responseUser
-    });
 }
 async function POST(req) {
-    await (0,db/* default */.Z)();
     try {
-        let body = await req.json();
-        if (body === undefined || body === null) return next_response/* default */.Z.json({
-            message: "Invalid body men and yes, I didn't take the trouble to validate the body"
-        });
-        const response = await ordersModel/* default */.ZP.findOneAndUpdate({
-            _id: body._id
-        }, {
-            state: body?.state ?? 0
-        });
+        if ((0,_middleware_api/* default */.Z)()) {
+            await (0,db/* default */.Z)();
+            let body = await req.json();
+            if (body === undefined || body === null) return next_response/* default */.Z.json({
+                message: "Invalid body men and yes, I didn't take the trouble to validate the body"
+            });
+            const response = await ordersModel/* default */.ZP.findOneAndUpdate({
+                _id: body._id
+            }, {
+                state: body?.state ?? 0
+            });
+            return next_response/* default */.Z.json({
+                message: "Order State updated",
+                order: response
+            });
+        }
         return next_response/* default */.Z.json({
-            message: "Order State updated",
-            order: response
+            message: "Invalid auth"
         });
     } catch (errors) {
         console.log(errors);
@@ -241,7 +261,7 @@ const originalPathname = "/api/orderss/edit/route";
 var __webpack_require__ = require("../../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,9735,6971,1013], () => (__webpack_exec__(11859)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,9735,6971,1125], () => (__webpack_exec__(11859)));
 module.exports = __webpack_exports__;
 
 })();

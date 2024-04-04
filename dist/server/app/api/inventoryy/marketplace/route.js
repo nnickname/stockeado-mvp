@@ -158,7 +158,10 @@ var inventoryModel = __webpack_require__(93928);
 var userModel = __webpack_require__(17486);
 // EXTERNAL MODULE: ./node_modules/next/headers.js
 var headers = __webpack_require__(40063);
+// EXTERNAL MODULE: ./app/api/midd/_middleware.api.ts
+var _middleware_api = __webpack_require__(28342);
 ;// CONCATENATED MODULE: ./app/api/inventoryy/marketplace/route.ts
+
 
 
 
@@ -166,35 +169,39 @@ var headers = __webpack_require__(40063);
 
 async function GET(req, res, next) {
     try {
-        await (0,db/* default */.Z)();
-        const shop = (0,headers.headers)().get("id");
-        console.log(shop);
-        const response = await userModel/* default */.Z.findById({
-            _id: shop
-        });
-        const responseInventory = await inventoryModel/* default */.Z.find({
-            owner_id: shop,
-            inMP: true
-        });
-        var responseUpdate;
-        if (response?.visits !== undefined) {
-            responseUpdate = await userModel/* default */.Z.findOneAndUpdate({
+        if ((0,_middleware_api/* default */.Z)()) {
+            await (0,db/* default */.Z)();
+            const shop = (0,headers.headers)().get("id");
+            const response = await userModel/* default */.Z.findById({
                 _id: shop
-            }, {
-                visits: response?.visits + 1
             });
-        } else responseUpdate = await userModel/* default */.Z.findOneAndUpdate({
-            _id: shop
-        });
-        if (response !== undefined) {
+            const responseInventory = await inventoryModel/* default */.Z.find({
+                owner_id: shop,
+                inMP: true
+            });
+            var responseUpdate;
+            if (response?.visits !== undefined) {
+                responseUpdate = await userModel/* default */.Z.findOneAndUpdate({
+                    _id: shop
+                }, {
+                    visits: response?.visits + 1
+                });
+            } else responseUpdate = await userModel/* default */.Z.findOneAndUpdate({
+                _id: shop
+            });
+            if (response !== undefined) {
+                return next_response/* default */.Z.json({
+                    message: "Valid tokens",
+                    user: response ?? {},
+                    items: responseInventory ?? []
+                });
+            }
             return next_response/* default */.Z.json({
-                message: "Valid tokens",
-                user: response ?? {},
-                items: responseInventory ?? []
+                message: "Invalid token"
             });
         }
         return next_response/* default */.Z.json({
-            message: "Invalid token"
+            message: "Invalid auth"
         });
     } catch (error) {
         console.log(error);
@@ -206,19 +213,24 @@ async function GET(req, res, next) {
 }
 async function POST(req) {
     try {
-        await (0,db/* default */.Z)();
-        let body = await req.json();
-        if (body === undefined || body === null) return next_response/* default */.Z.json({
-            message: "Invalid body men and yes, I didn't take the trouble to validate the body"
-        });
-        const response = await inventoryModel/* default */.Z.findOneAndUpdate({
-            _id: body._id
-        }, {
-            ...body
-        });
+        if ((0,_middleware_api/* default */.Z)()) {
+            await (0,db/* default */.Z)();
+            let body = await req.json();
+            if (body === undefined || body === null) return next_response/* default */.Z.json({
+                message: "Invalid body men and yes, I didn't take the trouble to validate the body"
+            });
+            const response = await inventoryModel/* default */.Z.findOneAndUpdate({
+                _id: body._id
+            }, {
+                ...body
+            });
+            return next_response/* default */.Z.json({
+                message: "Item updated",
+                item: response
+            });
+        }
         return next_response/* default */.Z.json({
-            message: "Item updated",
-            item: response
+            message: "Invalid auth"
         });
     } catch (errors) {
         console.log(errors);
@@ -259,6 +271,30 @@ const originalPathname = "/api/inventoryy/marketplace/route";
 
 
 //# sourceMappingURL=app-route.js.map
+
+/***/ }),
+
+/***/ 28342:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (/* binding */ middlewareApi)
+/* harmony export */ });
+/* harmony import */ var next_headers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(40063);
+/* harmony import */ var next_headers__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_headers__WEBPACK_IMPORTED_MODULE_0__);
+
+function middlewareApi() {
+    const token = (0,next_headers__WEBPACK_IMPORTED_MODULE_0__.headers)().get("Authorization");
+    if (token === null) {
+        return false;
+    } else {
+        if (token === "4756478495-stockea2.token-auth") {
+            return true;
+        }
+        return false;
+    }
+}
+
 
 /***/ }),
 

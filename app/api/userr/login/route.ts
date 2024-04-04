@@ -6,17 +6,21 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 import Users from '../../../../models/userModel';
 import { headers } from 'next/headers';
 import User from "../../../../models/userModel";
+import middlewareApi from "../../midd/_middleware.api";
 const statictoken = 'eyJhbGciOiJIUz';
 export async function GET (req: Request | any, res: Response, next: any){
   try{
-    await dbConnect();
-    const token = headers().get('token');
+    if(middlewareApi()){
+      await dbConnect();
+      const token = headers().get('token');
 
-    if(token === null){
-     return NextResponse.json({message: 'Invalid token'});
+      if(token === null){
+      return NextResponse.json({message: 'Invalid token'});
+      }
+      var responseUser = await User.findOne({_id: token});
+      return NextResponse.json({ message: "User found", user: responseUser});
     }
-    var responseUser = await User.findOne({_id: token});
-    return NextResponse.json({ message: "User found", user: responseUser});
+    return NextResponse.json({message: "Invalid auth"});
   }
   catch(error){
     return NextResponse.json({message: 'Invalid token'});
@@ -26,23 +30,22 @@ export async function GET (req: Request | any, res: Response, next: any){
 
 }
 export async function POST (req: Request,
-
     res: NextApiResponse,){
       try{
-        await dbConnect();
-
-        let body = await req.json();
-        const account = await Users.findOne({ email: body?.email });
-        console.log(account);
-        if(account){
-          if (bcrypt.compareSync(body?.password.toString(), account?.password.toString())) {
-            const token = jwt.sign({ _id: account?._id.toString() }, "SECRET_EXAMPLE_KEY", {
-              expiresIn: '7 days',
-            });
-            return NextResponse.json({message: "Account loggin", user: account, token, external_token: statictoken});
-          } else return NextResponse.json({message: "Invalid password"});
-        } else return NextResponse.json({message: "Account not found", account});
-
+        if(middlewareApi()){
+          await dbConnect();
+          let body = await req.json();
+          const account = await Users.findOne({ email: body?.email });
+          if(account){
+            if (bcrypt.compareSync(body?.password.toString(), account?.password.toString())) {
+              const token = jwt.sign({ _id: account?._id.toString() }, process.env.JWT_KEY, {
+                expiresIn: '1 days',
+              });
+              return NextResponse.json({message: "Account loggin", user: account, token, external_token: statictoken});
+            } else return NextResponse.json({message: "Invalid password"});
+          } else return NextResponse.json({message: "Account not found", account});
+        }
+        return NextResponse.json({message: "Invalid auth"});
       }
       catch(error){
         return NextResponse.json({message: "Invalid error", error});

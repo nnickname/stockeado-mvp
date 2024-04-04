@@ -8,16 +8,17 @@ exports.modules = {
 "use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Kb: () => (/* binding */ findRandomProducts),
-/* harmony export */   V_: () => (/* binding */ findProduct),
-/* harmony export */   li: () => (/* binding */ findMostViewedShops)
+/* harmony export */   V_: () => (/* binding */ findProduct)
 /* harmony export */ });
+/* unused harmony export findMostViewedShops */
 /* harmony import */ var _call__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14328);
 
 const findProduct = async (keyword)=>{
     try {
         const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.get("/marketplacee", {
             headers: {
-                "token": keyword
+                "token": keyword,
+                authorization: "4756478495-stockea2.token-auth"
             }
         });
         if (response?.data?.items !== undefined) {
@@ -29,7 +30,11 @@ const findProduct = async (keyword)=>{
 };
 const findRandomProducts = async ()=>{
     try {
-        const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.get("/marketplacee/random");
+        const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.get("/marketplacee/random", {
+            headers: {
+                authorization: "4756478495-stockea2.token-auth"
+            }
+        });
         if (response?.data?.items !== undefined) {
             return response?.data?.items;
         } else return null;
@@ -39,7 +44,7 @@ const findRandomProducts = async ()=>{
 };
 const findMostViewedShops = async ()=>{
     try {
-        const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.get("/marketplacee/mostviewed");
+        const response = await axios.get("/marketplacee/mostviewed");
         if (response?.data?.items !== undefined) {
             return response?.data?.items;
         } else return null;
@@ -122,7 +127,7 @@ const CardMarketPlace = ({ item, setCart, setAmmountItem, ammountItem, cart })=>
                                     children: [
                                         item?.name + " ",
                                         "  ",
-                                        item?.model ?? ""
+                                        item?.brand ?? ""
                                     ]
                                 })
                             ]
@@ -236,7 +241,6 @@ const CardMarketPlace = ({ item, setCart, setAmmountItem, ammountItem, cart })=>
 const Pagination = ({ setCurrentPage, currentPage, postPerPage, postData })=>{
     const renderPages = [];
     for(var i = 0; i <= postData.length / postPerPage; i++)renderPages.push({});
-    console.log(postData.length);
     //on clicking next
     const nextHandle = ()=>{
         currentPage < postData.length / postPerPage && setCurrentPage((page)=>page + 1);

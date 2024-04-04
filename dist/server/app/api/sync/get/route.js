@@ -165,45 +165,53 @@ var userModel = __webpack_require__(17486);
 // EXTERNAL MODULE: external "bcrypt"
 var external_bcrypt_ = __webpack_require__(67096);
 var external_bcrypt_default = /*#__PURE__*/__webpack_require__.n(external_bcrypt_);
+// EXTERNAL MODULE: ./app/api/midd/_middleware.api.public.ts
+var _middleware_api_public = __webpack_require__(82188);
 ;// CONCATENATED MODULE: ./app/api/sync/get/route.ts
 
 
 
 
 
+
 async function POST(req) {
-    await (0,db/* default */.Z)();
     try {
-        let body = await req.json();
-        if (body === undefined || body === null) return next_response/* default */.Z.json({
-            message: "Invalid body men and yes, I didn't take the trouble to validate the body"
-        });
-        const account = await userModel/* default */.Z.findOne({
-            email: body?.email
-        });
-        if (account) {
-            if (external_bcrypt_default().compareSync(body?.password.toString(), account?.password.toString())) {
-                const items = await inventoryModel/* default */.Z.find({
-                    owner_id: String(account?._id)
-                });
-                const finalItems = items?.map((e)=>{
-                    e.image = "Long Characters";
-                    return e;
-                });
-                if (items) {
-                    return next_response/* default */.Z.json({
-                        message: "Items",
-                        items: finalItems
+        if ((0,_middleware_api_public/* default */.Z)()) {
+            await (0,db/* default */.Z)();
+            let body = await req.json();
+            if (body === undefined || body === null) return next_response/* default */.Z.json({
+                message: "Invalid body men and yes, I didn't take the trouble to validate the body"
+            });
+            const account = await userModel/* default */.Z.findOne({
+                email: body?.email
+            });
+            if (account) {
+                if (external_bcrypt_default().compareSync(body?.password.toString(), account?.password.toString())) {
+                    const items = await inventoryModel/* default */.Z.find({
+                        owner_id: String(account?._id)
+                    });
+                    const finalItems = items?.map((e)=>{
+                        e.image = "Long Characters";
+                        return e;
+                    });
+                    if (items) {
+                        return next_response/* default */.Z.json({
+                            message: "Items",
+                            items: finalItems
+                        });
+                    } else return next_response/* default */.Z.json({
+                        message: "Invalid Items"
                     });
                 } else return next_response/* default */.Z.json({
-                    message: "Invalid Items"
+                    message: "Invalid password"
                 });
             } else return next_response/* default */.Z.json({
-                message: "Invalid password"
+                message: "Account not found",
+                account
             });
-        } else return next_response/* default */.Z.json({
-            message: "Account not found",
-            account
+        }
+        return next_response/* default */.Z.json({
+            message: "Invalid auth"
         });
     } catch (errors) {
         console.log(errors);
@@ -244,6 +252,39 @@ const originalPathname = "/api/sync/get/route";
 
 
 //# sourceMappingURL=app-route.js.map
+
+/***/ }),
+
+/***/ 82188:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (/* binding */ middlewareApiPublic)
+/* harmony export */ });
+/* harmony import */ var next_headers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(40063);
+/* harmony import */ var next_headers__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_headers__WEBPACK_IMPORTED_MODULE_0__);
+
+function middlewareApiPublic() {
+    const token = (0,next_headers__WEBPACK_IMPORTED_MODULE_0__.headers)().get("Authorization");
+    if (token === null) {
+        return false;
+    } else {
+        if (token === "4872363548-stockea2.token-auth") {
+            return true;
+        }
+        return false;
+    }
+}
+
+
+/***/ }),
+
+/***/ 40063:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+
+module.exports = __webpack_require__(74937);
+
 
 /***/ })
 

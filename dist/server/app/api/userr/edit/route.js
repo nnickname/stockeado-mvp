@@ -153,28 +153,35 @@ var next_response = __webpack_require__(89335);
 var db = __webpack_require__(66971);
 // EXTERNAL MODULE: ./models/userModel.ts
 var userModel = __webpack_require__(17486);
+// EXTERNAL MODULE: ./app/api/midd/_middleware.api.ts
+var _middleware_api = __webpack_require__(28342);
 ;// CONCATENATED MODULE: ./app/api/userr/edit/route.ts
 
 
 
+
 async function POST(req) {
-    await (0,db/* default */.Z)();
     try {
-        let body = await req.json();
-        if (body === undefined || body === null) return next_response/* default */.Z.json({
-            message: "Invalid body men and yes, I didn't take the trouble to validate the body"
-        });
-        const response = await userModel/* default */.Z.findOneAndUpdate({
-            _id: body._id
-        }, {
-            ...body
-        });
+        if ((0,_middleware_api/* default */.Z)()) {
+            await (0,db/* default */.Z)();
+            let body = await req.json();
+            if (body === undefined || body === null) return next_response/* default */.Z.json({
+                message: "Invalid body men and yes, I didn't take the trouble to validate the body"
+            });
+            const response = await userModel/* default */.Z.findOneAndUpdate({
+                _id: body._id
+            }, {
+                ...body
+            });
+            return next_response/* default */.Z.json({
+                message: "User updated",
+                user: response
+            });
+        }
         return next_response/* default */.Z.json({
-            message: "User updated",
-            user: response
+            message: "Invalid auth"
         });
     } catch (errors) {
-        console.log(errors);
         return next_response/* default */.Z.json({
             message: "Invalid body or error"
         });
@@ -212,6 +219,39 @@ const originalPathname = "/api/userr/edit/route";
 
 
 //# sourceMappingURL=app-route.js.map
+
+/***/ }),
+
+/***/ 28342:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (/* binding */ middlewareApi)
+/* harmony export */ });
+/* harmony import */ var next_headers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(40063);
+/* harmony import */ var next_headers__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_headers__WEBPACK_IMPORTED_MODULE_0__);
+
+function middlewareApi() {
+    const token = (0,next_headers__WEBPACK_IMPORTED_MODULE_0__.headers)().get("Authorization");
+    if (token === null) {
+        return false;
+    } else {
+        if (token === "4756478495-stockea2.token-auth") {
+            return true;
+        }
+        return false;
+    }
+}
+
+
+/***/ }),
+
+/***/ 40063:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+
+module.exports = __webpack_require__(74937);
+
 
 /***/ })
 

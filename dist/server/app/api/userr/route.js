@@ -164,9 +164,12 @@ var external_bcrypt_ = __webpack_require__(67096);
 var external_bcrypt_default = /*#__PURE__*/__webpack_require__.n(external_bcrypt_);
 // EXTERNAL MODULE: ./node_modules/next/dist/server/web/exports/next-response.js
 var next_response = __webpack_require__(89335);
-// EXTERNAL MODULE: ./app/api/_middleware.ts
-var _middleware = __webpack_require__(33088);
+// EXTERNAL MODULE: ./app/api/midd/_middleware.ts
+var _middleware = __webpack_require__(60783);
+// EXTERNAL MODULE: ./app/api/midd/_middleware.api.ts
+var _middleware_api = __webpack_require__(28342);
 ;// CONCATENATED MODULE: ./app/api/userr/route.ts
+
 
 
 
@@ -174,19 +177,24 @@ var _middleware = __webpack_require__(33088);
 
 async function GET(req, res, next) {
     try {
-        await (0,db/* default */.Z)();
-        const midd = await (0,_middleware/* default */.Z)(req, res);
-        if (midd === null) {
+        if ((0,_middleware_api/* default */.Z)()) {
+            await (0,db/* default */.Z)();
+            const midd = await (0,_middleware/* default */.Z)(req, res);
+            if (midd === null) {
+                return next_response/* default */.Z.json({
+                    message: "Invalid token"
+                });
+            }
+            var responseUser = await userModel/* default */.Z.findOne({
+                _id: midd
+            });
             return next_response/* default */.Z.json({
-                message: "Invalid token"
+                message: "User found",
+                user: responseUser ?? null
             });
         }
-        var responseUser = await userModel/* default */.Z.findOne({
-            _id: midd
-        });
         return next_response/* default */.Z.json({
-            message: "User found",
-            user: responseUser ?? null
+            message: "Invalid auth"
         });
     } catch (error) {
         return next_response/* default */.Z.json({
@@ -196,35 +204,40 @@ async function GET(req, res, next) {
 }
 async function POST(req) {
     try {
-        await (0,db/* default */.Z)();
-        const c = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        let randPassword = [
-            ...Array(8)
-        ].map((_)=>c[~~(Math.random() * c.length)]).join("");
-        let encryptedrandPassword = external_bcrypt_default().hashSync(randPassword.toString(), 10);
-        let body = await req.json();
-        const object = {
-            ...body,
-            password: encryptedrandPassword
-        };
-        var responseUser = await userModel/* default */.Z.findOne({
-            email: body.email
-        });
-        console.log(responseUser);
-        if (responseUser !== null) return next_response/* default */.Z.json({
-            message: "User already registered"
-        });
-        const addingUser = new userModel/* default */.Z(object);
-        addingUser.markModified("users");
-        addingUser.save();
-        if (addingUser) {
-            return next_response/* default */.Z.json({
-                message: "User registered",
-                user: addingUser,
-                password: randPassword
+        if ((0,_middleware_api/* default */.Z)()) {
+            await (0,db/* default */.Z)();
+            const c = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            let randPassword = [
+                ...Array(8)
+            ].map((_)=>c[~~(Math.random() * c.length)]).join("");
+            let encryptedrandPassword = external_bcrypt_default().hashSync(randPassword.toString(), 10);
+            let body = await req.json();
+            const object = {
+                ...body,
+                password: encryptedrandPassword
+            };
+            var responseUser = await userModel/* default */.Z.findOne({
+                email: body.email
             });
-        } else return next_response/* default */.Z.json({
-            message: "User not registered"
+            console.log(responseUser);
+            if (responseUser !== null) return next_response/* default */.Z.json({
+                message: "User already registered"
+            });
+            const addingUser = new userModel/* default */.Z(object);
+            addingUser.markModified("users");
+            addingUser.save();
+            if (addingUser) {
+                return next_response/* default */.Z.json({
+                    message: "User registered",
+                    user: addingUser,
+                    password: randPassword
+                });
+            } else return next_response/* default */.Z.json({
+                message: "User not registered"
+            });
+        }
+        return next_response/* default */.Z.json({
+            message: "Invalid auth"
         });
     } catch (errors) {
         return next_response/* default */.Z.json({
@@ -267,7 +280,31 @@ const originalPathname = "/api/userr/route";
 
 /***/ }),
 
-/***/ 33088:
+/***/ 28342:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (/* binding */ middlewareApi)
+/* harmony export */ });
+/* harmony import */ var next_headers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(40063);
+/* harmony import */ var next_headers__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_headers__WEBPACK_IMPORTED_MODULE_0__);
+
+function middlewareApi() {
+    const token = (0,next_headers__WEBPACK_IMPORTED_MODULE_0__.headers)().get("Authorization");
+    if (token === null) {
+        return false;
+    } else {
+        if (token === "4756478495-stockea2.token-auth") {
+            return true;
+        }
+        return false;
+    }
+}
+
+
+/***/ }),
+
+/***/ 60783:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -280,17 +317,13 @@ const originalPathname = "/api/userr/route";
 /* harmony import */ var next_headers__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_headers__WEBPACK_IMPORTED_MODULE_1__);
 
 
-const allow_origin_lists = (/* unused pure expression or super */ null && ( true ? [
-    "https://another.com",
-    "http://localhost:3000"
-] : 0));
 async function middleware(req, res) {
     const token = (0,next_headers__WEBPACK_IMPORTED_MODULE_1__.headers)().get("token");
-    if (token === undefined) {
+    if (token === null) {
         return null;
     }
     try {
-        const data = jsonwebtoken__WEBPACK_IMPORTED_MODULE_0___default().verify(token, "SECRET_EXAMPLE_KEY");
+        const data = jsonwebtoken__WEBPACK_IMPORTED_MODULE_0___default().verify(token, process.env.JWT_KEY);
         if (data) {
             return data._id;
         }

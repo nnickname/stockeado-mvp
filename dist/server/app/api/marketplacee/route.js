@@ -156,39 +156,47 @@ var inventoryModel = __webpack_require__(93928);
 var next_response = __webpack_require__(89335);
 // EXTERNAL MODULE: ./node_modules/next/headers.js
 var headers = __webpack_require__(40063);
+// EXTERNAL MODULE: ./app/api/midd/_middleware.api.ts
+var _middleware_api = __webpack_require__(28342);
 ;// CONCATENATED MODULE: ./app/api/marketplacee/route.ts
 const dynamic = "force-dynamic";
 
 
 
 
+
 async function GET(req, res, next) {
     try {
-        await (0,db/* default */.Z)();
-        const token = (0,headers.headers)().get("token");
-        if (token === null) {
+        if ((0,_middleware_api/* default */.Z)()) {
+            await (0,db/* default */.Z)();
+            const token = (0,headers.headers)().get("token");
+            if (token === null) {
+                return next_response/* default */.Z.json({
+                    message: "Invalid keyword"
+                });
+            }
+            var responseItems = await inventoryModel/* default */.Z.find({
+                name: {
+                    $regex: token,
+                    $options: "i"
+                }
+            });
+            var responseItemsTwo = await inventoryModel/* default */.Z.find({
+                sku: {
+                    $regex: token,
+                    $options: "i"
+                }
+            });
             return next_response/* default */.Z.json({
-                message: "Invalid keyword"
+                message: "Item's found",
+                items: [
+                    ...responseItems,
+                    ...responseItemsTwo
+                ]
             });
         }
-        var responseItems = await inventoryModel/* default */.Z.find({
-            name: {
-                $regex: token,
-                $options: "i"
-            }
-        });
-        var responseItemsTwo = await inventoryModel/* default */.Z.find({
-            sku: {
-                $regex: token,
-                $options: "i"
-            }
-        });
         return next_response/* default */.Z.json({
-            message: "Item's found",
-            items: [
-                ...responseItems,
-                ...responseItemsTwo
-            ]
+            message: "Invalid auth"
         });
     } catch (error) {
         console.log(error);
@@ -230,6 +238,30 @@ const originalPathname = "/api/marketplacee/route";
 
 
 //# sourceMappingURL=app-route.js.map
+
+/***/ }),
+
+/***/ 28342:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (/* binding */ middlewareApi)
+/* harmony export */ });
+/* harmony import */ var next_headers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(40063);
+/* harmony import */ var next_headers__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_headers__WEBPACK_IMPORTED_MODULE_0__);
+
+function middlewareApi() {
+    const token = (0,next_headers__WEBPACK_IMPORTED_MODULE_0__.headers)().get("Authorization");
+    if (token === null) {
+        return false;
+    } else {
+        if (token === "4756478495-stockea2.token-auth") {
+            return true;
+        }
+        return false;
+    }
+}
+
 
 /***/ }),
 

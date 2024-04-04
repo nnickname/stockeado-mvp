@@ -46,11 +46,8 @@ const LayoutMarketPlaceNative = ()=>{
     const [realItems, setRealItems] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)([]);
     const [items, setItems] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(null);
     const [ammountItem, setAmmountItem] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(0);
-    const [mostViewed, setMostViewed] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)([]);
     const findStaticProducts = async ()=>{
         const response = await (0,_api_marketplacee_call__WEBPACK_IMPORTED_MODULE_6__/* .findRandomProducts */ .Kb)();
-        const responseMostViewed = await (0,_api_marketplacee_call__WEBPACK_IMPORTED_MODULE_6__/* .findMostViewedShops */ .li)() ?? [];
-        if (responseMostViewed !== null) setMostViewed(responseMostViewed);
         if (response !== null) setItems(response);
         if (response !== null) setRealItems(response);
         setLoading(true);

@@ -24,6 +24,10 @@ const loginUser = async (email, password)=>{
         const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.post("/userr/login", {
             email,
             password
+        }, {
+            headers: {
+                authorization: "4756478495-stockea2.token-auth"
+            }
         });
         if (response?.data?.user !== undefined) {
             cookies.set("access_token", response?.data?.token, {
@@ -39,7 +43,8 @@ const getUserById = async (id)=>{
     try {
         const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.get("/userr/login", {
             headers: {
-                "token": id
+                "token": id,
+                authorization: "4756478495-stockea2.token-auth"
             }
         });
         console.log(response);
@@ -54,7 +59,8 @@ const getUser = async ()=>{
         const token = cookies.get("access_token");
         const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.get("/userr", {
             headers: {
-                "token": token
+                "token": token,
+                authorization: "4756478495-stockea2.token-auth"
             }
         });
         return response?.data?.user;
@@ -66,6 +72,10 @@ const editUser = async (body)=>{
     try {
         const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.post("/userr/edit", {
             ...body
+        }, {
+            headers: {
+                authorization: "4756478495-stockea2.token-auth"
+            }
         });
         if (response?.data?.user !== undefined) {
             return true;
@@ -78,6 +88,10 @@ const createUser = async (body)=>{
     try {
         const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.post("/userr/edit/create", {
             ...body
+        }, {
+            headers: {
+                authorization: "4756478495-stockea2.token-auth"
+            }
         });
         if (response?.data?.user !== undefined && response?.data?.user !== null) {
             return true;

@@ -46,7 +46,7 @@ function createServer() {
     app.use(cors__WEBPACK_IMPORTED_MODULE_4___default()(corsOptions));
     return app;
 }
-const MONGODB_URI = "mongodb+srv://canitrotbartolome:canitrotbartolome@cluster0.x5zoaac.mongodb.net/stockeado?retryWrites=true&w=majority";
+const MONGODB_URI = process.env.MONGO_URI;
 if (!MONGODB_URI) {
     console.log("Error on connect MongoDb");
 }

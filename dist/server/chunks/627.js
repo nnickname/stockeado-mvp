@@ -36,7 +36,8 @@ const deleteInventory = async (id)=>{
     try {
         const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.get("/inventoryy/edit", {
             headers: {
-                "id": id
+                "id": id,
+                authorization: "4756478495-stockea2.token-auth"
             }
         });
         if (response?.data?.deleted !== undefined) {
@@ -50,6 +51,10 @@ const createInventory = async (body)=>{
     try {
         const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.post("/inventoryy", {
             ...body
+        }, {
+            headers: {
+                authorization: "4756478495-stockea2.token-auth"
+            }
         });
         if (response?.data?.item !== undefined) {
             return true;
@@ -62,7 +67,8 @@ const getInventoryById = async (id)=>{
     try {
         const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.get("/inventoryy/load", {
             headers: {
-                "id": id
+                "id": id,
+                authorization: "4756478495-stockea2.token-auth"
             }
         });
         console.log(response);
@@ -79,6 +85,10 @@ const createManyInventories = async (body)=>{
             items: [
                 ...body
             ]
+        }, {
+            headers: {
+                authorization: "4756478495-stockea2.token-auth"
+            }
         });
         console.log(response);
         if (response?.data?.item !== undefined) {
@@ -92,6 +102,10 @@ const editInventory = async (body)=>{
     try {
         const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.post("/inventoryy/edit", {
             ...body
+        }, {
+            headers: {
+                authorization: "4756478495-stockea2.token-auth"
+            }
         });
         if (response?.data?.item !== undefined) {
             return true;
@@ -106,7 +120,8 @@ const getInventory = async ()=>{
         const token = cookies.get("access_token");
         const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.get("/inventoryy", {
             headers: {
-                "token": token
+                "token": token,
+                authorization: "4756478495-stockea2.token-auth"
             }
         });
         return response?.data?.items;
@@ -118,7 +133,8 @@ const getMarketPlace = async (id)=>{
     try {
         const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.get("/inventoryy/marketplace", {
             headers: {
-                "id": id
+                "id": id,
+                authorization: "4756478495-stockea2.token-auth"
             }
         });
         return response?.data;

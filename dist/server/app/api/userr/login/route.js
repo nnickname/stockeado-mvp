@@ -169,7 +169,10 @@ var jsonwebtoken_default = /*#__PURE__*/__webpack_require__.n(jsonwebtoken);
 var userModel = __webpack_require__(17486);
 // EXTERNAL MODULE: ./node_modules/next/headers.js
 var headers = __webpack_require__(40063);
+// EXTERNAL MODULE: ./app/api/midd/_middleware.api.ts
+var _middleware_api = __webpack_require__(28342);
 ;// CONCATENATED MODULE: ./app/api/userr/login/route.ts
+
 
 
 
@@ -180,19 +183,24 @@ var headers = __webpack_require__(40063);
 const statictoken = "eyJhbGciOiJIUz";
 async function GET(req, res, next) {
     try {
-        await (0,db/* default */.Z)();
-        const token = (0,headers.headers)().get("token");
-        if (token === null) {
+        if ((0,_middleware_api/* default */.Z)()) {
+            await (0,db/* default */.Z)();
+            const token = (0,headers.headers)().get("token");
+            if (token === null) {
+                return next_response/* default */.Z.json({
+                    message: "Invalid token"
+                });
+            }
+            var responseUser = await userModel/* default */.Z.findOne({
+                _id: token
+            });
             return next_response/* default */.Z.json({
-                message: "Invalid token"
+                message: "User found",
+                user: responseUser
             });
         }
-        var responseUser = await userModel/* default */.Z.findOne({
-            _id: token
-        });
         return next_response/* default */.Z.json({
-            message: "User found",
-            user: responseUser
+            message: "Invalid auth"
         });
     } catch (error) {
         return next_response/* default */.Z.json({
@@ -202,31 +210,35 @@ async function GET(req, res, next) {
 }
 async function POST(req, res) {
     try {
-        await (0,db/* default */.Z)();
-        let body = await req.json();
-        const account = await userModel/* default */.Z.findOne({
-            email: body?.email
-        });
-        console.log(account);
-        if (account) {
-            if (external_bcrypt_default().compareSync(body?.password.toString(), account?.password.toString())) {
-                const token = jsonwebtoken_default().sign({
-                    _id: account?._id.toString()
-                }, "SECRET_EXAMPLE_KEY", {
-                    expiresIn: "7 days"
-                });
-                return next_response/* default */.Z.json({
-                    message: "Account loggin",
-                    user: account,
-                    token,
-                    external_token: statictoken
+        if ((0,_middleware_api/* default */.Z)()) {
+            await (0,db/* default */.Z)();
+            let body = await req.json();
+            const account = await userModel/* default */.Z.findOne({
+                email: body?.email
+            });
+            if (account) {
+                if (external_bcrypt_default().compareSync(body?.password.toString(), account?.password.toString())) {
+                    const token = jsonwebtoken_default().sign({
+                        _id: account?._id.toString()
+                    }, process.env.JWT_KEY, {
+                        expiresIn: "1 days"
+                    });
+                    return next_response/* default */.Z.json({
+                        message: "Account loggin",
+                        user: account,
+                        token,
+                        external_token: statictoken
+                    });
+                } else return next_response/* default */.Z.json({
+                    message: "Invalid password"
                 });
             } else return next_response/* default */.Z.json({
-                message: "Invalid password"
+                message: "Account not found",
+                account
             });
-        } else return next_response/* default */.Z.json({
-            message: "Account not found",
-            account
+        }
+        return next_response/* default */.Z.json({
+            message: "Invalid auth"
         });
     } catch (error) {
         return next_response/* default */.Z.json({
@@ -267,6 +279,30 @@ const originalPathname = "/api/userr/login/route";
 
 
 //# sourceMappingURL=app-route.js.map
+
+/***/ }),
+
+/***/ 28342:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (/* binding */ middlewareApi)
+/* harmony export */ });
+/* harmony import */ var next_headers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(40063);
+/* harmony import */ var next_headers__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_headers__WEBPACK_IMPORTED_MODULE_0__);
+
+function middlewareApi() {
+    const token = (0,next_headers__WEBPACK_IMPORTED_MODULE_0__.headers)().get("Authorization");
+    if (token === null) {
+        return false;
+    } else {
+        if (token === "4756478495-stockea2.token-auth") {
+            return true;
+        }
+        return false;
+    }
+}
+
 
 /***/ })
 

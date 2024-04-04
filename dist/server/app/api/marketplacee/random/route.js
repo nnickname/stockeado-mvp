@@ -153,27 +153,35 @@ var db = __webpack_require__(66971);
 var inventoryModel = __webpack_require__(93928);
 // EXTERNAL MODULE: ./node_modules/next/dist/server/web/exports/next-response.js
 var next_response = __webpack_require__(89335);
+// EXTERNAL MODULE: ./app/api/midd/_middleware.api.ts
+var _middleware_api = __webpack_require__(28342);
 ;// CONCATENATED MODULE: ./app/api/marketplacee/random/route.ts
+
 
 
 
 async function GET(req, res, next) {
     try {
-        await (0,db/* default */.Z)();
-        var responseItems = await inventoryModel/* default */.Z.aggregate([
-            {
-                $sample: {
-                    size: 1125
+        if ((0,_middleware_api/* default */.Z)()) {
+            await (0,db/* default */.Z)();
+            var responseItems = await inventoryModel/* default */.Z.aggregate([
+                {
+                    $sample: {
+                        size: 1125
+                    }
                 }
-            }
-        ]);
+            ]);
+            return next_response/* default */.Z.json({
+                message: "Item's found",
+                items: responseItems
+            });
+        }
         return next_response/* default */.Z.json({
-            message: "Item's found",
-            items: responseItems
+            message: "Invalid auth"
         });
     } catch (error) {
         return next_response/* default */.Z.json({
-            message: "Invalid token"
+            message: "Invalid auth"
         });
     }
 }
@@ -209,6 +217,39 @@ const originalPathname = "/api/marketplacee/random/route";
 
 
 //# sourceMappingURL=app-route.js.map
+
+/***/ }),
+
+/***/ 28342:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (/* binding */ middlewareApi)
+/* harmony export */ });
+/* harmony import */ var next_headers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(40063);
+/* harmony import */ var next_headers__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_headers__WEBPACK_IMPORTED_MODULE_0__);
+
+function middlewareApi() {
+    const token = (0,next_headers__WEBPACK_IMPORTED_MODULE_0__.headers)().get("Authorization");
+    if (token === null) {
+        return false;
+    } else {
+        if (token === "4756478495-stockea2.token-auth") {
+            return true;
+        }
+        return false;
+    }
+}
+
+
+/***/ }),
+
+/***/ 40063:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+
+module.exports = __webpack_require__(74937);
+
 
 /***/ })
 

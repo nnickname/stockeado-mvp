@@ -156,43 +156,64 @@ var next_response = __webpack_require__(89335);
 var inventoryModel = __webpack_require__(93928);
 // EXTERNAL MODULE: ./node_modules/next/headers.js
 var headers = __webpack_require__(40063);
+// EXTERNAL MODULE: ./app/api/midd/_middleware.api.ts
+var _middleware_api = __webpack_require__(28342);
 ;// CONCATENATED MODULE: ./app/api/inventoryy/edit/route.ts
 
 
 
 
+
 async function GET(req, res, next) {
-    const deleted = (0,headers.headers)().get("id");
-    if (deleted?.length > 10) {
-        const response = await inventoryModel/* default */.Z.findByIdAndDelete({
-            _id: deleted
-        });
-        if (response !== undefined) {
+    try {
+        if ((0,_middleware_api/* default */.Z)()) {
+            await (0,db/* default */.Z)();
+            const deleted = (0,headers.headers)().get("id");
+            if (deleted?.length > 10) {
+                const response = await inventoryModel/* default */.Z.findByIdAndDelete({
+                    _id: deleted
+                });
+                if (response !== undefined) {
+                    return next_response/* default */.Z.json({
+                        message: "Valid tokens",
+                        deleted: true
+                    });
+                }
+            }
             return next_response/* default */.Z.json({
-                message: "Valid tokens",
-                deleted: true
+                message: "Invalid token"
             });
         }
+        return next_response/* default */.Z.json({
+            message: "Invalid auth"
+        });
+    } catch (errors) {
+        console.log(errors);
+        return next_response/* default */.Z.json({
+            message: "Invalid body or error"
+        });
     }
-    return next_response/* default */.Z.json({
-        message: "Invalid token"
-    });
 }
 async function POST(req, res, next) {
-    await (0,db/* default */.Z)();
     try {
-        let body = await req.json();
-        if (body === undefined || body === null) return next_response/* default */.Z.json({
-            message: "Invalid body men and yes, I didn't take the trouble to validate the body"
-        });
-        const response = await inventoryModel/* default */.Z.findOneAndUpdate({
-            _id: body._id
-        }, {
-            ...body
-        });
+        if ((0,_middleware_api/* default */.Z)()) {
+            await (0,db/* default */.Z)();
+            let body = await req.json();
+            if (body === undefined || body === null) return next_response/* default */.Z.json({
+                message: "Invalid body men and yes, I didn't take the trouble to validate the body"
+            });
+            const response = await inventoryModel/* default */.Z.findOneAndUpdate({
+                _id: body._id
+            }, {
+                ...body
+            });
+            return next_response/* default */.Z.json({
+                message: "Item updated",
+                item: response
+            });
+        }
         return next_response/* default */.Z.json({
-            message: "Item updated",
-            item: response
+            message: "Invalid auth"
         });
     } catch (errors) {
         console.log(errors);
@@ -233,6 +254,30 @@ const originalPathname = "/api/inventoryy/edit/route";
 
 
 //# sourceMappingURL=app-route.js.map
+
+/***/ }),
+
+/***/ 28342:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (/* binding */ middlewareApi)
+/* harmony export */ });
+/* harmony import */ var next_headers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(40063);
+/* harmony import */ var next_headers__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_headers__WEBPACK_IMPORTED_MODULE_0__);
+
+function middlewareApi() {
+    const token = (0,next_headers__WEBPACK_IMPORTED_MODULE_0__.headers)().get("Authorization");
+    if (token === null) {
+        return false;
+    } else {
+        if (token === "4756478495-stockea2.token-auth") {
+            return true;
+        }
+        return false;
+    }
+}
+
 
 /***/ }),
 

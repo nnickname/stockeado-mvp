@@ -31,12 +31,9 @@ const LayoutMarketPlaceNative = () => {
     const [realItems, setRealItems] = useState<InventoryModel[]>([]);
     const [items, setItems] = useState<InventoryModel[]>(null);
     const [ammountItem, setAmmountItem] = useState<number>(0);
-    const [mostViewed, setMostViewed] = useState<UserModel[]>([]);
     
     const findStaticProducts = async () => {
       const response = await findRandomProducts();
-      const responseMostViewed = await findMostViewedShops() ?? [];
-      if(responseMostViewed !== null) setMostViewed(responseMostViewed);
       if(response !== null) setItems(response);
       if(response !== null) setRealItems(response);
       setLoading(true);
