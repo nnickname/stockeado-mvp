@@ -26,7 +26,7 @@ const loginUser = async (email, password)=>{
             password
         }, {
             headers: {
-                authorization: "4756478495-stockea2.token-auth"
+                authorization: "41212756478495-stockea2.token-auth"
             }
         });
         if (response?.data?.user !== undefined) {
@@ -44,7 +44,7 @@ const getUserById = async (id)=>{
         const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.get("/userr/login", {
             headers: {
                 "token": id,
-                authorization: "4756478495-stockea2.token-auth"
+                authorization: "41212756478495-stockea2.token-auth"
             }
         });
         console.log(response);
@@ -60,7 +60,7 @@ const getUser = async ()=>{
         const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.get("/userr", {
             headers: {
                 "token": token,
-                authorization: "4756478495-stockea2.token-auth"
+                authorization: "41212756478495-stockea2.token-auth"
             }
         });
         return response?.data?.user;
@@ -74,7 +74,7 @@ const editUser = async (body)=>{
             ...body
         }, {
             headers: {
-                authorization: "4756478495-stockea2.token-auth"
+                authorization: "41212756478495-stockea2.token-auth"
             }
         });
         if (response?.data?.user !== undefined) {
@@ -90,7 +90,7 @@ const createUser = async (body)=>{
             ...body
         }, {
             headers: {
-                authorization: "4756478495-stockea2.token-auth"
+                authorization: "41212756478495-stockea2.token-auth"
             }
         });
         if (response?.data?.user !== undefined && response?.data?.user !== null) {

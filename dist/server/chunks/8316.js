@@ -18,7 +18,7 @@ const findProduct = async (keyword)=>{
         const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.get("/marketplacee", {
             headers: {
                 "token": keyword,
-                authorization: "4756478495-stockea2.token-auth"
+                authorization: "41212756478495-stockea2.token-auth"
             }
         });
         if (response?.data?.items !== undefined) {
@@ -32,7 +32,7 @@ const findRandomProducts = async ()=>{
     try {
         const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.get("/marketplacee/random", {
             headers: {
-                authorization: "4756478495-stockea2.token-auth"
+                authorization: "41212756478495-stockea2.token-auth"
             }
         });
         if (response?.data?.items !== undefined) {

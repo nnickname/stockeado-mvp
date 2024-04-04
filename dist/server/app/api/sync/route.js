@@ -278,7 +278,7 @@ function middlewareApiPublic() {
     if (token === null) {
         return false;
     } else {
-        if (token === "4872363548-stockea2.token-auth") {
+        if (token === "48724543363548-stockea2.token-auth") {
             return true;
         }
         return false;
