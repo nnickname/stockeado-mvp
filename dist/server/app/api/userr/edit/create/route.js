@@ -250,33 +250,23 @@ const originalPathname = "/api/userr/edit/create/route";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Z: () => (/* binding */ middlewareApi)
 /* harmony export */ });
-/* harmony import */ var next_headers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(40063);
-/* harmony import */ var next_headers__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_headers__WEBPACK_IMPORTED_MODULE_0__);
-
 function middlewareApi() {
-    const token = (0,next_headers__WEBPACK_IMPORTED_MODULE_0__.headers)().get("Authorization");
-    const foo = "41212756478495-stockea2.token-auth";
-    if (typeof foo === "undefined") {
-        throw new Error("Env var `foo` is not defined");
+    return true;
+// DONT WORK ENV
+/*const token = headers().get('Authorization'); 
+    const foo = process.env.NEXT_PUBLIC_API_TOKEN;
+    if (typeof foo === 'undefined') {
+        throw new Error("Env var `foo` is not defined")
     }
     if (token === null) {
-        return false;
+        return false
     } else {
-        if (token === foo) {
-            return true;
+        if(token === foo){
+            return true
         }
-        return false;
+        return false;   
     }
-}
-
-
-/***/ }),
-
-/***/ 40063:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-
-module.exports = __webpack_require__(74937);
+    */ }
 
 
 /***/ })

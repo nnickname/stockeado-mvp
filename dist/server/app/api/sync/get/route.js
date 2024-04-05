@@ -261,29 +261,9 @@ const originalPathname = "/api/sync/get/route";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Z: () => (/* binding */ middlewareApiPublic)
 /* harmony export */ });
-/* harmony import */ var next_headers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(40063);
-/* harmony import */ var next_headers__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_headers__WEBPACK_IMPORTED_MODULE_0__);
-
 function middlewareApiPublic() {
-    const token = (0,next_headers__WEBPACK_IMPORTED_MODULE_0__.headers)().get("Authorization");
-    if (token === null) {
-        return false;
-    } else {
-        if (token === "48724543363548-stockea2.token-auth") {
-            return true;
-        }
-        return false;
-    }
+    return true;
 }
-
-
-/***/ }),
-
-/***/ 40063:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-
-module.exports = __webpack_require__(74937);
 
 
 /***/ })
