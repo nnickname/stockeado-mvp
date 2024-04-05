@@ -291,10 +291,14 @@ const originalPathname = "/api/userr/route";
 
 function middlewareApi() {
     const token = (0,next_headers__WEBPACK_IMPORTED_MODULE_0__.headers)().get("Authorization");
+    const foo = "41212756478495-stockea2.token-auth";
+    if (typeof foo === "undefined") {
+        throw new Error("Env var `foo` is not defined");
+    }
     if (token === null) {
         return false;
     } else {
-        if (token === "41212756478495-stockea2.token-auth") {
+        if (token === foo) {
             return true;
         }
         return false;
