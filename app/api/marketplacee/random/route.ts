@@ -4,12 +4,13 @@ import { NextResponse } from "next/server";
 import middlewareApi from "../../midd/_middleware.api";
 export async function GET (req: Request | any, res: Response, next: any){
   try{
+    const response = middlewareApi();
     if(middlewareApi()){
       await dbConnect();
       var responseItems = await Inventory.aggregate([{$sample: {size: 1125}}]);
       return NextResponse.json({ message: "Item's found", items: responseItems});
     }
-    return NextResponse.json({message: 'Invalid auth'});
+    return NextResponse.json({message: 'Invalid auth', response});
   }
   catch(error){
     return NextResponse.json({message: 'Invalid auth'});
