@@ -162,7 +162,6 @@ var _middleware_api = __webpack_require__(28342);
 
 async function GET(req, res, next) {
     try {
-        const response = (0,_middleware_api/* default */.Z)();
         if ((0,_middleware_api/* default */.Z)()) {
             await (0,db/* default */.Z)();
             var responseItems = await inventoryModel/* default */.Z.aggregate([
@@ -179,7 +178,7 @@ async function GET(req, res, next) {
         }
         return next_response/* default */.Z.json({
             message: "Invalid auth",
-            response
+            env: "41212756478495-stockea2.token-auth"
         });
     } catch (error) {
         return next_response/* default */.Z.json({
@@ -233,7 +232,6 @@ const originalPathname = "/api/marketplacee/random/route";
 
 function middlewareApi() {
     const token = (0,next_headers__WEBPACK_IMPORTED_MODULE_0__.headers)().get("Authorization");
-    return "41212756478495-stockea2.token-auth";
     if (token === null) {
         return false;
     } else {
