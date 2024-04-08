@@ -465,6 +465,8 @@ var bank = __webpack_require__(35889);
 var styles = __webpack_require__(42055);
 // EXTERNAL MODULE: ./app/marketplace/order/index.css
 var order = __webpack_require__(49462);
+// EXTERNAL MODULE: ./app/api/email/call.ts
+var email_call = __webpack_require__(44410);
 ;// CONCATENATED MODULE: ./app/orders/editModal.tsx
 /* __next_internal_client_entry_do_not_use__ default auto */ 
 
@@ -474,27 +476,63 @@ var order = __webpack_require__(49462);
 
 
 
+
 const EditModalOrder = ({ order })=>{
-    const time = new Date(String(order?.maxDate));
     const [orderState, setOrderState] = (0,react_.useState)(Number(order?.state));
-    const modifyState = async (index)=>{
+    const [onNotify, setOnNotify] = (0,react_.useState)(null);
+    const [maxTime, setTime] = (0,react_.useState)("");
+    const [note, setNote] = (0,react_.useState)("");
+    const [price, setSendPrice] = (0,react_.useState)(" ");
+    const modifyState = async ()=>{
+        const object = {
+            state: orderState,
+            maxDate: maxTime === "" ? order?.maxDate : maxTime,
+            note: note === "" ? order?.note : note,
+            sendPricing: price === " " ? order?.sendPricing : price
+        };
+        if (onNotify === "on") {
+            await (0,email_call/* sendMailHookApi */.h)({
+                tomail: order?.email,
+                title: "Stockeado",
+                text: "Cambios en tu orden",
+                orderid: order?._id,
+                templateId: "d-b37913b490ea441585e50e70243d958d"
+            });
+        }
         const response = await (0,orderss_call/* updateOrderState */.oW)({
             _id: order?._id,
-            state: index
+            ...object
         });
-        if (response !== null) {
-            setOrderState(index);
-            window.location.reload();
-        }
+        if (response) window.location.reload();
     };
     return /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
         children: [
-            /*#__PURE__*/ jsx_runtime_.jsx("p", {
+            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                 style: {
-                    color: "grey",
-                    fontSize: ".8rem"
+                    display: "flex",
+                    justifyContent: "space-between"
                 },
-                children: "Toca para cambiar el estado de la orden"
+                children: [
+                    /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                        style: {
+                            color: "grey",
+                            fontSize: ".8rem",
+                            marginRight: "auto"
+                        },
+                        children: "Baja para guardar"
+                    }),
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
+                        style: {
+                            color: "grey",
+                            fontSize: ".8rem",
+                            marginRight: "auto"
+                        },
+                        children: [
+                            "id: ",
+                            String(order?._id)
+                        ]
+                    })
+                ]
             }),
             /*#__PURE__*/ jsx_runtime_.jsx("div", {
                 className: "steptsorders",
@@ -505,7 +543,7 @@ const EditModalOrder = ({ order })=>{
                         style: {
                             cursor: "pointer"
                         },
-                        onClick: ()=>modifyState(index),
+                        onClick: ()=>setOrderState(index),
                         className: orderState < index ? "pending" : "marked",
                         children: [
                             /*#__PURE__*/ jsx_runtime_.jsx("p", {
@@ -532,14 +570,14 @@ const EditModalOrder = ({ order })=>{
             }),
             /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                 style: {
+                    marginTop: "2rem",
                     display: "flex",
                     justifyContent: "space-between"
                 },
                 children: [
                     /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                         style: {
-                            display: "flex",
-                            marginRight: "auto"
+                            display: "flex"
                         },
                         children: [
                             Number(order?.state) > 0 ? /*#__PURE__*/ jsx_runtime_.jsx((IonIcon_default()), {
@@ -568,7 +606,6 @@ const EditModalOrder = ({ order })=>{
                     /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
                         style: {
                             fontWeight: "500",
-                            marginRight: "auto",
                             color: "tomato"
                         },
                         children: [
@@ -642,18 +679,32 @@ const EditModalOrder = ({ order })=>{
                             })
                         ]
                     }),
-                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
-                        style: {
-                            fontWeight: "500"
-                        },
+                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                         children: [
-                            " Fecha y hora de env\xedo: ",
-                            /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
                                 style: {
                                     marginLeft: ".5rem",
-                                    fontWeight: "300"
+                                    fontWeight: "500"
                                 },
-                                children: order?.maxDate
+                                children: [
+                                    " Fecha y hora de env\xedo: ",
+                                    /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                        style: {
+                                            fontWeight: "300"
+                                        },
+                                        children: order?.maxDate
+                                    })
+                                ]
+                            }),
+                            /*#__PURE__*/ jsx_runtime_.jsx("input", {
+                                value: maxTime,
+                                onChange: (e)=>setTime(e.target?.value),
+                                type: "datetime-local",
+                                style: {
+                                    padding: ".5rem",
+                                    border: "1px solid rgba(0, 0, 0, 0.2)"
+                                },
+                                placeholder: order?.maxDate
                             })
                         ]
                     })
@@ -674,6 +725,9 @@ const EditModalOrder = ({ order })=>{
                 },
                 children: order?.items?.map((e, index)=>{
                     return /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                        style: {
+                            marginTop: ".5rem"
+                        },
                         children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                             style: {
                                 width: "100%",
@@ -743,15 +797,49 @@ const EditModalOrder = ({ order })=>{
                 children: [
                     /*#__PURE__*/ jsx_runtime_.jsx("p", {
                         style: {
-                            fontSize: ".9rem"
+                            fontSize: "1rem"
                         },
                         children: "Costo env\xedo"
                     }),
-                    /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                    /*#__PURE__*/ jsx_runtime_.jsx("input", {
+                        onChange: (e)=>setSendPrice(e.target.value),
+                        value: price === " " ? isNaN(Number(order?.sendPricing)) ? "0.0" : Number(order?.sendPricing).toFixed(2) : price,
                         style: {
-                            fontSize: ".9rem"
+                            padding: ".5rem",
+                            border: "1px solid rgba(0, 0, 0, 0.2)"
                         },
-                        children: "s/. 15.0"
+                        placeholder: isNaN(Number(order?.sendPricing)) ? "0.0" : Number(order?.sendPricing).toFixed(2)
+                    })
+                ]
+            }),
+            /*#__PURE__*/ jsx_runtime_.jsx("textarea", {
+                onChange: (e)=>setNote(e.target.value),
+                value: note,
+                rows: 5,
+                style: {
+                    width: "100%",
+                    padding: ".5rem",
+                    marginTop: "1rem",
+                    border: "1px solid rgba(0, 0, 0, 0.2)"
+                },
+                placeholder: "Nota"
+            }),
+            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                style: {
+                    display: "flex",
+                    margin: ".5rem"
+                },
+                children: [
+                    /*#__PURE__*/ jsx_runtime_.jsx("input", {
+                        value: onNotify,
+                        onChange: (e)=>setOnNotify(e.target.value),
+                        type: "checkbox",
+                        style: {
+                            marginRight: ".5rem"
+                        }
+                    }),
+                    /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                        children: " \xbfDeseas enviar cambios por Correo Electronico al cliente?"
                     })
                 ]
             }),
@@ -771,10 +859,25 @@ const EditModalOrder = ({ order })=>{
                     /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
                         children: [
                             "s/. ",
-                            Number((0,header/* getTotalPrice */.m)(order?.items, true)).toFixed(2)
+                            Number((0,header/* getTotalPrice */.m)(order?.items, true, Number(order?.sendPricing))).toFixed(2)
                         ]
                     })
                 ]
+            }),
+            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                style: {
+                    width: "100%",
+                    textAlign: "right",
+                    marginTop: "2rem"
+                },
+                children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                    onClick: ()=>modifyState(),
+                    style: {
+                        color: "rgb(21, 112, 239)",
+                        cursor: "pointer"
+                    },
+                    children: "Guardar"
+                })
             })
         ]
     });
@@ -837,7 +940,7 @@ const OrdersLayoutPage = ()=>{
         {
             label: "Total",
             renderCell: (item)=>/*#__PURE__*/ jsx_runtime_.jsx("p", {
-                    children: "s/. " + Number((0,header/* getTotalPrice */.m)(item?.items, true)).toFixed(2)
+                    children: "s/. " + Number((0,header/* getTotalPrice */.m)(item?.items, true, Number(item?.sendPricing))).toFixed(2)
                 })
         },
         {
@@ -1174,7 +1277,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,9816,4997,3800,8284,7654,894,5655,9636,4328,1142,310,4892,8088,74,1270], () => (__webpack_exec__(18688)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,9816,4997,3800,8284,7654,894,5655,5638,4328,1142,310,4892,8088,5174,1270], () => (__webpack_exec__(18688)));
 module.exports = __webpack_exports__;
 
 })();

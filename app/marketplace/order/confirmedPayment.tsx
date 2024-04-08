@@ -54,7 +54,7 @@ const ConfirmedPaymentView: FunctionComponent<StepsOfPaymentType> = ({cartItems,
                         {cartItems?.length === 0 ? <p style={{textAlign: 'center', color: 'grey'}}>Todavia no añadiste nada</p> : ''}
                         <div className="responsiveItems">
                         {cartItems?.map((e, index) => {
-                                    return <div key={index}>
+                                    return <div style={{marginTop: '.5rem'}} key={index}>
                                     <div style={{width: '100%', display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(220, 220, 220, .3)'}}>
                                         <img style={{width: '105px', maxHeight: '105px'}} src={e?.item?.image} alt='Product Image' />
                                         <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
@@ -72,12 +72,13 @@ const ConfirmedPaymentView: FunctionComponent<StepsOfPaymentType> = ({cartItems,
                     </div>
                     <div style={{marginTop: '2rem', display: 'flex', justifyContent: 'space-between'}}>
                         <p style={{fontSize: '.9rem'}}>Costo envío</p>
-                        <p style={{fontSize: '.9rem'}}>s/. 15.0</p>
+                        <p style={{fontSize: '.9rem'}}>s/. {Number(order?.sendPricing).toFixed(2)}</p>
                     </div>
                     <div style={{marginTop: '.2rem', display: 'flex', justifyContent: 'space-between'}}>
                         <p style={{fontSize: '1.1rem'}}>Total</p>
-                        <p>s/. {(Number(getTotalPrice(cartItems, true)).toFixed(2))}</p>
+                        <p>s/. {(Number(getTotalPrice(cartItems, true, Number(order?.sendPricing))).toFixed(2))}</p>
                     </div>
+                    <textarea disabled style={{marginTop: '1rem', width: '100%', padding: '1rem', border: '1px solid rgba(0, 0, 0, 0.2)'}} placeholder={order?.note === ' ' ? 'Nota' : order?.note} rows={5}/>
 
                     <div className="steptsorders" style={{marginTop: '0rem'}}>
                         {OrderStates?.map((e, index) => <div className={Number(order?.state) < index ? 'pending' : 'marked'}  key={index}>

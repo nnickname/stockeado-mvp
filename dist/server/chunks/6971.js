@@ -40,7 +40,8 @@ function createServer() {
         origin: [
             "http://64.225.62.133",
             "https://davalos.pe",
-            "https://stockeado.com"
+            "https://stockeado.com",
+            "https://www.stockeado.com"
         ]
     }));
     app.use(cors__WEBPACK_IMPORTED_MODULE_4___default()(corsOptions));

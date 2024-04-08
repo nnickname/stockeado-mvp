@@ -5,8 +5,8 @@
 .marketplace .sidebarM{
     padding: 2rem;
     min-width: 250px;
-    height: 100%;
-    background-color: #f6f7fa;
+    
+    background-color: #eceff7;
 }
 
 .sidebarM h1{

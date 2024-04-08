@@ -199,10 +199,16 @@ async function POST(req) {
             if (body === undefined || body === null) return next_response/* default */.Z.json({
                 message: "Invalid body men and yes, I didn't take the trouble to validate the body"
             });
+            const object = {
+                state: body?.state,
+                maxDate: body?.maxDate,
+                note: body?.note,
+                sendPricing: body?.sendPricing
+            };
             const response = await ordersModel/* default */.ZP.findOneAndUpdate({
                 _id: body._id
             }, {
-                state: body?.state ?? 0
+                ...object
             });
             return next_response/* default */.Z.json({
                 message: "Order State updated",
@@ -261,7 +267,7 @@ const originalPathname = "/api/orderss/edit/route";
 var __webpack_require__ = require("../../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,9735,6971,2193], () => (__webpack_exec__(11859)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,1835,3680,6971,2193], () => (__webpack_exec__(11859)));
 module.exports = __webpack_exports__;
 
 })();

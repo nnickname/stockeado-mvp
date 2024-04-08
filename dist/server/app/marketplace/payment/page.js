@@ -433,6 +433,35 @@ Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_re
 
 /***/ }),
 
+/***/ 44410:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   h: () => (/* binding */ sendMailHookApi)
+/* harmony export */ });
+/* harmony import */ var _call__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14328);
+
+const sendMailHookApi = async (body)=>{
+    try {
+        const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.post("/email", {
+            ...body
+        }, {
+            headers: {
+                authorization: "41212756478495-stockea2.token-auth"
+            }
+        });
+        if (response?.data?.send) {
+            return true;
+        } else return false;
+    } catch (error) {
+        return false;
+    }
+};
+
+
+/***/ }),
+
 /***/ 95179:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -456,7 +485,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(57114);
 /* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(next_navigation__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _components_dashboard_Footer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(90507);
+/* harmony import */ var _app_api_email_call__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(44410);
 /* __next_internal_client_entry_do_not_use__ default auto */ 
+
 
 
 
@@ -477,6 +508,7 @@ const LayoutMarketPlacePayment = ()=>{
     const [maxDate, setMaxDate] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
     const [cart, setCart] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
     const [paymentSelected, setPaymentSelected] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
+    const [email, setEmail] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)("");
     const buildForm = async ()=>{
         if (phone !== "" && ruc !== "" && nameShop !== "" && name !== "" && lastname !== "" && direction !== "" && maxDate !== null) {
             if (cart?.length > 0) {
@@ -490,10 +522,28 @@ const LayoutMarketPlacePayment = ()=>{
                     nameShop,
                     ruc,
                     phone,
-                    items: cart
+                    items: cart,
+                    sendPricing: "0",
+                    sendDate: "0",
+                    email: email,
+                    note: " "
                 };
                 const response = await (0,_app_api_orderss_call__WEBPACK_IMPORTED_MODULE_7__/* .createOrder */ .LV)(body);
                 if (response !== null) {
+                    await (0,_app_api_email_call__WEBPACK_IMPORTED_MODULE_10__/* .sendMailHookApi */ .h)({
+                        tomail: email,
+                        title: "Stockeado",
+                        text: "Creamos tu orden",
+                        orderid: response?._id,
+                        templateId: "d-d3182e5de32145d29fe053124e00a3b0"
+                    });
+                    await (0,_app_api_email_call__WEBPACK_IMPORTED_MODULE_10__/* .sendMailHookApi */ .h)({
+                        tomail: "bruno@stockeado.com",
+                        title: "Stockeado",
+                        text: "Creamos tu orden",
+                        orderid: response?._id,
+                        templateId: "d-d3182e5de32145d29fe053124e00a3b0"
+                    });
                     react_notifications__WEBPACK_IMPORTED_MODULE_6__/* .NotificationManager */ .fn.success("Creaste una nueva orden", "Creado");
                     router.push("/marketplace/order?id=" + response?._id);
                 }
@@ -625,14 +675,32 @@ const LayoutMarketPlacePayment = ()=>{
                                 })
                             ]
                         }),
-                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
-                            value: phone,
-                            onChange: (e)=>setPhone(e.target.value),
-                            placeholder: "Celular",
-                            className: "border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none",
+                        /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                             style: {
-                                background: "transparent"
-                            }
+                                display: "flex",
+                                justifyContent: "space-between"
+                            },
+                            children: [
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
+                                    value: email,
+                                    onChange: (e)=>setEmail(e.target.value),
+                                    placeholder: "Correo electr\xf3nico",
+                                    type: "email",
+                                    className: "border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none",
+                                    style: {
+                                        background: "transparent"
+                                    }
+                                }),
+                                /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
+                                    value: phone,
+                                    onChange: (e)=>setPhone(e.target.value),
+                                    placeholder: "Celular",
+                                    className: "border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none",
+                                    style: {
+                                        background: "transparent"
+                                    }
+                                })
+                            ]
                         }),
                         /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
                             style: {
@@ -741,7 +809,7 @@ const LayoutMarketPlacePayment = ()=>{
                                 /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
                                     children: [
                                         "s/. ",
-                                        Number((0,_components_marketplace_header__WEBPACK_IMPORTED_MODULE_4__/* .getTotalPrice */ .m)(cart, false)).toFixed(2)
+                                        Number((0,_components_marketplace_header__WEBPACK_IMPORTED_MODULE_4__/* .getTotalPrice */ .m)(cart, false, 0)).toFixed(2)
                                     ]
                                 })
                             ]
@@ -875,7 +943,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,9816,4997,3800,9636,4328,507,1142,4892], () => (__webpack_exec__(97268)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,9816,4997,3800,5638,4328,507,1142,4892], () => (__webpack_exec__(97268)));
 module.exports = __webpack_exports__;
 
 })();

@@ -41,7 +41,11 @@ export interface OrderModel extends Document {
   nameShop: string;
   ruc: string;
   phone: string;
-  items: CartProps[]
+  items: CartProps[];
+  sendPricing: string;
+  sendDate: string;
+  email: string;
+  note: string;
 }
 
 /* PetSchema will correspond to a collection in your MongoDB database. */
@@ -91,5 +95,22 @@ const OrderSchema = new Schema({
     type: Number,
     required: [true, "Please provide a pay type."],
   },
+  sendPricing: {
+    type: String,
+    required: [true, "Please provide a Send Pricing."],
+  },
+  sendDate: {
+    type: String,
+    required: [true, "Please provide a Date."],
+  },
+  email: {
+    type: String,
+    required: [true, "Please provide a email."],
+  },
+  note: {
+    type: String,
+    required: [true, "Please provide a note"]
+  }
 });
+
 export default  mongoose.models.orders || model<OrderModel>("orders", OrderSchema);

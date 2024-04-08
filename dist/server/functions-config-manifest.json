@@ -11,15 +11,15 @@
     "/inventory": {},
     "/marketplace/item": {},
     "/marketplace/order": {},
+    "/marketplace": {},
     "/marketplace/payment": {},
     "/marketplace/searchus": {},
-    "/marketplace": {},
     "/marketplace/shop": {},
     "/orders": {},
     "/": {},
     "/privacy": {},
     "/signin": {},
-    "/terms": {},
-    "/signup": {}
+    "/signup": {},
+    "/terms": {}
   }
 }

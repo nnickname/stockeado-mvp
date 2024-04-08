@@ -40,7 +40,7 @@ const OrdersLayoutPage = () => {
         { label: 'Dirección', renderCell: (item) => <p>{item?.direction}</p> },
         {
           label: 'Total',
-          renderCell: (item) => <p>{'s/. ' + Number(getTotalPrice(item?.items, true)).toFixed(2)}</p>,
+          renderCell: (item) => <p>{'s/. ' + Number(getTotalPrice(item?.items, true, Number(item?.sendPricing))).toFixed(2)}</p>,
         },
         { label: 'Fecha maxima', renderCell: (item) => <p>{new Date(item.maxDate).getDay()}/
         {new Date(item.maxDate).getMonth()}/

@@ -10,6 +10,7 @@ import Modal from "react-responsive-modal";
 import 'react-responsive-modal/styles.css';
 import { updateOrderState } from "@/app/api/orderss/call";
 import Link from "next/link";
+import { sendMailHookApi } from "@/app/api/email/call";
 
 export type StepsOfPaymentType = {
     cartItems: CartProps[]
@@ -21,6 +22,13 @@ const AwaitPaymentView: FunctionComponent<StepsOfPaymentType> = ({cartItems, ord
     const confirmPayment = async () => {
         const response = await updateOrderState({_id: order?._id, state: 2});
         if(response !== null) {
+            await sendMailHookApi({
+                tomail: 'bruno@stockeado.com',
+                title: 'Stockeado',
+                text: 'Confirmamos el pago de tu orden',
+                orderid: response?._id,
+                templateId: 'd-b37913b490ea441585e50e70243d958d'
+            });
             window.location.reload();
         }
     }
@@ -51,6 +59,7 @@ const AwaitPaymentView: FunctionComponent<StepsOfPaymentType> = ({cartItems, ord
 
                         <p style={{fontWeight: '500'}}> Fecha y hora de envío: <span style={{marginLeft: '.5rem', fontWeight: '300'}}>{order?.maxDate}</span></p>
                     </div>
+                    <p style={{marginTop: '1rem'}}> <span style={{fontWeight: '500'}}> Email</span> {order?.email}</p>
 
                     <div>
                     <h2 style={{fontWeight: '600', marginTop: '1rem', marginBottom: '.5rem'}}>Productos:</h2>
@@ -71,7 +80,7 @@ const AwaitPaymentView: FunctionComponent<StepsOfPaymentType> = ({cartItems, ord
 
                     {cartItems?.map((e, index) => {
                     const nameString = e?.item?.name +  ' ' + e?.item?.model;
-                    return <div key={index}>
+                    return <div style={{marginTop: '.5rem'}} key={index}>
                         <div style={{width: '100%', display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(220, 220, 220, .3)'}}>
                             <img style={{width: '85px', maxHeight: '85px'}} src={e?.item?.image} alt='Product Image' />
                             <p style={{maxWidth: '200px',}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
@@ -89,13 +98,13 @@ const AwaitPaymentView: FunctionComponent<StepsOfPaymentType> = ({cartItems, ord
                 </div>
                 <div style={{marginTop: '2rem', display: 'flex', justifyContent: 'space-between'}}>
                     <p style={{fontSize: '.9rem'}}>Costo envío</p>
-                    <p style={{fontSize: '.9rem'}}>s/. 15.0</p>
+                    <p style={{fontSize: '.9rem'}}>s/. {Number(order?.sendPricing).toFixed(2)}</p>
                 </div>
                 <div style={{marginTop: '.2rem', display: 'flex', justifyContent: 'space-between'}}>
                     <p style={{fontSize: '1.1rem'}}>Total</p>
-                    <p>s/. {(Number(getTotalPrice(cartItems, true)).toFixed(2))}</p>
+                    <p>s/. {(Number(getTotalPrice(cartItems, true, Number(order?.sendPricing))).toFixed(2))}</p>
                 </div>
-
+                <textarea disabled style={{marginTop: '1rem', width: '100%', padding: '1rem', border: '1px solid rgba(0, 0, 0, 0.2)'}} placeholder={order?.note === ' ' ? 'Nota' : order?.note} rows={5}/>
                 <BankOptions {...order}/>
                 <button onClick={() => setOpen(true)} style={{marginTop: '2rem', padding: '.5rem', textAlign: 'center', width:'100%', background: 'linear-gradient(180deg, #127FFF 0%, #3662E3 100%)', color: 'white'}}>Confirmar Pago</button>
                     </div>

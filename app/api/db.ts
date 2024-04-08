@@ -21,7 +21,7 @@ function createServer() {
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(cookieParser());
   app.use(cors({
-    origin: ['http://64.225.62.133', 'https://davalos.pe', 'https://stockeado.com']
+    origin: ['http://64.225.62.133', 'https://davalos.pe', 'https://stockeado.com', 'https://www.stockeado.com']
   }))
   app.use(cors(corsOptions))
   return app;

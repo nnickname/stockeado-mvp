@@ -152,6 +152,34 @@ const getOrderState = (id)=>{
             true,
             "Please provide a pay type."
         ]
+    },
+    sendPricing: {
+        type: String,
+        required: [
+            true,
+            "Please provide a Send Pricing."
+        ]
+    },
+    sendDate: {
+        type: String,
+        required: [
+            true,
+            "Please provide a Date."
+        ]
+    },
+    email: {
+        type: String,
+        required: [
+            true,
+            "Please provide a email."
+        ]
+    },
+    note: {
+        type: String,
+        required: [
+            true,
+            "Please provide a note"
+        ]
     }
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((mongoose__WEBPACK_IMPORTED_MODULE_0___default().models).orders || (0,mongoose__WEBPACK_IMPORTED_MODULE_0__.model)("orders", OrderSchema));

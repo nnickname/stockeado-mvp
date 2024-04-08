@@ -44,9 +44,9 @@ var Popover = __webpack_require__(36413);
 
 
 
-const getTotalPrice = (cartItems, deliveried)=>{
+const getTotalPrice = (cartItems, deliveried, priceDeliveried)=>{
     var price = 0;
-    if (deliveried) price = 15.0;
+    if (deliveried) price = priceDeliveried;
     cartItems?.map((e)=>{
         price = price + Number(e?.item?.priceSelling) * e?.ammount;
     });
@@ -299,7 +299,7 @@ const HeaderMarketPlace = ({ cartItems, setCart })=>{
                                             /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
                                                 children: [
                                                     "s/. ",
-                                                    Number(getTotalPrice(cartItems, false)).toFixed(2)
+                                                    Number(getTotalPrice(cartItems, false, 0)).toFixed(2)
                                                 ]
                                             })
                                         ]

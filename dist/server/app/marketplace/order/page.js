@@ -477,8 +477,11 @@ var styles = __webpack_require__(42055);
 // EXTERNAL MODULE: ./node_modules/next/link.js
 var next_link = __webpack_require__(11440);
 var link_default = /*#__PURE__*/__webpack_require__.n(next_link);
+// EXTERNAL MODULE: ./app/api/email/call.ts
+var email_call = __webpack_require__(44410);
 ;// CONCATENATED MODULE: ./app/marketplace/order/awaitPayment.tsx
 /* __next_internal_client_entry_do_not_use__ default auto */ 
+
 
 
 
@@ -498,6 +501,13 @@ const AwaitPaymentView = ({ cartItems, order })=>{
             state: 2
         });
         if (response !== null) {
+            await (0,email_call/* sendMailHookApi */.h)({
+                tomail: "bruno@stockeado.com",
+                title: "Stockeado",
+                text: "Confirmamos el pago de tu orden",
+                orderid: response?._id,
+                templateId: "d-b37913b490ea441585e50e70243d958d"
+            });
             window.location.reload();
         }
     };
@@ -663,6 +673,22 @@ const AwaitPaymentView = ({ cartItems, order })=>{
                                         })
                                     ]
                                 }),
+                                /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
+                                    style: {
+                                        marginTop: "1rem"
+                                    },
+                                    children: [
+                                        " ",
+                                        /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                            style: {
+                                                fontWeight: "500"
+                                            },
+                                            children: " Email"
+                                        }),
+                                        " ",
+                                        order?.email
+                                    ]
+                                }),
                                 /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                                     children: [
                                         /*#__PURE__*/ jsx_runtime_.jsx("h2", {
@@ -716,6 +742,9 @@ const AwaitPaymentView = ({ cartItems, order })=>{
                                         cartItems?.map((e, index)=>{
                                             const nameString = e?.item?.name + " " + e?.item?.model;
                                             return /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                                style: {
+                                                    marginTop: ".5rem"
+                                                },
                                                 children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                                                     style: {
                                                         width: "100%",
@@ -772,11 +801,14 @@ const AwaitPaymentView = ({ cartItems, order })=>{
                                             },
                                             children: "Costo env\xedo"
                                         }),
-                                        /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                        /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
                                             style: {
                                                 fontSize: ".9rem"
                                             },
-                                            children: "s/. 15.0"
+                                            children: [
+                                                "s/. ",
+                                                Number(order?.sendPricing).toFixed(2)
+                                            ]
                                         })
                                     ]
                                 }),
@@ -796,10 +828,21 @@ const AwaitPaymentView = ({ cartItems, order })=>{
                                         /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
                                             children: [
                                                 "s/. ",
-                                                Number((0,header/* getTotalPrice */.m)(cartItems, true)).toFixed(2)
+                                                Number((0,header/* getTotalPrice */.m)(cartItems, true, Number(order?.sendPricing))).toFixed(2)
                                             ]
                                         })
                                     ]
+                                }),
+                                /*#__PURE__*/ jsx_runtime_.jsx("textarea", {
+                                    disabled: true,
+                                    style: {
+                                        marginTop: "1rem",
+                                        width: "100%",
+                                        padding: "1rem",
+                                        border: "1px solid rgba(0, 0, 0, 0.2)"
+                                    },
+                                    placeholder: order?.note === " " ? "Nota" : order?.note,
+                                    rows: 5
                                 }),
                                 /*#__PURE__*/ jsx_runtime_.jsx(bank/* BankOptions */.l, {
                                     ...order
@@ -1159,6 +1202,9 @@ const ConfirmedPaymentView = ({ cartItems, order })=>{
                                         className: "responsiveItems",
                                         children: cartItems?.map((e, index)=>{
                                             return /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                                style: {
+                                                    marginTop: ".5rem"
+                                                },
                                                 children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                                                     style: {
                                                         width: "100%",
@@ -1227,11 +1273,14 @@ const ConfirmedPaymentView = ({ cartItems, order })=>{
                                         },
                                         children: "Costo env\xedo"
                                     }),
-                                    /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
                                         style: {
                                             fontSize: ".9rem"
                                         },
-                                        children: "s/. 15.0"
+                                        children: [
+                                            "s/. ",
+                                            Number(order?.sendPricing).toFixed(2)
+                                        ]
                                     })
                                 ]
                             }),
@@ -1251,10 +1300,21 @@ const ConfirmedPaymentView = ({ cartItems, order })=>{
                                     /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
                                         children: [
                                             "s/. ",
-                                            Number((0,header/* getTotalPrice */.m)(cartItems, true)).toFixed(2)
+                                            Number((0,header/* getTotalPrice */.m)(cartItems, true, Number(order?.sendPricing))).toFixed(2)
                                         ]
                                     })
                                 ]
+                            }),
+                            /*#__PURE__*/ jsx_runtime_.jsx("textarea", {
+                                disabled: true,
+                                style: {
+                                    marginTop: "1rem",
+                                    width: "100%",
+                                    padding: "1rem",
+                                    border: "1px solid rgba(0, 0, 0, 0.2)"
+                                },
+                                placeholder: order?.note === " " ? "Nota" : order?.note,
+                                rows: 5
                             }),
                             /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                 className: "steptsorders",
@@ -1485,7 +1545,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,9816,4997,3800,7654,9636,4328,507,1142,4892,74], () => (__webpack_exec__(13165)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,9816,4997,3800,7654,5638,4328,507,1142,4892,5174], () => (__webpack_exec__(13165)));
 module.exports = __webpack_exports__;
 
 })();

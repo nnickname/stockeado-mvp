@@ -32,7 +32,13 @@ export async function POST(
             await dbConnect();
             let body = await req.json();
             if(body === undefined || body === null) return NextResponse.json({ message: "Invalid body men and yes, I didn't take the trouble to validate the body" });
-            const response = await Order.findOneAndUpdate({_id: body._id}, { state: body?.state ?? 0});
+            const object = {
+              state: body?.state,
+              maxDate: body?.maxDate,
+              note: body?.note,
+              sendPricing: body?.sendPricing
+            };
+            const response = await Order.findOneAndUpdate({_id: body._id}, { ...object});
             return NextResponse.json({ message: "Order State updated", order: response});
           }
           return NextResponse.json({message: 'Invalid auth'});

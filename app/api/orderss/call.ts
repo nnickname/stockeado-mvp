@@ -26,7 +26,6 @@ export const getOrders = async (id: string) => {
     }
 }
 export const updateOrderState = async (body: object) => {
-    
     try{
         
         const response: any = await axios.post("/orderss/edit", body, {headers: {authorization: process.env.NEXT_PUBLIC_API_TOKEN}});
