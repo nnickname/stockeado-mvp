@@ -17,18 +17,10 @@ exports.modules = {
 /* harmony import */ var express__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var cookie_parser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(99961);
 /* harmony import */ var cookie_parser__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(cookie_parser__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var cors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(22477);
-/* harmony import */ var cors__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(cors__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
 
-
-const corsOptions = {
-    origin: "http://64.225.62.133:3000/",
-    credentials: true,
-    optionSuccessStatus: 200
-};
 function createServer() {
     const app = express__WEBPACK_IMPORTED_MODULE_2___default()();
     app.use(express__WEBPACK_IMPORTED_MODULE_2___default().json());
@@ -37,7 +29,21 @@ function createServer() {
         extended: true
     }));
     app.use(cookie_parser__WEBPACK_IMPORTED_MODULE_3___default()());
-    app.use(cors__WEBPACK_IMPORTED_MODULE_4___default()(corsOptions));
+    const cors = {
+        origin: [
+            "www.stockeado.com",
+            "stockeado.com",
+            "64.225.62.133"
+        ]
+    };
+    app.all("*", function(req, res, next) {
+        let origin = req.headers.origin;
+        if (cors.origin.indexOf(origin) >= 0) {
+            res.header("Access-Control-Allow-Origin", origin);
+        }
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next();
+    });
     return app;
 }
 const MONGODB_URI = process.env.MONGO_URI;

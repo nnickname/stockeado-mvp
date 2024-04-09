@@ -8,12 +8,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import { NextResponse } from "next/server";
 
-const corsOptions ={
-  origin: 'http://64.225.62.133:3000/',
-  credentials:true, 
-  optionSuccessStatus:200,
-  
-}
+
 function createServer() {
   const app = express();
   app.use(express.json());
@@ -21,7 +16,20 @@ function createServer() {
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(cookieParser());
  
-  app.use(cors(corsOptions))
+  const cors = {
+      origin: ["www.stockeado.com","stockeado.com","64.225.62.133"]
+  }
+
+
+
+app.all('*', function(req, res, next) {
+            let origin = req.headers.origin;
+            if(cors.origin.indexOf(origin) >= 0){
+                res.header("Access-Control-Allow-Origin", origin);
+            }         
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            next();
+        });
   return app;
 }
 
