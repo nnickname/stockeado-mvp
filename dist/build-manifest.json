@@ -5,14 +5,14 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/kwh0ZsbJ9KoTdB3ccsjd4/_buildManifest.js",
-    "static/kwh0ZsbJ9KoTdB3ccsjd4/_ssgManifest.js"
+    "static/jj4SbMcoDP8ngYQ5xdcVQ/_buildManifest.js",
+    "static/jj4SbMcoDP8ngYQ5xdcVQ/_ssgManifest.js"
   ],
   "rootMainFiles": [
     "static/chunks/webpack-be5d81d1660955df.js",
     "static/chunks/fd9d1056-f861531bd2b0fe9c.js",
     "static/chunks/596-54229f63080b6dbe.js",
-    "static/chunks/main-app-fc8ccbd54a8d4950.js"
+    "static/chunks/main-app-0a0ff139d96f8682.js"
   ],
   "pages": {
     "/_app": [

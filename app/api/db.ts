@@ -9,20 +9,18 @@ import cors from "cors";
 import { NextResponse } from "next/server";
 
 const corsOptions ={
-  
   credentials:true, 
   optionSuccessStatus:200,
   
 }
 function createServer() {
   const app = express();
+  app.use(cors({ origin: ["https://www.stockeado.com", "https://stockeado.com", "64.225.62.133"] }));
   app.use(express.json());
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(cookieParser());
-  app.use(cors({
-    origin: ['http://64.225.62.133', 'https://davalos.pe', 'https://stockeado.com', 'https://www.stockeado.com']
-  }))
+ 
   app.use(cors(corsOptions))
   return app;
 }

@@ -30,20 +30,19 @@ const corsOptions = {
 };
 function createServer() {
     const app = express__WEBPACK_IMPORTED_MODULE_2___default()();
+    app.use(cors__WEBPACK_IMPORTED_MODULE_4___default()({
+        origin: [
+            "https://www.stockeado.com",
+            "https://stockeado.com",
+            "64.225.62.133"
+        ]
+    }));
     app.use(express__WEBPACK_IMPORTED_MODULE_2___default().json());
     app.use(body_parser__WEBPACK_IMPORTED_MODULE_1___default().json());
     app.use(body_parser__WEBPACK_IMPORTED_MODULE_1___default().urlencoded({
         extended: true
     }));
     app.use(cookie_parser__WEBPACK_IMPORTED_MODULE_3___default()());
-    app.use(cors__WEBPACK_IMPORTED_MODULE_4___default()({
-        origin: [
-            "http://64.225.62.133",
-            "https://davalos.pe",
-            "https://stockeado.com",
-            "https://www.stockeado.com"
-        ]
-    }));
     app.use(cors__WEBPACK_IMPORTED_MODULE_4___default()(corsOptions));
     return app;
 }
