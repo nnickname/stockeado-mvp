@@ -25,18 +25,12 @@ exports.modules = {
 
 
 const corsOptions = {
+    origin: "*",
     credentials: true,
     optionSuccessStatus: 200
 };
 function createServer() {
     const app = express__WEBPACK_IMPORTED_MODULE_2___default()();
-    app.use(cors__WEBPACK_IMPORTED_MODULE_4___default()({
-        origin: [
-            "https://www.stockeado.com",
-            "https://stockeado.com",
-            "64.225.62.133"
-        ]
-    }));
     app.use(express__WEBPACK_IMPORTED_MODULE_2___default().json());
     app.use(body_parser__WEBPACK_IMPORTED_MODULE_1___default().json());
     app.use(body_parser__WEBPACK_IMPORTED_MODULE_1___default().urlencoded({

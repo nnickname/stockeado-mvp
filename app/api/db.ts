@@ -9,13 +9,13 @@ import cors from "cors";
 import { NextResponse } from "next/server";
 
 const corsOptions ={
+  origin: '*',
   credentials:true, 
   optionSuccessStatus:200,
   
 }
 function createServer() {
   const app = express();
-  app.use(cors({ origin: ["https://www.stockeado.com", "https://stockeado.com", "64.225.62.133"] }));
   app.use(express.json());
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended: true}));
