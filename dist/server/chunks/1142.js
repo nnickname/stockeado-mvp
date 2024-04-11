@@ -88,10 +88,15 @@ const HeaderMarketPlace = ({ cartItems, setCart })=>{
             router.push("/marketplace/searchus?name=" + String(keywordCast));
         }
     };
-    return /*#__PURE__*/ jsx_runtime_.jsx(jsx_runtime_.Fragment, {
+    return /*#__PURE__*/ jsx_runtime_.jsx("div", {
+        style: {
+            zIndex: 55,
+            width: "100%"
+        },
         children: /*#__PURE__*/ jsx_runtime_.jsx("header", {
             style: {
-                zIndex: 55
+                zIndex: 55,
+                width: "100%"
             },
             className: `header left-0 top-0 flex w-full items-center ${sticky ? "dark:bg-gray-dark dark:shadow-sticky-dark fixed z-[9999] bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm transition" : "absolute bg-transparent"}`,
             children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
@@ -159,6 +164,9 @@ const HeaderMarketPlace = ({ cartItems, setCart })=>{
                             onClick: ()=>router.push("/signin"),
                             children: [
                                 /*#__PURE__*/ jsx_runtime_.jsx((IonIcon_default()), {
+                                    style: {
+                                        fontSize: "1.2rem"
+                                    },
                                     name: "person-outline"
                                 }),
                                 /*#__PURE__*/ jsx_runtime_.jsx("p", {
@@ -317,23 +325,45 @@ const HeaderMarketPlace = ({ cartItems, setCart })=>{
                                     })
                                 ]
                             }),
-                            children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                            children: /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                 className: "cart cartResponsive",
                                 style: {
-                                    minWidth: "130px"
+                                    marginLeft: "1rem",
+                                    marginRight: "1rem"
                                 },
                                 onClick: ()=>setIsPopoverOpen(!isPopoverOpen),
-                                children: [
-                                    /*#__PURE__*/ jsx_runtime_.jsx((IonIcon_default()), {
-                                        name: "cart-outline"
-                                    }),
-                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {
-                                        children: [
-                                            "Mi Carrito",
-                                            " (" + (cartItems?.length ?? 0) + ")"
-                                        ]
-                                    })
-                                ]
+                                children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                    style: {
+                                        position: "relative",
+                                        width: "max-content"
+                                    },
+                                    children: [
+                                        /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                            style: {
+                                                position: "absolute",
+                                                right: "-.5rem",
+                                                top: "-.5rem",
+                                                fontSize: ".85rem",
+                                                borderRadius: "100%",
+                                                background: "rgba(0,0,0, 0.1)",
+                                                width: "1.2rem",
+                                                height: "1.2rem",
+                                                fontWeight: "500",
+                                                color: "#3662E3"
+                                            },
+                                            children: " " + (cartItems?.length ?? 0) + " "
+                                        }),
+                                        /*#__PURE__*/ jsx_runtime_.jsx((IonIcon_default()), {
+                                            style: {
+                                                fontSize: "1.2rem"
+                                            },
+                                            name: "cart-outline"
+                                        }),
+                                        /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                                            children: "Carrito"
+                                        })
+                                    ]
+                                })
                             })
                         })
                     ]

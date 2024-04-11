@@ -34,22 +34,19 @@
     border: 1px solid #3662E3;
 }
 .cart{
-    width: 100px;
     text-align: center;
     cursor: pointer;
 }
 .cart *{
-    font-size: 1.5rem;
     color: grey;
 }
 .cart p{
-    font-size:  .9rem;
     color: grey;
 }
 
 @media screen and (max-width: 720px) {
     .input-search{
-        
+        width: 100% !important;
         margin-right: 1rem;
     }
     .cart.cartResponsive{

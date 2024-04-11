@@ -4,7 +4,6 @@
     padding: 2rem;
     background-size: 100%;
 }
-
 .background h1{
     font-size: 2rem;
     color: white;
@@ -18,12 +17,11 @@
     padding-right: 2rem;
     background-color: white;
     color: #3662E3;
-    margin: 5rem;
+    margin-top: 5rem !important;
     border-radius: .3rem;
 }
 @media screen and (max-width: 720px) {
     .background{
         margin-top: 5rem;
     }
-    
 }

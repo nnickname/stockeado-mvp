@@ -32,6 +32,10 @@
         width: 100% !important;
     }
     .viewitem{
+        max-width: 100% !important;
         width: 100% !important;
+        margin: 0px !important;
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
     }
 }

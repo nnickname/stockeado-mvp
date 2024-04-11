@@ -63,9 +63,9 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
     }
   }
   return (
-    <>
+    <div style={{zIndex: 55, width: '100%'}}>
       <header
-        style={{zIndex: 55}}
+        style={{zIndex: 55, width: '100%'}}
         className={`header left-0 top-0 flex w-full items-center ${
           sticky
             ? "dark:bg-gray-dark dark:shadow-sticky-dark fixed z-[9999] bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm transition"
@@ -106,7 +106,7 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
 
             </div>
             <div className="cart cartResponsive" onClick={() => router.push('/signin')}>
-                <IonIcon name="person-outline"/>
+                <IonIcon style={{fontSize: '1.2rem'}} name="person-outline"/>
                 <p>Cuenta</p>
             </div>
             <Popover
@@ -173,9 +173,25 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
                 }
                     >
                     
-                    <div className="cart cartResponsive" style={{minWidth: '130px'}} onClick={() => setIsPopoverOpen(!isPopoverOpen)}>
-                        <IonIcon name="cart-outline"/>
-                        <p>Mi Carrito{' (' + (cartItems?.length ?? 0) + ')'}</p>
+                    <div className="cart cartResponsive" style={{marginLeft: '1rem', marginRight: '1rem'}} onClick={() => setIsPopoverOpen(!isPopoverOpen)}>
+                        <div style={{position: 'relative', width: 'max-content'}}>
+                          <div style={{
+                            position: 'absolute',
+                            right: '-.5rem',
+                            top: '-.5rem',
+                            fontSize: '.85rem',
+                            borderRadius: '100%',
+                            background: 'rgba(0,0,0, 0.1)', 
+                            width: '1.2rem',
+                            height: '1.2rem',
+                            fontWeight: '500',
+                            color: '#3662E3'
+                          }}>
+                          {' ' + (cartItems?.length ?? 0) + ' '}
+                          </div>
+                          <IonIcon style={{fontSize: '1.2rem'}} name="cart-outline"/>
+                          <p>Carrito</p>
+                        </div>
                     </div>
               </Popover>
               
@@ -184,7 +200,7 @@ const HeaderMarketPlace: FunctionComponent<HeaderMarketPlaceProps> = ({cartItems
           </div>
         </div>
       </header>
-    </>
+    </div>
   );
 };
 

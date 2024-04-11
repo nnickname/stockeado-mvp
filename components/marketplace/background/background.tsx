@@ -12,13 +12,10 @@ const BackgroundImage = () => {
     const [open, setOpen] = useState(false);
     return <div>
         <div className="background" style={{backgroundImage: `url(${backgroundImage.src})`,}}>
-                <div style={{zIndex: 99}}>
+                <div style={{zIndex: 99, paddingBottom: '2rem'}}>
                     <h1> ¿No encuentras lo que necesitas?</h1>
-                    <p>Ingresa una solicitud de cotización y recibe ofertas personalizadas.</p>
-                    <div style={{margin: '2rem'}}>
-                      <Link href="https://api.whatsapp.com/send?phone=+51941531016&text=¡Hola! Necesito una cotización. Marca, modelo y año del vehiculo: Placa: Producto: Original/Alternativo:" target='_blank' onClick={() => setOpen(true)}>Ingresar solicitud</Link>
-
-                    </div>
+                    <p style={{marginBottom: '4rem'}}>Ingresa una solicitud de cotización y recibe ofertas personalizadas.</p>
+                    <a href="https://api.whatsapp.com/send?phone=+51941531016&text=¡Hola! Necesito una cotización. Marca, modelo y año del vehiculo: Placa: Producto: Original/Alternativo:" target='_blank' onClick={() => setOpen(true)}>Ingresar solicitud</a>
                 </div>
             </div>
 

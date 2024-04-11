@@ -20,12 +20,8 @@ var jsx_runtime_ = __webpack_require__(56786);
 var marketplace_background = __webpack_require__(2032);
 // EXTERNAL MODULE: external "next/dist/compiled/react"
 var react_ = __webpack_require__(18038);
-// EXTERNAL MODULE: ./node_modules/next/link.js
-var next_link = __webpack_require__(11440);
-var link_default = /*#__PURE__*/__webpack_require__.n(next_link);
 ;// CONCATENATED MODULE: ./components/marketplace/background/background.tsx
 /* __next_internal_client_entry_do_not_use__ default auto */ 
-
 
 
 
@@ -39,25 +35,24 @@ const BackgroundImage = ()=>{
             },
             children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                 style: {
-                    zIndex: 99
+                    zIndex: 99,
+                    paddingBottom: "2rem"
                 },
                 children: [
                     /*#__PURE__*/ jsx_runtime_.jsx("h1", {
                         children: " \xbfNo encuentras lo que necesitas?"
                     }),
                     /*#__PURE__*/ jsx_runtime_.jsx("p", {
+                        style: {
+                            marginBottom: "4rem"
+                        },
                         children: "Ingresa una solicitud de cotizaci\xf3n y recibe ofertas personalizadas."
                     }),
-                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                        style: {
-                            margin: "2rem"
-                        },
-                        children: /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
-                            href: "https://api.whatsapp.com/send?phone=+51941531016&text=\xa1Hola! Necesito una cotizaci\xf3n. Marca, modelo y a\xf1o del vehiculo: Placa: Producto: Original/Alternativo:",
-                            target: "_blank",
-                            onClick: ()=>setOpen(true),
-                            children: "Ingresar solicitud"
-                        })
+                    /*#__PURE__*/ jsx_runtime_.jsx("a", {
+                        href: "https://api.whatsapp.com/send?phone=+51941531016&text=\xa1Hola! Necesito una cotizaci\xf3n. Marca, modelo y a\xf1o del vehiculo: Placa: Producto: Original/Alternativo:",
+                        target: "_blank",
+                        onClick: ()=>setOpen(true),
+                        children: "Ingresar solicitud"
                     })
                 ]
             })
