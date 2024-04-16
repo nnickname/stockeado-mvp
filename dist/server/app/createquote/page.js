@@ -469,6 +469,9 @@ const CreateQuoteLayoutPage = ()=>{
             router.push("/");
             return;
         }
+        if (userr?.type !== "workshop") {
+            return router.push("/hub");
+        }
         setUser(userr);
     };
     const onChangeImageLogo = async (event)=>{
@@ -871,6 +874,13 @@ const CreateQuoteLayoutPage = ()=>{
                                                     String(e?.price)
                                                 ]
                                             }),
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                                style: {
+                                                    marginLeft: ".5rem"
+                                                },
+                                                className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
+                                                children: String(e?.timeDeliveried)
+                                            }),
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                                 style: {
                                                     display: "flex",
@@ -888,7 +898,6 @@ const CreateQuoteLayoutPage = ()=>{
                                                     }
                                                 })
                                             }),
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {}),
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {})
                                         ]
                                     })

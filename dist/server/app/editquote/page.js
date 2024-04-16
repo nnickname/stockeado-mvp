@@ -459,7 +459,7 @@ const EditQuoteLayoutPage = ()=>{
             };
             const response = await (0,_api_quotess_call__WEBPACK_IMPORTED_MODULE_11__/* .editQuote */ .Wz)(object);
             if (response !== null) {
-                router.push("/quotes");
+                window.location.reload();
             } else react_notifications__WEBPACK_IMPORTED_MODULE_10__/* .NotificationManager */ .fn.error("Ocurrio un problema", "Error");
         } else react_notifications__WEBPACK_IMPORTED_MODULE_10__/* .NotificationManager */ .fn.error("Completa los datos", "Error");
     };
@@ -474,6 +474,9 @@ const EditQuoteLayoutPage = ()=>{
         if (userr === undefined || userr === null) {
             router.push("/");
             return;
+        }
+        if (userr?.type !== "workshop") {
+            return router.push("/hub");
         }
         const quotesCast = await (0,_api_quotess_call__WEBPACK_IMPORTED_MODULE_11__/* .getQuotes */ .QR)(userr?._id);
         const urlParams = new URLSearchParams(window.location.search);
@@ -843,7 +846,6 @@ const EditQuoteLayoutPage = ()=>{
                                         style: {
                                             width: "100%",
                                             display: "flex",
-                                            justifyContent: "space-between",
                                             borderBottom: "1px solid rgba(220, 220, 220, .3)"
                                         },
                                         children: [
@@ -855,35 +857,33 @@ const EditQuoteLayoutPage = ()=>{
                                                 src: e?.image,
                                                 alt: "Product Image"
                                             }),
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+                                                style: {
+                                                    marginLeft: "1rem"
+                                                },
                                                 className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
-                                                    style: {
-                                                        marginLeft: ".5rem"
-                                                    },
-                                                    children: [
-                                                        e?.product.substring(0, 30),
-                                                        "..."
-                                                    ]
-                                                })
+                                                children: [
+                                                    e?.product.substring(0, 30),
+                                                    "..."
+                                                ]
                                             }),
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
                                                 style: {
-                                                    marginLeft: ".5rem"
+                                                    marginLeft: "auto"
                                                 },
                                                 className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
                                                 children: String(e?.provider)
                                             }),
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
                                                 style: {
-                                                    marginLeft: ".5rem"
+                                                    marginLeft: "auto"
                                                 },
                                                 className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
                                                 children: String(e?.brand)
                                             }),
                                             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
                                                 style: {
-                                                    marginLeft: ".5rem"
+                                                    marginLeft: "auto"
                                                 },
                                                 className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
                                                 children: [
@@ -891,9 +891,17 @@ const EditQuoteLayoutPage = ()=>{
                                                     String(e?.price)
                                                 ]
                                             }),
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                                style: {
+                                                    marginLeft: "auto"
+                                                },
+                                                className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
+                                                children: String(e?.timeDeliveried)
+                                            }),
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                                 style: {
                                                     display: "flex",
+                                                    marginLeft: "auto",
                                                     marginRight: "1rem"
                                                 },
                                                 children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_5___default()), {

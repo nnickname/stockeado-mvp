@@ -61,6 +61,9 @@ const CreateQuoteLayoutPage = () => {
             router.push('/');
             return;
         }
+        if(userr?.type !== 'workshop'){
+            return router.push('/hub')
+        }
         setUser(userr);
     }
     const onChangeImageLogo = async (event) => {
@@ -182,12 +185,13 @@ const CreateQuoteLayoutPage = () => {
                                         {String(e?.brand)}</p>
                                         <p style={{marginLeft: '.5rem'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
                                         s/. {String(e?.price)}</p>
+                                        <p style={{marginLeft: '.5rem'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+                                        {String(e?.timeDeliveried)}</p>
                                         <div style={{display: 'flex', marginRight: '1rem'}}>
                                             <IonIcon onClick={() => {
                                                 setQuotes(quotes?.filter((obj, indexx) => index !== indexx))
                                             }} name="trash-outline" style={{cursor: 'pointer', color: '#E43E1B', fontSize: '1.2rem'}}/>
                                         </div>
-                                        <div></div>
                                         <div></div>
                                         </div>
                                     </div>

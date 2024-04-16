@@ -525,8 +525,10 @@ const LayoutSignIn = ()=>{
                                                             if (password !== "" && email !== "") {
                                                                 react_notifications__WEBPACK_IMPORTED_MODULE_6__/* .NotificationManager */ .fn.info("Estamos validando los datos.", "Espera");
                                                                 const response = await (0,_api_userr_call__WEBPACK_IMPORTED_MODULE_4__/* .loginUser */ .pH)(email ?? "", password ?? "");
-                                                                if (response) {
-                                                                    router.push("/hub");
+                                                                if (response !== false) {
+                                                                    if (response?.type === "workshop") {
+                                                                        router.push("/quotes");
+                                                                    } else router.push("/hub");
                                                                 } else react_notifications__WEBPACK_IMPORTED_MODULE_6__/* .NotificationManager */ .fn.error("La contrase\xf1a o el email no coinciden.", "Error");
                                                             } else react_notifications__WEBPACK_IMPORTED_MODULE_6__/* .NotificationManager */ .fn.error("Completa el formulario.", "Error");
                                                         },

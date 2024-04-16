@@ -462,12 +462,12 @@ __webpack_require__.r(__webpack_exports__);
 
 function getTextState(quote) {
     if (quote.state === "Confirmed") return "Confirmado";
-    if (quote.products?.length > 0) return "Cotizado";
+    if (quote.quotes?.length > 0) return "Cotizado";
     if (quote.state === "Pending") return "Pendiente";
 }
 function geTexttColor(quote) {
     if (quote.state === "Confirmed") return "#00771B";
-    if (quote.products?.length > 0) return "#FF9017";
+    if (quote.quotes?.length > 0) return "#FF9017";
     if (quote.state === "Pending") return "#666666";
 }
 const QuoutesLayoutPage = ()=>{
@@ -570,6 +570,9 @@ const QuoutesLayoutPage = ()=>{
             router.push("/");
             return;
         }
+        if (userr?.type !== "workshop") {
+            return router.push("/hub");
+        }
         const quotesCast = await (0,_api_quotess_call__WEBPACK_IMPORTED_MODULE_11__/* .getQuotes */ .QR)(userr?._id);
         if (quotesCast !== null) {
             const finalQuotesCast = quotesCast?.map((e)=>{
@@ -578,6 +581,7 @@ const QuoutesLayoutPage = ()=>{
                     vehicle: e?.vehicle,
                     plate: e?.plate,
                     products: e?.requirements,
+                    quotes: e?.sendedQuotes,
                     date: e?.date,
                     state: e?.state ?? "Pending",
                     action: ""

@@ -117,7 +117,7 @@ const Header = () => {
                                 : "text-dark hover:text-primary dark:text-white/70 dark:hover:text-white"
                             }`}
                           >
-                            {menuItem.title}
+                            {menuItem.title} {menuItem?.path === '/workshops' ? <div><span style={{marginBottom: '.4rem', color: 'green', fontSize: '.6rem', padding: '.2rem', border: '1px solid green', borderRadius: '.2rem', marginLeft: '.2rem'}}>Nuevo</span></div>: ''}
                           </Link>
                         ) : (
                           <>

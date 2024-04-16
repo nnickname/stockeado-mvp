@@ -33,7 +33,7 @@ const LayoutSignUp = () => {
           const response = await createUser(body);
           if(response){
             NotificationManager.success('Creaste tu cuenta', 'Creada');
-            setTimeout(() => router.push('/hub'), 1500);
+            setTimeout(() => router.push('/quotes'), 1500);
           } else NotificationManager.error('Usuario ya registrado', 'Error');
         }else NotificationManager.error('Completa el formulario', 'Error');
 

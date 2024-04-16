@@ -51,7 +51,7 @@ const EditQuoteLayoutPage = () => {
                 }
                 const response = await editQuote(object);
                 if(response !== null) {
-                    router.push('/quotes')
+                    window.location.reload();
                 } else NotificationManager.error('Ocurrio un problema', 'Error');
         } else NotificationManager.error('Completa los datos', 'Error');
     }
@@ -67,8 +67,10 @@ const EditQuoteLayoutPage = () => {
             router.push('/');
             return;
         }
+        if(userr?.type !== 'workshop'){
+            return router.push('/hub')
+        }
         const quotesCast = await getQuotes(userr?._id);
-        
         const urlParams = new URLSearchParams(window.location.search);
         let id = urlParams.get('id');
         if(id !== null && id?.length > 0){
@@ -194,17 +196,19 @@ const EditQuoteLayoutPage = () => {
                         <div className="responsiveItems">
                         {quotes?.map((e, index) => {
                                     return <div style={{marginTop: '.5rem'}} key={index}>
-                                    <div style={{width: '100%', display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(220, 220, 220, .3)'}}>
+                                    <div style={{width: '100%', display: 'flex', borderBottom: '1px solid rgba(220, 220, 220, .3)'}}>
                                         <img style={{width: '105px', maxHeight: '105px'}} src={e?.image} alt='Product Image' />
-                                        <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                                        <p style={{ marginLeft: '.5rem'}}>{e?.product.substring(0, 30)}...</p></p>
-                                        <p style={{marginLeft: '.5rem'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+                                        <p style={{ marginLeft: '1rem'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+                                        {e?.product.substring(0, 30)}...</p>
+                                        <p style={{marginLeft: 'auto'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
                                         {String(e?.provider)}</p>
-                                        <p style={{marginLeft: '.5rem'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+                                        <p style={{marginLeft: 'auto'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
                                         {String(e?.brand)}</p>
-                                        <p style={{marginLeft: '.5rem'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+                                        <p style={{marginLeft: 'auto'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
                                         s/. {String(e?.price)}</p>
-                                        <div style={{display: 'flex', marginRight: '1rem'}}>
+                                        <p style={{marginLeft: 'auto'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
+                                        {String(e?.timeDeliveried)}</p>
+                                        <div style={{display: 'flex', marginLeft: 'auto', marginRight: '1rem'}}>
                                             <IonIcon onClick={() => {
                                                 setQuotes(quotes?.filter((obj, indexx) => index !== indexx))
                                             }} name="trash-outline" style={{cursor: 'pointer', color: '#E43E1B', fontSize: '1.2rem'}}/>

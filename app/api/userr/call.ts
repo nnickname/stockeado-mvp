@@ -8,7 +8,7 @@ export const loginUser = async (email: string, password: string) => {
         const response: any = await axios.post("/userr/login", {email, password}, {headers: {authorization: process.env.NEXT_PUBLIC_API_TOKEN}});
         if(response?.data?.user !== undefined){
             cookies.set('access_token', response?.data?.token, { path: '/' })
-            return true;
+            return response?.data?.user;
         } else return false;
     }
     catch(error){

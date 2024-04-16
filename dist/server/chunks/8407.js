@@ -147,10 +147,27 @@ const Header = ()=>{
                                                 className: "block lg:flex lg:space-x-12",
                                                 children: Header_menuData.map((menuItem, index)=>/*#__PURE__*/ jsx_runtime_.jsx("li", {
                                                         className: "group relative",
-                                                        children: menuItem.path ? /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
+                                                        children: menuItem.path ? /*#__PURE__*/ (0,jsx_runtime_.jsxs)((link_default()), {
                                                             href: menuItem.path,
                                                             className: `flex py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${usePathName === menuItem.path ? "text-primary dark:text-white" : "text-dark hover:text-primary dark:text-white/70 dark:hover:text-white"}`,
-                                                            children: menuItem.title
+                                                            children: [
+                                                                menuItem.title,
+                                                                " ",
+                                                                menuItem?.path === "/workshops" ? /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                                                    children: /*#__PURE__*/ jsx_runtime_.jsx("span", {
+                                                                        style: {
+                                                                            marginBottom: ".4rem",
+                                                                            color: "green",
+                                                                            fontSize: ".6rem",
+                                                                            padding: ".2rem",
+                                                                            border: "1px solid green",
+                                                                            borderRadius: ".2rem",
+                                                                            marginLeft: ".2rem"
+                                                                        },
+                                                                        children: "Nuevo"
+                                                                    })
+                                                                }) : ""
+                                                            ]
                                                         }) : /*#__PURE__*/ (0,jsx_runtime_.jsxs)(jsx_runtime_.Fragment, {
                                                             children: [
                                                                 /*#__PURE__*/ (0,jsx_runtime_.jsxs)("p", {

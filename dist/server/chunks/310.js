@@ -33,7 +33,7 @@ const loginUser = async (email, password)=>{
             cookies.set("access_token", response?.data?.token, {
                 path: "/"
             });
-            return true;
+            return response?.data?.user;
         } else return false;
     } catch (error) {
         return false;

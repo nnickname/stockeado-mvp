@@ -77,8 +77,10 @@ const LayoutSignIn = () =>{
                             if(password !== '' && email !== ''){
                               NotificationManager.info('Estamos validando los datos.', 'Espera');
                               const response: any = await loginUser(email ?? '', password ?? '');
-                              if(response){
-                                router.push('/hub');
+                              if(response !== false){
+                                if(response?.type === 'workshop'){
+                                  router.push('/quotes');
+                                } else router.push('/hub');
                               } else NotificationManager.error('La contraseña o el email no coinciden.', 'Error');
                             } else NotificationManager.error('Completa el formulario.', 'Error');
                         }} className=" flex w-full items-center justify-center rounded-sm bg-primary px-9 py-4 text-base font-medium text-white duration-300 hover:bg-primary/90">

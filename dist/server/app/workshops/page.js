@@ -470,7 +470,7 @@ const LayoutSignUp = ()=>{
                 const response = await (0,_api_userr_call__WEBPACK_IMPORTED_MODULE_5__/* .createUser */ .r4)(body);
                 if (response) {
                     react_notifications__WEBPACK_IMPORTED_MODULE_4__/* .NotificationManager */ .fn.success("Creaste tu cuenta", "Creada");
-                    setTimeout(()=>router.push("/hub"), 1500);
+                    setTimeout(()=>router.push("/quotes"), 1500);
                 } else react_notifications__WEBPACK_IMPORTED_MODULE_4__/* .NotificationManager */ .fn.error("Usuario ya registrado", "Error");
             } else react_notifications__WEBPACK_IMPORTED_MODULE_4__/* .NotificationManager */ .fn.error("Completa el formulario", "Error");
         } else react_notifications__WEBPACK_IMPORTED_MODULE_4__/* .NotificationManager */ .fn.error("Tienes que aceptar nuestros terminos y condiciones", "Error");
