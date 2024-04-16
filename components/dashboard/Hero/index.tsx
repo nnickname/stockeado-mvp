@@ -154,15 +154,16 @@ const Hero = () => {
 
 
                 </p>
+
                 <div className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-                  <button
+                  <a  href="https://api.whatsapp.com/send?phone=+51941531016&text=¡Hola! Necesito una cotización. Marca, modelo y año del vehiculo: Placa: Producto: Original/Alternativo:" target='_blank'
                     onClick={() => setOpen(true)}
                     className="rounded-sm bg-primary px-8 py-4 text-base font-semibold text-white duration-300 ease-in-out hover:bg-primary/80"              
                     style={{backgroundImage: 'linear-gradient(89deg, var(--token-dc60c65c-2692-4b09-8d77-49a86f7aedee, rgb(24, 36, 61)) /* {"name":"Azul prinicipal"} */ 0%, var(--token-1632e6e1-d1e5-427f-b435-20cb1e67f695, rgb(54, 98, 227)) /* {"name":"Azul claro"} */ 123.5068681091516%)'}}
                   
                   >
                     Enviar una solicitud
-                  </button>
+                  </a>
                   <button
                     onClick={() => router.push('/signup')}
                     className="inline-block rounded-sm bg-black px-8 py-4 text-base font-semibold text-white duration-300 ease-in-out hover:bg-black/90 dark:bg-white/10 dark:text-white dark:hover:bg-white/5"

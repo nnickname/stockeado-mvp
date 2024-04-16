@@ -322,20 +322,20 @@ const routeModule = new AppPageRouteModule({
 
 /***/ }),
 
-/***/ 1260:
+/***/ 64330:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 92684));
 Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 67248));
-Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 83304));
 Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 84671));
+Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 83304));
 Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 70363));
 Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 92271));
 Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 86496));
 Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 90507));
+Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 48407));
 Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 93147));
-Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 32242));
-Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 48407))
+Promise.resolve(/* import() eager */).then(__webpack_require__.bind(__webpack_require__, 32242))
 
 /***/ }),
 
@@ -742,7 +742,9 @@ const Hero = ()=>{
                                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                         className: "flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0",
                                         children: [
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("a", {
+                                                href: "https://api.whatsapp.com/send?phone=+51941531016&text=\xa1Hola! Necesito una cotizaci\xf3n. Marca, modelo y a\xf1o del vehiculo: Placa: Producto: Original/Alternativo:",
+                                                target: "_blank",
                                                 onClick: ()=>setOpen(true),
                                                 className: "rounded-sm bg-primary px-8 py-4 text-base font-semibold text-white duration-300 ease-in-out hover:bg-primary/80",
                                                 style: {
