@@ -1523,6 +1523,9 @@ const LayoutHubInventoryPage = ()=>{
         if (userr === undefined || user === null) {
             router.push("/");
         }
+        if (userr?.type === "workshop") {
+            router.push("/quotes");
+        }
         setUser(userr);
         const ordersCast = await (0,_api_orderss_call__WEBPACK_IMPORTED_MODULE_17__/* .getOrders */ .AU)(userr?._id);
         setOrderData(ordersCast);
@@ -1661,7 +1664,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,9816,4997,8284,7654,894,6127,9636,4328,310,4892,8088,627,8773], () => (__webpack_exec__(91694)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,4185,954,9816,4997,8284,7654,6120,120,9636,4328,310,8088,9198,627,8773], () => (__webpack_exec__(91694)));
 module.exports = __webpack_exports__;
 
 })();

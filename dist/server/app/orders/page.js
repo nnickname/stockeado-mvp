@@ -724,6 +724,7 @@ const EditModalOrder = ({ order })=>{
                     overflowX: "scroll"
                 },
                 children: order?.items?.map((e, index)=>{
+                    const nameString = e?.item?.name + " " + e?.item?.brand;
                     return /*#__PURE__*/ jsx_runtime_.jsx("div", {
                         style: {
                             marginTop: ".5rem"
@@ -752,9 +753,8 @@ const EditModalOrder = ({ order })=>{
                                             marginLeft: ".5rem"
                                         },
                                         children: [
-                                            e?.item?.name + " ",
-                                            "  ",
-                                            e?.item?.model
+                                            nameString.substring(0, 30),
+                                            "..."
                                         ]
                                     })
                                 }),
@@ -972,10 +972,6 @@ const OrdersLayoutPage = ()=>{
                     },
                     children: [
                         /*#__PURE__*/ jsx_runtime_.jsx("div", {
-                            onClick: ()=>{
-                            //setItemSelected(item._id);
-                            //setOpenEdit(true);
-                            },
                             style: {
                                 cursor: "pointer",
                                 marginRight: ".5rem"
@@ -993,7 +989,7 @@ const OrdersLayoutPage = ()=>{
                                 })
                             })
                         }),
-                        /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                        user?.type === "workshop" ? /*#__PURE__*/ jsx_runtime_.jsx(jsx_runtime_.Fragment, {}) : /*#__PURE__*/ jsx_runtime_.jsx("div", {
                             onClick: ()=>{
                                 setOrderSelected(item);
                                 setOpen(true);
@@ -1012,12 +1008,14 @@ const OrdersLayoutPage = ()=>{
     ];
     const toUser = async ()=>{
         const userr = await (0,call/* getUser */.PR)();
-        console.log(user);
         if (userr === undefined || userr === null) {
             router.push("/");
             return;
         }
-        const ordersCast = await (0,orderss_call/* getOrders */.AU)(userr?._id);
+        var ordersCast;
+        if (userr?.type === "workshop") {
+            ordersCast = await (0,orderss_call/* getOrdersWorkshop */.XU)(userr?.email);
+        } else ordersCast = await (0,orderss_call/* getOrders */.AU)(userr?._id);
         setOrderData(ordersCast);
         setUser(userr);
     };
@@ -1063,7 +1061,7 @@ const OrdersLayoutPage = ()=>{
                     },
                     children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                         children: [
-                            /*#__PURE__*/ jsx_runtime_.jsx(sellresume/* default */.Z, {
+                            user?.type === "workshop" ? /*#__PURE__*/ jsx_runtime_.jsx(jsx_runtime_.Fragment, {}) : /*#__PURE__*/ jsx_runtime_.jsx(sellresume/* default */.Z, {
                                 orders: ordersData,
                                 user: user
                             }),
@@ -1095,18 +1093,21 @@ const OrdersLayoutPage = ()=>{
                                             })
                                         ]
                                     }),
-                                    /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
+                                    user?.type === "workshop" ? /*#__PURE__*/ jsx_runtime_.jsx(jsx_runtime_.Fragment, {}) : /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                                         className: "input-search",
                                         style: {
                                             marginTop: "1rem",
                                             marginBottom: "1rem"
                                         },
                                         children: [
-                                            /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                                            /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                                                 className: "iconinput",
-                                                children: /*#__PURE__*/ jsx_runtime_.jsx((IonIcon_default()), {
-                                                    name: "search-outline"
-                                                })
+                                                children: [
+                                                    /*#__PURE__*/ jsx_runtime_.jsx((IonIcon_default()), {
+                                                        name: "search-outline"
+                                                    }),
+                                                    "|"
+                                                ]
                                             }),
                                             /*#__PURE__*/ jsx_runtime_.jsx("input", {
                                                 placeholder: "Busca por nombre de cliente",
@@ -1277,7 +1278,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,9816,4997,3800,8284,7654,894,5655,9636,4328,1142,310,4892,8088,5174,1270], () => (__webpack_exec__(18688)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,4185,954,9816,4997,8284,3800,7654,6120,5655,9636,4328,310,1142,8088,9198,3848,1270], () => (__webpack_exec__(18688)));
 module.exports = __webpack_exports__;
 
 })();

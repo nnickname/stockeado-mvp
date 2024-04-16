@@ -442,8 +442,6 @@ const LayoutConfigurationPage = ()=>{
             router.push("/signin");
         }
         setUser(userr);
-        setImage(user?.image ?? "");
-        setImageLogo(user?.imageLogo ?? "");
     };
     (0,react_.useEffect)(()=>{
         toUser();
@@ -451,13 +449,14 @@ const LayoutConfigurationPage = ()=>{
     const validateForm = async ()=>{
         const body = {
             _id: user?._id,
-            image: image ?? user?.image,
-            imageLogo: imageLogo ?? user?.imageLogo,
+            image: image !== "" ? image : user?.image,
+            imageLogo: imageLogo !== "" ? imageLogo : user?.imageLogo,
             direction: direction ?? user?.direction,
             name: name ?? user?.name,
             lastName: lastName ?? user?.lastname,
             nameShop: nameShop ?? user?.nameShop,
-            phone: phone ?? user?.phone
+            phone: phone ?? user?.phone,
+            type: user?.type
         };
         const response = await (0,call/* editUser */.uz)(body);
         if (response) window.location.reload();
@@ -502,7 +501,7 @@ const LayoutConfigurationPage = ()=>{
             frameContennt: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("div", {
                 className: "configurationContent",
                 children: [
-                    /*#__PURE__*/ jsx_runtime_.jsx("div", {
+                    user?.type === "workshop" ? /*#__PURE__*/ jsx_runtime_.jsx("div", {}) : /*#__PURE__*/ jsx_runtime_.jsx("div", {
                         className: "banner",
                         children: /*#__PURE__*/ (0,jsx_runtime_.jsxs)("label", {
                             htmlFor: "imageBanner",
@@ -513,11 +512,11 @@ const LayoutConfigurationPage = ()=>{
                             },
                             children: [
                                 /*#__PURE__*/ jsx_runtime_.jsx("img", {
-                                    src: image !== "" ? image : background2.src,
+                                    src: image !== "" ? image : user?.image === "" ? background2.src : user?.image,
                                     alt: "Banner",
                                     style: {
-                                        marginRight: "auto",
-                                        marginLeft: "auto"
+                                        width: "100%",
+                                        maxHeight: "200px"
                                     }
                                 }),
                                 /*#__PURE__*/ jsx_runtime_.jsx("input", {
@@ -552,7 +551,7 @@ const LayoutConfigurationPage = ()=>{
                                             marginRight: "auto",
                                             marginLeft: "auto"
                                         },
-                                        src: imageLogo !== "" ? imageLogo : blueimage/* default */.Z.src,
+                                        src: imageLogo !== "" ? imageLogo : user?.imageLogo === "" ? blueimage/* default */.Z.src : user?.imageLogo,
                                         alt: "Logo"
                                     }),
                                     /*#__PURE__*/ jsx_runtime_.jsx("input", {
@@ -723,17 +722,6 @@ const Page = ()=>{
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Page);
 
-
-/***/ }),
-
-/***/ 57286:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"src":"/_next/static/media/logopreferente.bbc72056.png","height":200,"width":640,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAADCAMAAACZFr56AAAAHlBMVEUrQY0bK0ssU7ktSaUdMWEzXNUYJDsYIzwqS6wnQoxrmA7DAAAACnRSTlMEGSAOboSRcmx7+e+bqwAAAAlwSFlzAAALEwAACxMBAJqcGAAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAgSURBVHicY2BkYGBmAGE2dhYWTg5WVgZGRkZGJiYmJgADaQBE56VQMAAAAABJRU5ErkJggg==","blurWidth":8,"blurHeight":3});
 
 /***/ }),
 

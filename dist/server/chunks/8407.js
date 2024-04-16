@@ -31,7 +31,7 @@ const menuData = [
     {
         id: 1,
         title: "Para talleres",
-        path: "/marketplace",
+        path: "/workshops",
         newTab: true
     },
     {
@@ -43,7 +43,7 @@ const menuData = [
     {
         id: 3,
         title: "Para proveedores",
-        path: "/signup",
+        path: "/providers",
         newTab: true
     }
 ];
@@ -193,7 +193,7 @@ const Header = ()=>{
                                     className: "flex items-center justify-end pr-16 lg:pr-0",
                                     children: [
                                         /*#__PURE__*/ jsx_runtime_.jsx((link_default()), {
-                                            href: "/signup",
+                                            href: "/workshops",
                                             className: "hidden px-7 py-3 text-base font-medium text-dark hover:opacity-70 dark:text-white md:block",
                                             style: {
                                                 color: "white",

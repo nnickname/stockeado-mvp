@@ -7,7 +7,6 @@ import Users from '../../../../models/userModel';
 import { headers } from 'next/headers';
 import User from "../../../../models/userModel";
 import middlewareApi from "../../midd/_middleware.api";
-const statictoken = 'eyJhbGciOiJIUz';
 export async function GET (req: Request | any, res: Response, next: any){
   try{
     if(middlewareApi()){
@@ -41,7 +40,7 @@ export async function POST (req: Request,
               const token = jwt.sign({ _id: account?._id.toString() }, process.env.JWT_KEY, {
                 expiresIn: '1 days',
               });
-              return NextResponse.json({message: "Account loggin", user: account, token, external_token: statictoken});
+              return NextResponse.json({message: "Account loggin", user: account, token});
             } else return NextResponse.json({message: "Invalid password"});
           } else return NextResponse.json({message: "Account not found", account});
         }

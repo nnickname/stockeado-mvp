@@ -32,8 +32,6 @@ const LayoutConfigurationPage = () =>{
             router.push('/signin');
         }
         setUser(userr);
-        setImage(user?.image ?? '');
-        setImageLogo(user?.imageLogo ?? '');
 
     }
     useEffect(() => {
@@ -42,13 +40,14 @@ const LayoutConfigurationPage = () =>{
     const validateForm = async () => {
         const body = {
             _id: user?._id,
-            image: image ?? user?.image,
-            imageLogo: imageLogo ?? user?.imageLogo,
+            image: image !== '' ? image : user?.image,
+            imageLogo: imageLogo !== '' ? imageLogo : user?.imageLogo,
             direction: direction ?? user?.direction,
             name: name ?? user?.name,
             lastName: lastName ?? user?.lastname,
             nameShop: nameShop ?? user?.nameShop,
-            phone: phone ?? user?.phone
+            phone: phone ?? user?.phone,
+            type: user?.type
         };
         const response = await editUser(body);
         if(response) window.location.reload();
@@ -80,17 +79,20 @@ const LayoutConfigurationPage = () =>{
             
     <SideBarComponent user={user} route='configuration' frameContennt={
         <div className="configurationContent">
+            {user?.type === 'workshop' ? <div></div> :
             <div className="banner">
+                
                 <label  htmlFor="imageBanner" style={{cursor: 'pointer', width: '100%', padding: '1rem'}}>
-                    <img src={image !== '' ? image : backgroundImage.src} alt="Banner" style={{marginRight: 'auto', marginLeft: 'auto'}}/>
+                    <img src={image !== '' ? image : (user?.image === '' ? backgroundImage.src : user?.image)} alt="Banner" style={{width: '100%', maxHeight: '200px'}}/>
                     <input accept="image" id="imageBanner" onChange={onChangeImage} type='file' placeholder='Subir archivo' style={{
                         visibility: 'hidden', display: 'none'}}/>
                 </label>
                 
             </div>
+            }
             <div className="container">
                 <label  htmlFor="imageLogo" style={{cursor: 'pointer'}}>
-                    <img style={{width: '150px', height: '150px', borderRadius: '100%', padding: '1rem', marginRight: 'auto', marginLeft: 'auto'}} src={imageLogo !== '' ? imageLogo : blueImage.src } alt="Logo"/>
+                    <img style={{width: '150px', height: '150px', borderRadius: '100%', padding: '1rem', marginRight: 'auto', marginLeft: 'auto'}} src={imageLogo !== '' ? imageLogo : (user?.imageLogo === '' ? blueImage.src : user?.imageLogo)} alt="Logo"/>
                     <input accept="image" id="imageLogo" onChange={onChangeImageLogo} type='file' placeholder='Subir archivo' style={{
                         visibility: 'hidden', display: 'none'}}/>
                 </label>

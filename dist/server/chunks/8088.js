@@ -86,30 +86,10 @@ const SideBarComponent = ({ user, frameContennt, route })=>{
                                     marginTop: "3rem"
                                 }
                             }),
-                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                className: "list",
-                                onClick: ()=>router.push("/hub"),
-                                children: [
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_5___default()), {
-                                        style: {
-                                            color: route === "dashboard" ? "#1570EF" : "black"
-                                        },
-                                        className: "icon",
-                                        name: "home-outline"
-                                    }),
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                        style: {
-                                            color: route === "dashboard" ? "#1570EF" : "black"
-                                        },
-                                        className: "text",
-                                        children: "Dashboard"
-                                    })
-                                ]
-                            }),
-                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                            user?.type === "workshop" ? /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                                 className: "list",
                                 onClick: ()=>{
-                                    router.push("/inventory", {});
+                                    router.push("/quotes");
                                     setTimeout(()=>{
                                         window.location.reload();
                                     }, 1500);
@@ -117,17 +97,65 @@ const SideBarComponent = ({ user, frameContennt, route })=>{
                                 children: [
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_5___default()), {
                                         style: {
-                                            color: route === "inventory" ? "#1570EF" : "black"
+                                            color: route === "quoutes" ? "#1570EF" : "#25d366"
                                         },
                                         className: "icon",
-                                        name: "cart-outline"
+                                        name: "cash-outline"
                                     }),
                                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
                                         style: {
-                                            color: route === "inventory" ? "#1570EF" : "black"
+                                            color: route === "quotes" ? "#1570EF" : "black"
                                         },
                                         className: "text",
-                                        children: "Inventario Web"
+                                        children: "Cotizaciones"
+                                    })
+                                ]
+                            }) : /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                children: [
+                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                        className: "list",
+                                        onClick: ()=>router.push("/hub"),
+                                        children: [
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_5___default()), {
+                                                style: {
+                                                    color: route === "dashboard" ? "#1570EF" : "black"
+                                                },
+                                                className: "icon",
+                                                name: "home-outline"
+                                            }),
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                                style: {
+                                                    color: route === "dashboard" ? "#1570EF" : "black"
+                                                },
+                                                className: "text",
+                                                children: "Dashboard"
+                                            })
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                        className: "list",
+                                        onClick: ()=>{
+                                            router.push("/inventory", {});
+                                            setTimeout(()=>{
+                                                window.location.reload();
+                                            }, 1500);
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_5___default()), {
+                                                style: {
+                                                    color: route === "inventory" ? "#1570EF" : "black"
+                                                },
+                                                className: "icon",
+                                                name: "cart-outline"
+                                            }),
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                                                style: {
+                                                    color: route === "inventory" ? "#1570EF" : "black"
+                                                },
+                                                className: "text",
+                                                children: "Inventario Web"
+                                            })
+                                        ]
                                     })
                                 ]
                             }),
@@ -236,6 +264,17 @@ const SideBarComponent = ({ user, frameContennt, route })=>{
 /* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"src":"/_next/static/media/blueimage.a34531f7.png","height":194,"width":259,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAGCAMAAADJ2y/JAAAAA1BMVEUAAP+KeNJXAAAACXBIWXMAAAsTAAALEwEAmpwYAAAADElEQVR4nGNgIAcAAAA2AAG2dLktAAAAAElFTkSuQmCC","blurWidth":8,"blurHeight":6});
+
+/***/ }),
+
+/***/ 57286:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"src":"/_next/static/media/logopreferente.bbc72056.png","height":200,"width":640,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAADCAMAAACZFr56AAAAHlBMVEUrQY0bK0ssU7ktSaUdMWEzXNUYJDsYIzwqS6wnQoxrmA7DAAAACnRSTlMEGSAOboSRcmx7+e+bqwAAAAlwSFlzAAALEwAACxMBAJqcGAAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAgSURBVHicY2BkYGBmAGE2dhYWTg5WVgZGRkZGJiYmJgADaQBE56VQMAAAAABJRU5ErkJggg==","blurWidth":8,"blurHeight":3});
 
 /***/ }),
 

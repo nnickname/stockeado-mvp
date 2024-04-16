@@ -53,8 +53,10 @@ export const editUser = async (body: Object) => {
 export const createUser = async (body: Object) => {
     
     try{
+        const cookies = new Cookie();
         const response: any = await axios.post("/userr/edit/create", {...body}, {headers: {authorization: process.env.NEXT_PUBLIC_API_TOKEN}});
         if(response?.data?.user !== undefined && response?.data?.user !== null){
+            cookies.set('access_token', response?.data?.token, { path: '/' })
             return true;
         } else return false;
     }

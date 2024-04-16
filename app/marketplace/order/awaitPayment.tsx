@@ -79,7 +79,7 @@ const AwaitPaymentView: FunctionComponent<StepsOfPaymentType> = ({cartItems, ord
                     {cartItems?.length === 0 ? <p style={{textAlign: 'center', color: 'grey'}}>Todavia no añadiste nada</p> : ''}
 
                     {cartItems?.map((e, index) => {
-                    const nameString = e?.item?.name +  ' ' + e?.item?.model;
+                    const nameString = e?.item?.name +  ' ' + e?.item?.brand;
                     return <div style={{marginTop: '.5rem'}} key={index}>
                         <div style={{width: '100%', display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(220, 220, 220, .3)'}}>
                             <img style={{width: '85px', maxHeight: '85px'}} src={e?.item?.image} alt='Product Image' />

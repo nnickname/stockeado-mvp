@@ -740,7 +740,7 @@ const AwaitPaymentView = ({ cartItems, order })=>{
                                             children: "Todavia no a\xf1adiste nada"
                                         }) : "",
                                         cartItems?.map((e, index)=>{
-                                            const nameString = e?.item?.name + " " + e?.item?.model;
+                                            const nameString = e?.item?.name + " " + e?.item?.brand;
                                             return /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                                 style: {
                                                     marginTop: ".5rem"
@@ -1201,6 +1201,7 @@ const ConfirmedPaymentView = ({ cartItems, order })=>{
                                     /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                         className: "responsiveItems",
                                         children: cartItems?.map((e, index)=>{
+                                            const nameString = e?.item?.name + " " + e?.item?.brand;
                                             return /*#__PURE__*/ jsx_runtime_.jsx("div", {
                                                 style: {
                                                     marginTop: ".5rem"
@@ -1229,9 +1230,8 @@ const ConfirmedPaymentView = ({ cartItems, order })=>{
                                                                     marginLeft: ".5rem"
                                                                 },
                                                                 children: [
-                                                                    e?.item?.name + " ",
-                                                                    "  ",
-                                                                    e?.item?.model
+                                                                    nameString.substring(0, 30),
+                                                                    "..."
                                                                 ]
                                                             })
                                                         }),
@@ -1503,6 +1503,17 @@ const Page = ()=>{
 
 /***/ }),
 
+/***/ 57286:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"src":"/_next/static/media/logopreferente.bbc72056.png","height":200,"width":640,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAADCAMAAACZFr56AAAAHlBMVEUrQY0bK0ssU7ktSaUdMWEzXNUYJDsYIzwqS6wnQoxrmA7DAAAACnRSTlMEGSAOboSRcmx7+e+bqwAAAAlwSFlzAAALEwAACxMBAJqcGAAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAgSURBVHicY2BkYGBmAGE2dhYWTg5WVgZGRkZGJiYmJgADaQBE56VQMAAAAABJRU5ErkJggg==","blurWidth":8,"blurHeight":3});
+
+/***/ }),
+
 /***/ 34355:
 /***/ (() => {
 
@@ -1529,13 +1540,6 @@ const Page = ()=>{
 
 
 
-/***/ }),
-
-/***/ 42055:
-/***/ (() => {
-
-
-
 /***/ })
 
 };
@@ -1545,7 +1549,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,9816,4997,3800,7654,9636,4328,507,1142,4892,5174], () => (__webpack_exec__(13165)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,4185,954,9816,4997,3800,7654,9636,4328,507,1142,9198,3848], () => (__webpack_exec__(13165)));
 module.exports = __webpack_exports__;
 
 })();

@@ -427,6 +427,9 @@ const LayouHubDashboardPage = ()=>{
         if (userr === undefined || userr === null) {
             router.push("/signin");
         }
+        if (userr?.type === "workshop") {
+            router.push("/quotes");
+        }
         const ordersCast = await (0,_api_orderss_call__WEBPACK_IMPORTED_MODULE_8__/* .getOrders */ .AU)(userr?._id);
         setOrderData(ordersCast);
         setUser(userr);
@@ -536,7 +539,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,4185,9816,4997,8284,9636,4328,310,4892,8088,627,1270,8773], () => (__webpack_exec__(59413)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,4185,9816,4997,8284,9636,4328,310,8088,9198,627,1270,8773], () => (__webpack_exec__(59413)));
 module.exports = __webpack_exports__;
 
 })();

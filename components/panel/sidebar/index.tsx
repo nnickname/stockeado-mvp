@@ -34,20 +34,33 @@ const SideBarComponent: FunctionComponent<SideBarProps> = ({user, frameContennt,
 
             <h1 className="title">{user?.nameShop}</h1>
             <div style={{marginTop: '3rem'}}></div>
-
-            <div className="list" onClick={() => router.push('/hub')}>
-                <IonIcon style={{color: route === 'dashboard' ? '#1570EF' : 'black'}} className="icon" name="home-outline" />
-                <p style={{color: route === 'dashboard' ? '#1570EF' : 'black'}} className="text">Dashboard</p>
-            </div>
-            <div className="list" onClick={() => {
-                router.push('/inventory', {});
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1500);
+            {user?.type === 'workshop' ? 
+                <div className="list" onClick={() => {
+                    router.push('/quotes');
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1500);
                 }}>
-                <IonIcon style={{color: route === 'inventory' ? '#1570EF' : 'black'}} className="icon" name="cart-outline" />
-                <p style={{color: route === 'inventory' ? '#1570EF' : 'black'}} className="text">Inventario Web</p>
-            </div>
+                    <IonIcon style={{color: route === 'quoutes' ? '#1570EF' : '#25d366'}} className="icon" name="cash-outline" />
+                    <p style={{color: route === 'quotes' ? '#1570EF' : 'black'}} className="text">Cotizaciones</p>
+                </div> 
+            :
+                <div>
+                    <div className="list" onClick={() => router.push('/hub')}>
+                        <IonIcon style={{color: route === 'dashboard' ? '#1570EF' : 'black'}} className="icon" name="home-outline" />
+                        <p style={{color: route === 'dashboard' ? '#1570EF' : 'black'}} className="text">Dashboard</p>
+                    </div>
+                    <div className="list" onClick={() => {
+                        router.push('/inventory', {});
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1500);
+                        }}>
+                        <IonIcon style={{color: route === 'inventory' ? '#1570EF' : 'black'}} className="icon" name="cart-outline" />
+                        <p style={{color: route === 'inventory' ? '#1570EF' : 'black'}} className="text">Inventario Web</p>
+                    </div>
+                </div>
+            }
             <div className="list">
                 <IonIcon style={{color: route === 'request' ? '#1570EF' : 'black'}} className="icon" name="person-outline" />
                 <p style={{color: route === 'request' ? '#1570EF' : 'black'}} className="text">Solicitudes</p>
@@ -65,7 +78,6 @@ const SideBarComponent: FunctionComponent<SideBarProps> = ({user, frameContennt,
             <div className="list logout" onClick={async () => {
                 cookies.remove('access_token');
                 router.push('/signin');
-                
             }}>
                 <IonIcon className="icon" name="log-out-outline" />
                 <p className="text">Cerrar sesión</p>

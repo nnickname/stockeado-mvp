@@ -86,6 +86,7 @@ const editUser = async (body)=>{
 };
 const createUser = async (body)=>{
     try {
+        const cookies = new (universal_cookie__WEBPACK_IMPORTED_MODULE_1___default())();
         const response = await _call__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z.post("/userr/edit/create", {
             ...body
         }, {
@@ -94,6 +95,9 @@ const createUser = async (body)=>{
             }
         });
         if (response?.data?.user !== undefined && response?.data?.user !== null) {
+            cookies.set("access_token", response?.data?.token, {
+                path: "/"
+            });
             return true;
         } else return false;
     } catch (error) {

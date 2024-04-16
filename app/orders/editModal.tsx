@@ -77,11 +77,12 @@ const EditModalOrder: FunctionComponent<editModalProps> = ({order}) => {
         </p>
         <div style={{overflowX: 'scroll'}}>
         {order?.items?.map((e, index) => {
+            const nameString = e?.item?.name + ' ' + e?.item?.brand ;
             return <div style={{marginTop: '.5rem'}} key={index}>
                     <div style={{width: '100%', display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(220, 220, 220, .3)'}}>
                         <img style={{width: '105px', maxHeight: '105px'}} src={e?.item?.image} alt='Product Image' />
                         <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                        <p style={{minWidth: '200px', marginLeft: '.5rem'}}>{e?.item?.name + ' '}  {e?.item?.model }</p></p>
+                        <p style={{minWidth: '200px', marginLeft: '.5rem'}}>{nameString.substring(0, 30)}...</p></p>
                         <p style={{marginLeft: '.5rem'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
                            {String(e?.ammount)}</p>
                         <p  className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" style={{marginLeft: '4rem', maxWidth: '100px'}}>

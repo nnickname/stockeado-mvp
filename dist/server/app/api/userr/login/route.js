@@ -180,7 +180,6 @@ var _middleware_api = __webpack_require__(28342);
 
 
 
-const statictoken = "eyJhbGciOiJIUz";
 async function GET(req, res, next) {
     try {
         if ((0,_middleware_api/* default */.Z)()) {
@@ -226,8 +225,7 @@ async function POST(req, res) {
                     return next_response/* default */.Z.json({
                         message: "Account loggin",
                         user: account,
-                        token,
-                        external_token: statictoken
+                        token
                     });
                 } else return next_response/* default */.Z.json({
                     message: "Invalid password"
@@ -307,6 +305,15 @@ function middlewareApi() {
     */ }
 
 
+/***/ }),
+
+/***/ 40063:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+
+module.exports = __webpack_require__(74937);
+
+
 /***/ })
 
 };
@@ -316,7 +323,7 @@ function middlewareApi() {
 var __webpack_require__ = require("../../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,1835,5177,6086,6971,7486], () => (__webpack_exec__(22264)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,1835,5177,9877,6971,7486], () => (__webpack_exec__(22264)));
 module.exports = __webpack_exports__;
 
 })();

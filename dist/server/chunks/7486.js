@@ -18,55 +18,23 @@ exports.modules = {
         required: [
             true,
             "Please provide a name."
-        ],
-        maxlength: [
-            60,
-            "Name cannot be more than 60 characters"
         ]
     },
     lastname: {
-        /* The name of this pet */ type: String,
-        required: [
-            true,
-            "Please provide a lastname."
-        ],
-        maxlength: [
-            60,
-            "Name cannot be more than 60 characters"
-        ]
+        /* The name of this pet */ type: String
     },
     nameShop: {
         /* The name of this pet */ type: String,
         required: [
             true,
             "Please provide a nameShop."
-        ],
-        maxlength: [
-            60,
-            "Name cannot be more than 60 characters"
         ]
     },
     phone: {
-        type: String,
-        required: [
-            true,
-            "Please provide a Phone."
-        ],
-        maxlength: [
-            60,
-            "Name cannot be more than 60 characters"
-        ]
+        type: String
     },
     direction: {
-        type: String,
-        required: [
-            true,
-            "Please provide a direction."
-        ],
-        maxlength: [
-            60,
-            "Name cannot be more than 60 characters"
-        ]
+        type: String
     },
     email: {
         type: String,
@@ -98,17 +66,16 @@ exports.modules = {
         ]
     },
     image: {
-        type: String,
-        required: [
-            true,
-            "Please provide the image"
-        ]
+        type: String
     },
     imageLogo: {
+        type: String
+    },
+    type: {
         type: String,
-        required: [
+        requried: [
             true,
-            "Please provide the imageBanner"
+            "Please prove a type"
         ]
     }
 });

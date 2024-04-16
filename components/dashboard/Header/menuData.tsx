@@ -4,7 +4,7 @@ const menuData: Menu[] = [
   {
     id: 1,
     title: "Para talleres",
-    path: "/marketplace",
+    path: "/workshops",
     newTab: true,
   },
   {
@@ -16,7 +16,7 @@ const menuData: Menu[] = [
   {
     id: 3,
     title: "Para proveedores",
-    path: "/signup",
+    path: "/providers",
     newTab: true,
   },
   

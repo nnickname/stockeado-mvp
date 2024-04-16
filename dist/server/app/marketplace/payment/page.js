@@ -486,7 +486,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_navigation__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(next_navigation__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _components_dashboard_Footer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(90507);
 /* harmony import */ var _app_api_email_call__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(44410);
+/* harmony import */ var _app_api_userr_call__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(310);
 /* __next_internal_client_entry_do_not_use__ default auto */ 
+
 
 
 
@@ -550,9 +552,20 @@ const LayoutMarketPlacePayment = ()=>{
             } else react_notifications__WEBPACK_IMPORTED_MODULE_6__/* .NotificationManager */ .fn.error("No tienes elementos en el carrito.", "Error");
         } else react_notifications__WEBPACK_IMPORTED_MODULE_6__/* .NotificationManager */ .fn.error("Completa el formulario.", "Error");
     };
+    const toUser = async ()=>{
+        const userr = await (0,_app_api_userr_call__WEBPACK_IMPORTED_MODULE_11__/* .getUser */ .PR)();
+        if (userr !== undefined && userr !== null) {
+            if (userr?.type === "workshop") {
+                setEmail(userr?.email);
+                setName(userr?.name);
+                setLastName(userr?.lastname);
+                setNameShop(userr?.nameShop);
+            }
+        }
+    };
     (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{
-        console.log(sessionStorage.getItem("cart"));
         setCart(JSON.parse(sessionStorage.getItem("cart")));
+        toUser();
     }, []);
     return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
         style: {
@@ -747,7 +760,7 @@ const LayoutMarketPlacePayment = ()=>{
                                                     children: [
                                                         e?.item?.name + " ",
                                                         "  ",
-                                                        e?.item?.model
+                                                        e?.item?.brand
                                                     ]
                                                 })
                                             }),
@@ -922,6 +935,17 @@ const Page = ()=>{
 
 /***/ }),
 
+/***/ 57286:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({"src":"/_next/static/media/logopreferente.bbc72056.png","height":200,"width":640,"blurDataURL":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAADCAMAAACZFr56AAAAHlBMVEUrQY0bK0ssU7ktSaUdMWEzXNUYJDsYIzwqS6wnQoxrmA7DAAAACnRSTlMEGSAOboSRcmx7+e+bqwAAAAlwSFlzAAALEwAACxMBAJqcGAAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAgSURBVHicY2BkYGBmAGE2dhYWTg5WVgZGRkZGJiYmJgADaQBE56VQMAAAAABJRU5ErkJggg==","blurWidth":8,"blurHeight":3});
+
+/***/ }),
+
 /***/ 34355:
 /***/ (() => {
 
@@ -943,7 +967,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,954,4185,9816,4997,3800,9636,4328,507,1142,4892], () => (__webpack_exec__(97268)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,4185,954,9816,4997,8284,3800,9636,4328,310,507,1142,9198], () => (__webpack_exec__(97268)));
 module.exports = __webpack_exports__;
 
 })();

@@ -1,0 +1,9 @@
+.table{
+    --data-table-library_grid-template-columns: 20% 20% 20% 10% 20% 10% !important;
+}
+@media screen and (max-width: 1020px) {
+    .table{
+        --data-table-library_grid-template-columns: 20% 20% 20% 10% 20% 20% !important;
+    }
+    
+}

@@ -538,6 +538,9 @@ const LayoutHubInventoryPage = () => {
         if(userr === undefined || user === null){
             router.push('/');
         }
+        if(userr?.type === 'workshop'){
+          router.push('/quotes');
+        }
         setUser(userr);
         const ordersCast = await getOrders(userr?._id);
       setOrderData(ordersCast);

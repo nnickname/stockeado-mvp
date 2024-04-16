@@ -5,21 +5,25 @@
     "/about": {},
     "/configuration": {},
     "/contact": {},
+    "/createquote": {},
     "/dashboard": {},
+    "/editquote": {},
     "/error": {},
     "/hub": {},
     "/inventory": {},
     "/marketplace/item": {},
     "/marketplace/order": {},
-    "/marketplace": {},
     "/marketplace/payment": {},
+    "/marketplace": {},
     "/marketplace/searchus": {},
     "/marketplace/shop": {},
     "/orders": {},
     "/": {},
     "/privacy": {},
+    "/providers": {},
+    "/quotes": {},
     "/signin": {},
-    "/signup": {},
-    "/terms": {}
+    "/terms": {},
+    "/workshops": {}
   }
 }

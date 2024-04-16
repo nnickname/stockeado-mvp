@@ -91,6 +91,12 @@ h1, h2, h3, h4 {
   background-color: #3662E3;
   color: white;
 }
+
+button{
+  padding-left: .7rem !important;
+  padding-right: .7rem !important;
+}
+
 @media screen and (max-width: 1120px) {
   .responsiveNavMarketplace{
     max-width: 100% !important;

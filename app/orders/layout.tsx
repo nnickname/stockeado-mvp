@@ -10,7 +10,7 @@ import { usePagination } from "@table-library/react-table-library/pagination";
 import { OrderModel, OrderStates, getOrderState } from "@/models/ordersModel";
 import { getTotalPrice } from "@/components/marketplace/header";
 import './index.css';
-import { getOrders } from "../api/orderss/call";
+import { getOrders, getOrdersWorkshop } from "../api/orderss/call";
 import SellResume from "@/components/panel/sellresume";
 import IonIcon from "@reacticons/ionicons";
 import Link from "next/link";
@@ -49,21 +49,19 @@ const OrdersLayoutPage = () => {
         {
           label: '',
           renderCell: (item) => <div style={{display: 'flex'}}>
-            <div onClick={() => {
-            //setItemSelected(item._id);
-            //setOpenEdit(true);
-            
-          }} style={{cursor: 'pointer', marginRight: '.5rem'}}>
+            <div  style={{cursor: 'pointer', marginRight: '.5rem'}}>
             <Link target='_blank' style={{fontSize: '1rem', color: '#3662E3', marginLeft: '.5rem'}} href={'/marketplace/order?id=' + item?._id}><IonIcon name='eye-outline'/></Link>
 
-          </div><div onClick={() => {
-            setOrderSelected(item);
-            setOpen(true);
-            
-          }} style={{color: 'orange', cursor: 'pointer'}}>
-                <IonIcon name="pencil-outline"/>
+            </div>
+            {user?.type === 'workshop' ? <></> : 
+            <div onClick={() => {
+              setOrderSelected(item);
+              setOpen(true);
+              
+            }} style={{color: 'orange', cursor: 'pointer'}}>
+                  <IonIcon name="pencil-outline"/>
 
-          </div>
+            </div>}
           </div>
         }
         
@@ -71,12 +69,14 @@ const OrdersLayoutPage = () => {
       ];
       const toUser = async () => {
           const userr = await getUser();
-          console.log(user);
           if(userr === undefined || userr === null){
               router.push('/');
               return;
           }
-          const ordersCast = await getOrders(userr?._id);
+          var ordersCast;
+          if(userr?.type === 'workshop'){
+            ordersCast = await getOrdersWorkshop(userr?.email);
+          }else ordersCast = await getOrders(userr?._id);
           setOrderData(ordersCast);
           setUser(userr);
       }
@@ -106,25 +106,30 @@ const OrdersLayoutPage = () => {
         <SideBarComponent user={user} route='orders' frameContennt={
           <div className="resume" style={{overflow: 'hidden'}}>
               <div>
+                  {user?.type === 'workshop' ? <></> : 
                   <SellResume orders={ordersData} user={user}/>
+                  }
                   <div style={{padding: '1rem'}}>
                     <div style={{width: '100%', display: 'flex', justifyContent: 'space-between'}}>
                         <h1 style={{marginBottom: '1rem', marginTop: '.5rem', fontSize: '1rem', fontWeight: '500'}}>Ordenes finales</h1>
                         <div style={{display: 'flex'}}>
                         </div>
                     </div>
-                    <div className="input-search" style={{marginTop: '1rem', marginBottom: '1rem'}}>
-                      <div className="iconinput">
-                        <IonIcon name="search-outline"/>
+                    {user?.type === 'workshop' ? <></> : 
+                      <div className="input-search" style={{marginTop: '1rem', marginBottom: '1rem'}}>
+                        <div className="iconinput">
+                          <IonIcon name="search-outline"/>
+|
+                        </div>
+                        <input placeholder="Busca por nombre de cliente" type='text' value={search} onChange={handleSearch} />
+                        <button >
+                          Buscar
+                        </button>
+
 
                       </div>
-                      <input placeholder="Busca por nombre de cliente" type='text' value={search} onChange={handleSearch} />
-                      <button >
-                        Buscar
-                      </button>
-
-
-                    </div>
+                    }
+                    
                     <CompactTable  theme={theme} layout={{ custom: true, horizontalScroll: true }}  pagination={pagination} columns={COLUMNS} data={{nodes: ordersData?.filter((item) =>
                         item?.name.toLowerCase().includes(search.toLowerCase())
                         

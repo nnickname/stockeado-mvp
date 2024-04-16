@@ -25,6 +25,18 @@ export const getOrders = async (id: string) => {
         return null;
     }
 }
+export const getOrdersWorkshop = async (id: string) => {
+    
+    try{
+        
+        const response: any = await axios.get("/orderss/get", {headers: {'token': id, authorization: process.env.NEXT_PUBLIC_API_TOKEN}});
+        console.log(response);
+        return response?.data?.orders;
+    }
+    catch(error){
+        return null;
+    }
+}
 export const updateOrderState = async (body: object) => {
     try{
         

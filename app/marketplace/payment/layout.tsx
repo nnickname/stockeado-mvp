@@ -14,6 +14,7 @@ import { Router } from 'next/router';
 import { useRouter } from 'next/navigation';
 import Footer from '@/components/dashboard/Footer';
 import { sendMailHookApi } from '@/app/api/email/call';
+import { getUser } from '@/app/api/userr/call';
 
 
 
@@ -75,9 +76,20 @@ const LayoutMarketPlacePayment = () => {
         } else NotificationManager.error('Completa el formulario.', 'Error');
         
     }
+    const toUser = async () => {
+        const userr = await getUser();
+        if(userr !== undefined && userr !== null){
+            if(userr?.type === 'workshop'){
+                setEmail(userr?.email);
+                setName(userr?.name);
+                setLastName(userr?.lastname);
+                setNameShop(userr?.nameShop);
+            }
+        }
+    }
     useEffect(() => {
-        console.log(sessionStorage.getItem('cart'));
         setCart(JSON.parse(sessionStorage.getItem('cart')));
+        toUser();
     }, []);
     return <div style={{margin: '0px', padding: '0px'}}>
         <p style={{padding: '1rem', color: '#3662E3', cursor: 'pointer'}} onClick={() => router.push('/marketplace')}><IonIcon name="chevron-back-outline"/> Regresar al Marketplace</p>
@@ -115,7 +127,7 @@ const LayoutMarketPlacePayment = () => {
                             <div style={{width: '100%', display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(220, 220, 220, .3)'}}>
                                 <img style={{width: '105px', maxHeight: '105px'}} src={e?.item?.image} alt='Product Image' />
                                 <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                                <p style={{minWidth: '250px', margin: 'auto'}}>{e?.item?.name + ' '}  {e?.item?.model }</p></p>
+                                <p style={{minWidth: '250px', margin: 'auto'}}>{e?.item?.name + ' '}  {e?.item?.brand }</p></p>
                                 <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
                                 {String(e?.ammount)}</p>
                                 <p  className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" style={{marginLeft: '4rem', maxWidth: '100px'}}>

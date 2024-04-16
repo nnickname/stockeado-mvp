@@ -5,6 +5,7 @@ import bcrypt from 'bcrypt';
 import { NextResponse } from "next/server";
 import middleware from "../../../midd/_middleware";
 import middlewareApi from "@/app/api/midd/_middleware.api";
+import jwt from "jsonwebtoken";
 
 
 export async function POST(
@@ -25,8 +26,11 @@ export async function POST(
             addingUser.markModified("users");
             addingUser.save()
             if (addingUser) {
+              const token = jwt.sign({ _id: addingUser?._id.toString() }, process.env.JWT_KEY, {
+                expiresIn: '1 days',
+              });
               return NextResponse
-                .json({ message: "User registered", user: addingUser, password: encryptedrandPassword });
+                .json({ message: "User registered", user: addingUser, token, password: encryptedrandPassword });
             } else return NextResponse.json({ message: "User not registered" });
           }
           return NextResponse.json({ message: "Invalid auth" });

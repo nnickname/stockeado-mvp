@@ -165,7 +165,11 @@ var external_bcrypt_default = /*#__PURE__*/__webpack_require__.n(external_bcrypt
 var next_response = __webpack_require__(89335);
 // EXTERNAL MODULE: ./app/api/midd/_middleware.api.ts
 var _middleware_api = __webpack_require__(28342);
+// EXTERNAL MODULE: ./node_modules/jsonwebtoken/index.js
+var jsonwebtoken = __webpack_require__(69877);
+var jsonwebtoken_default = /*#__PURE__*/__webpack_require__.n(jsonwebtoken);
 ;// CONCATENATED MODULE: ./app/api/userr/edit/create/route.ts
+
 
 
 
@@ -191,9 +195,15 @@ async function POST(req) {
             addingUser.markModified("users");
             addingUser.save();
             if (addingUser) {
+                const token = jsonwebtoken_default().sign({
+                    _id: addingUser?._id.toString()
+                }, process.env.JWT_KEY, {
+                    expiresIn: "1 days"
+                });
                 return next_response/* default */.Z.json({
                     message: "User registered",
                     user: addingUser,
+                    token,
                     password: encryptedrandPassword
                 });
             } else return next_response/* default */.Z.json({
@@ -278,7 +288,7 @@ function middlewareApi() {
 var __webpack_require__ = require("../../../../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,1835,5177,6971,7486], () => (__webpack_exec__(2097)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,1835,5177,9877,6971,7486], () => (__webpack_exec__(2097)));
 module.exports = __webpack_exports__;
 
 })();
