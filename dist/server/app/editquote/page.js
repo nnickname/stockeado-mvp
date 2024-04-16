@@ -857,15 +857,12 @@ const EditQuoteLayoutPage = ()=>{
                                                 src: e?.image,
                                                 alt: "Product Image"
                                             }),
-                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
                                                 style: {
                                                     marginLeft: "1rem"
                                                 },
                                                 className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                                children: [
-                                                    e?.product.substring(0, 30),
-                                                    "..."
-                                                ]
+                                                children: e?.product
                                             }),
                                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
                                                 style: {
@@ -1056,9 +1053,9 @@ const EditQuoteLayoutPage = ()=>{
                                     },
                                     children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                                         onClick: ()=>{
-                                            if (imageLogo !== "" && nameAdd !== "" && codeAdd !== "") {
+                                            if (nameAdd !== "" && codeAdd !== "") {
                                                 const object = {
-                                                    image: imageLogo,
+                                                    image: imageLogo ?? "",
                                                     name: nameAdd,
                                                     code: codeAdd
                                                 };

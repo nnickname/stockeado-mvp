@@ -178,7 +178,7 @@ const CreateQuoteLayoutPage = () => {
                                     <div style={{width: '100%', display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(220, 220, 220, .3)'}}>
                                         <img style={{width: '105px', maxHeight: '105px'}} src={e?.image} alt='Product Image' />
                                         <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                                        <p style={{ marginLeft: '.5rem'}}>{e?.product.substring(0, 30)}...</p></p>
+                                        <p style={{ marginLeft: '.5rem'}}>{e?.product}</p></p>
                                         <p style={{marginLeft: '.5rem'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
                                         {String(e?.provider)}</p>
                                         <p style={{marginLeft: '.5rem'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
@@ -218,9 +218,9 @@ const CreateQuoteLayoutPage = () => {
                 </div>
                 <div style={{width: '100%', textAlign: 'right', marginTop: '2rem'}}> 
                     <div onClick={() => {
-                        if(imageLogo !== '' && nameAdd !== '' && codeAdd !== ''){
+                        if(nameAdd !== '' && codeAdd !== ''){
                             const object = {
-                                image: imageLogo,
+                                image: imageLogo ?? '',
                                 name: nameAdd,
                                 code: codeAdd
                             }
