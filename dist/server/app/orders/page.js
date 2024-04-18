@@ -1034,7 +1034,7 @@ const OrdersLayoutPage = ()=>{
         (0,baseline/* getTheme */.g)(),
         {
             Table: `
-            --data-table-library_grid-template-columns: 100px 200px 100px 100px 100px 100px 100px
+            --data-table-library_grid-template-columns: 100px 200px 100px 100px 100px 150px 
           `
         }
     ]);
@@ -1278,7 +1278,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,4185,954,9816,4997,8284,3800,7654,6120,5655,9636,4328,310,1142,8088,9198,3848,1270], () => (__webpack_exec__(18688)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,4185,954,9816,4997,8284,3800,7654,7761,5655,7252,9636,4328,310,1142,8088,9198,3848,1270], () => (__webpack_exec__(18688)));
 module.exports = __webpack_exports__;
 
 })();

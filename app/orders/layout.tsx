@@ -96,7 +96,7 @@ const OrdersLayoutPage = () => {
         getTheme(),
         {
           Table: `
-            --data-table-library_grid-template-columns: 100px 200px 100px 100px 100px 100px 100px
+            --data-table-library_grid-template-columns: 100px 200px 100px 100px 100px 150px 
           `,
         },
       ]);

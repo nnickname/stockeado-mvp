@@ -90,7 +90,6 @@ const createManyInventories = async (body)=>{
                 authorization: "41212756478495-stockea2.token-auth"
             }
         });
-        console.log(response);
         if (response?.data?.item !== undefined) {
             return true;
         } else return false;

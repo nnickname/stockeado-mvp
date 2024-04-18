@@ -12,7 +12,9 @@ import productImage from '../../public/images/logo/productImage.png';
 import 'react-responsive-modal/styles.css';
 import {NotificationManager} from 'react-notifications';
 import { createQuote } from "../api/quotess/call";
-
+import { CompactTable } from '@table-library/react-table-library/compact';
+import { useTheme } from "@table-library/react-table-library/theme";
+import { getTheme } from "@table-library/react-table-library/baseline";
 const CreateQuoteLayoutPage = () => {
     const router = useRouter();
     const [user, setUser] = useState<UserModel>(null);
@@ -34,6 +36,60 @@ const CreateQuoteLayoutPage = () => {
     const [time, setTime] = useState<string>('');
     const [price, setPrice] = useState<string>('');
 
+    const COLUMNSPRODUCT = [
+        {
+            label: 'Imagen',
+            renderCell: (item) => <img style={{width: '105px', maxHeight: '105px'}} src={item?.image} alt='Product Image' />
+            ,
+        },
+        { label: 'Nombre de Producto', renderCell: (item) => <p>{item?.name}</p> },
+        
+        { label: 'Código de repuesto', renderCell: (item) => <p>{item?.code}</p> },
+        
+        {
+          label: '',
+          renderCell: (item) => 
+            <IonIcon onClick={() => {
+                setRequeriments(requeriments?.filter((obj, indexx) => item?.name !== requeriments[indexx].name))
+            }} name="trash-outline" style={{cursor: 'pointer', color: '#E43E1B', fontSize: '1.2rem'}}/>
+        
+        }
+    ];
+    const COLUMNSQUOTES = [
+        {
+            label: 'Imagen',
+            renderCell: (item) => <img style={{width: '105px', maxHeight: '105px'}} src={item?.image} alt='Product Image' />
+            ,
+        },
+        { label: 'Nombre de Producto', renderCell: (item) => <p>{item?.product}</p> },
+        
+        { label: 'Proveedor', renderCell: (item) => <p>{item?.provider}</p> },
+        { label: 'Marca', renderCell: (item) => <p>{item?.brand}</p> },
+        { label: 'Precio', renderCell: (item) => <p>s/. {item?.price}</p> },
+        { label: 'Tiempo de envío', renderCell: (item) => <p> {item?.timeDeliveried}</p>},
+        {
+          label: '',
+          renderCell: (item) => 
+            <IonIcon onClick={() => {
+                setQuotes(quotes?.filter((obj, indexx) => item?.product !== quotes[indexx].product))
+            }} name="trash-outline" style={{cursor: 'pointer', color: '#E43E1B', fontSize: '1.2rem'}}/>
+        
+        }
+    ];
+    const themeProducts = useTheme([
+        getTheme(),
+        {
+            Table: `
+            --data-table-library_grid-template-columns: 150px 300px 200px 100px !important;
+             `,
+        },
+    ]);
+    const themeQuotes = useTheme([
+        getTheme(),
+        {
+            
+        },
+    ]);
     const [openQuotes, setOpenQuotes] = useState<boolean>();
     const [quotes, setQuotes] = useState<SendedQuotesModel[]>();
     const buildForm = async () => {
@@ -110,95 +166,24 @@ const CreateQuoteLayoutPage = () => {
               <input value={date} onChange={(e) => setDate(e.target.value)} placeholder="Placa" type='datetime-local' className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
 
             </div>
-            <div style={{display: 'flex', marginTop: '2rem'}}>
+            <div style={{display: 'flex', marginTop: '2rem', marginBottom: '1rem'}}>
                 <h1 style={{fontSize: '1.1rem', fontWeight: '500'}}>Productos</h1>
                 <button className="buttonsWithouthPadding" onClick={() => setOpen(true)} style={{marginLeft: '1rem', fontSize: '.8rem', borderRadius: '.5rem', padding: '.2rem', paddingLeft: '1rem', paddingRight: '1rem', marginRight: '1rem', backgroundColor: 'transparent', color: '#1366D9', border: '1px solid #1366D9'}}>+</button>
                 
             </div>
-            <div style={{marginTop: '1rem', width: '100%', height: '1px', background: 'rgba(0, 0, 0, 0.2)'}}></div>
-                        <div style={{display: 'flex', justifyContent: 'space-between', paddingBottom: '1rem', marginTop: '1rem'}}>
-                            <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                            Imagen</p>
-                            <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                            Nombre producto</p>
-                            <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                            Codigo de repuesto</p>
-                            <p></p>
-                            
-                                
-                                
-                        </div>
-                        {requeriments?.length === 0 ? <p style={{textAlign: 'center', color: 'grey'}}>Todavia no añadiste nada</p> : ''}
-                        <div className="responsiveItems">
-                        {requeriments?.map((e, index) => {
-                                    return <div style={{marginTop: '.5rem'}} key={index}>
-                                    <div style={{width: '100%', display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(220, 220, 220, .3)'}}>
-                                        <img style={{width: '105px', maxHeight: '105px'}} src={e?.image} alt='Product Image' />
-                                        <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                                        <p style={{minWidth: '200px', marginLeft: '.5rem'}}>{e?.name.substring(0, 30)}...</p></p>
-                                        <p style={{marginLeft: '.5rem'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                                        {String(e?.code)}</p>
-                                        <div style={{display: 'flex', marginRight: '1rem'}}>
-                                            <IonIcon onClick={() => {
-                                                setRequeriments(requeriments?.filter((obj, indexx) => index !== indexx))
-                                            }} name="trash-outline" style={{cursor: 'pointer', color: '#E43E1B', fontSize: '1.2rem'}}/>
-                                        </div>
-                                        </div>
-                                    </div>
-                        })}
-            </div>
-            <div style={{display: 'flex', marginTop: '2rem'}}>
+            <div style={{maxWidth: '100%'}}>
+                <CompactTable theme={themeProducts} layout={{ custom: true, horizontalScroll: true }}   columns={COLUMNSPRODUCT} data={{nodes: requeriments ?? []}} />
+            </div>            
+            <div style={{display: 'flex', marginTop: '2rem', marginBottom: '1rem'}}>
                 <h1 style={{fontSize: '1.1rem', fontWeight: '500'}}>Cotizaciones</h1>
                 <button className="buttonsWithouthPadding" onClick={() => setOpenQuotes(true)} style={{marginLeft: '1rem', fontSize: '.8rem', borderRadius: '.5rem', padding: '.2rem', paddingLeft: '1rem', paddingRight: '1rem', marginRight: '1rem', backgroundColor: 'transparent', color: '#1366D9', border: '1px solid #1366D9'}}>+</button>
                 
             </div>
-            <div style={{overflowY: 'scroll', marginTop: '1rem', width: '100%', height: '1px', background: 'rgba(0, 0, 0, 0.2)'}}></div>
-                        <div style={{display: 'flex', justifyContent: 'space-between', paddingBottom: '1rem', marginTop: '1rem'}}>
-                            <p style={{display: 'inline', marginLeft: '0rem'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                            Imagen</p>
-                            <p style={{display: 'inline', marginLeft: '.40rem'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                            Producto</p>
-                            <p style={{display: 'inline', marginLeft: '.40rem'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                            Proveedor</p>
-                            <p style={{display: 'inline', marginLeft: '.40rem'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                            Marca</p>
-                            <p style={{display: 'inline', marginLeft: '.40rem'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                            Precio</p>
-                            <p style={{display: 'inline', marginLeft: '.40rem'}}  className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                            Tiempo de envio</p>
-                            <p></p>
-                            
-                                
-                                
-                        </div>
-                        {requeriments?.length === 0 ? <p style={{textAlign: 'center', color: 'grey'}}>Todavia no añadiste nada</p> : ''}
-                        <div className="responsiveItems">
-                        {quotes?.map((e, index) => {
-                                    return <div style={{marginTop: '.5rem'}} key={index}>
-                                    <div style={{width: '100%', display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(220, 220, 220, .3)'}}>
-                                        <img style={{width: '105px', maxHeight: '105px'}} src={e?.image} alt='Product Image' />
-                                        <p className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                                        <p style={{ marginLeft: '.5rem'}}>{e?.product}</p></p>
-                                        <p style={{marginLeft: '.5rem'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                                        {String(e?.provider)}</p>
-                                        <p style={{marginLeft: '.5rem'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                                        {String(e?.brand)}</p>
-                                        <p style={{marginLeft: '.5rem'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                                        s/. {String(e?.price)}</p>
-                                        <p style={{marginLeft: '.5rem'}} className="dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm" >
-                                        {String(e?.timeDeliveried)}</p>
-                                        <div style={{display: 'flex', marginRight: '1rem'}}>
-                                            <IonIcon onClick={() => {
-                                                setQuotes(quotes?.filter((obj, indexx) => index !== indexx))
-                                            }} name="trash-outline" style={{cursor: 'pointer', color: '#E43E1B', fontSize: '1.2rem'}}/>
-                                        </div>
-                                        <div></div>
-                                        </div>
-                                    </div>
-                        })}
-                        <div style={{width: '100%', textAlign: 'center', marginTop: '2rem'}}> 
-                            <button onClick={() => buildForm()} style={{width: 'max-content', background: 'rgb(21, 112, 239)', color: 'white', padding: '.7rem', borderRadius: '.2rem', cursor: 'pointer'}}>Crear Cotización</button>
-                        </div>
+            <div style={{maxWidth: '100%'}}>
+                <CompactTable theme={themeQuotes} layout={{ custom: true, horizontalScroll: true }}   columns={COLUMNSQUOTES} data={{nodes: quotes ?? []}} />
+            </div> 
+            <div style={{width: '100%', textAlign: 'center', marginTop: '2rem'}}> 
+                <button onClick={() => buildForm()} style={{width: 'max-content', background: 'rgb(21, 112, 239)', color: 'white', padding: '.7rem', borderRadius: '.2rem', cursor: 'pointer'}}>Crear Cotización</button>
             </div>
             <Modal closeIcon={<IonIcon name="close"/>} styles={{
               modal : {borderRadius: '1rem', padding: '0rem', maxWidth: width < 921 ? '90%' : '900px'},

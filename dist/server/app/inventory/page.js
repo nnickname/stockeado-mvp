@@ -950,8 +950,8 @@ const TableRow = ({ user, inventoryData, realInventoryData, setInventoryRealData
                         name: String(e[2]),
                         ammount: String(e[3]),
                         image: String(e[6]) ?? " ",
-                        price: String(e[4]) ?? "",
-                        priceSelling: String(e[5]) ?? "",
+                        price: String(Number(e[4]).toFixed(2)) ?? "",
+                        priceSelling: String(Number(e[5]).toFixed(2)) ?? "",
                         brand: String(e[1]),
                         categorie: 0,
                         inMP: true,
@@ -964,10 +964,10 @@ const TableRow = ({ user, inventoryData, realInventoryData, setInventoryRealData
                     };
                 });
                 body.splice(0, 1);
-                body.splice(body?.length - 1, 1);
+                //body.splice(body?.length-1, 1);
                 if (await (0,_api_inventoryy_call__WEBPACK_IMPORTED_MODULE_9__/* .createManyInventories */ .RZ)(body)) {
-                    window.location.reload();
                     react_notifications__WEBPACK_IMPORTED_MODULE_15__/* .NotificationManager */ .fn.success("Logramos cargar tu inventario con exito, recuerda editarlo correctamente", "Cargado");
+                    window.location.reload();
                 } else react_notifications__WEBPACK_IMPORTED_MODULE_15__/* .NotificationManager */ .fn.error("Ocurrio un error cargando tu CSV, recorda que tu csv debe tener los encabezados SKU, description y cantidad", "Error");
             }
         });
@@ -1664,7 +1664,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,4185,954,9816,4997,8284,7654,6120,120,9636,4328,310,8088,9198,627,8773], () => (__webpack_exec__(91694)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,4185,954,9816,4997,8284,7654,7761,7252,120,9636,4328,310,8088,9198,627,8773], () => (__webpack_exec__(91694)));
 module.exports = __webpack_exports__;
 
 })();

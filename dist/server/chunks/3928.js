@@ -30,10 +30,6 @@ exports.modules = {
         required: [
             true,
             "Please provide a price."
-        ],
-        maxlength: [
-            60,
-            "Price cannot be more than 60 characters"
         ]
     },
     stars: {
@@ -125,18 +121,10 @@ exports.modules = {
         required: [
             true,
             "Please provide a price of Selling."
-        ],
-        maxlength: [
-            160,
-            "Price cannot be more than 60 characters"
         ]
     },
     description: {
-        /* The name of this pet */ type: String,
-        maxlength: [
-            260,
-            "Price cannot be more than 60 characters"
-        ]
+        /* The name of this pet */ type: String
     }
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((mongoose__WEBPACK_IMPORTED_MODULE_0___default().models).Inventories || (0,mongoose__WEBPACK_IMPORTED_MODULE_0__.model)("Inventories", InventorySchema));

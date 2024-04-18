@@ -110,7 +110,9 @@ const QuoutesLayoutPage = () => {
       const theme = useTheme([
         getTheme(),
         {
-          
+          Table: `
+            --data-table-library_grid-template-columns: 150px 200px 200px 200px 200px 100px !important;
+             `,
         },
       ]);
       

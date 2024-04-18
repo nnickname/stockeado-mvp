@@ -411,7 +411,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_responsive_modal_styles_css__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_responsive_modal_styles_css__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var react_notifications__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(78644);
 /* harmony import */ var _api_quotess_call__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(94);
+/* harmony import */ var _table_library_react_table_library_theme__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(1077);
+/* harmony import */ var _table_library_react_table_library_baseline__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(35655);
+/* harmony import */ var _table_library_react_table_library_compact__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(77761);
 /* __next_internal_client_entry_do_not_use__ default auto */ 
+
+
+
 
 
 
@@ -524,6 +530,120 @@ const EditQuoteLayoutPage = ()=>{
         window.addEventListener("resize", handleResize);
         return ()=>window.removeEventListener("resize", handleResize);
     }, []);
+    const COLUMNSPRODUCT = [
+        {
+            label: "Imagen",
+            renderCell: (item)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
+                    style: {
+                        width: "105px",
+                        maxHeight: "105px"
+                    },
+                    src: item?.image,
+                    alt: "Product Image"
+                })
+        },
+        {
+            label: "Nombre de Producto",
+            renderCell: (item)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                    children: item?.name
+                })
+        },
+        {
+            label: "C\xf3digo de repuesto",
+            renderCell: (item)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                    children: item?.code
+                })
+        },
+        {
+            label: "",
+            renderCell: (item)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_5___default()), {
+                    onClick: ()=>{
+                        setRequeriments(requeriments?.filter((obj, indexx)=>item?.name !== requeriments[indexx].name));
+                    },
+                    name: "trash-outline",
+                    style: {
+                        cursor: "pointer",
+                        color: "#E43E1B",
+                        fontSize: "1.2rem"
+                    }
+                })
+        }
+    ];
+    const COLUMNSQUOTES = [
+        {
+            label: "Imagen",
+            renderCell: (item)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
+                    style: {
+                        width: "105px",
+                        maxHeight: "105px"
+                    },
+                    src: item?.image,
+                    alt: "Product Image"
+                })
+        },
+        {
+            label: "Nombre de Producto",
+            renderCell: (item)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                    children: item?.product
+                })
+        },
+        {
+            label: "Proveedor",
+            renderCell: (item)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                    children: item?.provider
+                })
+        },
+        {
+            label: "Marca",
+            renderCell: (item)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
+                    children: item?.brand
+                })
+        },
+        {
+            label: "Precio",
+            renderCell: (item)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+                    children: [
+                        "s/. ",
+                        item?.price
+                    ]
+                })
+        },
+        {
+            label: "Tiempo de env\xedo",
+            renderCell: (item)=>/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+                    children: [
+                        " ",
+                        item?.timeDeliveried
+                    ]
+                })
+        },
+        {
+            label: "",
+            renderCell: (item)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_5___default()), {
+                    onClick: ()=>{
+                        setQuotes(quotes?.filter((obj, indexx)=>item?.product !== quotes[indexx].product));
+                    },
+                    name: "trash-outline",
+                    style: {
+                        cursor: "pointer",
+                        color: "#E43E1B",
+                        fontSize: "1.2rem"
+                    }
+                })
+        }
+    ];
+    const themeProducts = (0,_table_library_react_table_library_theme__WEBPACK_IMPORTED_MODULE_14__.u)([
+        (0,_table_library_react_table_library_baseline__WEBPACK_IMPORTED_MODULE_12__/* .getTheme */ .g)(),
+        {
+            Table: `
+            --data-table-library_grid-template-columns: 150px 300px 200px 100px !important;
+             `
+        }
+    ]);
+    const themeQuotes = (0,_table_library_react_table_library_theme__WEBPACK_IMPORTED_MODULE_14__.u)([
+        (0,_table_library_react_table_library_baseline__WEBPACK_IMPORTED_MODULE_12__/* .getTheme */ .g)(),
+        {}
+    ]);
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         children: user === null ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_5___default()), {
             name: "chevron-collapse-outline",
@@ -595,7 +715,8 @@ const EditQuoteLayoutPage = ()=>{
                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                         style: {
                             display: "flex",
-                            marginTop: "2rem"
+                            marginTop: "2rem",
+                            marginBottom: "1rem"
                         },
                         children: [
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
@@ -626,111 +747,25 @@ const EditQuoteLayoutPage = ()=>{
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                         style: {
-                            marginTop: "1rem",
-                            width: "100%",
-                            height: "1px",
-                            background: "rgba(0, 0, 0, 0.2)"
-                        }
-                    }),
-                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                        style: {
-                            display: "flex",
-                            justifyContent: "space-between",
-                            paddingBottom: "1rem",
-                            marginTop: "1rem"
+                            maxWidth: "100%"
                         },
-                        children: [
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                children: "Imagen"
-                            }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                children: "Nombre producto"
-                            }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                children: "Codigo de repuesto"
-                            }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {})
-                        ]
-                    }),
-                    requeriments?.length === 0 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                        style: {
-                            textAlign: "center",
-                            color: "grey"
-                        },
-                        children: "Todavia no a\xf1adiste nada"
-                    }) : "",
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                        className: "responsiveItems",
-                        children: requeriments?.map((e, index)=>{
-                            return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                style: {
-                                    marginTop: ".5rem"
-                                },
-                                children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                    style: {
-                                        width: "100%",
-                                        display: "flex",
-                                        justifyContent: "space-between",
-                                        borderBottom: "1px solid rgba(220, 220, 220, .3)"
-                                    },
-                                    children: [
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
-                                            style: {
-                                                width: "105px",
-                                                maxHeight: "105px"
-                                            },
-                                            src: e?.image,
-                                            alt: "Product Image"
-                                        }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                            className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                            children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
-                                                style: {
-                                                    minWidth: "200px",
-                                                    marginLeft: ".5rem"
-                                                },
-                                                children: [
-                                                    e?.name.substring(0, 30),
-                                                    "..."
-                                                ]
-                                            })
-                                        }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                            style: {
-                                                marginLeft: ".5rem"
-                                            },
-                                            className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                            children: String(e?.code)
-                                        }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                            style: {
-                                                display: "flex",
-                                                marginRight: "1rem"
-                                            },
-                                            children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_5___default()), {
-                                                onClick: ()=>{
-                                                    setRequeriments(requeriments?.filter((obj, indexx)=>index !== indexx));
-                                                },
-                                                name: "trash-outline",
-                                                style: {
-                                                    cursor: "pointer",
-                                                    color: "#E43E1B",
-                                                    fontSize: "1.2rem"
-                                                }
-                                            })
-                                        })
-                                    ]
-                                })
-                            }, index);
+                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_table_library_react_table_library_compact__WEBPACK_IMPORTED_MODULE_13__/* .CompactTable */ ._, {
+                            theme: themeProducts,
+                            layout: {
+                                custom: true,
+                                horizontalScroll: true
+                            },
+                            columns: COLUMNSPRODUCT,
+                            data: {
+                                nodes: requeriments ?? []
+                            }
                         })
                     }),
                     /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                         style: {
                             display: "flex",
-                            marginTop: "2rem"
+                            marginTop: "2rem",
+                            marginBottom: "1rem"
                         },
                         children: [
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("h1", {
@@ -761,198 +796,52 @@ const EditQuoteLayoutPage = ()=>{
                     }),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
                         style: {
-                            overflowY: "scroll",
-                            marginTop: "1rem",
+                            maxWidth: "100%"
+                        },
+                        children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_table_library_react_table_library_compact__WEBPACK_IMPORTED_MODULE_13__/* .CompactTable */ ._, {
+                            theme: themeQuotes,
+                            layout: {
+                                custom: true,
+                                horizontalScroll: true
+                            },
+                            columns: COLUMNSQUOTES,
+                            data: {
+                                nodes: quotes ?? []
+                            }
+                        })
+                    }),
+                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                        style: {
                             width: "100%",
-                            height: "1px",
-                            background: "rgba(0, 0, 0, 0.2)"
-                        }
-                    }),
-                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                        style: {
-                            display: "flex",
-                            justifyContent: "space-between",
-                            paddingBottom: "1rem",
-                            marginTop: "1rem"
-                        },
-                        children: [
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                style: {
-                                    display: "inline",
-                                    marginLeft: "0rem"
-                                },
-                                className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                children: "Imagen"
-                            }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                style: {
-                                    display: "inline",
-                                    marginLeft: ".40rem"
-                                },
-                                className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                children: "Producto"
-                            }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                style: {
-                                    display: "inline",
-                                    marginLeft: ".40rem"
-                                },
-                                className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                children: "Proveedor"
-                            }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                style: {
-                                    display: "inline",
-                                    marginLeft: ".40rem"
-                                },
-                                className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                children: "Marca"
-                            }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                style: {
-                                    display: "inline",
-                                    marginLeft: ".40rem"
-                                },
-                                className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                children: "Precio"
-                            }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                style: {
-                                    display: "inline",
-                                    marginLeft: ".40rem"
-                                },
-                                className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                children: "Tiempo de envio"
-                            }),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {})
-                        ]
-                    }),
-                    requeriments?.length === 0 ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                        style: {
                             textAlign: "center",
-                            color: "grey"
+                            marginTop: "2rem"
                         },
-                        children: "Todavia no a\xf1adiste nada"
-                    }) : "",
-                    /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                        className: "responsiveItems",
                         children: [
-                            quotes?.map((e, index)=>{
-                                return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                    style: {
-                                        marginTop: ".5rem"
-                                    },
-                                    children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                        style: {
-                                            width: "100%",
-                                            display: "flex",
-                                            borderBottom: "1px solid rgba(220, 220, 220, .3)"
-                                        },
-                                        children: [
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("img", {
-                                                style: {
-                                                    width: "105px",
-                                                    maxHeight: "105px"
-                                                },
-                                                src: e?.image,
-                                                alt: "Product Image"
-                                            }),
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                                style: {
-                                                    marginLeft: "1rem"
-                                                },
-                                                className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                                children: e?.product
-                                            }),
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                                style: {
-                                                    marginLeft: "auto"
-                                                },
-                                                className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                                children: String(e?.provider)
-                                            }),
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                                style: {
-                                                    marginLeft: "auto"
-                                                },
-                                                className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                                children: String(e?.brand)
-                                            }),
-                                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
-                                                style: {
-                                                    marginLeft: "auto"
-                                                },
-                                                className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                                children: [
-                                                    "s/. ",
-                                                    String(e?.price)
-                                                ]
-                                            }),
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("p", {
-                                                style: {
-                                                    marginLeft: "auto"
-                                                },
-                                                className: "dark:text-body-color-dark mb-1 text-base !leading-relaxed text-body-color sm:text-sm md:text-sm",
-                                                children: String(e?.timeDeliveried)
-                                            }),
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                                style: {
-                                                    display: "flex",
-                                                    marginLeft: "auto",
-                                                    marginRight: "1rem"
-                                                },
-                                                children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_5___default()), {
-                                                    onClick: ()=>{
-                                                        setQuotes(quotes?.filter((obj, indexx)=>index !== indexx));
-                                                    },
-                                                    name: "trash-outline",
-                                                    style: {
-                                                        cursor: "pointer",
-                                                        color: "#E43E1B",
-                                                        fontSize: "1.2rem"
-                                                    }
-                                                })
-                                            }),
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {}),
-                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {})
-                                        ]
-                                    })
-                                }, index);
-                            }),
-                            /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
+                                onClick: ()=>confirmBuildQuote(),
                                 style: {
-                                    width: "100%",
-                                    textAlign: "center",
-                                    marginTop: "2rem"
+                                    width: "max-content",
+                                    background: "rgb(21, 112, 239)",
+                                    color: "white",
+                                    padding: ".5rem",
+                                    borderRadius: ".2rem",
+                                    cursor: "pointer"
                                 },
-                                children: [
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-                                        onClick: ()=>confirmBuildQuote(),
-                                        style: {
-                                            width: "max-content",
-                                            background: "rgb(21, 112, 239)",
-                                            color: "white",
-                                            padding: ".5rem",
-                                            borderRadius: ".2rem",
-                                            cursor: "pointer"
-                                        },
-                                        children: " Confirmar"
-                                    }),
-                                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
-                                        onClick: ()=>buildForm(),
-                                        style: {
-                                            marginLeft: "1rem",
-                                            width: "max-content",
-                                            color: "rgb(21, 112, 239)",
-                                            background: "transparent",
-                                            padding: ".5rem",
-                                            borderRadius: ".2rem",
-                                            cursor: "pointer",
-                                            border: "1px solid #DEE2E7"
-                                        },
-                                        children: "Editar Cotizaci\xf3n"
-                                    })
-                                ]
+                                children: " Confirmar"
+                            }),
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("button", {
+                                onClick: ()=>buildForm(),
+                                style: {
+                                    marginLeft: "1rem",
+                                    width: "max-content",
+                                    color: "rgb(21, 112, 239)",
+                                    background: "transparent",
+                                    padding: ".5rem",
+                                    borderRadius: ".2rem",
+                                    cursor: "pointer",
+                                    border: "1px solid #DEE2E7"
+                                },
+                                children: "Editar Cotizaci\xf3n"
                             })
                         ]
                     }),
@@ -1346,7 +1235,7 @@ const Page = ()=>{
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,4185,9816,4997,8284,7654,9636,4328,310,8088,94], () => (__webpack_exec__(98855)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,4185,9816,4997,8284,7654,7761,5655,9636,4328,310,8088,94], () => (__webpack_exec__(98855)));
 module.exports = __webpack_exports__;
 
 })();

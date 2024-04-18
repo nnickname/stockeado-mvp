@@ -54,7 +54,6 @@ export const createManyInventories = async (body: any) => {
     
     try{
         const response: any = await axios.post("/inventoryy/load", {items: [...body] }, {headers: {authorization: process.env.NEXT_PUBLIC_API_TOKEN}});
-        console.log(response)
         if(response?.data?.item !== undefined){
             return true;
         } else return false;

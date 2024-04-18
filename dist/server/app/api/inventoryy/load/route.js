@@ -208,7 +208,9 @@ async function POST(req) {
                     sellings: []
                 };
             });
+            console.log(object);
             const addingInventory = await inventoryModel/* default */.Z.insertMany(object);
+            console.log(addingInventory);
             if (addingInventory) {
                 return next_response/* default */.Z.json({
                     message: "Items registered",
@@ -222,8 +224,10 @@ async function POST(req) {
             message: "Invalid auth"
         });
     } catch (errors) {
+        console.log(errors);
         return next_response/* default */.Z.json({
-            message: "Invalid body or error"
+            message: "Invalid body or error",
+            errors
         });
     }
 }

@@ -42,7 +42,9 @@ export async function POST(
               ...e,
               sellings: []
             }})
+            console.log(object);
             const addingInventory = await Inventory.insertMany(object);
+            console.log(addingInventory);
             if (addingInventory) {
               return NextResponse
                 .json({ message: "Items registered", item: addingInventory});
@@ -50,7 +52,8 @@ export async function POST(
         }
         return NextResponse.json({message: 'Invalid auth'});
       } catch (errors) {
-        return NextResponse.json({ message: "Invalid body or error" });
+        console.log(errors);
+        return NextResponse.json({ message: "Invalid body or error", errors});
       }
         
         

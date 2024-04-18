@@ -604,7 +604,11 @@ const QuoutesLayoutPage = ()=>{
     };
     const theme = (0,_table_library_react_table_library_theme__WEBPACK_IMPORTED_MODULE_13__.u)([
         (0,_table_library_react_table_library_baseline__WEBPACK_IMPORTED_MODULE_9__/* .getTheme */ .g)(),
-        {}
+        {
+            Table: `
+            --data-table-library_grid-template-columns: 150px 200px 200px 200px 200px 100px !important;
+             `
+        }
     ]);
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
         children: user === null ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_7___default()), {
@@ -808,7 +812,7 @@ module.exports = __webpack_require__(50954)
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [8478,964,4185,954,9816,4997,8284,6120,5655,9636,4328,310,8088,94], () => (__webpack_exec__(52185)));
+var __webpack_exports__ = __webpack_require__.X(0, [8478,964,4185,954,9816,4997,8284,7761,5655,7252,9636,4328,310,8088,94], () => (__webpack_exec__(52185)));
 module.exports = __webpack_exports__;
 
 })();
