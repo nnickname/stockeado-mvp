@@ -15,6 +15,7 @@ import { confirmQuote, createQuote, editQuote, getQuotes } from "../api/quotess/
 import { useTheme } from "@table-library/react-table-library/theme";
 import { getTheme } from "@table-library/react-table-library/baseline";
 import { CompactTable } from '@table-library/react-table-library/compact';
+import GreyImage from '../../public/images/logo/greyimage.jpg';
 const EditQuoteLayoutPage = () => {
     const router = useRouter();
     const [useQuote, setuseQuote] = useState<QutoeModel>();
@@ -122,7 +123,7 @@ const EditQuoteLayoutPage = () => {
     const COLUMNSPRODUCT = [
         {
             label: 'Imagen',
-            renderCell: (item) => <img style={{width: '105px', maxHeight: '105px'}} src={item?.image} alt='Product Image' />
+            renderCell: (item) => <img style={{width: '105px', maxHeight: '105px'}} src={item?.image !== '' ? item.image : GreyImage.src} alt='Product Image' />
             ,
         },
         { label: 'Nombre de Producto', renderCell: (item) => <p>{item?.name}</p> },
@@ -141,9 +142,9 @@ const EditQuoteLayoutPage = () => {
     const COLUMNSQUOTES = [
         {
             label: 'Imagen',
-            renderCell: (item) => <img style={{width: '105px', maxHeight: '105px'}} src={item?.image} alt='Product Image' />
+            renderCell: (item) => <img style={{width: '105px', maxHeight: '105px'}} src={item?.image !== '' ? item.image : GreyImage.src} alt='Product Image' />
             ,
-        },
+        }, 
         { label: 'Nombre de Producto', renderCell: (item) => <p>{item?.product}</p> },
         
         { label: 'Proveedor', renderCell: (item) => <p>{item?.provider}</p> },
@@ -170,14 +171,16 @@ const EditQuoteLayoutPage = () => {
     const themeQuotes = useTheme([
         getTheme(),
         {
-            
+            Table: `
+            --data-table-library_grid-template-columns: 150px 300px 180px 180px 180px 180px 180px  !important;
+             `,
         },
     ]);
       
     return <>  
         {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
         <SideBarComponent user={user} route='quotes' frameContennt={
-         <div >
+         <div style={{maxWidth: '100%'}}>
             <p style={{color: 'grey'}}>Editar cotización</p>
             <h1 style={{fontSize: '1.1rem', fontWeight: '500', marginTop: '1rem'}}>Detalle de cotización</h1>
             <div style={{marginTop: '.5rem', display: 'flex', justifyContent: 'space-between'}}>
@@ -199,7 +202,7 @@ const EditQuoteLayoutPage = () => {
                 <button className="buttonsWithouthPadding" onClick={() => setOpenQuotes(true)} style={{marginLeft: '1rem', fontSize: '.8rem', borderRadius: '.5rem', padding: '.2rem', paddingLeft: '1rem', paddingRight: '1rem', marginRight: '1rem', backgroundColor: 'transparent', color: '#1366D9', border: '1px solid #1366D9'}}>+</button>
                 
             </div>
-            <div style={{maxWidth: '100%'}}>
+            <div style={{width: '100%'}}>
                 <CompactTable theme={themeQuotes} layout={{ custom: true, horizontalScroll: true }}   columns={COLUMNSQUOTES} data={{nodes: quotes ?? []}} />
             </div>
             <div style={{width: '100%', textAlign: 'center', marginTop: '2rem'}}> 

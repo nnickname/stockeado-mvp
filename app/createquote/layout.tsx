@@ -15,6 +15,7 @@ import { createQuote } from "../api/quotess/call";
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from "@table-library/react-table-library/theme";
 import { getTheme } from "@table-library/react-table-library/baseline";
+import GreyImage from '../../public/images/logo/greyimage.jpg';
 const CreateQuoteLayoutPage = () => {
     const router = useRouter();
     const [user, setUser] = useState<UserModel>(null);
@@ -39,7 +40,7 @@ const CreateQuoteLayoutPage = () => {
     const COLUMNSPRODUCT = [
         {
             label: 'Imagen',
-            renderCell: (item) => <img style={{width: '105px', maxHeight: '105px'}} src={item?.image} alt='Product Image' />
+            renderCell: (item) => <img style={{width: '105px', maxHeight: '105px'}} src={item?.image !== '' ? item.image : GreyImage.src} alt='Product Image' />
             ,
         },
         { label: 'Nombre de Producto', renderCell: (item) => <p>{item?.name}</p> },
@@ -58,7 +59,7 @@ const CreateQuoteLayoutPage = () => {
     const COLUMNSQUOTES = [
         {
             label: 'Imagen',
-            renderCell: (item) => <img style={{width: '105px', maxHeight: '105px'}} src={item?.image} alt='Product Image' />
+            renderCell: (item) => <img style={{width: '105px', maxHeight: '105px'}} src={item?.image !== '' ? item.image : GreyImage.src} alt='Product Image' />
             ,
         },
         { label: 'Nombre de Producto', renderCell: (item) => <p>{item?.product}</p> },
@@ -87,7 +88,9 @@ const CreateQuoteLayoutPage = () => {
     const themeQuotes = useTheme([
         getTheme(),
         {
-            
+            Table: `
+            --data-table-library_grid-template-columns: 150px 300px 180px 180px 180px 180px 180px  !important;
+             `,
         },
     ]);
     const [openQuotes, setOpenQuotes] = useState<boolean>();

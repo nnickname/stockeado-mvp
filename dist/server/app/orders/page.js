@@ -1016,7 +1016,7 @@ const OrdersLayoutPage = ()=>{
         if (userr?.type === "workshop") {
             ordersCast = await (0,orderss_call/* getOrdersWorkshop */.XU)(userr?.email);
         } else ordersCast = await (0,orderss_call/* getOrders */.AU)(userr?._id);
-        setOrderData(ordersCast);
+        setOrderData(ordersCast ?? []);
         setUser(userr);
     };
     const [width, setWidth] = (0,react_.useState)(0);
@@ -1034,7 +1034,7 @@ const OrdersLayoutPage = ()=>{
         (0,baseline/* getTheme */.g)(),
         {
             Table: `
-            --data-table-library_grid-template-columns: 100px 200px 100px 100px 100px 150px 
+            --data-table-library_grid-template-columns: 200px 300px 200px 200px 200px !important;
           `
         }
     ]);

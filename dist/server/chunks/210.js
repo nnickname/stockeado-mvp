@@ -83,7 +83,16 @@ const LayoutMarketPlaceNative = ()=>{
     const [isPopoverOpenCategorie, setPopoverOpenCategorie] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(false);
     const [isPopoverOpenType, setPopoverOpenType] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(false);
     const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(false);
-    const [currentPage, setCurrentPage] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(1);
+    const [currentPage, setPage] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(1);
+    const [loadingPage, setLoadingPage] = (0,react__WEBPACK_IMPORTED_MODULE_5__.useState)(false);
+    const setCurrentPage = (value)=>{
+        setPage(value);
+        window.scrollTo(0, 0);
+        setLoadingPage(true);
+        setTimeout(()=>{
+            setLoadingPage(false);
+        }, 2500);
+    };
     const postPerPage = 18;
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
         children: items === null ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_7___default()), {
@@ -462,27 +471,43 @@ const LayoutMarketPlaceNative = ()=>{
                                         ]
                                     })
                                 }),
-                                items?.length > 0 ? /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                                    children: [
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                            className: "gridItems",
-                                            children: items?.slice(currentPage * postPerPage - postPerPage, currentPage * postPerPage).map((e, index)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_marketplace_item__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z, {
-                                                    item: e,
-                                                    setCart: setCart,
-                                                    setAmmountItem: setAmmountItem,
-                                                    ammountItem: ammountItem,
-                                                    cart: cart
-                                                }, index))
-                                        }),
-                                        /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_marketplace_pagination__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z, {
-                                            setCurrentPage: setCurrentPage,
-                                            currentPage: currentPage,
-                                            postPerPage: postPerPage,
-                                            postData: items ?? []
-                                        })
-                                    ]
+                                loadingPage === true ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                    style: {
+                                        width: "100%",
+                                        textAlign: "center"
+                                    },
+                                    children: /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_7___default()), {
+                                        name: "chevron-collapse-outline",
+                                        className: "rotateItem",
+                                        color: "#1366D9",
+                                        style: {
+                                            fontSize: "1.5rem",
+                                            marginTop: "5rem"
+                                        }
+                                    })
                                 }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
-                                    children: " "
+                                    children: items?.length > 0 ? /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                                        children: [
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                                className: "gridItems",
+                                                children: items?.slice(currentPage * postPerPage - postPerPage, currentPage * postPerPage).map((e, index)=>/*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_marketplace_item__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z, {
+                                                        item: e,
+                                                        setCart: setCart,
+                                                        setAmmountItem: setAmmountItem,
+                                                        ammountItem: ammountItem,
+                                                        cart: cart
+                                                    }, index))
+                                            }),
+                                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_marketplace_pagination__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z, {
+                                                setCurrentPage: setCurrentPage,
+                                                currentPage: currentPage,
+                                                postPerPage: postPerPage,
+                                                postData: items ?? []
+                                            })
+                                        ]
+                                    }) : /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+                                        children: " "
+                                    })
                                 })
                             ]
                         })

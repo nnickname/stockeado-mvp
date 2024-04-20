@@ -77,7 +77,7 @@ const OrdersLayoutPage = () => {
           if(userr?.type === 'workshop'){
             ordersCast = await getOrdersWorkshop(userr?.email);
           }else ordersCast = await getOrders(userr?._id);
-          setOrderData(ordersCast);
+          setOrderData(ordersCast ?? []);
           setUser(userr);
       }
 
@@ -96,7 +96,7 @@ const OrdersLayoutPage = () => {
         getTheme(),
         {
           Table: `
-            --data-table-library_grid-template-columns: 100px 200px 100px 100px 100px 150px 
+            --data-table-library_grid-template-columns: 200px 300px 200px 200px 200px !important;
           `,
         },
       ]);

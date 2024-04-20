@@ -70,7 +70,16 @@ const LayoutMarketPlaceNative = () => {
     const [isPopoverOpenCategorie, setPopoverOpenCategorie] = useState<boolean>(false);
     const [isPopoverOpenType, setPopoverOpenType] = useState<boolean>(false);
     const [loading, setLoading] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setPage] = useState(1);
+    const [loadingPage, setLoadingPage] = useState<boolean>(false);
+    const setCurrentPage = (value: any) => {
+      setPage(value);
+      window.scrollTo(0, 0);
+      setLoadingPage(true);
+      setTimeout(() => {
+        setLoadingPage(false);
+      }, 2500)
+    }
     const postPerPage = 18;
 
 
@@ -261,7 +270,7 @@ const LayoutMarketPlaceNative = () => {
             <p>Se encontraron <span style={{fontWeight: '700'}}>+{items?.length} productos</span></p>
           </div>
           
-          
+          {loadingPage === true ? <div style={{width: '100%', textAlign: 'center'}}><IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', marginTop: '5rem'}}/></div> : <div>
           {items?.length > 0 ? <div>
             <div className="gridItems">
             {items?.slice(
@@ -278,7 +287,8 @@ const LayoutMarketPlaceNative = () => {
             />
             
         </div>
-          : <div> </div>}
+          : <div> </div>}</div>}
+
         </div>
         
       </div>

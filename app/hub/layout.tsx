@@ -40,10 +40,10 @@ const LayouHubDashboardPage = () =>{
         MakeData();
     }, []);
 
-    return <div>
+    return <div style={{width:'100%'}}>
         {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
         <SideBarComponent user={user} route='dashboard' frameContennt={
-            <div>
+            <div style={{width:'100%'}}>
                 <SellResume orders={ordersData} user={user}/>
                 <InventoryResume items={realInventory} orders={ordersData} user={user}/>
     

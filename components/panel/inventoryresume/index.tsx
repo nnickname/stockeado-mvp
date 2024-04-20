@@ -76,7 +76,7 @@ export const getTotalBrands = (cartItems: InventoryModel[] ) => {
         return String(brands?.length);
 }
 const InventoryResume: FunctionComponent<InventoryResume> = ({items, orders, user}) => {
-    return <div className="content-frame-container resume">
+    return <div  className="content-frame-container resume">
         <div style={{width: '100%', textAlign: 'left'}}>
             <h1>Resumen de Inventario</h1>
             <div className="resumeContainer displayGridResponsive" style={{display: 'flex'}}>

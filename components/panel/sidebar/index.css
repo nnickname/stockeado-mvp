@@ -6,8 +6,8 @@
     background-color: rgb(247, 247, 247);
     padding: 1rem;
     padding-top: 3rem;
-    width: 100% !important;
-
+    width: 100%;
+    max-width: calc(100% - 250px) !important;
 }
 
 .sidebarCustomStyle{
@@ -83,6 +83,9 @@
 
 
 @media screen and (max-width: 920px) {
+    .sideBarContainer{
+        max-width: 100vw !important;
+    }
     .sidebarCustomStyle{
         
         position: fixed;

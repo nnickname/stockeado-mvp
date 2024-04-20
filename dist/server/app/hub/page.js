@@ -443,6 +443,9 @@ const LayouHubDashboardPage = ()=>{
         MakeData();
     }, []);
     return /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("div", {
+        style: {
+            width: "100%"
+        },
         children: user === null ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx((_reacticons_ionicons__WEBPACK_IMPORTED_MODULE_9___default()), {
             name: "chevron-collapse-outline",
             className: "rotateItem",
@@ -458,6 +461,9 @@ const LayouHubDashboardPage = ()=>{
             user: user,
             route: "dashboard",
             frameContennt: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                style: {
+                    width: "100%"
+                },
                 children: [
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_panel_sellresume__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z, {
                         orders: ordersData,
