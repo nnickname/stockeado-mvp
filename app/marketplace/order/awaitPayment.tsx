@@ -1,6 +1,6 @@
 'use client';
 import { getTotalPrice } from "@/components/marketplace/header";
-import { CartProps, OrderModel } from "@/models/ordersModel";
+import { CartProps, OrderModel } from "@/models/orders.model";
 import { useRouter } from "next/navigation";
 import { FunctionComponent, useState } from "react";
 import Logo from '../../../public/images/logo/logopreferente.png';

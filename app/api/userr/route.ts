@@ -1,6 +1,6 @@
 
 import dbConnect from "../db";
-import User from "../../../models/userModel";
+import User from "../../../models/user.model";
 import bcrypt from 'bcrypt';
 import { NextResponse } from "next/server";
 import middleware from "../midd/_middleware";

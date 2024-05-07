@@ -2,7 +2,7 @@
 import dbConnect from "../db";
 import { NextResponse } from "next/server";
 import middleware from "../midd/_middleware";
-import Inventory from "../../../models/inventoryModel";
+import Inventory from "../../../models/inventory.model";
 import middlewareApi from "../midd/_middleware.api";
 
 export async function GET (req: Request | any, res: Response, next: any){
@@ -14,7 +14,7 @@ export async function GET (req: Request | any, res: Response, next: any){
        return NextResponse.json({message: 'Invalid token'});
       }
       var response = await Inventory.find({owner_id: midd});
-      return NextResponse.json({ message: "Items found", items: response});
+      return NextResponse.json({ message: "Items found", items: response?.reverse()});
     }
     return NextResponse.json({message: 'Invalid auth'});
   }

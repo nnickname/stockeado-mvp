@@ -8,7 +8,7 @@ import IonIcon from "@reacticons/ionicons";
 import { Popover } from "react-tiny-popover";
 import LogoFavicon from '../../../public/images/favicon.png';
 import { TypeBrands } from "@/models/brands";
-import { CartProps } from "@/models/ordersModel";
+import { CartProps } from "@/models/orders.model";
 import Cookie from 'universal-cookie';
 import { findProduct } from "@/app/api/marketplacee/call";
 type HeaderMarketPlaceProps = {

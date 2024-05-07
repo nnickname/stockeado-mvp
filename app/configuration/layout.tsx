@@ -6,7 +6,7 @@ import SideBarComponent from "@/components/panel/sidebar";
 import { createConnection } from "mongoose";
 import { useEffect, useState } from "react";
 import Cookie from 'universal-cookie';
-import { UserModel } from '../../models/userModel';
+import { UserModel } from '../../models/user.model';
 import './index.css';
 import blueImage from '../../public/images/logo/blueimage.png';
 import backgroundImage from '../../public/images/logo/background2.jpeg';

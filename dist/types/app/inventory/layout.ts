@@ -1,8 +1,8 @@
 // File: C:\Users\barto\OneDrive\Desktop\stockeado\stockeado-mvp\app\inventory\layout.tsx
-import * as entry from '../../../../app/inventory/layout.js'
+import * as entry from '../../../../app/provider/inventory/layout.jsx'
 import type { ResolvingMetadata } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
-type TEntry = typeof import('../../../../app/inventory/layout.js')
+type TEntry = typeof import('../../../../app/provider/inventory/layout.jsx')
 
 // Check that the entry is a valid entry
 checkFields<Diff<{

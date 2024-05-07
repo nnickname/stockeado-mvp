@@ -2,12 +2,12 @@ import IonIcon from '@reacticons/ionicons';
 import './index.css';
 
 import Image from 'next/image';
-import { InventoryModel } from '@/models/inventoryModel';
+import { InventoryModel } from '@/models/inventory.model';
 import { FunctionComponent } from 'react';
-import { CartProps, OrderModel } from '@/models/ordersModel';
+import { CartProps, OrderModel } from '@/models/orders.model';
 import { TypeBrands } from '@/models/brands';
 import { getTotalSellings } from '../sellresume';
-import { UserModel } from '@/models/userModel';
+import { UserModel } from '@/models/user.model';
 type InventoryResume = {
     items: InventoryModel[],
     orders: OrderModel[],

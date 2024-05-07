@@ -1,5 +1,5 @@
 import dbConnect from "../../db";
-import Inventory from "../../../../models/inventoryModel";
+import Inventory from "../../../../models/inventory.model";
 import { NextResponse } from "next/server";
 import middlewareApi from "../../midd/_middleware.api";
 export async function GET (req: Request | any, res: Response, next: any){

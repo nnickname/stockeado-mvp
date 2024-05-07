@@ -1,0 +1,44 @@
+.selectHomeWorkshop{
+    padding: .5rem;
+    border: 1px solid grey;
+    border-radius: .3rem;
+    padding-top: .1rem;
+    padding-bottom: .1rem;
+}
+.cardHome{
+    min-width: 300px;
+    display: flex;
+    padding: 1.3rem;
+    background-color: white;
+    border-radius: .5rem;
+}
+.cardHome p{
+    color: #979797;
+    font-size: .9rem;
+}
+.cardHome .span{
+    color: #18243D;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 2rem;
+}
+.cardHome span{
+    color: rgb(236, 230, 230);
+}
+.cardHome .icon2{
+    background-image: linear-gradient(to right, #1E367D  0%, #000000  100%);
+    border-radius: 100%;
+    padding: 1.5rem;
+}
+.cardHome .icon1{
+    background-image: linear-gradient(to right, #3662E3  0%, #1E367D  100%);
+    border-radius: 100%;
+    padding: 1.5rem;
+    font-size: 1rem !important;
+}
+.cardHome .icon3{
+    background-image: linear-gradient(to right, #18243D  0%, #3662E3  100%);
+    border-radius: 100%;
+    padding: 1.5rem;
+    font-size: 1rem !important;
+}

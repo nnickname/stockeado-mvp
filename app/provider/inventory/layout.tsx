@@ -9,11 +9,11 @@ import Modal from "react-responsive-modal";
 import 'react-responsive-modal/styles.css';
 import { TypeBrands, TypeCategories, TypeOfPiece } from "@/models/brands";
 import Link from "next/link";
-import { UserModel } from "@/models/userModel";
+import { UserModel } from "@/models/user.model";
 import Cookie from 'universal-cookie';
 import { useRouter } from "next/navigation";
-import { createInventory, createManyInventories, deleteInventory, editInventory, getInventory } from "../api/inventoryy/call";
-import { getUser } from "../api/userr/call";
+import { createInventory, createManyInventories, deleteInventory, editInventory, getInventory } from "../../api/inventoryy/call";
+import { getUser } from "../../api/userr/call";
 import { usePagination } from "@table-library/react-table-library/pagination";
 
 
@@ -23,12 +23,12 @@ import { getTheme } from "@table-library/react-table-library/baseline";
 
 
 import './index.css';
-import '../../components/marketplace/header/index.css';
+import '../../../components/marketplace/header/index.css';
 import {NotificationManager} from 'react-notifications';
-import { InventoryModel } from "@/models/inventoryModel";
+import { InventoryModel } from "@/models/inventory.model";
 import {ExcelRenderer} from 'react-excel-renderer';
-import { getOrders } from "../api/orderss/call";
-import { OrderModel } from "@/models/ordersModel";
+import { getOrders } from "../../api/orderss/call";
+import { OrderModel } from "@/models/orders.model";
 
 
 export type InventoryTableModel = {
@@ -359,6 +359,7 @@ const TableRow: FunctionComponent<TableRowParams> = ({user, inventoryData, realI
     }
    
     return <>
+      <style>{'.table{--data-table-library_grid-template-columns: 100px 200px 150px 150px 150px 200px 200px !important;}'}</style>
       <div style={{width: '100%', display: 'flex', justifyContent: 'space-between'}}>
         <h1 style={{marginBottom: '1rem', marginTop: '.5rem', fontSize: '1rem', fontWeight: '500'}}>Productos en MarketPlace <Link target="_blank" style={{fontSize: '1rem', color: '#3662E3', marginLeft: '.5rem'}} href={'/marketplace/shop?id=' + user?._id}>Mi URL<IonIcon name='open-outline'/></Link></h1>
         <div style={{display: 'flex'}}>
@@ -552,7 +553,7 @@ const LayoutHubInventoryPage = () => {
     return <>
         {inventoryData === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
         <div>
-          <SideBarComponent user={user} route='inventory' frameContennt={
+          <SideBarComponent user={user} route='/provider/inventory' frameContennt={
             <div className="resume" style={{overflow: 'hidden'}}>
                 <div>
                   <InventoryResume items={realInventoryData} orders={ordersData} user={user}/>

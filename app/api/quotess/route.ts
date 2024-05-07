@@ -17,7 +17,7 @@ export async function GET (req: Request | any, res: Response, next: any){
       }
 
       var responseQuote = await Quote.find({owner_id: token});
-      return NextResponse.json({ message: "Quote found", quotes: responseQuote});
+      return NextResponse.json({ message: "Quote found", quotes: responseQuote?.reverse()});
     }
     return NextResponse.json({message: 'Invalid auth'});
   }catch(error){

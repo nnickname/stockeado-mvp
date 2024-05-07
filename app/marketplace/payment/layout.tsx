@@ -1,7 +1,7 @@
 'use client';
 import { FunctionComponent, useEffect, useState } from 'react';
 import './index.css';
-import { CartProps } from '@/models/ordersModel';
+import { CartProps } from '@/models/orders.model';
 import { TypeBrands } from '@/models/brands';
 import IonIcon from '@reacticons/ionicons';
 import Cookie  from 'universal-cookie';

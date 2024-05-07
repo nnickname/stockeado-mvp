@@ -8,7 +8,7 @@ import Plin from '../../../public/images/logo/plin-logo-0C4106153C-seeklogo.com.
 import Tunki from '../../../public/images/logo/tunki.png';
 import Yape from '../../../public/images/logo/Yape_text_app_icon.png';
 import Link from "next/link";
-import { OrderModel } from "@/models/ordersModel";
+import { OrderModel } from "@/models/orders.model";
 export const OrderStates = ['Pendiente', 'Confirmado', 'Pagado', 'Enviando', 'Entregado'];
 
 export const BankOptions = (order: OrderModel) => {

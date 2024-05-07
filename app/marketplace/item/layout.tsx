@@ -2,9 +2,9 @@
 import { getInventoryById, getMarketPlace } from '@/app/api/inventoryy/call';
 import { getUser, getUserById } from '@/app/api/userr/call';
 import HeaderMarketPlace from '@/components/marketplace/header';
-import { InventoryModel } from '@/models/inventoryModel';
-import { CartProps } from '@/models/ordersModel';
-import { UserModel } from '@/models/userModel';
+import { InventoryModel } from '@/models/inventory.model';
+import { CartProps } from '@/models/orders.model';
+import { UserModel } from '@/models/user.model';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import './index.css';

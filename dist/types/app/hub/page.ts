@@ -1,8 +1,8 @@
 // File: C:\Users\barto\OneDrive\Desktop\stockeado\stockeado-mvp\app\hub\page.tsx
-import * as entry from '../../../../app/hub/page.js'
+import * as entry from '../../../../app/provider/home/page.jsx'
 import type { ResolvingMetadata } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
-type TEntry = typeof import('../../../../app/hub/page.js')
+type TEntry = typeof import('../../../../app/provider/home/page.jsx')
 
 // Check that the entry is a valid entry
 checkFields<Diff<{

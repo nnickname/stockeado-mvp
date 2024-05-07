@@ -3,9 +3,9 @@ import dbConnect from "../../db";
 import bcrypt from 'bcrypt';
 import { NextRequest, NextResponse } from "next/server";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import Users from '../../../../models/userModel';
+import Users from '../../../../models/user.model';
 import { headers } from 'next/headers';
-import User from "../../../../models/userModel";
+import User from "../../../../models/user.model";
 import middlewareApi from "../../midd/_middleware.api";
 export async function GET (req: Request | any, res: Response, next: any){
   try{

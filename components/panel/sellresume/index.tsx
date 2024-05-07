@@ -5,9 +5,9 @@ import Icon2 from '../../../public/images/logo/icon2.png';
 import Icon3 from '../../../public/images/logo/icon3.png';
 import Icon4 from '../../../public/images/logo/icon4.png';
 import Image from 'next/image';
-import { OrderModel } from '@/models/ordersModel';
+import { OrderModel } from '@/models/orders.model';
 import { FunctionComponent } from 'react';
-import { UserModel } from '@/models/userModel';
+import { UserModel } from '@/models/user.model';
 export const getTotalSellings = (orders: OrderModel[]) => {
     var counter=0;
     orders?.map((e) => {

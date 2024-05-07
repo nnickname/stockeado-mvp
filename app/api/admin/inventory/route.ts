@@ -1,7 +1,7 @@
 
 import { NextResponse } from "next/server";
 import dbConnect from "../../db";
-import Inventory from "../../../../models/inventoryModel";
+import Inventory from "../../../../models/inventory.model";
 import { headers } from "next/headers";
 import middlewareApi from "../../midd/_middleware.api";
 import { getTotalPriceInventory } from "@/components/panel/inventoryresume";

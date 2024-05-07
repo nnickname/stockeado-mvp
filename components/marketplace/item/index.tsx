@@ -5,9 +5,9 @@ import './index.css';
 import { Popover } from 'react-tiny-popover';
 import { FunctionComponent, useState } from 'react';
 import IonIcon from '@reacticons/ionicons';
-import { InventoryModel } from '@/models/inventoryModel';
+import { InventoryModel } from '@/models/inventory.model';
 import { TypeBrands, TypeCategories, TypeOfPiece } from '@/models/brands';
-import { CartProps } from '@/models/ordersModel';
+import { CartProps } from '@/models/orders.model';
 import Cookie from 'universal-cookie';
 import { useRouter } from 'next/navigation';
 

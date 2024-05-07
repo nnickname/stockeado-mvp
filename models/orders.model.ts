@@ -1,5 +1,5 @@
 import mongoose, {Date, model, ObjectId, Schema} from "mongoose";
-import { InventoryModel } from "./inventoryModel";
+import { InventoryModel } from "./inventory.model";
 
 export const OrderStates: String[] = ['Pendiente', 'Confirmado', 'Pagado', 'Enviando', 'Entregado'];
 

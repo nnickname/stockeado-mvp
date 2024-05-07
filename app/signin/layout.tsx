@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { getUser, loginUser } from "../api/userr/call";
 import { useRouter } from "next/navigation";
 import {NotificationManager} from 'react-notifications';
-import { UserModel } from "@/models/userModel";
+import { UserModel } from "@/models/user.model";
 import  Cookie  from "universal-cookie";
 import CSVReader from 'react-csv-reader'
 
@@ -17,7 +17,9 @@ const LayoutSignIn = () =>{
     const toUser = async () => {
         const userr = await getUser();
         if(userr !== undefined && userr !== null){
-            router.push('/hub');
+          if(userr?.type === 'workshop'){
+            router.push('/workshop/home');
+          } else router.push('/provider/home');
         }
         setUser(userr);
     }
@@ -79,8 +81,8 @@ const LayoutSignIn = () =>{
                               const response: any = await loginUser(email ?? '', password ?? '');
                               if(response !== false){
                                 if(response?.type === 'workshop'){
-                                  router.push('/quotes');
-                                } else router.push('/hub');
+                                  router.push('/workshop/home');
+                                } else router.push('/provider/home');
                               } else NotificationManager.error('La contraseña o el email no coinciden.', 'Error');
                             } else NotificationManager.error('Completa el formulario.', 'Error');
                         }} className=" flex w-full items-center justify-center rounded-sm bg-primary px-9 py-4 text-base font-medium text-white duration-300 hover:bg-primary/90">

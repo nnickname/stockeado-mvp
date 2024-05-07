@@ -8,7 +8,7 @@ td{
 
     
 .table{
-    --data-table-library_grid-template-columns: 100px 200px 100px 100px 150px 200px 200px !important;
+    --data-table-library_grid-template-columns: 100px 200px 200px 150px 150px 200px 200px !important;
 }
 
 @media screen and (max-width: 920px) {

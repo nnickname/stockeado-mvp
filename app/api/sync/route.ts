@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import dbConnect from "../db";
-import Inventory, { InventoryModel } from "../../../models/inventoryModel";
-import Users from "../../../models/userModel";
+import Inventory, { InventoryModel } from "../../../models/inventory.model";
+import Users from "../../../models/user.model";
 import bcrypt from 'bcrypt';
 import middlewareApiPublic from "../midd/_middleware.api.public";
 

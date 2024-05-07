@@ -1,7 +1,7 @@
 import dbConnect from "../../db";
 import { NextResponse } from "next/server";
-import Inventory from "../../../../models/inventoryModel";
-import Users from "../../../../models/userModel";
+import Inventory from "../../../../models/inventory.model";
+import Users from "../../../../models/user.model";
 import { headers } from "next/headers";
 import middlewareApi from "../../midd/_middleware.api";
 

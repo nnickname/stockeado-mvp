@@ -1,16 +1,16 @@
 'use client';
 import InventoryResume from "@/components/panel/inventoryresume";
 import SideBarComponent from "@/components/panel/sidebar";
-import { UserModel } from "@/models/userModel";
+import { UserModel } from "@/models/user.model";
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { getUser } from "../api/userr/call";
+import { getUser } from "../../api/userr/call";
 import { usePagination } from "@table-library/react-table-library/pagination";
-import { OrderModel, OrderStates, getOrderState } from "@/models/ordersModel";
+import { OrderModel, OrderStates, getOrderState } from "@/models/orders.model";
 import { getTotalPrice } from "@/components/marketplace/header";
 import './index.css';
-import { getOrders, getOrdersWorkshop } from "../api/orderss/call";
+import { getOrders, getOrdersWorkshop } from "../../api/orderss/call";
 import SellResume from "@/components/panel/sellresume";
 import IonIcon from "@reacticons/ionicons";
 import Link from "next/link";
@@ -103,7 +103,7 @@ const OrdersLayoutPage = () => {
       
       return <>  
         {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
-        <SideBarComponent user={user} route='orders' frameContennt={
+        <SideBarComponent user={user} route='/provider/orders' frameContennt={
           <div className="resume" style={{overflow: 'hidden'}}>
               <div>
                   {user?.type === 'workshop' ? <></> : 

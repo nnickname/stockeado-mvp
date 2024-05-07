@@ -1,7 +1,7 @@
 
 import { NextResponse } from "next/server";
 import dbConnect from "../../db";
-import User from '../../../../models/userModel';
+import User from '../../../../models/user.model';
 import middlewareApi from "../../midd/_middleware.api";
 export async function POST(
     req: Request,

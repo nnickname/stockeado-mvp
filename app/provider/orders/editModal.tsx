@@ -1,14 +1,14 @@
 'use client';
 import { TypeBrands } from "@/models/brands"
-import { OrderModel } from "@/models/ordersModel"
+import { OrderModel } from "@/models/orders.model"
 import { FunctionComponent, useState } from "react"
-import { BankOptions, OrderStates } from "../marketplace/payment/bank";
+import { BankOptions, OrderStates } from "../../marketplace/payment/bank";
 import 'react-responsive-modal/styles.css';
-import './../marketplace/order/index.css';
+import '../../marketplace/order/index.css';
 import { getTotalPrice } from "@/components/marketplace/header";
-import { updateOrderState } from "../api/orderss/call";
+import { updateOrderState } from "../../api/orderss/call";
 import IonIcon from "@reacticons/ionicons";
-import { sendMailHookApi } from "../api/email/call";
+import { sendMailHookApi } from "../../api/email/call";
 import changesEmailTemplate from "@/utils/mail/orders/changes";
 type editModalProps = {
     order: OrderModel

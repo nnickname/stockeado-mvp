@@ -1,6 +1,6 @@
 
 import dbConnect from "../db";
-import Order from "../../../models/ordersModel";
+import Order from "../../../models/orders.model";
 import bcrypt from 'bcrypt';
 import { NextResponse } from "next/server";
 import { headers } from 'next/headers';

@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import '../index.css';
 import HeaderMarketPlace, { getTotalPrice } from "@/components/marketplace/header";
 import '../../../components/marketplace/background/index.css';
-import { CartProps, OrderModel } from "@/models/ordersModel";
+import { CartProps, OrderModel } from "@/models/orders.model";
 import { useRouter, useSearchParams } from 'next/navigation';
 import Logo from '../../../public/images/logo/logopreferente.png';
 import '../payment/index.css';

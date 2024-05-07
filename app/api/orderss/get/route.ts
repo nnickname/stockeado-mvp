@@ -1,5 +1,5 @@
 import dbConnect from "../../db";
-import Order from "../../../../models/ordersModel";
+import Order from "../../../../models/orders.model";
 import bcrypt from 'bcrypt';
 import { NextResponse } from "next/server";
 import { headers } from 'next/headers';
@@ -14,7 +14,7 @@ export async function GET (req: Request | any, res: Response, next: any){
       return NextResponse.json({message: 'Invalid token'});
       }
       var responseUser = await Order.find({email: token});
-      return NextResponse.json({ message: "Orders found", orders: responseUser});
+      return NextResponse.json({ message: "Orders found", orders: responseUser?.reverse()});
     }
     return NextResponse.json({message: 'Invalid auth'});
   } catch(error){

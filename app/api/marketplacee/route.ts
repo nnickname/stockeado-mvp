@@ -1,7 +1,7 @@
 
 export const dynamic = 'force-dynamic'
 import dbConnect from "../db";
-import Inventory from "../../../models/inventoryModel";
+import Inventory from "../../../models/inventory.model";
 import { NextResponse } from "next/server";
 import { headers } from 'next/headers';
 import middlewareApi from "../midd/_middleware.api";
