@@ -10,6 +10,7 @@ import '../home/index.css';
 import Modal from "react-responsive-modal";
 import 'react-responsive-modal/styles.css';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import Select from "react-dropdown-select";
 
 const ClientsWorkshopLayoutPage = ( ) => {
     
@@ -102,7 +103,33 @@ const ClientsWorkshopLayoutPage = ( ) => {
                 </div>
                 <div className="flex between mt1">
                     <p className="formTitle">Asociar vehículos</p>
-                    <input className="inputForm ml1" type="text" placeholder=""/>
+                    <Select
+                                        multi
+                                        options={[
+                                            {
+                                                label: 'BMW 1',
+                                                value: '0',
+                                            },
+                                            {
+                                                label: 'BMW 2',
+                                                value: '1',
+                                            },
+                                            {
+                                                label: 'BMW 3',
+                                                value: '2',
+                                            },
+                                            {
+                                                label: 'BMW 4',
+                                                value: '3',
+                                            },
+                                            {
+                                                label: 'BMW 5',
+                                                value: '4',
+                                            }
+                                        ]}
+                                        separator
+                                        className="inputForm"
+                                        onChange={(values) => { } } values={[]}                                    />
                 </div>
                 <div className="center w100 mt2">
                     <button className="btn-gradient-primary">Guardar cliente</button>
@@ -113,6 +140,7 @@ const ClientsWorkshopLayoutPage = ( ) => {
 }
 
 const TableComponent = () => {
+    const router = useRouter();
     const columns: GridColDef[] = [
         
         
@@ -124,17 +152,18 @@ const TableComponent = () => {
           valueGetter: (value, row) => `${row.name || ''} ${row.lastname || ''}`,
           headerClassName: 'color-table-header'
         },
-        { field: 'vehicle', headerName: 'Vehículo', headerClassName: 'color-table-header'},
+        { field: 'vehicle', headerName: 'Vehículo', width: 200, headerClassName: 'color-table-header'},
         { field: 'phone', headerName: 'Celular', width: 200, headerClassName: 'color-table-header'},
         { field: 'service', headerName: 'Último servicio', width: 200, headerClassName: 'color-table-header'},
-        { field: 'calendars', headerName: 'Recordatorios', headerClassName: 'color-table-header'},
+        { field: 'calendars', headerName: 'Recordatorios', width: 200, headerClassName: 'color-table-header'},
         {
             field: 'action',
-            headerName: '',
+            headerName: 'Ver/Editar',
             sortable: false,
             width: 160,
-            align: 'center',
-            renderCell: (params) => <button className="btn mt05">
+            align: 'left',
+            headerClassName: 'color-table-header',
+            renderCell: (params) => <button onClick={() => router.push('/workshop/clients/view')} className="btn mt05">
                 <IonIcon style={{fontSize: '1.5rem', color: "#3662E3"}} name='eye-outline'/>
             </button>
         },
@@ -152,8 +181,10 @@ const TableComponent = () => {
             calendars: '10'
         }
     ];      
-    return <div className="mt1" style={{minHeight: 500}}>
+    return <div className="mt1" style={{minHeight: 500, width: '100%'}}>
         <DataGrid
+        autoPageSize={true}
+        autoHeight={true}
         rows={rows}
         columns={columns}
         initialState={{
@@ -162,6 +193,7 @@ const TableComponent = () => {
             },
         }}
         pageSizeOptions={[5, 10]}
+        
         
         />
   </div>

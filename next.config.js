@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   //distDir: './dist/',
+  experimental: {
+    serverComponentsExternalPackages: ['pdf2json'],
+  },
   eslint: { 
     ignoreDuringBuilds: true, 
   }, 

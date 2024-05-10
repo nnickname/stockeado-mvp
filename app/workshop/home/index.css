@@ -42,3 +42,14 @@
     padding: 1.5rem;
     font-size: 1rem !important;
 }
+.MuiBox-root, .MuiPaper-root, .MuiButtonBase-root div{
+    background-color: #D0DCFF !important;
+    border-radius: .5rem !important;
+    box-shadow: none !important;
+}
+.MuiPaper-elevation{
+    background-color: white !important;
+}
+.MuiTypography-root{
+    color: #1E367D !important;
+}

@@ -1,6 +1,6 @@
 
 import { Metadata } from "next";
-import ClientsWorkshopLayoutPage from "./layout";
+import ClientsWorkshopLayoutPage from "./layoutview";
 export const metadata: Metadata = {
     title: "Stockeado - Clientes",
     description: "Stockeado | Clientes",

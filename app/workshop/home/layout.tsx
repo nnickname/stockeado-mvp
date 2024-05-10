@@ -30,7 +30,7 @@ const HomeWorkshopLayoutPage = () => {
                     <h1 className="headerSideBar"> Dashboard general</h1>
                     <div className="p1">
                         <div className="flex"> 
-                            <button onClick={() => router.push('/workshop/inspections/new')} className="btn-gradient-primary"><IonIcon className="mr1" name="search-outline" style={{fontSize: '1.1rem'}}/> <span style={{fontSize: '1rem'}}> Nueva Inspección</span></button>
+                            <button onClick={() => router.push('/workshop/inspections/create')} className="btn-gradient-primary"><IonIcon className="mr1" name="search-outline" style={{fontSize: '1.1rem'}}/> <span style={{fontSize: '1rem'}}> Nueva Inspección</span></button>
                             <button className="btn-gradient-secondary ml1"><IonIcon className="mr1" name="briefcase-outline" style={{fontSize: '1.1rem'}}/> <span style={{fontSize: '1rem'}}>Nuevo servicio</span></button>
                             <button className="btn-gradient-secondary ml1"><IonIcon className="mr1" name="person-outline" style={{fontSize: '1.1rem'}}/> <span style={{fontSize: '1rem'}}>Nuevo cliente</span></button>
 
@@ -48,8 +48,8 @@ const HomeWorkshopLayoutPage = () => {
                             
                         </div>
 
-                        <div className="flex between mt1 displayBlockResponsive">
-                            <div className="cardHome">
+                        <div className="flex between displayBlockResponsive">
+                            <div className="cardHome mt1">
                                 <div>
                                     <div className="icon1">
                                         <IonIcon size="large" name="car-outline"/>
@@ -60,7 +60,7 @@ const HomeWorkshopLayoutPage = () => {
                                     <span className="span">25</span>
                                 </div>
                             </div>
-                            <div className="cardHome">
+                            <div className="cardHome mt1">
                                 <div>
                                     <div className="icon2">
                                         <IonIcon size="large" name="cash-outline"/>
@@ -71,7 +71,7 @@ const HomeWorkshopLayoutPage = () => {
                                     <span className="span">s/. 1400</span>
                                 </div>
                             </div>
-                            <div className="cardHome">
+                            <div className="cardHome mt1">
                                 <div>
                                     <div className="icon3">
                                         <IonIcon size="large" name="cart-outline"/>
@@ -86,8 +86,8 @@ const HomeWorkshopLayoutPage = () => {
                         <div>
                             <p className="subtitle mt1">Clientes</p>
                         </div>
-                        <div className="flex between mt1 displayBlockResponsive">
-                            <div className="cardHome">
+                        <div className="flex between displayBlockResponsive">
+                            <div className="cardHome mt1">
                                 <div>
                                     <div className="icon1">
                                         <IonIcon size="large" name="person-add-outline"/>
@@ -98,7 +98,7 @@ const HomeWorkshopLayoutPage = () => {
                                     <span className="span">11</span>
                                 </div>
                             </div>
-                            <div className="cardHome">
+                            <div className="cardHome mt1">
                                 <div>
                                     <div className="icon2">
                                         <IonIcon size="large" name="bar-chart-outline"/>
@@ -109,7 +109,7 @@ const HomeWorkshopLayoutPage = () => {
                                     <span className="span">+ 45%</span>
                                 </div>
                             </div>
-                            <div className="cardHome">
+                            <div className="cardHome mt1">
                                 <div>
                                     <div className="icon3">
                                         <IonIcon size="large" name="cart-outline"/>

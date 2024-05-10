@@ -1,0 +1,32 @@
+.withIconDeleteRight{
+    position: relative;
+}
+.withIconDeleteRight .icon{
+    cursor: pointer;
+    position: absolute;
+    right: 1rem;
+    top: 1.5rem;
+    color: rgb(178, 40, 40);
+    font-size: 1rem;
+}
+
+.item-create{
+    display: inline-block;
+    padding: .5rem;
+    width: max-content !important;
+    background-color: #D0DCFF;
+    border-radius: .3rem;
+    border: 1px solid #3662E3;
+    color: #3662E3;
+    font-size: 1rem !important;
+}
+.item-create span{
+    cursor: pointer;
+    font-size: 1.2rem !important;
+}
+.item-create span:hover{
+    color: #992424;
+}
+.inline-items{
+    display: inline-block;
+}

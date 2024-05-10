@@ -3,7 +3,7 @@
     width: 100% !important;
 }
 .sideBarContainer{
-    background-color: rgb(247, 247, 247);
+    background-color: #F5F7FA;
     width: 100%;
     max-width: calc(100% - 188px) !important;
 }

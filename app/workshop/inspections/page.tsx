@@ -1,13 +1,13 @@
 
 import { Metadata } from "next";
-import InspectionWorkshopLayoutPage from "./layout";
+import LayoutViewClientWorkShop from "./layoutview";
 export const metadata: Metadata = {
-    title: "Stockeado - Nueva inspección",
-    description: "Stockeado | Nueva inspección",
+    title: "Stockeado - Inspecciones",
+    description: "Stockeado | Inspecciones",
 
 };
 const Page = () => {
-    return <InspectionWorkshopLayoutPage/>;
+    return <LayoutViewClientWorkShop/>;
 }
 
 export default Page;
