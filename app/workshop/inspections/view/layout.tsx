@@ -5,10 +5,10 @@ import { UserModel } from "@/models/user.model";
 import IonIcon from "@reacticons/ionicons";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import './index.css';
+import '../create/index.css';
 import Select from "react-dropdown-select";
 
-const InspectionWorkshopLayoutPage = () => {
+const InspectionViewWorkshopLayoutPage = () => {
     const router = useRouter();
     const [user, setUser] = useState<UserModel>(null);
     const toUser = async () => {
@@ -30,7 +30,7 @@ const InspectionWorkshopLayoutPage = () => {
             <SideBarComponent user={user} route='/workshop/inspections' frameContennt={
                 <div>
                     <div className="flex between">
-                        <h1 className="headerSideBar"> Nuevo informe de inspección</h1>
+                        <h1 className="headerSideBar"> Editar informe de inspección</h1>
                         <div style={{background: 'white'}}>
                             <button  onClick={() => router.push('/workshop/inspections')} className="btn-back mr1 mt1"><IonIcon name="arrow-back-outline"/></button>
                         </div>
@@ -232,7 +232,18 @@ const InspectionWorkshopLayoutPage = () => {
 
                             <p className="formTitle mt2">Trabajos a realizar</p>
                             <div className="inline-items">
-                                
+                                <div className="item-create mt1 ml1">
+                                    <div className="flex">
+                                        <p>Cambio de bujías x5</p>
+                                        <IonIcon className="icon ml1" name="trash-outline"/>
+                                    </div>
+                                </div>
+                                <div className="item-create mt1 ml1">
+                                    <div className="flex">
+                                        <p>Cambio de liquido refrigerante</p>
+                                        <IonIcon className="icon ml1" name="trash-outline"/>
+                                    </div>
+                                </div>
                                 
                             </div>
                             
@@ -252,7 +263,18 @@ const InspectionWorkshopLayoutPage = () => {
                                 <IonIcon className="ml1" name="eye-off-outline"/>
                             </div>
                             <div className="inline-items">
-                                
+                                <div className="item-create mt1 ml1">
+                                    <div className="flex">
+                                        <p>100.000km avisar revision 24/10/2024:11:00</p>
+                                        <IonIcon className="icon ml1" name="trash-outline"/>
+                                    </div>
+                                </div>
+                                <div className="item-create mt1 ml1">
+                                    <div className="flex">
+                                        <p>Cambio de aceite 10/10/2024:11:00</p>
+                                        <IonIcon className="icon ml1" name="trash-outline"/>
+                                    </div>
+                                </div>
                                 
                             </div>
                             <div className="flex w100">
@@ -271,6 +293,13 @@ const InspectionWorkshopLayoutPage = () => {
                                         <IonIcon className="icon ml1" name="trash-outline"/>
                                     </div>
                                 </div>
+                                <div className="item-create mt1 ml1">
+                                    <div className="flex">
+                                        <p>Rueda de auxilio</p>
+                                        <IonIcon className="icon ml1" name="trash-outline"/>
+                                    </div>
+                                </div>
+                                
                             </div>
                             <div className="flex w100">
                                 <input className="inputForm mt1 w100" type="text" placeholder="" style={{borderRadius: '.5rem 0rem 0rem .5rem'}}/>
@@ -300,8 +329,8 @@ const InspectionWorkshopLayoutPage = () => {
                         </div>
 
                         <div className=" center mt1 mSidesAuto">
-                            <button className="btn-gradient-third mr1">Crear inspección</button>
-                            <button className="btn-disabled-secondary ml1 " disabled>Crear orden de servicio</button>
+                            <button className="btn-gradient-third mr1">Guardad inspección</button>
+                            <button className="btn-gradient-secondary ml1 " >Crear orden de servicio</button>
                         </div>
 
                         
@@ -313,4 +342,4 @@ const InspectionWorkshopLayoutPage = () => {
         }
     </div>
 }
-export default InspectionWorkshopLayoutPage;
+export default InspectionViewWorkshopLayoutPage;

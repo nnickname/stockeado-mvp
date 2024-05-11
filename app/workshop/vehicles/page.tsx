@@ -1,9 +1,9 @@
 
 import { Metadata } from "next";
-import VehiclesWorkshopLayoutPage from "./layout";
+import VehiclesWorkshopLayoutPage from "./layoutview";
 export const metadata: Metadata = {
-    title: "Stockeado - Clientes",
-    description: "Stockeado | Clientes",
+    title: "Stockeado - Vehículos",
+    description: "Stockeado | Vehículos",
 
 };
 const Page = () => {

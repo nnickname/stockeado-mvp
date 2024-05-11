@@ -1,0 +1,28 @@
+.btn-payed{
+           
+    background-color: #4cd2404e ;
+    padding: .3rem;
+    color: #18712C;
+    font-weight: 500;
+    font-size: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.btn-process{
+    background-color: #c0bc433d ;
+    padding: .3rem;
+    color: #C0BB43;
+    font-weight: 500;
+    font-size: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.btn-deliveried{
+    background-color: #d9952e45 ;
+    padding: .3rem;
+    color: #D9942E;
+    font-weight: 500;
+    font-size: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}

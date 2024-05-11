@@ -2,23 +2,22 @@
 import { getUser } from "@/app/api/userr/call";
 import SideBarComponent from "@/components/panel/sidebar";
 import { UserModel } from "@/models/user.model";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import IonIcon from "@reacticons/ionicons";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import '../../../components/marketplace/header/index.css';
 import '../home/index.css';
 import Modal from "react-responsive-modal";
 import 'react-responsive-modal/styles.css';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Select from "react-dropdown-select";
+import Link from "next/link";
 
-const ClientsWorkshopLayoutPage = ( ) => {
-    
+const VehiclesWorkshopLayoutPage = ( ) => {
     const router = useRouter();
-    const [open, setOpen] = useState<boolean>();
     const [user, setUser] = useState<UserModel>(null);
-    const [search, setSearch] = useState("");
-
+    const [open, setOpen] = useState<boolean>();
+    const [width, setWidth] = useState(0)
+    const handleResize = () => setWidth(window.innerWidth)
     const toUser = async () => {
         const userr = await getUser();
         if(userr === undefined || userr === null){
@@ -29,36 +28,31 @@ const ClientsWorkshopLayoutPage = ( ) => {
         }
         setUser(userr);
       }
-    const [width, setWidth] = useState(0)
-    const handleResize = () => setWidth(window.innerWidth)
     useEffect(() => {
         toUser();
         handleResize()
         window.addEventListener('resize', handleResize)
         return () => window.removeEventListener('resize', handleResize);
     }, []);
-    const handleSearch = (event: any) => {
-        setSearch(event.target.value);
-    }
     return <div>
         {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
-            <SideBarComponent user={user} route='/workshop/clients' frameContennt={
+            <SideBarComponent user={user} route='/workshop/vehicles' frameContennt={
                 <div>
-                    <h1 className="headerSideBar"> Clientes</h1>
+                    <h1 className="headerSideBar"> Vehículos</h1>
                     <div className="p1">
                         <div className="flex between">
                             <div>
-                                <p className="subtitle mt2">Clientes recientes</p>
+                                <p className="subtitle mt2">Vehículos registrados recientes</p>
                             </div>
                             <div>
-                                <button onClick={() => setOpen(true)} className="btn-gradient-secondary mt1"><IonIcon className="mr1" name="person-add-outline" style={{fontSize: '1.1rem'}}/> <span style={{fontSize: '1rem'}}>Nuevo cliente</span></button>
+                                <button onClick={() => setOpen(true)} className="btn-gradient-secondary mt1"><IonIcon className="mr1" name="car-outline" style={{fontSize: '1.1rem'}}/> <span style={{fontSize: '1rem'}}>Nuevo vehículo</span></button>
                             </div>
                         </div>
                         
                         <div className="flex w100 mt1">
                             <div className="inputRightIcon">
                                 
-                                <input placeholder="Busca por nombre, placa o fecha"/>
+                                <input placeholder="Busca por vehículo, placa o fecha"/>
                                 <div>
                                     <IonIcon name="search-outline"/>
                                 </div>
@@ -68,94 +62,92 @@ const ClientsWorkshopLayoutPage = ( ) => {
                                         <option>Mayo</option>
                                 </select>
                         </div>
-                        <TableComponent />
+                        <TableComponent/>
                     </div>
                 </div>
             }
-
-
             />
         }
 
-        <Modal closeIcon={<IonIcon name="close"/>} styles={{
+<Modal closeIcon={<IonIcon name="close"/>} styles={{
               modal : {borderRadius: '.5rem', width: '100%', padding: '0rem', maxWidth: width < 921 ? '80%' : '600px'},
               closeIcon: {color: 'white !important'},
               overlay: {backgroundColor: 'rgba(220, 217, 217, 0.5)'}
             }}  open={open} center onClose={() => setOpen(false) }>
               <div style={{padding: '1rem'}}>
-                <h1 className="title">Nuevo cliente</h1>
-                <h2 className="subtitle mt1">Cliente #22</h2>
+                <h1 className="title">Nuevo vehículo</h1>
+                <h2 className="subtitle mt1">Vehículo #22</h2>
                 <div className="flex between mt1">
-                    <p className="formTitle">Nombre</p>
+                    <p className="formTitle">Marca</p>
                     <input className="inputForm" type="text" placeholder=""/>
                 </div>
                 <div className="flex between mt1">
-                    <p className="formTitle">Apellido</p>
+                    <p className="formTitle">Modelo</p>
                     <input className="inputForm ml1" type="text" placeholder=""/>
                 </div>
                 <div className="flex between mt1">
-                    <p className="formTitle">Celular</p>
+                    <p className="formTitle">Año</p>
                     <input className="inputForm ml1" type="text" placeholder=""/>
                 </div>
                 <div className="flex between mt1">
-                    <p className="formTitle">Correo</p>
+                    <p className="formTitle">Placa</p>
                     <input className="inputForm ml1" type="text" placeholder=""/>
                 </div>
                 <div className="flex between mt1">
-                    <p className="formTitle">Asociar vehículos</p>
+                    <p className="formTitle">VIN</p>
+                    <input className="inputForm ml1" type="text" placeholder=""/>
+                </div>
+                <div className="flex between mt1">
+                    <p className="formTitle">Asociar cliente</p>
                     <Select
                                         multi
                                         options={[
                                             {
-                                                label: 'BMW 1',
+                                                label: 'Jorge Perer',
                                                 value: '0',
                                             },
                                             {
-                                                label: 'BMW 2',
+                                                label: 'Jorge Perez',
                                                 value: '1',
                                             },
                                             {
-                                                label: 'BMW 3',
+                                                label: 'Mauricio Perez',
                                                 value: '2',
                                             },
                                             {
-                                                label: 'BMW 4',
+                                                label: 'Jose Perez',
                                                 value: '3',
                                             },
                                             {
-                                                label: 'BMW 5',
+                                                label: 'Hector Perez',
                                                 value: '4',
                                             }
                                         ]}
                                         separator
-                                        placeholder="Seleccionar varios"
+                                        placeholder="Seleccionar/buscar"
                                         className="inputForm"
                                         onChange={(values) => { } } values={[]}                                    />
                 </div>
                 <div className="center w100 mt2">
-                    <button className="btn-gradient-primary">Guardar cliente</button>
+                    <button className="btn-gradient-primary">Guardar vehículo</button>
                 </div>
               </div>
           </Modal>
     </div>
 }
 
+
+
 const TableComponent = () => {
     const router = useRouter();
     const columns: GridColDef[] = [
         
         
-        {
-          field: 'fullName',
-          headerName: 'Nombre',
-          sortable: false,
-          width: 160,
-          valueGetter: (value, row) => `${row.name || ''} ${row.lastname || ''}`,
-          headerClassName: 'color-table-header'
-        },
+        
         { field: 'vehicle', headerName: 'Vehículo', width: 200, headerClassName: 'color-table-header'},
-        { field: 'phone', headerName: 'Celular', width: 200, headerClassName: 'color-table-header'},
-        { field: 'service', headerName: 'Último servicio', width: 200, headerClassName: 'color-table-header'},
+        { field: 'plate', headerName: 'Placa', width: 150, headerClassName: 'color-table-header'},
+        { field: 'client', headerName: 'Cliente', width: 200, headerClassName: 'color-table-header'},
+        { field: 'lastService', headerName: 'Último servicio', width: 200, headerClassName: 'color-table-header'},
         { field: 'calendars', headerName: 'Recordatorios', width: 200, headerClassName: 'color-table-header'},
         {
             field: 'action',
@@ -164,26 +156,26 @@ const TableComponent = () => {
             width: 160,
             align: 'left',
             headerClassName: 'color-table-header',
-            renderCell: (params) => <button onClick={() => router.push('/workshop/clients/view')} className="btn mt05">
+            renderCell: (params) => <Link href='/workshop/vehicles/view' className="btn mt05">
                 <IonIcon style={{fontSize: '1.5rem', color: "#3662E3"}} name='eye-outline'/>
-            </button>
+            </Link>
         },
 
     ];
     const rows = [
         {
             id: 0,
-            realid: '19394',
-            name: 'Hola',
-            lastname: 'Chau',
-            phone: '+542050484754',
+            client: 'Jorge Perez',
+            plate: 'MKY-485',
             vehicle: 'BMEW I30',
-            service: '23-04/10',
+            lastService: '23-04/10',
             calendars: '10'
         }
     ];      
     return <div className="mt1" style={{minHeight: 500, width: '100%'}}>
         <DataGrid
+        disableColumnSelector
+        rowSelection={false}
         autoPageSize={true}
         autoHeight={true}
         rows={rows}
@@ -199,4 +191,4 @@ const TableComponent = () => {
         />
   </div>
 }
-export default ClientsWorkshopLayoutPage;
+export default VehiclesWorkshopLayoutPage;

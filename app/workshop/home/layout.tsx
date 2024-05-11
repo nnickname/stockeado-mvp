@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import './index.css';
 import SchedulerRender from "./scheduler";
+import Link from "next/link";
 const HomeWorkshopLayoutPage = () => {
     const router = useRouter();
     const [user, setUser] = useState<UserModel>(null);
@@ -30,8 +31,8 @@ const HomeWorkshopLayoutPage = () => {
                     <h1 className="headerSideBar"> Dashboard general</h1>
                     <div className="p1">
                         <div className="flex"> 
-                            <button onClick={() => router.push('/workshop/inspections/create')} className="btn-gradient-primary"><IonIcon className="mr1" name="search-outline" style={{fontSize: '1.1rem'}}/> <span style={{fontSize: '1rem'}}> Nueva Inspección</span></button>
-                            <button className="btn-gradient-secondary ml1"><IonIcon className="mr1" name="briefcase-outline" style={{fontSize: '1.1rem'}}/> <span style={{fontSize: '1rem'}}>Nuevo servicio</span></button>
+                            <Link href='/workshop/inspections/create'  className="btn-gradient-primary"><IonIcon className="mr1" name="search-outline" style={{fontSize: '1.1rem'}}/> <span style={{fontSize: '1rem'}}> Nueva Inspección</span></Link>
+                            <Link href='/workshop/orders/create'  className="btn-gradient-secondary ml1"><IonIcon className="mr1" name="briefcase-outline" style={{fontSize: '1.1rem'}}/> <span style={{fontSize: '1rem'}}>Nuevo servicio</span></Link>
                             <button className="btn-gradient-secondary ml1"><IonIcon className="mr1" name="person-outline" style={{fontSize: '1.1rem'}}/> <span style={{fontSize: '1rem'}}>Nuevo cliente</span></button>
 
                         </div>

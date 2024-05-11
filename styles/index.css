@@ -142,6 +142,16 @@ input{
   padding-left: 1rem;
   padding-right: 1rem;
 }
+.btn-gradient-third{
+           
+  background-image: linear-gradient(to right, #3662E3  0%, #3956ad  100%);
+  padding: .5rem;
+  color: white;
+  font-size: .9rem;
+  border-radius: .3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
 
 .btn-gradient-secondary{
            
@@ -158,11 +168,11 @@ input{
 .btn-disabled-secondary{
            
   background-color: #a9aeb84d;
-  padding: .5rem;
+  padding: .3rem;
   color: #979797;
   font-weight: 500;
   font-size: 1rem;
-  border-radius: .3rem;
+  border-radius: .5rem !important;
   padding-left: 1rem;
   padding-right: 1rem;
 }
@@ -173,7 +183,7 @@ input{
   color: #1B53C5;
   font-weight: 500;
   font-size: 1rem;
-  border-radius: .3rem;
+  border-radius: .5rem !important;
   padding-left: 1rem;
   padding-right: 1rem;
 }
@@ -196,6 +206,9 @@ input{
 .btn{
   cursor: pointer;
 }
+.color-trash{
+  color: #9c272e !important;
+}
 .btn-link{
   color: #3662E3;
   font-size: 1rem; 
@@ -217,11 +230,17 @@ input{
   padding-left: 2rem;
   padding-right: 2rem;
 }
+.br0{
+  border-radius: 0px !important;
+}
 .center{
   text-align: center;
 }
 .right{
-  text-align: right;
+  text-align: right !important;
+}
+.left{
+  text-align: left !important;
 }
 .title{
   font-size: 1.2rem;
@@ -273,6 +292,9 @@ input{
 }
 .w100{
   width: 100%;
+}
+.maxContent{
+  width: max-content !important;
 }
 .color-table-header{  
   color: #718EBF;

@@ -5,10 +5,9 @@ import { UserModel } from "@/models/user.model";
 import IonIcon from "@reacticons/ionicons";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import './index.css';
 import Select from "react-dropdown-select";
-
-const InspectionWorkshopLayoutPage = () => {
+import '../../inspections/create/index.css';
+const NewOrderWorkshopLayoutPage = () => {
     const router = useRouter();
     const [user, setUser] = useState<UserModel>(null);
     const toUser = async () => {
@@ -27,12 +26,12 @@ const InspectionWorkshopLayoutPage = () => {
     }, []);
     return <div>
         {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
-            <SideBarComponent user={user} route='/workshop/inspections' frameContennt={
+            <SideBarComponent user={user} route='/workshop/orders' frameContennt={
                 <div>
                     <div className="flex between">
-                        <h1 className="headerSideBar"> Nuevo informe de inspección</h1>
+                        <h1 className="headerSideBar"> Nuevo orden de servicio</h1>
                         <div style={{background: 'white'}}>
-                            <button  onClick={() => router.push('/workshop/inspections')} className="btn-back mr1 mt1"><IonIcon name="arrow-back-outline"/></button>
+                            <button  onClick={() => router.push('/workshop/orders')} className="btn-back mr1 mt1"><IonIcon name="arrow-back-outline"/></button>
                         </div>
                     </div>
                     <div className="p1">
@@ -40,17 +39,50 @@ const InspectionWorkshopLayoutPage = () => {
 
                         <div className="flex between">
                             <div>
-                                <p className="subtitle mt1" style={{fontWeight: '500'}}>Inspección #21</p>
+                                <p className="subtitle mt1" style={{fontWeight: '500'}}>Orden de servicio #21</p>
                             </div>
-                            <div className="flex">
+                            <div className="flex displayBlockResponsive">
                                 <p className="subtitle mr1 mt1">Estado</p>
-                                <div className="mt1">
-                                    <button disabled className="btn-disabled-secondary ml1">Sin confirmar</button>
+                                <div>
+                                    <button disabled className="btn-disabled-secondary ml1 mt1">Sin confirmar</button>
                                 </div>
                             </div>
                         </div>
 
-
+                        <div className="">
+                            <div className="card p2 mt1 flex maxContent displayBlockResponsive w100Responsive">
+                                <p className="formTitle mr1 mt1">Informe de inspeción</p>
+                                <div className="ml1 mt1">
+                                    <Select
+                                        options={[
+                                            {
+                                                label: '#21 - ANZ-252',
+                                                value: '0',
+                                            },
+                                            {
+                                                label: '#22 - ANZ-252',
+                                                value: '1',
+                                            },
+                                            {
+                                                label: '#23 - ANZ-252',
+                                                value: '2',
+                                            },
+                                            {
+                                                label: '#24 - ANZ-252',
+                                                value: '3',
+                                            },
+                                            {
+                                                label: '#25 - ANZ-252',
+                                                value: '4',
+                                            }
+                                        ]}
+                                        separator
+                                        placeholder="Seleccionar/Buscar"
+                                        className="inputForm"
+                                        onChange={(values) => { } } values={[]}                                    />
+                                </div>
+                            </div>
+                        </div>
                         <div className="cardWhiteForm mt2">
                             <p className="subsubtitle">Generales</p>
                             <div className="flex between displayBlockResponsive w100">
@@ -98,23 +130,23 @@ const InspectionWorkshopLayoutPage = () => {
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Nombre</p>
-                                    <input className="inputForm ml1" type="text" placeholder=""/>
+                                    <input className="inputForm" type="text" placeholder=""/>
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Apellido</p>
-                                    <input className="inputForm ml1" type="text" placeholder=""/>
+                                    <input className="inputForm" type="text" placeholder=""/>
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Celular</p>
-                                    <input className="inputForm ml1" type="text" placeholder=""/>
+                                    <input className="inputForm" type="text" placeholder=""/>
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Correo</p>
-                                    <input className="inputForm ml1" type="text" placeholder=""/>
+                                    <input className="inputForm" type="text" placeholder=""/>
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Visita</p>
-                                    <input className="inputForm ml1" type="text" placeholder=""/>
+                                    <input className="inputForm" type="text" placeholder=""/>
                                 </div>
                             </div>
                             <div className="cardWhiteForm mt1 w100">
@@ -150,23 +182,23 @@ const InspectionWorkshopLayoutPage = () => {
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Placa</p>
-                                    <input className="inputForm ml1" type="text" placeholder=""/>
+                                    <input className="inputForm" type="text" placeholder=""/>
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Marca</p>
-                                    <input className="inputForm ml1" type="text" placeholder=""/>
+                                    <input className="inputForm" type="text" placeholder=""/>
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Modelo</p>
-                                    <input className="inputForm ml1" type="text" placeholder=""/>
+                                    <input className="inputForm" type="text" placeholder=""/>
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Año</p>
-                                    <input className="inputForm ml1" type="text" placeholder=""/>
+                                    <input className="inputForm" type="text" placeholder=""/>
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">VIN</p>
-                                    <input className="inputForm ml1" type="text" placeholder=""/>
+                                    <input className="inputForm" type="text" placeholder=""/>
                                 </div>
                             </div>
                             
@@ -177,111 +209,73 @@ const InspectionWorkshopLayoutPage = () => {
 
 
 
+                        
+
                         <div className="cardWhiteForm mt1">
-                            <p className="subsubtitle">Estado del vehículo actual</p>
-                            <div className="flex between displayBlockResponsive mt1">
-                                <div className="w100 mr1 nPaddingLeftResponsive" style={{paddingRight: '2rem'}}>
-                                    <div className="flex between mt1">
-                                        <p className="formTitle ">Kilometraje</p>
-                                        <input className="inputForm ml1" type="text" placeholder=""/>
+                            <p className="subsubtitle">Trabajos a realizar </p>
+                            
+                            <div className="mt2">
+                                <div className="flex between right">
+                                    <div className="w100 ml1 left">
+                                        <p>x1</p>
                                     </div>
-
-                                </div>
-                                <div className="w100 nPaddingLeftResponsive" style={{ paddingLeft: '2rem'}}>
-                                    <div className="flex between mt1">
-                                        <p className="formTitle" >Nivel de aceite</p>
-                                        <input className="inputForm ml1" type="text" placeholder=""/>
+                                    <p className="w100">Cambio de agua </p>
+                                    <p className="w100">s/. 350</p>
+                                    <div className="w100 mr1">
+                                        <IonIcon className="btn color-trash"  name="trash-outline"/>
                                     </div>
-
                                 </div>
-                            </div>
-
-                            <div className="flex between displayBlockResponsive">
-                                <div className="w100 mr1 nPaddingLeftResponsive" style={{paddingRight: '2rem'}}>
-                                    <div className="flex between mt1">
-                                        <p className="formTitle ">Nivel de gasolina</p>
-                                        <input className="inputForm ml1" type="text" placeholder=""/>
+                                <div className="flex between right mt1">
+                                    <div className="w100 ml1 left">
+                                        <p>x1</p>
                                     </div>
-
-                                </div>
-                                <div className="w100 nPaddingLeftResponsive" style={{ paddingLeft: '2rem'}}>
-                                    <div className="flex between mt1">
-                                        <p className="formTitle" >Líquido de frenos</p>
-                                        <input className="inputForm ml1" type="text" placeholder=""/>
+                                    <p className="w100">Cambio de agua </p>
+                                    <p className="w100">s/. 350</p>
+                                    <div className="w100 mr1">
+                                        <IonIcon className="btn color-trash"  name="trash-outline"/>
                                     </div>
-
                                 </div>
-                            </div>
-
-                            <div className="flex between displayBlockResponsive">
-                                <div className="w100 mr1 nPaddingLeftResponsive" style={{paddingRight: '2rem'}}>
-                                    <div className="flex between mt1">
-                                        <p className="formTitle ">Refrigerante</p>
-                                        <input className="inputForm ml1" type="text" placeholder=""/>
-                                    </div>
-
-                                </div>
-                                <div className="w100 nPaddingLeftResponsive" style={{ paddingLeft: '2rem'}}>
-                                    <div className="flex between mt1">
-                                        <p className="formTitle" >Fotos actuales(max 4)</p>
-                                        <input className="inputForm ml1" type="text" placeholder=""/>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <p className="formTitle mt2">Trabajos a realizar</p>
-                            <div className="inline-items">
                                 
                                 
+                            </div>
+                            <div className="flex w100 mt2">
+                                <p style={{marginLeft: 'auto'}} className="subsubtitle mr1">Total</p>
+                                <input className="inputForm ml1" type="text" placeholder=""/>
+                            </div>
+                            <div className="flex w100 mt05">
+                                <input type="number" min={0} className="inputForm w100" placeholder='Cantidad' style={{borderRadius: '.5rem 0rem 0rem .5rem'}}/>
+                                <input className="inputForm  w100" type="text" placeholder="Descripción" style={{borderRadius: '0rem 0rem 0rem 0rem'}}/>
+                                <input className="inputForm  w100" type="text" placeholder="Precio" style={{borderRadius: '0rem 0rem 0rem 0rem'}}/>
+                                <button className="btn-gradient-secondary " style={{border:'1px solid grey', borderRadius: '0px .5rem .5rem 0rem'}} >Añadir</button>
                             </div>
                             
-                            <div className="flex w100">
-                                <input className="inputForm mt1 w100" type="text" placeholder="" style={{borderRadius: '.5rem 0rem 0rem .5rem'}}/>
-                                <button className="btn-gradient-secondary mt1" style={{border: '1px solid grey', borderRadius: '0px .5rem .5rem 0rem'}} >Añadir</button>
+                        </div>
+
+
+
+                        <div className="cardWhiteForm mt1">
+                            <div className="flex between displayBlockResponsive">
+                                <div className="w100 mr1 nPaddingLeftResponsive" style={{paddingRight: '2rem'}}>
+                                    <div className="flex between mt1">
+                                        <p className="formTitle ">Fecha estimada</p>
+                                        <input className="inputForm" type="datetime-local" placeholder=""/>
+                                    </div>
+
+                                </div>
+                                <div className="w100 nPaddingLeftResponsive" style={{ paddingLeft: '2rem'}}>
+                                    <div className="flex between mt1">
+                                        <p className="formTitle" >Espacio en el taller</p>
+                                        <input className="inputForm" type="text" placeholder=""/>
+                                    </div>
+
+                                </div>
                             </div>
-                            <p className="formTitle mt2">Observaciones adicionales</p>
+                            <p className="formTitle mt2">Notas adicionales</p>
                             <input className="inputForm mt1 w100" type="text" placeholder=""/>
                         </div>
 
 
 
-                        <div className="cardWhiteForm mt1">
-                            <div className="flex">
-                                <p className="subsubtitle">Recordatorios </p>
-                                <IonIcon className="ml1" name="eye-off-outline"/>
-                            </div>
-                            <div className="inline-items">
-                                
-                                
-                            </div>
-                            <div className="flex w100">
-                                <input type="datetime-local" className="inputForm mt1" style={{borderRadius: '.5rem 0rem 0rem .5rem'}}/>
-                                <input className="inputForm mt1 w100" type="text" placeholder="Descripción" style={{borderRadius: '0rem 0rem 0rem 0rem'}}/>
-                                <button className="btn-gradient-secondary mt1" style={{border:'1px solid grey', borderRadius: '0px .5rem .5rem 0rem'}} >Añadir</button>
-                            </div>
-                        </div>
- 
-                        <div className="cardWhiteForm mt1">
-                            <p className="subsubtitle">Accesorios</p>
-                            <div className="inline-items">
-                                <div className="item-create mt1 ml1">
-                                    <div className="flex">
-                                        <p>Kit de auxilio</p>
-                                        <IonIcon className="icon ml1" name="trash-outline"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="flex w100">
-                                <input className="inputForm mt1 w100" type="text" placeholder="" style={{borderRadius: '.5rem 0rem 0rem .5rem'}}/>
-                                <button className="btn-gradient-secondary mt1" style={{border: '1px solid grey', borderRadius: '0px .5rem .5rem 0rem'}} >Añadir</button>
-                            </div>
-                        </div>
-
-                        
-                        
-                        
-                        
                         <div className="mSidesAuto" style={{width: 'max-content'}}>
                             <div className="card p2 mt1 flex" >
                                 <p className="formTitle mr1">Resultados scanner</p>
@@ -299,9 +293,8 @@ const InspectionWorkshopLayoutPage = () => {
                             </div>
                         </div>
 
-                        <div className=" center mt1 mSidesAuto">
-                            <button className="btn-gradient-third mr1">Crear inspección</button>
-                            <button className="btn-disabled-secondary ml1 " disabled>Crear orden de servicio</button>
+                        <div className="center mt1 mSidesAuto">
+                            <button className="btn-gradient-third mr1">Crear orden de servicio</button>
                         </div>
 
                         
@@ -313,4 +306,4 @@ const InspectionWorkshopLayoutPage = () => {
         }
     </div>
 }
-export default InspectionWorkshopLayoutPage;
+export default NewOrderWorkshopLayoutPage;

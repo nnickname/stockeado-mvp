@@ -25,7 +25,7 @@ const LayouHubDashboardPage = () =>{
             router.push('/signin');
         }
         if(userr?.type === 'workshop'){
-            router.push('/quotes');
+            router.push('/workshop/home');
         }
         const ordersCast = await getOrders(userr?._id);
         setOrderData(ordersCast);

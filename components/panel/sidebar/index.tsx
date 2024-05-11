@@ -38,7 +38,7 @@ const WorkShopOptions: TypeAccountOptions[] = [
     },
     {
         name: 'Órdenes  servicio',
-        icon: 'briefcase-outline',
+        icon: 'bag-outline',
         color: '#1570EF',
         route: '/workshop/orders'
     },
@@ -98,17 +98,17 @@ const SideBarComponent: FunctionComponent<SideBarProps> = ({user, frameContennt,
                 <div style={{marginTop: '3rem'}}></div>
                 {user?.type === 'workshop' ? 
                     WorkShopOptions.map((e: TypeAccountOptions, index: number) => {
-                        return <div key={index} className={e?.route === route ? 'list listactive' : 'list'} onClick={() => router.push(e.route)}>
+                        return <Link key={index} className={e?.route === route ? 'list listactive' : 'list'} href={e.route}>
                             <IonIcon style={{color: route === e.route ? e.color : 'black', marginRight: '1rem'}} className="icon" name={e.icon as any} />
                             <p style={{color: route === e?.route ? e?.color : 'black'}} className="text">{e.name}</p>
-                        </div>
+                        </Link>
                     })
                 :
                     ProvidersOptions.map((e: TypeAccountOptions, index: number) => {
-                        return <div key={index} className={e?.route === route ? 'list listactive' : 'list'} onClick={() => router.push(e.route)}>
+                        return <Link key={index} className={e?.route === route ? 'list listactive' : 'list'} href={e.route}>
                             <IonIcon style={{color: route === e.route ? e.color : 'black', marginRight: '1rem'}} className="icon" name={e.icon as any} />
                             <p style={{color: route === e?.route ? e?.color : 'black'}} className="text">{e.name}</p>
-                        </div>
+                        </Link>
                     })
                 }
                 
