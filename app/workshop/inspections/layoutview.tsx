@@ -26,7 +26,7 @@ const LayoutViewInspectionsWorkShop = ( ) => {
     useEffect(() => {
         toUser();
     }, []);
-    return <div>
+    return <div className="w100">
         {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
             <SideBarComponent user={user} route='/workshop/inspections' frameContennt={
                 <div className="">
@@ -53,7 +53,9 @@ const LayoutViewInspectionsWorkShop = ( ) => {
                                         <option>Mayo</option>
                                 </select>
                         </div>
-                        <TableComponent/>
+                        <div className="w100">
+                            <TableComponent/>
+                        </div>
                     </div>
                 </div>
             }/>
@@ -147,8 +149,9 @@ const TableComponent = () => {
     ];      
     return <div className="mt1" style={{minHeight: 500, width: '100%'}}>
         <DataGrid
-        
+        localeText={ValuesDataGridLocale}
         autoPageSize={true}
+        autoHeight={true}
         rowSelection={false}
         rows={rows}
         columns={columns}
@@ -162,4 +165,44 @@ const TableComponent = () => {
         />
   </div>
 }
+
+export const ValuesDataGridLocale = {
+    columnMenuLabel: 'Menu',
+    columnMenuShowColumns: 'Mostrar columna',
+    columnMenuManageColumns: 'Editar columna',
+    columnMenuFilter: 'Filtros',
+    columnMenuHideColumn: 'Esconder columna',
+    columnMenuUnsort: 'No filtrar',
+    columnMenuSortAsc: 'Filtrar por ascendente',
+    columnMenuSortDesc: 'Filtrar por descendente',
+    filterOperatorContains: 'Tipo',
+    filterOperatorEquals: 'Igual',
+    filterOperatorStartsWith: 'Empieza como',
+    filterOperatorEndsWith: 'Termina como',
+    filterOperatorIs: 'Es',
+    filterOperatorNot: 'No es',
+    filterOperatorAfter: 'Es despues',
+    filterOperatorOnOrAfter: 'Es o no despues',
+    filterOperatorBefore: 'Es antes',
+    filterOperatorOnOrBefore: 'Es o no antes',
+    filterOperatorIsEmpty: 'Es vacio',
+    filterOperatorIsNotEmpty: 'No es vacio',
+    filterOperatorIsAnyOf: 'Es cualquiera de',
+  'filterOperator=': 'Igual',
+  'filterOperator!=': 'No igual',
+  'filterOperator>': 'Mayor que',
+  'filterOperator>=': 'Mayor o igual que',
+  'filterOperator<': 'Menor que',
+  'filterOperator<=': 'Menor o igual que',
+  filterPanelAddFilter: 'Añadir filtro',
+  filterPanelRemoveAll: 'Remover todo',
+  filterPanelDeleteIconLabel: 'Eliminar',
+  filterPanelLogicOperator: 'Operador lógico',
+  filterPanelOperator: 'Operador',
+  filterPanelOperatorAnd: 'Y',
+  filterPanelOperatorOr: 'O',
+  filterPanelColumns: 'Columas',
+  filterPanelInputLabel: 'Valor',
+  filterPanelInputPlaceholder: 'Filtrar valor',
+};
 export default LayoutViewInspectionsWorkShop;

@@ -11,6 +11,7 @@ import Modal from "react-responsive-modal";
 import 'react-responsive-modal/styles.css';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Select from "react-dropdown-select";
+import { ValuesDataGridLocale } from "../inspections/layoutview";
 
 const ClientsWorkshopLayoutPage = ( ) => {
     
@@ -184,6 +185,7 @@ const TableComponent = () => {
     ];      
     return <div className="mt1" style={{minHeight: 500, width: '100%'}}>
         <DataGrid
+        localeText={ValuesDataGridLocale}
         autoPageSize={true}
         autoHeight={true}
         rows={rows}

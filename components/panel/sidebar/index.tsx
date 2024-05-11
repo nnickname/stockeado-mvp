@@ -80,7 +80,7 @@ const SideBarComponent: FunctionComponent<SideBarProps> = ({user, frameContennt,
     const cookies = new Cookie();
     const [open, setOpen] = useState<boolean>(true);
     
-    return <div>
+    return <div className="">
         <div className="responsiveButtonViewNavigation" style={{display: 'none', width: '100%', textAlign: 'right'}}>
                 <button style={{fontSize: '.9rem', color: 'grey', position: 'absolute', top: '1rem', right: '1rem'}} onClick={() => setOpen(!open)}>{open ? <IonIcon style={{fontSize: '1.5rem', color: 'grey'}} name="eye-off-outline"/> : 
                 <IonIcon style={{fontSize: '1.5rem', color: 'grey'}} name="menu-outline"/>}</button>
@@ -127,9 +127,9 @@ const SideBarComponent: FunctionComponent<SideBarProps> = ({user, frameContennt,
                     <p className="text">Cerrar sesión</p>
                 </div>
             </div>
-        <div className="sideBarContainer" >
-            {frameContennt}
-        </div>
+            <div className="sideBarContainer w100" >
+                {frameContennt}
+            </div>
         </div>
     </div>
     

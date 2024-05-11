@@ -9,6 +9,7 @@ import '../home/index.css';
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import './index.css';
 import Link from "next/link";
+import { ValuesDataGridLocale } from "../inspections/layoutview";
 function getOrderServiceTextState (state: string){
     switch(state){
         case 'pending': return 'Sin confirmar'; break;
@@ -165,7 +166,7 @@ const TableComponent = () => {
     ];      
     return <div className="mt1" style={{minHeight: 500, width: '100%'}}>
         <DataGrid
-        
+        localeText={ValuesDataGridLocale}
         autoPageSize={true}
         autoHeight={true}
         rows={rows}

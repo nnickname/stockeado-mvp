@@ -1,8 +1,31 @@
+'use client';
 import { Scheduler } from "@aldabil/react-scheduler"
+import { ProcessedEvent } from "@aldabil/react-scheduler/types";
+import { useState } from "react";
 
 const SchedulerRender = ( ) => {
+
+    const date = new Date();
+    var date15m = date;
+    date15m.setHours(date.getHours() + 1);
+    const events: ProcessedEvent[] = [
+        {
+            event_id: 1,
+            title: '100.000km revision',
+            start: new Date(),
+            end: date15m,
+            disabled: false,
+            color: '#D0DCFF !important',
+            textColor: '#1E367D',
+            editable: true,
+            deletable: false,
+            draggable: false,
+        }
+    ]
+    const [finalEvents, setFinalEvents] = useState<ProcessedEvent[]>(events);
     return <div>
         <Scheduler
+        events={events}
         translations={
             {
                 navigation: {
@@ -58,13 +81,13 @@ const SchedulerRender = ( ) => {
            weekStartOn: 6,
            startHour: 0,
            endHour: 24,
-           step: 30
+           step: 60
          }}
          day={
             {
                 startHour: 0, 
                 endHour: 24, 
-                step: 30,
+                step: 60,
                 navigation: true
                 }
          }

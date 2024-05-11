@@ -11,6 +11,7 @@ import Modal from "react-responsive-modal";
 import 'react-responsive-modal/styles.css';
 import Select from "react-dropdown-select";
 import Link from "next/link";
+import { ValuesDataGridLocale } from "../inspections/layoutview";
 
 const VehiclesWorkshopLayoutPage = ( ) => {
     const router = useRouter();
@@ -174,10 +175,9 @@ const TableComponent = () => {
     ];      
     return <div className="mt1" style={{minHeight: 500, width: '100%'}}>
         <DataGrid
-        disableColumnSelector
         rowSelection={false}
+        localeText={ValuesDataGridLocale}
         autoPageSize={true}
-        autoHeight={true}
         rows={rows}
         columns={columns}
         initialState={{

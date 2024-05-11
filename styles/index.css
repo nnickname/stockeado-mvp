@@ -206,6 +206,9 @@ input{
 .btn{
   cursor: pointer;
 }
+.color-link{
+  color: #3662E3 !important;
+}
 .color-trash{
   color: #9c272e !important;
 }
@@ -306,6 +309,7 @@ input{
 .react-dropdown-select-option, .react-dropdown-select-item-selected {
   background: #D0DCFF !important;
   color: #5079f2 !important;
+  
 }
 @media screen and (max-width: 980px) {
   .btn-back{
