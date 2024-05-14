@@ -42,6 +42,7 @@
     "react-responsive-modal": "^6.4.2",
     "react-spinners": "^0.13.8",
     "react-tiny-popover": "^8.0.4",
+    "react-toastify": "^10.0.5",
     "sharp": "^0.33.2",
     "universal-cookie": "^4.0.4"
   },

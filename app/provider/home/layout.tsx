@@ -5,13 +5,13 @@ import SellResume from "@/components/panel/sellresume";
 import SideBarComponent from "@/components/panel/sidebar";
 import { createConnection } from "mongoose";
 import { useEffect, useState } from "react";
-import { getUser } from "../../api/userr/call";
+import { getUser } from "../../api/user/call";
 import Cookie from 'universal-cookie';
 import { UserModel } from '../../../models/user.model';
 import { InventoryModel } from "@/models/inventory.model";
-import { getInventory } from "../../api/inventoryy/call";
+import { getInventory } from "../../api/provider/inventory/call";
 import { OrderModel } from "@/models/orders.model";
-import { getOrders } from "../../api/orderss/call";
+import { getOrders } from "../../api/provider/orders/call";
 import IonIcon from "@reacticons/ionicons";
 const LayouHubDashboardPage = () =>{
     const router = useRouter();

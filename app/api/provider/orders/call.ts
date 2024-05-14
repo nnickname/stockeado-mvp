@@ -1,9 +1,9 @@
-import axios from '../call';
+import axios from '../../call';
 
 export const createOrder = async (body: object) => {
     
     try{
-        const response: any = await axios.post("/orderss", {...body}, {headers: {authorization: process.env.NEXT_PUBLIC_API_TOKEN}});
+        const response: any = await axios.post("/provider/orders", {...body}, {headers: {authorization: process.env.NEXT_PUBLIC_API_TOKEN}});
         console.log(response);
         if(response?.data?.order !== undefined){
             return response?.data?.order;
@@ -17,7 +17,7 @@ export const getOrders = async (id: string) => {
     
     try{
         
-        const response: any = await axios.get("/orderss/edit", {headers: {'token': id, authorization: process.env.NEXT_PUBLIC_API_TOKEN}});
+        const response: any = await axios.get("/provider/orders/edit", {headers: {'token': id, authorization: process.env.NEXT_PUBLIC_API_TOKEN}});
         console.log(response);
         return response?.data?.orders;
     }
@@ -29,7 +29,7 @@ export const getOrdersWorkshop = async (id: string) => {
     
     try{
         
-        const response: any = await axios.get("/orderss/get", {headers: {'token': id, authorization: process.env.NEXT_PUBLIC_API_TOKEN}});
+        const response: any = await axios.get("/provider/orders/get", {headers: {'token': id, authorization: process.env.NEXT_PUBLIC_API_TOKEN}});
         console.log(response);
         return response?.data?.orders;
     }
@@ -40,7 +40,7 @@ export const getOrdersWorkshop = async (id: string) => {
 export const updateOrderState = async (body: object) => {
     try{
         
-        const response: any = await axios.post("/orderss/edit", body, {headers: {authorization: process.env.NEXT_PUBLIC_API_TOKEN}});
+        const response: any = await axios.post("/provider/orders/edit", body, {headers: {authorization: process.env.NEXT_PUBLIC_API_TOKEN}});
         if(response?.data?.order !== undefined){
             return response?.data?.order;
         } else return null;
@@ -53,7 +53,7 @@ export const getOrder = async (id: string) => {
     
     try{
         
-        const response: any = await axios.get("/orderss", {headers: {'token': id, authorization: process.env.NEXT_PUBLIC_API_TOKEN}});
+        const response: any = await axios.get("/provider/orders", {headers: {'token': id, authorization: process.env.NEXT_PUBLIC_API_TOKEN}});
         return response?.data?.order;
     }
     catch(error){

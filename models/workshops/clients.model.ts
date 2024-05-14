@@ -4,14 +4,12 @@ export interface ClientsModel extends Document {
     _id: ObjectId;
     name: string;
     lastname: string;
+    owner: string;
     phone: string;
     email: string;
     vehicles: string[];
-    inspections: string[];
-    services: string[];
 }
 
-/* PetSchema will correspond to a collection in your MongoDB database. */
 const ClientSchema = new Schema({
   name: {
     type: String,
@@ -20,6 +18,10 @@ const ClientSchema = new Schema({
   lastname: {
     type: String,
     required: [true, "Please provide a lastname."],
+  },
+  owner: {
+    type: String,
+    required: [true, 'Please provide a owner']
   },
   phone: {
     type: String,
@@ -33,14 +35,5 @@ const ClientSchema = new Schema({
     type: Array,
     required: [false]
   },
-  inspections: {
-    type: Array,
-    required: [false]
-  },
-  services: {
-    type: Array,
-    required: [false]
-  }
-  
 });
-export default  mongoose.models.Clients || model<ClientsModel>("clients", ClientSchema);
+export default  mongoose.models.clients || model<ClientsModel>("clients", ClientSchema);

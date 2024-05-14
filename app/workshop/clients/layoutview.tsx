@@ -1,10 +1,10 @@
 'use client';
-import { getUser } from "@/app/api/userr/call";
+import { getUser } from "@/app/api/user/call";
 import SideBarComponent from "@/components/panel/sidebar";
 import { UserModel } from "@/models/user.model";
 import IonIcon from "@reacticons/ionicons";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, FunctionComponent } from "react";
 import '../../../components/marketplace/header/index.css';
 import '../home/index.css';
 import Modal from "react-responsive-modal";
@@ -12,14 +12,26 @@ import 'react-responsive-modal/styles.css';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Select from "react-dropdown-select";
 import { ValuesDataGridLocale } from "../inspections/layoutview";
+import { createClient, getAllClients } from "@/app/api/workshop/clients/call";
+import { ClientsModel } from "@/models/workshops/clients.model";
+import { toast } from "react-toastify";
+import { VehiclesModel } from "@/models/workshops/vehicles.model";
+import { getAllVehicles } from "@/app/api/workshop/vehicles/call";
 
 const ClientsWorkshopLayoutPage = ( ) => {
-    
     const router = useRouter();
     const [open, setOpen] = useState<boolean>();
     const [user, setUser] = useState<UserModel>(null);
-    const [search, setSearch] = useState("");
+    const [clients, setClients] = useState<ClientsModel[]>(null);
 
+    const [search, setSearch] = useState("");
+    const [name, setName] = useState<string>('');
+    const [lastname, setLastName] = useState<string>('');
+    const [phone, setPhone] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [vehicles, setVehicles] = useState<string[]>([]);
+    const [formError, setErrorForm] = useState<string>('');
+    const [vehiclesOptions, setVehiclesOptions] = useState<VehiclesModel[]>([]);
     const toUser = async () => {
         const userr = await getUser();
         if(userr === undefined || userr === null){
@@ -28,8 +40,26 @@ const ClientsWorkshopLayoutPage = ( ) => {
         if(userr?.type !== 'workshop'){
             router.push('/provider/home');
         }
+        const clientss = await getAllClients(userr?._id) ?? [];
+        const vehicless = await getAllVehicles(String(userr?._id)) ?? [];
         setUser(userr);
-      }
+        setClients(clientss);
+        setVehiclesOptions(vehicless);
+    }
+    const buildForm = async() => {
+        if(name !== '' && lastname !== '' && phone !== '' && email !== ''){
+            const body = {
+                name, lastname, phone, email, vehicles, owner: String(user._id)
+            };
+            const response = await createClient(body);
+            if(response){
+                toast.success('Cliente añadido')
+                const clientss = await getAllClients(String(user?._id)) ?? [];
+                setClients(clientss);
+                setOpen(false);
+            } else setErrorForm('* Ocurrio un problema');
+        } else setErrorForm('* Encontramos errores en el formulario');
+    }
     const [width, setWidth] = useState(0)
     const handleResize = () => setWidth(window.innerWidth)
     useEffect(() => {
@@ -69,7 +99,22 @@ const ClientsWorkshopLayoutPage = ( ) => {
                                         <option>Mayo</option>
                                 </select>
                         </div>
-                        <TableComponent />
+                        <TableComponent rows={
+                            [...clients?.map((e, index: number) => {
+                                return {
+                                    id: index,
+                                    realid: e?._id,
+                                    name: e?.name,
+                                    lastname: e?.lastname,
+                                    phone: e?.phone,
+                                    vehicle: String(e?.vehicles?.map((a) =>{
+                                        return vehiclesOptions.find((e) => String(e?._id) === a).brand + ' ' + vehiclesOptions.find((e) => String(e?._id) === a).model + ' '
+                                    })).substring(0, 25) + '...',
+                                    service: '',
+                                    calendars: '2'
+                                }
+                            })]
+                        } />
                     </div>
                 </div>
             }
@@ -85,63 +130,55 @@ const ClientsWorkshopLayoutPage = ( ) => {
             }}  open={open} center onClose={() => setOpen(false) }>
               <div style={{padding: '1rem'}}>
                 <h1 className="title">Nuevo cliente</h1>
-                <h2 className="subtitle mt1">Cliente #22</h2>
+                <h2 className="subtitle mt1">Cliente #{clients?.length + 1}</h2>
                 <div className="flex between mt1">
                     <p className="formTitle">Nombre</p>
-                    <input className="inputForm" type="text" placeholder=""/>
+                    <input className="inputForm" onChange={(e) => setName(e.target.value)} type="text" placeholder=""/>
                 </div>
                 <div className="flex between mt1">
                     <p className="formTitle">Apellido</p>
-                    <input className="inputForm ml1" type="text" placeholder=""/>
+                    <input className="inputForm ml1" onChange={(e) => setLastName(e.target.value)} type="text" placeholder=""/>
                 </div>
                 <div className="flex between mt1">
                     <p className="formTitle">Celular</p>
-                    <input className="inputForm ml1" type="text" placeholder=""/>
+                    <input className="inputForm ml1" onChange={(e) => setPhone(e.target.value)} type="text" placeholder=""/>
                 </div>
                 <div className="flex between mt1">
                     <p className="formTitle">Correo</p>
-                    <input className="inputForm ml1" type="text" placeholder=""/>
+                    <input className="inputForm ml1" onChange={(e) => setEmail(e.target.value)} type="text" placeholder=""/>
                 </div>
                 <div className="flex between mt1">
                     <p className="formTitle">Asociar vehículos</p>
                     <Select
-                                        multi
-                                        options={[
-                                            {
-                                                label: 'BMW 1',
-                                                value: '0',
-                                            },
-                                            {
-                                                label: 'BMW 2',
-                                                value: '1',
-                                            },
-                                            {
-                                                label: 'BMW 3',
-                                                value: '2',
-                                            },
-                                            {
-                                                label: 'BMW 4',
-                                                value: '3',
-                                            },
-                                            {
-                                                label: 'BMW 5',
-                                                value: '4',
-                                            }
-                                        ]}
-                                        separator
-                                        placeholder="Seleccionar varios"
-                                        className="inputForm"
-                                        onChange={(values) => { } } values={[]}                                    />
+                        
+                        multi
+                        options={[...vehiclesOptions?.map((e) => {
+                            return {
+                                label: e?.brand + ' ' + e?.model,
+                                value: String(e?._id)
+                            }
+                        })]}
+                        separator
+                        placeholder="Seleccionar varios"
+                        className="inputForm"
+                        onChange={(values) => {setVehicles([...values?.map((e) => String(e.value))])} } 
+                        values={[]}                                    />
                 </div>
+                {formError === '' ? <p></p> : <p className="subsubtitle color-trash">{formError}</p>}
+
                 <div className="center w100 mt2">
-                    <button className="btn-gradient-primary">Guardar cliente</button>
+                    <button className="btn-gradient-primary" onClick={() => buildForm()}>Guardar cliente</button>
                 </div>
               </div>
           </Modal>
     </div>
 }
 
-const TableComponent = () => {
+
+export type NewTableComponentType = {
+    rows: any
+}
+const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
     const router = useRouter();
     const columns: GridColDef[] = [
         
@@ -171,31 +208,18 @@ const TableComponent = () => {
         },
 
     ];
-    const rows = [
-        {
-            id: 0,
-            realid: '19394',
-            name: 'Hola',
-            lastname: 'Chau',
-            phone: '+542050484754',
-            vehicle: 'BMEW I30',
-            service: '23-04/10',
-            calendars: '10'
-        }
-    ];      
+          
     return <div className="mt1" style={{minHeight: 500, width: '100%'}}>
         <DataGrid
-        localeText={ValuesDataGridLocale}
-        autoPageSize={true}
-        autoHeight={true}
-        rows={rows}
-        columns={columns}
-        initialState={{
-            pagination: {
-            paginationModel: { page: 0, pageSize: 5 },
-            },
-        }}
-        pageSizeOptions={[5, 10]}
+            localeText={ValuesDataGridLocale}
+            rows={rows}
+            columns={columns}
+            initialState={{
+                pagination: {
+                paginationModel: { page: 0, pageSize: 10 },
+                },
+            }}
+            pageSizeOptions={[5, 10, 50]}
         
         
         />

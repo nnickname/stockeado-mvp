@@ -2,18 +2,20 @@
 import Header from "@/components/dashboard/Header";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { getUser, loginUser } from "../api/userr/call";
+import { getUser, loginUser } from "../api/user/call";
 import { useRouter } from "next/navigation";
 import {NotificationManager} from 'react-notifications';
 import { UserModel } from "@/models/user.model";
 import  Cookie  from "universal-cookie";
 import CSVReader from 'react-csv-reader'
+import { toast } from "react-toastify";
 
 const LayoutSignIn = () =>{
   var router = useRouter();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-    const [user, setUser] = useState<UserModel>();
+  const [user, setUser] = useState<UserModel>();
+  const [formError, setErrorForm] = useState<string>('');
     const toUser = async () => {
         const userr = await getUser();
         if(userr !== undefined && userr !== null){
@@ -73,18 +75,20 @@ const LayoutSignIn = () =>{
                       className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none"
                     />
                   </div>
-                  
-                  <div className="mb-6">
+                  {formError === '' ? <p></p> : <p className="subsubtitle color-trash" >{formError}</p>}
+
+                  <div className="mb-6 mt1">
                     <button type='button' onClick={async () => {
                             if(password !== '' && email !== ''){
                               NotificationManager.info('Estamos validando los datos.', 'Espera');
                               const response: any = await loginUser(email ?? '', password ?? '');
                               if(response !== false){
                                 if(response?.type === 'workshop'){
+                                  toast.success('Te estamos redirigiendo..')
                                   router.push('/workshop/home');
                                 } else router.push('/provider/home');
-                              } else NotificationManager.error('La contraseña o el email no coinciden.', 'Error');
-                            } else NotificationManager.error('Completa el formulario.', 'Error');
+                              } else setErrorForm('* La contraseña o el email no coinciden.');
+                            } else setErrorForm('* Completa el formulario.');
                         }} className=" flex w-full items-center justify-center rounded-sm bg-primary px-9 py-4 text-base font-medium text-white duration-300 hover:bg-primary/90">
                       Continuar
                     </button>
@@ -92,7 +96,7 @@ const LayoutSignIn = () =>{
                 </form>
                 <p className="text-center text-base font-medium text-body-color">
                   No tienes una cuenta?{" "}
-                  <Link href="/signup" className="text-primary hover:underline">
+                  <Link href="/workshops" className="text-primary hover:underline">
                     Crear
                   </Link>
                 </p>

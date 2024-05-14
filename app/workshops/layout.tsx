@@ -3,7 +3,7 @@ import Header from "@/components/dashboard/Header"
 import Link from "next/link"
 import { useState } from "react";
 import {NotificationManager} from 'react-notifications';
-import { createUser } from "../api/userr/call";
+import { createUser } from "../api/user/call";
 import { useRouter } from "next/navigation";
 
 const LayoutSignUp = () => {
@@ -33,7 +33,7 @@ const LayoutSignUp = () => {
           const response = await createUser(body);
           if(response){
             NotificationManager.success('Creaste tu cuenta', 'Creada');
-            setTimeout(() => router.push('/quotes'), 1500);
+            setTimeout(() => router.push('/workshop/home'), 1500);
           } else NotificationManager.error('Usuario ya registrado', 'Error');
         }else NotificationManager.error('Completa el formulario', 'Error');
 

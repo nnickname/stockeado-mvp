@@ -1,5 +1,5 @@
 'use client';
-import { getUser } from "@/app/api/userr/call";
+import { getUser } from "@/app/api/user/call";
 import SideBarComponent from "@/components/panel/sidebar";
 import { UserModel } from "@/models/user.model";
 import IonIcon from "@reacticons/ionicons";

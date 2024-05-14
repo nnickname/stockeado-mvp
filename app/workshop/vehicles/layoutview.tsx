@@ -1,23 +1,34 @@
 'use client';
-import { getUser } from "@/app/api/userr/call";
+import { getUser } from "@/app/api/user/call";
 import SideBarComponent from "@/components/panel/sidebar";
 import { UserModel } from "@/models/user.model";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import IonIcon from "@reacticons/ionicons";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, FunctionComponent } from "react";
 import '../home/index.css';
 import Modal from "react-responsive-modal";
 import 'react-responsive-modal/styles.css';
 import Select from "react-dropdown-select";
 import Link from "next/link";
 import { ValuesDataGridLocale } from "../inspections/layoutview";
+import { createVehicle, getAllVehicles } from "@/app/api/workshop/vehicles/call";
+import { VehiclesModel } from "@/models/workshops/vehicles.model";
+import { toast } from "react-toastify";
+import { NewTableComponentType } from "../clients/layoutview";
 
 const VehiclesWorkshopLayoutPage = ( ) => {
     const router = useRouter();
     const [user, setUser] = useState<UserModel>(null);
     const [open, setOpen] = useState<boolean>();
-    const [width, setWidth] = useState(0)
+    const [width, setWidth] = useState(0);
+    const [vehicles, setVehicles] = useState<VehiclesModel[]>([]);
+    const [brand, setBrand] = useState<string>('');
+    const [model, setModel] = useState<string>('');
+    const [year, setYear] = useState<string>('');
+    const [plate, setPlate] = useState<string>('');
+    const [vin, setVin] = useState<string>('');
+    const [formError, setErrorForm] = useState<string>('');
     const handleResize = () => setWidth(window.innerWidth)
     const toUser = async () => {
         const userr = await getUser();
@@ -27,8 +38,24 @@ const VehiclesWorkshopLayoutPage = ( ) => {
         if(userr?.type !== 'workshop'){
             router.push('/provider/home');
         }
+        const vehicless = await getAllVehicles(userr?._id) ?? [];
         setUser(userr);
-      }
+        setVehicles(vehicless);
+    }
+    const buildForm = async() => {
+        if(brand !== '' && model !== '' && year !== '' && plate !== '' && vin !== ''){
+            const body = {
+                brand, model, year, plate, vin, owner: String(user._id)
+            };
+            const response = await createVehicle(body);
+            if(response){
+                toast.success('Vehículo añadido')
+                const vehicless = await getAllVehicles(String(user?._id)) ?? [];
+                setVehicles(vehicless);
+                setOpen(false);
+            } else setErrorForm('* Ocurrio un problema');
+        } else setErrorForm('* Encontramos errores en el formulario');
+    }
     useEffect(() => {
         toUser();
         handleResize()
@@ -63,7 +90,18 @@ const VehiclesWorkshopLayoutPage = ( ) => {
                                         <option>Mayo</option>
                                 </select>
                         </div>
-                        <TableComponent/>
+                        <TableComponent rows={
+                            [...vehicles?.map((e, index: number) => {
+                                return {
+                                    id: index,
+                                    client: '',
+                                    plate: e?.plate,
+                                    vehicle: e?.brand + ' ' + e.model,
+                                    lastService: '',
+                                    calendars: '1'
+                                }
+                            })]
+                        }/>
                     </div>
                 </div>
             }
@@ -77,69 +115,42 @@ const VehiclesWorkshopLayoutPage = ( ) => {
             }}  open={open} center onClose={() => setOpen(false) }>
               <div style={{padding: '1rem'}}>
                 <h1 className="title">Nuevo vehículo</h1>
-                <h2 className="subtitle mt1">Vehículo #22</h2>
+                <h2 className="subtitle mt1">Vehículo #{vehicles?.length+1}</h2>
                 <div className="flex between mt1">
                     <p className="formTitle">Marca</p>
-                    <input className="inputForm" type="text" placeholder=""/>
+                    <input onChange={(e) => setBrand(e.target.value)} className="inputForm" type="text" placeholder=""/>
                 </div>
                 <div className="flex between mt1">
                     <p className="formTitle">Modelo</p>
-                    <input className="inputForm ml1" type="text" placeholder=""/>
+                    <input onChange={(e) => setModel(e.target.value)} className="inputForm ml1" type="text" placeholder=""/>
                 </div>
                 <div className="flex between mt1">
                     <p className="formTitle">Año</p>
-                    <input className="inputForm ml1" type="text" placeholder=""/>
+                    <input onChange={(e) => setYear(e.target.value)} className="inputForm ml1" type="text" placeholder=""/>
                 </div>
                 <div className="flex between mt1">
-                    <p className="formTitle">Placa</p>
-                    <input className="inputForm ml1" type="text" placeholder=""/>
+                    <p  className="formTitle">Placa</p>
+                    <input onChange={(e) => setPlate(e.target.value)} className="inputForm ml1" type="text" placeholder=""/>
                 </div>
                 <div className="flex between mt1">
                     <p className="formTitle">VIN</p>
-                    <input className="inputForm ml1" type="text" placeholder=""/>
+                    <input onChange={(e) => setVin(e.target.value)} className="inputForm ml1" type="text" placeholder=""/>
                 </div>
-                <div className="flex between mt1">
-                    <p className="formTitle">Asociar cliente</p>
-                    <Select
-                                        multi
-                                        options={[
-                                            {
-                                                label: 'Jorge Perer',
-                                                value: '0',
-                                            },
-                                            {
-                                                label: 'Jorge Perez',
-                                                value: '1',
-                                            },
-                                            {
-                                                label: 'Mauricio Perez',
-                                                value: '2',
-                                            },
-                                            {
-                                                label: 'Jose Perez',
-                                                value: '3',
-                                            },
-                                            {
-                                                label: 'Hector Perez',
-                                                value: '4',
-                                            }
-                                        ]}
-                                        separator
-                                        placeholder="Seleccionar/buscar"
-                                        className="inputForm"
-                                        onChange={(values) => { } } values={[]}                                    />
-                </div>
+               
+                {formError === '' ? <p></p> : <p className="subsubtitle color-trash">{formError}</p>}
+
                 <div className="center w100 mt2">
-                    <button className="btn-gradient-primary">Guardar vehículo</button>
+                    <button className="btn-gradient-primary" onClick={() => buildForm()}>Guardar vehículo</button>
                 </div>
               </div>
           </Modal>
+          
     </div>
 }
 
 
 
-const TableComponent = () => {
+const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
     const router = useRouter();
     const columns: GridColDef[] = [
         
@@ -163,29 +174,19 @@ const TableComponent = () => {
         },
 
     ];
-    const rows = [
-        {
-            id: 0,
-            client: 'Jorge Perez',
-            plate: 'MKY-485',
-            vehicle: 'BMEW I30',
-            lastService: '23-04/10',
-            calendars: '10'
-        }
-    ];      
+          
     return <div className="mt1" style={{minHeight: 500, width: '100%'}}>
         <DataGrid
-        rowSelection={false}
-        localeText={ValuesDataGridLocale}
-        autoPageSize={true}
-        rows={rows}
-        columns={columns}
-        initialState={{
-            pagination: {
-            paginationModel: { page: 0, pageSize: 5 },
-            },
-        }}
-        pageSizeOptions={[5, 10]}
+            rowSelection={false}
+            localeText={ValuesDataGridLocale}
+            rows={rows}
+            columns={columns}
+            initialState={{
+                pagination: {
+                paginationModel: { page: 0, pageSize: 10 },
+                },
+            }}
+            pageSizeOptions={[5, 10, 50]}
         
         
         />

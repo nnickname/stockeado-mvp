@@ -1,10 +1,10 @@
 
-import dbConnect from "../db";
-import Order from "../../../models/orders.model";
+import dbConnect from "../../db";
+import Order from "../../../../models/orders.model";
 import bcrypt from 'bcrypt';
 import { NextResponse } from "next/server";
 import { headers } from 'next/headers';
-import middlewareApi from "../midd/_middleware.api";
+import middlewareApi from "../../midd/_middleware.api";
 
 
 export async function GET (req: Request | any, res: Response, next: any){

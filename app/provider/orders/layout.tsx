@@ -5,12 +5,12 @@ import { UserModel } from "@/models/user.model";
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { getUser } from "../../api/userr/call";
+import { getUser } from "../../api/user/call";
 import { usePagination } from "@table-library/react-table-library/pagination";
 import { OrderModel, OrderStates, getOrderState } from "@/models/orders.model";
 import { getTotalPrice } from "@/components/marketplace/header";
 import './index.css';
-import { getOrders, getOrdersWorkshop } from "../../api/orderss/call";
+import { getOrders, getOrdersWorkshop } from "../../api/provider/orders/call";
 import SellResume from "@/components/panel/sellresume";
 import IonIcon from "@reacticons/ionicons";
 import Link from "next/link";
@@ -75,7 +75,7 @@ const OrdersLayoutPage = () => {
           }
           var ordersCast;
           if(userr?.type === 'workshop'){
-            ordersCast = await getOrdersWorkshop(userr?.email);
+            router.push('/workshop/home');
           }else ordersCast = await getOrders(userr?._id);
           setOrderData(ordersCast ?? []);
           setUser(userr);

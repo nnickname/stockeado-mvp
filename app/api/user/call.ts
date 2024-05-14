@@ -5,7 +5,7 @@ export const loginUser = async (email: string, password: string) => {
     
     try{
         const cookies = new Cookie();
-        const response: any = await axios.post("/userr/login", {email, password}, {headers: {authorization: process.env.NEXT_PUBLIC_API_TOKEN}});
+        const response: any = await axios.post("/user/login", {email, password}, {headers: {authorization: process.env.NEXT_PUBLIC_API_TOKEN}});
         if(response?.data?.user !== undefined){
             cookies.set('access_token', response?.data?.token, { path: '/' })
             return response?.data?.user;
@@ -17,7 +17,7 @@ export const loginUser = async (email: string, password: string) => {
 }
 export const getUserById = async (id: string) => {
     try{
-        const response: any = await axios.get("/userr/login", {headers: {'token': id, authorization: process.env.NEXT_PUBLIC_API_TOKEN}});
+        const response: any = await axios.get("/user/login", {headers: {'token': id, authorization: process.env.NEXT_PUBLIC_API_TOKEN}});
         console.log(response);
         return response?.data?.user;
     }
@@ -30,7 +30,7 @@ export const getUser = async () => {
     try{
         const cookies = new Cookie();
         const token = cookies.get('access_token');
-        const response: any = await axios.get("/userr", {headers: {'token': token, authorization: process.env.NEXT_PUBLIC_API_TOKEN}});
+        const response: any = await axios.get("/user", {headers: {'token': token, authorization: process.env.NEXT_PUBLIC_API_TOKEN}});
         return response?.data?.user;
     }
     catch(error){
@@ -41,7 +41,7 @@ export const getUser = async () => {
 export const editUser = async (body: Object) => {
     
     try{
-        const response: any = await axios.post("/userr/edit", {...body}, {headers: {authorization: process.env.NEXT_PUBLIC_API_TOKEN}});
+        const response: any = await axios.post("/user/edit", {...body}, {headers: {authorization: process.env.NEXT_PUBLIC_API_TOKEN}});
         if(response?.data?.user !== undefined){
             return true;
         } else return false;
@@ -54,7 +54,7 @@ export const createUser = async (body: Object) => {
     
     try{
         const cookies = new Cookie();
-        const response: any = await axios.post("/userr/edit/create", {...body}, {headers: {authorization: process.env.NEXT_PUBLIC_API_TOKEN}});
+        const response: any = await axios.post("/user/edit/create", {...body}, {headers: {authorization: process.env.NEXT_PUBLIC_API_TOKEN}});
         if(response?.data?.user !== undefined && response?.data?.user !== null){
             cookies.set('access_token', response?.data?.token, { path: '/' })
             return true;

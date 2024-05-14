@@ -12,8 +12,8 @@ import Link from "next/link";
 import { UserModel } from "@/models/user.model";
 import Cookie from 'universal-cookie';
 import { useRouter } from "next/navigation";
-import { createInventory, createManyInventories, deleteInventory, editInventory, getInventory } from "../../api/inventoryy/call";
-import { getUser } from "../../api/userr/call";
+import { createInventory, createManyInventories, deleteInventory, editInventory, getInventory } from "../../api/provider/inventory/call";
+import { getUser } from "../../api/user/call";
 import { usePagination } from "@table-library/react-table-library/pagination";
 
 
@@ -27,7 +27,7 @@ import '../../../components/marketplace/header/index.css';
 import {NotificationManager} from 'react-notifications';
 import { InventoryModel } from "@/models/inventory.model";
 import {ExcelRenderer} from 'react-excel-renderer';
-import { getOrders } from "../../api/orderss/call";
+import { getOrders } from "../../api/provider/orders/call";
 import { OrderModel } from "@/models/orders.model";
 
 
@@ -540,7 +540,7 @@ const LayoutHubInventoryPage = () => {
             router.push('/');
         }
         if(userr?.type === 'workshop'){
-          router.push('/quotes');
+          router.push('/workshop/home');
         }
         setUser(userr);
         const ordersCast = await getOrders(userr?._id);

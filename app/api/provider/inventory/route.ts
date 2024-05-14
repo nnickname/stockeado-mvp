@@ -1,9 +1,9 @@
 
-import dbConnect from "../db";
+import dbConnect from "../../db";
 import { NextResponse } from "next/server";
-import middleware from "../midd/_middleware";
-import Inventory from "../../../models/inventory.model";
-import middlewareApi from "../midd/_middleware.api";
+import middleware from "../../midd/_middleware";
+import Inventory from "../../../../models/inventory.model";
+import middlewareApi from "../../midd/_middleware.api";
 
 export async function GET (req: Request | any, res: Response, next: any){
   try{

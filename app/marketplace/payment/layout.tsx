@@ -9,12 +9,12 @@ import { getTotalPrice } from '@/components/marketplace/header';
 import Logo from '../../../public/images/logo/logopreferente.png';
 import { BankOptions } from './bank';
 import { NotificationManager} from 'react-notifications';
-import { createOrder } from '@/app/api/orderss/call';
+import { createOrder } from '@/app/api/provider/orders/call';
 import { Router } from 'next/router';
 import { useRouter } from 'next/navigation';
 import Footer from '@/components/dashboard/Footer';
 import { sendMailHookApi } from '@/app/api/email/call';
-import { getUser } from '@/app/api/userr/call';
+import { getUser } from '@/app/api/user/call';
 
 
 
