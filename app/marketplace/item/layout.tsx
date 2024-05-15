@@ -1,6 +1,6 @@
 'use client';
-import { getInventoryById, getMarketPlace } from '@/app/api/inventoryy/call';
-import { getUser, getUserById } from '@/app/api/userr/call';
+import { getInventoryById, getMarketPlace } from '@/app/api/provider/inventory/call';
+import { getUser, getUserById } from '@/app/api/user/call';
 import HeaderMarketPlace from '@/components/marketplace/header';
 import { InventoryModel } from '@/models/inventory.model';
 import { CartProps } from '@/models/orders.model';

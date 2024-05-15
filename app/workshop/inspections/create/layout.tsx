@@ -12,6 +12,8 @@ import { getAllVehicles } from "@/app/api/workshop/vehicles/call";
 import { ClientsModel } from "@/models/workshops/clients.model";
 import { VehiclesModel } from "@/models/workshops/vehicles.model";
 import { toast } from "react-toastify";
+import { createInspection, getAllInspections } from "@/app/api/workshop/inspections/call";
+import { InspectionsModel } from "@/models/workshops/inspections.model";
 
 const InspectionWorkshopLayoutPage = () => {
     const router = useRouter();
@@ -52,7 +54,8 @@ const InspectionWorkshopLayoutPage = () => {
     
     const [newAccesorie, setNewAccesorie] = useState<string>('');
     const [accesories, setAccesories] = useState<string[]>(['Kit de auxilio']);
-
+    
+    const [inspections, setInspections] = useState<InspectionsModel[]>([]);
     const toUser = async () => {
         const userr = await getUser();
         if(userr === undefined || userr === null){
@@ -63,9 +66,11 @@ const InspectionWorkshopLayoutPage = () => {
         }
         const vehicless = await getAllVehicles(String(userr?._id)) ?? [];
         const clientss = await getAllClients(String(userr?._id)) ?? [];
+        const inspectionsCast = await getAllInspections(userr?._id) ?? [];
         setClients(clientss);
         setVehicles(vehicless);
         setUser(userr);
+        setInspections(inspectionsCast);
     }
     const buildForm = async () => {
         var message = '';
@@ -96,6 +101,7 @@ const InspectionWorkshopLayoutPage = () => {
             object: {
                 dateStart,
                 workerAssigned,
+                owner: user?._id,
                 client: {
                     _id: clientSelected ?? '',
                     name: clientName,
@@ -122,6 +128,11 @@ const InspectionWorkshopLayoutPage = () => {
                 observations
             }
         }
+        const response = await createInspection(body);
+        if(response !== null){
+            toast.success('Creaste una nueva inspección');
+            router.push('/workshop/view?id=' + response?._id);
+        } else return toast.error('Ocurrio un problema')
     }
     useEffect(() => {
         toUser();
@@ -141,7 +152,7 @@ const InspectionWorkshopLayoutPage = () => {
 
                         <div className="flex between">
                             <div>
-                                <p className="subtitle mt1" style={{fontWeight: '500'}}>Inspección #1</p>
+                                <p className="subtitle mt1" style={{fontWeight: '500'}}>Inspección #{inspections?.length +1}</p>
                             </div>
                             <div className="flex">
                                 <p className="subtitle mr1 mt1">Estado</p>
@@ -199,7 +210,7 @@ const InspectionWorkshopLayoutPage = () => {
                                             setClientLastName(clientObject?.lastname);
                                             setClientEmail(clientObject?.email);
                                             setClientPhone(clientObject?.phone);
-                                         } } values={[]}                                    />
+                                         } } values={[{value: clientSelected, label: '# ' + clientName + ' ' + clientLastname}]}                                     />
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Nombre</p>
@@ -258,7 +269,7 @@ const InspectionWorkshopLayoutPage = () => {
                                             setVehicleModel(vehicleObject?.model);
                                             setVehicleYear(vehicleObject?.year);
                                             setVehicleVin(vehicleObject?.vin);
-                                        } } values={[]}                                    />
+                                        } } values={[{value: vehicleSeleted, label: '# ' + vehicleBrand + ' ' + vehicleModel}]}                                    />
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Placa</p>
@@ -391,6 +402,7 @@ const InspectionWorkshopLayoutPage = () => {
                                 <button onClick={() => {
                                     if(clientName !== '' && vehicleBrand !== ''){
                                         if(newScheduler !== '' && newSchedulerDate !== ''){
+                                            
                                             setCalendars([{
                                                 dateStart: newSchedulerDate,
                                                 description: newScheduler,
@@ -421,6 +433,7 @@ const InspectionWorkshopLayoutPage = () => {
                                 <button  onClick={() => {
                                     if(newAccesorie !== ''){
                                         setAccesories([newAccesorie, ...accesories]);
+                                        setNewAccesorie('');
                                     } else toast.error(' Completa el formulario')
                                 }} className="btn-gradient-secondary mt1" style={{border: '1px solid grey', borderRadius: '0px .5rem .5rem 0rem'}} >Añadir</button>
                             </div>

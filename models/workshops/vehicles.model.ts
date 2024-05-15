@@ -36,5 +36,5 @@ const VehiclesSchema = new Schema({
     required: [true, "Please provide a vin."],
   },
   
-});
+}, { timestamps: true },);
 export default  mongoose.models.vehicles || model<VehiclesModel>("vehicles", VehiclesSchema);

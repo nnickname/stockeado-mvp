@@ -7,10 +7,57 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import '../create/index.css';
 import Select from "react-dropdown-select";
+import { getAllClients } from "@/app/api/workshop/clients/call";
+import { getAllVehicles } from "@/app/api/workshop/vehicles/call";
+import { ClientsModel } from "@/models/workshops/clients.model";
+import { VehiclesModel } from "@/models/workshops/vehicles.model";
+import { toast } from "react-toastify";
+import { createInspection, getAllInspections } from "@/app/api/workshop/inspections/call";
+import { InspectionsModel } from "@/models/workshops/inspections.model";
+import Link from "next/link";
 
 const InspectionViewWorkshopLayoutPage = () => {
     const router = useRouter();
     const [user, setUser] = useState<UserModel>(null);
+    const [vehicles, setVehicles] = useState<VehiclesModel[]>([]);
+    const [clients, setClients] = useState<ClientsModel[]>(null);
+
+    const [clientSelected, setSelectedClient] = useState<string>(null);
+    const [clientName, setClientName] = useState<string>('');
+    const [clientLastname, setClientLastName] = useState<string>('');
+    const [clientPhone, setClientPhone] = useState<string>('');
+    const [clientEmail, setClientEmail] = useState<string>('');
+
+
+    const [vehicleSeleted, setSelectedVehicle] = useState<string>(null);
+    const [vehicleBrand, setVehicleBrand] = useState<string>('');
+    const [vehicleModel, setVehicleModel] = useState<string>('');
+    const [vehicleYear, setVehicleYear] = useState<string>('');
+    const [vehiclePlate, setVehiclePlate] = useState<string>('');
+    const [vehicleVin, setVehicleVin] = useState<string>('');
+
+    const [dateStart, setDateStart] = useState<string>('');
+    const [workerAssigned, setWorker] = useState<string>('');
+    const [mileage, setMileage] = useState<string>('');
+    const [oil, setOil] = useState<string>('');
+    const [fuel, setFuel] = useState<string>('');
+    const [brakes, setBrakes] = useState<string>('');
+    const [refrigerant, setRefrigerant] = useState<string>('');
+
+    const [newJob, setNewJob] = useState<string>('');
+    const [tasks, setTasks] = useState<string[]>([]);
+
+    const [observations, setObservations] = useState<string>('');
+
+    const [newScheduler, setNewScheduler] = useState<string>('');
+    const [newSchedulerDate, setSchedulerDate] = useState<string>('');
+    const [calendars, setCalendars] = useState<any[]>([]);
+    
+    const [newAccesorie, setNewAccesorie] = useState<string>('');
+    const [accesories, setAccesories] = useState<string[]>(['Kit de auxilio']);
+    
+    const [inspections, setInspections] = useState<InspectionsModel[]>([]);
+    const [selectedInspection, setSelectedInspection] = useState<InspectionsModel>(null);
     const toUser = async () => {
         const userr = await getUser();
         if(userr === undefined || userr === null){
@@ -19,18 +66,131 @@ const InspectionViewWorkshopLayoutPage = () => {
         if(userr?.type !== 'workshop'){
             router.push('/provider/home');
         }
+        const vehicless = await getAllVehicles(String(userr?._id)) ?? [];
+        const clientss = await getAllClients(String(userr?._id)) ?? [];
+        const inspectionsCast = await getAllInspections(userr?._id) ?? [];
+        setClients(clientss);
+        setVehicles(vehicless);
         setUser(userr);
-      }
+        setInspections(inspectionsCast);
+        const urlParams = new URLSearchParams(window.location.search);
+        let id = urlParams.get('id');
+        if(id === null) router.push('/workshop/inspections');
+        selectInspectionCall(id, inspectionsCast);
+    }
+    const selectInspectionCall = (id: string, inspections: InspectionsModel[]) => {
+        if(id === 'other'){
+            setSelectedClient(null);
+            setClientName('');
+            setClientLastName('');
+            setClientEmail('');
+            setClientPhone('');
+            setSelectedVehicle(null);
+            setVehiclePlate('');
+            setVehicleBrand('');
+            setVehicleModel('');
+            setVehicleYear('');
+            setVehicleVin('');
+            setSelectedInspection(null);
+            setDateStart('');
+            setWorker('');
+            return;
+        }
+        const object = inspections?.find(e => String(e?._id) === id);
+        if(object !== null){
+            setDateStart(object?.dateStart);
+            setWorker(object?.workerAssigned);
+            setSelectedClient(object?.client?._id);
+            setSelectedClient(String(object?.client?._id));
+            setClientName(object?.client?.name);
+            setClientLastName(object?.client?.lastname);
+            setClientEmail(object?.client?.email);
+            setClientPhone(object?.client?.phone);
+            setSelectedVehicle(String(object?.vehicle?._id));
+            setVehiclePlate(object?.vehicle?.plate);
+            setVehicleBrand(object?.vehicle?.brand);
+            setVehicleModel(object?.vehicle?.model);
+            setVehicleYear(object?.vehicle?.year);
+            setVehicleVin(object?.vehicle?.vin);
+            setSelectedInspection(object);
+            setTasks(object?.tasks);
+            setAccesories(object?.accesories);
+            setObservations(object?.observations);
+            setBrakes(object?.brakes);
+            setOil(object?.oil);
+            setFuel(object?.fuel);
+            setMileage(object?.mileage);
+            setRefrigerant(object?.refrigerant);
+            
+        }
+    }
+    const buildForm = async () => {
+        var message = '';
+        if(dateStart === '' || workerAssigned === ''){
+            if(message === ''){
+                message = message + ' ' + 'Generales';  
+            }else message = message + ', ' + 'Generales'
+        }
+        if(clientName === '' || clientLastname === '' || clientEmail === '' || clientPhone === ''){
+            if(message === ''){
+                message = message + ' ' + 'Cliente';  
+            }else message = message + ', ' + 'Cliente';
+        } 
+        if(vehicleBrand === '' || vehicleModel === '' || vehiclePlate === '' || vehicleYear === '' || vehicleVin === ''){
+            if(message === ''){
+                message = message + ' ' + 'Vehículo';  
+            } else message = message + ', ' + 'Vehículo'
+        } 
+        if(mileage === '' || oil === '' || fuel === '' || brakes === '' || refrigerant === ''){
+            if(message === ''){
+                message = message + ' ' + 'Estado del vehículo';  
+            } else message = message + ', ' + 'Estado del vehículo'
+        } 
+        if(message !== '') return toast.error('Encontramos los siguientes errores en el formulario:' + message);
+        
+        const body = {
+            calendars,
+            object: {
+                dateStart,
+                workerAssigned,
+                owner: user?._id,
+                client: {
+                    _id: clientSelected ?? '',
+                    name: clientName,
+                    lastname: clientLastname,
+                    email: clientEmail,
+                    phone: clientPhone
+                },
+                vehicle: {
+                    _id: vehicleSeleted ?? '',
+                    brand: vehicleBrand,
+                    model: vehicleModel,
+                    plate: vehiclePlate,
+                    year: vehicleYear,
+                    vin: vehicleVin
+                },
+                orders: [],
+                mileage,
+                oil,
+                fuel,
+                brakes,
+                refrigerant,
+                tasks,
+                accesories,
+                observations
+            }
+        }
+        
+    }
     useEffect(() => {
-        router.refresh();
         toUser();
-    }, []);
+    }, []); 
     return <div>
         {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
             <SideBarComponent user={user} route='/workshop/inspections' frameContennt={
                 <div>
                     <div className="flex between">
-                        <h1 className="headerSideBar"> Editar informe de inspección</h1>
+                        <h1 className="headerSideBar"> Nuevo informe de inspección</h1>
                         <div style={{background: 'white'}}>
                             <button  onClick={() => router.push('/workshop/inspections')} className="btn-back mr1 mt1"><IonIcon name="arrow-back-outline"/></button>
                         </div>
@@ -40,7 +200,7 @@ const InspectionViewWorkshopLayoutPage = () => {
 
                         <div className="flex between">
                             <div>
-                                <p className="subtitle mt1" style={{fontWeight: '500'}}>Inspección #21</p>
+                                <p className="subtitle mt1" style={{fontWeight: '500'}}>Inspección #{inspections?.length +1}</p>
                             </div>
                             <div className="flex">
                                 <p className="subtitle mr1 mt1">Estado</p>
@@ -56,11 +216,11 @@ const InspectionViewWorkshopLayoutPage = () => {
                             <div className="flex between displayBlockResponsive w100">
                                 <div className="flex mr1 w100  mt1 nPaddingLeftResponsive" style={{paddingRight: '2rem'}}>
                                     <p className="formTitle w100 mr1">Fecha de ingreso</p>
-                                    <input className="inputForm w100  ml1 " type="datetime-local" placeholder=""/>
+                                    <input onChange={(e) => setDateStart(e.target.value)} value={dateStart} className="inputForm w100  ml1 " type="datetime-local" placeholder=""/>
                                 </div>
                                 <div className="flex w100 mt1 nPaddingLeftResponsive" style={{ paddingLeft: '2rem'}}>
                                     <p className="formTitle w100 mr1">Mecanico asignado</p>
-                                    <input className="inputForm w100 ml1" type="text" placeholder=""/>
+                                    <input onChange={(e) => setWorker(e.target.value)} value={workerAssigned} className="inputForm w100 ml1" type="text" placeholder=""/>
                                 </div>
                             </div>
                         </div>
@@ -71,50 +231,54 @@ const InspectionViewWorkshopLayoutPage = () => {
                                     <Select
                                         options={[
                                             {
-                                                label: 'Jorge Perez',
-                                                value: '0',
+                                                label: 'Completar',
+                                                value: 'other'
                                             },
-                                            {
-                                                label: 'Jose Perez',
-                                                value: '1',
-                                            },
-                                            {
-                                                label: 'Pablo Perez',
-                                                value: '2',
-                                            },
-                                            {
-                                                label: 'Mauricio Perez',
-                                                value: '3',
-                                            },
-                                            {
-                                                label: 'Javier Perez',
-                                                value: '4',
+                                            ...clients?.map((e) => {
+                                            return {
+                                                label: e?.name + ' ' + e?.lastname,
+                                                value: String(e?._id)
                                             }
-                                        ]}
+                                        })]}
                                         separator
                                         placeholder="Seleccionar/Buscar"
                                         className="inputForm"
-                                        onChange={(values) => { } } values={[]}                                    />
+                                        onChange={(values) => {
+                                            if(values[0]?.value === 'other') {
+                                                setSelectedClient(null);
+                                                setClientName('');
+                                                setClientLastName('');
+                                                setClientEmail('');
+                                                setClientPhone('');
+                                                return;
+                                            }
+                                            const clientObject = clients?.find(e => String(e._id) === values[0]?.value);
+                                            setSelectedClient(String(clientObject?._id));
+                                            setClientName(clientObject?.name);
+                                            setClientLastName(clientObject?.lastname);
+                                            setClientEmail(clientObject?.email);
+                                            setClientPhone(clientObject?.phone);
+                                         } } values={[{value: clientSelected, label: clientSelected === null ? 'Seleccionar/buscar' : '# ' + clientName + ' ' + clientLastname}]}                                    />
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Nombre</p>
-                                    <input className="inputForm ml1" type="text" placeholder=""/>
+                                    <input onChange={(e) => setClientName(e.target.value)} value={clientName} disabled={clientSelected !== null ? true : false} className="inputForm ml1" type="text" placeholder=""/>
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Apellido</p>
-                                    <input className="inputForm ml1" type="text" placeholder=""/>
+                                    <input onChange={(e) => setClientLastName(e.target.value)} value={clientLastname} disabled={clientSelected !== null ? true : false} className="inputForm ml1" type="text" placeholder=""/>
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Celular</p>
-                                    <input className="inputForm ml1" type="text" placeholder=""/>
+                                    <input onChange={(e) => setClientPhone(e.target.value)} value={clientPhone} disabled={clientSelected !== null ? true : false} className="inputForm ml1" type="text" placeholder=""/>
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Correo</p>
-                                    <input className="inputForm ml1" type="text" placeholder=""/>
+                                    <input onChange={(e) => setClientEmail(e.target.value)} value={clientEmail} disabled={clientSelected !== null ? true : false} className="inputForm ml1" type="text" placeholder=""/>
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Visita</p>
-                                    <input className="inputForm ml1" type="text" placeholder=""/>
+                                    <input disabled placeholder={clientSelected !== null ? 'Recurrente' : 'Nuevo'} className="inputForm ml1" type="text"/>
                                 </div>
                             </div>
                             <div className="cardWhiteForm mt1 w100">
@@ -123,50 +287,57 @@ const InspectionViewWorkshopLayoutPage = () => {
                                     <Select
                                         options={[
                                             {
-                                                label: 'BMW 1',
-                                                value: '0',
+                                                label: 'Completar',
+                                                value: 'other'
                                             },
-                                            {
-                                                label: 'BMW 2',
-                                                value: '1',
-                                            },
-                                            {
-                                                label: 'BMW 3',
-                                                value: '2',
-                                            },
-                                            {
-                                                label: 'BMW 4',
-                                                value: '3',
-                                            },
-                                            {
-                                                label: 'BMW 5',
-                                                value: '4',
+                                            ...vehicles?.map((e) => {
+                                                return {
+                                                    label: e?.brand + ' ' + e?.model,
+                                                    value: String(e?._id)
+                                                }
                                             }
-                                        ]}
+                                        )]}
                                         separator
                                         placeholder="Seleccionar/Buscar"
                                         className="inputForm"
-                                        onChange={(values) => { } } values={[]}                                    />
+                                        onChange={(values) => {
+                                            if(values[0]?.value === 'other') {
+                                                setSelectedVehicle(null);
+                                                setVehiclePlate('');
+                                                setVehicleBrand('');
+                                                setVehicleModel('');
+                                                setVehicleYear('');
+                                                setVehicleVin('');
+                                                return;
+                                            }
+                                            const vehicleObject = vehicles?.find(e => String(e._id) === values[0]?.value);
+                                            setSelectedVehicle(String(vehicleObject?._id));
+                                            setVehiclePlate(vehicleObject?.plate);
+                                            setVehicleBrand(vehicleObject?.brand);
+                                            setVehicleModel(vehicleObject?.model);
+                                            setVehicleYear(vehicleObject?.year);
+                                            setVehicleVin(vehicleObject?.vin);
+                                        } } values={[{value: vehicleSeleted, label: vehicleSeleted === null ? 'Seleccionar/buscar' : '# ' + vehicleBrand + ' ' + vehicleModel}]}                                    />
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Placa</p>
-                                    <input className="inputForm ml1" type="text" placeholder=""/>
+                                    <input disabled={vehicleSeleted !== null ? true : false} onChange={(e) => setVehiclePlate(e.target.value)} value={vehiclePlate} className="inputForm ml1" type="text" placeholder=""/>
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Marca</p>
-                                    <input className="inputForm ml1" type="text" placeholder=""/>
+                                    <input disabled={vehicleSeleted !== null ? true : false} onChange={(e) => setVehicleBrand(e.target.value)} value={vehicleBrand} className="inputForm ml1" type="text" placeholder=""/>
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Modelo</p>
-                                    <input className="inputForm ml1" type="text" placeholder=""/>
+                                    <input disabled={vehicleSeleted !== null ? true : false} onChange={(e) => setVehicleModel(e.target.value)} value={vehicleModel} className="inputForm ml1" type="text" placeholder=""/>
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Año</p>
-                                    <input className="inputForm ml1" type="text" placeholder=""/>
+                                    <input disabled={vehicleSeleted !== null ? true : false} onChange={(e) => setVehicleYear(e.target.value)} value={vehicleYear} className="inputForm ml1" type="text" placeholder=""/>
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">VIN</p>
-                                    <input className="inputForm ml1" type="text" placeholder=""/>
+                                    <input disabled={vehicleSeleted !== null ? true : false} onChange={(e) => setVehicleVin(e.target.value)} value={vehicleVin} className="inputForm ml1" type="text" placeholder=""/>
                                 </div>
                             </div>
                             
@@ -183,14 +354,14 @@ const InspectionViewWorkshopLayoutPage = () => {
                                 <div className="w100 mr1 nPaddingLeftResponsive" style={{paddingRight: '2rem'}}>
                                     <div className="flex between mt1">
                                         <p className="formTitle ">Kilometraje</p>
-                                        <input className="inputForm ml1" type="text" placeholder=""/>
+                                        <input onChange={(e) => setMileage(e.target.value)} value={mileage} className="inputForm ml1" type="text" placeholder=""/>
                                     </div>
 
                                 </div>
                                 <div className="w100 nPaddingLeftResponsive" style={{ paddingLeft: '2rem'}}>
                                     <div className="flex between mt1">
                                         <p className="formTitle" >Nivel de aceite</p>
-                                        <input className="inputForm ml1" type="text" placeholder=""/>
+                                        <input onChange={(e) => setOil(e.target.value)} value={oil} className="inputForm ml1" type="text" placeholder=""/>
                                     </div>
 
                                 </div>
@@ -200,14 +371,14 @@ const InspectionViewWorkshopLayoutPage = () => {
                                 <div className="w100 mr1 nPaddingLeftResponsive" style={{paddingRight: '2rem'}}>
                                     <div className="flex between mt1">
                                         <p className="formTitle ">Nivel de gasolina</p>
-                                        <input className="inputForm ml1" type="text" placeholder=""/>
+                                        <input onChange={(e) => setFuel(e.target.value)} value={fuel} className="inputForm ml1" type="text" placeholder=""/>
                                     </div>
 
                                 </div>
                                 <div className="w100 nPaddingLeftResponsive" style={{ paddingLeft: '2rem'}}>
                                     <div className="flex between mt1">
                                         <p className="formTitle" >Líquido de frenos</p>
-                                        <input className="inputForm ml1" type="text" placeholder=""/>
+                                        <input onChange={(e) => setBrakes(e.target.value)} value={brakes} className="inputForm ml1" type="text" placeholder=""/>
                                     </div>
 
                                 </div>
@@ -217,7 +388,7 @@ const InspectionViewWorkshopLayoutPage = () => {
                                 <div className="w100 mr1 nPaddingLeftResponsive" style={{paddingRight: '2rem'}}>
                                     <div className="flex between mt1">
                                         <p className="formTitle ">Refrigerante</p>
-                                        <input className="inputForm ml1" type="text" placeholder=""/>
+                                        <input onChange={(e) => setRefrigerant(e.target.value)} value={refrigerant} className="inputForm ml1" type="text" placeholder=""/>
                                     </div>
 
                                 </div>
@@ -232,27 +403,27 @@ const InspectionViewWorkshopLayoutPage = () => {
 
                             <p className="formTitle mt2">Trabajos a realizar</p>
                             <div className="inline-items">
-                                <div className="item-create mt1 ml1">
-                                    <div className="flex">
-                                        <p>Cambio de bujías x5</p>
-                                        <IonIcon className="icon ml1" name="trash-outline"/>
-                                    </div>
-                                </div>
-                                <div className="item-create mt1 ml1">
-                                    <div className="flex">
-                                        <p>Cambio de liquido refrigerante</p>
-                                        <IonIcon className="icon ml1" name="trash-outline"/>
-                                    </div>
-                                </div>
                                 
+                                {...tasks?.map((e, index: number) => <div className="item-create mt1 ml1">
+                                    <div className="flex">
+                                        <p>{e}</p>
+                                        <IonIcon onClick={() => {
+                                            setTasks(tasks?.filter((obj, indexx) => index !== indexx))
+                                        }} className="icon ml1" name="trash-outline"/>
+                                    </div>
+                                </div>)}
                             </div>
                             
                             <div className="flex w100">
-                                <input className="inputForm mt1 w100" type="text" placeholder="" style={{borderRadius: '.5rem 0rem 0rem .5rem'}}/>
-                                <button className="btn-gradient-secondary mt1" style={{border: '1px solid grey', borderRadius: '0px .5rem .5rem 0rem'}} >Añadir</button>
+                                <input onChange={(e) => setNewJob(e.target.value)} value={newJob} className="inputForm mt1 w100" type="text" placeholder="" style={{borderRadius: '.5rem 0rem 0rem .5rem'}}/>
+                                <button onClick={() => {
+                                    if(newJob !== ''){
+                                        setTasks([newJob, ...tasks]);
+                                    } else toast.error(' Completa el formulario')
+                                }} className="btn-gradient-secondary mt1" style={{border: '1px solid grey', borderRadius: '0px .5rem .5rem 0rem'}} >Añadir</button>
                             </div>
                             <p className="formTitle mt2">Observaciones adicionales</p>
-                            <input className="inputForm mt1 w100" type="text" placeholder=""/>
+                            <input onChange={(e) => setObservations(e.target.value)} value={observations} className="inputForm mt1 w100" type="text" placeholder=""/>
                         </div>
 
 
@@ -263,47 +434,56 @@ const InspectionViewWorkshopLayoutPage = () => {
                                 <IonIcon className="ml1" name="eye-off-outline"/>
                             </div>
                             <div className="inline-items">
-                                <div className="item-create mt1 ml1">
+                                {...calendars?.map((e, index: number) => <div className="item-create mt1 ml1">
                                     <div className="flex">
-                                        <p>100.000km avisar revision 24/10/2024:11:00</p>
-                                        <IonIcon className="icon ml1" name="trash-outline"/>
+                                        <p>{e?.description + ': ' + e?.dateStart}</p>
+                                        <IonIcon onClick={() => {
+                                            setCalendars(calendars?.filter((obj, indexx) => index !== indexx))
+                                        }} className="icon ml1" name="trash-outline"/>
                                     </div>
-                                </div>
-                                <div className="item-create mt1 ml1">
-                                    <div className="flex">
-                                        <p>Cambio de aceite 10/10/2024:11:00</p>
-                                        <IonIcon className="icon ml1" name="trash-outline"/>
-                                    </div>
-                                </div>
+                                </div>)}
                                 
                             </div>
                             <div className="flex w100">
-                                <input type="datetime-local" className="inputForm mt1" style={{borderRadius: '.5rem 0rem 0rem .5rem'}}/>
-                                <input className="inputForm mt1 w100" type="text" placeholder="Descripción" style={{borderRadius: '0rem 0rem 0rem 0rem'}}/>
-                                <button className="btn-gradient-secondary mt1" style={{border:'1px solid grey', borderRadius: '0px .5rem .5rem 0rem'}} >Añadir</button>
+                                <input onChange={(e) => setSchedulerDate(e.target.value)} value={newSchedulerDate} type="datetime-local" className="inputForm mt1" style={{borderRadius: '.5rem 0rem 0rem .5rem'}}/>
+                                <input onChange={(e) => setNewScheduler(e.target.value)} value={newScheduler} className="inputForm mt1 w100" type="text" placeholder="Descripción" style={{borderRadius: '0rem 0rem 0rem 0rem'}}/>
+                                <button onClick={() => {
+                                    if(clientName !== '' && vehicleBrand !== ''){
+                                        if(newScheduler !== '' && newSchedulerDate !== ''){
+                                            
+                                            setCalendars([{
+                                                dateStart: newSchedulerDate,
+                                                description: newScheduler,
+                                                client: clientSelected !== null ? clientSelected : (clientName + ' ' + clientLastname),
+                                                vehicle: vehicleSeleted !== '' ? vehicleSeleted : (vehicleBrand + ' ' + vehicleModel)
+                                            }, ...calendars]);
+                                        } else toast.error(' Completa el formulario');
+                                    } else toast.error(' Selecciona un cliente/vehículo');
+                                    
+                                }} className="btn-gradient-secondary mt1" style={{border:'1px solid grey', borderRadius: '0px .5rem .5rem 0rem'}} >Añadir</button>
                             </div>
                         </div>
  
                         <div className="cardWhiteForm mt1">
                             <p className="subsubtitle">Accesorios</p>
                             <div className="inline-items">
-                                <div className="item-create mt1 ml1">
+                             {...accesories?.map((e, index: number) => <div className="item-create mt1 ml1">
                                     <div className="flex">
-                                        <p>Kit de auxilio</p>
-                                        <IonIcon className="icon ml1" name="trash-outline"/>
+                                        <p>{e}</p>
+                                        <IonIcon onClick={() => {
+                                            setAccesories(accesories?.filter((obj, indexx) => index !== indexx))
+                                        }} className="icon ml1" name="trash-outline"/>
                                     </div>
-                                </div>
-                                <div className="item-create mt1 ml1">
-                                    <div className="flex">
-                                        <p>Rueda de auxilio</p>
-                                        <IonIcon className="icon ml1" name="trash-outline"/>
-                                    </div>
-                                </div>
-                                
+                                </div>)}
                             </div>
                             <div className="flex w100">
-                                <input className="inputForm mt1 w100" type="text" placeholder="" style={{borderRadius: '.5rem 0rem 0rem .5rem'}}/>
-                                <button className="btn-gradient-secondary mt1" style={{border: '1px solid grey', borderRadius: '0px .5rem .5rem 0rem'}} >Añadir</button>
+                                <input onChange={(e) => setNewAccesorie(e.target.value)} value={newAccesorie} className="inputForm mt1 w100" type="text" placeholder="" style={{borderRadius: '.5rem 0rem 0rem .5rem'}}/>
+                                <button  onClick={() => {
+                                    if(newAccesorie !== ''){
+                                        setAccesories([newAccesorie, ...accesories]);
+                                        setNewAccesorie('');
+                                    } else toast.error(' Completa el formulario')
+                                }} className="btn-gradient-secondary mt1" style={{border: '1px solid grey', borderRadius: '0px .5rem .5rem 0rem'}} >Añadir</button>
                             </div>
                         </div>
 
@@ -329,8 +509,8 @@ const InspectionViewWorkshopLayoutPage = () => {
                         </div>
 
                         <div className=" center mt1 mSidesAuto">
-                            <button className="btn-gradient-third mr1">Guardad inspección</button>
-                            <button className="btn-gradient-secondary ml1 " >Crear orden de servicio</button>
+                            <button className="btn btn-gradient-third mr1" onClick={() => buildForm()}>Guardar inspección</button>
+                            <Link href={'/workshop/orders/create?inspection=' + selectedInspection?._id} className="btn-gradient-secondary ml1 " >Crear orden de servicio</Link>
                         </div>
 
                         

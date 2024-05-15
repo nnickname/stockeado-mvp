@@ -35,5 +35,5 @@ const ClientSchema = new Schema({
     type: Array,
     required: [false]
   },
-});
+}, { timestamps: true },);
 export default  mongoose.models.clients || model<ClientsModel>("clients", ClientSchema);

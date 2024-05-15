@@ -4,15 +4,18 @@ import SideBarComponent from "@/components/panel/sidebar"
 import { UserModel } from "@/models/user.model";
 import IonIcon from "@reacticons/ionicons"
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, FunctionComponent } from "react";
 import '../home/index.css';
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Link from "next/link";
+import { InspectionsModel } from "@/models/workshops/inspections.model";
+import { getAllInspections } from "@/app/api/workshop/inspections/call";
+import { NewTableComponentType } from "../clients/layoutview";
 const LayoutViewInspectionsWorkShop = ( ) => {
     const router = useRouter();
     const [open, setOpen] = useState<boolean>();
     const [user, setUser] = useState<UserModel>(null);
-
+    const [inspections, setInspections] = useState<InspectionsModel[]>([]);
     const toUser = async () => {
         const userr = await getUser();
         if(userr === undefined || userr === null){
@@ -21,7 +24,9 @@ const LayoutViewInspectionsWorkShop = ( ) => {
         if(userr?.type !== 'workshop'){
             router.push('/provider/home');
         }
+        const inspectionsCast = await getAllInspections(userr?._id) ?? [];
         setUser(userr);
+        setInspections(inspectionsCast);
       }
     useEffect(() => {
         toUser();
@@ -54,7 +59,20 @@ const LayoutViewInspectionsWorkShop = ( ) => {
                                 </select>
                         </div>
                         <div className="w100">
-                            <TableComponent/>
+                        <TableComponent rows={
+                            [...inspections?.map((e, index: number) => {
+                                return {
+                                    id: index,
+                                    name: e?.client?.name,
+                                    lastname: e?.client?.lastname,
+                                    vehicle: e?.vehicle?.brand + ' ' + e?.vehicle?.model,
+                                    date: e?.dateStart,
+                                    plate: e?.vehicle?.plate,
+                                    state: 0,
+                                    action: e?._id
+                                }
+                            })]
+                        } />
                         </div>
                     </div>
                 </div>
@@ -63,7 +81,7 @@ const LayoutViewInspectionsWorkShop = ( ) => {
     </div>
 }
 
-const TableComponent = () => {
+const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
     const columns: GridColDef[] = [
         
         
@@ -97,7 +115,7 @@ const TableComponent = () => {
             width: 130,
             align: 'left',
             headerClassName: 'color-table-header',
-            renderCell: (params) => <Link href='/workshop/inspections/view' className="btn mt05">
+            renderCell: (params) => <Link href={'/workshop/inspections/view?id=' + params?.value} className="btn mt05">
                 <IonIcon style={{fontSize: '1.5rem', color: "#3662E3"}} name='eye-outline'/>
             </Link>
         },
@@ -114,39 +132,7 @@ const TableComponent = () => {
             </button>
         },
     ];
-    const rows = [
-        {
-            id: 0,
-            name: 'Jorge',
-            lastname: 'Perez',
-            vehicle: 'BMW 325i',
-            date: '12-04-24',
-            plate: 'C5S-287',
-            state: 1,
-            action: ''
-        },
-        {
-            id: 1,
-            name: 'Jorge',
-            lastname: 'Perez',
-            vehicle: 'BMW 325i',
-            date: '12-04-24',
-            plate: 'C5S-287',
-            state: 1,
-            action: ''
-        },
-        {
-            id: 2,
-            name: 'Jorge',
-            lastname: 'Perez',
-            vehicle: 'BMW 325i',
-            date: '12-04-24',
-            plate: 'C5S-287',
-            state: 0,
-            action: ''
-        },
-        
-    ];      
+    
     return <div className="mt1" style={{minHeight: 500, width: '100%'}}>
         <DataGrid
         localeText={ValuesDataGridLocale}

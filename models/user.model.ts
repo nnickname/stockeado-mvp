@@ -65,5 +65,5 @@ const UserSchema = new Schema({
     type: String,
     requried: [true, 'Please prove a type']
   }
-});
+}, {timestamps: true});
 export default  mongoose.models.Users || model<UserModel>("Users", UserSchema);

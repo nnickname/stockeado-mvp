@@ -12,7 +12,7 @@ import blueImage from '../../public/images/logo/blueimage.png';
 import backgroundImage from '../../public/images/logo/background2.jpeg';
 import ImageLogo from '../../public/images/logo/mplogo1.png';
 import Image from "next/image";
-import { editUser, getUser} from "../api/userr/call";
+import { editUser, getUser} from "../api/user/call";
 import BackgroundImage from "@/components/marketplace/background/background";
 import IonIcon from "@reacticons/ionicons";
 const LayoutConfigurationPage = () =>{
