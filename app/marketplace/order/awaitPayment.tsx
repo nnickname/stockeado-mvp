@@ -8,7 +8,7 @@ import IonIcon from "@reacticons/ionicons";
 import { BankOptions } from "../payment/bank";
 import Modal from "react-responsive-modal";
 import 'react-responsive-modal/styles.css';
-import { updateOrderState } from "@/app/api/orderss/call";
+import { updateOrderState } from "@/app/api/provider/orders/call";
 import Link from "next/link";
 import { sendMailHookApi } from "@/app/api/email/call";
 

@@ -13,7 +13,7 @@ import '../payment/index.css';
 import { BankOptions, OrderStates } from "../payment/bank";
 import './index.css';
 import IonIcon from "@reacticons/ionicons";
-import { getOrder } from "@/app/api/orderss/call";
+import { getOrder } from "@/app/api/provider/orders/call";
 import AwaitPaymentView from "./awaitPayment";
 import ConfirmedPaymentView from "./confirmedPayment";
 import Footer from "@/components/dashboard/Footer";

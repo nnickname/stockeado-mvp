@@ -6,7 +6,7 @@ import { BankOptions, OrderStates } from "../../marketplace/payment/bank";
 import 'react-responsive-modal/styles.css';
 import '../../marketplace/order/index.css';
 import { getTotalPrice } from "@/components/marketplace/header";
-import { updateOrderState } from "../../api/orderss/call";
+import { updateOrderState } from "../../api/provider/orders/call";
 import IonIcon from "@reacticons/ionicons";
 import { sendMailHookApi } from "../../api/email/call";
 import changesEmailTemplate from "@/utils/mail/orders/changes";
