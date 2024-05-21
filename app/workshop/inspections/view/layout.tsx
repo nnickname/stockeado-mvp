@@ -98,6 +98,7 @@ const InspectionViewWorkshopLayoutPage = () => {
             setDateStart('');
             setWorker('');
             selectState(0);
+            setTasks([]);
             return;
         }
         const object = inspections?.find((e) => String(e?._id) === id );
@@ -421,7 +422,7 @@ const InspectionViewWorkshopLayoutPage = () => {
                             <p className="formTitle mt2">Trabajos a realizar</p>
                             <div className="inline-items">
                                 
-                                {...tasks?.map((e, index: number) => <div className="item-create mt1 ml1">
+                                {tasks?.map((e, index: number) => <div className="item-create mt1 ml1">
                                     <div className="flex">
                                         <p>{e}</p>
                                         <IonIcon onClick={() => {
@@ -451,7 +452,7 @@ const InspectionViewWorkshopLayoutPage = () => {
                                 <IonIcon className="ml1" name="eye-off-outline"/>
                             </div>
                             <div className="inline-items">
-                                {...calendars?.map((e, index: number) => <div className="item-create mt1 ml1">
+                                {calendars?.map((e, index: number) => <div className="item-create mt1 ml1">
                                     <div className="flex">
                                         <p>{e?.description + ': ' + e?.dateStart}</p>
                                         <IonIcon onClick={() => {
@@ -484,7 +485,7 @@ const InspectionViewWorkshopLayoutPage = () => {
                         <div className="cardWhiteForm mt1">
                             <p className="subsubtitle">Accesorios</p>
                             <div className="inline-items">
-                             {...accesories?.map((e, index: number) => <div className="item-create mt1 ml1">
+                             {accesories?.map((e, index: number) => <div className="item-create mt1 ml1">
                                     <div className="flex">
                                         <p>{e}</p>
                                         <IonIcon onClick={() => {

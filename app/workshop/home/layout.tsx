@@ -4,7 +4,7 @@ import SideBarComponent from "@/components/panel/sidebar";
 import { UserModel } from "@/models/user.model";
 import IonIcon from "@reacticons/ionicons";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, FunctionComponent } from "react";
 import './index.css';
 import SchedulerRender from "./scheduler";
 import Link from "next/link";
@@ -19,6 +19,8 @@ import { ClientsModel } from "@/models/workshops/clients.model";
 import { getAllClients } from "@/app/api/workshop/clients/call";
 import { getAllOrderServices } from "@/app/api/workshop/orders/call";
 import { OrderWorkshopModel } from "@/models/workshops/orders.model";
+import { getAllCalendars } from "@/app/api/workshop/calendars/call";
+import { CalendarsModel } from "@/models/workshops/calendars.model";
 const HomeWorkshopLayoutPage = () => {
     const router = useRouter();
     const [user, setUser] = useState<UserModel>(null);
@@ -26,6 +28,7 @@ const HomeWorkshopLayoutPage = () => {
     const [vehicles, setVehicles] = useState<VehiclesModel[]>([]);
     const [clients, setClients] = useState<ClientsModel[]>([]);
     const [orders, setOrders] = useState<OrderWorkshopModel[]>([]);
+    const [calendars, setCalendars] = useState<CalendarsModel[]>([]);
     const toUser = async () => {
         const userr = await getUser();
         if(userr === undefined || userr === null){
@@ -38,6 +41,9 @@ const HomeWorkshopLayoutPage = () => {
         const inspectionsCast = await getAllInspections(String(userr?._id));
         const clientsCast = await getAllClients(String(userr?._id));
         const ordersCast = await getAllOrderServices(String(userr?._id));
+        const calendarsCast = await getAllCalendars(String(userr?._id));
+        console.log(calendarsCast);
+        setCalendars(calendarsCast ?? []);
         setVehicles(vehiclesCast ?? []);
         setInspections(inspectionsCast ?? []);
         setClients(clientsCast ?? []);
@@ -151,14 +157,24 @@ const HomeWorkshopLayoutPage = () => {
                         <p className="subsubtitle"> Registra recordatorios para no perder clientes y ganar más por vehículo</p>
                         <div className="card w100 inline-items br0 mt1">
                             <p className="inline-items subsubtitle mt1 ml1">Tareas por vencer hoy: </p>
+                            {...calendars?.map((e) => {
+                                const currentTime = new Date();
+                                const timeTask = new Date(e?.dateStart);
+                                if(timeTask.getDay() === currentTime.getDay()){
+                                    if(timeTask.getMonth() === currentTime.getMonth()){
+                                        if(timeTask.getFullYear() === currentTime.getFullYear()){
+                                            return <PopoverRender calendar={e}/>
+                                        }
+                                    }
+                                }
+                                
+                            })}
                             
-                            <PopoverRender/>
-                            <PopoverRender/>
                             
                             
                         </div>
                         <div className="">
-                            <SchedulerRender userid={String(user?._id)} orders={orders} vehicles={vehicles} clients={clients} inspections={inspections}/>
+                            <SchedulerRender setCalendars={setCalendars} calendars={calendars} userid={String(user?._id)} orders={orders} vehicles={vehicles} clients={clients} inspections={inspections}/>
                         </div>
 
 
@@ -172,8 +188,13 @@ const HomeWorkshopLayoutPage = () => {
           
     </>
 }
-const PopoverRender = () => {
+type PopoverRenderProps = {
+    calendar: CalendarsModel
+}
+const PopoverRender: FunctionComponent<PopoverRenderProps> = ({calendar}) => {
     const [isPopoverOpen, setIsPopoverOpen] = useState<boolean>(false);
+    var calendarTime = new Date(calendar?.dateEnd).toLocaleTimeString();
+    const finalcalendarTime = new Date(calendarTime);
     return <Popover         
         containerStyle={{
             backgroundColor: 'white',
@@ -186,7 +207,7 @@ const PopoverRender = () => {
         content={<div className="p1">
             <div className="flex"> 
                 <Checkbox inputProps={{ 'aria-label': '' }}></Checkbox>
-                <h1 className="title ml1">Mantenimiento 100 000 km</h1>
+                <h1 className="title ml1">{calendar?.title}</h1>
             </div>
             <div className="flex mt05">
                 <p className="subsubtitle mr1">Vehículo</p>
@@ -204,13 +225,13 @@ const PopoverRender = () => {
             <div className="flex mt05">
                 <div className="item-create">
                     <div className="flex">
-                        <p>03-05-2024</p>
+                        <p>{finalcalendarTime.getUTCDay()}-{finalcalendarTime.getMonth()}-{finalcalendarTime.getFullYear()}</p>
                         <IonIcon className="ml1" name="calendar-outline"/>
                     </div>
                 </div>
                 <div className="item-create ml1">
                 <div className="flex">
-                    <p>10:00</p>
+                    <p>{finalcalendarTime.getHours()}:{finalcalendarTime.getSeconds()}</p>
                     <IonIcon className="ml1" name="time-outline"/>
                 </div>
             </div>
@@ -218,7 +239,7 @@ const PopoverRender = () => {
         </div>} children={
             <div onClick={() => setIsPopoverOpen(!isPopoverOpen)} className="btn item-create small mt1 ml1">
                 <div className="flex">
-                    <p>Mantenimiento 100 000 km</p>
+                    <p>{calendar?.title}</p>
                 </div>
             </div>}        
         >

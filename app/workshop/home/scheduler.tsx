@@ -1,5 +1,6 @@
 'use client';
-import { createCalendar } from "@/app/api/workshop/calendars/call";
+import { createCalendar, getAllCalendars } from "@/app/api/workshop/calendars/call";
+import { CalendarsModel } from "@/models/workshops/calendars.model";
 import clientsModel, { ClientsModel } from "@/models/workshops/clients.model";
 import { InspectionsModel } from "@/models/workshops/inspections.model";
 import { OrderWorkshopModel } from "@/models/workshops/orders.model";
@@ -13,43 +14,36 @@ type SchedulerProps = {
     orders: OrderWorkshopModel[],
     clients: ClientsModel[],
     vehicles: VehiclesModel[],
-    inspections: InspectionsModel[]
+    inspections: InspectionsModel[],
+    calendars: CalendarsModel[],
+    setCalendars: any,
 }
-const SchedulerRender: FunctionComponent<SchedulerProps> = ({userid, orders, clients, vehicles, inspections}) => {
+const SchedulerRender: FunctionComponent<SchedulerProps> = ({userid, setCalendars, calendars, clients, vehicles, inspections}) => {
 
     const date = new Date();
     var date15m = date;
     date15m.setHours(date.getHours() + 1);
-    const events: ProcessedEvent[] = [
-        {
-            event_id: 1,
-            title: '100.000km revision',
-            start: new Date(),
-            end: date15m,
+    const randomColors = ['#D0DCFF !important', '#f1ffd0 !important', '#ffd9d0 !important', '#dfffd0 !important'];
+    const events: ProcessedEvent[] = [...calendars?.map((e, index: number) => {
+        return {
+            event_id: index,
+            title: e?.title,
+            start: new Date(e?.dateStart),
+            end: new Date(e?.dateEnd),
             disabled: false,
-            color: '#D0DCFF !important',
+            color: randomColors[(Math.floor(Math.random() * 3) + 0)],
             textColor: '#1E367D',
-            editable: true,
-            deletable: false,
-            draggable: false,
+            deletable: true,
+            draggable: false
         }
+    })
+        
     ]
     const [finalEvents, setFinalEvents] = useState<ProcessedEvent[]>(events);
     const handleConfirm = async (
         event: ProcessedEvent,
         action: EventActions
       ): Promise<ProcessedEvent> => {
-        console.log("handleConfirm =", action, event.clients);
-    
-        /**
-         * Make sure to return 4 mandatory fields:
-         * event_id: string|number
-         * title: string
-         * start: Date|string
-         * end: Date|string
-         * ....extra other fields depend on your custom fields/editor properties
-         */
-        // Simulate http request: return added/edited event
         return new Promise(async (res, rej) => {
           if (action === "edit") {
             /** PUT event to remote DB */
@@ -68,6 +62,12 @@ const SchedulerRender: FunctionComponent<SchedulerProps> = ({userid, orders, cli
             const response = await createCalendar(body);
             if(response) {
                 toast.success('Añadiste un nuevo recordatorio.');
+                const calendarsCast = await getAllCalendars(userid);
+                setCalendars(calendarsCast ?? []);
+                res({
+                    ...event,
+                    event_id: event.event_id
+                });
             } else toast.error('Ocurrio un problema añadiendo tu recordatorio.');
           }
     

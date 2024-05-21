@@ -102,7 +102,7 @@ const InspectionWorkshopLayoutPage = () => {
                 dateStart,
                 workerAssigned,
                 owner: user?._id,
-                
+                state: 0,
                 client: {
                     _id: clientSelected ?? '',
                     name: clientName,
@@ -358,14 +358,14 @@ const InspectionWorkshopLayoutPage = () => {
                             <p className="formTitle mt2">Trabajos a realizar</p>
                             <div className="inline-items">
                                 
-                                {...tasks?.map((e, index: number) => <div className="item-create mt1 ml1">
+                                {...tasks?.map((e, index: number) => {return <div className="item-create mt1 ml1">
                                     <div className="flex">
                                         <p>{e}</p>
                                         <IonIcon onClick={() => {
                                             setTasks(tasks?.filter((obj, indexx) => index !== indexx))
                                         }} className="icon ml1" name="trash-outline"/>
                                     </div>
-                                </div>)}
+                                </div>})}
                             </div>
                             
                             <div className="flex w100">
@@ -388,7 +388,7 @@ const InspectionWorkshopLayoutPage = () => {
                                 <IonIcon className="ml1" name="eye-off-outline"/>
                             </div>
                             <div className="inline-items">
-                                {...calendars?.map((e, index: number) => <div className="item-create mt1 ml1">
+                                {calendars?.map((e, index: number) => <div className="item-create mt1 ml1">
                                     <div className="flex">
                                         <p>{e?.description + ': ' + e?.dateStart}</p>
                                         <IonIcon onClick={() => {
@@ -421,7 +421,7 @@ const InspectionWorkshopLayoutPage = () => {
                         <div className="cardWhiteForm mt1">
                             <p className="subsubtitle">Accesorios</p>
                             <div className="inline-items">
-                             {...accesories?.map((e, index: number) => <div className="item-create mt1 ml1">
+                             {accesories?.map((e, index: number) => <div className="item-create mt1 ml1">
                                     <div className="flex">
                                         <p>{e}</p>
                                         <IonIcon onClick={() => {

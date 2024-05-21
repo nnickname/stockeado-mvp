@@ -84,6 +84,7 @@ const ViewOrderWorkshopLayoutPage = () => {
             setWorkSpace(object?.workSpace);
             setDateEnd(object?.dateEnd);
             selectInspectionCall(object?.inspection, inspectionsCast);
+            setSelectedInspection(object?.inspection);
         } else selectInspectionCall('other', inspectionsCast);
     }
     const buildForm = async () => {
@@ -184,6 +185,7 @@ const ViewOrderWorkshopLayoutPage = () => {
             setVehicleYear(object?.vehicle?.year);
             setVehicleVin(object?.vehicle?.vin);
             setSelectedInspection(object);
+            setTasks(object?.tasks);
         }
     }
     useEffect(() => {
