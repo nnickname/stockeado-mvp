@@ -68,7 +68,7 @@ const LayoutViewInspectionsWorkShop = ( ) => {
                                     vehicle: e?.vehicle?.brand + ' ' + e?.vehicle?.model,
                                     date: e?.dateStart,
                                     plate: e?.vehicle?.plate,
-                                    state: 0,
+                                    state: e?.state,
                                     action: e?._id
                                 }
                             })]
@@ -103,8 +103,8 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
             width: 150,
             align: 'left',
             headerClassName: 'color-table-header',
-            renderCell: (params) => <div className={params.value === 0 ? 'btn-confirmed-secondary small-btn br0' : 'btn-disabled-secondary small-btn br0'}>
-               {params.value === 0 ? 'Confirmado' : 'Sin confirmar'}
+            renderCell: (params) => <div className={params.value === 1 ? 'btn-confirmed-secondary small-btn br0' : 'btn-disabled-secondary small-btn br0'}>
+               {params.value === 1 ? 'Confirmado' : 'Sin confirmar'}
             </div>
         },
         {
@@ -135,18 +135,18 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
     
     return <div className="mt1" style={{minHeight: 500, width: '100%'}}>
         <DataGrid
-        localeText={ValuesDataGridLocale}
-        autoPageSize={true}
-        autoHeight={true}
-        rowSelection={false}
-        rows={rows}
-        columns={columns}
-        initialState={{
-            pagination: {
-            paginationModel: { page: 0, pageSize: 10 },
-            },
-        }}
-        pageSizeOptions={[5, 10, 50]}
+            localeText={ValuesDataGridLocale}
+            autoPageSize={true}
+            autoHeight={true}
+            rowSelection={false}
+            rows={rows}
+            columns={columns}
+            initialState={{
+                pagination: {
+                paginationModel: { page: 0, pageSize: 10 },
+                },
+            }}
+            pageSizeOptions={[5, 10, 50]}
         
         />
   </div>

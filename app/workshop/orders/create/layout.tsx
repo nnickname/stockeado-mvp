@@ -14,6 +14,7 @@ import { ClientsModel } from "@/models/workshops/clients.model";
 import { getAllClients } from "@/app/api/workshop/clients/call";
 import { getAllVehicles } from "@/app/api/workshop/vehicles/call";
 import { toast } from "react-toastify";
+import { createOrderService } from "@/app/api/workshop/orders/call";
 const NewOrderWorkshopLayoutPage = () => {
     const router = useRouter();
     const [user, setUser] = useState<UserModel>(null);
@@ -86,7 +87,7 @@ const NewOrderWorkshopLayoutPage = () => {
                 message = message + ' ' + 'Vehículo';  
             } else message = message + ', ' + 'Vehículo'
         }
-        if(tasks?.length < 1){
+        if(tasks?.length < 1 || totalPrice === ''){
             if(message === ''){
                 message = message + ' ' + 'Agrega un trabajo';  
             } else message = message + ', ' + 'Agrega un trabajo'
@@ -101,9 +102,13 @@ const NewOrderWorkshopLayoutPage = () => {
         const body = {
                 workerAssigned,
                 dateEnd,
-                notes: notes ?? '',
+                notes: notes ?? '-',
                 dateStart,
                 owner: user?._id,
+                state: 'pending',
+                pdfUri: '',
+                totalPrice,
+                workSpace,
                 client: {
                     _id: clientSelected ?? '',
                     name: clientName,
@@ -118,10 +123,16 @@ const NewOrderWorkshopLayoutPage = () => {
                     plate: vehiclePlate,
                     year: vehicleYear,
                     vin: vehicleVin
-                },                
+                },
                 tasks,
+                inspection: inspectionSelected?._id ?? ''
 
         }
+        const response = await createOrderService(body);
+        if(response){
+            toast.success('Creaste una nueva orden');
+            router.push('/workshop/orders/view?id=' + response?._id);
+        } else toast.error('Ocurrio un error creando tu orden');
         
     }
     const selectInspectionCall = (id: string, inspections: InspectionsModel[]) => {

@@ -16,6 +16,10 @@ import { createVehicle, getAllVehicles } from "@/app/api/workshop/vehicles/call"
 import { VehiclesModel } from "@/models/workshops/vehicles.model";
 import { toast } from "react-toastify";
 import { NewTableComponentType } from "../clients/layoutview";
+import { OrderWorkshopModel } from "@/models/workshops/orders.model";
+import { ClientsModel } from "@/models/workshops/clients.model";
+import { getAllClients } from "@/app/api/workshop/clients/call";
+import { getAllOrderServices } from "@/app/api/workshop/orders/call";
 
 const VehiclesWorkshopLayoutPage = ( ) => {
     const router = useRouter();
@@ -23,6 +27,9 @@ const VehiclesWorkshopLayoutPage = ( ) => {
     const [open, setOpen] = useState<boolean>();
     const [width, setWidth] = useState(0);
     const [vehicles, setVehicles] = useState<VehiclesModel[]>([]);
+    const [clients, setClients] = useState<ClientsModel[]>([]);
+    const [orders, setOrders] = useState<OrderWorkshopModel[]>([]);
+
     const [brand, setBrand] = useState<string>('');
     const [model, setModel] = useState<string>('');
     const [year, setYear] = useState<string>('');
@@ -38,9 +45,13 @@ const VehiclesWorkshopLayoutPage = ( ) => {
         if(userr?.type !== 'workshop'){
             router.push('/provider/home');
         }
-        const vehicless = await getAllVehicles(userr?._id) ?? [];
+        const clientss = await getAllClients(userr?._id) ?? [];
+        const vehicless = await getAllVehicles(String(userr?._id)) ?? [];
+        const ordersCast = await getAllOrderServices(String(userr?._id));
+        setOrders(ordersCast?.reverse() ?? []);
         setUser(userr);
-        setVehicles(vehicless);
+        setClients(clientss ?? []);
+        setVehicles(vehicless ?? []);
     }
     const buildForm = async() => {
         if(brand !== '' && model !== '' && year !== '' && plate !== '' && vin !== ''){
@@ -94,11 +105,23 @@ const VehiclesWorkshopLayoutPage = ( ) => {
                             [...vehicles?.map((e, index: number) => {
                                 return {
                                     id: index,
-                                    client: '',
+                                    client: clients?.map((t) => {
+                                        var items = [];
+                                        t?.vehicles?.map((a) =>{
+                                            if(String(e?._id) === a){
+                                                items.push( t?.name + ' ' + t?.lastname);
+                                            };
+                                        });
+                                        if(items?.length > 0) return items;
+                                    }).filter(s => s !== undefined) ,
                                     plate: e?.plate,
                                     vehicle: e?.brand + ' ' + e.model,
-                                    lastService: '',
-                                    calendars: '1'
+                                    lastService: orders?.map((a, index: number) => {
+                                        if(a?.client?._id === e?._id) return a?.dateStart;
+                                        return '-';
+                                    }),
+                                    calendars: '1',
+                                    action: e?._id
                                 }
                             })]
                         }/>
@@ -151,6 +174,7 @@ const VehiclesWorkshopLayoutPage = ( ) => {
 
 
 const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
+    console.log(rows);
     const router = useRouter();
     const columns: GridColDef[] = [
         
@@ -168,7 +192,7 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
             width: 160,
             align: 'left',
             headerClassName: 'color-table-header',
-            renderCell: (params) => <Link href='/workshop/vehicles/view' className="btn mt05">
+            renderCell: (params) => <Link href={'/workshop/vehicles/view?id=' + params?.value} className="btn mt05">
                 <IonIcon style={{fontSize: '1.5rem', color: "#3662E3"}} name='eye-outline'/>
             </Link>
         },

@@ -102,6 +102,7 @@ const InspectionWorkshopLayoutPage = () => {
                 dateStart,
                 workerAssigned,
                 owner: user?._id,
+                
                 client: {
                     _id: clientSelected ?? '',
                     name: clientName,
@@ -131,7 +132,7 @@ const InspectionWorkshopLayoutPage = () => {
         const response = await createInspection(body);
         if(response !== null){
             toast.success('Creaste una nueva inspección');
-            router.push('/workshop/view?id=' + response?._id);
+            router.push('/workshop/inspections/view?id=' + response?._id);
         } else return toast.error('Ocurrio un problema')
     }
     useEffect(() => {
@@ -144,7 +145,7 @@ const InspectionWorkshopLayoutPage = () => {
                     <div className="flex between">
                         <h1 className="headerSideBar"> Nuevo informe de inspección</h1>
                         <div style={{background: 'white'}}>
-                            <button  onClick={() => router.push('/workshop/inspections')} className="btn-back mr1 mt1"><IonIcon name="arrow-back-outline"/></button>
+                            <button  onClick={() => router.push('/workshop/inspections')} className="btn btn-back mr1 mt1"><IonIcon name="arrow-back-outline"/></button>
                         </div>
                     </div>
                     <div className="p1">
@@ -157,6 +158,7 @@ const InspectionWorkshopLayoutPage = () => {
                             <div className="flex">
                                 <p className="subtitle mr1 mt1">Estado</p>
                                 <div className="mt1">
+                                    
                                     <button disabled className="btn-disabled-secondary ml1">Sin confirmar</button>
                                 </div>
                             </div>
@@ -210,7 +212,7 @@ const InspectionWorkshopLayoutPage = () => {
                                             setClientLastName(clientObject?.lastname);
                                             setClientEmail(clientObject?.email);
                                             setClientPhone(clientObject?.phone);
-                                         } } values={[{value: clientSelected, label: '# ' + clientName + ' ' + clientLastname}]}                                     />
+                                         } } values={[{value: clientSelected, label: clientSelected === null ? 'Seleccionar/buscar' : '# ' + clientName + ' ' + clientLastname}]}                                     />
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Nombre</p>
@@ -269,7 +271,7 @@ const InspectionWorkshopLayoutPage = () => {
                                             setVehicleModel(vehicleObject?.model);
                                             setVehicleYear(vehicleObject?.year);
                                             setVehicleVin(vehicleObject?.vin);
-                                        } } values={[{value: vehicleSeleted, label: '# ' + vehicleBrand + ' ' + vehicleModel}]}                                    />
+                                        } } values={[{value: vehicleSeleted, label: vehicleSeleted === null ? 'Seleccionar/buscar' : '# ' + vehicleBrand + ' ' + vehicleModel}]}                                    />
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Placa</p>

@@ -11,9 +11,21 @@ import Link from "next/link";
 import '../inspections/create/index.css';
 import { Popover } from 'react-tiny-popover';
 import Checkbox from "@mui/material/Checkbox";
+import { getAllVehicles } from "@/app/api/workshop/vehicles/call";
+import { getAllInspections } from "@/app/api/workshop/inspections/call";
+import { InspectionsModel } from "@/models/workshops/inspections.model";
+import { VehiclesModel } from "@/models/workshops/vehicles.model";
+import { ClientsModel } from "@/models/workshops/clients.model";
+import { getAllClients } from "@/app/api/workshop/clients/call";
+import { getAllOrderServices } from "@/app/api/workshop/orders/call";
+import { OrderWorkshopModel } from "@/models/workshops/orders.model";
 const HomeWorkshopLayoutPage = () => {
     const router = useRouter();
     const [user, setUser] = useState<UserModel>(null);
+    const [inspections, setInspections] = useState<InspectionsModel[]>([]);
+    const [vehicles, setVehicles] = useState<VehiclesModel[]>([]);
+    const [clients, setClients] = useState<ClientsModel[]>([]);
+    const [orders, setOrders] = useState<OrderWorkshopModel[]>([]);
     const toUser = async () => {
         const userr = await getUser();
         if(userr === undefined || userr === null){
@@ -22,6 +34,14 @@ const HomeWorkshopLayoutPage = () => {
         if(userr?.type !== 'workshop'){
             router.push('/provider/home');
         }
+        const vehiclesCast = await getAllVehicles(String(userr?._id));
+        const inspectionsCast = await getAllInspections(String(userr?._id));
+        const clientsCast = await getAllClients(String(userr?._id));
+        const ordersCast = await getAllOrderServices(String(userr?._id));
+        setVehicles(vehiclesCast ?? []);
+        setInspections(inspectionsCast ?? []);
+        setClients(clientsCast ?? []);
+        setOrders(ordersCast ?? []);
         setUser(userr);
       }
     useEffect(() => {
@@ -138,7 +158,7 @@ const HomeWorkshopLayoutPage = () => {
                             
                         </div>
                         <div className="">
-                            <SchedulerRender/>
+                            <SchedulerRender userid={String(user?._id)} orders={orders} vehicles={vehicles} clients={clients} inspections={inspections}/>
                         </div>
 
 

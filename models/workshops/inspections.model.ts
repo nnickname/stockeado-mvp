@@ -17,6 +17,7 @@ export interface InspectionsModel extends Document {
     accesories: string[],
     observations: string,
     scannerUri: string,
+    state: number,
     extradata: string
 }
 
@@ -63,6 +64,10 @@ const InspecionsSchema = new Schema({
   refrigerant: {
     type: String,
     required: [true, "Please provide a refrigerant."],
+  },
+  state: {
+    type: Number,
+    required: [true, "Please provide a state"]
   },
   tasks: {
     type: Object,

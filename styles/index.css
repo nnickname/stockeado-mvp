@@ -236,6 +236,9 @@ input{
 .br0{
   border-radius: 0px !important;
 }
+.br05{
+  border-radius: .5rem !important;
+}
 .center{
   text-align: center;
 }

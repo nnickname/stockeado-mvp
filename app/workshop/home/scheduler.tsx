@@ -1,9 +1,21 @@
 'use client';
+import { createCalendar } from "@/app/api/workshop/calendars/call";
+import clientsModel, { ClientsModel } from "@/models/workshops/clients.model";
+import { InspectionsModel } from "@/models/workshops/inspections.model";
+import { OrderWorkshopModel } from "@/models/workshops/orders.model";
+import { VehiclesModel } from "@/models/workshops/vehicles.model";
 import { Scheduler } from "@aldabil/react-scheduler"
-import { ProcessedEvent } from "@aldabil/react-scheduler/types";
-import { useState } from "react";
-
-const SchedulerRender = ( ) => {
+import { EventActions, ProcessedEvent } from "@aldabil/react-scheduler/types";
+import { FunctionComponent, useState } from "react";
+import { toast } from "react-toastify";
+type SchedulerProps = {
+    userid: string;
+    orders: OrderWorkshopModel[],
+    clients: ClientsModel[],
+    vehicles: VehiclesModel[],
+    inspections: InspectionsModel[]
+}
+const SchedulerRender: FunctionComponent<SchedulerProps> = ({userid, orders, clients, vehicles, inspections}) => {
 
     const date = new Date();
     var date15m = date;
@@ -23,8 +35,49 @@ const SchedulerRender = ( ) => {
         }
     ]
     const [finalEvents, setFinalEvents] = useState<ProcessedEvent[]>(events);
+    const handleConfirm = async (
+        event: ProcessedEvent,
+        action: EventActions
+      ): Promise<ProcessedEvent> => {
+        console.log("handleConfirm =", action, event.clients);
+    
+        /**
+         * Make sure to return 4 mandatory fields:
+         * event_id: string|number
+         * title: string
+         * start: Date|string
+         * end: Date|string
+         * ....extra other fields depend on your custom fields/editor properties
+         */
+        // Simulate http request: return added/edited event
+        return new Promise(async (res, rej) => {
+          if (action === "edit") {
+            /** PUT event to remote DB */
+          } else if (action === "create") {
+            /**POST event to remote DB */
+            const body = {
+                client: event?.clients ?? '',
+                vehicle: event?.vehicles ?? '',
+                inspection: event?.inspections ?? '',
+                owner: userid,
+                title: event.title,
+                dateStart: event.start,
+                dateEnd: event.end,
+                checked: 'off'
+            }
+            const response = await createCalendar(body);
+            if(response) {
+                toast.success('Añadiste un nuevo recordatorio.');
+            } else toast.error('Ocurrio un problema añadiendo tu recordatorio.');
+          }
+    
+          
+        });
+    };
     return <div>
         <Scheduler
+        
+        onConfirm={handleConfirm}
         events={events}
         translations={
             {
@@ -64,16 +117,50 @@ const SchedulerRender = ( ) => {
         deletable={false}
         fields={[
             {
-            name: "Vehículos",
-            type: "select",
-            // Should provide options with type:"select"
-            options: [
-                { id: 1, text: "John", value: 1 },
-                { id: 2, text: "Mark", value: 2 }
-            ],
-            config: { label: "Vehículos", required: true, errMsg: "Selecciona un vehículo" }
+                name: "vehicles",
+                type: "select",
+                // Should provide options with type:"select"
+                options: [
+                    ...vehicles?.map((e, index: number) => {
+                        return {
+                            id: index,
+                            text: e?.brand + ' ' + e?.model,
+                            value: e?._id
+                        }
+                    })
+                ],
+                config: { label: "Vehículos", required: false, errMsg: "Selecciona un vehículo" }
             },
-            
+            {
+                name: "clients",
+                type: "select",
+                // Should provide options with type:"select"
+                options: [
+                    ...clients?.map((e, index: number) => {
+                        return {
+                            id: index,
+                            text: e?.name + ' ' + e?.lastname,
+                            value: e?._id
+                        }
+                    })
+                ],
+                config: { label: "Clientes", required: false, errMsg: "Selecciona un cliente" }
+            },
+            {
+                name: "inspections",
+                type: "select",
+                // Should provide options with type:"select"
+                options: [
+                    ...inspections?.map((e, index: number) => {
+                        return {
+                            id: index,
+                            text: 'Inspección #' + (index +1),
+                            value: e?._id
+                        }
+                    })
+                ],
+                config: { label: "Inspección", required: false, errMsg: "Selecciona un cliente" }
+            },
             
         ]}
          week={{

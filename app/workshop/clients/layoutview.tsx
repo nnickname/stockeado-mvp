@@ -17,6 +17,8 @@ import { ClientsModel } from "@/models/workshops/clients.model";
 import { toast } from "react-toastify";
 import { VehiclesModel } from "@/models/workshops/vehicles.model";
 import { getAllVehicles } from "@/app/api/workshop/vehicles/call";
+import { getAllOrderServices } from "@/app/api/workshop/orders/call";
+import { OrderWorkshopModel } from "@/models/workshops/orders.model";
 
 const ClientsWorkshopLayoutPage = ( ) => {
     const router = useRouter();
@@ -32,6 +34,7 @@ const ClientsWorkshopLayoutPage = ( ) => {
     const [vehicles, setVehicles] = useState<string[]>([]);
     const [formError, setErrorForm] = useState<string>('');
     const [vehiclesOptions, setVehiclesOptions] = useState<VehiclesModel[]>([]);
+    const [orders, setOrders] = useState<OrderWorkshopModel[]>([]);
     const toUser = async () => {
         const userr = await getUser();
         if(userr === undefined || userr === null){
@@ -42,9 +45,11 @@ const ClientsWorkshopLayoutPage = ( ) => {
         }
         const clientss = await getAllClients(userr?._id) ?? [];
         const vehicless = await getAllVehicles(String(userr?._id)) ?? [];
+        const ordersCast = await getAllOrderServices(String(userr?._id));
+        setOrders(ordersCast?.reverse() ?? []);
         setUser(userr);
-        setClients(clientss);
-        setVehiclesOptions(vehicless);
+        setClients(clientss ?? []);
+        setVehiclesOptions(vehicless ?? []);
     }
     const buildForm = async() => {
         if(name !== '' && lastname !== '' && phone !== '' && email !== ''){
@@ -110,7 +115,11 @@ const ClientsWorkshopLayoutPage = ( ) => {
                                     vehicle: String(e?.vehicles?.map((a) =>{
                                         return vehiclesOptions.find((e) => String(e?._id) === a).brand + ' ' + vehiclesOptions.find((e) => String(e?._id) === a).model + ' '
                                     })).substring(0, 25) + '...',
-                                    service: '',
+                                    service: orders?.map((a, index: number) => {
+                                        if(a?.client?._id === e?._id) return a?.dateStart;
+                                        return '-';
+                                    }),
+                                    action: e?._id,
                                     calendars: '2'
                                 }
                             })]
@@ -202,7 +211,7 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
             width: 160,
             align: 'left',
             headerClassName: 'color-table-header',
-            renderCell: (params) => <button onClick={() => router.push('/workshop/clients/view')} className="btn mt05">
+            renderCell: (params) => <button onClick={() => router.push('/workshop/clients/view?id=' + params?.value)} className="btn mt05">
                 <IonIcon style={{fontSize: '1.5rem', color: "#3662E3"}} name='eye-outline'/>
             </button>
         },

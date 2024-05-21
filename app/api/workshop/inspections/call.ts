@@ -11,3 +11,9 @@ export const getAllInspections = async (_id: string) => {
     if(inspection !== null) return inspection.inspections;
     return null;
 }
+
+export const updateInspection = async (body: Object) => {
+    const inspection = await callApiHookPost('/api/workshop/inspections/update', body);
+    if(inspection !== null) return true;
+    return null;
+}

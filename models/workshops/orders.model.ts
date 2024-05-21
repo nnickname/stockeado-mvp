@@ -7,9 +7,14 @@ export interface OrderWorkshopModel extends Document {
     notes: string;
     dateStart: string;
     owner: string;
-    client: object;
-    vehicle: object;
+    client: any;
+    vehicle: any;
+    inspection: string;
     tasks: any[];
+    workSpace: string;
+    totalPrice: string;
+    state: string;
+    pdfUri: string;
 }
 
 const OrderWorkshopSchema = new Schema({
@@ -23,7 +28,6 @@ const OrderWorkshopSchema = new Schema({
     },
     notes: {
         type: String,
-        required: [true, "Please provide a notes."],
     },
     dateStart: {
         type: String,
@@ -41,9 +45,26 @@ const OrderWorkshopSchema = new Schema({
         type: Object,
         required: [true, "Please provide a vehicle."],
     },
+    totalPrice: {
+        type: String,
+        required: [true, "Please provide a totalprice"]
+    },
+    inspection: {
+        type: String,
+        required: [true, "Please provide a inspections"]
+    },
+    workSpace: {
+        type: String,
+        required: [true, "Please prove a space"]
+    },
     tasks: {
         type: Array,
     },
-  
+    state: {
+        type: String,
+    },
+    pdfUri: {
+        type: String
+    }
 }, { timestamps: true },);
 export default  mongoose.models.orderservices || model<OrderWorkshopModel>("orderservices", OrderWorkshopSchema);

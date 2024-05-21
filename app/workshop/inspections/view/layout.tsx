@@ -12,7 +12,7 @@ import { getAllVehicles } from "@/app/api/workshop/vehicles/call";
 import { ClientsModel } from "@/models/workshops/clients.model";
 import { VehiclesModel } from "@/models/workshops/vehicles.model";
 import { toast } from "react-toastify";
-import { createInspection, getAllInspections } from "@/app/api/workshop/inspections/call";
+import { createInspection, getAllInspections, updateInspection } from "@/app/api/workshop/inspections/call";
 import { InspectionsModel } from "@/models/workshops/inspections.model";
 import Link from "next/link";
 
@@ -58,6 +58,8 @@ const InspectionViewWorkshopLayoutPage = () => {
     
     const [inspections, setInspections] = useState<InspectionsModel[]>([]);
     const [selectedInspection, setSelectedInspection] = useState<InspectionsModel>(null);
+    const [orderIndex, setOrderIndex] = useState<number>(0);
+    const [stateSelected, selectState] = useState<number>(0);
     const toUser = async () => {
         const userr = await getUser();
         if(userr === undefined || userr === null){
@@ -77,6 +79,7 @@ const InspectionViewWorkshopLayoutPage = () => {
         let id = urlParams.get('id');
         if(id === null) router.push('/workshop/inspections');
         selectInspectionCall(id, inspectionsCast);
+        
     }
     const selectInspectionCall = (id: string, inspections: InspectionsModel[]) => {
         if(id === 'other'){
@@ -94,9 +97,15 @@ const InspectionViewWorkshopLayoutPage = () => {
             setSelectedInspection(null);
             setDateStart('');
             setWorker('');
+            selectState(0);
             return;
         }
-        const object = inspections?.find(e => String(e?._id) === id);
+        const object = inspections?.find((e) => String(e?._id) === id );
+        var index = 0;
+        inspections.map((e, indexx: number) => {
+            if(String(e?._id) === id) index = indexx;
+        });
+        setOrderIndex(index);
         if(object !== null){
             setDateStart(object?.dateStart);
             setWorker(object?.workerAssigned);
@@ -121,6 +130,7 @@ const InspectionViewWorkshopLayoutPage = () => {
             setFuel(object?.fuel);
             setMileage(object?.mileage);
             setRefrigerant(object?.refrigerant);
+            selectState(object?.state);
             
         }
     }
@@ -149,7 +159,7 @@ const InspectionViewWorkshopLayoutPage = () => {
         if(message !== '') return toast.error('Encontramos los siguientes errores en el formulario:' + message);
         
         const body = {
-            calendars,
+            _id: String(selectedInspection?._id),
             object: {
                 dateStart,
                 workerAssigned,
@@ -173,6 +183,7 @@ const InspectionViewWorkshopLayoutPage = () => {
                 mileage,
                 oil,
                 fuel,
+                state: stateSelected,
                 brakes,
                 refrigerant,
                 tasks,
@@ -180,7 +191,10 @@ const InspectionViewWorkshopLayoutPage = () => {
                 observations
             }
         }
-        
+        const response = await updateInspection(body);
+        if(response){
+            toast.success('Guardaste los cambios.');
+        } else toast.error('Ocurrio un problema.');
     }
     useEffect(() => {
         toUser();
@@ -200,12 +214,15 @@ const InspectionViewWorkshopLayoutPage = () => {
 
                         <div className="flex between">
                             <div>
-                                <p className="subtitle mt1" style={{fontWeight: '500'}}>Inspección #{inspections?.length +1}</p>
+                                <p className="subtitle mt1" style={{fontWeight: '500'}}>Inspección #{orderIndex +1}</p>
                             </div>
                             <div className="flex">
                                 <p className="subtitle mr1 mt1">Estado</p>
                                 <div className="mt1">
-                                    <button disabled className="btn-disabled-secondary ml1">Sin confirmar</button>
+                                    <select className={stateSelected === 0 ? 'btn btn-disabled-secondary ml1' : 'btn btn-confirmed-secondary ml1'} value={stateSelected} onChange={(e) => selectState(Number(e?.target?.value))}>
+                                        <option className="btn-disabled-secondary" value={0}>Sin confirmar</option>
+                                        <option className="btn-confirmed-secondary" value={1}>Confirmado</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
