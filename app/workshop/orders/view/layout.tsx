@@ -63,8 +63,8 @@ const ViewOrderWorkshopLayoutPage = () => {
         }
         const vehicless = await getAllVehicles(String(userr?._id)) ?? [];
         const clientss = await getAllClients(String(userr?._id)) ?? [];
-        const inspectionsCast = await getAllInspections(userr?._id) ?? [];
-        const ordersCast = await getAllOrderServices(userr?._id);
+        const inspectionsCast = await getAllInspections(String(userr?._id)) ?? [];
+        const ordersCast = await getAllOrderServices(String(userr?._id));
         setClients(clientss);
         setVehicles(vehicless);
         setUser(userr);
@@ -84,7 +84,9 @@ const ViewOrderWorkshopLayoutPage = () => {
             setWorkSpace(object?.workSpace);
             setDateEnd(object?.dateEnd);
             selectInspectionCall(object?.inspection, inspectionsCast);
-            setSelectedInspection(object?.inspection);
+            setSelectedInspection(inspectionsCast?.find(e => String(e?._id) === object?.inspection));
+            setTasks(object?.tasks);
+            setTotalPrice(object?.totalPrice)
         } else selectInspectionCall('other', inspectionsCast);
     }
     const buildForm = async () => {
@@ -185,7 +187,6 @@ const ViewOrderWorkshopLayoutPage = () => {
             setVehicleYear(object?.vehicle?.year);
             setVehicleVin(object?.vehicle?.vin);
             setSelectedInspection(object);
-            setTasks(object?.tasks);
         }
     }
     useEffect(() => {
@@ -402,7 +403,7 @@ const ViewOrderWorkshopLayoutPage = () => {
                             
                             <div className="mt2">
                                 {
-                                    ...tasks?.map((e, index: number) => {
+                                    tasks?.map((e, index: number) => {
                                         return <div className="flex between right mt1">
                                             <div className="w100 ml1 left">
                                                 <p>x{e?.ammount}</p>

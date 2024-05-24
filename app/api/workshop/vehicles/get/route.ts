@@ -4,6 +4,7 @@ import Vehicle from '../../../../../models/workshops/vehicles.model';
 import Client from '../../../../../models/workshops/clients.model';
 import Inspection from '../../../../../models/workshops/inspections.model';
 import Order from '../../../../../models/workshops/orders.model';
+import Calendar from '../../../../../models/workshops/calendars.model';
 
 export async function POST(
     req: Request,
@@ -16,8 +17,9 @@ export async function POST(
             const clientResponse = await Client.find({'vehicles': body._id});
             const inspectionResponse = await Inspection.find({'vehicle._id': body._id});
             const orderResponse = await Order.find({'vehicle._id': body._id});
+            const calendarResponse = await Calendar.find({'vehicle': body._id});
 
-            return NextResponse.json({ message: "Vehicle find", vehicle: vehicleResponse, client: clientResponse, inspections: inspectionResponse, orders: orderResponse?.reverse()});
+            return NextResponse.json({ message: "Vehicle find", calendars: calendarResponse, vehicle: vehicleResponse, client: clientResponse, inspections: inspectionResponse, orders: orderResponse?.reverse()});
           
           return NextResponse.json({message: 'Invalid auth'});
         } catch (errors) {

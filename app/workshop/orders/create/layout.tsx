@@ -131,7 +131,7 @@ const NewOrderWorkshopLayoutPage = () => {
         const response = await createOrderService(body);
         if(response){
             toast.success('Creaste una nueva orden');
-            router.push('/workshop/orders/view?id=' + response?._id);
+            router.push('/workshop/orders');
         } else toast.error('Ocurrio un error creando tu orden');
         
     }
@@ -405,14 +405,21 @@ const NewOrderWorkshopLayoutPage = () => {
                                 <input onChange={(e) => setTaskPrice(e.target.value)} value={taskPrice} className="inputForm  w100" type="text" placeholder="Precio" style={{borderRadius: '0rem 0rem 0rem 0rem'}}/>
                                 <button onClick={() => {
                                     if(taskAmmount !== '' && taskDescription !== '' && taskPrice !== ''){
-                                        setTasks([{
+                                        const taskCast = [{
                                             ammount: taskAmmount,
                                             description: taskDescription,
                                             price: taskPrice
-                                        }, ...tasks]);
+                                        }, ...tasks];
+                                        setTasks(taskCast);
                                         setTaskAmmount('');
                                         setTaskDescription('');
                                         setTaskPrice('');
+                                        var total: number = 0;
+                                        taskCast?.map((e) => {
+                                            total = total + (Number(e?.ammount) * Number(e?.price));
+                                        })
+                                        total = total + Number(totalPrice);
+                                        setTotalPrice(String(total));
                                     } else toast.error(' Completa el formulario');
                                     
                                 }} className="btn-gradient-secondary " style={{border:'1px solid grey', borderRadius: '0px .5rem .5rem 0rem'}} >Añadir</button>

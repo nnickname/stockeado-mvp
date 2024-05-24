@@ -117,9 +117,11 @@ const VehiclesWorkshopLayoutPage = ( ) => {
                                     plate: e?.plate,
                                     vehicle: e?.brand + ' ' + e.model,
                                     lastService: orders?.map((a, index: number) => {
-                                        if(a?.client?._id === e?._id) return a?.dateStart;
-                                        return '-';
-                                    }),
+                                        if(a?.vehicle?._id === e?._id){
+                                         return a?.dateStart;
+                                        }
+                                        ;
+                                    }).filter(s => s !== undefined),
                                     calendars: '1',
                                     action: e?._id
                                 }

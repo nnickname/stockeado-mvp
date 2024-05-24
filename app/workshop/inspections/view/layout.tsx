@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 import { createInspection, getAllInspections, updateInspection } from "@/app/api/workshop/inspections/call";
 import { InspectionsModel } from "@/models/workshops/inspections.model";
 import Link from "next/link";
+import { createCalendar, getAllCalendarsInspections } from "@/app/api/workshop/calendars/call";
 
 const InspectionViewWorkshopLayoutPage = () => {
     const router = useRouter();
@@ -79,6 +80,14 @@ const InspectionViewWorkshopLayoutPage = () => {
         let id = urlParams.get('id');
         if(id === null) router.push('/workshop/inspections');
         selectInspectionCall(id, inspectionsCast);
+        const calendarsCast = await getAllCalendarsInspections(id);
+        console.log(calendarsCast)
+        setCalendars([...calendarsCast?.map((e) => {
+            return {
+                dateStart: e?.dateStart,
+                description: e?.title
+            }
+        })]);
         
     }
     const selectInspectionCall = (id: string, inspections: InspectionsModel[]) => {
@@ -465,16 +474,26 @@ const InspectionViewWorkshopLayoutPage = () => {
                             <div className="flex w100">
                                 <input onChange={(e) => setSchedulerDate(e.target.value)} value={newSchedulerDate} type="datetime-local" className="inputForm mt1" style={{borderRadius: '.5rem 0rem 0rem .5rem'}}/>
                                 <input onChange={(e) => setNewScheduler(e.target.value)} value={newScheduler} className="inputForm mt1 w100" type="text" placeholder="Descripción" style={{borderRadius: '0rem 0rem 0rem 0rem'}}/>
-                                <button onClick={() => {
+                                <button onClick={async () => {
                                     if(clientName !== '' && vehicleBrand !== ''){
                                         if(newScheduler !== '' && newSchedulerDate !== ''){
-                                            
-                                            setCalendars([{
+                                            const response = await createCalendar({
+                                                owner: user?._id,
                                                 dateStart: newSchedulerDate,
-                                                description: newScheduler,
-                                                client: clientSelected !== null ? clientSelected : (clientName + ' ' + clientLastname),
-                                                vehicle: vehicleSeleted !== '' ? vehicleSeleted : (vehicleBrand + ' ' + vehicleModel)
-                                            }, ...calendars]);
+                                                checked: 'off',
+                                                dateEnd: new Date(new Date(newSchedulerDate).setHours(new Date(newSchedulerDate).getHours() + 1)),
+                                                title: newScheduler,
+                                                vehicle: vehicleSeleted ?? '',
+                                                client: clientSelected ?? '',
+                                                inspection: String(selectedInspection?._id ?? '')                                             });
+                                            if(response){
+                                                setCalendars([{
+                                                    dateStart: newSchedulerDate,
+                                                    description: newScheduler,
+    
+                                                }, ...calendars]);
+                                                toast.success('Añadiste un recordatorio');
+                                            }
                                         } else toast.error(' Completa el formulario');
                                     } else toast.error(' Selecciona un cliente/vehículo');
                                     

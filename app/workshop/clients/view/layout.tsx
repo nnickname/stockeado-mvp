@@ -14,6 +14,8 @@ import { getAllVehicles, getVehicle } from "@/app/api/workshop/vehicles/call";
 import { VehiclesModel } from "@/models/workshops/vehicles.model";
 import Link from "next/link";
 import { toast } from "react-toastify";
+import { OrderWorkshopModel } from "@/models/workshops/orders.model";
+import { CalendarsModel } from "@/models/workshops/calendars.model";
 const LayoutViewClientWorkShop = ( ) => {
     const router = useRouter();
     const [open, setOpen] = useState<boolean>();
@@ -23,12 +25,13 @@ const LayoutViewClientWorkShop = ( ) => {
     const [allVehicles, setAllVehicles] = useState<VehiclesModel[]>([]);
     const [inspections, setInspections] = useState<InspectionsModel[]>([]);
     const [orderIndex, setOrderIndex] = useState<number>(null);
-    const [lastService, setLastService] = useState<string>('');
+    const [orderServices, setOrderServices] = useState<OrderWorkshopModel[]>([]);
     const [clientid, setClientID] = useState<string>('');
     const [name, setName] = useState<string>('');
     const [lastname, setLastname] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [phone, setPhone] = useState<string>('');
+    const [calendars, setCalendars] = useState<CalendarsModel[]>([]);
     const buildForm = async () => {
         if(name !== '' && lastname !== '' && email !== '' && phone !== '' && clientid !== ''){
             const body = {
@@ -68,7 +71,8 @@ const LayoutViewClientWorkShop = ( ) => {
         setEmail(response?.client?.email);
         setPhone(response?.client?.phone);
         setInspections(response?.inspections ?? []);
-        setLastService(response?.orders?.length > 0 ? 'Orden de servicio #' + response?.orders?.length : '');
+        setOrderServices(response?.orders ?? []);
+        setCalendars(response?.calendars ?? []);
         var index = 0;
         clientsCast?.map((e, indexx: number) => {
             if(String(e?._id) === id) index = indexx;
@@ -127,10 +131,12 @@ const LayoutViewClientWorkShop = ( ) => {
                                 </div>
                             </div>
                             <div className="card mt1 flex between p1 w100">
-                                <p className="subsubtitle w100">Último servicio:</p>
+                                <p className="subsubtitle w100">Ordenes servicio:</p>
                                 <div className="w100 right">
-                                    {lastService === '' ? <button className="subsubtitle ">No encontrado</button> : 
-                                    <button className="btn-link w100">{lastService}</button> }
+                                    {orderServices?.length === 0 ? <button className="subsubtitle ">No encontrado</button> : orderServices?.map((e, index: number) => {
+                                        return <button className="btn-link w100">Orden de servicio #{index + 1}</button>
+                                    })}
+                                    
                                 </div>
                             </div>
                         </div>
@@ -156,9 +162,11 @@ const LayoutViewClientWorkShop = ( ) => {
                             <div className="card mt1 flex between p1 w100">
                                 <p className="subsubtitle w100">Recordatorios:</p>
                                 <div className="w100 right">
-                                    <button className="btn-link w100">100 000 km - ANZ123</button>
-                                    <button className="btn-link mt05 w100">Cambio de aceite</button>
-                                    <button className="btn-link mt05 w100">Cambio de neumaticos</button>
+                                    {calendars?.length < 1 ? <button className="subsubtitle ">No encontrado</button> : 
+                                        calendars?.map((e) => {
+                                            return (<Link style={{display: 'block'}} href={'/workshop/inspections/home'} className="btn-link w100">{e?.title}</Link>)
+                                        })
+                                    }
                                 </div>
                             </div>
                         </div>

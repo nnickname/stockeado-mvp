@@ -113,12 +113,13 @@ const ClientsWorkshopLayoutPage = ( ) => {
                                     lastname: e?.lastname,
                                     phone: e?.phone,
                                     vehicle: String(e?.vehicles?.map((a) =>{
-                                        return vehiclesOptions.find((e) => String(e?._id) === a).brand + ' ' + vehiclesOptions.find((e) => String(e?._id) === a).model + ' '
-                                    })).substring(0, 25) + '...',
+                                        return ' ' + vehiclesOptions.find((e) =>  String(e?._id) === a).brand + ' ' + vehiclesOptions.find((e) => String(e?._id) === a).model})).substring(0, 25) + '...',
                                     service: orders?.map((a, index: number) => {
-                                        if(a?.client?._id === e?._id) return a?.dateStart;
-                                        return '-';
-                                    }),
+                                        if(a?.client?._id === e?._id){
+                                         return a?.dateStart;
+                                        }
+                                        ;
+                                    }).filter(s => s !== undefined),
                                     action: e?._id,
                                     calendars: '2'
                                 }

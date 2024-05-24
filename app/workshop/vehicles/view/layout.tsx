@@ -13,6 +13,7 @@ import { getAllInspections } from "@/app/api/workshop/inspections/call";
 import Link from "next/link";
 import { ClientsModel } from "@/models/workshops/clients.model";
 import { toast } from "react-toastify";
+import { CalendarsModel } from "@/models/workshops/calendars.model";
 const LayoutViewVehicleWorkShop = ( ) => {
     const router = useRouter();
     const [user, setUser] = useState<UserModel>(null);
@@ -24,9 +25,9 @@ const LayoutViewVehicleWorkShop = ( ) => {
     const [plate, setPlate] = useState<string>('');
     const [vin, setVin] = useState<string>('');
     const [client, setClient] = useState<ClientsModel[]>([]);
-    const [lastService, setLastService] = useState<string>('');
+    const [orderServices, setOrderServices] = useState<OrderWorkshopModel[]>([]);
     const [inspections, setInspections] = useState<InspectionsModel[]>([]);
-    const [calendar, setCalendars] = useState<OrderWorkshopModel[]>([]);
+    const [calendars, setCalendars] = useState<CalendarsModel[]>([]);
     const [allInspections, setAllInspections] = useState<InspectionsModel[]>([]);
     const [orderIndex, setOrderIndex] = useState<number>(0);
     const buildForm = async () => {
@@ -73,7 +74,8 @@ const LayoutViewVehicleWorkShop = ( ) => {
             return e
         })]);
         setInspections(response?.inspections ?? []);
-        setLastService(response?.orders?.length > 0 ? 'Orden de servicio #' + response?.orders?.length : '');
+        setOrderServices(response?.orders ?? []);
+        setCalendars(response?.calendars ?? []);
         setUser(userr);
       }
     useEffect(() => {
@@ -136,10 +138,11 @@ const LayoutViewVehicleWorkShop = ( ) => {
                                 </div>
                             </div>
                             <div className="card mt1 flex between p1 w100">
-                                <p className="subsubtitle w100">Último servicio:</p>
+                                <p className="subsubtitle w100">Ordenes servicio:</p>
                                 <div className="w100 right">
-                                    {lastService === '' ? <button className="subsubtitle ">No encontrado</button> :<button className="btn-link w100">{lastService}</button>}
-                                </div>
+                                    {orderServices?.length === 0 ? <button className="subsubtitle ">No encontrado</button> : orderServices?.map((e, index: number) => {
+                                        return <button className="btn-link w100">Orden de servicio #{index + 1}</button>
+                                    })}                                </div>
                             </div>
                         </div>
 
@@ -160,9 +163,11 @@ const LayoutViewVehicleWorkShop = ( ) => {
                             <div className="card mt1 flex between p1 w100">
                                 <p className="subsubtitle w100">Recordatorios:</p>
                                 <div className="w100 right">
-                                    <button className="btn-link w100">100 000 km - ANZ123</button>
-                                    <button className="btn-link mt05 w100">Cambio de aceite</button>
-                                    <button className="btn-link mt05 w100">Cambio de neumaticos</button>
+                                    {calendars?.length < 1 ? <button className="subsubtitle ">No encontrado</button> : 
+                                        calendars?.map((e) => {
+                                            return (<Link style={{display: 'block'}} href={'/workshop/inspections/home'} className="btn-link w100">{e?.title}</Link>)
+                                        })
+                                    }
                                 </div>
                             </div>
                         </div>

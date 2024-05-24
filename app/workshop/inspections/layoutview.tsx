@@ -136,8 +136,6 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
     return <div className="mt1" style={{minHeight: 500, width: '100%'}}>
         <DataGrid
             localeText={ValuesDataGridLocale}
-            autoPageSize={true}
-            autoHeight={true}
             rowSelection={false}
             rows={rows}
             columns={columns}

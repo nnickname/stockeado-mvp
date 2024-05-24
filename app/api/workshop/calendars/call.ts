@@ -10,3 +10,8 @@ export const getAllCalendars = async (_id: string) => {
     if(calendar !== null) return calendar?.calendars;
     return null;
 }
+export const getAllCalendarsInspections = async (_id: string) => {
+    const calendar = await callApiHookPost('/api/workshop/calendars/getinspection', {_id});
+    if(calendar !== null) return calendar?.calendars;
+    return null;
+}

@@ -163,7 +163,7 @@ const HomeWorkshopLayoutPage = () => {
                                 if(timeTask.getDay() === currentTime.getDay()){
                                     if(timeTask.getMonth() === currentTime.getMonth()){
                                         if(timeTask.getFullYear() === currentTime.getFullYear()){
-                                            return <PopoverRender calendar={e}/>
+                                            return <PopoverRender vehicles={vehicles} clients={clients} inspections={inspections} calendar={e}/>
                                         }
                                     }
                                 }
@@ -190,12 +190,25 @@ const HomeWorkshopLayoutPage = () => {
 }
 type PopoverRenderProps = {
     calendar: CalendarsModel
+    vehicles: VehiclesModel[],
+    clients: ClientsModel[],
+    inspections: InspectionsModel[]
 }
-const PopoverRender: FunctionComponent<PopoverRenderProps> = ({calendar}) => {
+const PopoverRender: FunctionComponent<PopoverRenderProps> = ({calendar, vehicles, clients, inspections}) => {
     const [isPopoverOpen, setIsPopoverOpen] = useState<boolean>(false);
-    var calendarTime = new Date(calendar?.dateEnd).toLocaleTimeString();
-    const finalcalendarTime = new Date(calendarTime);
-    return <Popover         
+    const finalcalendarTime = new Date(calendar?.dateEnd);
+    const vehicle = vehicles?.find(e => String(e?._id) === calendar?.vehicle);
+    const client = clients?.find(e => String(e?._id) === calendar?.client);
+    var indexInpection: number = 0;
+    const inspection = inspections?.find(e => String(e?._id) === calendar?.inspection);
+    inspections?.map((e, index: number) => {
+        if(String(e?._id) === calendar?.inspection){
+            indexInpection = index;
+        }
+    })
+
+    return <Popover  
+        onClickOutside={() => setIsPopoverOpen(false)}       
         containerStyle={{
             backgroundColor: 'white',
             padding: '1rem',
@@ -211,27 +224,27 @@ const PopoverRender: FunctionComponent<PopoverRenderProps> = ({calendar}) => {
             </div>
             <div className="flex mt05">
                 <p className="subsubtitle mr1">Vehículo</p>
-                <p className="subsubtitle btn color-link ml1">BMW 320i - ANZ123</p>
+                <Link href={'/workshop/vehicles/view?id=' + calendar?.vehicle} className="subsubtitle btn color-link ml1">{vehicle?.brand + ' ' + vehicle?.model} - {vehicle?.plate}</Link>
             </div>
             <div className="flex mt05">
                 <p className="subsubtitle mr1">Cliente</p>
-                <p className="subsubtitle btn color-link ml1">Jorge Perez</p>
+                <Link href={'/workshop/clients/view?id=' + calendar?.client} className="subsubtitle btn color-link ml1">{client?.name + ' ' + client?.lastname}</Link>
             </div>
             <div className="flex mt05">
                 <p className="subsubtitle mr1">Inspección</p>
-                <p className="subsubtitle btn color-link ml1">Inspección #21</p>
+                <Link href={'/workshop/inspections/view?id=' + calendar?.inspection} className="subsubtitle btn color-link ml1">Inspección #{indexInpection}</Link>
             </div>
             <h1 className="mt1 subsubtitle">Fecha de vencimiento</h1>
             <div className="flex mt05">
                 <div className="item-create">
                     <div className="flex">
-                        <p>{finalcalendarTime.getUTCDay()}-{finalcalendarTime.getMonth()}-{finalcalendarTime.getFullYear()}</p>
+                        <p>{finalcalendarTime.getDate()}-{finalcalendarTime.getMonth() +1 }-{finalcalendarTime.getFullYear()}</p>
                         <IonIcon className="ml1" name="calendar-outline"/>
                     </div>
                 </div>
                 <div className="item-create ml1">
                 <div className="flex">
-                    <p>{finalcalendarTime.getHours()}:{finalcalendarTime.getSeconds()}</p>
+                    <p>{finalcalendarTime.getHours()}:{finalcalendarTime.getMinutes()}</p>
                     <IonIcon className="ml1" name="time-outline"/>
                 </div>
             </div>

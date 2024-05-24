@@ -408,8 +408,9 @@ const InspectionWorkshopLayoutPage = () => {
                                             setCalendars([{
                                                 dateStart: newSchedulerDate,
                                                 description: newScheduler,
-                                                client: clientSelected !== null ? clientSelected : (clientName + ' ' + clientLastname),
-                                                vehicle: vehicleSeleted !== '' ? vehicleSeleted : (vehicleBrand + ' ' + vehicleModel)
+                                                client: clientSelected ?? '',
+                                                vehicle: vehicleSeleted ?? '',
+                        
                                             }, ...calendars]);
                                         } else toast.error(' Completa el formulario');
                                     } else toast.error(' Selecciona un cliente/vehículo');
