@@ -20,6 +20,8 @@ import { OrderWorkshopModel } from "@/models/workshops/orders.model";
 import { ClientsModel } from "@/models/workshops/clients.model";
 import { getAllClients } from "@/app/api/workshop/clients/call";
 import { getAllOrderServices } from "@/app/api/workshop/orders/call";
+import { getAllCalendars } from "@/app/api/workshop/calendars/call";
+import { CalendarsModel } from "@/models/workshops/calendars.model";
 
 const VehiclesWorkshopLayoutPage = ( ) => {
     const router = useRouter();
@@ -36,6 +38,7 @@ const VehiclesWorkshopLayoutPage = ( ) => {
     const [plate, setPlate] = useState<string>('');
     const [vin, setVin] = useState<string>('');
     const [formError, setErrorForm] = useState<string>('');
+    const [calendars, setCalendars] = useState<CalendarsModel[]>([]);
     const handleResize = () => setWidth(window.innerWidth)
     const toUser = async () => {
         const userr = await getUser();
@@ -48,10 +51,12 @@ const VehiclesWorkshopLayoutPage = ( ) => {
         const clientss = await getAllClients(userr?._id) ?? [];
         const vehicless = await getAllVehicles(String(userr?._id)) ?? [];
         const ordersCast = await getAllOrderServices(String(userr?._id));
+        const calendarsCast = await getAllCalendars(String(userr?._id));
         setOrders(ordersCast?.reverse() ?? []);
         setUser(userr);
         setClients(clientss ?? []);
         setVehicles(vehicless ?? []);
+        setCalendars(calendarsCast ?? []);
     }
     const buildForm = async() => {
         if(brand !== '' && model !== '' && year !== '' && plate !== '' && vin !== ''){
@@ -103,6 +108,10 @@ const VehiclesWorkshopLayoutPage = ( ) => {
                         </div>
                         <TableComponent rows={
                             [...vehicles?.map((e, index: number) => {
+                                var calendarsCount:number = 0;
+                                calendars?.map((a) => {
+                                    if(e?._id === a?.vehicle) calendarsCount++;
+                                })
                                 return {
                                     id: index,
                                     client: clients?.map((t) => {
@@ -122,7 +131,7 @@ const VehiclesWorkshopLayoutPage = ( ) => {
                                         }
                                         ;
                                     }).filter(s => s !== undefined),
-                                    calendars: '1',
+                                    calendars: String(calendarsCount),
                                     action: e?._id
                                 }
                             })]

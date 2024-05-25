@@ -5,7 +5,6 @@ import Inspection from '../../../../../models/workshops/inspections.model';
 import Client from '../../../../../models/workshops/clients.model';
 import Vehicle from '../../../../../models/workshops/vehicles.model';
 import Calendar from '../../../../../models/workshops/calendars.model';
-
 export async function POST(
     req: Request,
   ) {
@@ -13,8 +12,19 @@ export async function POST(
           await dbConnect();
           if(middlewareApi()){
             let body = await req.json();
-            
-            
+            var addingVehicle = new Vehicle({
+              owner: body?.object?.owner,
+              brand: body?.object?.vehicle?.brand,
+              model: body?.object?.vehicle?.model,
+              year: body?.object?.vehicle?.year,
+              plate: body?.object?.vehicle?.plate,
+              vin: body?.object?.vehicle?.vin
+            });
+            if(body?.object?.vehicle?._id === ''){
+              addingVehicle.markModified("vehicles");
+              addingVehicle.save()
+              if(addingVehicle) body.object.vehicle._id = String(addingVehicle?._id);
+            }
             if(body?.object?.client?._id === ''){
               const addingClient = new Client({
                 owner: body?.object?.owner,
@@ -22,30 +32,16 @@ export async function POST(
                 lastname: body?.object?.client?.lastname,
                 year: body?.object?.client?.year,
                 email: body?.object?.client?.email,
-                phone: body?.object?.client?.phone
+                phone: body?.object?.client?.phone,
+                vehicles: addingVehicle !== null ? [String(addingVehicle?._id)] : []
               });
               addingClient.markModified("clients");
               addingClient.save()
               if(addingClient) body.object.client._id = String(addingClient?._id);
             }
-            if(body?.object?.vehicle?._id === ''){
-              const addingVehicle = new Vehicle({
-                owner: body?.object?.owner,
-                brand: body?.object?.vehicle?.brand,
-                model: body?.object?.vehicle?.model,
-                year: body?.object?.vehicle?.year,
-                plate: body?.object?.vehicle?.plate,
-                vin: body?.object?.vehicle?.vin
-              });
-              addingVehicle.markModified("vehicles");
-              addingVehicle.save()
-              if(addingVehicle) body.object.vehicle._id = String(addingVehicle?._id);
-            }
-            
             const addingInspection = new Inspection(body?.object);
             addingInspection.markModified("inspections");
             addingInspection.save();
-            
             if (addingInspection) {
               if(body?.calendars?.length > 0){
                 const addingCalendars = Calendar.insertMany([...body?.calendars?.map((e)  => {

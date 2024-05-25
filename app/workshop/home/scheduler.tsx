@@ -1,5 +1,5 @@
 'use client';
-import { createCalendar, getAllCalendars } from "@/app/api/workshop/calendars/call";
+import { createCalendar, deleteCalendar, getAllCalendars } from "@/app/api/workshop/calendars/call";
 import { CalendarsModel } from "@/models/workshops/calendars.model";
 import clientsModel, { ClientsModel } from "@/models/workshops/clients.model";
 import { InspectionsModel } from "@/models/workshops/inspections.model";
@@ -40,6 +40,20 @@ const SchedulerRender: FunctionComponent<SchedulerProps> = ({userid, setCalendar
         
     ]
     const [finalEvents, setFinalEvents] = useState<ProcessedEvent[]>(events);
+    const handleDelete = async (deleteId: number): Promise<string> => {
+        return new Promise(async (res, rej) => {
+            const calendarCast = calendars?.find((e, index: number) => index === deleteId);
+            if(calendarCast?._id !== null){
+                const response = await deleteCalendar(String(calendarCast?._id));
+                if(response){
+                    const calendarsGet = await getAllCalendars(String(userid))
+                    setCalendars(calendarsGet ?? []);
+                    res(String(deleteId));
+                    toast.success('Eliminaste un recordatorio');
+                }
+            }
+          });
+      }
     const handleConfirm = async (
         event: ProcessedEvent,
         action: EventActions
@@ -76,7 +90,7 @@ const SchedulerRender: FunctionComponent<SchedulerProps> = ({userid, setCalendar
     };
     return <div>
         <Scheduler
-        
+        onDelete={handleDelete}
         onConfirm={handleConfirm}
         events={events}
         translations={

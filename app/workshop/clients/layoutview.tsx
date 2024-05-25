@@ -19,6 +19,8 @@ import { VehiclesModel } from "@/models/workshops/vehicles.model";
 import { getAllVehicles } from "@/app/api/workshop/vehicles/call";
 import { getAllOrderServices } from "@/app/api/workshop/orders/call";
 import { OrderWorkshopModel } from "@/models/workshops/orders.model";
+import { CalendarsModel } from "@/models/workshops/calendars.model";
+import { getAllCalendars } from "@/app/api/workshop/calendars/call";
 
 const ClientsWorkshopLayoutPage = ( ) => {
     const router = useRouter();
@@ -35,6 +37,7 @@ const ClientsWorkshopLayoutPage = ( ) => {
     const [formError, setErrorForm] = useState<string>('');
     const [vehiclesOptions, setVehiclesOptions] = useState<VehiclesModel[]>([]);
     const [orders, setOrders] = useState<OrderWorkshopModel[]>([]);
+    const [calendars, setCalendars] = useState<CalendarsModel[]>([]);
     const toUser = async () => {
         const userr = await getUser();
         if(userr === undefined || userr === null){
@@ -46,10 +49,12 @@ const ClientsWorkshopLayoutPage = ( ) => {
         const clientss = await getAllClients(userr?._id) ?? [];
         const vehicless = await getAllVehicles(String(userr?._id)) ?? [];
         const ordersCast = await getAllOrderServices(String(userr?._id));
+        const calendarsCast = await getAllCalendars(String(userr?._id));
         setOrders(ordersCast?.reverse() ?? []);
         setUser(userr);
         setClients(clientss ?? []);
         setVehiclesOptions(vehicless ?? []);
+        setCalendars(calendarsCast ?? []);
     }
     const buildForm = async() => {
         if(name !== '' && lastname !== '' && phone !== '' && email !== ''){
@@ -106,6 +111,10 @@ const ClientsWorkshopLayoutPage = ( ) => {
                         </div>
                         <TableComponent rows={
                             [...clients?.map((e, index: number) => {
+                                var calendarsCount:number = 0;
+                                calendars?.map((a) => {
+                                    if(e?._id === a?.client) calendarsCount++;
+                                })
                                 return {
                                     id: index,
                                     realid: e?._id,
@@ -121,7 +130,7 @@ const ClientsWorkshopLayoutPage = ( ) => {
                                         ;
                                     }).filter(s => s !== undefined),
                                     action: e?._id,
-                                    calendars: '2'
+                                    calendars: String(calendarsCount)
                                 }
                             })]
                         } />
