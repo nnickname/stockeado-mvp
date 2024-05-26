@@ -26,6 +26,7 @@ const ClientsWorkshopLayoutPage = ( ) => {
     const router = useRouter();
     const [open, setOpen] = useState<boolean>();
     const [user, setUser] = useState<UserModel>(null);
+    const [realClients, setRealClient] = useState<ClientsModel[]>(null);
     const [clients, setClients] = useState<ClientsModel[]>(null);
 
     const [search, setSearch] = useState("");
@@ -38,6 +39,8 @@ const ClientsWorkshopLayoutPage = ( ) => {
     const [vehiclesOptions, setVehiclesOptions] = useState<VehiclesModel[]>([]);
     const [orders, setOrders] = useState<OrderWorkshopModel[]>([]);
     const [calendars, setCalendars] = useState<CalendarsModel[]>([]);
+    const [month, selectMonth] = useState<number>(0);
+    const [disabledButton, setDisabledButton] = useState<boolean>(false);
     const toUser = async () => {
         const userr = await getUser();
         if(userr === undefined || userr === null){
@@ -52,21 +55,24 @@ const ClientsWorkshopLayoutPage = ( ) => {
         const calendarsCast = await getAllCalendars(String(userr?._id));
         setOrders(ordersCast?.reverse() ?? []);
         setUser(userr);
-        setClients(clientss ?? []);
+        setRealClient(clientss ?? []);
         setVehiclesOptions(vehicless ?? []);
         setCalendars(calendarsCast ?? []);
+        filterMonth(0, clientss);
     }
     const buildForm = async() => {
         if(name !== '' && lastname !== '' && phone !== '' && email !== ''){
             const body = {
                 name, lastname, phone, email, vehicles, owner: String(user._id)
             };
+            setDisabledButton(true);
             const response = await createClient(body);
             if(response){
                 toast.success('Cliente añadido')
                 const clientss = await getAllClients(String(user?._id)) ?? [];
                 setClients(clientss);
                 setOpen(false);
+                setDisabledButton(false);
             } else setErrorForm('* Ocurrio un problema');
         } else setErrorForm('* Encontramos errores en el formulario');
     }
@@ -81,6 +87,27 @@ const ClientsWorkshopLayoutPage = ( ) => {
     const handleSearch = (event: any) => {
         setSearch(event.target.value);
     }
+
+    const filterMonth = (month: number, realClientss: ClientsModel[]) => {
+        const currentDate = new Date();
+        if(month === 0){
+            setClients(realClientss ?? []);
+            selectMonth(0);
+            return;
+        }
+        const clientsFilter: ClientsModel[] = [];
+        realClientss?.map((e) => {
+            const date = new Date(e?.createdAt);
+            if(currentDate.getFullYear() === date?.getFullYear()){
+                if(month === Number(date?.getMonth() +1)){
+                    clientsFilter.push(e);
+                }
+            }
+        });
+        setClients(clientsFilter ?? []);
+        selectMonth(month);
+    }  
+    
     return <div>
         {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
             <SideBarComponent user={user} route='/workshop/clients' frameContennt={
@@ -104,10 +131,21 @@ const ClientsWorkshopLayoutPage = ( ) => {
                                     <IonIcon name="search-outline"/>
                                 </div>
                             </div>
-                                <select className="selectHomeWorkshop ml1">
-                                        <option>Abril</option>
-                                        <option>Mayo</option>
-                                </select>
+                            <select value={month} onChange={(e) => filterMonth(Number(e.target.value), realClients)} className="selectHomeWorkshop ml1">
+                                    <option value={0}>Todo</option>
+                                    <option value={1}>Enero</option>
+                                    <option value={2}>Febrero</option>
+                                    <option value={3}>Marzo</option>
+                                    <option value={4}>Abril</option>
+                                    <option value={5}>Mayo</option>
+                                    <option value={6}>Junio</option>
+                                    <option value={7}>Julio</option>
+                                    <option value={8}>Agosto</option>
+                                    <option value={9}>Septiembre</option>
+                                    <option value={10}>Octubre</option>
+                                    <option value={11}>Noviembre</option>
+                                    <option value={12}>Diciembre</option>
+                            </select>
                         </div>
                         <TableComponent rows={
                             [...clients?.map((e, index: number) => {
@@ -128,7 +166,7 @@ const ClientsWorkshopLayoutPage = ( ) => {
                                          return a?.dateStart;
                                         }
                                         ;
-                                    }).filter(s => s !== undefined),
+                                    }).filter(s => s !== undefined) ?? 'No encontrado',
                                     action: e?._id,
                                     calendars: String(calendarsCount)
                                 }
@@ -186,7 +224,8 @@ const ClientsWorkshopLayoutPage = ( ) => {
                 {formError === '' ? <p></p> : <p className="subsubtitle color-trash">{formError}</p>}
 
                 <div className="center w100 mt2">
-                    <button className="btn-gradient-primary" onClick={() => buildForm()}>Guardar cliente</button>
+                    <button className="btn-gradient-primary" onClick={() => buildForm()}>{
+                    disabledButton ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='grey' style={{fontSize: '1rem' }}/> : 'Guardar cliente'}</button>
                 </div>
               </div>
           </Modal>
@@ -228,9 +267,10 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
 
     ];
           
-    return <div className="mt1" style={{minHeight: 500, width: '100%'}}>
+    return <div className="mt1" style={{minHeight: 500, background: 'white', width: '100%'}}>
         <DataGrid
             localeText={ValuesDataGridLocale}
+            autoHeight
             rows={rows}
             columns={columns}
             initialState={{

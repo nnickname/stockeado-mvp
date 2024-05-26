@@ -48,7 +48,7 @@ const NewOrderWorkshopLayoutPage = () => {
     const [dateEnd, setDateEnd] = useState<string>('');
     const [workSpace, setWorkSpace] = useState<string>('');
     const [notes, setNotes] = useState<string>('');
-
+    const [disabledButton, setDisabledButton] = useState<boolean>(false);
     const toUser = async () => {
         const urlParams = new URLSearchParams(window.location.search);
         let id = urlParams.get('inspection');
@@ -98,7 +98,7 @@ const NewOrderWorkshopLayoutPage = () => {
             } else message = message + ', ' + 'Fín de orden'
         } 
         if(message !== '') return toast.error('Encontramos los siguientes errores en el formulario:' + message);
-        
+        setDisabledButton(true);
         const body = {
                 workerAssigned,
                 dateEnd,
@@ -133,7 +133,7 @@ const NewOrderWorkshopLayoutPage = () => {
             toast.success('Creaste una nueva orden');
             router.push('/workshop/orders');
         } else toast.error('Ocurrio un error creando tu orden');
-        
+        setDisabledButton(false);
     }
     const selectInspectionCall = (id: string, inspections: InspectionsModel[]) => {
         if(id === 'other'){
@@ -470,7 +470,8 @@ const NewOrderWorkshopLayoutPage = () => {
                         </div>
 
                         <div className="center mt1 mSidesAuto">
-                            <button className="btn-gradient-third mr1" onClick={() => buildForm()}>Crear orden de servicio</button>
+                            <button className="btn-gradient-third mr1" onClick={() => buildForm()}>{
+                                disabledButton ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='grey' style={{fontSize: '1rem' }}/> : 'Crear orden de servicio'}</button>
                         </div>
 
                         

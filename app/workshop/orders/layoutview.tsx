@@ -35,7 +35,10 @@ const LayoutViewOrdersWorkShop = ( ) => {
     const router = useRouter();
     const [open, setOpen] = useState<boolean>();
     const [user, setUser] = useState<UserModel>(null);
+    const [realOrders, setRealOrders] = useState<OrderWorkshopModel[]>([]);
     const [orders, setOrders] = useState<OrderWorkshopModel[]>([]);
+    const [month, selectMonth] = useState<number>(0);
+
     const toUser = async () => {
         const userr = await getUser();
         if(userr === undefined || userr === null){
@@ -45,12 +48,33 @@ const LayoutViewOrdersWorkShop = ( ) => {
             router.push('/provider/home');
         }
         const response = await getAllOrderServices(userr?._id);
-        setOrders(response ?? []);
+        filterMonth(0, response);
+        setRealOrders(response ?? []);
         setUser(userr);
       }
     useEffect(() => {
         toUser();
     }, []);
+    const filterMonth = (month: number, realOrderss: OrderWorkshopModel[]) => {
+        const currentDate = new Date();
+        if(month === 0){
+            setOrders(realOrderss ?? []);
+            selectMonth(0);
+            return;
+        }
+        const ordersFilter: OrderWorkshopModel[] = [];
+        realOrderss?.map((e) => {
+            const date = new Date(e?.createdAt);
+            if(currentDate.getFullYear() === date?.getFullYear()){
+                if(month === Number(date?.getMonth() +1)){
+                    ordersFilter.push(e);
+                }
+            }
+        });
+        setOrders(ordersFilter ?? []);
+        selectMonth(month);
+    }  
+    
     return <div>
         {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
             <SideBarComponent user={user} route='/workshop/orders' frameContennt={
@@ -73,10 +97,21 @@ const LayoutViewOrdersWorkShop = ( ) => {
                                     <IonIcon name="search-outline"/>
                                 </div>
                             </div>
-                                <select className="selectHomeWorkshop ml1">
-                                        <option>Abril</option>
-                                        <option>Mayo</option>
-                                </select>
+                            <select value={month} onChange={(e) => filterMonth(Number(e.target.value), realOrders)} className="selectHomeWorkshop ml1">
+                                    <option value={0}>Todo</option>
+                                    <option value={1}>Enero</option>
+                                    <option value={2}>Febrero</option>
+                                    <option value={3}>Marzo</option>
+                                    <option value={4}>Abril</option>
+                                    <option value={5}>Mayo</option>
+                                    <option value={6}>Junio</option>
+                                    <option value={7}>Julio</option>
+                                    <option value={8}>Agosto</option>
+                                    <option value={9}>Septiembre</option>
+                                    <option value={10}>Octubre</option>
+                                    <option value={11}>Noviembre</option>
+                                    <option value={12}>Diciembre</option>
+                            </select>
                         </div>
                         <TableComponent rows={[
                             ...orders?.map((e, index: number) => {
@@ -130,11 +165,10 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
         
     ];
        
-    return <div className="mt1" style={{minHeight: 500, width: '100%'}}>
+    return <div className="mt1" style={{minHeight: 500, height: '100%', background: 'white', width: '100%'}}>
         <DataGrid
         localeText={ValuesDataGridLocale}
-        autoPageSize={true}
-        autoHeight={true}
+        autoHeight
         rows={rows}
         rowSelection={false}
         columns={columns}

@@ -8,6 +8,7 @@ export interface ClientsModel extends Document {
     phone: string;
     email: string;
     vehicles: string[];
+    createdAt: string;
 }
 
 const ClientSchema = new Schema({

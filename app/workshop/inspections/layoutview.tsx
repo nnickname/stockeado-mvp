@@ -16,6 +16,9 @@ const LayoutViewInspectionsWorkShop = ( ) => {
     const [open, setOpen] = useState<boolean>();
     const [user, setUser] = useState<UserModel>(null);
     const [inspections, setInspections] = useState<InspectionsModel[]>([]);
+    const [realInspections, setRealInspections] = useState<InspectionsModel[]>([]);
+    const [month, selectMonth] = useState<number>(0);
+
     const toUser = async () => {
         const userr = await getUser();
         if(userr === undefined || userr === null){
@@ -26,11 +29,31 @@ const LayoutViewInspectionsWorkShop = ( ) => {
         }
         const inspectionsCast = await getAllInspections(userr?._id) ?? [];
         setUser(userr);
-        setInspections(inspectionsCast);
+        setRealInspections(inspectionsCast);
+        filterMonth(0, inspectionsCast, inspectionsCast);
       }
     useEffect(() => {
         toUser();
     }, []);
+    const filterMonth = (month: number, inspectionss: InspectionsModel[], realInspectionss: InspectionsModel[]) => {
+        const currentDate = new Date();
+        if(month === 0){
+            setInspections(realInspectionss ?? []);
+            selectMonth(0);
+            return;
+        }
+        const inspectionsFilter: InspectionsModel[] = [];
+        realInspections?.map((e) => {
+            const date = new Date(e?.createdAt);
+            if(currentDate.getFullYear() === date?.getFullYear()){
+                if(month === Number(date?.getMonth() +1)){
+                    inspectionsFilter.push(e);
+                }
+            }
+        });
+        setInspections(inspectionsFilter ?? []);
+        selectMonth(month);
+    }   
     return <div className="w100">
         {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
             <SideBarComponent user={user} route='/workshop/inspections' frameContennt={
@@ -53,10 +76,21 @@ const LayoutViewInspectionsWorkShop = ( ) => {
                                     <IonIcon name="search-outline"/>
                                 </div>
                             </div>
-                                <select className="selectHomeWorkshop ml1">
-                                        <option>Abril</option>
-                                        <option>Mayo</option>
-                                </select>
+                            <select value={month} onChange={(e) => filterMonth(Number(e.target.value), inspections, realInspections)} className="selectHomeWorkshop ml1">
+                                    <option value={0}>Todo</option>
+                                    <option value={1}>Enero</option>
+                                    <option value={2}>Febrero</option>
+                                    <option value={3}>Marzo</option>
+                                    <option value={4}>Abril</option>
+                                    <option value={5}>Mayo</option>
+                                    <option value={6}>Junio</option>
+                                    <option value={7}>Julio</option>
+                                    <option value={8}>Agosto</option>
+                                    <option value={9}>Septiembre</option>
+                                    <option value={10}>Octubre</option>
+                                    <option value={11}>Noviembre</option>
+                                    <option value={12}>Diciembre</option>
+                            </select>
                         </div>
                         <div className="w100">
                         <TableComponent rows={
@@ -113,7 +147,7 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
             sortable: false,
             filterable: false,
             width: 130,
-            align: 'left',
+            align: 'center',
             headerClassName: 'color-table-header',
             renderCell: (params) => <Link href={'/workshop/inspections/view?id=' + params?.value} className="btn mt05">
                 <IonIcon style={{fontSize: '1.5rem', color: "#3662E3"}} name='eye-outline'/>
@@ -125,7 +159,7 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
             sortable: false,
             filterable: false,
             width: 130,
-            align: 'left',
+            align: 'center',
             headerClassName: 'color-table-header',
             renderCell: (params) => <button onClick={() => {}} className="btn mt05">
                 <IonIcon style={{fontSize: '1.5rem', color: "#E15147"}} name='cloud-download-outline'/>
@@ -133,9 +167,10 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
         },
     ];
     
-    return <div className="mt1" style={{minHeight: 500, width: '100%'}}>
+    return <div className="mt1" style={{minHeight: 500, background: 'white', width: '100%'}}>
         <DataGrid
             localeText={ValuesDataGridLocale}
+            autoHeight
             rowSelection={false}
             rows={rows}
             columns={columns}

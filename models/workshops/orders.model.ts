@@ -15,6 +15,7 @@ export interface OrderWorkshopModel extends Document {
     totalPrice: string;
     state: string;
     pdfUri: string;
+    createdAt: string;
 }
 
 const OrderWorkshopSchema = new Schema({

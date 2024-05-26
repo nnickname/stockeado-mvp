@@ -56,6 +56,7 @@ const InspectionWorkshopLayoutPage = () => {
     const [accesories, setAccesories] = useState<string[]>(['Kit de auxilio']);
     
     const [inspections, setInspections] = useState<InspectionsModel[]>([]);
+    const [disabledButton, setDisabledButton] = useState<boolean>(false);
     const toUser = async () => {
         const userr = await getUser();
         if(userr === undefined || userr === null){
@@ -95,7 +96,7 @@ const InspectionWorkshopLayoutPage = () => {
             } else message = message + ', ' + 'Estado del vehículo'
         } 
         if(message !== '') return toast.error('Encontramos los siguientes errores en el formulario:' + message);
-        
+        setDisabledButton(true);
         const body = {
             calendars,
             object: {
@@ -133,7 +134,9 @@ const InspectionWorkshopLayoutPage = () => {
         if(response !== null){
             toast.success('Creaste una nueva inspección');
             router.push('/workshop/inspections/view?id=' + response?._id);
-        } else return toast.error('Ocurrio un problema')
+            
+        } else return toast.error('Ocurrio un problema');
+        setDisabledButton(false);
     }
     useEffect(() => {
         toUser();
@@ -373,6 +376,7 @@ const InspectionWorkshopLayoutPage = () => {
                                 <button onClick={() => {
                                     if(newJob !== ''){
                                         setTasks([newJob, ...tasks]);
+                                        setNewJob('');
                                     } else toast.error(' Completa el formulario')
                                 }} className="btn-gradient-secondary mt1" style={{border: '1px solid grey', borderRadius: '0px .5rem .5rem 0rem'}} >Añadir</button>
                             </div>
@@ -412,6 +416,8 @@ const InspectionWorkshopLayoutPage = () => {
                                                 vehicle: vehicleSeleted ?? '',
                         
                                             }, ...calendars]);
+                                            setSchedulerDate('');
+                                            setNewScheduler('');
                                         } else toast.error(' Completa el formulario');
                                     } else toast.error(' Selecciona un cliente/vehículo');
                                     
@@ -464,7 +470,8 @@ const InspectionWorkshopLayoutPage = () => {
                         </div>
 
                         <div className=" center mt1 mSidesAuto">
-                            <button className="btn btn-gradient-third mr1" onClick={() => buildForm()}>Crear inspección</button>
+                            <button className="btn btn-gradient-third mr1" onClick={() => buildForm()}>{
+                                disabledButton ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='grey' style={{fontSize: '1rem' }}/> : 'Crear inspección'}</button>
                             <button className="btn-disabled-secondary ml1 " disabled>Crear orden de servicio</button>
                         </div>
 

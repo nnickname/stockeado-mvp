@@ -18,7 +18,8 @@ export interface InspectionsModel extends Document {
     observations: string,
     scannerUri: string,
     state: number,
-    extradata: string
+    extradata: string,
+    createdAt: string
 }
 
 const InspecionsSchema = new Schema({

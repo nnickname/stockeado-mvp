@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 import { createInspection, getAllInspections, updateInspection } from "@/app/api/workshop/inspections/call";
 import { InspectionsModel } from "@/models/workshops/inspections.model";
 import Link from "next/link";
-import { createCalendar, getAllCalendarsInspections } from "@/app/api/workshop/calendars/call";
+import { createCalendar, deleteCalendar, getAllCalendarsInspections } from "@/app/api/workshop/calendars/call";
 
 const InspectionViewWorkshopLayoutPage = () => {
     const router = useRouter();
@@ -61,6 +61,7 @@ const InspectionViewWorkshopLayoutPage = () => {
     const [selectedInspection, setSelectedInspection] = useState<InspectionsModel>(null);
     const [orderIndex, setOrderIndex] = useState<number>(0);
     const [stateSelected, selectState] = useState<number>(0);
+    const [disabledButton, setDisabledButton] = useState<boolean>(false);
     const toUser = async () => {
         const userr = await getUser();
         if(userr === undefined || userr === null){
@@ -167,7 +168,7 @@ const InspectionViewWorkshopLayoutPage = () => {
             } else message = message + ', ' + 'Estado del vehículo'
         } 
         if(message !== '') return toast.error('Encontramos los siguientes errores en el formulario:' + message);
-        
+        setDisabledButton(true);
         const body = {
             _id: String(selectedInspection?._id),
             object: {
@@ -205,6 +206,7 @@ const InspectionViewWorkshopLayoutPage = () => {
         if(response){
             toast.success('Guardaste los cambios.');
         } else toast.error('Ocurrio un problema.');
+        setDisabledButton(false);
     }
     useEffect(() => {
         toUser();
@@ -445,6 +447,7 @@ const InspectionViewWorkshopLayoutPage = () => {
                                 <input onChange={(e) => setNewJob(e.target.value)} value={newJob} className="inputForm mt1 w100" type="text" placeholder="" style={{borderRadius: '.5rem 0rem 0rem .5rem'}}/>
                                 <button onClick={() => {
                                     if(newJob !== ''){
+                                        setNewJob('');
                                         setTasks([newJob, ...tasks]);
                                     } else toast.error(' Completa el formulario')
                                 }} className="btn-gradient-secondary mt1" style={{border: '1px solid grey', borderRadius: '0px .5rem .5rem 0rem'}} >Añadir</button>
@@ -464,9 +467,15 @@ const InspectionViewWorkshopLayoutPage = () => {
                                 {calendars?.map((e, index: number) => <div className="item-create mt1 ml1">
                                     <div className="flex">
                                         <p>{e?.description + ': ' + e?.dateStart}</p>
-                                        <IonIcon onClick={() => {
-                                            setCalendars(calendars?.filter((obj, indexx) => index !== indexx))
-                                        }} className="icon ml1" name="trash-outline"/>
+                                        <IonIcon onClick={async () => {
+                                            const response = await deleteCalendar(String(e?._id));
+                                            if(response) {
+                                                setCalendars(calendars?.filter((obj, indexx) => index !== indexx))
+                                                toast.success('Eliminaste un recordatorio');
+                                                
+                                            }
+                                        
+                                            }} className="icon ml1" name="trash-outline"/>
                                     </div>
                                 </div>)}
                                 
@@ -485,7 +494,7 @@ const InspectionViewWorkshopLayoutPage = () => {
                                                 title: newScheduler,
                                                 vehicle: vehicleSeleted ?? '',
                                                 client: clientSelected ?? '',
-                                                inspection: String(selectedInspection?._id ?? '')                                             });
+                                                inspection: String(selectedInspection?._id ?? '')});
                                             if(response){
                                                 setCalendars([{
                                                     dateStart: newSchedulerDate,
@@ -493,6 +502,8 @@ const InspectionViewWorkshopLayoutPage = () => {
     
                                                 }, ...calendars]);
                                                 toast.success('Añadiste un recordatorio');
+                                                setSchedulerDate('');
+                                                setNewScheduler('');
                                             }
                                         } else toast.error(' Completa el formulario');
                                     } else toast.error(' Selecciona un cliente/vehículo');
@@ -546,7 +557,8 @@ const InspectionViewWorkshopLayoutPage = () => {
                         </div>
 
                         <div className=" center mt1 mSidesAuto">
-                            <button className="btn btn-gradient-third mr1" onClick={() => buildForm()}>Guardar inspección</button>
+                            <button className="btn btn-gradient-third mr1" onClick={() => buildForm()}>{
+                                disabledButton ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='grey' style={{fontSize: '1rem' }}/> : 'Guardar inspección'}</button>
                             <Link href={'/workshop/orders/create?inspection=' + selectedInspection?._id} className="btn-gradient-secondary ml1 " >Crear orden de servicio</Link>
                         </div>
 

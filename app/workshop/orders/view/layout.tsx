@@ -52,6 +52,7 @@ const ViewOrderWorkshopLayoutPage = () => {
     const [notes, setNotes] = useState<string>('');
     const [orderIndex, setOrderIndex] = useState<number>(0);
     const [currentOrderState, setOrderState] = useState<string>('pending');
+    const [disabledButton, setDisabledButton] = useState<boolean>(false);
     const toUser = async () => {
         
         const userr = await getUser();
@@ -146,11 +147,12 @@ const ViewOrderWorkshopLayoutPage = () => {
                 inspection: inspectionSelected?._id ?? ''
             }
         }
+        setDisabledButton(true);
         const response = await updateOrderService(body);
         if(response){
             toast.success('Guardaste los cambios');
         } else toast.error('Ocurrio un problema');
-        
+        setDisabledButton(false);
     }
     const selectInspectionCall = (id: string, inspections: InspectionsModel[]) => {
         if(id === 'other'){
@@ -487,7 +489,8 @@ const ViewOrderWorkshopLayoutPage = () => {
                         </div>
 
                         <div className="center mt1 mSidesAuto">
-                            <button className="btn-gradient-third mr1" onClick={() => buildForm()}>Guardar orden de servicio</button>
+                            <button className="btn-gradient-third mr1" onClick={() => buildForm()}>{
+                                disabledButton ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='grey' style={{fontSize: '1rem' }}/> : 'Guardar orden de servicio'}</button>
                         </div>
 
                         

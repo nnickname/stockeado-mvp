@@ -29,6 +29,15 @@ const HomeWorkshopLayoutPage = () => {
     const [clients, setClients] = useState<ClientsModel[]>([]);
     const [orders, setOrders] = useState<OrderWorkshopModel[]>([]);
     const [calendars, setCalendars] = useState<CalendarsModel[]>([]);
+
+    const [clientsFilterr, setClientsFilter] = useState<ClientsModel[]>([]);
+    const [month, selectMonth] = useState<number>(new Date().getMonth());
+    const [percentageIncreaseClients , setPercentageClientsIncrease] = useState<number>(0);
+    const [ordersFilterr, setOrdersFilter] = useState<OrderWorkshopModel[]>([]);
+    const [orderTotal, setOrdersTotal] = useState<number>(0);
+    const [orderAverage, setOrderAverage] = useState<number>(0);
+    const [clientAverage, setClientAverage] = useState<number>(0);
+
     const toUser = async () => {
         const userr = await getUser();
         if(userr === undefined || userr === null){
@@ -42,17 +51,66 @@ const HomeWorkshopLayoutPage = () => {
         const clientsCast = await getAllClients(String(userr?._id));
         const ordersCast = await getAllOrderServices(String(userr?._id));
         const calendarsCast = await getAllCalendars(String(userr?._id));
-        console.log(calendarsCast);
         setCalendars(calendarsCast ?? []);
         setVehicles(vehiclesCast ?? []);
         setInspections(inspectionsCast ?? []);
         setClients(clientsCast ?? []);
         setOrders(ordersCast ?? []);
         setUser(userr);
+        filterMonth(Number(new Date().getMonth() +1), clientsCast, ordersCast);
+        selectMonth(Number(new Date().getMonth() +1));
+
       }
     useEffect(() => {
         toUser();
     }, []);
+    const filterMonth = (month: number, clients: ClientsModel[], orders: OrderWorkshopModel[]) => {
+        const currentDate = new Date();
+        var clientsFilterBeforeMonth: ClientsModel[] = [];
+        var clientsFilter: ClientsModel[] = [];
+        clients?.map((e) => {
+            const date = new Date(e?.createdAt);
+            if(currentDate.getFullYear() === date?.getFullYear()){
+                if(month === Number(date?.getMonth() +1)){
+                    clientsFilter.push(e);
+                }
+            }
+        });
+        clients?.map((e) => {
+            const date = new Date(e?.createdAt);
+            if(currentDate.getFullYear() === date?.getFullYear()){
+                if(month === Number(date?.getMonth())){
+                    clientsFilterBeforeMonth.push(e);
+                }
+            }
+        });
+        const difference = (clientsFilter.length - clientsFilterBeforeMonth?.length);
+        const media = ((clientsFilterBeforeMonth?.length + clientsFilter?.length) / 2 ) /2;
+        const intermediateValue = (difference / media );
+        const finalNumber = Number(intermediateValue * 100);
+        setClientsFilter(clientsFilter ?? []);
+        setPercentageClientsIncrease(finalNumber > 0 ? finalNumber : 0);
+        selectMonth(month);
+
+
+        var ordersFilter: OrderWorkshopModel[] = [];
+        var priceToAverage: number[] = [];
+        var orderTotal:number = 0;
+        orders?.map((e) => {
+            const date = new Date(e?.createdAt);
+            if(currentDate.getFullYear() === date?.getFullYear()){
+                if(month === Number(date?.getMonth() +1)){
+                    ordersFilter.push(e);
+                    orderTotal = orderTotal+Number(e?.totalPrice);
+                    priceToAverage.push(Number(e?.totalPrice));
+                }
+            }
+        });
+        setOrdersTotal(orderTotal);
+        setOrderAverage(orderTotal / priceToAverage?.length);
+        setClientAverage(orderTotal / clientsFilter?.length);
+        setOrdersFilter(ordersFilter ?? []);
+    }   
     return <>  
         {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
             <SideBarComponent user={user} route='/workshop/home' frameContennt={
@@ -72,9 +130,20 @@ const HomeWorkshopLayoutPage = () => {
                                 <p className="subtitle mt2">Órdenes de servicio</p>
                             </div>
                             <div>
-                                <select className="selectHomeWorkshop mt2">
-                                    <option>Abril</option>
-                                    <option>Mayo</option>
+                                <select value={month} onChange={(e) => filterMonth(Number(e.target.value), clients, orders)} className="selectHomeWorkshop mt2">
+                                    <option value={0}>Mes</option>
+                                    <option value={1}>Enero</option>
+                                    <option value={2}>Febrero</option>
+                                    <option value={3}>Marzo</option>
+                                    <option value={4}>Abril</option>
+                                    <option value={5}>Mayo</option>
+                                    <option value={6}>Junio</option>
+                                    <option value={7}>Julio</option>
+                                    <option value={8}>Agosto</option>
+                                    <option value={9}>Septiembre</option>
+                                    <option value={10}>Octubre</option>
+                                    <option value={11}>Noviembre</option>
+                                    <option value={12}>Diciembre</option>
                                 </select>
                             </div>
                             
@@ -89,7 +158,7 @@ const HomeWorkshopLayoutPage = () => {
                                 </div>
                                 <div className="ml1">
                                     <p>Servicios realizados</p>
-                                    <span className="span">25</span>
+                                    <span className="span">{ordersFilterr?.length}</span>
                                 </div>
                             </div>
                             <div className="cardHome mt1">
@@ -100,7 +169,7 @@ const HomeWorkshopLayoutPage = () => {
                                 </div>
                                 <div className="ml1">
                                     <p>Ingresos</p>
-                                    <span className="span">s/. 1400</span>
+                                    <span className="span">s/. {orderTotal.toFixed(2)}</span>
                                 </div>
                             </div>
                             <div className="cardHome mt1">
@@ -111,7 +180,7 @@ const HomeWorkshopLayoutPage = () => {
                                 </div>
                                 <div className="ml1">
                                     <p>Ticket por servicio</p>
-                                    <span className="span">s/. 560</span>
+                                    <span className="span">s/. {isNaN(orderAverage) ? 0 : orderAverage.toFixed(2)}</span>
                                 </div>
                             </div>
                         </div>
@@ -127,7 +196,7 @@ const HomeWorkshopLayoutPage = () => {
                                 </div>
                                 <div className="ml1">
                                     <p>Nuevos clientes</p>
-                                    <span className="span">11</span>
+                                    <span className="span">{clientsFilterr?.length}</span>
                                 </div>
                             </div>
                             <div className="cardHome mt1">
@@ -138,7 +207,7 @@ const HomeWorkshopLayoutPage = () => {
                                 </div>
                                 <div className="ml1">
                                     <p>Crecimiento cliente</p>
-                                    <span className="span">+ 45%</span>
+                                    <span className="span">+ {isNaN(percentageIncreaseClients) ? 0 : percentageIncreaseClients}%</span>
                                 </div>
                             </div>
                             <div className="cardHome mt1">
@@ -149,7 +218,7 @@ const HomeWorkshopLayoutPage = () => {
                                 </div>
                                 <div className="ml1">
                                     <p>Ticket por cliente</p>
-                                    <span className="span">s/. 655</span>
+                                    <span className="span">s/. {isNaN(clientAverage) ? 0 : clientAverage.toFixed(2)}</span>
                                 </div>
                             </div>
                         </div>

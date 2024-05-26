@@ -31,6 +31,7 @@ const VehiclesWorkshopLayoutPage = ( ) => {
     const [vehicles, setVehicles] = useState<VehiclesModel[]>([]);
     const [clients, setClients] = useState<ClientsModel[]>([]);
     const [orders, setOrders] = useState<OrderWorkshopModel[]>([]);
+    const [realVehicles, setRealVehicles] = useState<VehiclesModel[]>([]);
 
     const [brand, setBrand] = useState<string>('');
     const [model, setModel] = useState<string>('');
@@ -39,6 +40,8 @@ const VehiclesWorkshopLayoutPage = ( ) => {
     const [vin, setVin] = useState<string>('');
     const [formError, setErrorForm] = useState<string>('');
     const [calendars, setCalendars] = useState<CalendarsModel[]>([]);
+    const [month, selectMonth] = useState<number>(0);
+    const [disabledButton, setDisabledButton] = useState<boolean>(false);
     const handleResize = () => setWidth(window.innerWidth)
     const toUser = async () => {
         const userr = await getUser();
@@ -55,19 +58,41 @@ const VehiclesWorkshopLayoutPage = ( ) => {
         setOrders(ordersCast?.reverse() ?? []);
         setUser(userr);
         setClients(clientss ?? []);
-        setVehicles(vehicless ?? []);
+        setRealVehicles(vehicless ?? []);
         setCalendars(calendarsCast ?? []);
+        filterMonth(0, vehicless);
+    }
+    const filterMonth = (month: number, realVehicless: VehiclesModel[]) => {
+        const currentDate = new Date();
+        if(month === 0){
+            setVehicles(realVehicless ?? []);
+            selectMonth(0);
+            return;
+        }
+        const vehiclesFilter: VehiclesModel[] = [];
+        realVehicless?.map((e) => {
+            const date = new Date(e?.createdAt);
+            if(currentDate.getFullYear() === date?.getFullYear()){
+                if(month === Number(date?.getMonth() +1)){
+                    vehiclesFilter.push(e);
+                }
+            }
+        });
+        setVehicles(vehiclesFilter ?? []);
+        selectMonth(month);
     }
     const buildForm = async() => {
         if(brand !== '' && model !== '' && year !== '' && plate !== '' && vin !== ''){
             const body = {
                 brand, model, year, plate, vin, owner: String(user._id)
             };
+            setDisabledButton(true);
             const response = await createVehicle(body);
             if(response){
                 toast.success('Vehículo añadido')
                 const vehicless = await getAllVehicles(String(user?._id)) ?? [];
                 setVehicles(vehicless);
+                setDisabledButton(false);
                 setOpen(false);
             } else setErrorForm('* Ocurrio un problema');
         } else setErrorForm('* Encontramos errores en el formulario');
@@ -101,10 +126,21 @@ const VehiclesWorkshopLayoutPage = ( ) => {
                                     <IonIcon name="search-outline"/>
                                 </div>
                             </div>
-                                <select className="selectHomeWorkshop ml1">
-                                        <option>Abril</option>
-                                        <option>Mayo</option>
-                                </select>
+                            <select value={month} onChange={(e) => filterMonth(Number(e.target.value), realVehicles)} className="selectHomeWorkshop ml1">
+                                    <option value={0}>Todo</option>
+                                    <option value={1}>Enero</option>
+                                    <option value={2}>Febrero</option>
+                                    <option value={3}>Marzo</option>
+                                    <option value={4}>Abril</option>
+                                    <option value={5}>Mayo</option>
+                                    <option value={6}>Junio</option>
+                                    <option value={7}>Julio</option>
+                                    <option value={8}>Agosto</option>
+                                    <option value={9}>Septiembre</option>
+                                    <option value={10}>Octubre</option>
+                                    <option value={11}>Noviembre</option>
+                                    <option value={12}>Diciembre</option>
+                            </select>
                         </div>
                         <TableComponent rows={
                             [...vehicles?.map((e, index: number) => {
@@ -174,7 +210,8 @@ const VehiclesWorkshopLayoutPage = ( ) => {
                 {formError === '' ? <p></p> : <p className="subsubtitle color-trash">{formError}</p>}
 
                 <div className="center w100 mt2">
-                    <button className="btn-gradient-primary" onClick={() => buildForm()}>Guardar vehículo</button>
+                    <button disabled={disabledButton} className="btn-gradient-primary" onClick={() => buildForm()}>{
+                    disabledButton ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='grey' style={{fontSize: '1rem' }}/> : 'Guardar vehículo'}</button>
                 </div>
               </div>
           </Modal>

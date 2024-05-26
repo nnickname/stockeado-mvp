@@ -8,6 +8,7 @@ export interface VehiclesModel extends Document {
     year: string;
     plate: string;
     vin: string;
+    createdAt: string;
 }
 
 const VehiclesSchema = new Schema({
