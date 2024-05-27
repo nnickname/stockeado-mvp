@@ -42,7 +42,8 @@ const VehiclesWorkshopLayoutPage = ( ) => {
     const [calendars, setCalendars] = useState<CalendarsModel[]>([]);
     const [month, selectMonth] = useState<number>(0);
     const [disabledButton, setDisabledButton] = useState<boolean>(false);
-    const handleResize = () => setWidth(window.innerWidth)
+    const handleResize = () => setWidth(window.innerWidth);
+    const [search, setSearch] = useState<string>('');
     const toUser = async () => {
         const userr = await getUser();
         if(userr === undefined || userr === null){
@@ -121,7 +122,7 @@ const VehiclesWorkshopLayoutPage = ( ) => {
                         <div className="flex w100 mt1">
                             <div className="inputRightIcon">
                                 
-                                <input placeholder="Busca por vehículo, placa o fecha"/>
+                                <input onChange={(e) => setSearch(e?.target?.value)} placeholder="Busca por vehículo"/>
                                 <div>
                                     <IonIcon name="search-outline"/>
                                 </div>
@@ -170,7 +171,7 @@ const VehiclesWorkshopLayoutPage = ( ) => {
                                     calendars: String(calendarsCount),
                                     action: e?._id
                                 }
-                            })]
+                            })]?.filter((item) => (item?.vehicle).toLowerCase().includes(search?.toLowerCase()))
                         }/>
                     </div>
                 </div>

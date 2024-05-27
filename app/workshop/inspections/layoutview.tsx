@@ -18,7 +18,7 @@ const LayoutViewInspectionsWorkShop = ( ) => {
     const [inspections, setInspections] = useState<InspectionsModel[]>([]);
     const [realInspections, setRealInspections] = useState<InspectionsModel[]>([]);
     const [month, selectMonth] = useState<number>(0);
-
+    const [search, setSearch] = useState<string>('');
     const toUser = async () => {
         const userr = await getUser();
         if(userr === undefined || userr === null){
@@ -71,7 +71,7 @@ const LayoutViewInspectionsWorkShop = ( ) => {
                         <div className="flex w100 mt1">
                             <div className="inputRightIcon">
                                 
-                                <input placeholder="Busca por cliente, vehículo, placa o fecha"/>
+                                <input onChange={(e) => setSearch(e?.target.value)} placeholder="Busca por nombre de cliente"/>
                                 <div>
                                     <IonIcon name="search-outline"/>
                                 </div>
@@ -105,7 +105,7 @@ const LayoutViewInspectionsWorkShop = ( ) => {
                                     state: e?.state,
                                     action: e?._id
                                 }
-                            })]
+                            })]?.filter((item) => (item?.name + ' ' + item?.lastname).toLowerCase().includes(search?.toLowerCase()))
                         } />
                         </div>
                     </div>
@@ -148,6 +148,7 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
             filterable: false,
             width: 130,
             align: 'center',
+            type:'actions',
             headerClassName: 'color-table-header',
             renderCell: (params) => <Link href={'/workshop/inspections/view?id=' + params?.value} className="btn mt05">
                 <IonIcon style={{fontSize: '1.5rem', color: "#3662E3"}} name='eye-outline'/>
@@ -160,6 +161,7 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
             filterable: false,
             width: 130,
             align: 'center',
+            type: 'actions',
             headerClassName: 'color-table-header',
             renderCell: (params) => <button onClick={() => {}} className="btn mt05">
                 <IonIcon style={{fontSize: '1.5rem', color: "#E15147"}} name='cloud-download-outline'/>

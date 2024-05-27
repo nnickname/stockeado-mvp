@@ -84,9 +84,7 @@ const ClientsWorkshopLayoutPage = ( ) => {
         window.addEventListener('resize', handleResize)
         return () => window.removeEventListener('resize', handleResize);
     }, []);
-    const handleSearch = (event: any) => {
-        setSearch(event.target.value);
-    }
+    
 
     const filterMonth = (month: number, realClientss: ClientsModel[]) => {
         const currentDate = new Date();
@@ -126,7 +124,7 @@ const ClientsWorkshopLayoutPage = ( ) => {
                         <div className="flex w100 mt1">
                             <div className="inputRightIcon">
                                 
-                                <input placeholder="Busca por nombre, placa o fecha"/>
+                                <input onChange={(e) => setSearch(e?.target?.value)} placeholder="Busca por nombre de cliente"/>
                                 <div>
                                     <IonIcon name="search-outline"/>
                                 </div>
@@ -170,7 +168,7 @@ const ClientsWorkshopLayoutPage = ( ) => {
                                     action: e?._id,
                                     calendars: String(calendarsCount)
                                 }
-                            })]
+                            })]?.filter((item) => (item?.name + ' ' + item?.lastname).toLowerCase().includes(search?.toLowerCase()))
                         } />
                     </div>
                 </div>

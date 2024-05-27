@@ -21,3 +21,9 @@ export const deleteCalendar = async (_id: string) => {
     if(calendar?.calendar !== null) return true;
     return false;
 }
+
+export const updateCalendar = async (_id: string, body: object) => {
+    const calendar = await callApiHookPost('/api/workshop/calendars/update', {_id, object: body});
+    if(calendar?.calendar !== null) return true;
+    return false;
+}

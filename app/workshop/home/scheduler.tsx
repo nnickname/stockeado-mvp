@@ -1,5 +1,5 @@
 'use client';
-import { createCalendar, deleteCalendar, getAllCalendars } from "@/app/api/workshop/calendars/call";
+import { createCalendar, deleteCalendar, getAllCalendars, updateCalendar } from "@/app/api/workshop/calendars/call";
 import { CalendarsModel } from "@/models/workshops/calendars.model";
 import clientsModel, { ClientsModel } from "@/models/workshops/clients.model";
 import { InspectionsModel } from "@/models/workshops/inspections.model";
@@ -59,10 +59,6 @@ const SchedulerRender: FunctionComponent<SchedulerProps> = ({userid, setCalendar
         action: EventActions
       ): Promise<ProcessedEvent> => {
         return new Promise(async (res, rej) => {
-          if (action === "edit") {
-            /** PUT event to remote DB */
-          } else if (action === "create") {
-            /**POST event to remote DB */
             const body = {
                 client: event?.clients ?? '',
                 vehicle: event?.vehicles ?? '',
@@ -73,6 +69,20 @@ const SchedulerRender: FunctionComponent<SchedulerProps> = ({userid, setCalendar
                 dateEnd: event.end,
                 checked: 'off'
             }
+          if (action === "edit") {
+            const response = await updateCalendar(String(calendars?.find((e, index: number) => index === Number(event?.event_id))?._id),body);
+            if(response) {
+                toast.success('Editaste un recordatorio.');
+                const calendarsCast = await getAllCalendars(userid);
+                setCalendars(calendarsCast ?? []);
+                res({
+                    ...event,
+                    event_id: event.event_id
+                });
+            } else toast.error('Ocurrio un problema añadiendo tu recordatorio.');
+          } else if (action === "create") {
+            /**POST event to remote DB */
+            
             const response = await createCalendar(body);
             if(response) {
                 toast.success('Añadiste un nuevo recordatorio.');
@@ -148,6 +158,7 @@ const SchedulerRender: FunctionComponent<SchedulerProps> = ({userid, setCalendar
             {
                 name: "clients",
                 type: "select",
+                
                 // Should provide options with type:"select"
                 options: [
                     ...clients?.map((e, index: number) => {
