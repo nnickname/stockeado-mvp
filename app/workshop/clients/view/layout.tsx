@@ -134,7 +134,7 @@ const LayoutViewClientWorkShop = ( ) => {
                                 <p className="subsubtitle w100">Ordenes servicio:</p>
                                 <div className="w100 right">
                                     {orderServices?.length === 0 ? <button className="subsubtitle ">No encontrado</button> : orderServices?.map((e, index: number) => {
-                                        return <button className="btn-link w100">Orden de servicio #{index + 1}</button>
+                                        return <Link href={'/workshop/orders/view?id=' + e?._id} className="btn-link w100">Orden de servicio #{index + 1}</Link>
                                     })}
                                     
                                 </div>

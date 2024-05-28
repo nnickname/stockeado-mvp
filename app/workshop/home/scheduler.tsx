@@ -70,28 +70,31 @@ const SchedulerRender: FunctionComponent<SchedulerProps> = ({userid, setCalendar
                 checked: 'off'
             }
           if (action === "edit") {
-            const response = await updateCalendar(String(calendars?.find((e, index: number) => index === Number(event?.event_id))?._id),body);
+            const response = await updateCalendar(String(calendars?.find((e, index: number) => index === Number(event?.event_id))?._id), body);
             if(response) {
                 toast.success('Editaste un recordatorio.');
                 const calendarsCast = await getAllCalendars(userid);
                 setCalendars(calendarsCast ?? []);
-                res({
-                    ...event,
-                    event_id: event.event_id
-                });
+                setTimeout(() => {
+                    res({
+                        ...event,
+                        event_id: event.event_id
+                    });
+                }, 1000);
+                
             } else toast.error('Ocurrio un problema añadiendo tu recordatorio.');
-          } else if (action === "create") {
-            /**POST event to remote DB */
-            
+          } else if (action === "create") {            
             const response = await createCalendar(body);
             if(response) {
                 toast.success('Añadiste un nuevo recordatorio.');
                 const calendarsCast = await getAllCalendars(userid);
                 setCalendars(calendarsCast ?? []);
-                res({
-                    ...event,
-                    event_id: event.event_id
-                });
+                setTimeout(() => {
+                    res({
+                        ...event,
+                        event_id: event.event_id
+                    });
+                }, 1000);
             } else toast.error('Ocurrio un problema añadiendo tu recordatorio.');
           }
     

@@ -388,7 +388,14 @@ const NewOrderWorkshopLayoutPage = () => {
                                             <p className="w100">s/. {e?.price}</p>
                                             <div className="w100 mr1">
                                                 <IonIcon onClick={() => {
-                                                    setTasks(tasks?.filter((obj, indexx) => index !== indexx))
+                                                    const taskCast = tasks?.filter((obj, indexx) => index !== indexx);
+                                                    setTasks(taskCast);
+                                                    var total: number = 0;
+                                                    taskCast?.map((e) => {
+                                                        total = total + (Number(e?.ammount) * Number(e?.price));
+                                                    })
+                                                    total = total;
+                                                    setTotalPrice(String(total));
                                                 }} className="btn color-trash"  name="trash-outline"/>
                                             </div>
                                         </div>
@@ -418,7 +425,7 @@ const NewOrderWorkshopLayoutPage = () => {
                                         taskCast?.map((e) => {
                                             total = total + (Number(e?.ammount) * Number(e?.price));
                                         })
-                                        total = total + Number(totalPrice);
+                                        total = total;
                                         setTotalPrice(String(total));
                                     } else toast.error(' Completa el formulario');
                                     

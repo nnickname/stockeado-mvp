@@ -157,7 +157,8 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
             sortable: false,
             filterable: false,
             width: 130,
-            align: 'left',
+            type: 'actions',
+            align: 'center',
             headerClassName: 'color-table-header',
             renderCell: (params) => <Link href={'/workshop/orders/view?id='+ params?.value} className="btn mt05">
                 <IonIcon style={{fontSize: '1.5rem', color: "#3662E3"}} name='eye-outline'/>

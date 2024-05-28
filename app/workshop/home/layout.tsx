@@ -19,7 +19,7 @@ import { ClientsModel } from "@/models/workshops/clients.model";
 import { getAllClients } from "@/app/api/workshop/clients/call";
 import { getAllOrderServices } from "@/app/api/workshop/orders/call";
 import { OrderWorkshopModel } from "@/models/workshops/orders.model";
-import { getAllCalendars } from "@/app/api/workshop/calendars/call";
+import { getAllCalendars, updateCalendar } from "@/app/api/workshop/calendars/call";
 import { CalendarsModel } from "@/models/workshops/calendars.model";
 const HomeWorkshopLayoutPage = () => {
     const router = useRouter();
@@ -275,6 +275,11 @@ const PopoverRender: FunctionComponent<PopoverRenderProps> = ({calendar, vehicle
             indexInpection = index;
         }
     })
+    
+    const [checked, setChecked] = useState<boolean>(false);
+    useEffect(() => {
+        setChecked(calendar?.checked === 'on' ? true : false);
+    }, []);
     return <Popover  
         onClickOutside={() => setIsPopoverOpen(false)}       
         containerStyle={{
@@ -287,7 +292,14 @@ const PopoverRender: FunctionComponent<PopoverRenderProps> = ({calendar, vehicle
         positions={['top', 'bottom', 'left', 'right']} // preferred positions by priority
         content={<div className="p1">
             <div className="flex"> 
-                <Checkbox inputProps={{ 'aria-label': '' }}></Checkbox>
+                <Checkbox checked={checked} value={checked} onChange={async (e) => {
+                    calendar.checked = e?.target.checked === true ? 'on' : '';
+                    const response = await updateCalendar(String(calendar?._id), calendar);
+                    console.log(calendar);
+                    if(response){
+                        setChecked(!checked)
+                    }
+                    }} inputProps={{ 'aria-label': '' }}></Checkbox>
                 <h1 className="title ml1">{calendar?.title}</h1>
             </div>
             <div className="flex mt05">

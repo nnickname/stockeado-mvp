@@ -256,7 +256,8 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
             headerName: 'Ver/Editar',
             sortable: false,
             width: 160,
-            align: 'left',
+            type: 'actions',
+            align: 'center',
             headerClassName: 'color-table-header',
             renderCell: (params) => <button onClick={() => router.push('/workshop/clients/view?id=' + params?.value)} className="btn mt05">
                 <IonIcon style={{fontSize: '1.5rem', color: "#3662E3"}} name='eye-outline'/>
