@@ -85,9 +85,8 @@ const HomeWorkshopLayoutPage = () => {
             }
         });
         const difference = (clientsFilter.length - clientsFilterBeforeMonth?.length);
-        const media = ((clientsFilterBeforeMonth?.length + clientsFilter?.length) / 2 ) /2;
-        const intermediateValue = (difference / media );
-        const finalNumber = Number(intermediateValue * 100);
+        const differenceCast = (difference / 100) * 100
+        const finalNumber = differenceCast*100;
         setClientsFilter(clientsFilter ?? []);
         setPercentageClientsIncrease(finalNumber > 0 ? finalNumber : 0);
         selectMonth(month);

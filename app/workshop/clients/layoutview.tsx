@@ -222,7 +222,7 @@ const ClientsWorkshopLayoutPage = ( ) => {
                 {formError === '' ? <p></p> : <p className="subsubtitle color-trash">{formError}</p>}
 
                 <div className="center w100 mt2">
-                    <button className="btn-gradient-primary" onClick={() => buildForm()}>{
+                    <button disabled={disabledButton} className="btn-gradient-primary" onClick={() => buildForm()}>{
                     disabledButton ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='grey' style={{fontSize: '1rem' }}/> : 'Guardar cliente'}</button>
                 </div>
               </div>

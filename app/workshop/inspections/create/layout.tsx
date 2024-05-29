@@ -14,6 +14,7 @@ import { VehiclesModel } from "@/models/workshops/vehicles.model";
 import { toast } from "react-toastify";
 import { createInspection, getAllInspections } from "@/app/api/workshop/inspections/call";
 import { InspectionsModel } from "@/models/workshops/inspections.model";
+import Checkbox from "@mui/material/Checkbox";
 
 const InspectionWorkshopLayoutPage = () => {
     const router = useRouter();
@@ -52,8 +53,7 @@ const InspectionWorkshopLayoutPage = () => {
     const [newSchedulerDate, setSchedulerDate] = useState<string>('');
     const [calendars, setCalendars] = useState<any[]>([]);
     
-    const [newAccesorie, setNewAccesorie] = useState<string>('');
-    const [accesories, setAccesories] = useState<string[]>(['Kit de auxilio']);
+    const [accesories, setAccesories] = useState<any>([]);
     
     const [inspections, setInspections] = useState<InspectionsModel[]>([]);
     const [disabledButton, setDisabledButton] = useState<boolean>(false);
@@ -71,6 +71,10 @@ const InspectionWorkshopLayoutPage = () => {
         setClients(clientss);
         setVehicles(vehicless);
         setUser(userr);
+        setAccesories([...userr?.accesories?.map((e) => { return {
+            value: '',
+            label: e
+        }})]);
         setInspections(inspectionsCast);
     }
     const buildForm = async () => {
@@ -428,24 +432,22 @@ const InspectionWorkshopLayoutPage = () => {
                         <div className="cardWhiteForm mt1">
                             <p className="subsubtitle">Accesorios</p>
                             <div className="inline-items">
-                             {accesories?.map((e, index: number) => <div className="item-create mt1 ml1">
+                             {accesories?.map((e, index: number) => {return  <div className="inline-items mt1 ml1">
                                     <div className="flex">
-                                        <p>{e}</p>
-                                        <IonIcon onClick={() => {
-                                            setAccesories(accesories?.filter((obj, indexx) => index !== indexx))
-                                        }} className="icon ml1" name="trash-outline"/>
+                                        <p className="subsubtitle mt05">{e?.label}</p>
+                                        <Checkbox checked={e?.value === 'on' ? true : false} value={e?.value === 'on' ? true : false} onChange={async (e) => {
+                                            const checked = e?.target.checked === true ? 'on' : '';
+                                            
+                                            const newObject = [...accesories];
+                                            newObject[index].value = checked;
+                                            console.log(newObject);
+                                            setAccesories(newObject);
+                                            
+                                        }} inputProps={{ 'aria-label': '' }}></Checkbox>
                                     </div>
-                                </div>)}
+                                </div>})}
                             </div>
-                            <div className="flex w100">
-                                <input onChange={(e) => setNewAccesorie(e.target.value)} value={newAccesorie} className="inputForm mt1 w100" type="text" placeholder="" style={{borderRadius: '.5rem 0rem 0rem .5rem'}}/>
-                                <button  onClick={() => {
-                                    if(newAccesorie !== ''){
-                                        setAccesories([newAccesorie, ...accesories]);
-                                        setNewAccesorie('');
-                                    } else toast.error(' Completa el formulario')
-                                }} className="btn-gradient-secondary mt1" style={{border: '1px solid grey', borderRadius: '0px .5rem .5rem 0rem'}} >Añadir</button>
-                            </div>
+                            
                         </div>
 
                         

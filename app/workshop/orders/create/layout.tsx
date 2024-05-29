@@ -14,7 +14,8 @@ import { ClientsModel } from "@/models/workshops/clients.model";
 import { getAllClients } from "@/app/api/workshop/clients/call";
 import { getAllVehicles } from "@/app/api/workshop/vehicles/call";
 import { toast } from "react-toastify";
-import { createOrderService } from "@/app/api/workshop/orders/call";
+import { createOrderService, getAllOrderServices } from "@/app/api/workshop/orders/call";
+import { OrderWorkshopModel } from "@/models/workshops/orders.model";
 const NewOrderWorkshopLayoutPage = () => {
     const router = useRouter();
     const [user, setUser] = useState<UserModel>(null);
@@ -49,6 +50,7 @@ const NewOrderWorkshopLayoutPage = () => {
     const [workSpace, setWorkSpace] = useState<string>('');
     const [notes, setNotes] = useState<string>('');
     const [disabledButton, setDisabledButton] = useState<boolean>(false);
+    const [orders, setOrders] = useState<OrderWorkshopModel[]>([]);
     const toUser = async () => {
         const urlParams = new URLSearchParams(window.location.search);
         let id = urlParams.get('inspection');
@@ -62,10 +64,13 @@ const NewOrderWorkshopLayoutPage = () => {
         const vehicless = await getAllVehicles(String(userr?._id)) ?? [];
         const clientss = await getAllClients(String(userr?._id)) ?? [];
         const inspectionsCast = await getAllInspections(userr?._id) ?? [];
+        const ordersCast = await getAllOrderServices(userr?._id) ?? [];
+
         setClients(clientss);
         setVehicles(vehicless);
         setUser(userr);
-        setInspections(inspectionsCast);
+        setInspections(inspectionsCast ?? []);
+        setOrders(ordersCast ?? []);
         if(id !== null && id?.length > 3){
             selectInspectionCall(id, inspectionsCast);
         } else selectInspectionCall('other', inspectionsCast);
@@ -191,7 +196,7 @@ const NewOrderWorkshopLayoutPage = () => {
 
                         <div className="flex between">
                             <div>
-                                <p className="subtitle mt1" style={{fontWeight: '500'}}>Orden de servicio #21</p>
+                                <p className="subtitle mt1" style={{fontWeight: '500'}}>Orden de servicio #{orders?.length + 1}</p>
                             </div>
                             <div className="flex displayBlockResponsive">
                                 <p className="subtitle mr1 mt1">Estado</p>

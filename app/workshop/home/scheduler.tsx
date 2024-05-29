@@ -1,4 +1,5 @@
 'use client';
+import { createUser } from "@/app/api/user/call";
 import { createCalendar, deleteCalendar, getAllCalendars, updateCalendar } from "@/app/api/workshop/calendars/call";
 import { CalendarsModel } from "@/models/workshops/calendars.model";
 import clientsModel, { ClientsModel } from "@/models/workshops/clients.model";
@@ -34,12 +35,12 @@ const SchedulerRender: FunctionComponent<SchedulerProps> = ({userid, setCalendar
             color: randomColors[(Math.floor(Math.random() * 3) + 0)],
             textColor: '#1E367D',
             deletable: true,
+            editable: false,
             draggable: false
         }
     })
         
     ]
-    const [finalEvents, setFinalEvents] = useState<ProcessedEvent[]>(events);
     const handleDelete = async (deleteId: number): Promise<string> => {
         return new Promise(async (res, rej) => {
             const calendarCast = calendars?.find((e, index: number) => index === deleteId);
@@ -59,6 +60,8 @@ const SchedulerRender: FunctionComponent<SchedulerProps> = ({userid, setCalendar
         action: EventActions
       ): Promise<ProcessedEvent> => {
         return new Promise(async (res, rej) => {
+            console.log(action)
+          if (action === "edit") {
             const body = {
                 client: event?.clients ?? '',
                 vehicle: event?.vehicles ?? '',
@@ -69,32 +72,51 @@ const SchedulerRender: FunctionComponent<SchedulerProps> = ({userid, setCalendar
                 dateEnd: event.end,
                 checked: 'off'
             }
-          if (action === "edit") {
             const response = await updateCalendar(String(calendars?.find((e, index: number) => index === Number(event?.event_id))?._id), body);
             if(response) {
                 toast.success('Editaste un recordatorio.');
                 const calendarsCast = await getAllCalendars(userid);
                 setCalendars(calendarsCast ?? []);
+                const isFail = Math.random() > 0.6;
                 setTimeout(() => {
+                    if (isFail) {
+                    rej("Ops... Faild");
+                    } else {
                     res({
                         ...event,
-                        event_id: event.event_id
+                        event_id: event.event_id || Math.random()
                     });
-                }, 1000);
+                    }
+                }, 3000);
                 
             } else toast.error('Ocurrio un problema añadiendo tu recordatorio.');
           } else if (action === "create") {            
+            const body = {
+                client: event?.clients ?? '',
+                vehicle: event?.vehicles ?? '',
+                inspection: event?.inspections ?? '',
+                owner: userid,
+                title: event.title,
+                dateStart: event.start,
+                dateEnd: event.end,
+                checked: 'off'
+            }
             const response = await createCalendar(body);
             if(response) {
                 toast.success('Añadiste un nuevo recordatorio.');
                 const calendarsCast = await getAllCalendars(userid);
                 setCalendars(calendarsCast ?? []);
+                const isFail = Math.random() > 0.6;
                 setTimeout(() => {
+                    if (isFail) {
+                    rej("Ops... Faild");
+                    } else {
                     res({
                         ...event,
-                        event_id: event.event_id
+                        event_id: event.event_id || Math.random()
                     });
-                }, 1000);
+                    }
+                }, 3000);
             } else toast.error('Ocurrio un problema añadiendo tu recordatorio.');
           }
     
@@ -194,13 +216,13 @@ const SchedulerRender: FunctionComponent<SchedulerProps> = ({userid, setCalendar
          week={{
            weekDays: [0, 1, 2, 3, 4, 5, 6],
            weekStartOn: 6,
-           startHour: 0,
+           startHour: 4,
            endHour: 24,
            step: 60
          }}
          day={
             {
-                startHour: 0, 
+                startHour: 4, 
                 endHour: 24, 
                 step: 60,
                 navigation: true
