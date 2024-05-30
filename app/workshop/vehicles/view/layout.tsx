@@ -58,24 +58,28 @@ const LayoutViewVehicleWorkShop = ( ) => {
         const vehiclesCast = await getAllVehicles(String(userr?._id));
         const inspectionsCast = await getAllInspections(String(userr?._id));
         const response = await getVehicle(id);
-        var index = 0;
-        vehiclesCast?.map((e, indexx: number) => {
-            if(String(e?._id) === id) index = indexx;
-        });
-        setOrderIndex(index);
-        setAllInspections(inspectionsCast);
-        setVehicleId(response?.vehicle?._id);
-        setModel(response?.vehicle?.model);
-        setBrand(response?.vehicle?.brand);
-        setYear(response?.vehicle?.year);
-        setPlate(response?.vehicle?.plate);
-        setVin(response?.vehicle?.vin);
-        setClient([...response?.client?.map((e) => {
-            return e
-        })]);
-        setInspections(response?.inspections ?? []);
-        setOrderServices(response?.orders ?? []);
-        setCalendars(response?.calendars ?? []);
+        if(response === null) {
+            router?.push('/workshop/vehicles');
+        }else {
+            var index = 0;
+            vehiclesCast?.map((e, indexx: number) => {
+                if(String(e?._id) === id) index = indexx;
+            });
+            setOrderIndex(index);
+            setAllInspections(inspectionsCast);
+            setVehicleId(response?.vehicle?._id);
+            setModel(response?.vehicle?.model);
+            setBrand(response?.vehicle?.brand);
+            setYear(response?.vehicle?.year);
+            setPlate(response?.vehicle?.plate);
+            setVin(response?.vehicle?.vin);
+            setClient([...response?.client?.map((e) => {
+                return e
+            })]);
+            setInspections(response?.inspections ?? []);
+            setOrderServices(response?.orders ?? []);
+            setCalendars(response?.calendars ?? []);
+        }
         setUser(userr);
       }
     useEffect(() => {

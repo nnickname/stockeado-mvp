@@ -14,7 +14,7 @@ export const getAllVehicles = async (_id: string) => {
 
 export const getVehicle = async (_id: string) => {
     const vehicle = await callApiHookPost('/api/workshop/vehicles/get', {_id});
-    if(vehicle !== null) return vehicle;
+    if(vehicle?.vehicle !== undefined) return vehicle;
     return null;
 }
 export const updateVehicle = async (body: object) => {

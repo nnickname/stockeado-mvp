@@ -123,7 +123,7 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
           field: 'fullName',
           headerName: 'Cliente',
           sortable: false,
-          width: 160,
+          width: 200,
           valueGetter: (value, row) => `${row.name || ''} ${row.lastname || ''}`,
           headerClassName: 'color-table-header'
         },
@@ -137,9 +137,9 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
             width: 150,
             align: 'left',
             headerClassName: 'color-table-header',
-            renderCell: (params) => <div className={params.value === 1 ? 'btn-confirmed-secondary small-btn br0' : 'btn-disabled-secondary small-btn br0'}>
+            renderCell: (params) => <span className={params.value === 1 ? 'btn-confirmed-secondary small-btn m1' : 'btn-disabled-secondary small-btn m1'}>
                {params.value === 1 ? 'Confirmado' : 'Sin confirmar'}
-            </div>
+            </span>
         },
         {
             field: 'action',
@@ -154,25 +154,14 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
                 <IonIcon style={{fontSize: '1.5rem', color: "#3662E3"}} name='eye-outline'/>
             </Link>
         },
-        {
-            field: 'action1',
-            headerName: 'Descargar',
-            sortable: false,
-            filterable: false,
-            width: 130,
-            align: 'center',
-            type: 'actions',
-            headerClassName: 'color-table-header',
-            renderCell: (params) => <button onClick={() => {}} className="btn mt05">
-                <IonIcon style={{fontSize: '1.5rem', color: "#E15147"}} name='cloud-download-outline'/>
-            </button>
-        },
+        
     ];
     
     return <div className="mt1" style={{minHeight: 500, background: 'white', width: '100%'}}>
         <DataGrid
             localeText={ValuesDataGridLocale}
             autoHeight
+            autoPageSize
             rowSelection={false}
             rows={rows}
             columns={columns}

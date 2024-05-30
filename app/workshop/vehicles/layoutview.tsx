@@ -155,7 +155,7 @@ const VehiclesWorkshopLayoutPage = ( ) => {
                                         var items = [];
                                         t?.vehicles?.map((a) =>{
                                             if(String(e?._id) === a){
-                                                items.push( t?.name + ' ' + t?.lastname);
+                                                items.push(' ' + t?.name + ' ' + t?.lastname);
                                             };
                                         });
                                         if(items?.length > 0) return items;
@@ -164,7 +164,7 @@ const VehiclesWorkshopLayoutPage = ( ) => {
                                     vehicle: e?.brand + ' ' + e.model,
                                     lastService: orders?.map((a, index: number) => {
                                         if(a?.vehicle?._id === e?._id){
-                                         return a?.dateStart;
+                                         return ' ' + a?.dateStart;
                                         }
                                         ;
                                     }).filter(s => s !== undefined),
@@ -231,9 +231,9 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
         
         { field: 'vehicle', headerName: 'Vehículo', width: 200, headerClassName: 'color-table-header'},
         { field: 'plate', headerName: 'Placa', width: 150, headerClassName: 'color-table-header'},
-        { field: 'client', headerName: 'Cliente', width: 200, headerClassName: 'color-table-header'},
-        { field: 'lastService', headerName: 'Último servicio', width: 200, headerClassName: 'color-table-header'},
-        { field: 'calendars', headerName: 'Recordatorios', width: 200, headerClassName: 'color-table-header'},
+        { field: 'client', headerName: 'Clientes', width: 200, headerClassName: 'color-table-header'},
+        { field: 'lastService', headerName: 'Últimos servicios', width: 220, headerClassName: 'color-table-header'},
+        { field: 'calendars', headerName: 'Recordatorios', width: 100, headerClassName: 'color-table-header'},
         {
             field: 'action',
             headerName: 'Ver/Editar',

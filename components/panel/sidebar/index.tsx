@@ -53,7 +53,8 @@ const WorkShopOptions: TypeAccountOptions[] = [
         icon: 'car-outline',
         color: '#1570EF',
         route: '/workshop/vehicles'
-    }
+    },
+    
 ]
 const ProvidersOptions: TypeAccountOptions[] = [
     {
@@ -94,8 +95,8 @@ const SideBarComponent: FunctionComponent<SideBarProps> = ({user, frameContennt,
                 </div>
                 <img  className="avatar" alt="" src={user?.imageLogo !== '' ? user?.imageLogo : blueImage.src}/>
 
-                <h1 className="title">{user?.nameShop}</h1>
-                <div style={{marginTop: '3rem'}}></div>
+                <h1 className="title" style={{fontSize: '1rem'}}>{user?.nameShop}</h1>
+                <div style={{marginTop: '2rem'}}></div>
                 {user?.type === 'workshop' ? 
                     WorkShopOptions.map((e: TypeAccountOptions, index: number) => {
                         return <Link key={index} className={e?.route === route ? 'list listactive' : 'list'} href={e.route}>
@@ -114,8 +115,12 @@ const SideBarComponent: FunctionComponent<SideBarProps> = ({user, frameContennt,
                 
                 
 
-                <div style={{marginTop: '3rem'}} ></div>
-                <div onClick={() => router.push('/configuration')} className="list">
+                <div style={{marginTop: '2rem'}} ></div>
+                <div onClick={() => router.push('/workshop/users')} className={'/workshop/users' === route ? 'list listactive' : 'list'}>
+                    <IonIcon style={{color: route === '/workshop/users' ? '#1570EF' : 'black', marginRight: '1rem'}} className="icon" name="people-outline" />
+                    <p style={{color: route === '/workshop/users' ? '#1570EF' : 'black'}} className="text">Usuarios</p>
+                </div>
+                <div onClick={() => router.push('/configuration')} className={'/configuration' === route ? 'list listactive' : 'list'}>
                     <IonIcon style={{color: route === 'configuration' ? '#1570EF' : 'black', marginRight: '1rem'}} className="icon" name="settings-outline" />
                     <p style={{color: route === 'configuration' ? '#1570EF' : 'black'}} className="text">Configuración</p>
                 </div>

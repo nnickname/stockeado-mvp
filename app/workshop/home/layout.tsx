@@ -224,7 +224,8 @@ const HomeWorkshopLayoutPage = () => {
                         <p className="subtitle mt2">Recordatorios</p>
                         <p className="subsubtitle"> Registra recordatorios para no perder clientes y ganar más por vehículo</p>
                         <div className="card w100 inline-items br0 mt1">
-                            <p className="inline-items subsubtitle mt1 ml1">Tareas por vencer hoy: </p>
+                            <p className="inline-items subsubtitle mt1 ml1">Tareas por vencer hoy:
+                            { calendars?.length === 0 ? <span> No encontrado</span>:<span></span>} </p>
                             {...calendars?.map((e) => {
                                 const currentTime = new Date();
                                 const timeTask = new Date(e?.dateStart);

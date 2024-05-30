@@ -22,7 +22,7 @@ import { OrderWorkshopModel } from "@/models/workshops/orders.model";
 import { CalendarsModel } from "@/models/workshops/calendars.model";
 import { getAllCalendars } from "@/app/api/workshop/calendars/call";
 
-const ClientsWorkshopLayoutPage = ( ) => {
+const UsersWorkshopLayoutPage = ( ) => {
     const router = useRouter();
     const [open, setOpen] = useState<boolean>();
     const [user, setUser] = useState<UserModel>(null);
@@ -108,69 +108,10 @@ const ClientsWorkshopLayoutPage = ( ) => {
     
     return <div>
         {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
-            <SideBarComponent user={user} route='/workshop/clients' frameContennt={
+            <SideBarComponent user={user} route='/workshop/users' frameContennt={
                 <div>
-                    <h1 className="headerSideBar"> Clientes</h1>
-                    <div className="p1">
-                        <div className="flex between">
-                            <div>
-                                <p className="subtitle mt2">Clientes recientes</p>
-                            </div>
-                            <div>
-                                <button onClick={() => setOpen(true)} className="btn-gradient-secondary mt1"><IonIcon className="mr1" name="person-add-outline" style={{fontSize: '1.1rem'}}/> <span style={{fontSize: '1rem'}}>Nuevo cliente</span></button>
-                            </div>
-                        </div>
-                        
-                        <div className="flex w100 mt1">
-                            <div className="inputRightIcon">
-                                
-                                <input onChange={(e) => setSearch(e?.target?.value)} placeholder="Busca por nombre de cliente"/>
-                                <div>
-                                    <IonIcon name="search-outline"/>
-                                </div>
-                            </div>
-                            <select value={month} onChange={(e) => filterMonth(Number(e.target.value), realClients)} className="selectHomeWorkshop ml1">
-                                    <option value={0}>Todo</option>
-                                    <option value={1}>Enero</option>
-                                    <option value={2}>Febrero</option>
-                                    <option value={3}>Marzo</option>
-                                    <option value={4}>Abril</option>
-                                    <option value={5}>Mayo</option>
-                                    <option value={6}>Junio</option>
-                                    <option value={7}>Julio</option>
-                                    <option value={8}>Agosto</option>
-                                    <option value={9}>Septiembre</option>
-                                    <option value={10}>Octubre</option>
-                                    <option value={11}>Noviembre</option>
-                                    <option value={12}>Diciembre</option>
-                            </select>
-                        </div>
-                        <TableComponent rows={
-                            [...clients?.map((e, index: number) => {
-                                var calendarsCount:number = 0;
-                                calendars?.map((a) => {
-                                    if(e?._id === a?.client) calendarsCount++;
-                                })
-                                return {
-                                    id: index,
-                                    realid: e?._id,
-                                    name: e?.name,
-                                    lastname: e?.lastname,
-                                    phone: e?.phone,
-                                    vehicle: String(e?.vehicles?.map((a) =>{
-                                        return ' ' + vehiclesOptions.find((e) =>  String(e?._id) === a).brand + ' ' + vehiclesOptions.find((e) => String(e?._id) === a).model})).substring(0, 25) + '...',
-                                    service: orders?.map((a, index: number) => {
-                                        if(a?.client?._id === e?._id){
-                                         return ' ' + a?.dateStart;
-                                        }
-                                        ;
-                                    }).filter(s => s !== undefined) ?? 'No encontrado',
-                                    action: e?._id,
-                                    calendars: String(calendarsCount)
-                                }
-                            })]?.filter((item) => (item?.name + ' ' + item?.lastname).toLowerCase().includes(search?.toLowerCase()))
-                        } />
-                    </div>
+                    <h1 className="headerSideBar"> Disponible 3 Junio</h1>
+                    
                 </div>
             }
 
@@ -184,8 +125,8 @@ const ClientsWorkshopLayoutPage = ( ) => {
               overlay: {backgroundColor: 'rgba(220, 217, 217, 0.5)'}
             }}  open={open} center onClose={() => setOpen(false) }>
               <div style={{padding: '1rem'}}>
-                <h1 className="title">Nuevo cliente</h1>
-                <h2 className="subtitle mt1">Cliente #{clients?.length + 1}</h2>
+                <h1 className="title">Nuevo usuario</h1>
+                <h2 className="subtitle mt1">Usuario #{clients?.length + 1}</h2>
                 <div className="flex between mt1">
                     <p className="formTitle">Nombre</p>
                     <input className="inputForm" onChange={(e) => setName(e.target.value)} type="text" placeholder=""/>
@@ -203,27 +144,19 @@ const ClientsWorkshopLayoutPage = ( ) => {
                     <input className="inputForm ml1" onChange={(e) => setEmail(e.target.value)} type="text" placeholder=""/>
                 </div>
                 <div className="flex between mt1">
-                    <p className="formTitle">Asociar vehículos</p>
-                    <Select
-                        
-                        multi
-                        options={[...vehiclesOptions?.map((e) => {
-                            return {
-                                label: e?.brand + ' ' + e?.model,
-                                value: String(e?._id)
-                            }
-                        })]}
-                        separator
-                        placeholder="Seleccionar varios"
-                        className="inputForm"
-                        onChange={(values) => {setVehicles([...values?.map((e) => String(e.value))])} } 
-                        values={[]}                                    />
+                    <p className="formTitle">Rol</p>
+                    <select>
+                        <option>Admninistrador</option>
+                        <option>Mecanico</option>
+                        <option>Ayudante</option>
+
+                    </select>
                 </div>
                 {formError === '' ? <p></p> : <p className="subsubtitle color-trash">{formError}</p>}
 
                 <div className="center w100 mt2">
                     <button disabled={disabledButton} className="btn-gradient-primary" onClick={() => buildForm()}>{
-                    disabledButton ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='grey' style={{fontSize: '1rem' }}/> : 'Guardar cliente'}</button>
+                    disabledButton ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='grey' style={{fontSize: '1rem' }}/> : 'Crear usuario'}</button>
                 </div>
               </div>
           </Modal>
@@ -283,4 +216,4 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
         />
   </div>
 }
-export default ClientsWorkshopLayoutPage;
+export default UsersWorkshopLayoutPage;

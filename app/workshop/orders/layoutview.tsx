@@ -15,7 +15,7 @@ import { getAllOrderServices } from "@/app/api/workshop/orders/call";
 import { NewTableComponentType } from "../clients/layoutview";
 export function getOrderServiceTextState (state: string){
     switch(state){
-        case 'pending': return 'Sin confirmar'; break;
+        case 'pending': return 'Pendiente'; break;
         case 'confirmed': return 'Confirmado'; break;
         case 'payed': return 'Pagado'; break;
         case 'process': return 'En proceso'; break;
@@ -147,9 +147,9 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
             width: 150,
             align: 'left',
             headerClassName: 'color-table-header',
-            renderCell: (params) => <div className={getOrderServiceClassNameState(params.value) + ' w100 br0'}>
+            renderCell: (params) => <span className={getOrderServiceClassNameState(params.value) + ' br05 m1'}>
                 {getOrderServiceTextState(params.value)}
-            </div>
+            </span>
         },
         {
             field: 'action',
