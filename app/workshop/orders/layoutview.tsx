@@ -1,5 +1,5 @@
 'use client';
-import { getUser } from "@/app/api/user/call";
+import { getUser, verifyUserWorkshop } from "@/app/api/user/call";
 import SideBarComponent from "@/components/panel/sidebar"
 import { UserModel } from "@/models/user.model";
 import IonIcon from "@reacticons/ionicons"
@@ -41,15 +41,16 @@ const LayoutViewOrdersWorkShop = ( ) => {
     const [search, setSearch] = useState<string>('');
     const toUser = async () => {
         const userr = await getUser();
-        if(userr === undefined || userr === null){
-              router.push('/');
+        var ownerid = String(userr?._id);
+        if(!verifyUserWorkshop(userr, router, '/workshop/orders')) {
+            return;
         }
-        if(userr?.type !== 'workshop'){
-            router.push('/provider/home');
+        if(userr?.role !== 'owner'){
+            ownerid = userr?.owner;
         }
-        const response = await getAllOrderServices(userr?._id);
-        filterMonth(0, response);
-        setRealOrders(response ?? []);
+        const response = await getAllOrderServices(ownerid);
+        filterMonth(0, response?.reverse());
+        setRealOrders(response?.reverse() ?? []);
         setUser(userr);
       }
     useEffect(() => {
@@ -167,7 +168,7 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
         
     ];
        
-    return <div className="mt1" style={{minHeight: 500, height: '100%', background: 'white', width: '100%'}}>
+    return <div className="mt1" style={{height: '100%', background: 'white', width: '100%'}}>
         <DataGrid
         localeText={ValuesDataGridLocale}
         autoHeight

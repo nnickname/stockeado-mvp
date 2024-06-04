@@ -1,0 +1,34 @@
+.btn-role-administrator{
+           
+    background-color: #c51b1b50;
+    padding: .3rem;
+    color: #be2b2b;
+    font-weight: 500;
+    font-size: 1rem;
+    border-radius: .5rem !important;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.btn-role-worker{
+    background-color: #c51bc550;
+    padding: .3rem;
+    color: #66164b;
+    font-weight: 500;
+    font-size: 1rem;
+    border-radius: .5rem !important;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.btn-role-helper{
+           
+    background-color: #1b51c550;
+    padding: .3rem;
+    color: #1B53C5;
+    font-weight: 500;
+    font-size: 1rem;
+    border-radius: .5rem !important;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}

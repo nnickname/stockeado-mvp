@@ -1,5 +1,5 @@
 'use client';
-import { getUser } from "@/app/api/user/call";
+import { getUser, verifyUserWorkshop } from "@/app/api/user/call";
 import SideBarComponent from "@/components/panel/sidebar";
 import { UserModel } from "@/models/user.model";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
@@ -46,16 +46,17 @@ const VehiclesWorkshopLayoutPage = ( ) => {
     const [search, setSearch] = useState<string>('');
     const toUser = async () => {
         const userr = await getUser();
-        if(userr === undefined || userr === null){
-              router.push('/');
+        var ownerid = String(userr?._id);
+        if(!verifyUserWorkshop(userr, router, '/workshop/vehicles')) {
+            return;
         }
-        if(userr?.type !== 'workshop'){
-            router.push('/provider/home');
+        if(userr?.role !== 'owner'){
+            ownerid = userr?.owner;
         }
-        const clientss = await getAllClients(userr?._id) ?? [];
-        const vehicless = await getAllVehicles(String(userr?._id)) ?? [];
-        const ordersCast = await getAllOrderServices(String(userr?._id));
-        const calendarsCast = await getAllCalendars(String(userr?._id));
+        const clientss = await getAllClients(ownerid) ?? [];
+        const vehicless = await getAllVehicles(ownerid) ?? [];
+        const ordersCast = await getAllOrderServices(ownerid);
+        const calendarsCast = await getAllCalendars(ownerid);
         setOrders(ordersCast?.reverse() ?? []);
         setUser(userr);
         setClients(clientss ?? []);
@@ -85,7 +86,9 @@ const VehiclesWorkshopLayoutPage = ( ) => {
     const buildForm = async() => {
         if(brand !== '' && model !== '' && year !== '' && plate !== '' && vin !== ''){
             const body = {
-                brand, model, year, plate, vin, owner: String(user._id)
+                brand, model, year, plate, vin, 
+                owner: user?.role === 'owner' ? user?._id : user?.owner,
+                createdBy: user?.name + ' ' + user?.lastname
             };
             setDisabledButton(true);
             const response = await createVehicle(body);

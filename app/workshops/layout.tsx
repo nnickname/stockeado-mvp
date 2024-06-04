@@ -14,7 +14,6 @@ const LayoutSignUp = () => {
     const [validate, setValidate] = useState<any>();
     const router = useRouter();
     const buildForm = async () => {
-      console.log(validate);
       if(validate === 'on'){
         if(name !== '' && password !== '' && email !== ''){
           const body = {
@@ -28,7 +27,10 @@ const LayoutSignUp = () => {
             password,
             email,
             visits: 0,
-            type: 'workshop'
+            type: 'workshop',
+            accessories: [],
+            owner: '',
+            role: 'owner'
           }
           const response = await createUser(body);
           if(response){

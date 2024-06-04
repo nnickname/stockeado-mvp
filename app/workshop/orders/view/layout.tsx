@@ -1,5 +1,5 @@
 'use client';
-import { getUser } from "@/app/api/user/call";
+import { getUser, verifyUserWorkshop } from "@/app/api/user/call";
 import SideBarComponent from "@/components/panel/sidebar";
 import { UserModel } from "@/models/user.model";
 import IonIcon from "@reacticons/ionicons";
@@ -53,19 +53,21 @@ const ViewOrderWorkshopLayoutPage = () => {
     const [orderIndex, setOrderIndex] = useState<number>(0);
     const [currentOrderState, setOrderState] = useState<string>('pending');
     const [disabledButton, setDisabledButton] = useState<boolean>(false);
+    const [order, setOrder] = useState<OrderWorkshopModel>(null);
     const toUser = async () => {
         
         const userr = await getUser();
-        if(userr === undefined || userr === null){
-              router.push('/');
+        var ownerid = String(userr?._id);
+        if(!verifyUserWorkshop(userr, router, '/workshop/orders')) {
+            return;
         }
-        if(userr?.type !== 'workshop'){
-            router.push('/provider/home');
+        if(userr?.role !== 'owner'){
+            ownerid = userr?.owner;
         }
-        const vehicless = await getAllVehicles(String(userr?._id)) ?? [];
-        const clientss = await getAllClients(String(userr?._id)) ?? [];
-        const inspectionsCast = await getAllInspections(String(userr?._id)) ?? [];
-        const ordersCast = await getAllOrderServices(String(userr?._id));
+        const vehicless = await getAllVehicles(ownerid) ?? [];
+        const clientss = await getAllClients(ownerid) ?? [];
+        const inspectionsCast = await getAllInspections(ownerid) ?? [];
+        const ordersCast = await getAllOrderServices(ownerid);
         setClients(clientss);
         setVehicles(vehicless);
         setUser(userr);
@@ -80,6 +82,7 @@ const ViewOrderWorkshopLayoutPage = () => {
             ordersCast?.map((e, indexx: number) => {
                 if(String(e?._id) === id) index = indexx;
             });
+            setOrder(object);
             setOrderIndex(index);
             setOrderState(object?.state);
             setWorkSpace(object?.workSpace);
@@ -123,7 +126,7 @@ const ViewOrderWorkshopLayoutPage = () => {
                 dateEnd,
                 notes: notes ?? '-',
                 dateStart,
-                owner: user?._id,
+                owner: user?.role === 'owner' ? user?._id : user?.owner,
                 state: currentOrderState,
                 pdfUri: '',
                 totalPrice,
@@ -144,7 +147,8 @@ const ViewOrderWorkshopLayoutPage = () => {
                     vin: vehicleVin
                 },                
                 tasks,
-                inspection: inspectionSelected?._id ?? ''
+                inspection: inspectionSelected?._id ?? '',
+                updatedBy: user?.name + ' ' + user?.lastname
             }
         }
         setDisabledButton(true);
@@ -493,7 +497,14 @@ const ViewOrderWorkshopLayoutPage = () => {
                                 disabledButton ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='grey' style={{fontSize: '1rem' }}/> : 'Guardar orden de servicio'}</button>
                         </div>
 
-                        
+                        {(user?.role === 'owner' || user?.role === 'administrator') ? <div className="flex between displayBlockResponsive mt2">
+                            <div>
+                                <p className="subsubtitle" style={{fontSize: '.8rem'}}>Creado: {new Date(order?.createdAt).getDate() + '/' + new Date(order?.createdAt).getMonth() + '/' + new Date(order?.createdAt).getFullYear() + ' - ' + new Date(order?.createdAt).getHours() + ':' + new Date(order?.createdAt).getSeconds()} por: {order?.createdBy ?? 'No encontrado'}</p>
+                            </div>
+                            <div>
+                                <p className="subsubtitle" style={{fontSize: '.8rem'}}>Ultima vez editado: {new Date(order?.updatedAt).getDate() + '/' + new Date(order?.updatedAt).getMonth() + '/' + new Date(order?.updatedAt).getFullYear() + ' - ' + new Date(order?.updatedAt).getHours() + ':' + new Date(order?.updatedAt).getSeconds()} por: {order?.updatedBy ?? 'No encontrado'}</p>
+                            </div>
+                        </div> : <></>}
 
                     </div>
                 </div>

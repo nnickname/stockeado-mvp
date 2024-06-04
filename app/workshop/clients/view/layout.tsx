@@ -1,5 +1,5 @@
 'use client';
-import { getUser } from "@/app/api/user/call";
+import { getUser, verifyUserWorkshop } from "@/app/api/user/call";
 import SideBarComponent from "@/components/panel/sidebar"
 import { UserModel } from "@/models/user.model";
 import IonIcon from "@reacticons/ionicons"
@@ -32,12 +32,13 @@ const LayoutViewClientWorkShop = ( ) => {
     const [email, setEmail] = useState<string>('');
     const [phone, setPhone] = useState<string>('');
     const [calendars, setCalendars] = useState<CalendarsModel[]>([]);
+    const [client, setClient] = useState<ClientsModel>(null);
     const buildForm = async () => {
         if(name !== '' && lastname !== '' && email !== '' && phone !== '' && clientid !== ''){
             const body = {
                 _id: clientid,
                 object: {
-                    name, lastname, email, phone
+                    name, lastname, email, phone, updatedBy: user?.name + ' ' + user?.lastname
                 }
             };
             const response = await updateClient(body);
@@ -51,17 +52,19 @@ const LayoutViewClientWorkShop = ( ) => {
         let id = urlParams.get('id');
         if(id === null) router?.push('/workshop/clients');
         const userr = await getUser();
-        if(userr === undefined || userr === null){
-              router.push('/');
+        var ownerid = String(userr?._id);
+        if(!verifyUserWorkshop(userr, router, '/workshop/clients')) {
+            return;
         }
-        if(userr?.type !== 'workshop'){
-            router.push('/provider/home');
+        if(userr?.role !== 'owner'){
+            ownerid = userr?.owner;
         }
         setUser(userr);
-        const clientsCast = await getAllClients(String(userr?._id));
-        const vehiclesCast = await getAllVehicles(String(userr?._id));
-        const inspectionsCast = await getAllInspections(String(userr?._id));
+        const clientsCast = await getAllClients(ownerid);
+        const vehiclesCast = await getAllVehicles(ownerid);
+        const inspectionsCast = await getAllInspections(ownerid);
         const response = await getClient(id);
+        setClient(response?.client ?? {});
         setAllInspections(inspectionsCast ?? []);
         setCurrentVehicles(response?.client?.vehicles ?? []);
         setAllVehicles(vehiclesCast)
@@ -134,7 +137,7 @@ const LayoutViewClientWorkShop = ( ) => {
                                 <p className="subsubtitle w100">Ordenes servicio:</p>
                                 <div className="w100 right">
                                     {orderServices?.length === 0 ? <button className="subsubtitle ">No encontrado</button> : orderServices?.map((e, index: number) => {
-                                        return <Link href={'/workshop/orders/view?id=' + e?._id} className="btn-link w100">Orden de servicio #{index + 1}</Link>
+                                        return <Link style={{display: 'block'}} href={'/workshop/orders/view?id=' + e?._id} className="btn-link w100">Orden de servicio #{index + 1}</Link>
                                     })}
                                     
                                 </div>
@@ -173,6 +176,14 @@ const LayoutViewClientWorkShop = ( ) => {
                         <div className="center w100 mt2">
                             <button className="btn-gradient-primary" onClick={() => buildForm()}>Guardar cambios</button>
                         </div>
+                        {(user?.role === 'owner' || user?.role === 'administrator') ? <div className="flex between displayBlockResponsive mt2">
+                            <div>
+                                <p className="subsubtitle" style={{fontSize: '.8rem'}}>Creado: {new Date(client?.createdAt).getDate() + '/' + new Date(client?.createdAt).getMonth() + '/' + new Date(client?.createdAt).getFullYear() + ' - ' + new Date(client?.createdAt).getHours() + ':' + new Date(client?.createdAt).getSeconds()} por: {client?.createdBy ?? 'No encontrado'}</p>
+                            </div>
+                            <div>
+                                <p className="subsubtitle" style={{fontSize: '.8rem'}}>Ultima vez editado: {new Date(client?.updatedAt).getDate() + '/' + new Date(client?.updatedAt).getMonth() + '/' + new Date(client?.updatedAt).getFullYear() + ' - ' + new Date(client?.updatedAt).getHours() + ':' + new Date(client?.updatedAt).getSeconds()} por: {client?.updatedBy ?? 'No encontrado'}</p>
+                            </div>
+                        </div> : <></>}
                     </div>
                 </div>
             }/>

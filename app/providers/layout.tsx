@@ -28,7 +28,10 @@ const LayoutSignUp = () => {
             password,
             email,
             visits: 0,
-            type: 'provider'
+            type: 'provider',
+            accessories: [],
+            owner: '',
+            role: 'owner'
           }
           const response = await createUser(body);
           if(response){

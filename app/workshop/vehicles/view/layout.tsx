@@ -1,5 +1,5 @@
 'use client';
-import { getUser } from "@/app/api/user/call";
+import { getUser, verifyUserWorkshop } from "@/app/api/user/call";
 import SideBarComponent from "@/components/panel/sidebar"
 import { UserModel } from "@/models/user.model";
 import IonIcon from "@reacticons/ionicons"
@@ -14,6 +14,7 @@ import Link from "next/link";
 import { ClientsModel } from "@/models/workshops/clients.model";
 import { toast } from "react-toastify";
 import { CalendarsModel } from "@/models/workshops/calendars.model";
+import { VehiclesModel } from "@/models/workshops/vehicles.model";
 const LayoutViewVehicleWorkShop = ( ) => {
     const router = useRouter();
     const [user, setUser] = useState<UserModel>(null);
@@ -30,12 +31,14 @@ const LayoutViewVehicleWorkShop = ( ) => {
     const [calendars, setCalendars] = useState<CalendarsModel[]>([]);
     const [allInspections, setAllInspections] = useState<InspectionsModel[]>([]);
     const [orderIndex, setOrderIndex] = useState<number>(0);
+    const [vehicle, setVehicle] = useState<VehiclesModel>(null);
     const buildForm = async () => {
         if(brand !== '' && model !== '' && year !== '' && plate !== '' && vin !== '' && vehicleid !== ''){
             const body = {
                 _id: vehicleid,
                 object: {
-                    brand, model, year, plate, vin
+                    brand, model, year, plate, vin,
+                    updatedBy: user?.name + ' ' + user?.lastname
                 }
             };
             const response = await updateVehicle(body);
@@ -49,15 +52,17 @@ const LayoutViewVehicleWorkShop = ( ) => {
         let id = urlParams.get('id');
         if(id === null) router?.push('/workshop/vehicles');
         const userr = await getUser();
-        if(userr === undefined || userr === null){
-              router.push('/');
+        var ownerid = String(userr?._id);
+        if(!verifyUserWorkshop(userr, router, '/workshop/vehicles')) {
+            return;
         }
-        if(userr?.type !== 'workshop'){
-            router.push('/provider/home');
+        if(userr?.role !== 'owner'){
+            ownerid = userr?.owner;
         }
         const vehiclesCast = await getAllVehicles(String(userr?._id));
         const inspectionsCast = await getAllInspections(String(userr?._id));
         const response = await getVehicle(id);
+        setVehicle(response?.vehicle);
         if(response === null) {
             router?.push('/workshop/vehicles');
         }else {
@@ -178,6 +183,14 @@ const LayoutViewVehicleWorkShop = ( ) => {
                         <div className="center w100 mt2">
                             <button className="btn-gradient-primary" onClick={() => buildForm()}>Guardar cambios</button>
                         </div>
+                        {(user?.role === 'owner' || user?.role === 'administrator') ? <div className="flex between displayBlockResponsive mt2">
+                            <div>
+                                <p className="subsubtitle" style={{fontSize: '.8rem'}}>Creado: {new Date(vehicle?.createdAt).getDate() + '/' + new Date(vehicle?.createdAt).getMonth() + '/' + new Date(vehicle?.createdAt).getFullYear() + ' - ' + new Date(vehicle?.createdAt).getHours() + ':' + new Date(vehicle?.createdAt).getSeconds()} por: {vehicle?.createdBy ?? 'No encontrado'}</p>
+                            </div>
+                            <div>
+                                <p className="subsubtitle" style={{fontSize: '.8rem'}}>Ultima vez editado: {new Date(vehicle?.updatedAt).getDate() + '/' + new Date(vehicle?.updatedAt).getMonth() + '/' + new Date(vehicle?.updatedAt).getFullYear() + ' - ' + new Date(vehicle?.updatedAt).getHours() + ':' + new Date(vehicle?.updatedAt).getSeconds()} por: {vehicle?.updatedBy ?? 'No encontrado'}</p>
+                            </div>
+                        </div> : <></>}
                     </div>
                 </div>
             }/>

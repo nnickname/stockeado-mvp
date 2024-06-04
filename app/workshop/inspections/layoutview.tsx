@@ -1,5 +1,5 @@
 'use client';
-import { getUser } from "@/app/api/user/call";
+import { getUser, verifyUserWorkshop } from "@/app/api/user/call";
 import SideBarComponent from "@/components/panel/sidebar"
 import { UserModel } from "@/models/user.model";
 import IonIcon from "@reacticons/ionicons"
@@ -21,16 +21,17 @@ const LayoutViewInspectionsWorkShop = ( ) => {
     const [search, setSearch] = useState<string>('');
     const toUser = async () => {
         const userr = await getUser();
-        if(userr === undefined || userr === null){
-              router.push('/');
+        var ownerid = String(userr?._id);
+        if(!verifyUserWorkshop(userr, router, '/workshop/inspections')) {
+            return;
         }
-        if(userr?.type !== 'workshop'){
-            router.push('/provider/home');
+        if(userr?.role !== 'owner'){
+            ownerid = userr?.owner;
         }
-        const inspectionsCast = await getAllInspections(userr?._id) ?? [];
+        const inspectionsCast = await getAllInspections(ownerid) ?? [];
         setUser(userr);
-        setRealInspections(inspectionsCast);
-        filterMonth(0, inspectionsCast, inspectionsCast);
+        setRealInspections(inspectionsCast.reverse());
+        filterMonth(0, inspectionsCast.reverse(), inspectionsCast.reverse());
       }
     useEffect(() => {
         toUser();
@@ -157,11 +158,11 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
         
     ];
     
-    return <div className="mt1" style={{minHeight: 500, background: 'white', width: '100%'}}>
+    return <div className="mt1" style={{ background: 'white', width: '100%'}}>
         <DataGrid
             localeText={ValuesDataGridLocale}
             autoHeight
-            autoPageSize
+
             rowSelection={false}
             rows={rows}
             columns={columns}

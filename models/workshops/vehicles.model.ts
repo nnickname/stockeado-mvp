@@ -9,6 +9,9 @@ export interface VehiclesModel extends Document {
     plate: string;
     vin: string;
     createdAt: string;
+    updatedAt: string;
+    createdBy: string;
+    updatedBy: string;
 }
 
 const VehiclesSchema = new Schema({
@@ -36,6 +39,12 @@ const VehiclesSchema = new Schema({
     type: String,
     required: [true, "Please provide a vin."],
   },
+  createdBy: {
+    type: String
+  },
+  updatedBy: {
+    type: String
+  }
   
 }, { timestamps: true },);
 export default  mongoose.models.vehicles || model<VehiclesModel>("vehicles", VehiclesSchema);

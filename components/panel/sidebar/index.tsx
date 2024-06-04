@@ -21,38 +21,44 @@ type TypeAccountOptions = {
     name: string,
     icon: string,
     color: string,
-    route: string
+    route: string,
+    roles: string[]
 }
-const WorkShopOptions: TypeAccountOptions[] = [
+export const WorkShopOptions: TypeAccountOptions[] = [
     {
         name: 'Inicio',
         icon: 'home-outline',
         color: '#1570EF',
-        route: '/workshop/home'
+        route: '/workshop/home',
+        roles: ['owner', 'administrator', 'worker', 'helper']
     },
     {
         name: 'Inspecciones',
         icon: 'search-outline',
         color: '#1570EF',
-        route: '/workshop/inspections'
+        route: '/workshop/inspections',
+        roles: ['owner', 'administrator', 'worker', 'helper']
     },
     {
         name: 'Órdenes  servicio',
         icon: 'bag-outline',
         color: '#1570EF',
-        route: '/workshop/orders'
+        route: '/workshop/orders',
+        roles: ['owner', 'administrator', 'worker', 'helper']
     },
     {
         name: 'Clientes',
         icon: 'person-outline',
         color: '#1570EF',
         route: '/workshop/clients',
+        roles: ['owner', 'administrator', 'worker',]
     },
     {
         name: 'Vehículos',
         icon: 'car-outline',
         color: '#1570EF',
-        route: '/workshop/vehicles'
+        route: '/workshop/vehicles',
+        roles: ['owner', 'administrator', 'worker']
     },
     
 ]
@@ -61,19 +67,22 @@ const ProvidersOptions: TypeAccountOptions[] = [
         name: 'Dashboard',
         icon: 'home-outline',
         color: '#1570EF',
-        route: '/provider/home'
+        route: '/provider/home',
+        roles: []
     },
     {
         name: 'Inventario Web',
         icon: 'cart-outline',
         color: '#1570EF',
-        route: '/provider/inventory'
+        route: '/provider/inventory',
+        roles: []
     },
     {
         name: 'Órdenes  finales',
         icon: 'mail-unread-outline',
         color: '#1570EF',
-        route: '/provider/orders'
+        route: '/provider/orders',
+        roles: []
     }
 ]
 const SideBarComponent: FunctionComponent<SideBarProps> = ({user, frameContennt, route}) => {
@@ -99,10 +108,11 @@ const SideBarComponent: FunctionComponent<SideBarProps> = ({user, frameContennt,
                 <div style={{marginTop: '2rem'}}></div>
                 {user?.type === 'workshop' ? 
                     WorkShopOptions.map((e: TypeAccountOptions, index: number) => {
-                        return <Link key={index} className={e?.route === route ? 'list listactive' : 'list'} href={e.route}>
+                        const role = e?.roles?.find((a) => a === user?.role);
+                        return role?.length > 0 ? <Link key={index} className={e?.route === route ? 'list listactive' : 'list'} href={e.route}>
                             <IonIcon style={{color: route === e.route ? e.color : 'black', marginRight: '1rem'}} className="icon" name={e.icon as any} />
                             <p style={{color: route === e?.route ? e?.color : 'black'}} className="text">{e.name}</p>
-                        </Link>
+                        </Link> : <></>
                     })
                 :
                     ProvidersOptions.map((e: TypeAccountOptions, index: number) => {
@@ -116,10 +126,10 @@ const SideBarComponent: FunctionComponent<SideBarProps> = ({user, frameContennt,
                 
 
                 <div style={{marginTop: '2rem'}} ></div>
-                <div onClick={() => router.push('/workshop/users')} className={'/workshop/users' === route ? 'list listactive' : 'list'}>
+                {(user?.role === 'owner' || user?.role === 'administrator') ? <div onClick={() => router.push('/workshop/users')} className={'/workshop/users' === route ? 'list listactive' : 'list'}>
                     <IonIcon style={{color: route === '/workshop/users' ? '#1570EF' : 'black', marginRight: '1rem'}} className="icon" name="people-outline" />
                     <p style={{color: route === '/workshop/users' ? '#1570EF' : 'black'}} className="text">Usuarios</p>
-                </div>
+                </div> : <></>}
                 <div onClick={() => router.push('/configuration')} className={'/configuration' === route ? 'list listactive' : 'list'}>
                     <IonIcon style={{color: route === 'configuration' ? '#1570EF' : 'black', marginRight: '1rem'}} className="icon" name="settings-outline" />
                     <p style={{color: route === 'configuration' ? '#1570EF' : 'black'}} className="text">Configuración</p>

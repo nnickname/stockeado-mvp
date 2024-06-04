@@ -19,7 +19,10 @@ export interface InspectionsModel extends Document {
     scannerUri: string,
     state: number,
     extradata: string,
-    createdAt: string
+    createdAt: string;
+    updatedAt: string;
+    createdBy: string;
+    updatedBy: string;
 }
 
 const InspecionsSchema = new Schema({
@@ -85,6 +88,13 @@ const InspecionsSchema = new Schema({
   extradata: {
     type: String,
   },
+  createdBy: {
+    type: String
+  },
+  updatedBy: {
+    type: String
+  }
+
   
 }, { timestamps: true },);
 export default  mongoose.models.inspections || model<InspectionsModel>("inspections", InspecionsSchema);

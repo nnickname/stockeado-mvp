@@ -1,5 +1,5 @@
 'use client';
-import { getUser } from "@/app/api/user/call";
+import { getUser, verifyUserWorkshop } from "@/app/api/user/call";
 import SideBarComponent from "@/components/panel/sidebar";
 import { UserModel } from "@/models/user.model";
 import IonIcon from "@reacticons/ionicons";
@@ -55,16 +55,17 @@ const NewOrderWorkshopLayoutPage = () => {
         const urlParams = new URLSearchParams(window.location.search);
         let id = urlParams.get('inspection');
         const userr = await getUser();
-        if(userr === undefined || userr === null){
-              router.push('/');
+        var ownerid = String(userr?._id);
+        if(!verifyUserWorkshop(userr, router, '/workshop/orders')) {
+            return;
         }
-        if(userr?.type !== 'workshop'){
-            router.push('/provider/home');
+        if(userr?.role !== 'owner'){
+            ownerid = userr?.owner;
         }
-        const vehicless = await getAllVehicles(String(userr?._id)) ?? [];
-        const clientss = await getAllClients(String(userr?._id)) ?? [];
-        const inspectionsCast = await getAllInspections(userr?._id) ?? [];
-        const ordersCast = await getAllOrderServices(userr?._id) ?? [];
+        const vehicless = await getAllVehicles(ownerid) ?? [];
+        const clientss = await getAllClients(ownerid) ?? [];
+        const inspectionsCast = await getAllInspections(ownerid) ?? [];
+        const ordersCast = await getAllOrderServices(ownerid) ?? [];
 
         setClients(clientss);
         setVehicles(vehicless);
@@ -109,7 +110,7 @@ const NewOrderWorkshopLayoutPage = () => {
                 dateEnd,
                 notes: notes ?? '-',
                 dateStart,
-                owner: user?._id,
+                owner: user?.role === 'owner' ? user?._id : user?.owner,
                 state: 'pending',
                 pdfUri: '',
                 totalPrice,
@@ -130,7 +131,8 @@ const NewOrderWorkshopLayoutPage = () => {
                     vin: vehicleVin
                 },
                 tasks,
-                inspection: inspectionSelected?._id ?? ''
+                inspection: inspectionSelected?._id ?? '',
+                updatedBy: user?.name + ' ' + user?.lastname
 
         }
         const response = await createOrderService(body);

@@ -16,6 +16,9 @@ export interface OrderWorkshopModel extends Document {
     state: string;
     pdfUri: string;
     createdAt: string;
+    updatedAt: string;
+    createdBy: string;
+    updatedBy: string;
 }
 
 const OrderWorkshopSchema = new Schema({
@@ -65,6 +68,12 @@ const OrderWorkshopSchema = new Schema({
         type: String,
     },
     pdfUri: {
+        type: String
+    },
+    createdBy: {
+        type: String
+    },
+    updatedBy: {
         type: String
     }
 }, { timestamps: true },);

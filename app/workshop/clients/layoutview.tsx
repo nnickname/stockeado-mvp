@@ -1,5 +1,5 @@
 'use client';
-import { getUser } from "@/app/api/user/call";
+import { getUser, verifyUserWorkshop } from "@/app/api/user/call";
 import SideBarComponent from "@/components/panel/sidebar";
 import { UserModel } from "@/models/user.model";
 import IonIcon from "@reacticons/ionicons";
@@ -43,27 +43,30 @@ const ClientsWorkshopLayoutPage = ( ) => {
     const [disabledButton, setDisabledButton] = useState<boolean>(false);
     const toUser = async () => {
         const userr = await getUser();
-        if(userr === undefined || userr === null){
-              router.push('/');
+        var ownerid = String(userr?._id);
+        if(!verifyUserWorkshop(userr, router, '/workshop/clients')) {
+            return;
         }
-        if(userr?.type !== 'workshop'){
-            router.push('/provider/home');
+        if(userr?.role !== 'owner'){
+            ownerid = userr?.owner;
         }
-        const clientss = await getAllClients(userr?._id) ?? [];
-        const vehicless = await getAllVehicles(String(userr?._id)) ?? [];
-        const ordersCast = await getAllOrderServices(String(userr?._id));
-        const calendarsCast = await getAllCalendars(String(userr?._id));
+        const clientss = await getAllClients(ownerid) ?? [];
+        const vehicless = await getAllVehicles(ownerid) ?? [];
+        const ordersCast = await getAllOrderServices(ownerid);
+        const calendarsCast = await getAllCalendars(ownerid);
         setOrders(ordersCast?.reverse() ?? []);
         setUser(userr);
-        setRealClient(clientss ?? []);
-        setVehiclesOptions(vehicless ?? []);
-        setCalendars(calendarsCast ?? []);
-        filterMonth(0, clientss);
+        setRealClient(clientss.reverse() ?? []);
+        setVehiclesOptions(vehicless.reverse() ?? []);
+        setCalendars(calendarsCast.reverse() ?? []);
+        filterMonth(0, clientss.reverse());
     }
     const buildForm = async() => {
         if(name !== '' && lastname !== '' && phone !== '' && email !== ''){
             const body = {
-                name, lastname, phone, email, vehicles, owner: String(user._id)
+                name, lastname, phone, email, vehicles, 
+                owner: user?.role === 'owner' ? user?._id : user?.owner,
+                createdBy: user?.name + ' ' + user?.lastname
             };
             setDisabledButton(true);
             const response = await createClient(body);
@@ -266,7 +269,7 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
 
     ];
           
-    return <div className="mt1" style={{minHeight: 500, background: 'white', width: '100%'}}>
+    return <div className="mt1" style={{background: 'white', width: '100%'}}>
         <DataGrid
             localeText={ValuesDataGridLocale}
             autoHeight

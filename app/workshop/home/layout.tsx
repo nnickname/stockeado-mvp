@@ -1,5 +1,5 @@
 'use client';
-import { getUser } from "@/app/api/user/call";
+import { getUser, verifyUserWorkshop } from "@/app/api/user/call";
 import SideBarComponent from "@/components/panel/sidebar";
 import { UserModel } from "@/models/user.model";
 import IonIcon from "@reacticons/ionicons";
@@ -40,17 +40,18 @@ const HomeWorkshopLayoutPage = () => {
 
     const toUser = async () => {
         const userr = await getUser();
-        if(userr === undefined || userr === null){
-              router.push('/');
+        var ownerid = String(userr?._id);
+        if(!verifyUserWorkshop(userr, router, '/workshop/home')) {
+            return;
         }
-        if(userr?.type !== 'workshop'){
-            router.push('/provider/home');
+        if(userr?.role !== 'owner'){
+            ownerid = userr?.owner;
         }
-        const vehiclesCast = await getAllVehicles(String(userr?._id));
-        const inspectionsCast = await getAllInspections(String(userr?._id));
-        const clientsCast = await getAllClients(String(userr?._id));
-        const ordersCast = await getAllOrderServices(String(userr?._id));
-        const calendarsCast = await getAllCalendars(String(userr?._id));
+        const vehiclesCast = await getAllVehicles(ownerid);
+        const inspectionsCast = await getAllInspections(ownerid);
+        const clientsCast = await getAllClients(ownerid);
+        const ordersCast = await getAllOrderServices(ownerid);
+        const calendarsCast = await getAllCalendars(ownerid);
         setCalendars(calendarsCast ?? []);
         setVehicles(vehiclesCast ?? []);
         setInspections(inspectionsCast ?? []);

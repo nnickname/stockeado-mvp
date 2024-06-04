@@ -1,5 +1,5 @@
 'use client';
-import { getUser } from "@/app/api/user/call";
+import { getUser, verifyUserWorkshop } from "@/app/api/user/call";
 import SideBarComponent from "@/components/panel/sidebar";
 import { UserModel } from "@/models/user.model";
 import IonIcon from "@reacticons/ionicons";
@@ -59,15 +59,16 @@ const InspectionWorkshopLayoutPage = () => {
     const [disabledButton, setDisabledButton] = useState<boolean>(false);
     const toUser = async () => {
         const userr = await getUser();
-        if(userr === undefined || userr === null){
-              router.push('/');
+        var ownerid = String(userr?._id);
+        if(!verifyUserWorkshop(userr, router, '/workshop/inspections')) {
+            return;
         }
-        if(userr?.type !== 'workshop'){
-            router.push('/provider/home');
+        if(userr?.role !== 'owner'){
+            ownerid = userr?.owner;
         }
-        const vehicless = await getAllVehicles(String(userr?._id)) ?? [];
-        const clientss = await getAllClients(String(userr?._id)) ?? [];
-        const inspectionsCast = await getAllInspections(userr?._id) ?? [];
+        const vehicless = await getAllVehicles(ownerid) ?? [];
+        const clientss = await getAllClients(ownerid) ?? [];
+        const inspectionsCast = await getAllInspections(ownerid) ?? [];
         setClients(clientss);
         setVehicles(vehicless);
         setUser(userr);
@@ -106,7 +107,7 @@ const InspectionWorkshopLayoutPage = () => {
             object: {
                 dateStart,
                 workerAssigned,
-                owner: user?._id,
+                owner: user?.role === 'owner' ? user?._id : user?.owner,
                 state: 0,
                 client: {
                     _id: clientSelected ?? '',
@@ -131,7 +132,8 @@ const InspectionWorkshopLayoutPage = () => {
                 refrigerant,
                 tasks,
                 accesories,
-                observations
+                observations,
+                createdBy: user?.name + ' ' + user?.lastname
             }
         }
         const response = await createInspection(body);
@@ -353,10 +355,10 @@ const InspectionWorkshopLayoutPage = () => {
                                     </div>
 
                                 </div>
-                                <div className="w100 nPaddingLeftResponsive" style={{ paddingLeft: '2rem'}}>
+                                <div  className="w100 nPaddingLeftResponsive" style={{ paddingLeft: '2rem'}}>
                                     <div className="flex between mt1">
                                         <p className="formTitle" >Fotos actuales(max 4)</p>
-                                        <input className="inputForm ml1" type="text" placeholder=""/>
+                                        <input disabled className="inputForm ml1" type="text" placeholder=""/>
                                     </div>
 
                                 </div>

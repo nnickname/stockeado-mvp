@@ -1,5 +1,5 @@
 'use client';
-import { getUser } from "@/app/api/user/call";
+import { getUser, verifyUserWorkshop } from "@/app/api/user/call";
 import SideBarComponent from "@/components/panel/sidebar";
 import { UserModel } from "@/models/user.model";
 import IonIcon from "@reacticons/ionicons";
@@ -10,67 +10,90 @@ import '../home/index.css';
 import Modal from "react-responsive-modal";
 import 'react-responsive-modal/styles.css';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import Select from "react-dropdown-select";
 import { ValuesDataGridLocale } from "../inspections/layoutview";
-import { createClient, getAllClients } from "@/app/api/workshop/clients/call";
-import { ClientsModel } from "@/models/workshops/clients.model";
 import { toast } from "react-toastify";
-import { VehiclesModel } from "@/models/workshops/vehicles.model";
-import { getAllVehicles } from "@/app/api/workshop/vehicles/call";
-import { getAllOrderServices } from "@/app/api/workshop/orders/call";
-import { OrderWorkshopModel } from "@/models/workshops/orders.model";
-import { CalendarsModel } from "@/models/workshops/calendars.model";
-import { getAllCalendars } from "@/app/api/workshop/calendars/call";
-
+import { createWorkShopUser, deleteWorkShopUser, getAllWorkShopUsers, getOneWorkShopOwner } from "@/app/api/workshop/users/call";
+import './index.css';
+export function getUserWorkshopRoleName (state: string){
+    switch(state){
+        case 'administrator': return 'Administrador'; break;
+        case 'worker': return 'Mecanico'; break;
+        case 'helper': return 'Ayudante'; break;
+    }
+}
+export function getUserWorkshopRoleClassname (state: string){
+    switch(state){
+        case 'administrator': return 'btn-role-administrator'; break;
+        case 'worker': return 'btn-role-worker'; break;
+        case 'helper': return 'btn-role-helper'; break;
+        
+    }
+}
 const UsersWorkshopLayoutPage = ( ) => {
     const router = useRouter();
     const [open, setOpen] = useState<boolean>();
     const [user, setUser] = useState<UserModel>(null);
-    const [realClients, setRealClient] = useState<ClientsModel[]>(null);
-    const [clients, setClients] = useState<ClientsModel[]>(null);
+    const [realUsers, setRealUsers] = useState<UserModel[]>(null);
+    const [users, setUsers] = useState<UserModel[]>(null);
 
     const [search, setSearch] = useState("");
+    const [role, setRole] = useState<string>('');
     const [name, setName] = useState<string>('');
     const [lastname, setLastName] = useState<string>('');
-    const [phone, setPhone] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
     const [email, setEmail] = useState<string>('');
-    const [vehicles, setVehicles] = useState<string[]>([]);
     const [formError, setErrorForm] = useState<string>('');
-    const [vehiclesOptions, setVehiclesOptions] = useState<VehiclesModel[]>([]);
-    const [orders, setOrders] = useState<OrderWorkshopModel[]>([]);
-    const [calendars, setCalendars] = useState<CalendarsModel[]>([]);
     const [month, selectMonth] = useState<number>(0);
     const [disabledButton, setDisabledButton] = useState<boolean>(false);
     const toUser = async () => {
         const userr = await getUser();
+        var ownerid = userr?._id;
         if(userr === undefined || userr === null){
-              router.push('/');
+            router.push('/');
+            return;
         }
         if(userr?.type !== 'workshop'){
             router.push('/provider/home');
+            return;
         }
-        const clientss = await getAllClients(userr?._id) ?? [];
-        const vehicless = await getAllVehicles(String(userr?._id)) ?? [];
-        const ordersCast = await getAllOrderServices(String(userr?._id));
-        const calendarsCast = await getAllCalendars(String(userr?._id));
-        setOrders(ordersCast?.reverse() ?? []);
+        if(userr?.role === 'owner' || userr?.role === 'administrator'){
+            console.log('Configure')
+        } else {
+            router.push('/workshop/home');
+            return;
+        }
+        if(userr?.role !== 'owner'){
+            ownerid = userr?.owner;
+        }
+        const userss = await getAllWorkShopUsers(ownerid) ?? [];
         setUser(userr);
-        setRealClient(clientss ?? []);
-        setVehiclesOptions(vehicless ?? []);
-        setCalendars(calendarsCast ?? []);
-        filterMonth(0, clientss);
+        setRealUsers(userss?.reverse());
+        filterMonth(0, userss);
     }
     const buildForm = async() => {
-        if(name !== '' && lastname !== '' && phone !== '' && email !== ''){
+        if(name !== '' && lastname !== '' && password !== '' && email !== '' && role !== ''){
             const body = {
-                name, lastname, phone, email, vehicles, owner: String(user._id)
-            };
+                name,
+                lastname: lastname,
+                nameShop: user?.nameShop,
+                phone: '',
+                image: user?.image,
+                imageLogo: user?.imageLogo,
+                direction: user?.direction,
+                password,
+                email,
+                visits: 0,
+                type: 'workshop',
+                accessories: user?.accesories,
+                owner: String(user?._id),
+                role
+              }
             setDisabledButton(true);
-            const response = await createClient(body);
+            const response = await createWorkShopUser(body);
             if(response){
-                toast.success('Cliente añadido')
-                const clientss = await getAllClients(String(user?._id)) ?? [];
-                setClients(clientss);
+                toast.success('Usuario añadido')
+                const usersss = await getAllWorkShopUsers(String(user?._id)) ?? [];
+                setUsers(usersss?.reverse());
                 setOpen(false);
                 setDisabledButton(false);
             } else setErrorForm('* Ocurrio un problema');
@@ -86,23 +109,23 @@ const UsersWorkshopLayoutPage = ( ) => {
     }, []);
     
 
-    const filterMonth = (month: number, realClientss: ClientsModel[]) => {
+    const filterMonth = (month: number, realUserss: UserModel[]) => {
         const currentDate = new Date();
         if(month === 0){
-            setClients(realClientss ?? []);
+            setUsers(realUserss ?? []);
             selectMonth(0);
             return;
         }
-        const clientsFilter: ClientsModel[] = [];
-        realClientss?.map((e) => {
+        const usersFilter: UserModel[] = [];
+        realUserss?.map((e) => {
             const date = new Date(e?.createdAt);
             if(currentDate.getFullYear() === date?.getFullYear()){
                 if(month === Number(date?.getMonth() +1)){
-                    clientsFilter.push(e);
+                    usersFilter.push(e);
                 }
             }
         });
-        setClients(clientsFilter ?? []);
+        setUsers(realUserss ?? []);
         selectMonth(month);
     }  
     
@@ -110,8 +133,56 @@ const UsersWorkshopLayoutPage = ( ) => {
         {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
             <SideBarComponent user={user} route='/workshop/users' frameContennt={
                 <div>
-                    <h1 className="headerSideBar"> Disponible 3 Junio</h1>
-                    
+                    <h1 className="headerSideBar"> Usuarios</h1>
+                    <div className="p1">
+                        <div className="flex between">
+                            <div>
+                                <p className="subtitle mt2">Usuarios recientes</p>
+                            </div>
+                            <div>
+                                <button onClick={() => setOpen(true)} className="btn-gradient-secondary mt1"><IonIcon className="mr1" name="person-add-outline" style={{fontSize: '1.1rem'}}/> <span style={{fontSize: '1rem'}}>Nuevo cliente</span></button>
+                            </div>
+                        </div>
+                        
+                        <div className="flex w100 mt1">
+                            <div className="inputRightIcon">
+                                
+                                <input onChange={(e) => setSearch(e?.target?.value)} placeholder="Busca por nombre de usuario"/>
+                                <div>
+                                    <IonIcon name="search-outline"/>
+                                </div>
+                            </div>
+                            <select value={month} onChange={(e) => filterMonth(Number(e.target.value), realUsers)} className="selectHomeWorkshop ml1">
+                                    <option value={0}>Todo</option>
+                                    <option value={1}>Enero</option>
+                                    <option value={2}>Febrero</option>
+                                    <option value={3}>Marzo</option>
+                                    <option value={4}>Abril</option>
+                                    <option value={5}>Mayo</option>
+                                    <option value={6}>Junio</option>
+                                    <option value={7}>Julio</option>
+                                    <option value={8}>Agosto</option>
+                                    <option value={9}>Septiembre</option>
+                                    <option value={10}>Octubre</option>
+                                    <option value={11}>Noviembre</option>
+                                    <option value={12}>Diciembre</option>
+                            </select>
+                        </div>
+                        <TableComponent rows={
+                            [...users?.map((e, index: number) => {
+                                
+                                return {
+                                    id: index,
+                                    name: e?.name,
+                                    lastname: e?.lastname,
+                                    email: e?.email,
+                                    createdat: e?.createdAt,
+                                    role: e?.role,
+                                    action: e?._id,
+                                }
+                            })]?.filter((item) => (item?.name + ' ' + item?.lastname).toLowerCase().includes(search?.toLowerCase()))
+                        } />
+                    </div>
                 </div>
             }
 
@@ -126,7 +197,7 @@ const UsersWorkshopLayoutPage = ( ) => {
             }}  open={open} center onClose={() => setOpen(false) }>
               <div style={{padding: '1rem'}}>
                 <h1 className="title">Nuevo usuario</h1>
-                <h2 className="subtitle mt1">Usuario #{clients?.length + 1}</h2>
+                <h2 className="subtitle mt1">Usuario #{users?.length + 1}</h2>
                 <div className="flex between mt1">
                     <p className="formTitle">Nombre</p>
                     <input className="inputForm" onChange={(e) => setName(e.target.value)} type="text" placeholder=""/>
@@ -136,19 +207,20 @@ const UsersWorkshopLayoutPage = ( ) => {
                     <input className="inputForm ml1" onChange={(e) => setLastName(e.target.value)} type="text" placeholder=""/>
                 </div>
                 <div className="flex between mt1">
-                    <p className="formTitle">Celular</p>
-                    <input className="inputForm ml1" onChange={(e) => setPhone(e.target.value)} type="text" placeholder=""/>
-                </div>
-                <div className="flex between mt1">
                     <p className="formTitle">Correo</p>
                     <input className="inputForm ml1" onChange={(e) => setEmail(e.target.value)} type="text" placeholder=""/>
                 </div>
                 <div className="flex between mt1">
+                    <p className="formTitle">Contraseña</p>
+                    <input className="inputForm ml1" type='password' onChange={(e) => setPassword(e.target.value)} placeholder=""/>
+                </div>
+                <div className="flex between mt1">
                     <p className="formTitle">Rol</p>
-                    <select>
-                        <option>Admninistrador</option>
-                        <option>Mecanico</option>
-                        <option>Ayudante</option>
+                    <select onChange={(e) => setRole(e?.target?.value)} className="inputForm ml1">
+                        <option value="">Seleccionar</option>
+                        <option value="administrator">Administrador</option>
+                        <option value="worker">Mecanico</option>
+                        <option value="helper">Ayudante</option>
 
                     </select>
                 </div>
@@ -176,30 +248,45 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
           field: 'fullName',
           headerName: 'Nombre',
           sortable: false,
-          width: 160,
+          width: 200,
           valueGetter: (value, row) => `${row.name || ''} ${row.lastname || ''}`,
           headerClassName: 'color-table-header'
         },
-        { field: 'vehicle', headerName: 'Vehículo', width: 200, headerClassName: 'color-table-header'},
-        { field: 'phone', headerName: 'Celular', width: 150, headerClassName: 'color-table-header'},
-        { field: 'service', headerName: 'Último servicio', width: 200, headerClassName: 'color-table-header'},
-        { field: 'calendars', headerName: 'Recordatorios', width: 200, headerClassName: 'color-table-header'},
+        { field: 'email', headerName: 'Correo', width: 200, headerClassName: 'color-table-header'},
+        { field: 'createdat', headerName: 'Fecha de creación', width: 250, headerClassName: 'color-table-header'},
+        {
+            field: 'role',
+            headerName: 'Rol',
+            sortable: false,
+            width: 200,
+            align: 'left',
+            headerClassName: 'color-table-header',
+            renderCell: (params) => <span className={getUserWorkshopRoleClassname(params?.value) + ' m1 small-btn'}>
+               {getUserWorkshopRoleName(params?.value)}
+            </span>
+        },
         {
             field: 'action',
-            headerName: 'Ver/Editar',
+            headerName: 'Eliminar',
             sortable: false,
             width: 160,
             type: 'actions',
             align: 'center',
             headerClassName: 'color-table-header',
-            renderCell: (params) => <button onClick={() => router.push('/workshop/clients/view?id=' + params?.value)} className="btn mt05">
-                <IonIcon style={{fontSize: '1.5rem', color: "#3662E3"}} name='eye-outline'/>
+            renderCell: (params) => <button onClick={async () => {
+                toast.warning('Estamos eliminando tu usuario');
+                const response = await deleteWorkShopUser(String(params.value));
+                if(response){
+                    window.location.reload();
+                }
+            }} className="btn mt05">
+                <IonIcon style={{fontSize: '1.2rem', color: "tomato"}} name='trash-outline'/>
             </button>
         },
 
     ];
           
-    return <div className="mt1" style={{minHeight: 500, background: 'white', width: '100%'}}>
+    return <div className="mt1" style={{ background: 'white', width: '100%'}}>
         <DataGrid
             localeText={ValuesDataGridLocale}
             autoHeight

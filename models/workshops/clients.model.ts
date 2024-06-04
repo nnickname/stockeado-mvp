@@ -9,6 +9,9 @@ export interface ClientsModel extends Document {
     email: string;
     vehicles: string[];
     createdAt: string;
+    updatedAt: string;
+    createdBy: string;
+    updatedBy: string;
 }
 
 const ClientSchema = new Schema({
@@ -36,5 +39,11 @@ const ClientSchema = new Schema({
     type: Array,
     required: [false]
   },
+  createdBy: {
+    type: String
+  },
+  updatedBy: {
+    type: String
+  }
 }, { timestamps: true },);
 export default  mongoose.models.clients || model<ClientsModel>("clients", ClientSchema);

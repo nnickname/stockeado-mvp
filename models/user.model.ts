@@ -13,7 +13,10 @@ export interface UserModel extends Document {
   email: string;
   visits: number;
   type: string;
-  accesories: string[]
+  accesories: string[],
+  role: string;
+  owner: string;
+  createdAt: string;
 }
 
 /* PetSchema will correspond to a collection in your MongoDB database. */
@@ -65,6 +68,12 @@ const UserSchema = new Schema({
   type: {
     type: String,
     requried: [true, 'Please prove a type']
+  },
+  owner: {
+    type: String
+  },
+  role: {
+    type: String
   },
   accesories: {
     type: Array

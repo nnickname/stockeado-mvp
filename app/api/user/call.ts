@@ -1,5 +1,6 @@
 import Cookie from 'universal-cookie';
 import axios from '../call';
+import { WorkShopOptions } from '@/components/panel/sidebar';
 
 export const loginUser = async (email: string, password: string) => {
     
@@ -65,4 +66,26 @@ export const createUser = async (body: Object) => {
     }
 }
 
-
+export const verifyUserWorkshop = (userr: any, router: any, route: string) => {
+    const cookies = new Cookie();
+    if(userr === undefined || userr === null){
+        router.push('/');
+        return false;
+    }
+    if(userr?.type !== 'workshop'){
+        router.push('/provider/home');
+        return false;
+    }
+    const routeCast = WorkShopOptions.find((e) => e?.route === route);
+    const role = routeCast?.roles?.find((e) => e === userr?.role);
+    if(role?.length > 0){
+        return true;
+    } else {
+        if(route === '/workshop/home'){
+            cookies.remove('access_token');
+            router.push('/signin');
+        }
+        router.push('/workshop/home');
+        return false;
+    }
+}
