@@ -502,9 +502,9 @@ const ViewOrderWorkshopLayoutPage = () => {
                                 <p className="subsubtitle" style={{fontSize: '.8rem'}}>Creado: {new Date(order?.createdAt).getDate() + '/' + new Date(order?.createdAt).getMonth() + '/' + new Date(order?.createdAt).getFullYear() + ' - ' + new Date(order?.createdAt).getHours() + ':' + new Date(order?.createdAt).getSeconds()} por: {order?.createdBy ?? 'No encontrado'}</p>
                             </div>
                             <div>
-                                <p className="subsubtitle" style={{fontSize: '.8rem'}}>Ultima vez editado: {new Date(order?.updatedAt).getDate() + '/' + new Date(order?.updatedAt).getMonth() + '/' + new Date(order?.updatedAt).getFullYear() + ' - ' + new Date(order?.updatedAt).getHours() + ':' + new Date(order?.updatedAt).getSeconds()} por: {order?.updatedBy ?? 'No encontrado'}</p>
+                                <p className="subsubtitle " style={{fontSize: '.8rem'}}>Ultima vez editado: {new Date(order?.updatedAt).getDate() + '/' + new Date(order?.updatedAt).getMonth() + '/' + new Date(order?.updatedAt).getFullYear() + ' - ' + new Date(order?.updatedAt).getHours() + ':' + new Date(order?.updatedAt).getSeconds()} por: {order?.updatedBy ?? 'No encontrado'}</p>
                             </div>
-                        </div> : <></>}
+                        </div> : <></>}a
 
                     </div>
                 </div>
