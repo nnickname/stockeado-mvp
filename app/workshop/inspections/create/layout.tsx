@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 import { createInspection, getAllInspections } from "@/app/api/workshop/inspections/call";
 import { InspectionsModel } from "@/models/workshops/inspections.model";
 import Checkbox from "@mui/material/Checkbox";
+import Link from "next/link";
 
 const InspectionWorkshopLayoutPage = () => {
     const router = useRouter();
@@ -433,6 +434,10 @@ const InspectionWorkshopLayoutPage = () => {
  
                         <div className="cardWhiteForm mt1">
                             <p className="subsubtitle">Accesorios</p>
+                            {accesories?.length === 0 ? <div className="flex mt1">
+                                <p>No encontramos accesorios - </p>
+                                <Link className="ml1" href='/configuration' style={{color: '#3662E3'}}>Configurar tu inspección digital</Link> 
+                            </div>: <></>}
                             <div className="inline-items">
                              {accesories?.map((e, index: number) => {return  <div className="inline-items mt1 ml1">
                                     <div className="flex">

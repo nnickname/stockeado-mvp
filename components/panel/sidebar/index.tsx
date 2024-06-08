@@ -10,6 +10,8 @@ import { FunctionComponent, ReactNode, useState } from "react";
 import { UserModel } from "@/models/user.model";
 import Cookie from "universal-cookie";
 import { useRouter } from "next/navigation";
+import { getDefaultAutoSelectFamilyAttemptTimeout } from "net";
+import { toast } from "react-toastify";
 
 type SideBarProps = {
     frameContennt: ReactNode,
@@ -136,7 +138,10 @@ const SideBarComponent: FunctionComponent<SideBarProps> = ({user, frameContennt,
                 </div>
                 <div className="logout" onClick={async () => {
                     cookies.remove('access_token');
-                    router.push('/signin');
+                    toast.success('Cerraste sesión')
+                    setTimeout(() => {
+                        router.push('/signin');
+                    }, 2500);
                 }}>
                     <IonIcon className="icon" name="log-out-outline" />
                     <p className="text">Cerrar sesión</p>

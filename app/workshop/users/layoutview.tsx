@@ -140,7 +140,7 @@ const UsersWorkshopLayoutPage = ( ) => {
                                 <p className="subtitle mt2">Usuarios recientes</p>
                             </div>
                             <div>
-                                <button onClick={() => setOpen(true)} className="btn-gradient-secondary mt1"><IonIcon className="mr1" name="person-add-outline" style={{fontSize: '1.1rem'}}/> <span style={{fontSize: '1rem'}}>Nuevo cliente</span></button>
+                                <button onClick={() => setOpen(true)} className="btn-gradient-secondary mt1"><IonIcon className="mr1" name="person-add-outline" style={{fontSize: '1.1rem'}}/> <span style={{fontSize: '1rem'}}>Nuevo usuario</span></button>
                             </div>
                         </div>
                         
