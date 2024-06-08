@@ -83,8 +83,9 @@ const LayoutSignIn = () =>{
                               NotificationManager.info('Estamos validando los datos.', 'Espera');
                               const response: any = await loginUser(email ?? '', password ?? '');
                               if(response !== false){
+                                toast.success('Te estamos redirigiendo..')
                                 if(response?.type === 'workshop'){
-                                  toast.success('Te estamos redirigiendo..')
+                        
                                   router.push('/workshop/home');
                                 } else router.push('/provider/home');
                               } else setErrorForm('* La contraseña o el email no coinciden.');
@@ -95,7 +96,7 @@ const LayoutSignIn = () =>{
                   </div>
                 </form>
                 <p className="text-center text-base font-medium text-body-color">
-                  No tienes una cuenta?{" "}
+                  ¿No tienes una cuenta?{" "}
                   <Link href="/workshops" className="text-primary hover:underline">
                     Crear
                   </Link>

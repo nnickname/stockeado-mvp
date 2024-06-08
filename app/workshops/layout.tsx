@@ -5,6 +5,8 @@ import { useState } from "react";
 import {NotificationManager} from 'react-notifications';
 import { createUser } from "../api/user/call";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import Footer from "@/components/dashboard/Footer";
 
 const LayoutSignUp = () => {
     const [nameShop, setNameShop] = useState<string>('');
@@ -34,12 +36,12 @@ const LayoutSignUp = () => {
           }
           const response = await createUser(body);
           if(response){
-            NotificationManager.success('Creaste tu cuenta', 'Creada');
+            toast.success('Creaste tu cuenta');
             setTimeout(() => router.push('/workshop/home'), 1500);
-          } else NotificationManager.error('Usuario ya registrado', 'Error');
-        }else NotificationManager.error('Completa el formulario', 'Error');
+          } else toast.error('El usuario ya se encuentra registrado');
+        }else toast.error('Completa el formulario');
 
-      } else NotificationManager.error('Tienes que aceptar nuestros terminos y condiciones', 'Error');
+      } else toast.error('Tienes que aceptar nuestros terminos y condiciones');
     }
     return <div>
         <Header/>
@@ -190,6 +192,7 @@ const LayoutSignUp = () => {
           
         </div>
       </section>
+      <Footer/>
     </div>
 }
 

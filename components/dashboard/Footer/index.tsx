@@ -60,10 +60,18 @@ const Footer = () => {
                 <ul>
                   <li>
                     <a
-                      href="/signup"
+                      href="/workshops"
                       className="dark:text-body-color-dark mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:hover:text-primary"
                     >
-                      Crear cuenta
+                      Crear cuenta como taller
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/providers"
+                      className="dark:text-body-color-dark mb-4 inline-block text-base text-body-color duration-300 hover:text-primary dark:hover:text-primary"
+                    >
+                      Crear cuenta como proveedor
                     </a>
                   </li>
                   <li>

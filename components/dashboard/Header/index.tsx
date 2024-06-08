@@ -117,7 +117,7 @@ const Header = () => {
                                 : "text-dark hover:text-primary dark:text-white/70 dark:hover:text-white"
                             }`}
                           >
-                            {menuItem.title} {menuItem?.path === '/workshops' ? <div><span style={{marginBottom: '.4rem', color: 'green', fontSize: '.6rem', padding: '.2rem', border: '1px solid green', borderRadius: '.2rem', marginLeft: '.2rem'}}>Nuevo</span></div>: ''}
+                            {menuItem.title} {menuItem?.path === '/workshops' ? <div><span style={{marginBottom: '.4rem', color: '#ea4848', fontSize: '.6rem', padding: '.2rem', border: '1px solid #ea4848', borderRadius: '.2rem', marginLeft: '.2rem'}}>Nuevo</span></div>: ''}
                           </Link>
                         ) : (
                           <>
@@ -158,6 +158,9 @@ const Header = () => {
                     ))}
                   </ul>
                 </nav>
+              </div>
+              <div style={{display: 'none', width: '100%', textAlign: 'right'}} className="showResponsive">
+                    <Link href='/signin' style={{color: '#135bb9'}}>Iniciar sesión</Link>
               </div>
               <div className="flex items-center justify-end pr-16 lg:pr-0">
                 <Link
