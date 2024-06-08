@@ -244,7 +244,7 @@ const HomeWorkshopLayoutPage = () => {
                             
                         </div>
                         <div className="">
-                            <SchedulerRender setCalendars={setCalendars} calendars={calendars} userid={String(user?._id)} orders={orders} vehicles={vehicles} clients={clients} inspections={inspections}/>
+                            <SchedulerRender setCalendars={setCalendars} calendars={calendars} user={user} orders={orders} vehicles={vehicles} clients={clients} inspections={inspections}/>
                         </div>
 
 
