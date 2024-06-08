@@ -1,6 +1,7 @@
 'use client';
 import { createUser } from "@/app/api/user/call";
 import { createCalendar, deleteCalendar, getAllCalendars, updateCalendar } from "@/app/api/workshop/calendars/call";
+import { UserModel } from "@/models/user.model";
 import { CalendarsModel } from "@/models/workshops/calendars.model";
 import clientsModel, { ClientsModel } from "@/models/workshops/clients.model";
 import { InspectionsModel } from "@/models/workshops/inspections.model";
@@ -11,7 +12,7 @@ import { EventActions, ProcessedEvent } from "@aldabil/react-scheduler/types";
 import { FunctionComponent, useState } from "react";
 import { toast } from "react-toastify";
 type SchedulerProps = {
-    userid: string;
+    user: UserModel;
     orders: OrderWorkshopModel[],
     clients: ClientsModel[],
     vehicles: VehiclesModel[],
@@ -19,7 +20,7 @@ type SchedulerProps = {
     calendars: CalendarsModel[],
     setCalendars: any,
 }
-const SchedulerRender: FunctionComponent<SchedulerProps> = ({userid, setCalendars, calendars, clients, vehicles, inspections}) => {
+const SchedulerRender: FunctionComponent<SchedulerProps> = ({user, setCalendars, calendars, clients, vehicles, inspections}) => {
 
     const date = new Date();
     var date15m = date;
@@ -47,7 +48,7 @@ const SchedulerRender: FunctionComponent<SchedulerProps> = ({userid, setCalendar
             if(calendarCast?._id !== null){
                 const response = await deleteCalendar(String(calendarCast?._id));
                 if(response){
-                    const calendarsGet = await getAllCalendars(String(userid))
+                    const calendarsGet = await getAllCalendars(String(user?.role === 'owner' ? user?._id : user?.owner))
                     setCalendars(calendarsGet ?? []);
                     res(String(deleteId));
                     toast.success('Eliminaste un recordatorio');
@@ -60,42 +61,12 @@ const SchedulerRender: FunctionComponent<SchedulerProps> = ({userid, setCalendar
         action: EventActions
       ): Promise<ProcessedEvent> => {
         return new Promise(async (res, rej) => {
-            console.log(action)
-          if (action === "edit") {
+          if (action === "create") {            
             const body = {
                 client: event?.clients ?? '',
                 vehicle: event?.vehicles ?? '',
                 inspection: event?.inspections ?? '',
-                owner: userid,
-                title: event.title,
-                dateStart: event.start,
-                dateEnd: event.end,
-                checked: 'off'
-            }
-            const response = await updateCalendar(String(calendars?.find((e, index: number) => index === Number(event?.event_id))?._id), body);
-            if(response) {
-                toast.success('Editaste un recordatorio.');
-                const calendarsCast = await getAllCalendars(userid);
-                setCalendars(calendarsCast ?? []);
-                const isFail = Math.random() > 0.6;
-                setTimeout(() => {
-                    if (isFail) {
-                    rej("Ops... Faild");
-                    } else {
-                    res({
-                        ...event,
-                        event_id: event.event_id || Math.random()
-                    });
-                    }
-                }, 3000);
-                
-            } else toast.error('Ocurrio un problema añadiendo tu recordatorio.');
-          } else if (action === "create") {            
-            const body = {
-                client: event?.clients ?? '',
-                vehicle: event?.vehicles ?? '',
-                inspection: event?.inspections ?? '',
-                owner: userid,
+                owner: user?.role === 'owner' ? user?._id : user?.owner,
                 title: event.title,
                 dateStart: event.start,
                 dateEnd: event.end,
@@ -104,18 +75,16 @@ const SchedulerRender: FunctionComponent<SchedulerProps> = ({userid, setCalendar
             const response = await createCalendar(body);
             if(response) {
                 toast.success('Añadiste un nuevo recordatorio.');
-                const calendarsCast = await getAllCalendars(userid);
+                const calendarsCast = await getAllCalendars(String(user?.role === 'owner' ? user?._id : user?.owner));
                 setCalendars(calendarsCast ?? []);
-                const isFail = Math.random() > 0.6;
+                
                 setTimeout(() => {
-                    if (isFail) {
-                    rej("Ops... Faild");
-                    } else {
+                    
                     res({
                         ...event,
                         event_id: event.event_id || Math.random()
                     });
-                    }
+                    
                 }, 3000);
             } else toast.error('Ocurrio un problema añadiendo tu recordatorio.');
           }
