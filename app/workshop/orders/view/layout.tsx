@@ -504,7 +504,7 @@ const ViewOrderWorkshopLayoutPage = () => {
                             <div>
                                 <p className="subsubtitle " style={{fontSize: '.8rem'}}>Ultima vez editado: {new Date(order?.updatedAt).getDate() + '/' + new Date(order?.updatedAt).getMonth() + '/' + new Date(order?.updatedAt).getFullYear() + ' - ' + new Date(order?.updatedAt).getHours() + ':' + new Date(order?.updatedAt).getSeconds()} por: {order?.updatedBy ?? 'No encontrado'}</p>
                             </div>
-                        </div> : <></>}a
+                        </div> : <></>}
 
                     </div>
                 </div>
