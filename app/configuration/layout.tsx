@@ -89,7 +89,9 @@ const LayoutConfigurationPage = () =>{
             
     <SideBarComponent user={user} route='configuration' frameContennt={
         <div>
-            <h1 className="headerSideBar"> Configuración</h1>
+            <h1 className="headerSideBar"> Datos de la empresa</h1>
+            <p className="subsubtitle mt1 ml1" style={{marginLeft: 'calc(1rem + 1px)'}}>Conoce la información que tienes registrada en Stockeado sobre tu empresa.            </p>
+
             <div className="p1">
                 <div className="configurationContent">
                     {user?.type === 'workshop' ? <div></div> :
@@ -135,34 +137,77 @@ const LayoutConfigurationPage = () =>{
                 </div>
 
 
-                {user?.type === 'workshop' ? <div className="cardWhiteForm mt1">
-                    <h1 className="title">Configura tu inspección digital</h1>
-                    <p className="subtitle mt1">Accesorios</p>
-                    <p className="subsubtitle">Personaliza los accesorios que usarás en tu inspección digital, para poder hacer un checklist y ahorrar tiempo</p>
-                    <div className="inline-items mt05">
-                    {accesories?.map((e, index: number) => <div className="item-create mt1 ml1">
-                        <div className="flex">
-                            <p>{e}</p>
-                            <IonIcon onClick={() => {
-                                setAccesories(accesories?.filter((obj, indexx) => index !== indexx));
-                                toast.warning('Necesitas guardar los cambios');
-                            }} className="icon ml1" name="trash-outline"/>
+                {user?.type === 'workshop' ? <div>
+
+                    <div className="cardWhiteForm mt1">
+                        <h1 className="title">Configura tus servicios</h1>
+                        <p className="subtitle mt1">Accesorios</p>
+                        <p className="subsubtitle">Personaliza los accesorios que usarás en tu inspección digital, para poder hacer un checklist y ahorrar tiempo</p>
+                        <div className="inline-items mt05">
+                        {accesories?.map((e, index: number) => <div className="item-create mt1 ml1">
+                            <div className="flex">
+                                <p>{e}</p>
+                                <IonIcon onClick={() => {
+                                    setAccesories(accesories?.filter((obj, indexx) => index !== indexx));
+                                    toast.warning('Necesitas guardar los cambios');
+                                }} className="icon ml1" name="trash-outline"/>
+                            </div>
+                        </div>)}
+                    </div>
+                    <div className="flex w100">
+                        <input onChange={(e) => setNewAccesorie(e.target.value)} value={newAccesorie} className="inputForm mt1 w100" type="text" placeholder="" style={{borderRadius: '.5rem 0rem 0rem .5rem'}}/>
+                        <button  onClick={async () => {
+                        if(newAccesorie !== ''){
+                                if(await validateForm([newAccesorie, ...accesories])){
+                                    setAccesories([newAccesorie, ...accesories]);
+                                    setNewAccesorie('');
+                                }
+                                
+                            } else toast.error(' Completa el formulario')
+                        }} className="btn-gradient-secondary mt1" style={{border: '1px solid grey', borderRadius: '0px .5rem .5rem 0rem'}} >Añadir</button>
                         </div>
-                    </div>)}
-                </div>
-                <div className="flex w100">
-                    <input onChange={(e) => setNewAccesorie(e.target.value)} value={newAccesorie} className="inputForm mt1 w100" type="text" placeholder="" style={{borderRadius: '.5rem 0rem 0rem .5rem'}}/>
-                    <button  onClick={async () => {
-                    if(newAccesorie !== ''){
-                            if(await validateForm([newAccesorie, ...accesories])){
-                                setAccesories([newAccesorie, ...accesories]);
-                                setNewAccesorie('');
-                            }
-                            
-                        } else toast.error(' Completa el formulario')
-                    }} className="btn-gradient-secondary mt1" style={{border: '1px solid grey', borderRadius: '0px .5rem .5rem 0rem'}} >Añadir</button>
+                    </div>
+
+                    <div className="cardWhiteForm mt1">
+                        <div className="flex between">
+                            <h1 className="title">Configura tus servicios</h1>
+                            <button className="btn-gradient-secondary" style={{fontSize: '.9rem', paddingTop: '.3rem', paddingBottom: '.3rem'}}><IonIcon className="mr1" name="add-outline" style={{fontSize: '1rem'}}/> Añadir servicio </button>
+                        </div>
+                        <p className="subsubtitle mt1">Personaliza tus servicio en categorías a detalle para hacer las cotizaciones más rápido.</p>
+                        <div className="w100">
+                            <div className="tableConfigurationServicesHeader flex between">
+                                <h1>Nombre</h1>
+                                <h1>Items</h1>
+                                <h1>Acciones</h1>
+                            </div>
+                            <div className="tableConfigurationServicesItem w100 flex">
+                                <p className="w100 first">Servicio de frenos</p>
+                                <p className="w100 ml1">3</p>
+                                <div className="flex" style={{ color: '#3662E3'}}>
+                                    <IonIcon className="btn" name="eye-outline" style={{fontSize: '1.3rem'}}/>
+                                    <IonIcon className="btn ml1" name="trash-outline" style={{fontSize: '1.3rem'}}/>
+                                </div>
+                            </div>
+                            <div className="tableConfigurationServicesItem w100 flex">
+                                <p className="w100 first">Servicio de frenos</p>
+                                <p className="w100 ml1">3</p>
+                                <div className="flex" style={{ color: '#3662E3'}}>
+                                    <IonIcon className="btn" name="eye-outline" style={{fontSize: '1.3rem'}}/>
+                                    <IonIcon className="btn ml1" name="trash-outline" style={{fontSize: '1.3rem'}}/>
+                                </div>
+                            </div>
+                            <div className="tableConfigurationServicesItem last w100 flex">
+                                <p className="w100 first">Servicio de frenos</p>
+                                <p className="w100 ml1">3</p>
+                                <div className="flex" style={{ color: '#3662E3'}}>
+                                    <IonIcon className="btn" name="eye-outline" style={{fontSize: '1.3rem'}}/>
+                                    <IonIcon className="btn ml1" name="trash-outline" style={{fontSize: '1.3rem'}}/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div> : <div></div>}
+                
             </div>
         </div>
         

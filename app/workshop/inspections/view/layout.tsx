@@ -17,6 +17,8 @@ import { InspectionsModel } from "@/models/workshops/inspections.model";
 import Link from "next/link";
 import { createCalendar, deleteCalendar, getAllCalendarsInspections } from "@/app/api/workshop/calendars/call";
 import Checkbox from "@mui/material/Checkbox";
+import { ReturnUnifiedStringDateTime } from "@/utils/hooks";
+import Cars from '@/json/cars.json';
 
 const InspectionViewWorkshopLayoutPage = () => {
     const router = useRouter();
@@ -63,6 +65,8 @@ const InspectionViewWorkshopLayoutPage = () => {
     const [orderIndex, setOrderIndex] = useState<number>(0);
     const [stateSelected, selectState] = useState<number>(0);
     const [disabledButton, setDisabledButton] = useState<boolean>(false);
+    const [carSelected, setCarSelected]  = useState<Array<any>>([]);
+
     const toUser = async () => {
         const userr = await getUser();
         var ownerid = String(userr?._id);
@@ -356,15 +360,86 @@ const InspectionViewWorkshopLayoutPage = () => {
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Marca</p>
-                                    <input disabled={vehicleSeleted !== null ? true : false} onChange={(e) => setVehicleBrand(e.target.value)} value={vehicleBrand} className="inputForm ml1" type="text" placeholder=""/>
+                                    {
+                                        (vehicleSeleted === null) ? <Select
+                                        closeOnClickInput
+                                        style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
+                                        options={
+                                            
+                                            [...Cars?.map((e) => {
+                                                return {
+                                                    label: e?.brand,
+                                                    value: e?.brand
+                                                }
+                                            })]}
+                                            separator
+                                            placeholder="Seleccionar/Buscar"
+                                            className="inputForm"
+                                            onChange={(values) => {
+                                                if(values[0]?.value !== 'other') {
+                                                    setVehicleBrand(values[0]?.value);
+                                                    setCarSelected(Cars?.find((e) => e?.brand === values[0]?.value)?.models);
+                                                    return;
+                                                }
+                                        } } values={[{value: vehicleBrand, label: vehicleBrand === '' ? 'Seleccionar/buscar' : '# ' + vehicleBrand }]}                                     />
+                                        : <select className="inputForm" style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
+                                        disabled><option># {vehicleBrand}</option></select>
+                                    }
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Modelo</p>
-                                    <input disabled={vehicleSeleted !== null ? true : false} onChange={(e) => setVehicleModel(e.target.value)} value={vehicleModel} className="inputForm ml1" type="text" placeholder=""/>
+                                    {
+                                        (vehicleSeleted === null) ? <Select
+                                        closeOnClickInput
+                                        disabled={vehicleSeleted !== null ? true : false}                                        
+                                        style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
+                                        options={
+                                            carSelected?.length > 0 ? [...carSelected?.map((e) => {
+                                                return {
+                                                    label: String(e?.title),
+                                                    value: String(e?.title)
+
+                                                }
+                                            })] : [{label: 'No encontrado', value: 'other'}]}
+                                            separator
+                                            placeholder="Seleccionar/Buscar"
+                                            className="inputForm"
+                                            onChange={(values) => {
+                                                if(values[0]?.value !== 'other') {
+                                                    setVehicleModel(values[0]?.value);
+                                                    return;
+                                                }
+                                        } } values={[{value: vehicleModel, label: vehicleModel === '' ? 'Seleccionar/buscar' : '# ' + vehicleModel }]}                                     />
+                                        : <select className="inputForm" style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
+                                        disabled><option># {vehicleModel}</option></select> 
+                                }
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Año</p>
-                                    <input disabled={vehicleSeleted !== null ? true : false} onChange={(e) => setVehicleYear(e.target.value)} value={vehicleYear} className="inputForm ml1" type="text" placeholder=""/>
+                                    {
+                                        (vehicleSeleted === null) ? <Select
+                                        disabled={vehicleSeleted !== null ? true : false}
+                                        closeOnClickInput
+                                        style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
+                                        options={[ ...new Array(74).fill(null).map((_, i) => {
+                                                return {
+                                                    value: (1950 + (i+1)).toString(),
+                                                    label: (1950 + (i+1)).toString(),
+                                                }
+                                                })
+                                            ]}
+                                            separator
+                                            placeholder="Seleccionar/Buscar"
+                                            className="inputForm"
+                                            onChange={(values) => {
+                                                if(values[0]?.value !== 'other') {
+                                                    setVehicleYear(values[0]?.value);
+                                                    return;
+                                                }
+                                        } } values={[{value: vehicleYear, label: vehicleYear === '' ? 'Seleccionar/buscar' : '# ' + vehicleYear }]}                                     />
+                                : <select className="inputForm" style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
+                                        disabled><option># {vehicleYear}</option></select> 
+                                }
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">VIN</p>
@@ -468,16 +543,14 @@ const InspectionViewWorkshopLayoutPage = () => {
                             <div className="inline-items">
                                 {calendars?.map((e, index: number) => <div className="item-create mt1 ml1">
                                     <div className="flex">
-                                        <p>{e?.description + ': ' + e?.dateStart}</p>
+                                        <p>{e?.description + ' ' + ReturnUnifiedStringDateTime(e?.dateStart)}</p>
                                         <IonIcon onClick={async () => {
                                             const response = await deleteCalendar(String(e?._id));
                                             if(response) {
                                                 setCalendars(calendars?.filter((obj, indexx) => index !== indexx))
                                                 toast.success('Eliminaste un recordatorio');
-                                                
                                             }
-                                        
-                                            }} className="icon ml1" name="trash-outline"/>
+                                        }} className="icon ml1" name="trash-outline"/>
                                     </div>
                                 </div>)}
                                 
@@ -563,10 +636,10 @@ const InspectionViewWorkshopLayoutPage = () => {
                         </div>
                         {(user?.role === 'owner' || user?.role === 'administrator') ? <div className="flex between displayBlockResponsive mt2">
                             <div>
-                                <p className="subsubtitle" style={{fontSize: '.8rem'}}>Creado: {new Date(selectedInspection?.createdAt).getDate() + '/' + new Date(selectedInspection?.createdAt).getMonth() + '/' + new Date(selectedInspection?.createdAt).getFullYear() + ' - ' + new Date(selectedInspection?.createdAt).getHours() + ':' + new Date(selectedInspection?.createdAt).getSeconds()} por: {selectedInspection?.createdBy ?? 'No encontrado'}</p>
+                                <p className="subsubtitle" style={{fontSize: '.8rem'}}>Creado: {ReturnUnifiedStringDateTime(selectedInspection?.createdAt)} por: {selectedInspection?.createdBy ?? 'No encontrado'}</p>
                             </div>
                             <div>
-                                <p className="subsubtitle" style={{fontSize: '.8rem'}}>Ultima vez editado: {new Date(selectedInspection?.updatedAt).getDate() + '/' + new Date(selectedInspection?.updatedAt).getMonth() + '/' + new Date(selectedInspection?.updatedAt).getFullYear() + ' - ' + new Date(selectedInspection?.updatedAt).getHours() + ':' + new Date(selectedInspection?.updatedAt).getSeconds()} por: {selectedInspection?.updatedBy ?? 'No encontrado'}</p>
+                                <p className="subsubtitle" style={{fontSize: '.8rem'}}>Ultima vez editado: {ReturnUnifiedStringDateTime(selectedInspection?.updatedAt)} por: {selectedInspection?.updatedBy ?? 'No encontrado'}</p>
                             </div>
                         </div> : <></>}
 

@@ -15,6 +15,7 @@ import { ClientsModel } from "@/models/workshops/clients.model";
 import { toast } from "react-toastify";
 import { CalendarsModel } from "@/models/workshops/calendars.model";
 import { VehiclesModel } from "@/models/workshops/vehicles.model";
+import { ReturnUnifiedStringDateTime } from "@/utils/hooks";
 const LayoutViewVehicleWorkShop = ( ) => {
     const router = useRouter();
     const [user, setUser] = useState<UserModel>(null);
@@ -185,10 +186,10 @@ const LayoutViewVehicleWorkShop = ( ) => {
                         </div>
                         {(user?.role === 'owner' || user?.role === 'administrator') ? <div className="flex between displayBlockResponsive mt2">
                             <div>
-                                <p className="subsubtitle" style={{fontSize: '.8rem'}}>Creado: {new Date(vehicle?.createdAt).getDate() + '/' + new Date(vehicle?.createdAt).getMonth() + '/' + new Date(vehicle?.createdAt).getFullYear() + ' - ' + new Date(vehicle?.createdAt).getHours() + ':' + new Date(vehicle?.createdAt).getSeconds()} por: {vehicle?.createdBy ?? 'No encontrado'}</p>
+                                <p className="subsubtitle" style={{fontSize: '.8rem'}}>Creado: {ReturnUnifiedStringDateTime(vehicle?.createdAt)} por: {vehicle?.createdBy ?? 'No encontrado'}</p>
                             </div>
                             <div>
-                                <p className="subsubtitle" style={{fontSize: '.8rem'}}>Ultima vez editado: {new Date(vehicle?.updatedAt).getDate() + '/' + new Date(vehicle?.updatedAt).getMonth() + '/' + new Date(vehicle?.updatedAt).getFullYear() + ' - ' + new Date(vehicle?.updatedAt).getHours() + ':' + new Date(vehicle?.updatedAt).getSeconds()} por: {vehicle?.updatedBy ?? 'No encontrado'}</p>
+                                <p className="subsubtitle" style={{fontSize: '.8rem'}}>Ultima vez editado: {ReturnUnifiedStringDateTime(vehicle?.updatedAt)} por: {vehicle?.updatedBy ?? 'No encontrado'}</p>
                             </div>
                         </div> : <></>}
                     </div>

@@ -14,6 +14,7 @@ import { ValuesDataGridLocale } from "../inspections/layoutview";
 import { toast } from "react-toastify";
 import { createWorkShopUser, deleteWorkShopUser, getAllWorkShopUsers, getOneWorkShopOwner } from "@/app/api/workshop/users/call";
 import './index.css';
+import { ReturnUnifiedStringDateTime } from "@/utils/hooks";
 export function getUserWorkshopRoleName (state: string){
     switch(state){
         case 'administrator': return 'Administrador'; break;
@@ -147,12 +148,14 @@ const UsersWorkshopLayoutPage = ( ) => {
                         <div className="flex w100 mt1">
                             <div className="inputRightIcon">
                                 
-                                <input onChange={(e) => setSearch(e?.target?.value)} placeholder="Busca por nombre de usuario"/>
+                                <input style={{border: '1px solid #3662E3'}} onChange={(e) => setSearch(e?.target?.value)} placeholder="Busca por nombre de usuario"/>
                                 <div>
                                     <IonIcon name="search-outline"/>
                                 </div>
                             </div>
-                            <select value={month} onChange={(e) => filterMonth(Number(e.target.value), realUsers)} className="selectHomeWorkshop ml1">
+                            <button className="ml1 selectHomeWorkshopblue flex"><IonIcon style={{fontSize: '1.2rem', backgroundColor: 'white'}} className="mr1 mt05" name="cloud-download-outline"/> <span style={{marginTop: '.3rem'}}>Exportar</span></button>
+
+                            <select value={month} onChange={(e) => filterMonth(Number(e.target.value), realUsers)} className="selectHomeWorkshopblue ml1">
                                     <option value={0}>Todo</option>
                                     <option value={1}>Enero</option>
                                     <option value={2}>Febrero</option>
@@ -176,7 +179,7 @@ const UsersWorkshopLayoutPage = ( ) => {
                                     name: e?.name,
                                     lastname: e?.lastname,
                                     email: e?.email,
-                                    createdat: e?.createdAt,
+                                    createdat: ReturnUnifiedStringDateTime(e?.createdAt),
                                     role: e?.role,
                                     action: e?._id,
                                 }

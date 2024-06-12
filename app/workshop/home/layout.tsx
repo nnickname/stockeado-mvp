@@ -305,7 +305,7 @@ const PopoverRender: FunctionComponent<PopoverRenderProps> = ({calendar, vehicle
             </div>
             <div className="flex mt05">
                 <p className="subsubtitle mr1">Vehículo</p>
-                {calendar?.vehicle !== '' ? <Link href={'/workshop/vehicles/view?id=' + calendar?.vehicle} className="subsubtitle btn color-link ml1">{vehicle?.brand + ' ' + vehicle?.model} - {vehicle?.plate}</Link> : <p className="subsubtitle" style={{fontSize: '.8rem'}}>No encontrado</p>}
+                {calendar?.vehicle !== '' ? <Link href={'/workshop/vehicles/view?id=' + calendar?.vehicle} className="subsubtitle btn color-link ml1">{vehicle?.brand + ' ' + vehicle?.model}  {vehicle?.plate}</Link> : <p className="subsubtitle" style={{fontSize: '.8rem'}}>No encontrado</p>}
             </div>
             <div className="flex mt05">
                 <p className="subsubtitle mr1">Cliente</p>

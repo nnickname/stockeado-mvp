@@ -11,6 +11,7 @@ import Link from "next/link";
 import { InspectionsModel } from "@/models/workshops/inspections.model";
 import { getAllInspections } from "@/app/api/workshop/inspections/call";
 import { NewTableComponentType } from "../clients/layoutview";
+import { ReturnUnifiedStringDateTime } from "@/utils/hooks";
 const LayoutViewInspectionsWorkShop = ( ) => {
     const router = useRouter();
     const [open, setOpen] = useState<boolean>();
@@ -72,12 +73,13 @@ const LayoutViewInspectionsWorkShop = ( ) => {
                         <div className="flex w100 mt1">
                             <div className="inputRightIcon">
                                 
-                                <input onChange={(e) => setSearch(e?.target.value)} placeholder="Busca por nombre de cliente"/>
+                                <input style={{border: '1px solid #3662E3'}} onChange={(e) => setSearch(e?.target.value)} placeholder="Busca por nombre de cliente"/>
                                 <div>
                                     <IonIcon name="search-outline"/>
                                 </div>
                             </div>
-                            <select value={month} onChange={(e) => filterMonth(Number(e.target.value), inspections, realInspections)} className="selectHomeWorkshop ml1">
+                            <button className="ml1 selectHomeWorkshopblue flex"><IonIcon style={{fontSize: '1.2rem', backgroundColor: 'white'}} className="mr1 mt05" name="cloud-download-outline"/> <span style={{marginTop: '.3rem'}}>Exportar</span></button>
+                            <select value={month} onChange={(e) => filterMonth(Number(e.target.value), inspections, realInspections)} className="selectHomeWorkshopblue ml1">
                                     <option value={0}>Todo</option>
                                     <option value={1}>Enero</option>
                                     <option value={2}>Febrero</option>
@@ -101,7 +103,7 @@ const LayoutViewInspectionsWorkShop = ( ) => {
                                     name: e?.client?.name,
                                     lastname: e?.client?.lastname,
                                     vehicle: e?.vehicle?.brand + ' ' + e?.vehicle?.model,
-                                    date: e?.dateStart,
+                                    date: ReturnUnifiedStringDateTime(e?.dateStart),
                                     plate: e?.vehicle?.plate,
                                     state: e?.state,
                                     action: e?._id

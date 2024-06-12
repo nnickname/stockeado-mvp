@@ -13,6 +13,7 @@ import { ValuesDataGridLocale } from "../inspections/layoutview";
 import { OrderWorkshopModel } from "@/models/workshops/orders.model";
 import { getAllOrderServices } from "@/app/api/workshop/orders/call";
 import { NewTableComponentType } from "../clients/layoutview";
+import { ReturnUnifiedStringDateTime } from "@/utils/hooks";
 export function getOrderServiceTextState (state: string){
     switch(state){
         case 'pending': return 'Pendiente'; break;
@@ -93,12 +94,14 @@ const LayoutViewOrdersWorkShop = ( ) => {
                         <div className="flex w100 mt1">
                             <div className="inputRightIcon">
                                 
-                                <input onChange={(e) => setSearch(e?.target?.value)} placeholder="Busca por vehículo"/>
+                                <input style={{border: '1px solid #3662E3'}} onChange={(e) => setSearch(e?.target?.value)} placeholder="Busca por vehículo"/>
                                 <div>
                                     <IonIcon name="search-outline"/>
                                 </div>
                             </div>
-                            <select value={month} onChange={(e) => filterMonth(Number(e.target.value), realOrders)} className="selectHomeWorkshop ml1">
+                            <button className="ml1 selectHomeWorkshopblue flex"><IonIcon style={{fontSize: '1.2rem', backgroundColor: 'white'}} className="mr1 mt05" name="cloud-download-outline"/> <span style={{marginTop: '.3rem'}}>Exportar</span></button>
+
+                            <select value={month} onChange={(e) => filterMonth(Number(e.target.value), realOrders)} className="selectHomeWorkshopblue ml1">
                                     <option value={0}>Todo</option>
                                     <option value={1}>Enero</option>
                                     <option value={2}>Febrero</option>
@@ -120,7 +123,7 @@ const LayoutViewOrdersWorkShop = ( ) => {
                                     id: index,
                                     ammount: 's/. ' + (e?.totalPrice === '' ? '0' : e?.totalPrice),
                                     vehicle: e?.vehicle?.brand + ' ' + e?.vehicle?.model,
-                                    date: e?.dateStart,
+                                    date: ReturnUnifiedStringDateTime(e?.dateStart),
                                     plate: e?.vehicle?.plate,
                                     state: e?.state,
                                     action: e?._id

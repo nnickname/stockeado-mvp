@@ -29,3 +29,44 @@
     border-radius: 0rem 0rem .5rem .5rem;
 
 }
+.tableConfigurationServicesHeader{
+    margin-top: 1rem;
+    background-color: #F5F7FA;
+    border-radius: 1rem 1rem 0rem 0rem;
+    padding: 1rem;   
+}
+.tableConfigurationServicesHeader h1{
+    color: #8C95A3;
+ }
+.tableConfigurationServicesItem{
+    background-color: #F5F7FA;
+    padding: 1rem;
+    padding-bottom: .5rem;
+    padding-top: .2rem;
+    margin-top: .5rem;
+}
+.tableConfigurationServicesItem p{
+    min-width: max-content;
+    color: #232323;
+    font-weight: 500;
+}
+
+.tableConfigurationServicesItem div{
+    margin-left: auto;
+}
+
+
+.tableConfigurationServicesItem.last{
+    background-color: #F5F7FA;
+    padding: 1rem;
+    padding-bottom: 1rem;
+    padding-top: .5rem;
+    margin-top: .2rem;
+    border-radius: 0rem 0rem 1rem 1rem;
+
+}
+@media screen and (max-width: 920px) {
+    .tableConfigurationServicesItem p.first{
+        max-width: 100px !important;
+    }
+}

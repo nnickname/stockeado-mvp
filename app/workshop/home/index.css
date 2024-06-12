@@ -1,9 +1,21 @@
 .selectHomeWorkshop{
     padding: .5rem;
     border: 1px solid grey;
+    color: grey;
     border-radius: .3rem;
     padding-top: .1rem;
     padding-bottom: .1rem;
+}
+.selectHomeWorkshopblue{
+    padding: .5rem;
+    border: 1px solid #3662E3;
+    color: #3662E3;
+    background-color: white;
+    border-radius: .3rem;
+    padding-top: .1rem;
+    padding-bottom: .1rem;
+    width: max-content !important;
+
 }
 .cardHome{
     min-width: 300px;

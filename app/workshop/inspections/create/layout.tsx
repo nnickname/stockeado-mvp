@@ -16,6 +16,8 @@ import { createInspection, getAllInspections } from "@/app/api/workshop/inspecti
 import { InspectionsModel } from "@/models/workshops/inspections.model";
 import Checkbox from "@mui/material/Checkbox";
 import Link from "next/link";
+import Cars from '@/json/cars.json';
+import { ReturnUnifiedStringDateTime } from "@/utils/hooks";
 
 const InspectionWorkshopLayoutPage = () => {
     const router = useRouter();
@@ -58,6 +60,7 @@ const InspectionWorkshopLayoutPage = () => {
     
     const [inspections, setInspections] = useState<InspectionsModel[]>([]);
     const [disabledButton, setDisabledButton] = useState<boolean>(false);
+    const [carSelected, setCarSelected]  = useState<Array<any>>([]);
     const toUser = async () => {
         const userr = await getUser();
         var ownerid = String(userr?._id);
@@ -193,6 +196,8 @@ const InspectionWorkshopLayoutPage = () => {
                                 <div className="flex between">
                                     <p className="subsubtitle">Cliente</p>
                                     <Select
+                                        closeOnClickInput
+                                        style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
                                         options={[
                                             {
                                                 label: 'Completar',
@@ -249,6 +254,8 @@ const InspectionWorkshopLayoutPage = () => {
                                 <div className="flex between">
                                     <p className="subsubtitle">Vehículo</p>
                                     <Select
+                                        closeOnClickInput
+                                        style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
                                         options={[
                                             {
                                                 label: 'Completar',
@@ -273,14 +280,15 @@ const InspectionWorkshopLayoutPage = () => {
                                                 setVehicleYear('');
                                                 setVehicleVin('');
                                                 return;
+                                            } else {
+                                                const vehicleObject = vehicles?.find(e => String(e._id) === values[0]?.value);
+                                                setSelectedVehicle(String(vehicleObject?._id));
+                                                setVehiclePlate(vehicleObject?.plate);
+                                                setVehicleBrand(vehicleObject?.brand);
+                                                setVehicleModel(vehicleObject?.model);
+                                                setVehicleYear(vehicleObject?.year);
+                                                setVehicleVin(vehicleObject?.vin);
                                             }
-                                            const vehicleObject = vehicles?.find(e => String(e._id) === values[0]?.value);
-                                            setSelectedVehicle(String(vehicleObject?._id));
-                                            setVehiclePlate(vehicleObject?.plate);
-                                            setVehicleBrand(vehicleObject?.brand);
-                                            setVehicleModel(vehicleObject?.model);
-                                            setVehicleYear(vehicleObject?.year);
-                                            setVehicleVin(vehicleObject?.vin);
                                         } } values={[{value: vehicleSeleted, label: vehicleSeleted === null ? 'Seleccionar/buscar' : '# ' + vehicleBrand + ' ' + vehicleModel}]}                                    />
                                 </div>
                                 <div className="flex between mt1">
@@ -289,15 +297,86 @@ const InspectionWorkshopLayoutPage = () => {
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Marca</p>
-                                    <input disabled={vehicleSeleted !== null ? true : false} onChange={(e) => setVehicleBrand(e.target.value)} value={vehicleBrand} className="inputForm ml1" type="text" placeholder=""/>
+                                    {
+                                        (vehicleSeleted === null) ? <Select
+                                        closeOnClickInput
+                                        style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
+                                        options={
+                                            
+                                            [...Cars?.map((e) => {
+                                                return {
+                                                    label: e?.brand,
+                                                    value: e?.brand
+                                                }
+                                            })]}
+                                            separator
+                                            placeholder="Seleccionar/Buscar"
+                                            className="inputForm"
+                                            onChange={(values) => {
+                                                if(values[0]?.value !== 'other') {
+                                                    setVehicleBrand(values[0]?.value);
+                                                    setCarSelected(Cars?.find((e) => e?.brand === values[0]?.value)?.models);
+                                                    return;
+                                                }
+                                        } } values={[{value: vehicleBrand, label: vehicleBrand === '' ? 'Seleccionar/buscar' : '# ' + vehicleBrand }]}                                     />
+                                        : <select className="inputForm" style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
+                                        disabled><option># {vehicleBrand}</option></select>
+                                    }
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Modelo</p>
-                                    <input disabled={vehicleSeleted !== null ? true : false} onChange={(e) => setVehicleModel(e.target.value)} value={vehicleModel} className="inputForm ml1" type="text" placeholder=""/>
+                                    {
+                                        (vehicleSeleted === null) ? <Select
+                                        closeOnClickInput
+                                        disabled={vehicleSeleted !== null ? true : false}                                        
+                                        style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
+                                        options={
+                                            carSelected?.length > 0 ? [...carSelected?.map((e) => {
+                                                return {
+                                                    label: String(e?.title),
+                                                    value: String(e?.title)
+
+                                                }
+                                            })] : [{label: 'No encontrado', value: 'other'}]}
+                                            separator
+                                            placeholder="Seleccionar/Buscar"
+                                            className="inputForm"
+                                            onChange={(values) => {
+                                                if(values[0]?.value !== 'other') {
+                                                    setVehicleModel(values[0]?.value);
+                                                    return;
+                                                }
+                                        } } values={[{value: vehicleModel, label: vehicleModel === '' ? 'Seleccionar/buscar' : '# ' + vehicleModel }]}                                     />
+                                        : <select className="inputForm" style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
+                                        disabled><option># {vehicleModel}</option></select> 
+                                }
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Año</p>
-                                    <input disabled={vehicleSeleted !== null ? true : false} onChange={(e) => setVehicleYear(e.target.value)} value={vehicleYear} className="inputForm ml1" type="text" placeholder=""/>
+                                    {
+                                        (vehicleSeleted === null) ? <Select
+                                        disabled={vehicleSeleted !== null ? true : false}
+                                        closeOnClickInput
+                                        style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
+                                        options={[ ...new Array(74).fill(null).map((_, i) => {
+                                                return {
+                                                    value: (1950 + (i+1)).toString(),
+                                                    label: (1950 + (i+1)).toString(),
+                                                }
+                                                })
+                                            ]}
+                                            separator
+                                            placeholder="Seleccionar/Buscar"
+                                            className="inputForm"
+                                            onChange={(values) => {
+                                                if(values[0]?.value !== 'other') {
+                                                    setVehicleYear(values[0]?.value);
+                                                    return;
+                                                }
+                                        } } values={[{value: vehicleYear, label: vehicleYear === '' ? 'Seleccionar/buscar' : '# ' + vehicleYear }]}                                     />
+                                : <select className="inputForm" style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
+                                        disabled><option># {vehicleYear}</option></select> 
+                                }
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">VIN</p>
@@ -401,7 +480,7 @@ const InspectionWorkshopLayoutPage = () => {
                             <div className="inline-items">
                                 {calendars?.map((e, index: number) => <div className="item-create mt1 ml1">
                                     <div className="flex">
-                                        <p>{e?.description + ': ' + e?.dateStart}</p>
+                                        <p>{e?.description + ' ' + ReturnUnifiedStringDateTime(e?.dateStart)}</p>
                                         <IonIcon onClick={() => {
                                             setCalendars(calendars?.filter((obj, indexx) => index !== indexx))
                                         }} className="icon ml1" name="trash-outline"/>
@@ -461,7 +540,7 @@ const InspectionWorkshopLayoutPage = () => {
                         
                         
                         
-                        <div className="mSidesAuto" style={{width: 'max-content'}}>
+                        <div className="mSidesAuto" style={{width: 'max-content', maxWidth: '100%'}}>
                             <div className="card p2 mt1 flex" >
                                 <p className="formTitle mr1">Resultados scanner</p>
                                 <div className="btn-upload-pdf ml1">

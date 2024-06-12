@@ -16,6 +16,7 @@ import Link from "next/link";
 import { toast } from "react-toastify";
 import { OrderWorkshopModel } from "@/models/workshops/orders.model";
 import { CalendarsModel } from "@/models/workshops/calendars.model";
+import { ReturnUnifiedStringDateTime } from "@/utils/hooks";
 const LayoutViewClientWorkShop = ( ) => {
     const router = useRouter();
     const [open, setOpen] = useState<boolean>();
@@ -178,10 +179,10 @@ const LayoutViewClientWorkShop = ( ) => {
                         </div>
                         {(user?.role === 'owner' || user?.role === 'administrator') ? <div className="flex between displayBlockResponsive mt2">
                             <div>
-                                <p className="subsubtitle" style={{fontSize: '.8rem'}}>Creado: {new Date(client?.createdAt).getDate() + '/' + new Date(client?.createdAt).getMonth() + '/' + new Date(client?.createdAt).getFullYear() + ' - ' + new Date(client?.createdAt).getHours() + ':' + new Date(client?.createdAt).getSeconds()} por: {client?.createdBy ?? 'No encontrado'}</p>
+                                <p className="subsubtitle" style={{fontSize: '.8rem'}}>Creado: {ReturnUnifiedStringDateTime(client?.createdAt)} por: {client?.createdBy ?? 'No encontrado'}</p>
                             </div>
                             <div>
-                                <p className="subsubtitle" style={{fontSize: '.8rem'}}>Ultima vez editado: {new Date(client?.updatedAt).getDate() + '/' + new Date(client?.updatedAt).getMonth() + '/' + new Date(client?.updatedAt).getFullYear() + ' - ' + new Date(client?.updatedAt).getHours() + ':' + new Date(client?.updatedAt).getSeconds()} por: {client?.updatedBy ?? 'No encontrado'}</p>
+                                <p className="subsubtitle" style={{fontSize: '.8rem'}}>Ultima vez editado: {ReturnUnifiedStringDateTime(client?.updatedAt)} por: {client?.updatedBy ?? 'No encontrado'}</p>
                             </div>
                         </div> : <></>}
                     </div>
