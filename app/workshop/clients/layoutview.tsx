@@ -22,8 +22,33 @@ import { OrderWorkshopModel } from "@/models/workshops/orders.model";
 import { CalendarsModel } from "@/models/workshops/calendars.model";
 import { getAllCalendars } from "@/app/api/workshop/calendars/call";
 import { ReturnUnifiedStringDateTime } from "@/utils/hooks";
+import { ExportJsonCsv } from 'react-export-json-csv';
 
 const ClientsWorkshopLayoutPage = ( ) => {
+    const headers = [
+        {
+            key: 'fullname',
+            name: 'Nombre completo',
+        },
+        {
+            key: 'phone',
+            name: 'Celular'
+        },
+        {
+            key: 'vehicle',
+            name: 'Vehículo',
+        },
+        {
+            key: 'service',
+            name: 'Ultimo servicio'
+        },
+        {
+            key: 'calendars',
+            name: 'Calendarios',
+        },
+        
+    ];
+    
     const router = useRouter();
     const [open, setOpen] = useState<boolean>();
     const [user, setUser] = useState<UserModel>(null);
@@ -133,8 +158,26 @@ const ClientsWorkshopLayoutPage = ( ) => {
                                     <IonIcon name="search-outline"/>
                                 </div>
                             </div>
-                            <button className="ml1 selectHomeWorkshopblue flex"><IonIcon style={{fontSize: '1.2rem', backgroundColor: 'white'}} className="mr1 mt05" name="cloud-download-outline"/> <span style={{marginTop: '.3rem'}}>Exportar</span></button>
-                            <select value={month} onChange={(e) => filterMonth(Number(e.target.value), realClients)} className="selectHomeWorkshopblue ml1">
+                            <ExportJsonCsv fileTitle="clientes-stockeado"  className="ml1 selectHomeWorkshopblue flex" headers={headers} items={[...clients?.map((e, index: number) => {
+                                var calendarsCount:number = 0;
+                                calendars?.map((a) => {
+                                    if(e?._id === a?.client) calendarsCount++;
+                                })
+                                return {
+                                    fullname: e?.name + ' ' + e?.lastname,
+                                    phone: e?.phone,
+                                    vehicle: String(e?.vehicles?.map((a) =>{
+                                        return ' ' + vehiclesOptions.find((e) =>  String(e?._id) === a).brand + ' ' + vehiclesOptions.find((e) => String(e?._id) === a).model})).substring(0, 25) + '...',
+                                    service: orders?.map((a, index: number) => {
+                                        if(a?.client?._id === e?._id){
+                                         return ' ' + ReturnUnifiedStringDateTime(a?.dateStart);
+                                        }
+                                        ;
+                                    }).filter(s => s !== undefined) ?? 'No encontrado',
+                                    calendars: String(calendarsCount)
+                                }
+                            })]}><IonIcon style={{fontSize: '1.2rem', backgroundColor: 'white'}} className="mr1 mt05" name="cloud-download-outline"/> <span style={{marginTop: '.3rem'}}>Exportar</span></ExportJsonCsv >
+                           <select value={month} onChange={(e) => filterMonth(Number(e.target.value), realClients)} className="selectHomeWorkshopblue ml1">
                                     <option value={0}>Todo</option>
                                     <option value={1}>Enero</option>
                                     <option value={2}>Febrero</option>

@@ -262,7 +262,7 @@ const ViewOrderWorkshopLayoutPage = () => {
                                         onChange={(values) => {
                                             selectInspectionCall(String(values[0]?.value), inspections);
                                         } } 
-                                        values={[{value: inspectionSelected?._id, label: inspectionSelected === null ? 'Seleccionar/buscar' : '#' +  ' ' + inspectionSelected?.vehicle?.plate}]}                                    />
+                                        values={[{value: inspectionSelected?._id, label: inspectionSelected === null ? '' : '#' +  ' ' + inspectionSelected?.vehicle?.plate}]}                                    />
                                 </div>
                             </div>
                         </div>
@@ -314,7 +314,7 @@ const ViewOrderWorkshopLayoutPage = () => {
                                             setClientLastName(clientObject?.lastname);
                                             setClientEmail(clientObject?.email);
                                             setClientPhone(clientObject?.phone);
-                                         } } values={[{value: clientSelected, label: clientSelected === null ? 'Seleccionar/Buscar' : '# ' + clientName ?? '' + ' ' + clientLastname ?? ''}]}                                    />
+                                         } } values={[{value: clientSelected, label: clientSelected === null ? '' : '# ' + clientName ?? '' + ' ' + clientLastname ?? ''}]}                                    />
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Nombre</p>
@@ -374,7 +374,7 @@ const ViewOrderWorkshopLayoutPage = () => {
                                             setVehicleModel(vehicleObject?.model);
                                             setVehicleYear(vehicleObject?.year);
                                             setVehicleVin(vehicleObject?.vin);
-                                        } } values={[{value: vehicleSeleted, label: vehicleSeleted === null ? 'Seleccionar/Buscar' : '# ' + vehicleBrand ?? '' + ' ' + vehicleModel ?? ''}]}                                   />
+                                        } } values={[{value: vehicleSeleted, label: vehicleSeleted === null ? '' : '# ' + vehicleBrand ?? '' + ' ' + vehicleModel ?? ''}]}                                   />
                                 </div>
                                 <div className="flex between mt1">
                                     <p className="formTitle">Placa</p>

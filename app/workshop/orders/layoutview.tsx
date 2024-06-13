@@ -14,6 +14,8 @@ import { OrderWorkshopModel } from "@/models/workshops/orders.model";
 import { getAllOrderServices } from "@/app/api/workshop/orders/call";
 import { NewTableComponentType } from "../clients/layoutview";
 import { ReturnUnifiedStringDateTime } from "@/utils/hooks";
+import { ExportJsonCsv } from 'react-export-json-csv';
+
 export function getOrderServiceTextState (state: string){
     switch(state){
         case 'pending': return 'Pendiente'; break;
@@ -33,6 +35,29 @@ export function getOrderServiceClassNameState (state: string){
     }
 }
 const LayoutViewOrdersWorkShop = ( ) => {
+    
+    const headers = [
+        {
+            key: 'ammount',
+            name: 'Monto total',
+        },
+        {
+            key: 'vehicle',
+            name: 'Vehículo',
+        },
+        {
+            key: 'date',
+            name: 'Fecha'
+        },
+        {
+            key: 'plate',
+            name: 'Placa',
+        },
+        {
+            key: 'state',
+            name: 'Estado'
+        }
+    ];
     const router = useRouter();
     const [open, setOpen] = useState<boolean>();
     const [user, setUser] = useState<UserModel>(null);
@@ -99,8 +124,18 @@ const LayoutViewOrdersWorkShop = ( ) => {
                                     <IonIcon name="search-outline"/>
                                 </div>
                             </div>
-                            <button className="ml1 selectHomeWorkshopblue flex"><IonIcon style={{fontSize: '1.2rem', backgroundColor: 'white'}} className="mr1 mt05" name="cloud-download-outline"/> <span style={{marginTop: '.3rem'}}>Exportar</span></button>
-
+                            <ExportJsonCsv fileTitle="ordenes-stockeado"  className="ml1 selectHomeWorkshopblue flex" headers={headers} items={[
+                                ...orders?.map((e, index: number) => {
+                                    return {
+                                        ammount: 's/. ' + (e?.totalPrice === '' ? '0' : e?.totalPrice),
+                                        vehicle: e?.vehicle?.brand + ' ' + e?.vehicle?.model,
+                                        date: ReturnUnifiedStringDateTime(e?.dateStart),
+                                        plate: e?.vehicle?.plate,
+                                        state: getOrderServiceTextState(e?.state),
+                                    };
+                                })
+                            ]}><IonIcon style={{fontSize: '1.2rem', backgroundColor: 'white'}} className="mr1 mt05" name="cloud-download-outline"/> <span style={{marginTop: '.3rem'}}>Exportar</span></ExportJsonCsv >
+                                                    
                             <select value={month} onChange={(e) => filterMonth(Number(e.target.value), realOrders)} className="selectHomeWorkshopblue ml1">
                                     <option value={0}>Todo</option>
                                     <option value={1}>Enero</option>

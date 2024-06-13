@@ -12,6 +12,8 @@ import { InspectionsModel } from "@/models/workshops/inspections.model";
 import { getAllInspections } from "@/app/api/workshop/inspections/call";
 import { NewTableComponentType } from "../clients/layoutview";
 import { ReturnUnifiedStringDateTime } from "@/utils/hooks";
+import { ExportJsonCsv } from 'react-export-json-csv';
+
 const LayoutViewInspectionsWorkShop = ( ) => {
     const router = useRouter();
     const [open, setOpen] = useState<boolean>();
@@ -20,6 +22,29 @@ const LayoutViewInspectionsWorkShop = ( ) => {
     const [realInspections, setRealInspections] = useState<InspectionsModel[]>([]);
     const [month, selectMonth] = useState<number>(0);
     const [search, setSearch] = useState<string>('');
+    const headers = [
+        {
+            key: 'fullname',
+            name: 'Nombre completo',
+        },
+        {
+            key: 'vehicle',
+            name: 'Vehículo',
+        },
+        {
+            key: 'date',
+            name: 'Fecha'
+        },
+        {
+            key: 'plate',
+            name: 'Placa',
+        },
+        {
+            key: 'state',
+            name: 'Estado'
+        }
+    ];
+   
     const toUser = async () => {
         const userr = await getUser();
         var ownerid = String(userr?._id);
@@ -78,7 +103,15 @@ const LayoutViewInspectionsWorkShop = ( ) => {
                                     <IonIcon name="search-outline"/>
                                 </div>
                             </div>
-                            <button className="ml1 selectHomeWorkshopblue flex"><IonIcon style={{fontSize: '1.2rem', backgroundColor: 'white'}} className="mr1 mt05" name="cloud-download-outline"/> <span style={{marginTop: '.3rem'}}>Exportar</span></button>
+                            <ExportJsonCsv fileTitle="inspecciones-stockeado"  className="ml1 selectHomeWorkshopblue flex" headers={headers} items={[...inspections?.map((e, index: number) => {
+                                return {
+                                    fullname: e?.client?.name + ' ' + e?.client.lastname,
+                                    vehicle: e?.vehicle?.brand + ' ' + e?.vehicle?.model,
+                                    date: ReturnUnifiedStringDateTime(e?.dateStart),
+                                    plate: e?.vehicle?.plate,
+                                    state: e.state === 1 ? 'Confirmado' : 'Sin confirmar',
+                                }
+                            })]}><IonIcon style={{fontSize: '1.2rem', backgroundColor: 'white'}} className="mr1 mt05" name="cloud-download-outline"/> <span style={{marginTop: '.3rem'}}>Exportar</span></ExportJsonCsv >
                             <select value={month} onChange={(e) => filterMonth(Number(e.target.value), inspections, realInspections)} className="selectHomeWorkshopblue ml1">
                                     <option value={0}>Todo</option>
                                     <option value={1}>Enero</option>

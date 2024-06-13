@@ -237,7 +237,7 @@ const NewOrderWorkshopLayoutPage = () => {
                                         onChange={(values) => {
                                             selectInspectionCall(String(values[0]?.value), inspections);
                                         } } 
-                                        values={[{value: inspectionSelected?._id, label: inspectionSelected === null ? 'Seleccionar/buscar' : '#' +  ' ' + inspectionSelected?.vehicle?.plate}]}                                    />
+                                        values={[{value: inspectionSelected?._id, label: inspectionSelected === null ? 'Seleccionar/buscar' : '#' +  '  ' + inspectionSelected?.vehicle?.plate}]}                                    />
                                 </div>
                             </div>
                         </div>

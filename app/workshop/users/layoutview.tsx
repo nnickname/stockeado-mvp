@@ -15,6 +15,8 @@ import { toast } from "react-toastify";
 import { createWorkShopUser, deleteWorkShopUser, getAllWorkShopUsers, getOneWorkShopOwner } from "@/app/api/workshop/users/call";
 import './index.css';
 import { ReturnUnifiedStringDateTime } from "@/utils/hooks";
+import { ExportJsonCsv } from 'react-export-json-csv';
+
 export function getUserWorkshopRoleName (state: string){
     switch(state){
         case 'administrator': return 'Administrador'; break;
@@ -31,6 +33,26 @@ export function getUserWorkshopRoleClassname (state: string){
     }
 }
 const UsersWorkshopLayoutPage = ( ) => {
+    const headers = [
+        {
+            key: 'fullname',
+            name: 'Nombre completo',
+        },
+        {
+            key: 'email',
+            name: 'Correo electronico'
+        },
+        {
+            key: 'createdat',
+            name: 'Creado'
+        },
+        {
+            key: 'role',
+            name: 'Rol'
+        }
+        
+    ];
+    
     const router = useRouter();
     const [open, setOpen] = useState<boolean>();
     const [user, setUser] = useState<UserModel>(null);
@@ -153,8 +175,17 @@ const UsersWorkshopLayoutPage = ( ) => {
                                     <IonIcon name="search-outline"/>
                                 </div>
                             </div>
-                            <button className="ml1 selectHomeWorkshopblue flex"><IonIcon style={{fontSize: '1.2rem', backgroundColor: 'white'}} className="mr1 mt05" name="cloud-download-outline"/> <span style={{marginTop: '.3rem'}}>Exportar</span></button>
-
+                            <ExportJsonCsv fileTitle="usuarios-stockeado"  className="ml1 selectHomeWorkshopblue flex" headers={headers} items={[
+                                ...users?.map((e, index: number) => {
+                                    return {
+                                        fullname: e?.name + ' ' + e?.lastname,
+                                        email: e?.email,
+                                        createdat: ReturnUnifiedStringDateTime(e?.createdAt),
+                                        role: getUserWorkshopRoleName(e?.role),
+                                    }
+                                })
+                            ]}><IonIcon style={{fontSize: '1.2rem', backgroundColor: 'white'}} className="mr1 mt05" name="cloud-download-outline"/> <span style={{marginTop: '.3rem'}}>Exportar</span></ExportJsonCsv >
+                               
                             <select value={month} onChange={(e) => filterMonth(Number(e.target.value), realUsers)} className="selectHomeWorkshopblue ml1">
                                     <option value={0}>Todo</option>
                                     <option value={1}>Enero</option>
