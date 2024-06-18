@@ -307,6 +307,7 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
             type: 'actions',
             align: 'center',
             headerClassName: 'color-table-header',
+            flex: 2,
             renderCell: (params) => <button onClick={async () => {
                 toast.warning('Estamos eliminando tu usuario');
                 const response = await deleteWorkShopUser(String(params.value));

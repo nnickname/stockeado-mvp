@@ -42,8 +42,7 @@
     background-color: #F5F7FA;
     padding: 1rem;
     padding-bottom: .5rem;
-    padding-top: .2rem;
-    margin-top: .5rem;
+    padding-top: .5rem;
 }
 .tableConfigurationServicesItem p{
     min-width: max-content;
@@ -54,8 +53,6 @@
 .tableConfigurationServicesItem div{
     margin-left: auto;
 }
-
-
 .tableConfigurationServicesItem.last{
     background-color: #F5F7FA;
     padding: 1rem;
@@ -68,5 +65,11 @@
 @media screen and (max-width: 920px) {
     .tableConfigurationServicesItem p.first{
         max-width: 100px !important;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .p05Min{
+        padding: 0.5rem !important; 
     }
 }

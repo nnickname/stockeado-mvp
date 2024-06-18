@@ -236,7 +236,7 @@ const InspectionViewWorkshopLayoutPage = () => {
                                 <p className="subtitle mt1" style={{fontWeight: '500'}}>Inspección #{orderIndex +1}</p>
                             </div>
                             <div className="flex">
-                                <p className="subtitle mr1 mt1">Estado</p>
+                                <p className="subtitle hideResponsive mr1 mt1">Estado</p>
                                 <div className="mt1">
                                     <select className={stateSelected === 0 ? 'btn btn-disabled-secondary ml1' : 'btn btn-confirmed-secondary ml1'} value={stateSelected} onChange={(e) => selectState(Number(e?.target?.value))}>
                                         <option className="btn-disabled-secondary" value={0}>Sin confirmar</option>
@@ -260,66 +260,12 @@ const InspectionViewWorkshopLayoutPage = () => {
                             </div>
                         </div>
                         <div className="flex between displayBlockResponsive">
-                            <div className="cardWhiteForm mt1 w100 mr1">
-                                <div className="flex between">
-                                    <p className="subsubtitle">Cliente</p>
+                        <div className="cardWhiteForm mt1 w100 mr1">
+                                <div className="flex between displayBlockResponsiveMin">
+                                    <p className="subsubtitle mt1">Vehículo</p>
                                     <Select
-                                        options={[
-                                            {
-                                                label: 'Completar',
-                                                value: 'other'
-                                            },
-                                            ...clients?.map((e) => {
-                                            return {
-                                                label: e?.name + ' ' + e?.lastname,
-                                                value: String(e?._id)
-                                            }
-                                        })]}
-                                        separator
-                                        placeholder="Seleccionar/Buscar"
-                                        className="inputForm"
-                                        onChange={(values) => {
-                                            if(values[0]?.value === 'other') {
-                                                setSelectedClient(null);
-                                                setClientName('');
-                                                setClientLastName('');
-                                                setClientEmail('');
-                                                setClientPhone('');
-                                                return;
-                                            }
-                                            const clientObject = clients?.find(e => String(e._id) === values[0]?.value);
-                                            setSelectedClient(String(clientObject?._id));
-                                            setClientName(clientObject?.name);
-                                            setClientLastName(clientObject?.lastname);
-                                            setClientEmail(clientObject?.email);
-                                            setClientPhone(clientObject?.phone);
-                                         } } values={[{value: clientSelected, label: clientSelected === null ? 'Seleccionar/buscar' : '# ' + clientName + ' ' + clientLastname}]}                                    />
-                                </div>
-                                <div className="flex between mt1">
-                                    <p className="formTitle">Nombre</p>
-                                    <input onChange={(e) => setClientName(e.target.value)} value={clientName} disabled={clientSelected !== null ? true : false} className="inputForm ml1" type="text" placeholder=""/>
-                                </div>
-                                <div className="flex between mt1">
-                                    <p className="formTitle">Apellido</p>
-                                    <input onChange={(e) => setClientLastName(e.target.value)} value={clientLastname} disabled={clientSelected !== null ? true : false} className="inputForm ml1" type="text" placeholder=""/>
-                                </div>
-                                <div className="flex between mt1">
-                                    <p className="formTitle">Celular</p>
-                                    <input onChange={(e) => setClientPhone(e.target.value)} value={clientPhone} disabled={clientSelected !== null ? true : false} className="inputForm ml1" type="text" placeholder=""/>
-                                </div>
-                                <div className="flex between mt1">
-                                    <p className="formTitle">Correo</p>
-                                    <input onChange={(e) => setClientEmail(e.target.value)} value={clientEmail} disabled={clientSelected !== null ? true : false} className="inputForm ml1" type="text" placeholder=""/>
-                                </div>
-                                <div className="flex between mt1">
-                                    <p className="formTitle">Visita</p>
-                                    <input disabled placeholder={clientSelected !== null ? 'Recurrente' : 'Nuevo'} className="inputForm ml1" type="text"/>
-                                </div>
-                            </div>
-                            <div className="cardWhiteForm mt1 w100">
-                                <div className="flex between">
-                                    <p className="subsubtitle">Vehículo</p>
-                                    <Select
+                                        closeOnClickInput
+                                        style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
                                         options={[
                                             {
                                                 label: 'Completar',
@@ -327,14 +273,14 @@ const InspectionViewWorkshopLayoutPage = () => {
                                             },
                                             ...vehicles?.map((e) => {
                                                 return {
-                                                    label: e?.brand + ' ' + e?.model,
+                                                    label: '#' + e?.plate,
                                                     value: String(e?._id)
                                                 }
                                             }
                                         )]}
                                         separator
                                         placeholder="Seleccionar/Buscar"
-                                        className="inputForm"
+                                        className="inputForm br05 w100 mt1"
                                         onChange={(values) => {
                                             if(values[0]?.value === 'other') {
                                                 setSelectedVehicle(null);
@@ -344,21 +290,37 @@ const InspectionViewWorkshopLayoutPage = () => {
                                                 setVehicleYear('');
                                                 setVehicleVin('');
                                                 return;
+                                            } else {
+                                                const vehicleObject = vehicles?.find(e => String(e._id) === values[0]?.value);
+                                                setSelectedVehicle(String(vehicleObject?._id));
+                                                setVehiclePlate(vehicleObject?.plate);
+                                                setVehicleBrand(vehicleObject?.brand);
+                                                setVehicleModel(vehicleObject?.model);
+                                                setVehicleYear(vehicleObject?.year);
+                                                setVehicleVin(vehicleObject?.vin);
+                                                clients?.map(e => {
+                                                    const responseVehicle = e?.vehicles?.find((a) =>  a === String(vehicleObject?._id));
+                                                    if(responseVehicle?.length > 3){
+                                                        setSelectedClient(String(e?._id));
+                                                        setClientName(e?.name);
+                                                        setClientLastName(e?.lastname);
+                                                        setClientEmail(e?.email);
+                                                        setClientPhone(e?.phone);
+                                                    }
+                                                });
+                                                
+                                                 
                                             }
-                                            const vehicleObject = vehicles?.find(e => String(e._id) === values[0]?.value);
-                                            setSelectedVehicle(String(vehicleObject?._id));
-                                            setVehiclePlate(vehicleObject?.plate);
-                                            setVehicleBrand(vehicleObject?.brand);
-                                            setVehicleModel(vehicleObject?.model);
-                                            setVehicleYear(vehicleObject?.year);
-                                            setVehicleVin(vehicleObject?.vin);
                                         } } values={[{value: vehicleSeleted, label: vehicleSeleted === null ? 'Seleccionar/buscar' : '# ' + vehicleBrand + ' ' + vehicleModel}]}                                    />
                                 </div>
-                                <div className="flex between mt1">
-                                    <p className="formTitle">Placa</p>
-                                    <input disabled={vehicleSeleted !== null ? true : false} onChange={(e) => setVehiclePlate(e.target.value)} value={vehiclePlate} className="inputForm ml1" type="text" placeholder=""/>
+                                <div className="flex between displayBlockResponsiveMin mt1">
+                                    <p className="formTitle mr1">Placa</p>
+                                    <input maxLength={7}  pattern="([a-zA-Z]+-)?d{3,6}" required disabled={vehicleSeleted !== null ? true : false} onChange={(e) => {
+                                        
+                                        setVehiclePlate(e?.target.value);
+                                    }} value={vehiclePlate} className="inputForm w100Min" type="text" placeholder=""/>
                                 </div>
-                                <div className="flex between mt1">
+                                <div className="flex between mt1 displayBlockResponsiveMin">
                                     <p className="formTitle">Marca</p>
                                     {
                                         (vehicleSeleted === null) ? <Select
@@ -374,7 +336,7 @@ const InspectionViewWorkshopLayoutPage = () => {
                                             })]}
                                             separator
                                             placeholder="Seleccionar/Buscar"
-                                            className="inputForm"
+                                            className="inputForm br05"
                                             onChange={(values) => {
                                                 if(values[0]?.value !== 'other') {
                                                     setVehicleBrand(values[0]?.value);
@@ -386,7 +348,7 @@ const InspectionViewWorkshopLayoutPage = () => {
                                         disabled><option># {vehicleBrand}</option></select>
                                     }
                                 </div>
-                                <div className="flex between mt1">
+                                <div className="flex between mt1 displayBlockResponsiveMin">
                                     <p className="formTitle">Modelo</p>
                                     {
                                         (vehicleSeleted === null) ? <Select
@@ -403,7 +365,7 @@ const InspectionViewWorkshopLayoutPage = () => {
                                             })] : [{label: 'No encontrado', value: 'other'}]}
                                             separator
                                             placeholder="Seleccionar/Buscar"
-                                            className="inputForm"
+                                            className="inputForm br05 w100"
                                             onChange={(values) => {
                                                 if(values[0]?.value !== 'other') {
                                                     setVehicleModel(values[0]?.value);
@@ -414,7 +376,7 @@ const InspectionViewWorkshopLayoutPage = () => {
                                         disabled><option># {vehicleModel}</option></select> 
                                 }
                                 </div>
-                                <div className="flex between mt1">
+                                <div className="flex between mt1 displayBlockResponsiveMin">
                                     <p className="formTitle">Año</p>
                                     {
                                         (vehicleSeleted === null) ? <Select
@@ -430,7 +392,7 @@ const InspectionViewWorkshopLayoutPage = () => {
                                             ]}
                                             separator
                                             placeholder="Seleccionar/Buscar"
-                                            className="inputForm"
+                                            className="inputForm br05"
                                             onChange={(values) => {
                                                 if(values[0]?.value !== 'other') {
                                                     setVehicleYear(values[0]?.value);
@@ -441,11 +403,70 @@ const InspectionViewWorkshopLayoutPage = () => {
                                         disabled><option># {vehicleYear}</option></select> 
                                 }
                                 </div>
-                                <div className="flex between mt1">
-                                    <p className="formTitle">VIN</p>
-                                    <input disabled={vehicleSeleted !== null ? true : false} onChange={(e) => setVehicleVin(e.target.value)} value={vehicleVin} className="inputForm ml1" type="text" placeholder=""/>
+                                <div className="flex between displayBlockResponsiveMin mt1">
+                                    <p className="formTitle mr1">VIN</p>
+                                    <input disabled={vehicleSeleted !== null ? true : false} onChange={(e) => setVehicleVin(e.target.value)} value={vehicleVin} className="inputForm w100Min" type="text" placeholder=""/>
                                 </div>
                             </div>
+                            <div className="cardWhiteForm mt1 w100">
+                                <div className="flex between displayBlockResponsiveMin">
+                                    <p className="subsubtitle mr1">Cliente</p>
+                                    <Select
+                                        closeOnClickInput
+                                        style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
+                                        options={[
+                                            {
+                                                label: 'Completar',
+                                                value: 'other'
+                                            },
+                                            ...clients?.map((e) => {
+                                            return {
+                                                label: e?.name + ' ' + e?.lastname,
+                                                value: String(e?._id)
+                                            }
+                                        })]}
+                                        separator
+                                        placeholder="Seleccionar/Buscar"
+                                        className="inputForm br05"
+                                        onChange={(values) => {
+                                            if(values[0]?.value === 'other') {
+                                                setSelectedClient(null);
+                                                setClientName('');
+                                                setClientLastName('');
+                                                setClientEmail('');
+                                                setClientPhone('');
+                                                return;
+                                            }
+                                            const clientObject = clients?.find(e => String(e._id) === values[0]?.value);
+                                            setSelectedClient(String(clientObject?._id));
+                                            setClientName(clientObject?.name);
+                                            setClientLastName(clientObject?.lastname);
+                                            setClientEmail(clientObject?.email);
+                                            setClientPhone(clientObject?.phone);
+                                         } } values={[{value: clientSelected, label: clientSelected === null ? 'Seleccionar/buscar' : '# ' + clientName + ' ' + clientLastname}]}                                     />
+                                </div>
+                                <div className="flex between mt1 displayBlockResponsiveMin">
+                                    <p className="formTitle mr1">Nombre</p>
+                                    <input onChange={(e) => setClientName(e.target.value)} value={clientName} disabled={clientSelected !== null ? true : false} className="inputForm w100Min" type="text" placeholder=""/>
+                                </div>
+                                <div className="flex between mt1 displayBlockResponsiveMin">
+                                    <p className="formTitle mr1">Apellido</p>
+                                    <input onChange={(e) => setClientLastName(e.target.value)} value={clientLastname} disabled={clientSelected !== null ? true : false} className="inputForm w100Min" type="text" placeholder=""/>
+                                </div>
+                                <div className="flex between mt1 displayBlockResponsiveMin">
+                                    <p className="formTitle mr1">Celular</p>
+                                    <input onChange={(e) => setClientPhone(e.target.value)} value={clientPhone} disabled={clientSelected !== null ? true : false} className="inputForm w100Min" type="text" placeholder=""/>
+                                </div>
+                                <div className="flex between mt1 displayBlockResponsiveMin">
+                                    <p className="formTitle mr1">Correo</p>
+                                    <input onChange={(e) => setClientEmail(e.target.value)} value={clientEmail} disabled={clientSelected !== null ? true : false} className="inputForm w100Min " type="text" placeholder=""/>
+                                </div>
+                                <div className="flex between mt1 displayBlockResponsiveMin">
+                                    <p className="formTitle mr1">Visita</p>
+                                    <input disabled placeholder={clientSelected !== null ? 'Recurrente' : 'Nuevo'} className="inputForm w100Min " type="text"/>
+                                </div>
+                            </div>
+                            
                             
 
                             
@@ -458,16 +479,16 @@ const InspectionViewWorkshopLayoutPage = () => {
                             <p className="subsubtitle">Estado del vehículo actual</p>
                             <div className="flex between displayBlockResponsive mt1">
                                 <div className="w100 mr1 nPaddingLeftResponsive" style={{paddingRight: '2rem'}}>
-                                    <div className="flex between mt1">
-                                        <p className="formTitle ">Kilometraje</p>
-                                        <input onChange={(e) => setMileage(e.target.value)} value={mileage} className="inputForm ml1" type="text" placeholder=""/>
+                                    <div className="flex between displayBlockResponsiveMin mt1">
+                                        <p className="formTitle mr1">Kilometraje</p>
+                                        <input onChange={(e) => setMileage(e.target.value)} value={mileage} className="inputForm w100Min" type="text" placeholder=""/>
                                     </div>
 
                                 </div>
                                 <div className="w100 nPaddingLeftResponsive" style={{ paddingLeft: '2rem'}}>
-                                    <div className="flex between mt1">
-                                        <p className="formTitle" >Nivel de aceite</p>
-                                        <input onChange={(e) => setOil(e.target.value)} value={oil} className="inputForm ml1" type="text" placeholder=""/>
+                                    <div className="flex between displayBlockResponsiveMin mt1">
+                                        <p className="formTitle mr1" >Nivel de aceite</p>
+                                        <input onChange={(e) => setOil(e.target.value)} value={oil} className="inputForm w100Min" type="text" placeholder=""/>
                                     </div>
 
                                 </div>
@@ -475,16 +496,16 @@ const InspectionViewWorkshopLayoutPage = () => {
 
                             <div className="flex between displayBlockResponsive">
                                 <div className="w100 mr1 nPaddingLeftResponsive" style={{paddingRight: '2rem'}}>
-                                    <div className="flex between mt1">
-                                        <p className="formTitle ">Nivel de gasolina</p>
-                                        <input onChange={(e) => setFuel(e.target.value)} value={fuel} className="inputForm ml1" type="text" placeholder=""/>
+                                    <div className="flex between displayBlockResponsiveMin mt1">
+                                        <p className="formTitle mr1">Nivel de gasolina</p>
+                                        <input onChange={(e) => setFuel(e.target.value)} value={fuel} className="inputForm w100Min" type="text" placeholder=""/>
                                     </div>
 
                                 </div>
                                 <div className="w100 nPaddingLeftResponsive" style={{ paddingLeft: '2rem'}}>
-                                    <div className="flex between mt1">
-                                        <p className="formTitle" >Líquido de frenos</p>
-                                        <input onChange={(e) => setBrakes(e.target.value)} value={brakes} className="inputForm ml1" type="text" placeholder=""/>
+                                    <div className="flex between displayBlockResponsiveMin mt1">
+                                        <p className="formTitle mr1" >Líquido de frenos</p>
+                                        <input onChange={(e) => setBrakes(e.target.value)} value={brakes} className="inputForm w100Min" type="text" placeholder=""/>
                                     </div>
 
                                 </div>
@@ -492,55 +513,31 @@ const InspectionViewWorkshopLayoutPage = () => {
 
                             <div className="flex between displayBlockResponsive">
                                 <div className="w100 mr1 nPaddingLeftResponsive" style={{paddingRight: '2rem'}}>
-                                    <div className="flex between mt1">
-                                        <p className="formTitle ">Refrigerante</p>
-                                        <input onChange={(e) => setRefrigerant(e.target.value)} value={refrigerant} className="inputForm ml1" type="text" placeholder=""/>
+                                    <div className="flex between displayBlockResponsiveMin mt1">
+                                        <p className="formTitle mr1 ">Refrigerante</p>
+                                        <input onChange={(e) => setRefrigerant(e.target.value)} value={refrigerant} className="inputForm w100Min" type="text" placeholder=""/>
                                     </div>
 
                                 </div>
-                                <div className="w100 nPaddingLeftResponsive" style={{ paddingLeft: '2rem'}}>
-                                    <div className="flex between mt1">
-                                        <p className="formTitle" >Fotos actuales(max 4)</p>
-                                        <input disabled className="inputForm ml1" type="text" placeholder=""/>
+                                <div  className="w100 nPaddingLeftResponsive" style={{ paddingLeft: '2rem'}}>
+                                    <div className="flex between displayBlockResponsiveMin mt1">
+                                        <p className="formTitle mr1" >Fotos actuales(max 4)</p>
+                                        <input disabled className="inputForm" type="text" placeholder=""/>
                                     </div>
 
                                 </div>
                             </div>
 
-                            <p className="formTitle mt2">Trabajos a realizar</p>
-                            <div className="inline-items">
-                                
-                                {tasks?.map((e, index: number) => <div className="item-create mt1 ml1">
-                                    <div className="flex">
-                                        <p>{e}</p>
-                                        <IonIcon onClick={() => {
-                                            setTasks(tasks?.filter((obj, indexx) => index !== indexx))
-                                        }} className="icon ml1" name="trash-outline"/>
-                                    </div>
-                                </div>)}
-                            </div>
-                            
-                            <div className="flex w100">
-                                <input onChange={(e) => setNewJob(e.target.value)} value={newJob} className="inputForm mt1 w100" type="text" placeholder="" style={{borderRadius: '.5rem 0rem 0rem .5rem'}}/>
-                                <button onClick={() => {
-                                    if(newJob !== ''){
-                                        setNewJob('');
-                                        setTasks([newJob, ...tasks]);
-                                    } else toast.error(' Completa el formulario')
-                                }} className="btn-gradient-secondary mt1" style={{border: '1px solid grey', borderRadius: '0px .5rem .5rem 0rem'}} >Añadir</button>
-                            </div>
-                            <p className="formTitle mt2">Observaciones adicionales</p>
-                            <input onChange={(e) => setObservations(e.target.value)} value={observations} className="inputForm mt1 w100" type="text" placeholder=""/>
                         </div>
 
 
 
-                        <div className="cardWhiteForm mt1">
+                        <div className="cardWhiteForm overFlowXResponsive mt1">
                             <div className="flex">
                                 <p className="subsubtitle">Recordatorios </p>
                                 <IonIcon className="ml1" name="eye-off-outline"/>
                             </div>
-                            <div className="inline-items">
+                            <div className="inline-items" >
                                 {calendars?.map((e, index: number) => <div className="item-create mt1 ml1">
                                     <div className="flex">
                                         <p>{e?.description + ' ' + ReturnUnifiedStringDateTime(e?.dateStart)}</p>
@@ -613,7 +610,7 @@ const InspectionViewWorkshopLayoutPage = () => {
                         
                         
                         <div className="mSidesAuto" style={{width: 'max-content'}}>
-                            <div className="card p2 mt1 flex" >
+                            <div className="card p2 mt1 flex displayBlockResponsiveMin" >
                                 <p className="formTitle mr1">Resultados scanner</p>
                                 <div className="btn-upload-pdf ml1">
                                     <p className="mr1">Adjuntar PDF</p>
@@ -629,10 +626,11 @@ const InspectionViewWorkshopLayoutPage = () => {
                             </div>
                         </div>
 
-                        <div className=" center mt1 mSidesAuto">
-                            <button className="btn btn-gradient-third mr1" onClick={() => buildForm()}>{
+                        
+                        <div className="center mt1 mSidesAuto" style={{ minHeight: '100px'}}>
+                            <button className="btn btn-gradient-third displayBlockResponsiveMin w100Min mt1 mr1" onClick={() => buildForm()}>{
                                 disabledButton ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='grey' style={{fontSize: '1rem' }}/> : 'Guardar inspección'}</button>
-                            <Link href={'/workshop/orders/create?inspection=' + selectedInspection?._id} className="btn-gradient-secondary ml1 " >Crear orden de servicio</Link>
+                            <Link  href={'/workshop/orders/create?inspection=' + selectedInspection?._id} className="btn-gradient-secondary displayBlockResponsiveMin w100Min mt1 "  >Crear orden de servicio</Link>
                         </div>
                         {(user?.role === 'owner' || user?.role === 'administrator') ? <div className="flex between displayBlockResponsive mt2">
                             <div>

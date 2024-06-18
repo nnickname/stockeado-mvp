@@ -100,23 +100,23 @@ const LayoutViewClientWorkShop = ( ) => {
                         <h1 className="subtitle">Cliente #{orderIndex +1}</h1>
                         <div className="card p1 mt1">
                             <div className="flex displayBlockResponsive w100">
-                                <div className="flex w100 mr1 mt1">
-                                    <p className="formTitle w100">Nombre</p>
-                                    <input onChange={(e) => setName(e?.target.value)} value={name}  className="inputForm mr1 ml1" type="text" />
+                                <div className="flex displayBlockResponsiveMin w100 mr1 mt1">
+                                    <p className="formTitle mr1">Nombre</p>
+                                    <input onChange={(e) => setName(e?.target.value)} value={name}  className="inputForm w100" type="text" />
                                 </div>
-                                <div className="flex w100 mt1">
-                                    <p className="formTitle w100">Apellido</p>
-                                    <input onChange={(e) => setLastname(e?.target.value)} value={lastname} className="inputForm mr1 ml1 " type="text"/>
+                                <div className="flex displayBlockResponsiveMin w100 mt1">
+                                    <p className="formTitle mr1">Apellido</p>
+                                    <input onChange={(e) => setLastname(e?.target.value)} value={lastname} className="inputForm w100 " type="text"/>
                                 </div>
                             </div>
                             <div className="flex displayBlockResponsive mt1 w100">
-                                <div className="flex w100 mr1 mt1">
-                                    <p className="formTitle w100">Celular</p>
-                                    <input onChange={(e) => setPhone(e?.target.value)} value={phone} className="inputForm mr1 ml1" type="text" />
+                                <div className="flex w100 displayBlockResponsiveMin mr1 mt1">
+                                    <p className="formTitle mr1">Celular</p>
+                                    <input onChange={(e) => setPhone(e?.target.value)} value={phone} className="inputForm w100" type="text" />
                                 </div>
-                                <div className="flex w100 mt1">
-                                    <p className="formTitle w100">Correo</p>
-                                    <input onChange={(e) => setEmail(e?.target.value)} value={email} className="inputForm mr1 ml1" type="email" />
+                                <div className="flex w100 displayBlockResponsiveMin mt1">
+                                    <p className="formTitle mr1">Correo</p>
+                                    <input onChange={(e) => setEmail(e?.target.value)} value={email} className="inputForm w100" type="email" />
                                 </div>
                             </div>
                         </div>
@@ -175,7 +175,7 @@ const LayoutViewClientWorkShop = ( ) => {
                             </div>
                         </div>
                         <div className="center w100 mt2">
-                            <button className="btn-gradient-primary" onClick={() => buildForm()}>Guardar cambios</button>
+                            <button className="btn-gradient-primary w100Min" onClick={() => buildForm()}>Guardar cambios</button>
                         </div>
                         {(user?.role === 'owner' || user?.role === 'administrator') ? <div className="flex between displayBlockResponsive mt2">
                             <div>

@@ -222,7 +222,7 @@ const ViewOrderWorkshopLayoutPage = () => {
                                 <p className="subtitle mt1" style={{fontWeight: '500'}}>Orden de servicio #{orderIndex+1}</p>
                             </div>
                             <div className="flex displayBlockResponsive">
-                                <p className="subtitle mr1 mt1">Estado</p>
+                                <p className="subtitle hideResponsive mr1 mt1">Estado</p>
                                 <select onChange={(e) => setOrderState(e?.target?.value)} value={currentOrderState} className={getOrderServiceClassNameState(currentOrderState) + ' btn ml1 mt1 br05'}>
                                     <option className={getOrderServiceClassNameState('pending')} value='pending'>Pendiente</option>
                                     <option className={getOrderServiceClassNameState('confirmed')} value='confirmed'>Confirmado</option>
@@ -237,9 +237,9 @@ const ViewOrderWorkshopLayoutPage = () => {
                         </div>
 
                         <div className="">
-                            <div className="card p2 mt1 flex maxContent displayBlockResponsive w100Responsive">
+                            <div className="card p2 mt1 flex maxContent displayBlockResponsiveMin w100Min">
                                 <p className="formTitle mr1 mt1">Informe de inspeción</p>
-                                <div className="ml1 mt1">
+                                <div className="mt1">
                                     <Select
                                         style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
                                         options={[
@@ -258,7 +258,7 @@ const ViewOrderWorkshopLayoutPage = () => {
                                         
                                         separator
                                         placeholder="Seleccionar/Buscar"
-                                        className="inputForm"
+                                        className="inputForm br05"
                                         onChange={(values) => {
                                             selectInspectionCall(String(values[0]?.value), inspections);
                                         } } 
@@ -280,67 +280,11 @@ const ViewOrderWorkshopLayoutPage = () => {
                             </div>
                         </div>
                         <div className="flex between displayBlockResponsive">
-                            <div className="cardWhiteForm mt1 w100 mr1">
-                                <div className="flex between">
-                                    <p className="subsubtitle">Cliente</p>
+                        <div className="cardWhiteForm mt1 w100 mr1">
+                                <div className="flex between displayBlockResponsiveMin">
+                                    <p className="subsubtitle mt1">Vehículo</p>
                                     <Select
-                                        style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
-                                        options={[
-                                            {
-                                                label: 'Completar',
-                                                value: 'other'
-                                            },
-                                            ...clients?.map((e) => {
-                                            return {
-                                                label: e?.name + ' ' + e?.lastname,
-                                                value: String(e?._id)
-                                            }
-                                        })]}
-                                        separator
-                                        placeholder="Seleccionar/Buscar"
-                                        className="inputForm"
-                                        onChange={(values) => {
-                                            if(values[0]?.value === 'other') {
-                                                setSelectedClient(null);
-                                                setClientName('');
-                                                setClientLastName('');
-                                                setClientEmail('');
-                                                setClientPhone('');
-                                                return;
-                                            }
-                                            const clientObject = clients?.find(e => String(e._id) === values[0]?.value);
-                                            setSelectedClient(String(clientObject?._id));
-                                            setClientName(clientObject?.name);
-                                            setClientLastName(clientObject?.lastname);
-                                            setClientEmail(clientObject?.email);
-                                            setClientPhone(clientObject?.phone);
-                                         } } values={[{value: clientSelected, label: clientSelected === null ? '' : '# ' + clientName ?? '' + ' ' + clientLastname ?? ''}]}                                    />
-                                </div>
-                                <div className="flex between mt1">
-                                    <p className="formTitle">Nombre</p>
-                                    <input onChange={(e) => setClientName(e.target.value)} value={clientName} disabled={clientSelected !== null ? true : false} className="inputForm ml1" type="text" placeholder=""/>
-                                </div>
-                                <div className="flex between mt1">
-                                    <p className="formTitle">Apellido</p>
-                                    <input onChange={(e) => setClientLastName(e.target.value)} value={clientLastname} disabled={clientSelected !== null ? true : false} className="inputForm ml1" type="text" placeholder=""/>
-                                </div>
-                                <div className="flex between mt1">
-                                    <p className="formTitle">Celular</p>
-                                    <input onChange={(e) => setClientPhone(e.target.value)} value={clientPhone} disabled={clientSelected !== null ? true : false} className="inputForm ml1" type="text" placeholder=""/>
-                                </div>
-                                <div className="flex between mt1">
-                                    <p className="formTitle">Correo</p>
-                                    <input onChange={(e) => setClientEmail(e.target.value)} value={clientEmail} disabled={clientSelected !== null ? true : false} className="inputForm ml1" type="text" placeholder=""/>
-                                </div>
-                                <div className="flex between mt1">
-                                    <p className="formTitle">Visita</p>
-                                    <input disabled placeholder={clientSelected !== null ? 'Recurrente' : 'Nuevo'} className="inputForm ml1" type="text"/>
-                                </div>
-                            </div>
-                            <div className="cardWhiteForm mt1 w100">
-                                <div className="flex between">
-                                    <p className="subsubtitle">Vehículo</p>
-                                    <Select
+                                        closeOnClickInput
                                         style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
                                         options={[
                                             {
@@ -349,14 +293,14 @@ const ViewOrderWorkshopLayoutPage = () => {
                                             },
                                             ...vehicles?.map((e) => {
                                                 return {
-                                                    label: e?.brand + ' ' + e?.model,
+                                                    label: '#' + e?.plate,
                                                     value: String(e?._id)
                                                 }
                                             }
                                         )]}
                                         separator
                                         placeholder="Seleccionar/Buscar"
-                                        className="inputForm"
+                                        className="inputForm br05 w100 mt1"
                                         onChange={(values) => {
                                             if(values[0]?.value === 'other') {
                                                 setSelectedVehicle(null);
@@ -366,21 +310,37 @@ const ViewOrderWorkshopLayoutPage = () => {
                                                 setVehicleYear('');
                                                 setVehicleVin('');
                                                 return;
+                                            } else {
+                                                const vehicleObject = vehicles?.find(e => String(e._id) === values[0]?.value);
+                                                setSelectedVehicle(String(vehicleObject?._id));
+                                                setVehiclePlate(vehicleObject?.plate);
+                                                setVehicleBrand(vehicleObject?.brand);
+                                                setVehicleModel(vehicleObject?.model);
+                                                setVehicleYear(vehicleObject?.year);
+                                                setVehicleVin(vehicleObject?.vin);
+                                                clients?.map(e => {
+                                                    const responseVehicle = e?.vehicles?.find((a) =>  a === String(vehicleObject?._id));
+                                                    if(responseVehicle?.length > 3){
+                                                        setSelectedClient(String(e?._id));
+                                                        setClientName(e?.name);
+                                                        setClientLastName(e?.lastname);
+                                                        setClientEmail(e?.email);
+                                                        setClientPhone(e?.phone);
+                                                    }
+                                                });
+                                                
+                                                 
                                             }
-                                            const vehicleObject = vehicles?.find(e => String(e._id) === values[0]?.value);
-                                            setSelectedVehicle(String(vehicleObject?._id));
-                                            setVehiclePlate(vehicleObject?.plate);
-                                            setVehicleBrand(vehicleObject?.brand);
-                                            setVehicleModel(vehicleObject?.model);
-                                            setVehicleYear(vehicleObject?.year);
-                                            setVehicleVin(vehicleObject?.vin);
-                                        } } values={[{value: vehicleSeleted, label: vehicleSeleted === null ? '' : '# ' + vehicleBrand ?? '' + ' ' + vehicleModel ?? ''}]}                                   />
+                                        } } values={[{value: vehicleSeleted, label: vehicleSeleted === null ? 'Seleccionar/buscar' : '# ' + vehicleBrand + ' ' + vehicleModel}]}                                    />
                                 </div>
-                                <div className="flex between mt1">
-                                    <p className="formTitle">Placa</p>
-                                    <input disabled={vehicleSeleted !== null ? true : false} onChange={(e) => setVehiclePlate(e.target.value)} value={vehiclePlate} className="inputForm ml1" type="text" placeholder=""/>
+                                <div className="flex between displayBlockResponsiveMin mt1">
+                                    <p className="formTitle mr1">Placa</p>
+                                    <input maxLength={7}  pattern="([a-zA-Z]+-)?d{3,6}" required disabled={vehicleSeleted !== null ? true : false} onChange={(e) => {
+                                        
+                                        setVehiclePlate(e?.target.value);
+                                    }} value={vehiclePlate} className="inputForm w100Min" type="text" placeholder=""/>
                                 </div>
-                                <div className="flex between mt1">
+                                <div className="flex between mt1 displayBlockResponsiveMin">
                                     <p className="formTitle">Marca</p>
                                     {
                                         (vehicleSeleted === null) ? <Select
@@ -396,7 +356,7 @@ const ViewOrderWorkshopLayoutPage = () => {
                                             })]}
                                             separator
                                             placeholder="Seleccionar/Buscar"
-                                            className="inputForm"
+                                            className="inputForm br05"
                                             onChange={(values) => {
                                                 if(values[0]?.value !== 'other') {
                                                     setVehicleBrand(values[0]?.value);
@@ -408,7 +368,7 @@ const ViewOrderWorkshopLayoutPage = () => {
                                         disabled><option># {vehicleBrand}</option></select>
                                     }
                                 </div>
-                                <div className="flex between mt1">
+                                <div className="flex between mt1 displayBlockResponsiveMin">
                                     <p className="formTitle">Modelo</p>
                                     {
                                         (vehicleSeleted === null) ? <Select
@@ -425,7 +385,7 @@ const ViewOrderWorkshopLayoutPage = () => {
                                             })] : [{label: 'No encontrado', value: 'other'}]}
                                             separator
                                             placeholder="Seleccionar/Buscar"
-                                            className="inputForm"
+                                            className="inputForm br05 w100"
                                             onChange={(values) => {
                                                 if(values[0]?.value !== 'other') {
                                                     setVehicleModel(values[0]?.value);
@@ -436,7 +396,7 @@ const ViewOrderWorkshopLayoutPage = () => {
                                         disabled><option># {vehicleModel}</option></select> 
                                 }
                                 </div>
-                                <div className="flex between mt1">
+                                <div className="flex between mt1 displayBlockResponsiveMin">
                                     <p className="formTitle">Año</p>
                                     {
                                         (vehicleSeleted === null) ? <Select
@@ -452,7 +412,7 @@ const ViewOrderWorkshopLayoutPage = () => {
                                             ]}
                                             separator
                                             placeholder="Seleccionar/Buscar"
-                                            className="inputForm"
+                                            className="inputForm br05"
                                             onChange={(values) => {
                                                 if(values[0]?.value !== 'other') {
                                                     setVehicleYear(values[0]?.value);
@@ -463,11 +423,70 @@ const ViewOrderWorkshopLayoutPage = () => {
                                         disabled><option># {vehicleYear}</option></select> 
                                 }
                                 </div>
-                                <div className="flex between mt1">
-                                    <p className="formTitle">VIN</p>
-                                    <input disabled={vehicleSeleted !== null ? true : false} onChange={(e) => setVehicleVin(e.target.value)} value={vehicleVin} className="inputForm ml1" type="text" placeholder=""/>
+                                <div className="flex between displayBlockResponsiveMin mt1">
+                                    <p className="formTitle mr1">VIN</p>
+                                    <input disabled={vehicleSeleted !== null ? true : false} onChange={(e) => setVehicleVin(e.target.value)} value={vehicleVin} className="inputForm w100Min" type="text" placeholder=""/>
                                 </div>
                             </div>
+                            <div className="cardWhiteForm mt1 w100">
+                                <div className="flex between displayBlockResponsiveMin">
+                                    <p className="subsubtitle mr1">Cliente</p>
+                                    <Select
+                                        closeOnClickInput
+                                        style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
+                                        options={[
+                                            {
+                                                label: 'Completar',
+                                                value: 'other'
+                                            },
+                                            ...clients?.map((e) => {
+                                            return {
+                                                label: e?.name + ' ' + e?.lastname,
+                                                value: String(e?._id)
+                                            }
+                                        })]}
+                                        separator
+                                        placeholder="Seleccionar/Buscar"
+                                        className="inputForm br05"
+                                        onChange={(values) => {
+                                            if(values[0]?.value === 'other') {
+                                                setSelectedClient(null);
+                                                setClientName('');
+                                                setClientLastName('');
+                                                setClientEmail('');
+                                                setClientPhone('');
+                                                return;
+                                            }
+                                            const clientObject = clients?.find(e => String(e._id) === values[0]?.value);
+                                            setSelectedClient(String(clientObject?._id));
+                                            setClientName(clientObject?.name);
+                                            setClientLastName(clientObject?.lastname);
+                                            setClientEmail(clientObject?.email);
+                                            setClientPhone(clientObject?.phone);
+                                         } } values={[{value: clientSelected, label: clientSelected === null ? 'Seleccionar/buscar' : '# ' + clientName + ' ' + clientLastname}]}                                     />
+                                </div>
+                                <div className="flex between mt1 displayBlockResponsiveMin">
+                                    <p className="formTitle mr1">Nombre</p>
+                                    <input onChange={(e) => setClientName(e.target.value)} value={clientName} disabled={clientSelected !== null ? true : false} className="inputForm w100Min" type="text" placeholder=""/>
+                                </div>
+                                <div className="flex between mt1 displayBlockResponsiveMin">
+                                    <p className="formTitle mr1">Apellido</p>
+                                    <input onChange={(e) => setClientLastName(e.target.value)} value={clientLastname} disabled={clientSelected !== null ? true : false} className="inputForm w100Min" type="text" placeholder=""/>
+                                </div>
+                                <div className="flex between mt1 displayBlockResponsiveMin">
+                                    <p className="formTitle mr1">Celular</p>
+                                    <input onChange={(e) => setClientPhone(e.target.value)} value={clientPhone} disabled={clientSelected !== null ? true : false} className="inputForm w100Min" type="text" placeholder=""/>
+                                </div>
+                                <div className="flex between mt1 displayBlockResponsiveMin">
+                                    <p className="formTitle mr1">Correo</p>
+                                    <input onChange={(e) => setClientEmail(e.target.value)} value={clientEmail} disabled={clientSelected !== null ? true : false} className="inputForm w100Min " type="text" placeholder=""/>
+                                </div>
+                                <div className="flex between mt1 displayBlockResponsiveMin">
+                                    <p className="formTitle mr1">Visita</p>
+                                    <input disabled placeholder={clientSelected !== null ? 'Recurrente' : 'Nuevo'} className="inputForm w100Min " type="text"/>
+                                </div>
+                            </div>
+                            
                             
 
                             
@@ -480,52 +499,8 @@ const ViewOrderWorkshopLayoutPage = () => {
 
                         <div className="cardWhiteForm mt1">
                             
-                            {inspectionSelected !== null ? <p className="subsubtitle">Trabajos a realizar ({inspectionSelected?.tasks?.map((e, index: number) => {
-                                if(index === inspectionSelected?.tasks?.length -1){
-                                    return e;
-                                } else return e + ', ';
-                            })}) </p> : <p className="subsubtitle">Trabajos a realizar </p>}
+                            <p className="subsubtitle">Trabajos a realizar </p>
                             
-                            <div className="mt2">
-                                {
-                                    tasks?.map((e, index: number) => {
-                                        return <div className="flex between right mt1">
-                                            <div className="w100 ml1 left">
-                                                <p>x{e?.ammount}</p>
-                                            </div>
-                                            <p className="w100">{e?.description}</p>
-                                            <p className="w100">s/. {e?.price}</p>
-                                            <div className="w100 mr1">
-                                                <IonIcon onClick={() => {
-                                                    setTasks(tasks?.filter((obj, indexx) => index !== indexx))
-                                                }} className="btn color-trash"  name="trash-outline"/>
-                                            </div>
-                                        </div>
-                                    })
-                                }
-                            </div>
-                            <div className="flex w100 mt2">
-                                <p style={{marginLeft: 'auto'}} className="subsubtitle mr1">Total</p>
-                                <input  onChange={(e) => setTotalPrice(String(e.target.value))} value={totalPrice} className="inputForm ml1" type="text" placeholder=""/>
-                            </div>
-                            <div className="flex w100 mt05">
-                                <input onChange={(e) => setTaskAmmount(String(e.target.value))} value={taskAmmount} type="number" min={0} className="inputForm w100" placeholder='Cantidad' style={{borderRadius: '.5rem 0rem 0rem .5rem'}}/>
-                                <input onChange={(e) => setTaskDescription(e.target.value)} value={taskDescription} className="inputForm  w100" type="text" placeholder="Descripción" style={{borderRadius: '0rem 0rem 0rem 0rem'}}/>
-                                <input onChange={(e) => setTaskPrice(e.target.value)} value={taskPrice} className="inputForm  w100" type="text" placeholder="Precio" style={{borderRadius: '0rem 0rem 0rem 0rem'}}/>
-                                <button onClick={() => {
-                                    if(taskAmmount !== '' && taskDescription !== '' && taskPrice !== ''){
-                                        setTasks([{
-                                            ammount: taskAmmount,
-                                            description: taskDescription,
-                                            price: taskPrice
-                                        }, ...tasks]);
-                                        setTaskAmmount('');
-                                        setTaskDescription('');
-                                        setTaskPrice('');
-                                    } else toast.error(' Completa el formulario');
-                                    
-                                }} className="btn-gradient-secondary " style={{border:'1px solid grey', borderRadius: '0px .5rem .5rem 0rem'}} >Añadir</button>
-                            </div>
                             
                         </div>
 
@@ -534,16 +509,16 @@ const ViewOrderWorkshopLayoutPage = () => {
                         <div className="cardWhiteForm mt1">
                             <div className="flex between displayBlockResponsive">
                                 <div className="w100 mr1 nPaddingLeftResponsive" style={{paddingRight: '2rem'}}>
-                                    <div className="flex between mt1">
-                                        <p className="formTitle ">Fecha estimada</p>
-                                        <input onChange={(e) => setDateEnd(e.target.value)} value={dateEnd} className="inputForm" type="datetime-local" placeholder=""/>
+                                    <div className="flex displayBlockResponsiveMin between mt1">
+                                        <p className="formTitle mr1 ">Fecha estimada</p>
+                                        <input onChange={(e) => setDateEnd(e.target.value)} value={dateEnd} className="inputForm w100Min" type="datetime-local" placeholder=""/>
                                     </div>
 
                                 </div>
                                 <div className="w100 nPaddingLeftResponsive" style={{ paddingLeft: '2rem'}}>
-                                    <div className="flex between mt1">
-                                        <p className="formTitle" >Espacio en el taller</p>
-                                        <input onChange={(e) => setWorkSpace(e.target.value)} value={workSpace} className="inputForm" type="text" placeholder=""/>
+                                    <div className="flex displayBlockResponsiveMin between mt1">
+                                        <p className="formTitle mr1" >Espacio en el taller</p>
+                                        <input onChange={(e) => setWorkSpace(e.target.value)} value={workSpace} className="inputForm w100Min" type="text" placeholder=""/>
                                     </div>
 
                                 </div>
@@ -555,9 +530,9 @@ const ViewOrderWorkshopLayoutPage = () => {
 
 
                         <div className="mSidesAuto" style={{width: 'max-content'}}>
-                            <div className="card p2 mt1 flex" >
+                            <div className="card p2 mt1 flex displayBlockResponsiveMin" >
                                 <p className="formTitle mr1">Resultados scanner</p>
-                                <div className="btn-upload-pdf ml1">
+                                <div className="btn-upload-pdf">
                                     <p className="mr1">Adjuntar PDF</p>
                                     <svg className="ml1" width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M5.58579 3.58579C5.96086 3.21071 6.46957 3 7 3H19C19.2652 3 19.5196 3.10536 19.7071 3.29289L26.7071 10.2929C26.8946 10.4804 27 10.7348 27 11V16C27 16.5523 26.5523 17 26 17C25.4477 17 25 16.5523 25 16V11.4142L18.5858 5L7 5L7 16C7 16.5523 6.55228 17 6 17C5.44772 17 5 16.5523 5 16V5C5 4.46957 5.21071 3.96086 5.58579 3.58579Z" fill="#A9AEB8"/>
@@ -572,7 +547,7 @@ const ViewOrderWorkshopLayoutPage = () => {
                         </div>
 
                         <div className="center mt1 mSidesAuto">
-                            <button className="btn-gradient-third mr1" onClick={() => buildForm()}>{
+                            <button className="btn-gradient-third w100Min mr1" onClick={() => buildForm()}>{
                                 disabledButton ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='grey' style={{fontSize: '1rem' }}/> : 'Guardar orden de servicio'}</button>
                         </div>
 

@@ -17,6 +17,9 @@ import BackgroundImage from "@/components/marketplace/background/background";
 import IonIcon from "@reacticons/ionicons";
 import { toast } from "react-toastify";
 import '../workshop/inspections/create/index.css';
+import Modal from "react-responsive-modal";
+import 'react-responsive-modal/styles.css';
+import Link from "next/link";
 const LayoutConfigurationPage = () =>{
     const router = useRouter();
     const [user, setUser] = useState<UserModel>(null);
@@ -30,7 +33,14 @@ const LayoutConfigurationPage = () =>{
     const [nameShop, setNameShop] = useState(null);   
 
     const [newAccesorie, setNewAccesorie] = useState<string>('');
-    const [accesories, setAccesories] = useState<string[]>([])
+    const [accesories, setAccesories] = useState<string[]>([]);
+    const [open, setOpen] = useState<boolean>();
+    const [width, setWidth] = useState(0);
+    const [disabledButton, setDisabledButton] = useState<boolean>(false);
+    const [formError, setErrorForm] = useState<string>('');
+
+    const handleResize = () => setWidth(window.innerWidth);
+
     const toUser = async () => {
         const userr = await getUser();
         if(userr === undefined || userr === null){
@@ -38,10 +48,54 @@ const LayoutConfigurationPage = () =>{
         }
         setUser(userr);
         setAccesories(userr?.accesories ?? []);
+        setServices(userr?.services ?? []);
     }
     useEffect(() => {
         toUser();
+        handleResize()
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
+    const [services, setServices] = useState<any[]>([]);
+    const [serviceSku, setServiceSku] = useState<string>('');
+    const [serviceName, setServiceName] = useState<string>('');
+    const deleteService = async(index: number) => {
+        const servicess = services?.filter((e, indexx) => indexx !== index)
+        const body = {
+            _id: user?._id,
+            services: servicess, 
+        };
+        const response = await editUser(body);
+        if(response){
+            toast.success('Eliminaste un servicio')
+                setServices(body?.services);
+                setDisabledButton(false);
+        } else setErrorForm('* Ocurrio un problema');
+        
+    }
+    const addService = async() => {
+        if(serviceSku !== '' && serviceName !== ''){
+            const body = {
+                _id: user?._id,
+                services: [...services, {
+                    sku: serviceSku,
+                    name: serviceName,
+                    tasks: []
+                }], 
+            };
+            setDisabledButton(true);
+            const response = await editUser(body);
+            if(response){
+                toast.success('Añadiste un servicio')
+                setServiceSku('');
+                setServiceName('');
+                setServices(body?.services);
+                setDisabledButton(false);
+                setOpen(false);
+                setErrorForm('');
+            } else setErrorForm('* Ocurrio un problema');
+        } else setErrorForm('* Encontramos errores en el formulario');
+    }
     const validateForm = async (accesoriess: string[]) => {
         const body = {
             _id: user?._id,
@@ -95,15 +149,14 @@ const LayoutConfigurationPage = () =>{
             <div className="p1">
                 <div className="configurationContent">
                     {user?.type === 'workshop' ? <div></div> :
-                    <div className="banner">
-                        
-                        <label  htmlFor="imageBanner" style={{cursor: 'pointer', width: '100%', padding: '1rem'}}>
-                            <img src={image !== '' ? image : (user?.image === '' ? backgroundImage.src : user?.image)} alt="Banner" style={{width: '100%', maxHeight: '200px'}}/>
-                            <input accept="image" id="imageBanner" onChange={onChangeImage} type='file' placeholder='Subir archivo' style={{
-                                visibility: 'hidden', display: 'none'}}/>
-                        </label>
-                        
-                    </div>
+                        <div className="banner">
+                            
+                            <label  htmlFor="imageBanner" style={{cursor: 'pointer', width: '100%', padding: '1rem'}}>
+                                <img src={image !== '' ? image : (user?.image === '' ? backgroundImage.src : user?.image)} alt="Banner" style={{width: '100%', maxHeight: '200px'}}/>
+                                <input accept="image" id="imageBanner" onChange={onChangeImage} type='file' placeholder='Subir archivo' style={{
+                                    visibility: 'hidden', display: 'none'}}/>
+                            </label>
+                        </div>
                     }
                     <div className="container">
                         <label  htmlFor="imageLogo" style={{cursor: 'pointer'}}>
@@ -140,7 +193,7 @@ const LayoutConfigurationPage = () =>{
                 {user?.type === 'workshop' ? <div>
 
                     <div className="cardWhiteForm mt1">
-                        <h1 className="title">Configura tus servicios</h1>
+                        <h1 className="title">Configura tu inspección digital</h1>
                         <p className="subtitle mt1">Accesorios</p>
                         <p className="subsubtitle">Personaliza los accesorios que usarás en tu inspección digital, para poder hacer un checklist y ahorrar tiempo</p>
                         <div className="inline-items mt05">
@@ -171,7 +224,7 @@ const LayoutConfigurationPage = () =>{
                     <div className="cardWhiteForm mt1">
                         <div className="flex between">
                             <h1 className="title">Configura tus servicios</h1>
-                            <button className="btn-gradient-secondary" style={{fontSize: '.9rem', paddingTop: '.3rem', paddingBottom: '.3rem'}}><IonIcon className="mr1" name="add-outline" style={{fontSize: '1rem'}}/> Añadir servicio </button>
+                            <button onClick={() => setOpen(true)} className="btn-gradient-secondary" style={{fontSize: '.9rem', paddingTop: '.3rem', paddingBottom: '.3rem'}}><IonIcon className="mr1" name="add-outline" style={{fontSize: '1rem'}}/> Añadir servicio </button>
                         </div>
                         <p className="subsubtitle mt1">Personaliza tus servicio en categorías a detalle para hacer las cotizaciones más rápido.</p>
                         <div className="w100">
@@ -180,30 +233,18 @@ const LayoutConfigurationPage = () =>{
                                 <h1>Items</h1>
                                 <h1>Acciones</h1>
                             </div>
-                            <div className="tableConfigurationServicesItem w100 flex">
-                                <p className="w100 first">Servicio de frenos</p>
-                                <p className="w100 ml1">3</p>
-                                <div className="flex" style={{ color: '#3662E3'}}>
-                                    <IonIcon className="btn" name="eye-outline" style={{fontSize: '1.3rem'}}/>
-                                    <IonIcon className="btn ml1" name="trash-outline" style={{fontSize: '1.3rem'}}/>
+                            {services?.map((e, index) => {
+                                const last = (index+1) === services?.length ? true : false;
+                                return <div className={"tableConfigurationServicesItem "+ (last ? 'last' : '') + " w100 flex"}>
+                                    <p className="w100 first">{e?.name}</p>
+                                    <p className="w100 ml1">{e?.tasks?.length}</p>
+                                    <div className="flex" style={{ color: '#3662E3'}}>
+                                        <Link href={'/configuration/service?id=' + index}><IonIcon className="btn" name="eye-outline" style={{fontSize: '1.3rem'}}/></Link>
+                                        <IonIcon onClick={() => deleteService(index)} className="btn ml1" name="trash-outline" style={{fontSize: '1.3rem'}}/>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="tableConfigurationServicesItem w100 flex">
-                                <p className="w100 first">Servicio de frenos</p>
-                                <p className="w100 ml1">3</p>
-                                <div className="flex" style={{ color: '#3662E3'}}>
-                                    <IonIcon className="btn" name="eye-outline" style={{fontSize: '1.3rem'}}/>
-                                    <IonIcon className="btn ml1" name="trash-outline" style={{fontSize: '1.3rem'}}/>
-                                </div>
-                            </div>
-                            <div className="tableConfigurationServicesItem last w100 flex">
-                                <p className="w100 first">Servicio de frenos</p>
-                                <p className="w100 ml1">3</p>
-                                <div className="flex" style={{ color: '#3662E3'}}>
-                                    <IonIcon className="btn" name="eye-outline" style={{fontSize: '1.3rem'}}/>
-                                    <IonIcon className="btn ml1" name="trash-outline" style={{fontSize: '1.3rem'}}/>
-                                </div>
-                            </div>
+                            })}
+
                         </div>
                     </div>
                 </div> : <div></div>}
@@ -213,6 +254,30 @@ const LayoutConfigurationPage = () =>{
         
       }/>
     }
+    
+    <Modal closeIcon={<IonIcon name="close"/>} styles={{
+              modal : {borderRadius: '.5rem', width: '100%', padding: '0rem', maxWidth: width < 921 ? '80%' : '600px'},
+              closeIcon: {color: 'white !important'},
+              overlay: {backgroundColor: 'rgba(220, 217, 217, 0.5)'}
+            }}  open={open} center onClose={() => setOpen(false) }>
+              <div style={{padding: '1rem'}}>
+                <h1 className="title">Nuevo servicio</h1>
+                <div className="flex between mt1">
+                    <p className="formTitle">SKU</p>
+                    <input onChange={(e) => setServiceSku(e.target.value)} className="inputForm ml1" type="text" placeholder=""/>
+                </div>
+                <div className="flex between mt1">
+                    <p className="formTitle">Nombre*</p>
+                    <input onChange={(e) => setServiceName(e.target.value)} className="inputForm ml1" type="text" placeholder=""/>
+                </div>
+                {formError === '' ? <p></p> : <p className="subsubtitle color-trash">{formError}</p>}
+
+                <div className="center w100 mt2">
+                    <button disabled={disabledButton} className="btn-gradient-primary" onClick={() => addService()}>{
+                    disabledButton ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='grey' style={{fontSize: '1rem' }}/> : 'Guardar servicio'}</button>
+                </div>
+              </div>
+        </Modal>
     </div>;
 }
 

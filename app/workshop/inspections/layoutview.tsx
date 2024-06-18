@@ -161,7 +161,7 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
           sortable: false,
           width: 200,
           valueGetter: (value, row) => `${row.name || ''} ${row.lastname || ''}`,
-          headerClassName: 'color-table-header'
+          headerClassName: 'color-table-header',
         },
         { field: 'vehicle', headerName: 'Vehículo', width: 200, headerClassName: 'color-table-header'},
         { field: 'plate', headerName: 'Placa', width: 160, headerClassName: 'color-table-header'},
@@ -185,6 +185,7 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
             width: 130,
             align: 'center',
             type:'actions',
+            flex: 2,
             headerClassName: 'color-table-header',
             renderCell: (params) => <Link href={'/workshop/inspections/view?id=' + params?.value} className="btn mt05">
                 <IonIcon style={{fontSize: '1.5rem', color: "#3662E3"}} name='eye-outline'/>

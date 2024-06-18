@@ -14,6 +14,7 @@ export interface UserModel extends Document {
   visits: number;
   type: string;
   accesories: string[],
+  services: any[],
   role: string;
   owner: string;
   createdAt: string;
@@ -67,7 +68,7 @@ const UserSchema = new Schema({
   },
   type: {
     type: String,
-    requried: [true, 'Please prove a type']
+    requried: [true, 'Please provide a type']
   },
   owner: {
     type: String
@@ -76,6 +77,9 @@ const UserSchema = new Schema({
     type: String
   },
   accesories: {
+    type: Array
+  },
+  services: {
     type: Array
   }
 }, {timestamps: true});

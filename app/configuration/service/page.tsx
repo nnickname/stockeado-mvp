@@ -1,9 +1,6 @@
 
 import { Metadata, NextPage } from "next";
-import SideBarComponent from "@/components/panel/sidebar";
-import SellResume from "@/components/panel/sellresume";
-import InventoryResume from "@/components/panel/inventoryresume";
-import LayoutConfigurationPage from './layoutview';
+import LayoutConfigurationPage from './layout';
 
 
 export const metadata: Metadata = {
