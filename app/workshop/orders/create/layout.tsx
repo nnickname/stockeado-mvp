@@ -17,7 +17,20 @@ import { toast } from "react-toastify";
 import { createOrderService, getAllOrderServices } from "@/app/api/workshop/orders/call";
 import { OrderWorkshopModel } from "@/models/workshops/orders.model";
 import Cars from '@/json/cars.json';
-
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+export function countTotalTasksPrice(tasks: any[]){
+    var count = 0;
+    tasks?.map((e) => {
+        count = count + (Number(e?.ammount) * Number(e?.price));
+    })
+    return count;
+}
 const NewOrderWorkshopLayoutPage = () => {
     const router = useRouter();
     const [user, setUser] = useState<UserModel>(null);
@@ -43,7 +56,6 @@ const NewOrderWorkshopLayoutPage = () => {
     const [dateStart, setDateStart] = useState<string>('');
     const [workerAssigned, setWorker] = useState<string>('');
 
-    const [tasks, setTasks] = useState<any[]>([]);
     const [taskAmmount, setTaskAmmount] = useState<string>('');
     const [taskDescription, setTaskDescription] = useState<string>('');
     const [taskPrice, setTaskPrice] = useState<string>('');
@@ -54,7 +66,15 @@ const NewOrderWorkshopLayoutPage = () => {
     const [disabledButton, setDisabledButton] = useState<boolean>(false);
     const [orders, setOrders] = useState<OrderWorkshopModel[]>([]);
     const [carSelected, setCarSelected]  = useState<Array<any>>([]);
+    const [tableKey, setTableKey] = useState<number>( Math.random());
 
+    const [tasks, setTasks] = useState<any[]>([{
+        service: '',
+        item: '',
+        price: '',
+        ammount: 0,
+        
+    }]);
     const toUser = async () => {
         const urlParams = new URLSearchParams(window.location.search);
         let id = urlParams.get('inspection');
@@ -97,7 +117,7 @@ const NewOrderWorkshopLayoutPage = () => {
                 message = message + ' ' + 'Vehículo';  
             } else message = message + ', ' + 'Vehículo'
         }
-        if(tasks?.length < 1 || totalPrice === ''){
+        if(tasks?.length < 1){
             if(message === ''){
                 message = message + ' ' + 'Agrega un trabajo';  
             } else message = message + ', ' + 'Agrega un trabajo'
@@ -117,7 +137,7 @@ const NewOrderWorkshopLayoutPage = () => {
                 owner: user?.role === 'owner' ? user?._id : user?.owner,
                 state: 'pending',
                 pdfUri: '',
-                totalPrice,
+                totalPrice: String(countTotalTasksPrice(tasks)),
                 workSpace,
                 client: {
                     _id: clientSelected ?? '',
@@ -136,7 +156,7 @@ const NewOrderWorkshopLayoutPage = () => {
                 },
                 tasks,
                 inspection: inspectionSelected?._id ?? '',
-                updatedBy: user?.name + ' ' + user?.lastname
+                createdBy: user?.name + ' ' + user?.lastname
 
         }
         const response = await createOrderService(body);
@@ -156,6 +176,13 @@ const NewOrderWorkshopLayoutPage = () => {
             setSelectedVehicle(null);
             setVehiclePlate('');
             setVehicleBrand('');
+            setTasks([{
+                service: '',
+                item: '',
+                price: '',
+                ammount: 0,
+                
+            }]);
             setVehicleModel('');
             setVehicleYear('');
             setVehicleVin('');
@@ -181,6 +208,7 @@ const NewOrderWorkshopLayoutPage = () => {
             setVehicleYear(object?.vehicle?.year);
             setVehicleVin(object?.vehicle?.vin);
             setSelectedInspection(object);
+            setTasks(object?.tasks ?? [])
         }
     }
     useEffect(() => {
@@ -473,37 +501,96 @@ const NewOrderWorkshopLayoutPage = () => {
                         
 
                         <div className="cardWhiteForm mt1">
-                            
-                            {inspectionSelected !== null ? <p className="subsubtitle">Trabajos a realizar ({inspectionSelected?.tasks?.map((e, index: number) => {
-                                if(index === inspectionSelected?.tasks?.length -1){
-                                    return e;
-                                } else return e + ', ';
-                            })}) </p> : <p className="subsubtitle">Trabajos a realizar </p>}
-                            
-                            <div className="mt2">
-                                {
-                                    ...tasks?.map((e, index: number) => {
-                                        return <div className="flex between right mt1">
-                                            <div className="w100 ml1 left">
-                                                <p>x{e?.ammount}</p>
-                                            </div>
-                                            <p className="w100">{e?.description}</p>
-                                            <p className="w100">s/. {e?.price}</p>
-                                            <div className="w100 mr1">
-                                                <IonIcon onClick={() => {
-                                                    const taskCast = tasks?.filter((obj, indexx) => index !== indexx);
-                                                    setTasks(taskCast);
-                                                    var total: number = 0;
-                                                    taskCast?.map((e) => {
-                                                        total = total + (Number(e?.ammount) * Number(e?.price));
-                                                    })
-                                                    total = total;
-                                                    setTotalPrice(String(total));
-                                                }} className="btn color-trash"  name="trash-outline"/>
-                                            </div>
-                                        </div>
-                                    })
-                                }
+                            <p className="subsubtitle">Trabajos a realizar</p>
+                            <TableContainer key={tableKey} className="mt1" style={{boxShadow: 'none'}} component={Paper}>
+                                <Table aria-label="simple table">
+                                    <TableHead>
+                                    <TableRow>
+                                        <TableCell>Servicio</TableCell>
+                                        <TableCell align="center">Item</TableCell>
+                                        <TableCell align="center">Cantidad</TableCell>
+                                        <TableCell align="center">Precio</TableCell>
+                                        <TableCell align="center">Total</TableCell>
+                                        <TableCell align="center"></TableCell>
+                                    </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                    {tasks?.map((row, index) => {
+                                        return <TableRow
+                                            key={index}
+                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                            style={{borderBottom: '1px solid rgba(0, 0, 0, 0.2)'}}
+                                        >
+                                            <TableCell component="th" scope="row">
+                                                <select value={row?.service} onChange={(e) =>  {
+                                                    var tasksCast = tasks;
+                                                    tasksCast[index].service = e?.target?.value;
+                                                    setTasks(tasksCast);
+                                                    setTableKey( Math.random());
+                                                }} style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}} className="btn inputForm br05" >
+                                                    <option value=''>Seleccionar</option>
+                                                    {user?.services?.map((e) => {
+                                                        return <option value={e?.name}>{e?.name}</option>
+                                                    })}
+                                                    
+                                                </select>
+                                            </TableCell>
+                                            <TableCell align="right">
+                                                <select onChange={(e) => {
+                                                    var tasksCast = tasks;
+                                                    tasksCast[index].item = e?.target?.value;
+                                                    tasksCast[index].price = user?.services?.find(a => a?.name === tasks[index].service)?.tasks.find(a => a?.name === e?.target?.value)?.price;
+
+                                                    setTasks(tasksCast);
+                                                    setTableKey( Math.random());
+                                                }} value={row?.item} style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}} className="btn inputForm br05">
+                                                    <option value=''>Seleccionar</option>
+                                                    {user?.services?.find(e => e?.name === tasks[index].service)?.tasks?.map((e) => {
+                                                        return <option value={e.name}>{e?.name}</option>
+                                                    })}
+                                                </select>
+                                            </TableCell>
+                                            <TableCell align="right">
+                                                <input value={row.ammount} onChange={(e) => {
+                                                    var tasksCast = tasks;
+                                                    tasksCast[index].ammount = Number(e?.target?.value);
+                                                    setTasks(tasksCast);
+                                                    setTableKey( Math.random());
+                                                }} type='number' className="inputForm" placeholder=''></input>
+                                            </TableCell>
+                                            <TableCell align="right">
+                                                <input value={row.price} onChange={(e) => {
+                                                    var tasksCast = tasks;
+                                                    tasksCast[index].price = e?.target?.value;
+                                                    setTasks(tasksCast);
+                                                    setTableKey( Math.random());
+                                                }} className="inputForm" placeholder=''></input>
+                                            </TableCell>
+                                            <TableCell align="right">s/. {Number(row?.price) * Number(row?.ammount)}</TableCell>
+                                            <TableCell  align="right">
+                                                <IonIcon className="btn" name='trash-outline' style={{fontSize: '1rem', border: '0px', color: '#3662E3'}}  onClick={(e) => {
+                                                    var tasksCast = tasks;
+                                                    tasksCast.splice(index, 1);
+                                                    setTasks(tasksCast);
+                                                    setTableKey( Math.random());
+                                                }} />
+                                            </TableCell>
+                                        </TableRow>
+            })} 
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                            <div className="flex between">
+                                <button className="btn btn-gradient-secondary mt2" onClick={() => {
+                                    setTasks([...tasks, {
+                                        service: '',
+                                        item: '',
+                                        price: '',
+                                        ammount: 0,
+                                        
+                                    }])
+                                }}>+ Agregar linea</button>
+                                <p className="mt2 mr1"><span className="mr1">Total</span> s/. {countTotalTasksPrice(tasks)}</p>
                             </div>
                             
                             

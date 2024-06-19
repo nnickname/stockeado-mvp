@@ -234,23 +234,23 @@ const ClientsWorkshopLayoutPage = ( ) => {
               <div style={{padding: '1rem'}}>
                 <h1 className="title">Nuevo cliente</h1>
                 <h2 className="subtitle mt1">Cliente #{clients?.length + 1}</h2>
-                <div className="flex between mt1">
-                    <p className="formTitle">Nombre</p>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">Nombre</p>
                     <input className="inputForm" onChange={(e) => setName(e.target.value)} type="text" placeholder=""/>
                 </div>
-                <div className="flex between mt1">
-                    <p className="formTitle">Apellido</p>
-                    <input className="inputForm ml1" onChange={(e) => setLastName(e.target.value)} type="text" placeholder=""/>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">Apellido</p>
+                    <input className="inputForm" onChange={(e) => setLastName(e.target.value)} type="text" placeholder=""/>
                 </div>
-                <div className="flex between mt1">
-                    <p className="formTitle">Celular</p>
-                    <input className="inputForm ml1" onChange={(e) => setPhone(e.target.value)} type="text" placeholder=""/>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">Celular</p>
+                    <input className="inputForm" onChange={(e) => setPhone(e.target.value)} type="text" placeholder=""/>
                 </div>
-                <div className="flex between mt1">
-                    <p className="formTitle">Correo</p>
-                    <input className="inputForm ml1" onChange={(e) => setEmail(e.target.value)} type="text" placeholder=""/>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">Correo</p>
+                    <input className="inputForm " onChange={(e) => setEmail(e.target.value)} type="text" placeholder=""/>
                 </div>
-                <div className="flex between mt1">
+                <div className="flex between mt1 displayBlockResponsive">
                     <p className="formTitle">Asociar vehículos</p>
                     <Select
                         

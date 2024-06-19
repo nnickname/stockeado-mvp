@@ -262,13 +262,13 @@ const LayoutConfigurationPage = () =>{
             }}  open={open} center onClose={() => setOpen(false) }>
               <div style={{padding: '1rem'}}>
                 <h1 className="title">Nuevo servicio</h1>
-                <div className="flex between mt1">
-                    <p className="formTitle">SKU</p>
-                    <input onChange={(e) => setServiceSku(e.target.value)} className="inputForm ml1" type="text" placeholder=""/>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">SKU</p>
+                    <input onChange={(e) => setServiceSku(e.target.value)} className="inputForm w100Min" type="text" placeholder=""/>
                 </div>
-                <div className="flex between mt1">
-                    <p className="formTitle">Nombre*</p>
-                    <input onChange={(e) => setServiceName(e.target.value)} className="inputForm ml1" type="text" placeholder=""/>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">Nombre*</p>
+                    <input onChange={(e) => setServiceName(e.target.value)} className="inputForm w100Min" type="text" placeholder=""/>
                 </div>
                 {formError === '' ? <p></p> : <p className="subsubtitle color-trash">{formError}</p>}
 

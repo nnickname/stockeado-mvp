@@ -246,8 +246,8 @@ const VehiclesWorkshopLayoutPage = ( ) => {
               <div style={{padding: '1rem'}}>
                 <h1 className="title">Nuevo vehículo</h1>
                 <h2 className="subtitle mt1">Vehículo #{vehicles?.length+1}</h2>
-                <div className="flex between mt1">
-                    <p className="formTitle">Marca</p>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">Marca</p>
                     <Select
                         closeOnClickInput
                         style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
@@ -270,8 +270,8 @@ const VehiclesWorkshopLayoutPage = ( ) => {
                                 }
                         } } values={[{value: brand, label: brand === '' ? 'Seleccionar/buscar' : '# ' + brand }]}                                     />
                 </div>
-                <div className="flex between mt1">
-                    <p className="formTitle">Modelo</p>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">Modelo</p>
                     <Select
                         closeOnClickInput
                         disabled={carSelected?.length === 0 ? true : false}
@@ -295,8 +295,8 @@ const VehiclesWorkshopLayoutPage = ( ) => {
                         } } values={[{value: model, label: model === '' ? 'Seleccionar/buscar' : '# ' + model }]}                                     />
                 
                 </div>
-                <div className="flex between mt1">
-                    <p className="formTitle">Año</p>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">Año</p>
                     <Select
                         closeOnClickInput
                         disabled={carSelected?.length === 0 ? true : false}
@@ -319,13 +319,13 @@ const VehiclesWorkshopLayoutPage = ( ) => {
                         } } values={[{value: year, label: year === '' ? 'Seleccionar/buscar' : '# ' + year }]}                                     />
                 
                 </div>
-                <div className="flex between mt1">
-                    <p  className="formTitle">Placa</p>
-                    <input onChange={(e) => setPlate(e.target.value)} className="inputForm ml1" type="text" placeholder=""/>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p  className="formTitle mr1">Placa</p>
+                    <input onChange={(e) => setPlate(e.target.value)} className="inputForm" type="text" placeholder=""/>
                 </div>
-                <div className="flex between mt1">
-                    <p className="formTitle">VIN</p>
-                    <input onChange={(e) => setVin(e.target.value)} className="inputForm ml1" type="text" placeholder=""/>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">VIN</p>
+                    <input onChange={(e) => setVin(e.target.value)} className="inputForm " type="text" placeholder=""/>
                 </div>
                
                 {formError === '' ? <p></p> : <p className="subsubtitle color-trash">{formError}</p>}

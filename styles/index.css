@@ -333,6 +333,13 @@ input{
     
   }
 }
+@media screen and (max-width: 610px) {
+  .cardWhiteForm{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    
+  }
+}
 @media screen and (max-width: 1120px) {
   .responsiveNavMarketplace{
     max-width: 100% !important;

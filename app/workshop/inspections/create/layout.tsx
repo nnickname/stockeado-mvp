@@ -25,6 +25,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { countTotalTasksPrice } from "../../orders/create/layout";
 
 const InspectionWorkshopLayoutPage = () => {
     const router = useRouter();
@@ -53,8 +54,8 @@ const InspectionWorkshopLayoutPage = () => {
     const [fuel, setFuel] = useState<string>('');
     const [brakes, setBrakes] = useState<string>('');
     const [refrigerant, setRefrigerant] = useState<string>('');
+    const [tableKey, setTableKey] = useState<number>( Math.random());
 
-    const [newJob, setNewJob] = useState<string>('');
     const [tasks, setTasks] = useState<any[]>([{
         service: '',
         item: '',
@@ -164,6 +165,11 @@ const InspectionWorkshopLayoutPage = () => {
     useEffect(() => {
         toUser();
     }, []); 
+    const editItemTasks = (value: string, index: number) => {
+        var tasksCast = tasks;
+        tasksCast[index].service = value;
+        setTasks(tasksCast);
+    }
     return <div>
         {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
             <SideBarComponent user={user} route='/workshop/inspections' frameContennt={
@@ -478,7 +484,7 @@ const InspectionWorkshopLayoutPage = () => {
 
                         <div className="cardWhiteForm mt1">
                             <p className="subsubtitle">Trabajos a realizar</p>
-                            <TableContainer className="mt1" style={{boxShadow: 'none'}} component={Paper}>
+                            <TableContainer key={tableKey} className="mt1" style={{boxShadow: 'none'}} component={Paper}>
                                 <Table aria-label="simple table">
                                     <TableHead>
                                     <TableRow>
@@ -487,6 +493,7 @@ const InspectionWorkshopLayoutPage = () => {
                                         <TableCell align="center">Cantidad</TableCell>
                                         <TableCell align="center">Precio</TableCell>
                                         <TableCell align="center">Total</TableCell>
+                                        <TableCell align="center"></TableCell>
                                     </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -497,41 +504,75 @@ const InspectionWorkshopLayoutPage = () => {
                                             style={{borderBottom: '1px solid rgba(0, 0, 0, 0.2)'}}
                                         >
                                             <TableCell component="th" scope="row">
-                                                <select value={tasks[index].service} onChange={(e) => {
-                                                    tasks[index].service = e?.target?.value;
-                                                    setTasks(tasks);
-                                                }} style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}} className="inputForm br05" >
-                                                    <option value={'carroceria'}>Servicio carroceria</option>
-                                                    <option value={'frenos'}>Servicio de frenos</option>
+                                                <select value={row?.service} onChange={(e) =>  {
+                                                    editItemTasks(e?.target?.value, index);
+                                                    setTableKey( Math.random());
+                                                }} style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}} className="btn inputForm br05" >
+                                                    <option value=''>Seleccionar</option>
+                                                    {user?.services?.map((e) => {
+                                                        return <option value={e?.name}>{e?.name}</option>
+                                                    })}
+                                                    
                                                 </select>
                                             </TableCell>
                                             <TableCell align="right">
-                                                <select style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}} className="inputForm br05">
-                                                    <option>Item asdsa</option>
+                                                <select onChange={(e) => {
+                                                    var tasksCast = tasks;
+                                                    tasksCast[index].item = e?.target?.value;
+                                                    tasksCast[index].price = user?.services?.find(a => a?.name === tasks[index].service)?.tasks.find(a => a?.name === e?.target?.value)?.price;
+
+                                                    setTasks(tasksCast);
+                                                    setTableKey( Math.random());
+                                                }} value={row?.item} style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}} className="btn inputForm br05">
+                                                    <option value=''>Seleccionar</option>
+                                                    {user?.services?.find(e => e?.name === tasks[index].service)?.tasks?.map((e) => {
+                                                        return <option value={e.name}>{e?.name}</option>
+                                                    })}
                                                 </select>
                                             </TableCell>
                                             <TableCell align="right">
-                                                <input type='number' className="inputForm" placeholder=''></input>
+                                                <input value={row.ammount} onChange={(e) => {
+                                                    var tasksCast = tasks;
+                                                    tasksCast[index].ammount = Number(e?.target?.value);
+                                                    setTasks(tasksCast);
+                                                    setTableKey( Math.random());
+                                                }} type='number' className="inputForm" placeholder=''></input>
                                             </TableCell>
                                             <TableCell align="right">
-                                                <input className="inputForm" placeholder=''></input>
+                                                <input value={row.price} onChange={(e) => {
+                                                    var tasksCast = tasks;
+                                                    tasksCast[index].price = e?.target?.value;
+                                                    setTasks(tasksCast);
+                                                    setTableKey( Math.random());
+                                                }} className="inputForm" placeholder=''></input>
                                             </TableCell>
-                                            <TableCell align="right">s/. 500</TableCell>
+                                            <TableCell align="right">s/. {Number(row?.price) * Number(row?.ammount)}</TableCell>
+                                            <TableCell  align="right">
+                                                <IonIcon className="btn" name='trash-outline' style={{fontSize: '1rem', border: '0px', color: '#3662E3'}}  onClick={(e) => {
+                                                    var tasksCast = tasks;
+                                                    tasksCast.splice(index, 1);
+                                                    setTasks(tasksCast);
+                                                    setTableKey( Math.random());
+                                                }} />
+                                            </TableCell>
                                         </TableRow>
             })} 
                                     </TableBody>
                                 </Table>
                             </TableContainer>
                             
-                            <button className="btn btn-gradient-secondary mt2" onClick={() => {
-                                setTasks([...tasks, {
-                                    service: '',
-                                    item: '',
-                                    price: '',
-                                    ammount: 0,
-                                    
-                                }])
-                            }}>+ Agregar linea</button>
+                            <div className="flex between">
+                                <button className="btn btn-gradient-secondary mt2" onClick={() => {
+                                    setTasks([...tasks, {
+                                        service: '',
+                                        item: '',
+                                        price: '',
+                                        ammount: 0,
+                                        
+                                    }])
+                                }}>+ Agregar linea</button>
+                                <p className="mt2 mr1"><span className="mr1">Total</span> s/. {countTotalTasksPrice(tasks)}</p>
+                            </div>
                             <p className="formTitle mt2">Observaciones adicionales</p>
                             <input onChange={(e) => setObservations(e.target.value)} value={observations} className="inputForm mt1 w100" type="text" placeholder=""/>
                         

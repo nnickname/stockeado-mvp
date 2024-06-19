@@ -183,7 +183,8 @@ const LayoutConfigurationPage = () =>{
                     <div className="cardWhiteForm mt1">
                         <div className="flex between">
                             <div className="flex">
-                                <h1 className="title" style={{fontWeight: '500'}}>{service?.name}</h1>
+                                <h1 className="title mr1" style={{fontWeight: '500'}}>{service?.name}</h1>
+                                <div>
                                 <IonIcon onClick={() => {
                                     var services = user?.services;
                                     const urlParams = new URLSearchParams(window.location.search);
@@ -192,8 +193,11 @@ const LayoutConfigurationPage = () =>{
                                     setServiceSku(services[Number(id)].sku); 
                                     setServiceName(services[Number(id)].name);
                                     setOpenEdit(true);
-                                }} className="btn ml1" name="pencil-outline" style={{color: '#FFA500'}}/>
+                                }} className="btn mr1" name="pencil-outline" style={{color: '#FFA500', fontSize: '1.1rem'}}/>
+                            
+                                </div>
                             </div>
+                            <p></p>
                             <button onClick={() => setOpen(true)} className="btn-gradient-secondary" style={{fontSize: '.9rem', paddingTop: '.3rem', paddingBottom: '.3rem'}}><IonIcon className="mr1" name="add-outline" style={{fontSize: '1rem'}}/> Añadir un item </button>
                         </div>
                         <p className="subsubtitle mt1">Items asociados: Agrupa ítems y crea tus cotizaciones más rápido.</p>
@@ -238,7 +242,7 @@ const LayoutConfigurationPage = () =>{
                                                 </div>
                                             </TableCell>
                                         </TableRow>
-            })} 
+                                })} 
                                     </TableBody>
                                 </Table>
                             </TableContainer>
@@ -258,17 +262,17 @@ const LayoutConfigurationPage = () =>{
             }}  open={open} center onClose={() => setOpen(false) }>
               <div style={{padding: '1rem'}}>
                 <h1 className="title">Nuevo item</h1>
-                <div className="flex between mt1">
-                    <p className="formTitle">SKU</p>
-                    <input onChange={(e) => setServiceSku(e.target.value)} className="inputForm ml1" type="text" placeholder=""/>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">SKU</p>
+                    <input onChange={(e) => setServiceSku(e.target.value)} className="inputForm w100Min" type="text" placeholder=""/>
                 </div>
-                <div className="flex between mt1">
-                    <p className="formTitle">Nombre*</p>
-                    <input onChange={(e) => setServiceName(e.target.value)} className="inputForm ml1" type="text" placeholder=""/>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">Nombre*</p>
+                    <input onChange={(e) => setServiceName(e.target.value)} className="inputForm w100Min" type="text" placeholder=""/>
                 </div>
-                <div className="flex between mt1">
-                    <p className="formTitle">Precio</p>
-                    <input type='number' placeholder='s/.' onChange={(e) => setServicePrice(e.target.value)} className="inputForm ml1"/>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">Precio</p>
+                    <input type='number' placeholder='s/.' onChange={(e) => setServicePrice(e.target.value)} className="inputForm w100Min"/>
                 </div>
                 {formError === '' ? <p></p> : <p className="subsubtitle color-trash">{formError}</p>}
 
@@ -285,17 +289,17 @@ const LayoutConfigurationPage = () =>{
             }}  open={openEditItem} center onClose={() => setOpenEditItem(false) }>
               <div style={{padding: '1rem'}}>
                 <h1 className="title">Editar item</h1>
-                <div className="flex between mt1">
-                    <p className="formTitle">SKU</p>
-                    <input value={serviceSku} onChange={(e) => setServiceSku(e.target.value)} className="inputForm ml1" type="text" placeholder=""/>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">SKU</p>
+                    <input value={serviceSku} onChange={(e) => setServiceSku(e.target.value)} className="inputForm w100Min" type="text" placeholder=""/>
                 </div>
-                <div className="flex between mt1">
-                    <p className="formTitle">Nombre*</p>
-                    <input value={serviceName} onChange={(e) => setServiceName(e.target.value)} className="inputForm ml1" type="text" placeholder=""/>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">Nombre*</p>
+                    <input value={serviceName} onChange={(e) => setServiceName(e.target.value)} className="inputForm w100Min" type="text" placeholder=""/>
                 </div>
-                <div className="flex between mt1">
-                    <p className="formTitle">Precio</p>
-                    <input value={servicePrice} type='number' placeholder='s/.' onChange={(e) => setServicePrice(e.target.value)} className="inputForm ml1"/>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">Precio</p>
+                    <input value={servicePrice} type='number' placeholder='s/.' onChange={(e) => setServicePrice(e.target.value)} className="inputForm w100Min"/>
                 </div>
                 {formError === '' ? <p></p> : <p className="subsubtitle color-trash">{formError}</p>}
 
@@ -312,13 +316,13 @@ const LayoutConfigurationPage = () =>{
             }}  open={openEdit} center onClose={() => setOpenEdit(false) }>
               <div style={{padding: '1rem'}}>
                 <h1 className="title">Editar servicio</h1>
-                <div className="flex between mt1">
-                    <p className="formTitle">SKU</p>
-                    <input value={serviceSku} onChange={(e) => setServiceSku(e.target.value)} className="inputForm ml1" type="text" placeholder=""/>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">SKU</p>
+                    <input value={serviceSku} onChange={(e) => setServiceSku(e.target.value)} className="inputForm w100Min" type="text" placeholder=""/>
                 </div>
-                <div className="flex between mt1">
-                    <p className="formTitle">Nombre*</p>
-                    <input value={serviceName} onChange={(e) => setServiceName(e.target.value)} className="inputForm ml1" type="text" placeholder=""/>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">Nombre*</p>
+                    <input value={serviceName} onChange={(e) => setServiceName(e.target.value)} className="inputForm w100Min" type="text" placeholder=""/>
                 </div>
                 
                 {formError === '' ? <p></p> : <p className="subsubtitle color-trash">{formError}</p>}
