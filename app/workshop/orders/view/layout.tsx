@@ -26,7 +26,13 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { countTotalTasksPrice } from "../create/layout";
+function countTotalTasksPrice(tasks: any[]){
+    var count = 0;
+    tasks?.map((e) => {
+        count = count + (Number(e?.ammount) * Number(e?.price));
+    })
+    return count;
+}
 const ViewOrderWorkshopLayoutPage = () => {
     const router = useRouter();
     const [user, setUser] = useState<UserModel>(null);
