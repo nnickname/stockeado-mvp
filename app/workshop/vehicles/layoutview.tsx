@@ -22,8 +22,35 @@ import { getAllClients } from "@/app/api/workshop/clients/call";
 import { getAllOrderServices } from "@/app/api/workshop/orders/call";
 import { getAllCalendars } from "@/app/api/workshop/calendars/call";
 import { CalendarsModel } from "@/models/workshops/calendars.model";
+import Cars from '@/json/cars.json';
+import { ReturnUnifiedStringDateTime } from "@/utils/hooks";
+import { ExportJsonCsv } from 'react-export-json-csv';
 
 const VehiclesWorkshopLayoutPage = ( ) => {
+    const headers = [
+        {
+            key: 'client',
+            name: 'Clientes',
+        },
+        {
+            key: 'plate',
+            name: 'Placa'
+        },
+        {
+            key: 'vehicle',
+            name: 'Vehículo'
+        },
+        {
+            key: 'lastService',
+            name: 'Ultimo servicio'
+        },
+        {
+            key: 'calendars',
+            name: 'Calendarios'
+        }
+        
+    ];
+    
     const router = useRouter();
     const [user, setUser] = useState<UserModel>(null);
     const [open, setOpen] = useState<boolean>();
@@ -42,6 +69,7 @@ const VehiclesWorkshopLayoutPage = ( ) => {
     const [calendars, setCalendars] = useState<CalendarsModel[]>([]);
     const [month, selectMonth] = useState<number>(0);
     const [disabledButton, setDisabledButton] = useState<boolean>(false);
+    const [carSelected, setCarSelected]  = useState<Array<any>>([]);
     const handleResize = () => setWidth(window.innerWidth);
     const [search, setSearch] = useState<string>('');
     const toUser = async () => {
@@ -125,12 +153,40 @@ const VehiclesWorkshopLayoutPage = ( ) => {
                         <div className="flex w100 mt1">
                             <div className="inputRightIcon">
                                 
-                                <input onChange={(e) => setSearch(e?.target?.value)} placeholder="Busca por vehículo"/>
+                                <input style={{border: '1px solid #3662E3'}} onChange={(e) => setSearch(e?.target?.value)} placeholder="Busca por vehículo"/>
                                 <div>
                                     <IonIcon name="search-outline"/>
                                 </div>
                             </div>
-                            <select value={month} onChange={(e) => filterMonth(Number(e.target.value), realVehicles)} className="selectHomeWorkshop ml1">
+                            <ExportJsonCsv fileTitle="vehiculos-stockeado"  className="ml1 selectHomeWorkshopblue flex" headers={headers} items={[
+                                ...vehicles?.map((e, index: number) => {
+                                    var calendarsCount:number = 0;
+                                    calendars?.map((a) => {
+                                        if(e?._id === a?.vehicle) calendarsCount++;
+                                    })
+                                    return {
+                                        client: clients?.map((t) => {
+                                            var items = [];
+                                            t?.vehicles?.map((a) =>{
+                                                if(String(e?._id) === a){
+                                                    items.push(' ' + t?.name + ' ' + t?.lastname);
+                                                };
+                                            });
+                                            if(items?.length > 0) return items;
+                                        }).filter(s => s !== undefined) ,
+                                        plate: e?.plate,
+                                        vehicle: e?.brand + ' ' + e.model,
+                                        lastService: orders?.map((a, index: number) => {
+                                            if(a?.vehicle?._id === e?._id){
+                                             return ' ' + ReturnUnifiedStringDateTime(a?.dateStart);
+                                            }
+                                            ;
+                                        }).filter(s => s !== undefined),
+                                        calendars: String(calendarsCount),
+                                    }
+                                })
+                            ]}><IonIcon style={{fontSize: '1.2rem', backgroundColor: 'white'}} className="mr1 mt05" name="cloud-download-outline"/> <span style={{marginTop: '.3rem'}}>Exportar</span></ExportJsonCsv >
+                             <select value={month} onChange={(e) => filterMonth(Number(e.target.value), realVehicles)} className="selectHomeWorkshopblue ml1">
                                     <option value={0}>Todo</option>
                                     <option value={1}>Enero</option>
                                     <option value={2}>Febrero</option>
@@ -167,7 +223,7 @@ const VehiclesWorkshopLayoutPage = ( ) => {
                                     vehicle: e?.brand + ' ' + e.model,
                                     lastService: orders?.map((a, index: number) => {
                                         if(a?.vehicle?._id === e?._id){
-                                         return ' ' + a?.dateStart;
+                                         return ' ' + ReturnUnifiedStringDateTime(a?.dateStart);
                                         }
                                         ;
                                     }).filter(s => s !== undefined),
@@ -190,25 +246,86 @@ const VehiclesWorkshopLayoutPage = ( ) => {
               <div style={{padding: '1rem'}}>
                 <h1 className="title">Nuevo vehículo</h1>
                 <h2 className="subtitle mt1">Vehículo #{vehicles?.length+1}</h2>
-                <div className="flex between mt1">
-                    <p className="formTitle">Marca</p>
-                    <input onChange={(e) => setBrand(e.target.value)} className="inputForm" type="text" placeholder=""/>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">Marca</p>
+                    <Select
+                        closeOnClickInput
+                        style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
+                        options={[
+                            
+                            ...Cars?.map((e) => {
+                                return {
+                                    label: e?.brand,
+                                    value: e?.brand
+                                }
+                            })]}
+                            separator
+                            placeholder="Seleccionar/Buscar"
+                            className="inputForm"
+                            onChange={(values) => {
+                                if(values[0]?.value !== 'other') {
+                                    setBrand(values[0]?.value);
+                                    setCarSelected(Cars?.find((e) => e?.brand === values[0]?.value)?.models);
+                                    return;
+                                }
+                        } } values={[{value: brand, label: brand === '' ? 'Seleccionar/buscar' : '# ' + brand }]}                                     />
                 </div>
-                <div className="flex between mt1">
-                    <p className="formTitle">Modelo</p>
-                    <input onChange={(e) => setModel(e.target.value)} className="inputForm ml1" type="text" placeholder=""/>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">Modelo</p>
+                    <Select
+                        closeOnClickInput
+                        disabled={carSelected?.length === 0 ? true : false}
+                        style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
+                        options={
+                            carSelected?.length > 0 ? [...carSelected?.map((e) => {
+                                return {
+                                    label: String(e?.title),
+                                    value: String(e?.title)
+
+                                }
+                            })] : [{label: 'No encontrado', value: 'other'}]}
+                            separator
+                            placeholder="Seleccionar/Buscar"
+                            className="inputForm"
+                            onChange={(values) => {
+                                if(values[0]?.value !== 'other') {
+                                    setModel(values[0]?.value);
+                                    return;
+                                }
+                        } } values={[{value: model, label: model === '' ? 'Seleccionar/buscar' : '# ' + model }]}                                     />
+                
                 </div>
-                <div className="flex between mt1">
-                    <p className="formTitle">Año</p>
-                    <input onChange={(e) => setYear(e.target.value)} className="inputForm ml1" type="text" placeholder=""/>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">Año</p>
+                    <Select
+                        closeOnClickInput
+                        disabled={carSelected?.length === 0 ? true : false}
+                        style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
+                        options={[ ...new Array(74).fill(null).map((_, i) => {
+                                return {
+                                    value: (1950 + (i+1)).toString(),
+                                    label: (1950 + (i+1)).toString(),
+                                }
+                                })
+                            ]}
+                            separator
+                            placeholder="Seleccionar/Buscar"
+                            className="inputForm"
+                            onChange={(values) => {
+                                if(values[0]?.value !== 'other') {
+                                    setYear(values[0]?.value);
+                                    return;
+                                }
+                        } } values={[{value: year, label: year === '' ? 'Seleccionar/buscar' : '# ' + year }]}                                     />
+                
                 </div>
-                <div className="flex between mt1">
-                    <p  className="formTitle">Placa</p>
-                    <input onChange={(e) => setPlate(e.target.value)} className="inputForm ml1" type="text" placeholder=""/>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p  className="formTitle mr1">Placa</p>
+                    <input onChange={(e) => setPlate(e.target.value)} className="inputForm" type="text" placeholder=""/>
                 </div>
-                <div className="flex between mt1">
-                    <p className="formTitle">VIN</p>
-                    <input onChange={(e) => setVin(e.target.value)} className="inputForm ml1" type="text" placeholder=""/>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">VIN</p>
+                    <input onChange={(e) => setVin(e.target.value)} className="inputForm " type="text" placeholder=""/>
                 </div>
                
                 {formError === '' ? <p></p> : <p className="subsubtitle color-trash">{formError}</p>}
@@ -244,6 +361,7 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
             width: 160,
             type: 'actions',
             align: 'center',
+            flex: 2,
             headerClassName: 'color-table-header',
             renderCell: (params) => <Link href={'/workshop/vehicles/view?id=' + params?.value} className="btn mt05">
                 <IonIcon style={{fontSize: '1.5rem', color: "#3662E3"}} name='eye-outline'/>
@@ -252,9 +370,10 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
 
     ];
           
-    return <div className="mt1" style={{minHeight: 500, width: '100%'}}>
+    return <div className="mt1" style={{width: '100%', background: 'white'}}>
         <DataGrid
             rowSelection={false}
+            autoHeight
             localeText={ValuesDataGridLocale}
             rows={rows}
             columns={columns}

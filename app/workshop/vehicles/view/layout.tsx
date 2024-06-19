@@ -15,6 +15,10 @@ import { ClientsModel } from "@/models/workshops/clients.model";
 import { toast } from "react-toastify";
 import { CalendarsModel } from "@/models/workshops/calendars.model";
 import { VehiclesModel } from "@/models/workshops/vehicles.model";
+import { ReturnUnifiedStringDateTime } from "@/utils/hooks";
+import Select from "react-dropdown-select";
+import Cars from '@/json/cars.json';
+
 const LayoutViewVehicleWorkShop = ( ) => {
     const router = useRouter();
     const [user, setUser] = useState<UserModel>(null);
@@ -32,6 +36,8 @@ const LayoutViewVehicleWorkShop = ( ) => {
     const [allInspections, setAllInspections] = useState<InspectionsModel[]>([]);
     const [orderIndex, setOrderIndex] = useState<number>(0);
     const [vehicle, setVehicle] = useState<VehiclesModel>(null);
+    const [carSelected, setCarSelected]  = useState<Array<any>>([]);
+
     const buildForm = async () => {
         if(brand !== '' && model !== '' && year !== '' && plate !== '' && vin !== '' && vehicleid !== ''){
             const body = {
@@ -84,6 +90,8 @@ const LayoutViewVehicleWorkShop = ( ) => {
             setInspections(response?.inspections ?? []);
             setOrderServices(response?.orders ?? []);
             setCalendars(response?.calendars ?? []);
+            setCarSelected(Cars?.find((e) => e?.brand === response?.vehicle?.brand)?.models);
+
         }
         setUser(userr);
       }
@@ -105,19 +113,75 @@ const LayoutViewVehicleWorkShop = ( ) => {
                         <div className="card p1 mt1">
                             <div className="flex displayBlockResponsive w100">
                                 <div className="flex w100 mr1 mt1">
-                                    <p className="formTitle w100">Marca</p>
-                                    <input onChange={(e) => setBrand(e?.target.value)} value={brand} className="inputForm mr1 ml1" type="text" placeholder="BMW"/>
-                                </div>
+                                    <p className="formTitle mr1">Marca</p>
+                                    <Select
+                                        closeOnClickInput
+                                        style={{marginLeft: 'auto', color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
+                                        options={
+                                            
+                                            [...Cars?.map((e) => {
+                                                return {
+                                                    label: e?.brand,
+                                                    value: e?.brand
+                                                }
+                                            })]}
+                                            separator
+                                            placeholder="Seleccionar/Buscar"
+                                            className="inputForm w100 br05"
+                                            onChange={(values) => {
+                                                if(values[0]?.value !== 'other') {
+                                                    setBrand(values[0]?.value);
+                                                    setCarSelected(Cars?.find((e) => e?.brand === values[0]?.value)?.models);
+                                                    return;
+                                                }
+                                        } } values={[{value: brand, label: brand === '' ? 'Seleccionar/buscar' : '# ' + brand }]}                                     />                                </div>
                                 <div className="flex w100 mt1">
-                                    <p className="formTitle w100">Modelo</p>
-                                    <input onChange={(e) => setModel(e?.target.value)} value={model} className="inputForm mr1 ml1 " type="text" placeholder="320i"/>
-                                </div>
+                                    <p className="formTitle mr1">Modelo</p>
+                                    <Select
+                                        closeOnClickInput
+                                        style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
+                                        options={
+                                            carSelected?.length > 0 ? [...carSelected?.map((e) => {
+                                                return {
+                                                    label: String(e?.title),
+                                                    value: String(e?.title)
+
+                                                }
+                                            })] : [{label: 'No encontrado', value: 'other'}]}
+                                            separator
+                                            placeholder="Seleccionar/Buscar"
+                                            className="inputForm br05 w100"
+                                            onChange={(values) => {
+                                                if(values[0]?.value !== 'other') {
+                                                    setModel(values[0]?.value);
+                                                    return;
+                                                }
+                                        } } values={[{value: model, label: model === '' ? 'Seleccionar/buscar' : '# ' + model }]}                                     />
+                                                                       </div>
                             </div>
                             <div className="flex displayBlockResponsive mt1 w100">
                                 <div className="flex w100 mr1 mt1">
-                                    <p className="formTitle w100">Año</p>
-                                    <input onChange={(e) => setYear(e?.target.value)} value={year} className="inputForm mr1 ml1" type="text" placeholder="2022"/>
-                                </div>
+                                    <p className="formTitle mr1">Año</p>
+                                    <Select
+                                        closeOnClickInput
+                                        style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
+                                        options={[ ...new Array(74).fill(null).map((_, i) => {
+                                                return {
+                                                    value: (1950 + (i+1)).toString(),
+                                                    label: (1950 + (i+1)).toString(),
+                                                }
+                                                })
+                                            ]}
+                                            separator
+                                            placeholder="Seleccionar/Buscar"
+                                            className="inputForm br05"
+                                            onChange={(values) => {
+                                                if(values[0]?.value !== 'other') {
+                                                    setYear(values[0]?.value);
+                                                    return;
+                                                }
+                                        } } values={[{value: year, label: year === '' ? 'Seleccionar/buscar' : '# ' + year }]}                                     />
+                                                                </div>
                                 <div className="flex w100 mt1">
                                     <p className="formTitle w100">Placa</p>
                                     <input onChange={(e) => setPlate(e?.target.value)} value={plate} className="inputForm mr1 ml1" type="email" placeholder="ANZ123"/>
@@ -181,14 +245,14 @@ const LayoutViewVehicleWorkShop = ( ) => {
                             </div>
                         </div>
                         <div className="center w100 mt2">
-                            <button className="btn-gradient-primary" onClick={() => buildForm()}>Guardar cambios</button>
+                            <button className="btn-gradient-primary w100Min" onClick={() => buildForm()}>Guardar cambios</button>
                         </div>
                         {(user?.role === 'owner' || user?.role === 'administrator') ? <div className="flex between displayBlockResponsive mt2">
                             <div>
-                                <p className="subsubtitle" style={{fontSize: '.8rem'}}>Creado: {new Date(vehicle?.createdAt).getDate() + '/' + new Date(vehicle?.createdAt).getMonth() + '/' + new Date(vehicle?.createdAt).getFullYear() + ' - ' + new Date(vehicle?.createdAt).getHours() + ':' + new Date(vehicle?.createdAt).getSeconds()} por: {vehicle?.createdBy ?? 'No encontrado'}</p>
+                                <p className="subsubtitle" style={{fontSize: '.8rem'}}>Creado: {ReturnUnifiedStringDateTime(vehicle?.createdAt)} por: {vehicle?.createdBy ?? 'No encontrado'}</p>
                             </div>
                             <div>
-                                <p className="subsubtitle" style={{fontSize: '.8rem'}}>Ultima vez editado: {new Date(vehicle?.updatedAt).getDate() + '/' + new Date(vehicle?.updatedAt).getMonth() + '/' + new Date(vehicle?.updatedAt).getFullYear() + ' - ' + new Date(vehicle?.updatedAt).getHours() + ':' + new Date(vehicle?.updatedAt).getSeconds()} por: {vehicle?.updatedBy ?? 'No encontrado'}</p>
+                                <p className="subsubtitle" style={{fontSize: '.8rem'}}>Ultima vez editado: {ReturnUnifiedStringDateTime(vehicle?.updatedAt)} por: {vehicle?.updatedBy ?? 'No encontrado'}</p>
                             </div>
                         </div> : <></>}
                     </div>

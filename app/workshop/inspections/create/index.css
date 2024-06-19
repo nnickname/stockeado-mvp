@@ -43,3 +43,17 @@
     border: 1px solid #C9CDD4;
     background-color: white;
 }
+.allTask{
+    overflow-y: scroll;
+}
+.headerAddTasks{
+    display: inline-block;
+}
+.headerAddTasks div{
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: inline-block;
+}
+.headerAddTasks h1{
+    color: #8C95A3;
+}

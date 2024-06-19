@@ -72,6 +72,18 @@ h1, h2, h3, h4 {
   .noTopResponsive{
     margin-top: 5rem !important;
   }
+  .overFlowXResponsive{
+    overflow-x: scroll;
+  }
+}
+@media screen and (max-width: 520px) {
+  .displayBlockResponsiveMin{
+    display: block !important;
+  }
+  .w100Min{
+    width: 100% !important;
+  }
+  
 }
 .rotateItem {
   animation: spin 3s infinite linear;
@@ -197,11 +209,11 @@ input{
   padding: auto;
   font-weight: 500;
   font-size: 1rem;
+  padding: .2rem;
   border: 1px solid #1B53C5;
   border-radius: 100%;
   cursor: pointer;
-  height: 35px;
-  width: 35px;
+  
 }
 .btn{
   cursor: pointer;
@@ -314,12 +326,18 @@ input{
   color: #5079f2 !important;
   
 }
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 1110px) {
   .btn-back{
     margin-right: 4rem !important;
     font-size: .8rem;
-    width: 30px;
-    height: 30px;
+    
+  }
+}
+@media screen and (max-width: 610px) {
+  .cardWhiteForm{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    
   }
 }
 @media screen and (max-width: 1120px) {

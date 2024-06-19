@@ -21,8 +21,34 @@ import { getAllOrderServices } from "@/app/api/workshop/orders/call";
 import { OrderWorkshopModel } from "@/models/workshops/orders.model";
 import { CalendarsModel } from "@/models/workshops/calendars.model";
 import { getAllCalendars } from "@/app/api/workshop/calendars/call";
+import { ReturnUnifiedStringDateTime } from "@/utils/hooks";
+import { ExportJsonCsv } from 'react-export-json-csv';
 
 const ClientsWorkshopLayoutPage = ( ) => {
+    const headers = [
+        {
+            key: 'fullname',
+            name: 'Nombre completo',
+        },
+        {
+            key: 'phone',
+            name: 'Celular'
+        },
+        {
+            key: 'vehicle',
+            name: 'Vehículo',
+        },
+        {
+            key: 'service',
+            name: 'Ultimo servicio'
+        },
+        {
+            key: 'calendars',
+            name: 'Calendarios',
+        },
+        
+    ];
+    
     const router = useRouter();
     const [open, setOpen] = useState<boolean>();
     const [user, setUser] = useState<UserModel>(null);
@@ -127,12 +153,31 @@ const ClientsWorkshopLayoutPage = ( ) => {
                         <div className="flex w100 mt1">
                             <div className="inputRightIcon">
                                 
-                                <input onChange={(e) => setSearch(e?.target?.value)} placeholder="Busca por nombre de cliente"/>
+                                <input style={{border: '1px solid #3662E3'}} onChange={(e) => setSearch(e?.target?.value)} placeholder="Busca por nombre de cliente"/>
                                 <div>
                                     <IonIcon name="search-outline"/>
                                 </div>
                             </div>
-                            <select value={month} onChange={(e) => filterMonth(Number(e.target.value), realClients)} className="selectHomeWorkshop ml1">
+                            <ExportJsonCsv fileTitle="clientes-stockeado"  className="ml1 selectHomeWorkshopblue flex" headers={headers} items={[...clients?.map((e, index: number) => {
+                                var calendarsCount:number = 0;
+                                calendars?.map((a) => {
+                                    if(e?._id === a?.client) calendarsCount++;
+                                })
+                                return {
+                                    fullname: e?.name + ' ' + e?.lastname,
+                                    phone: e?.phone,
+                                    vehicle: String(e?.vehicles?.map((a) =>{
+                                        return ' ' + vehiclesOptions.find((e) =>  String(e?._id) === a).brand + ' ' + vehiclesOptions.find((e) => String(e?._id) === a).model})).substring(0, 25) + '...',
+                                    service: orders?.map((a, index: number) => {
+                                        if(a?.client?._id === e?._id){
+                                         return ' ' + ReturnUnifiedStringDateTime(a?.dateStart);
+                                        }
+                                        ;
+                                    }).filter(s => s !== undefined) ?? 'No encontrado',
+                                    calendars: String(calendarsCount)
+                                }
+                            })]}><IonIcon style={{fontSize: '1.2rem', backgroundColor: 'white'}} className="mr1 mt05" name="cloud-download-outline"/> <span style={{marginTop: '.3rem'}}>Exportar</span></ExportJsonCsv >
+                           <select value={month} onChange={(e) => filterMonth(Number(e.target.value), realClients)} className="selectHomeWorkshopblue ml1">
                                     <option value={0}>Todo</option>
                                     <option value={1}>Enero</option>
                                     <option value={2}>Febrero</option>
@@ -164,7 +209,7 @@ const ClientsWorkshopLayoutPage = ( ) => {
                                         return ' ' + vehiclesOptions.find((e) =>  String(e?._id) === a).brand + ' ' + vehiclesOptions.find((e) => String(e?._id) === a).model})).substring(0, 25) + '...',
                                     service: orders?.map((a, index: number) => {
                                         if(a?.client?._id === e?._id){
-                                         return ' ' + a?.dateStart;
+                                         return ' ' + ReturnUnifiedStringDateTime(a?.dateStart);
                                         }
                                         ;
                                     }).filter(s => s !== undefined) ?? 'No encontrado',
@@ -189,23 +234,23 @@ const ClientsWorkshopLayoutPage = ( ) => {
               <div style={{padding: '1rem'}}>
                 <h1 className="title">Nuevo cliente</h1>
                 <h2 className="subtitle mt1">Cliente #{clients?.length + 1}</h2>
-                <div className="flex between mt1">
-                    <p className="formTitle">Nombre</p>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">Nombre</p>
                     <input className="inputForm" onChange={(e) => setName(e.target.value)} type="text" placeholder=""/>
                 </div>
-                <div className="flex between mt1">
-                    <p className="formTitle">Apellido</p>
-                    <input className="inputForm ml1" onChange={(e) => setLastName(e.target.value)} type="text" placeholder=""/>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">Apellido</p>
+                    <input className="inputForm" onChange={(e) => setLastName(e.target.value)} type="text" placeholder=""/>
                 </div>
-                <div className="flex between mt1">
-                    <p className="formTitle">Celular</p>
-                    <input className="inputForm ml1" onChange={(e) => setPhone(e.target.value)} type="text" placeholder=""/>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">Celular</p>
+                    <input className="inputForm" onChange={(e) => setPhone(e.target.value)} type="text" placeholder=""/>
                 </div>
-                <div className="flex between mt1">
-                    <p className="formTitle">Correo</p>
-                    <input className="inputForm ml1" onChange={(e) => setEmail(e.target.value)} type="text" placeholder=""/>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">Correo</p>
+                    <input className="inputForm " onChange={(e) => setEmail(e.target.value)} type="text" placeholder=""/>
                 </div>
-                <div className="flex between mt1">
+                <div className="flex between mt1 displayBlockResponsive">
                     <p className="formTitle">Asociar vehículos</p>
                     <Select
                         
@@ -261,6 +306,7 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
             width: 160,
             type: 'actions',
             align: 'center',
+            flex: 2,
             headerClassName: 'color-table-header',
             renderCell: (params) => <button onClick={() => router.push('/workshop/clients/view?id=' + params?.value)} className="btn mt05">
                 <IonIcon style={{fontSize: '1.5rem', color: "#3662E3"}} name='eye-outline'/>

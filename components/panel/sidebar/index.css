@@ -4,7 +4,8 @@
 }
 .sideBarContainer{
     background-color: #F5F7FA;
-    width: calc(100% - 220px) !important;
+    width: calc(100% - 158px) !important;
+    min-height: 100vh;
 }
 
 .sidebarCustomStyle{
@@ -97,28 +98,25 @@
 
 @media screen and (max-width: 1120px) {
     .sideBarContainer{
-        width: calc(100vw - 1rem - 1px) !important;
-    }
-    .sidebarCustomStyle{        
-        position: fixed;
-        border-right: 1px solid grey;
-    }
-    .responsiveButtonViewNavigation{
-        display: block !important;
-    }
-    
-  }
-
-@media screen and (max-width: 920px) {
-    .sideBarContainer{
         width: calc(100vw) !important;
     }
     .sidebarCustomStyle{        
         position: fixed;
         border-right: 1px solid grey;
     }
+    
+}
+
+@media screen and (max-width: 920px) {
+    .sidebarCustomStyle{        
+        position: fixed;
+        border-right: 1px solid grey;
+    }
+  }
+@media screen and (max-width: 1110px) {
+    
     .responsiveButtonViewNavigation{
         display: block !important;
     }
     
-  }
+}
