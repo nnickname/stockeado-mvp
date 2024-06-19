@@ -66,13 +66,14 @@ const HomeWorkshopLayoutPage = () => {
         toUser();
     }, []);
     const filterMonth = (month: number, clients: ClientsModel[], orders: OrderWorkshopModel[]) => {
+    
         const currentDate = new Date();
         var clientsFilterBeforeMonth: ClientsModel[] = [];
         var clientsFilter: ClientsModel[] = [];
         clients?.map((e) => {
             const date = new Date(e?.createdAt);
             if(currentDate.getFullYear() === date?.getFullYear()){
-                if(month === Number(date?.getMonth() +1)){
+                if(month === Number(date?.getUTCMonth() +1)){
                     clientsFilter.push(e);
                 }
             }
@@ -80,7 +81,7 @@ const HomeWorkshopLayoutPage = () => {
         clients?.map((e) => {
             const date = new Date(e?.createdAt);
             if(currentDate.getFullYear() === date?.getFullYear()){
-                if(month === Number(date?.getMonth())){
+                if(month === Number(date?.getUTCMonth())){
                     clientsFilterBeforeMonth.push(e);
                 }
             }
@@ -99,10 +100,13 @@ const HomeWorkshopLayoutPage = () => {
         orders?.map((e) => {
             const date = new Date(e?.createdAt);
             if(currentDate.getFullYear() === date?.getFullYear()){
-                if(month === Number(date?.getMonth() +1)){
+                if(month === (Number(date?.getUTCMonth()) +1)){
                     ordersFilter.push(e);
-                    orderTotal = orderTotal+Number(e?.totalPrice);
+                    if(e?.state !== 'pending' && e?.state !== 'confirmed'){
+                        orderTotal = orderTotal+Number(e?.totalPrice);
+                    }
                     priceToAverage.push(Number(e?.totalPrice));
+                    
                 }
             }
         });
@@ -130,7 +134,7 @@ const HomeWorkshopLayoutPage = () => {
                                 <p className="subtitle mt2">Órdenes de servicio</p>
                             </div>
                             <div>
-                                <select value={month} onChange={(e) => filterMonth(Number(e.target.value), clients, orders)} className="selectHomeWorkshop mt2">
+                                <select value={month} onChange={(e) => filterMonth(Number(e.target.value), clients.reverse(), orders.reverse())} className="selectHomeWorkshop mt2">
                                     <option value={0}>Mes</option>
                                     <option value={1}>Enero</option>
                                     <option value={2}>Febrero</option>

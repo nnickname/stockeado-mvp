@@ -202,7 +202,7 @@ const LayoutConfigurationPage = () =>{
                         </div>
                         <p className="subsubtitle mt1">Items asociados: Agrupa ítems y crea tus cotizaciones más rápido.</p>
                         <TableContainer className="mt1" style={{boxShadow: 'none', backgroundColor: '#F5F7FA'}} component={Paper}>
-                                <Table aria-label="simple table">
+                                <Table style={{boxShadow: 'none', backgroundColor: '#F5F7FA'}} aria-label="simple table">
                                     <TableHead>
                                     <TableRow>
                                         <TableCell>Codigo propio</TableCell>

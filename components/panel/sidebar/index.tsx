@@ -137,11 +137,11 @@ const SideBarComponent: FunctionComponent<SideBarProps> = ({user, frameContennt,
                     <p style={{color: route === 'configuration' ? '#1570EF' : 'black'}} className="text">Configuración</p>
                 </div>
                 <div className="logout" onClick={async () => {
-                    cookies.remove('access_token');
+                    cookies.set('access_token', '', {secure: true, path: '/', expires: new Date()})
                     toast.success('Cerraste sesión')
                     setTimeout(() => {
                         router.push('/signin');
-                    }, 2500);
+                    }, 1500);
                 }}>
                     <IonIcon className="icon" name="log-out-outline" />
                     <p className="text">Cerrar sesión</p>

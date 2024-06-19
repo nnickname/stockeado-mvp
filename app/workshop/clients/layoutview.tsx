@@ -118,7 +118,7 @@ const ClientsWorkshopLayoutPage = ( ) => {
     const filterMonth = (month: number, realClientss: ClientsModel[]) => {
         const currentDate = new Date();
         if(month === 0){
-            setClients(realClientss ?? []);
+            setClients(realClientss.reverse() ?? []);
             selectMonth(0);
             return;
         }
@@ -131,7 +131,7 @@ const ClientsWorkshopLayoutPage = ( ) => {
                 }
             }
         });
-        setClients(clientsFilter ?? []);
+        setClients(clientsFilter.reverse() ?? []);
         selectMonth(month);
     }  
     

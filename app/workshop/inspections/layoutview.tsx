@@ -136,7 +136,7 @@ const LayoutViewInspectionsWorkShop = ( ) => {
                                     name: e?.client?.name,
                                     lastname: e?.client?.lastname,
                                     vehicle: e?.vehicle?.brand + ' ' + e?.vehicle?.model,
-                                    date: ReturnUnifiedStringDateTime(e?.dateStart),
+                                    date: ReturnUnifiedStringDateTime(e?.createdAt),
                                     plate: e?.vehicle?.plate,
                                     state: e?.state,
                                     action: e?._id

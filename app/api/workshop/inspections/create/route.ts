@@ -33,7 +33,7 @@ export async function POST(
                 year: body?.object?.client?.year,
                 email: body?.object?.client?.email,
                 phone: body?.object?.client?.phone,
-                vehicles: addingVehicle !== null ? [String(addingVehicle?._id)] : []
+                vehicles: body.object.vehicle._id
               });
               addingClient.markModified("clients");
               addingClient.save()

@@ -8,7 +8,7 @@ export const loginUser = async (email: string, password: string) => {
         const cookies = new Cookie();
         const response: any = await axios.post("/user/login", {email, password}, {headers: {authorization: process.env.NEXT_PUBLIC_API_TOKEN}});
         if(response?.data?.user !== undefined){
-            cookies.set('access_token', response?.data?.token, {secure: false, path: '/' })
+            cookies.set('access_token', response?.data?.token, {secure: true, path: '/'})
             return response?.data?.user;
         } else return false;
     }

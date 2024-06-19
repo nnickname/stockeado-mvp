@@ -1,3 +1,5 @@
 export const ReturnUnifiedStringDateTime = (realdate: string) => {
-    return new Date(realdate).getDate() + '/' + new Date(realdate).getMonth() + '/' + new Date(realdate).getFullYear()  + ' ' + new Date(realdate).getHours() + ':' + new Date(realdate).getMinutes();
+    const full_date = new Date(realdate).toLocaleDateString(); //Date String
+    const full_time = new Date(realdate).toLocaleTimeString(); // Time String
+    return full_date + ' ' + full_time;
 }

@@ -75,8 +75,8 @@ const LayoutViewOrdersWorkShop = ( ) => {
             ownerid = userr?.owner;
         }
         const response = await getAllOrderServices(ownerid);
-        filterMonth(0, response?.reverse());
-        setRealOrders(response?.reverse() ?? []);
+        filterMonth(0, response);
+        setRealOrders(response ?? []);
         setUser(userr);
       }
     useEffect(() => {
@@ -85,7 +85,7 @@ const LayoutViewOrdersWorkShop = ( ) => {
     const filterMonth = (month: number, realOrderss: OrderWorkshopModel[]) => {
         const currentDate = new Date();
         if(month === 0){
-            setOrders(realOrderss ?? []);
+            setOrders(realOrderss.reverse() ?? []);
             selectMonth(0);
             return;
         }
@@ -98,7 +98,7 @@ const LayoutViewOrdersWorkShop = ( ) => {
                 }
             }
         });
-        setOrders(ordersFilter ?? []);
+        setOrders(ordersFilter.reverse() ?? []);
         selectMonth(month);
     }  
     
@@ -158,7 +158,7 @@ const LayoutViewOrdersWorkShop = ( ) => {
                                     id: index,
                                     ammount: 's/. ' + (e?.totalPrice === '' ? '0' : e?.totalPrice),
                                     vehicle: e?.vehicle?.brand + ' ' + e?.vehicle?.model,
-                                    date: ReturnUnifiedStringDateTime(e?.dateStart),
+                                    date: ReturnUnifiedStringDateTime(e?.createdAt),
                                     plate: e?.vehicle?.plate,
                                     state: e?.state,
                                     action: e?._id
@@ -178,7 +178,7 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
         { field: 'vehicle', headerName: 'Vehículo', width: 200, headerClassName: 'color-table-header'},
         { field: 'plate', headerName: 'Placa', width: 160, headerClassName: 'color-table-header'},
         { field: 'ammount', headerName: 'Monto', width: 200, headerClassName: 'color-table-header'},
-        { sortable: false, field: 'date', headerName: 'Fecha', width: 150, headerClassName: 'color-table-header'},
+        { sortable: false, field: 'date', headerName: 'Fecha', width: 200, headerClassName: 'color-table-header'},
         {
             field: 'state',
             headerName: 'Estado',
