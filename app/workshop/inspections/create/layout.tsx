@@ -489,6 +489,10 @@ const InspectionWorkshopLayoutPage = () => {
 
                         <div className="cardWhiteForm mt1">
                             <p className="subsubtitle">Trabajos a realizar</p>
+                            {user.services?.length === 0 ? <div className="flex mt1">
+                                <p className="subsubtitle mt1">No encontramos servicios - </p>
+                                <Link className="subsubtitle ml1 mt1" href='/configuration' style={{color: '#3662E3'}}>Configura tu inspección digital</Link> 
+                            </div>: <></>}
                             <TableContainer key={tableKey} className="mt1" style={{boxShadow: 'none'}} component={Paper}>
                                 <Table aria-label="simple table">
                                     <TableHead>
@@ -625,8 +629,8 @@ const InspectionWorkshopLayoutPage = () => {
                         <div className="cardWhiteForm mt1">
                             <p className="subsubtitle">Accesorios</p>
                             {accesories?.length === 0 ? <div className="flex mt1">
-                                <p>No encontramos accesorios - </p>
-                                <Link className="ml1" href='/configuration' style={{color: '#3662E3'}}>Configurar tu inspección digital</Link> 
+                                <p className="subsubtitle mt1">No encontramos accesorios - </p>
+                                <Link className="subsubtitle ml1 mt1" href='/configuration' style={{color: '#3662E3'}}>Configura tu inspección digital</Link> 
                             </div>: <></>}
                             <div className="inline-items">
                              {accesories?.map((e, index: number) => {return  <div className="inline-items mt1 ml1">

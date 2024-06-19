@@ -43,6 +43,7 @@
     padding: 1rem;
     padding-bottom: .5rem;
     padding-top: .5rem;
+    margin-top: .2rem;
 }
 .tableConfigurationServicesItem p{
     min-width: max-content;
