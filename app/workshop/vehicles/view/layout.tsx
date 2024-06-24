@@ -112,11 +112,11 @@ const LayoutViewVehicleWorkShop = ( ) => {
                         <h1 className="subtitle">Vehículo #{orderIndex +1}</h1>
                         <div className="card p1 mt1">
                             <div className="flex displayBlockResponsive w100">
-                                <div className="flex w100 mr1 mt1">
-                                    <p className="formTitle mr1">Marca</p>
+                                <div className="flex displayBlockResponsive w100 mr1 mt1">
+                                    <p className="formTitle" style={{marginRight: 'auto'}}>Marca</p>
                                     <Select
                                         closeOnClickInput
-                                        style={{marginLeft: 'auto', color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
+                                        style={{ color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '250px'}}
                                         options={
                                             
                                             [...Cars?.map((e) => {
@@ -135,11 +135,11 @@ const LayoutViewVehicleWorkShop = ( ) => {
                                                     return;
                                                 }
                                         } } values={[{value: brand, label: brand === '' ? 'Seleccionar/buscar' : '# ' + brand }]}                                     />                                </div>
-                                <div className="flex w100 mt1">
-                                    <p className="formTitle mr1">Modelo</p>
+                                <div className="flex displayBlockResponsive w100 mt1">
+                                    <p className="formTitle" style={{marginRight: 'auto'}}>Modelo</p>
                                     <Select
                                         closeOnClickInput
-                                        style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
+                                        style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '250px'}}
                                         options={
                                             carSelected?.length > 0 ? [...carSelected?.map((e) => {
                                                 return {
@@ -160,11 +160,11 @@ const LayoutViewVehicleWorkShop = ( ) => {
                                                                        </div>
                             </div>
                             <div className="flex displayBlockResponsive mt1 w100">
-                                <div className="flex w100 mr1 mt1">
-                                    <p className="formTitle mr1">Año</p>
+                                <div className="flex displayBlockResponsive w100 mr1 mt1">
+                                    <p className="formTitle" style={{marginRight: 'auto'}}>Año</p>
                                     <Select
                                         closeOnClickInput
-                                        style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
+                                        style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '250px'}}
                                         options={[ ...new Array(74).fill(null).map((_, i) => {
                                                 return {
                                                     value: (1950 + (i+1)).toString(),
@@ -184,7 +184,7 @@ const LayoutViewVehicleWorkShop = ( ) => {
                                                                 </div>
                                 <div className="flex w100 mt1">
                                     <p className="formTitle w100">Placa</p>
-                                    <input onChange={(e) => setPlate(e?.target.value)} value={plate} className="inputForm mr1 ml1" type="email" placeholder="ANZ123"/>
+                                    <input onChange={(e) => setPlate(e?.target.value)} value={plate} className="inputForm w100 mr1 ml1" type="email" placeholder="ANZ123"/>
                                 </div>
                             </div>
                             
@@ -214,7 +214,7 @@ const LayoutViewVehicleWorkShop = ( ) => {
                                 <p className="subsubtitle w100">Ordenes servicio:</p>
                                 <div className="w100 right">
                                     {orderServices?.length === 0 ? <button className="subsubtitle ">No encontrado</button> : orderServices?.map((e, index: number) => {
-                                        return <button className="btn-link w100">Orden de servicio #{index + 1}</button>
+                                        return <button className="btn-link">Orden de servicio #{index + 1}</button>
                                     })}                                </div>
                             </div>
                         </div>

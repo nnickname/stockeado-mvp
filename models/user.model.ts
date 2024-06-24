@@ -13,6 +13,7 @@ export interface UserModel extends Document {
   email: string;
   visits: number;
   type: string;
+  ruc: string;
   accesories: string[],
   services: any[],
   role: string;
@@ -81,6 +82,9 @@ const UserSchema = new Schema({
   },
   services: {
     type: Array
+  },
+  ruc: {
+    type: String
   }
 }, {timestamps: true});
 export default  mongoose.models.Users || model<UserModel>("Users", UserSchema);

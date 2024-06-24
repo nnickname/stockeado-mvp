@@ -33,6 +33,8 @@ export async function POST(
                 year: body?.object?.client?.year,
                 email: body?.object?.client?.email,
                 phone: body?.object?.client?.phone,
+                birth: body?.object?.client?.birth,
+                ruc: body?.object?.client?.ruc,
                 vehicles: body.object.vehicle._id
               });
               addingClient.markModified("clients");

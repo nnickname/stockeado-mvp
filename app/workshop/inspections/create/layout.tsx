@@ -4,7 +4,7 @@ import SideBarComponent from "@/components/panel/sidebar";
 import { UserModel } from "@/models/user.model";
 import IonIcon from "@reacticons/ionicons";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import './index.css';
 import Select from "react-dropdown-select";
 import { getAllClients } from "@/app/api/workshop/clients/call";
@@ -25,6 +25,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import ViewPDFPageInspection from "../pdf/component";
 function countTotalTasksPrice(tasks: any[]){
     var count = 0;
     tasks?.map((e) => {
@@ -43,6 +44,8 @@ const InspectionWorkshopLayoutPage = () => {
     const [clientLastname, setClientLastName] = useState<string>('');
     const [clientPhone, setClientPhone] = useState<string>('');
     const [clientEmail, setClientEmail] = useState<string>('');
+    const [clientBirth, setClientBirth] = useState<string>('');
+    const [clientRuc, setClientRuc] = useState<string>('');
 
 
     const [vehicleSeleted, setSelectedVehicle] = useState<string>(null);
@@ -108,7 +111,7 @@ const InspectionWorkshopLayoutPage = () => {
                 message = message + ' ' + 'Generales';  
             }else message = message + ', ' + 'Generales'
         }
-        if(clientName === '' || clientLastname === '' || clientEmail === '' || clientPhone === ''){
+        if(clientName === '' || clientLastname === '' || clientEmail === '' || clientPhone === '' || clientBirth === '' || clientRuc === ''){
             if(message === ''){
                 message = message + ' ' + 'Cliente';  
             }else message = message + ', ' + 'Cliente';
@@ -137,7 +140,9 @@ const InspectionWorkshopLayoutPage = () => {
                     name: clientName,
                     lastname: clientLastname,
                     email: clientEmail,
-                    phone: clientPhone
+                    phone: clientPhone,
+                    birth: clientBirth,
+                    ruc: clientRuc
                 },
                 vehicle: {
                     _id: vehicleSeleted ?? '',
@@ -263,6 +268,8 @@ const InspectionWorkshopLayoutPage = () => {
                                                         setClientLastName(e?.lastname);
                                                         setClientEmail(e?.email);
                                                         setClientPhone(e?.phone);
+                                                        setClientBirth(e?.birth);
+                                                        setClientRuc(e?.ruc);
                                                     }
                                                 });
                                                 
@@ -364,6 +371,10 @@ const InspectionWorkshopLayoutPage = () => {
                                     <p className="formTitle mr1">VIN</p>
                                     <input disabled={vehicleSeleted !== null ? true : false} onChange={(e) => setVehicleVin(e.target.value)} value={vehicleVin} className="inputForm w100Min" type="text" placeholder=""/>
                                 </div>
+                                <div className="flex between mt1 displayBlockResponsiveMin">
+                                    <p className="formTitle mr1">Visita</p>
+                                    <input disabled placeholder={vehicleSeleted !== null ? 'Recurrente' : 'Nuevo'} className="inputForm w100Min " type="text"/>
+                                </div>
                             </div>
                             <div className="cardWhiteForm mt1 w100">
                                 <div className="flex between displayBlockResponsiveMin">
@@ -392,6 +403,8 @@ const InspectionWorkshopLayoutPage = () => {
                                                 setClientLastName('');
                                                 setClientEmail('');
                                                 setClientPhone('');
+                                                setClientBirth('');
+                                                setClientRuc('');
                                                 return;
                                             }
                                             const clientObject = clients?.find(e => String(e._id) === values[0]?.value);
@@ -400,6 +413,8 @@ const InspectionWorkshopLayoutPage = () => {
                                             setClientLastName(clientObject?.lastname);
                                             setClientEmail(clientObject?.email);
                                             setClientPhone(clientObject?.phone);
+                                            setClientBirth(clientObject?.birth);
+                                            setClientRuc(clientObject?.ruc);
                                          } } values={[{value: clientSelected, label: clientSelected === null ? 'Seleccionar/buscar' : '# ' + clientName + ' ' + clientLastname}]}                                     />
                                 </div>
                                 <div className="flex between mt1 displayBlockResponsiveMin">
@@ -413,6 +428,14 @@ const InspectionWorkshopLayoutPage = () => {
                                 <div className="flex between mt1 displayBlockResponsiveMin">
                                     <p className="formTitle mr1">Celular</p>
                                     <input onChange={(e) => setClientPhone(e.target.value)} value={clientPhone} disabled={clientSelected !== null ? true : false} className="inputForm w100Min" type="text" placeholder=""/>
+                                </div>
+                                <div className="flex between mt1 displayBlockResponsiveMin">
+                                    <p className="formTitle mr1">DNI/RUC</p>
+                                    <input onChange={(e) => setClientRuc(e.target.value)} value={clientRuc} disabled={clientSelected !== null ? true : false} className="inputForm w100Min" type="text" placeholder=""/>
+                                </div>
+                                <div className="flex between mt1 displayBlockResponsiveMin">
+                                    <p className="formTitle mr1">Fecha de nacimiento</p>
+                                    <input value={clientBirth} disabled={clientSelected !== null ? true : false} className="inputForm w100Min" onChange={(e) => setClientBirth(e.target.value)} type="datetime-local" placeholder=""/>
                                 </div>
                                 <div className="flex between mt1 displayBlockResponsiveMin">
                                     <p className="formTitle mr1">Correo</p>
@@ -641,7 +664,6 @@ const InspectionWorkshopLayoutPage = () => {
                                             
                                             const newObject = [...accesories];
                                             newObject[index].value = checked;
-                                            console.log(newObject);
                                             setAccesories(newObject);
                                             
                                         }} inputProps={{ 'aria-label': '' }}></Checkbox>
