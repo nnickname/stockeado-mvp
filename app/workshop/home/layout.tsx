@@ -21,6 +21,7 @@ import { getAllOrderServices } from "@/app/api/workshop/orders/call";
 import { OrderWorkshopModel } from "@/models/workshops/orders.model";
 import { getAllCalendars, updateCalendar } from "@/app/api/workshop/calendars/call";
 import { CalendarsModel } from "@/models/workshops/calendars.model";
+import { ReturnUnifiedStringDateTime } from "@/utils/hooks";
 const HomeWorkshopLayoutPage = () => {
     const router = useRouter();
     const [user, setUser] = useState<UserModel>(null);
@@ -231,9 +232,11 @@ const HomeWorkshopLayoutPage = () => {
                         <div className="card w100 inline-items br0 mt1">
                             <p className="inline-items subsubtitle mt1 ml1">Tareas por vencer hoy:
                             { calendars?.length === 0 ? <span> No encontrado</span>:<span></span>} </p>
-                            {...calendars?.map((e) => {
+                            {
+                                 
+                            ...calendars?.map((e) => {
                                 const currentTime = new Date();
-                                const timeTask = new Date(e?.dateStart);
+                                const timeTask = new Date(ReturnUnifiedStringDateTime(e?.dateEnd));
                                 if(timeTask.getDay() === currentTime.getDay()){
                                     if(timeTask.getMonth() === currentTime.getMonth()){
                                         if(timeTask.getFullYear() === currentTime.getFullYear()){

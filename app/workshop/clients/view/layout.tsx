@@ -29,17 +29,20 @@ const LayoutViewClientWorkShop = ( ) => {
     const [orderServices, setOrderServices] = useState<OrderWorkshopModel[]>([]);
     const [clientid, setClientID] = useState<string>('');
     const [name, setName] = useState<string>('');
+    const [birth, setBirth] = useState<string>('');
+    const [ruc, setRuc] = useState<string>('');
+
     const [lastname, setLastname] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [phone, setPhone] = useState<string>('');
     const [calendars, setCalendars] = useState<CalendarsModel[]>([]);
     const [client, setClient] = useState<ClientsModel>(null);
     const buildForm = async () => {
-        if(name !== '' && lastname !== '' && email !== '' && phone !== '' && clientid !== ''){
+        if(name !== '' && lastname !== '' && email !== '' && phone !== '' && clientid !== '' && birth !== '' && ruc !== ''){
             const body = {
                 _id: clientid,
                 object: {
-                    name, lastname, email, phone, updatedBy: user?.name + ' ' + user?.lastname
+                    name, lastname, email, phone, updatedBy: user?.name + ' ' + user?.lastname, birth, ruc
                 }
             };
             const response = await updateClient(body);
@@ -74,6 +77,8 @@ const LayoutViewClientWorkShop = ( ) => {
         setLastname(response?.client?.lastname);
         setEmail(response?.client?.email);
         setPhone(response?.client?.phone);
+        setBirth(response?.client.birth);
+        setRuc(response?.client?.ruc);
         setInspections(response?.inspections ?? []);
         setOrderServices(response?.orders ?? []);
         setCalendars(response?.calendars ?? []);
@@ -101,22 +106,32 @@ const LayoutViewClientWorkShop = ( ) => {
                         <div className="card p1 mt1">
                             <div className="flex displayBlockResponsive w100">
                                 <div className="flex displayBlockResponsiveMin w100 mr1 mt1">
-                                    <p className="formTitle mr1">Nombre</p>
+                                    <p className="formTitle w100 mr1">Nombre</p>
                                     <input onChange={(e) => setName(e?.target.value)} value={name}  className="inputForm w100" type="text" />
                                 </div>
                                 <div className="flex displayBlockResponsiveMin w100 mt1">
-                                    <p className="formTitle mr1">Apellido</p>
+                                    <p className="formTitle w100 mr1">Apellido</p>
                                     <input onChange={(e) => setLastname(e?.target.value)} value={lastname} className="inputForm w100 " type="text"/>
                                 </div>
                             </div>
                             <div className="flex displayBlockResponsive mt1 w100">
                                 <div className="flex w100 displayBlockResponsiveMin mr1 mt1">
-                                    <p className="formTitle mr1">Celular</p>
+                                    <p className="formTitle w100 mr1">Celular</p>
                                     <input onChange={(e) => setPhone(e?.target.value)} value={phone} className="inputForm w100" type="text" />
                                 </div>
                                 <div className="flex w100 displayBlockResponsiveMin mt1">
-                                    <p className="formTitle mr1">Correo</p>
+                                    <p className="formTitle w100 mr1">Correo</p>
                                     <input onChange={(e) => setEmail(e?.target.value)} value={email} className="inputForm w100" type="email" />
+                                </div>
+                            </div>
+                            <div className="flex displayBlockResponsive mt1 w100">
+                                <div className="flex w100 displayBlockResponsiveMin mr1 mt1">
+                                    <p className="formTitle w100 mr1">Fecha de nacimiento</p>
+                                    <input value={birth} className="inputForm w100" onChange={(e) => setBirth(e.target.value)} type="datetime-local" placeholder=""/>
+                                    </div>
+                                <div className="flex w100 displayBlockResponsiveMin mt1">
+                                    <p className="formTitle w100 mr1">DNI/RUC</p>
+                                    <input onChange={(e) => setRuc(e?.target.value)} value={ruc} className="inputForm w100" type="email" />
                                 </div>
                             </div>
                         </div>
@@ -138,7 +153,7 @@ const LayoutViewClientWorkShop = ( ) => {
                                 <p className="subsubtitle w100">Ordenes servicio:</p>
                                 <div className="w100 right">
                                     {orderServices?.length === 0 ? <button className="subsubtitle ">No encontrado</button> : orderServices?.map((e, index: number) => {
-                                        return <Link style={{display: 'block'}} href={'/workshop/orders/view?id=' + e?._id} className="btn-link w100">Orden de servicio #{index + 1}</Link>
+                                        return <Link style={{display: 'block'}} href={'/workshop/orders/view?id=' + e?._id} className="btn-link">Orden de servicio #{index + 1}</Link>
                                     })}
                                     
                                 </div>

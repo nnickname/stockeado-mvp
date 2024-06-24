@@ -46,6 +46,8 @@ const ViewOrderWorkshopLayoutPage = () => {
     const [clientLastname, setClientLastName] = useState<string>('');
     const [clientPhone, setClientPhone] = useState<string>('');
     const [clientEmail, setClientEmail] = useState<string>('');
+    const [clientBirth, setClientBirth] = useState<string>('');
+    const [clientRuc, setClientRuc] = useState<string>('');
 
 
     const [vehicleSeleted, setSelectedVehicle] = useState<string>(null);
@@ -125,7 +127,7 @@ const ViewOrderWorkshopLayoutPage = () => {
                 message = message + ' ' + 'Generales';  
             }else message = message + ', ' + 'Generales'
         }
-        if(clientName === '' || clientLastname === '' || clientEmail === '' || clientPhone === ''){
+        if(clientName === '' || clientLastname === '' || clientEmail === '' || clientPhone === '' || clientBirth === '' || clientRuc === ''){
             if(message === ''){
                 message = message + ' ' + 'Cliente';  
             }else message = message + ', ' + 'Cliente';
@@ -161,7 +163,9 @@ const ViewOrderWorkshopLayoutPage = () => {
                     name: clientName,
                     lastname: clientLastname,
                     email: clientEmail,
-                    phone: clientPhone
+                    phone: clientPhone,
+                    birth: clientBirth,
+                    ruc: clientRuc
                 },
                 vehicle: {
                     _id: vehicleSeleted ?? '',
@@ -190,6 +194,8 @@ const ViewOrderWorkshopLayoutPage = () => {
             setClientLastName('');
             setClientEmail('');
             setClientPhone('');
+            setClientBirth('');
+            setClientRuc('');
             setSelectedVehicle(null);
             setVehiclePlate('');
             setVehicleBrand('');
@@ -218,6 +224,8 @@ const ViewOrderWorkshopLayoutPage = () => {
             setClientLastName(object?.client?.lastname);
             setClientEmail(object?.client?.email);
             setClientPhone(object?.client?.phone);
+            setClientBirth(object.client.birth);
+            setClientRuc(object?.client?.ruc);
             setSelectedVehicle(String(object?.vehicle?._id));
             setVehiclePlate(object?.vehicle?.plate);
             setVehicleBrand(object?.vehicle?.brand);
@@ -355,6 +363,8 @@ const ViewOrderWorkshopLayoutPage = () => {
                                                         setClientLastName(e?.lastname);
                                                         setClientEmail(e?.email);
                                                         setClientPhone(e?.phone);
+                                                        setClientBirth(e?.birth);
+                                                        setClientRuc(e?.ruc);
                                                     }
                                                 });
                                                 
@@ -456,6 +466,10 @@ const ViewOrderWorkshopLayoutPage = () => {
                                     <p className="formTitle mr1">VIN</p>
                                     <input disabled={vehicleSeleted !== null ? true : false} onChange={(e) => setVehicleVin(e.target.value)} value={vehicleVin} className="inputForm w100Min" type="text" placeholder=""/>
                                 </div>
+                                <div className="flex between mt1 displayBlockResponsiveMin">
+                                    <p className="formTitle mr1">Visita</p>
+                                    <input disabled placeholder={vehicleSeleted !== null ? 'Recurrente' : 'Nuevo'} className="inputForm w100Min " type="text"/>
+                                </div>
                             </div>
                             <div className="cardWhiteForm mt1 w100">
                                 <div className="flex between displayBlockResponsiveMin">
@@ -484,6 +498,8 @@ const ViewOrderWorkshopLayoutPage = () => {
                                                 setClientLastName('');
                                                 setClientEmail('');
                                                 setClientPhone('');
+                                                setClientBirth('');
+                                                setClientRuc('');
                                                 return;
                                             }
                                             const clientObject = clients?.find(e => String(e._id) === values[0]?.value);
@@ -492,6 +508,8 @@ const ViewOrderWorkshopLayoutPage = () => {
                                             setClientLastName(clientObject?.lastname);
                                             setClientEmail(clientObject?.email);
                                             setClientPhone(clientObject?.phone);
+                                            setClientBirth(clientObject?.birth);
+                                            setClientRuc(clientObject?.ruc);
                                          } } values={[{value: clientSelected, label: clientSelected === null ? 'Seleccionar/buscar' : '# ' + clientName + ' ' + clientLastname}]}                                     />
                                 </div>
                                 <div className="flex between mt1 displayBlockResponsiveMin">
@@ -505,6 +523,14 @@ const ViewOrderWorkshopLayoutPage = () => {
                                 <div className="flex between mt1 displayBlockResponsiveMin">
                                     <p className="formTitle mr1">Celular</p>
                                     <input onChange={(e) => setClientPhone(e.target.value)} value={clientPhone} disabled={clientSelected !== null ? true : false} className="inputForm w100Min" type="text" placeholder=""/>
+                                </div>
+                                <div className="flex between mt1 displayBlockResponsiveMin">
+                                    <p className="formTitle mr1">DNI/RUC</p>
+                                    <input onChange={(e) => setClientRuc(e.target.value)} value={clientRuc} disabled={clientSelected !== null ? true : false} className="inputForm w100Min" type="text" placeholder=""/>
+                                </div>
+                                <div className="flex between mt1 displayBlockResponsiveMin">
+                                    <p className="formTitle mr1">Fecha de nacimiento</p>
+                                    <input value={clientBirth} className="inputForm w100Min" onChange={(e) => setClientBirth(e.target.value)} disabled={clientSelected !== null ? true : false} type="datetime-local" placeholder=""/>
                                 </div>
                                 <div className="flex between mt1 displayBlockResponsiveMin">
                                     <p className="formTitle mr1">Correo</p>

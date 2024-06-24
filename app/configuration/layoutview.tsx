@@ -26,11 +26,12 @@ const LayoutConfigurationPage = () =>{
     const [image, setImage] = useState('');
     const [imageLogo, setImageLogo] = useState('');
 
-    const [direction, setDirection] = useState(null);    
-    const [name, setName] = useState(null); 
-    const [lastName, setLastname] = useState(null); 
-    const [phone, setPhone] = useState(null); 
-    const [nameShop, setNameShop] = useState(null);   
+    const [direction, setDirection] = useState(user?.direction);    
+    const [name, setName] = useState(user?.name); 
+    const [lastName, setLastname] = useState(user?.lastname); 
+    const [phone, setPhone] = useState(user?.phone); 
+    const [nameShop, setNameShop] = useState(user?.nameShop);   
+    const [ruc, setRuc] = useState(user?.ruc);   
 
     const [newAccesorie, setNewAccesorie] = useState<string>('');
     const [accesories, setAccesories] = useState<string[]>([]);
@@ -47,15 +48,23 @@ const LayoutConfigurationPage = () =>{
             router.push('/signin');
         }
         setUser(userr);
+        setNameShop(userr?.nameShop);
+        setName(userr?.name);
+        setLastname(userr?.lastname);
+        setPhone(userr?.phone);
+        setDirection(userr?.direction);
+        setRuc(userr.ruc);
         setAccesories(userr?.accesories ?? []);
         setServices(userr?.services ?? []);
     }
+
     useEffect(() => {
         toUser();
         handleResize()
         window.addEventListener('resize', handleResize)
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+
     const [services, setServices] = useState<any[]>([]);
     const [serviceSku, setServiceSku] = useState<string>('');
     const [serviceName, setServiceName] = useState<string>('');
@@ -99,13 +108,14 @@ const LayoutConfigurationPage = () =>{
     const validateForm = async (accesoriess: string[]) => {
         const body = {
             _id: user?._id,
-            image: image !== '' ? image : user?.image,
-            imageLogo: imageLogo !== '' ? imageLogo : user?.imageLogo,
-            direction: direction ?? user?.direction,
-            name: name ?? user?.name,
-            lastName: lastName ?? user?.lastname,
-            nameShop: nameShop ?? user?.nameShop,
-            phone: phone ?? user?.phone,
+            image: image,
+            imageLogo: imageLogo,
+            direction: direction,
+            name: name,
+            lastName: lastName,
+            nameShop: nameShop,
+            phone: phone,
+            ruc: ruc,
             type: user?.type,
             accesories: accesoriess
         };
@@ -166,15 +176,17 @@ const LayoutConfigurationPage = () =>{
                         </label>
                         <h1 style={{color: 'rgba(0,0,0, 0.8)', fontSize: '1.2rem', marginTop: '1rem'}}>Configura tu usuario</h1>
                         <div style={{marginTop: '1rem'}}>
-                            <input value={nameShop} onChange={(e) => setNameShop(e.target.value)} placeholder={"Nombre de tienda (" + user?.nameShop + ")"} className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+                            <input value={nameShop} onChange={(e) => setNameShop(e.target.value)} placeholder={"Nombre de tienda (" + nameShop + ")"} className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+                            <input value={ruc} onChange={(e) => setRuc(e.target.value)} placeholder={"RUC (" + ruc + ")"}  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+
                         </div>
                         <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                            <input value={name} onChange={(e) => setName(e.target.value)} placeholder={"Nombre (" + user?.name + ")"}  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
-                            <input value={lastName} onChange={(e) => setLastname(e.target.value)} placeholder={"Apellido (" + user?.lastname + ")"} className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+                            <input value={name} onChange={(e) => setName(e.target.value)} placeholder={"Nombre (" + name + ")"}  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+                            <input value={lastName} onChange={(e) => setLastname(e.target.value)} placeholder={"Apellido (" + lastName + ")"} className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
                         </div>
                         <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                            <input value={direction} onChange={(e) => setDirection(e.target.value)} placeholder={"Dirección (" + user?.direction + ")"}  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
-                            <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder={"Whatsapp (" + user?.phone + ")"} className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+                            <input value={direction} onChange={(e) => setDirection(e.target.value)} placeholder={"Dirección (" + direction + ")"}  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+                            <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder={"Whatsapp (" + phone + ")"} className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
                         </div>
                             <div style={{width: '100%', marginTop: '1rem', textAlign: 'right'}}>
                                 <button

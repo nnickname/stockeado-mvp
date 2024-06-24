@@ -44,7 +44,8 @@ const InspectionViewWorkshopLayoutPage = () => {
     const [clientLastname, setClientLastName] = useState<string>('');
     const [clientPhone, setClientPhone] = useState<string>('');
     const [clientEmail, setClientEmail] = useState<string>('');
-
+    const [clientBirth, setClientBirth] = useState<string>('');
+    const [clientRuc, setClientRuc] = useState<string>('');
 
     const [vehicleSeleted, setSelectedVehicle] = useState<string>(null);
     const [vehicleBrand, setVehicleBrand] = useState<string>('');
@@ -60,16 +61,11 @@ const InspectionViewWorkshopLayoutPage = () => {
     const [fuel, setFuel] = useState<string>('');
     const [brakes, setBrakes] = useState<string>('');
     const [refrigerant, setRefrigerant] = useState<string>('');
-
-    const [newJob, setNewJob] = useState<string>('');
-
     const [observations, setObservations] = useState<string>('');
 
     const [newScheduler, setNewScheduler] = useState<string>('');
     const [newSchedulerDate, setSchedulerDate] = useState<string>('');
     const [calendars, setCalendars] = useState<any[]>([]);
-    
-    const [newAccesorie, setNewAccesorie] = useState<string>('');
     const [accesories, setAccesories] = useState<any>([]);
     
     const [inspections, setInspections] = useState<InspectionsModel[]>([]);
@@ -123,12 +119,15 @@ const InspectionViewWorkshopLayoutPage = () => {
             setClientLastName('');
             setClientEmail('');
             setClientPhone('');
+            setClientBirth('');
+            setClientRuc('');
             setSelectedVehicle(null);
             setVehiclePlate('');
             setVehicleBrand('');
             setVehicleModel('');
             setVehicleYear('');
             setVehicleVin('');
+            
             setSelectedInspection(null);
             setDateStart('');
             setWorker('');
@@ -157,6 +156,8 @@ const InspectionViewWorkshopLayoutPage = () => {
             setClientLastName(object?.client?.lastname);
             setClientEmail(object?.client?.email);
             setClientPhone(object?.client?.phone);
+            setClientBirth(object.client.birth);
+            setClientRuc(object?.client?.ruc);
             setSelectedVehicle(String(object?.vehicle?._id));
             setVehiclePlate(object?.vehicle?.plate);
             setVehicleBrand(object?.vehicle?.brand);
@@ -184,7 +185,7 @@ const InspectionViewWorkshopLayoutPage = () => {
                 message = message + ' ' + 'Generales';  
             }else message = message + ', ' + 'Generales'
         }
-        if(clientName === '' || clientLastname === '' || clientEmail === '' || clientPhone === ''){
+        if(clientName === '' || clientLastname === '' || clientEmail === '' || clientPhone === '' || clientBirth === '' || clientRuc === ''){
             if(message === ''){
                 message = message + ' ' + 'Cliente';  
             }else message = message + ', ' + 'Cliente';
@@ -212,7 +213,9 @@ const InspectionViewWorkshopLayoutPage = () => {
                     name: clientName,
                     lastname: clientLastname,
                     email: clientEmail,
-                    phone: clientPhone
+                    phone: clientPhone,
+                    birth: clientBirth,
+                    ruc: clientRuc
                 },
                 vehicle: {
                     _id: vehicleSeleted ?? '',
@@ -332,6 +335,8 @@ const InspectionViewWorkshopLayoutPage = () => {
                                                         setClientLastName(e?.lastname);
                                                         setClientEmail(e?.email);
                                                         setClientPhone(e?.phone);
+                                                        setClientBirth(e?.birth);
+                                                        setClientRuc(e?.ruc);
                                                     }
                                                 });
                                                 
@@ -433,6 +438,10 @@ const InspectionViewWorkshopLayoutPage = () => {
                                     <p className="formTitle mr1">VIN</p>
                                     <input disabled={vehicleSeleted !== null ? true : false} onChange={(e) => setVehicleVin(e.target.value)} value={vehicleVin} className="inputForm w100Min" type="text" placeholder=""/>
                                 </div>
+                                <div className="flex between mt1 displayBlockResponsiveMin">
+                                    <p className="formTitle mr1">Visita</p>
+                                    <input disabled placeholder={vehicleSeleted !== null ? 'Recurrente' : 'Nuevo'} className="inputForm w100Min " type="text"/>
+                                </div>
                             </div>
                             <div className="cardWhiteForm mt1 w100">
                                 <div className="flex between displayBlockResponsiveMin">
@@ -461,6 +470,8 @@ const InspectionViewWorkshopLayoutPage = () => {
                                                 setClientLastName('');
                                                 setClientEmail('');
                                                 setClientPhone('');
+                                                setClientBirth('');
+                                                setClientRuc('');
                                                 return;
                                             }
                                             const clientObject = clients?.find(e => String(e._id) === values[0]?.value);
@@ -469,6 +480,9 @@ const InspectionViewWorkshopLayoutPage = () => {
                                             setClientLastName(clientObject?.lastname);
                                             setClientEmail(clientObject?.email);
                                             setClientPhone(clientObject?.phone);
+                                            setClientBirth(clientObject?.birth);
+                                            setClientRuc(clientObject?.ruc);
+                                            
                                          } } values={[{value: clientSelected, label: clientSelected === null ? 'Seleccionar/buscar' : '# ' + clientName + ' ' + clientLastname}]}                                     />
                                 </div>
                                 <div className="flex between mt1 displayBlockResponsiveMin">
@@ -482,6 +496,14 @@ const InspectionViewWorkshopLayoutPage = () => {
                                 <div className="flex between mt1 displayBlockResponsiveMin">
                                     <p className="formTitle mr1">Celular</p>
                                     <input onChange={(e) => setClientPhone(e.target.value)} value={clientPhone} disabled={clientSelected !== null ? true : false} className="inputForm w100Min" type="text" placeholder=""/>
+                                </div>
+                                <div className="flex between mt1 displayBlockResponsiveMin">
+                                    <p className="formTitle mr1">DNI/RUC</p>
+                                    <input onChange={(e) => setClientRuc(e.target.value)} value={clientRuc} disabled={clientSelected !== null ? true : false} className="inputForm w100Min" type="text" placeholder=""/>
+                                </div>
+                                <div className="flex between mt1 displayBlockResponsiveMin">
+                                    <p className="formTitle mr1">Fecha de nacimiento</p>
+                                    <input value={clientBirth} className="inputForm w100Min" onChange={(e) => setClientBirth(e.target.value)} disabled={clientSelected !== null ? true : false} type="datetime-local" placeholder=""/>
                                 </div>
                                 <div className="flex between mt1 displayBlockResponsiveMin">
                                     <p className="formTitle mr1">Correo</p>

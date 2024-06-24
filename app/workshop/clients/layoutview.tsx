@@ -59,6 +59,8 @@ const ClientsWorkshopLayoutPage = ( ) => {
     const [name, setName] = useState<string>('');
     const [lastname, setLastName] = useState<string>('');
     const [phone, setPhone] = useState<string>('');
+    const [ruc, setRuc] = useState<string>('');
+    const [birth, setBirth] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [vehicles, setVehicles] = useState<string[]>([]);
     const [formError, setErrorForm] = useState<string>('');
@@ -88,9 +90,9 @@ const ClientsWorkshopLayoutPage = ( ) => {
         filterMonth(0, clientss.reverse());
     }
     const buildForm = async() => {
-        if(name !== '' && lastname !== '' && phone !== '' && email !== ''){
+        if(name !== '' && lastname !== '' && phone !== '' && email !== '' && birth !== '' && ruc !== ''){
             const body = {
-                name, lastname, phone, email, vehicles, 
+                name, lastname, phone, email, vehicles, birth, ruc,
                 owner: user?.role === 'owner' ? user?._id : user?.owner,
                 createdBy: user?.name + ' ' + user?.lastname
             };
@@ -101,6 +103,13 @@ const ClientsWorkshopLayoutPage = ( ) => {
                 const clientss = await getAllClients(String(user?._id)) ?? [];
                 setClients(clientss);
                 setOpen(false);
+                setName('');
+                setLastName('');
+                setPhone('');
+                setEmail('');
+                setBirth('');
+                setRuc('');
+                setVehicles([]);
                 setDisabledButton(false);
             } else setErrorForm('* Ocurrio un problema');
         } else setErrorForm('* Encontramos errores en el formulario');
@@ -193,31 +202,30 @@ const ClientsWorkshopLayoutPage = ( ) => {
                                     <option value={12}>Diciembre</option>
                             </select>
                         </div>
-                        <TableComponent rows={
-                            [...clients?.map((e, index: number) => {
-                                var calendarsCount:number = 0;
-                                calendars?.map((a) => {
-                                    if(e?._id === a?.client) calendarsCount++;
-                                })
-                                return {
-                                    id: index,
-                                    realid: e?._id,
-                                    name: e?.name,
-                                    lastname: e?.lastname,
-                                    phone: e?.phone,
-                                    vehicle: String(e?.vehicles?.map((a) =>{
-                                        return ' ' + vehiclesOptions.find((e) =>  String(e?._id) === a).brand + ' ' + vehiclesOptions.find((e) => String(e?._id) === a).model})).substring(0, 25) + '...',
-                                    service: orders?.map((a, index: number) => {
-                                        if(a?.client?._id === e?._id){
-                                         return ' ' + ReturnUnifiedStringDateTime(a?.dateStart);
-                                        }
-                                        ;
-                                    }).filter(s => s !== undefined) ?? 'No encontrado',
-                                    action: e?._id,
-                                    calendars: String(calendarsCount)
-                                }
-                            })]?.filter((item) => (item?.name + ' ' + item?.lastname).toLowerCase().includes(search?.toLowerCase()))
-                        } />
+                        <TableComponent rows={[...clients?.map((e, index: number) => {
+                            var calendarsCount: number = 0;
+                            calendars?.map((a) => {
+                                if (e?._id === a?.client) calendarsCount++;
+                            });
+                            return {
+                                id: index,
+                                realid: e?._id,
+                                name: e?.name,
+                                lastname: e?.lastname,
+                                phone: e?.phone,
+                                vehicle: String(e?.vehicles?.map((a) => {
+                                    return ' ' + vehiclesOptions.find((e) => String(e?._id) === a).brand + ' ' + vehiclesOptions.find((e) => String(e?._id) === a).model;
+                                })).substring(0, 25) + '...',
+                                service: orders?.map((a, index: number) => {
+                                    if (a?.client?._id === e?._id) {
+                                        return ' ' + ReturnUnifiedStringDateTime(a?.dateStart);
+                                    }
+                                    ;
+                                }).filter(s => s !== undefined) ?? 'No encontrado',
+                                action: e?._id,
+                                calendars: String(calendarsCount)
+                            };
+                        })]?.filter((item) => (item?.name + ' ' + item?.lastname).toLowerCase().includes(search?.toLowerCase()))} targetRef={undefined} />
                     </div>
                 </div>
             }
@@ -241,6 +249,14 @@ const ClientsWorkshopLayoutPage = ( ) => {
                 <div className="flex between displayBlockResponsive mt1">
                     <p className="formTitle mr1">Apellido</p>
                     <input className="inputForm" onChange={(e) => setLastName(e.target.value)} type="text" placeholder=""/>
+                </div>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">DNI/RUC</p>
+                    <input className="inputForm" onChange={(e) => setRuc(e.target.value)} type="text" placeholder=""/>
+                </div>
+                <div className="flex between displayBlockResponsive mt1">
+                    <p className="formTitle mr1">Fecha de nacimiento</p>
+                    <input className="inputForm" onChange={(e) => setBirth(e.target.value)} type="datetime-local" placeholder=""/>
                 </div>
                 <div className="flex between displayBlockResponsive mt1">
                     <p className="formTitle mr1">Celular</p>
@@ -280,7 +296,9 @@ const ClientsWorkshopLayoutPage = ( ) => {
 
 
 export type NewTableComponentType = {
-    rows: any
+    rows: any,
+    targetRef?: any,
+    setSelectedIndexPdf?: any
 }
 const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
     const router = useRouter();

@@ -287,6 +287,9 @@ input{
 .between{
   justify-content: space-between;
 }
+.fz1{
+  fontSize: 1rem !important;
+}
 .p1{
   padding: 1rem;
 }
