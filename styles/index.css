@@ -203,18 +203,7 @@ input{
   background-color: white;
   border-radius: .5rem;
 }
-.btn-back{
-  background-color: white;
-  color: #1B53C5;
-  padding: auto;
-  font-weight: 500;
-  font-size: 1rem;
-  padding: .2rem;
-  border: 1px solid #1B53C5;
-  border-radius: 100%;
-  cursor: pointer;
-  
-}
+
 .btn{
   cursor: pointer;
 }
@@ -331,7 +320,7 @@ input{
 }
 @media screen and (max-width: 1110px) {
   .btn-back{
-    margin-right: 4rem !important;
+    padding-right: 3rem !important;
     font-size: .8rem;
     
   }

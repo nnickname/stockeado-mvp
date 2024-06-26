@@ -16,6 +16,7 @@ import { createWorkShopUser, deleteWorkShopUser, getAllWorkShopUsers, getOneWork
 import './index.css';
 import { ReturnUnifiedStringDateTime } from "@/utils/hooks";
 import { ExportJsonCsv } from 'react-export-json-csv';
+import LoadPage from "@/components/general/loadPage";
 
 export function getUserWorkshopRoleName (state: string){
     switch(state){
@@ -153,7 +154,7 @@ const UsersWorkshopLayoutPage = ( ) => {
     }  
     
     return <div>
-        {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
+        {user === null ? <LoadPage/> :
             <SideBarComponent user={user} route='/workshop/users' frameContennt={
                 <div>
                     <h1 className="headerSideBar"> Usuarios</h1>

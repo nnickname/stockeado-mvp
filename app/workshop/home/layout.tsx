@@ -22,6 +22,7 @@ import { OrderWorkshopModel } from "@/models/workshops/orders.model";
 import { getAllCalendars, updateCalendar } from "@/app/api/workshop/calendars/call";
 import { CalendarsModel } from "@/models/workshops/calendars.model";
 import { ReturnUnifiedStringDateTime } from "@/utils/hooks";
+import LoadPage from "@/components/general/loadPage";
 const HomeWorkshopLayoutPage = () => {
     const router = useRouter();
     const [user, setUser] = useState<UserModel>(null);
@@ -117,7 +118,7 @@ const HomeWorkshopLayoutPage = () => {
         setOrdersFilter(ordersFilter ?? []);
     }   
     return <>  
-        {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
+        {user === null ? <LoadPage/> :
             <SideBarComponent user={user} route='/workshop/home' frameContennt={
                 <div>
                     <h1 className="headerSideBar"> Dashboard general</h1>
@@ -237,7 +238,11 @@ const HomeWorkshopLayoutPage = () => {
                             ...calendars?.map((e) => {
                                 const currentTime = new Date();
                                 const timeTask = new Date(ReturnUnifiedStringDateTime(e?.dateEnd));
-                                if(timeTask.getDay() === currentTime.getDay()){
+                                console.log(timeTask.getDate(), currentTime.getDate());
+                                console.log(timeTask.getMonth(), currentTime.getMonth());
+                                console.log(timeTask.getFullYear(), currentTime.getFullYear());
+
+                                if(timeTask.getDate() === currentTime.getDate()){
                                     if(timeTask.getMonth() === currentTime.getMonth()){
                                         if(timeTask.getFullYear() === currentTime.getFullYear()){
                                             return <PopoverRender vehicles={vehicles} clients={clients} inspections={inspections} calendar={e}/>

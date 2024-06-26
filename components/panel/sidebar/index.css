@@ -4,7 +4,7 @@
 }
 .sideBarContainer{
     background-color: #F5F7FA;
-    width: calc(100% - 158px) !important;
+    width: calc(100% - 220px);
     min-height: 100vh;
 }
 
@@ -12,6 +12,7 @@
     transition: 1s ease;
     background-color: #FFFFFF;
     width: 220px;
+    min-width: 220px !important;
     min-height: 100vh;
     text-align: center;
     z-index: 110;

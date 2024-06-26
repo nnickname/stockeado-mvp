@@ -17,6 +17,8 @@ import { toast } from "react-toastify";
 import { OrderWorkshopModel } from "@/models/workshops/orders.model";
 import { CalendarsModel } from "@/models/workshops/calendars.model";
 import { ReturnUnifiedStringDateTime } from "@/utils/hooks";
+import LoadPage from "@/components/general/loadPage";
+import BackButton from "@/components/general/backButton";
 const LayoutViewClientWorkShop = ( ) => {
     const router = useRouter();
     const [open, setOpen] = useState<boolean>();
@@ -92,14 +94,12 @@ const LayoutViewClientWorkShop = ( ) => {
         toUser();
     }, []);
     return <div>
-        {orderIndex === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
+        {orderIndex === null ? <LoadPage/> :
             <SideBarComponent user={user} route='/workshop/clients' frameContennt={
                 <div>
                     <div className="flex between">
                         <h1 className="headerSideBar"> Clientes</h1>
-                        <div style={{background: 'white'}}>
-                            <button onClick={() => router.push('/workshop/clients')} className="btn-back mr1 mt1"><IonIcon name="arrow-back-outline"/></button>
-                        </div>
+                        <BackButton route='/workshop/clients'/>
                     </div>
                     <div className="p1">
                         <h1 className="subtitle">Cliente #{orderIndex +1}</h1>

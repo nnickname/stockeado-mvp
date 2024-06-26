@@ -25,6 +25,7 @@ import { CalendarsModel } from "@/models/workshops/calendars.model";
 import Cars from '@/json/cars.json';
 import { ReturnUnifiedStringDateTime } from "@/utils/hooks";
 import { ExportJsonCsv } from 'react-export-json-csv';
+import LoadPage from "@/components/general/loadPage";
 
 const VehiclesWorkshopLayoutPage = ( ) => {
     const headers = [
@@ -136,7 +137,7 @@ const VehiclesWorkshopLayoutPage = ( ) => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
     return <div>
-        {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
+        {user === null ? <LoadPage/> :
             <SideBarComponent user={user} route='/workshop/vehicles' frameContennt={
                 <div>
                     <h1 className="headerSideBar"> Vehículos</h1>

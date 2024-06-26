@@ -27,6 +27,8 @@ import Paper from '@mui/material/Paper';
 import Link from "next/link";
 import Modal from "react-responsive-modal";
 import 'react-responsive-modal/styles.css';
+import LoadPage from "@/components/general/loadPage";
+import BackButton from "@/components/general/backButton";
 const LayoutConfigurationPage = () =>{
     const router = useRouter();
     const [user, setUser] = useState<UserModel>(null);
@@ -170,11 +172,14 @@ const LayoutConfigurationPage = () =>{
         } else setOpenEditItem(false);
     }
     return <div>
-        {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
+        {user === null ? <LoadPage/> :
             
     <SideBarComponent user={user} route='configuration' frameContennt={
         <div>
-            <h1 className="headerSideBar"> Servicio</h1>
+            <div className="flex between">
+                <h1 className="headerSideBar"> Servicio</h1>
+                <BackButton route='/configuration'/>
+            </div>
             <p className="subsubtitle mt1 ml1" style={{marginLeft: 'calc(1rem + 1px)'}}>Personaliza tus servicio en categorías a detalle para hacer las cotizaciones más rápido.            </p>
 
             
@@ -226,7 +231,7 @@ const LayoutConfigurationPage = () =>{
                                                 {row?.name}
                                             </TableCell>
                                             <TableCell align="left">
-                                               s/. {row?.price}
+                                               s/. {Number(row?.price).toFixed(2)}
                                             </TableCell>
                             
                                             <TableCell align="right">
