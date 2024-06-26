@@ -17,6 +17,7 @@ import { ReturnUnifiedStringDateTime } from "@/utils/hooks";
 import { ExportJsonCsv } from 'react-export-json-csv';
 import generatePDF from 'react-to-pdf';
 import dynamic from "next/dynamic";
+import LoadPage from "@/components/general/loadPage";
 const ViewPDFOrderPage = dynamic(
     () => import('./pdf/component'),
     { ssr: false }
@@ -110,10 +111,10 @@ const LayoutViewOrdersWorkShop = ( ) => {
     }  
     
     return <div>
-        <div style={{transform: 'translateX(-1000%)', position: 'absolute', width: '100vw'}}>
+        <div style={{transform: 'translateX(-99999%)', position: 'absolute', width: '100%', minWidth: '1500px'}}>
             <div ref={targetRef}> <ViewPDFOrderPage indexLength={realOrders?.length} index={selectIndexPdf}   tasks={orders[selectIndexPdf]?.tasks} user={user} inspection={orders[selectIndexPdf]}/> </div>
         </div>
-        {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
+        {user === null ? <LoadPage/> :
             <SideBarComponent user={user} route='/workshop/orders' frameContennt={
                 <div className="">
                     <h1 className="headerSideBar"> Órdenes de servicio</h1>
@@ -166,7 +167,7 @@ const LayoutViewOrdersWorkShop = ( ) => {
                             ...orders?.map((e, index: number) => {
                                 return {
                                     id: index,
-                                    ammount: 's/. ' + (e?.totalPrice === '' ? '0' : e?.totalPrice),
+                                    ammount: 's/. ' + Number(e?.totalPrice === '' ? '0' : e?.totalPrice).toFixed(2),
                                     vehicle: e?.vehicle?.brand + ' ' + e?.vehicle?.model,
                                     date: ReturnUnifiedStringDateTime(e?.createdAt),
                                     plate: e?.vehicle?.plate,

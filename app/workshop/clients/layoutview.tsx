@@ -23,6 +23,7 @@ import { CalendarsModel } from "@/models/workshops/calendars.model";
 import { getAllCalendars } from "@/app/api/workshop/calendars/call";
 import { ReturnUnifiedStringDateTime } from "@/utils/hooks";
 import { ExportJsonCsv } from 'react-export-json-csv';
+import LoadPage from "@/components/general/loadPage";
 
 const ClientsWorkshopLayoutPage = ( ) => {
     const headers = [
@@ -145,7 +146,7 @@ const ClientsWorkshopLayoutPage = ( ) => {
     }  
     
     return <div>
-        {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
+        {user === null ? <LoadPage/> :
             <SideBarComponent user={user} route='/workshop/clients' frameContennt={
                 <div>
                     <h1 className="headerSideBar"> Clientes</h1>

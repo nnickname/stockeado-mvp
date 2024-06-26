@@ -20,6 +20,7 @@ import '../workshop/inspections/create/index.css';
 import Modal from "react-responsive-modal";
 import 'react-responsive-modal/styles.css';
 import Link from "next/link";
+import LoadPage from "@/components/general/loadPage";
 const LayoutConfigurationPage = () =>{
     const router = useRouter();
     const [user, setUser] = useState<UserModel>(null);
@@ -53,7 +54,7 @@ const LayoutConfigurationPage = () =>{
         setLastname(userr?.lastname);
         setPhone(userr?.phone);
         setDirection(userr?.direction);
-        setRuc(userr.ruc);
+        setRuc(userr?.ruc );
         setAccesories(userr?.accesories ?? []);
         setServices(userr?.services ?? []);
     }
@@ -149,7 +150,7 @@ const LayoutConfigurationPage = () =>{
         };
     }
     return <div>
-        {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
+        {user === null ? <LoadPage/> :
             
     <SideBarComponent user={user} route='configuration' frameContennt={
         <div>
@@ -177,16 +178,16 @@ const LayoutConfigurationPage = () =>{
                         <h1 style={{color: 'rgba(0,0,0, 0.8)', fontSize: '1.2rem', marginTop: '1rem'}}>Configura tu usuario</h1>
                         <div style={{marginTop: '1rem'}}>
                             <input value={nameShop} onChange={(e) => setNameShop(e.target.value)} placeholder={"Nombre de tienda (" + nameShop + ")"} className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
-                            <input value={ruc} onChange={(e) => setRuc(e.target.value)} placeholder={"RUC (" + ruc + ")"}  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+                            <input value={ruc} onChange={(e) => setRuc(e.target.value)} placeholder={"RUC (" + (ruc ?? '') + ")"}  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
 
                         </div>
                         <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                            <input value={name} onChange={(e) => setName(e.target.value)} placeholder={"Nombre (" + name + ")"}  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
-                            <input value={lastName} onChange={(e) => setLastname(e.target.value)} placeholder={"Apellido (" + lastName + ")"} className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+                            <input value={name} onChange={(e) => setName(e.target.value)} placeholder={"Nombre (" + (name ?? '') + ")"}  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+                            <input value={lastName} onChange={(e) => setLastname(e.target.value)} placeholder={"Apellido (" + (lastName ?? '') + ")"} className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
                         </div>
                         <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                            <input value={direction} onChange={(e) => setDirection(e.target.value)} placeholder={"Dirección (" + direction + ")"}  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
-                            <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder={"Whatsapp (" + phone + ")"} className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+                            <input value={direction} onChange={(e) => setDirection(e.target.value)} placeholder={"Dirección (" + (direction ?? '') + ")"}  className="border-stroke dark:text-body-color-dark dark:shadow-two  w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
+                            <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder={"Whatsapp (" + (phone ?? '') + ")"} className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border  px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none" style={{background: 'transparent'}}></input>
                         </div>
                             <div style={{width: '100%', marginTop: '1rem', textAlign: 'right'}}>
                                 <button

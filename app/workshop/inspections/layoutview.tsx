@@ -15,6 +15,7 @@ import { ReturnUnifiedStringDateTime } from "@/utils/hooks";
 import { ExportJsonCsv } from 'react-export-json-csv';
 import ViewPDFPageInspection from "./pdf/component";
 import generatePDF from "react-to-pdf";
+import LoadPage from "@/components/general/loadPage";
 
 const LayoutViewInspectionsWorkShop = ( ) => {
     const targetRef = useRef();
@@ -87,10 +88,10 @@ const LayoutViewInspectionsWorkShop = ( ) => {
         selectMonth(month);
     }   
     return <div className="w100">
-        <div style={{transform: 'translateX(-1000%)', position: 'absolute', width: '100vw'}}>
+        <div style={{transform: 'translateX(-99999%)', position: 'absolute', width: '100%', minWidth: '1500px'}}>
             <div ref={targetRef}> <ViewPDFPageInspection indexLength={realInspections?.length} index={selectIndexPdf}  user={user} inspection={inspections[selectIndexPdf]}/> </div>
         </div>
-        {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
+        {user === null ? <LoadPage/> :
             <SideBarComponent user={user} route='/workshop/inspections' frameContennt={
                 <div className="">
                     <h1 className="headerSideBar"> Inspecciones</h1>

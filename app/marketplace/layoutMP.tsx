@@ -23,6 +23,7 @@ import { SkewLoader } from "react-spinners";
 import ArrayPagination from '@vlsergey/react-bootstrap-array-pagination';
 import Pagination from "@/components/marketplace/pagination";
 import Footer from "@/components/dashboard/Footer";
+import LoadPage from "@/components/general/loadPage";
 
 const LayoutMarketPlaceNative = () => {
     const [open, setOpen] = useState(false);
@@ -85,7 +86,7 @@ const LayoutMarketPlaceNative = () => {
 
     
     return <div>
-        {items === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
+        {items === null ? <LoadPage/> :
         <div>
           <HeaderMarketPlace cartItems={cart} setCart={setCart}/>
           <BackgroundImage/>

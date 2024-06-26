@@ -174,8 +174,8 @@ const ViewPDFPageInspection: FunctionComponent<ViewPDFPageInspectionType> = ({us
                                                 <TableCell align="center">
                                                     {row.ammount}</TableCell>
                                                 <TableCell align="center">
-                                                    s/. {row.price}</TableCell>
-                        <TableCell align="right">s/. {Number(row?.price) * Number(row?.ammount)}</TableCell>
+                                                    s/. {Number(row.price).toFixed(2)}</TableCell>
+                        <TableCell align="right">s/. {(Number(row?.price) * Number(row?.ammount)).toFixed(2)}</TableCell>
                     </TableRow>
                 })} 
                     </TableBody>
@@ -183,7 +183,7 @@ const ViewPDFPageInspection: FunctionComponent<ViewPDFPageInspectionType> = ({us
             </TableContainer>
             <div className="flex between">
                 <p></p>
-                <p className="mt2 mr1"><span className="mr1">Total</span> s/. {countTotalTasksPrice(inspection?.tasks)}</p>
+                <p className="mt2 mr1"><span className="mr1">Total</span> s/. {countTotalTasksPrice(inspection?.tasks).toFixed(2)}</p>
             </div>
 
             <div className="w100 center" style={{marginTop: '6rem'}}>

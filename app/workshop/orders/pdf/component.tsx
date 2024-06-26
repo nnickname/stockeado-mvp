@@ -119,8 +119,8 @@ const ViewPDFOrderPage: FunctionComponent<ViewPDFOrderPageType> = ({tasks, user,
                                                 <TableCell align="center">
                                                     {row.ammount}</TableCell>
                                                 <TableCell align="center">
-                                                    s/. {row.price}</TableCell>
-                        <TableCell align="center">s/. {Number(row?.price) * Number(row?.ammount)}</TableCell>
+                                                    s/. {Number(row.price).toFixed(2)}</TableCell>
+                        <TableCell align="center">s/. {(Number(row?.price) * Number(row?.ammount)).toFixed(2)}</TableCell>
                     </TableRow>
                 })} 
                     </TableBody>
@@ -128,7 +128,7 @@ const ViewPDFOrderPage: FunctionComponent<ViewPDFOrderPageType> = ({tasks, user,
             </TableContainer>
             <div className="flex between">
                 <p></p>
-                <p className="mt2 mr1"><span className="mr1">Total</span> s/. {countTotalTasksPrice(tasks)}</p>
+                <p className="mt2 mr1"><span className="mr1">Total</span> s/. {countTotalTasksPrice(tasks).toFixed(2)}</p>
             </div>
 
             <div className="w100 center" style={{marginTop: '6rem'}}>

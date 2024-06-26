@@ -26,6 +26,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import LoadPage from "@/components/general/loadPage";
+import BackButton from "@/components/general/backButton";
 function countTotalTasksPrice(tasks: any[]){
     var count = 0;
     tasks?.map((e) => {
@@ -248,14 +250,12 @@ const InspectionViewWorkshopLayoutPage = () => {
         toUser();
     }, []); 
     return <div>
-        {user === null ? <IonIcon name='chevron-collapse-outline' className="rotateItem" color='#1366D9' style={{fontSize: '1.5rem', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}/> :
+        {user === null ? <LoadPage/> :
             <SideBarComponent user={user} route='/workshop/inspections' frameContennt={
                 <div>
                     <div className="flex between">
                         <h1 className="headerSideBar"> Nuevo informe de inspección</h1>
-                        <div style={{background: 'white'}}>
-                            <button  onClick={() => router.push('/workshop/inspections')} className="btn-back mr1 mt1"><IonIcon name="arrow-back-outline"/></button>
-                        </div>
+                        <BackButton route='/workshop/inspections'/>
                     </div>
                     <div className="p1">
 
@@ -637,14 +637,14 @@ const InspectionViewWorkshopLayoutPage = () => {
                                                 }} type='number' className="inputForm" placeholder=''></input>
                                             </TableCell>
                                             <TableCell align="right">
-                                                <input value={row.price} onChange={(e) => {
+                                                <input type='number' value={Number(row.price).toFixed(2)} onChange={(e) => {
                                                     var tasksCast = tasks;
                                                     tasksCast[index].price = e?.target?.value;
                                                     setTasks(tasksCast);
                                                     setTableKey( Math.random());
                                                 }} className="inputForm" placeholder=''></input>
                                             </TableCell>
-                                            <TableCell align="right">s/. {Number(row?.price) * Number(row?.ammount)}</TableCell>
+                                            <TableCell align="right">s/. {(Number(row?.price) * Number(row?.ammount)).toFixed(2)}</TableCell>
                                             <TableCell  align="right">
                                                 <IonIcon className="btn" name='trash-outline' style={{fontSize: '1rem', border: '0px', color: '#3662E3'}}  onClick={(e) => {
                                                     var tasksCast = tasks;
@@ -669,7 +669,7 @@ const InspectionViewWorkshopLayoutPage = () => {
                                         
                                     }])
                                 }}>+ Agregar linea</button>
-                                <p className="mt2 mr1"><span className="mr1">Total</span> s/. {countTotalTasksPrice(tasks)}</p>
+                                <p className="mt2 mr1"><span className="mr1">Total</span> s/. {countTotalTasksPrice(tasks).toFixed(2)}</p>
                             </div>
                             <p className="formTitle mt2">Observaciones adicionales</p>
                             <input onChange={(e) => setObservations(e.target.value)} value={observations} className="inputForm mt1 w100" type="text" placeholder=""/>

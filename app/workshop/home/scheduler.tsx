@@ -76,14 +76,21 @@ const SchedulerRender: FunctionComponent<SchedulerProps> = ({user, setCalendars,
             if(response) {
                 toast.success('Añadiste un nuevo recordatorio.');
                 const calendarsCast = await getAllCalendars(String(user?.role === 'owner' ? user?._id : user?.owner));
-                setCalendars(calendarsCast ?? []);
+                
                 
                 setTimeout(() => {
                     
                     res({
                         ...event,
-                        event_id: event.event_id || Math.random()
+                        event_id: event.event_id || Math.random(),
+                        disabled: false,
+                        color: randomColors[(Math.floor(Math.random() * 3) + 0)],
+                        textColor: '#1E367D',
+                        deletable: true,
+                        editable: false,
+                        draggable: false
                     });
+                    setCalendars(calendarsCast ?? []);
                     
                 }, 3000);
             } else toast.error('Ocurrio un problema añadiendo tu recordatorio.');
