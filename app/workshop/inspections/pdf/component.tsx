@@ -131,9 +131,9 @@ const ViewPDFPageInspection: FunctionComponent<ViewPDFPageInspectionType> = ({us
                 <div className="w100">
                     {
                         inspection?.accesories?.map((e) => {
-                            return <p style={{width: 'max-content', display: 'inline-block'}} className="mt05 fz1 ml1">
+                            return e?.value === 'on' ? <p style={{width: 'max-content', display: 'inline-block'}} className="mt05 fz1 ml1">
                                 {e?.label}
-                            </p>
+                            </p> : <div/>
                         })
                     }
                 </div>
