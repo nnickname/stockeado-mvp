@@ -75,7 +75,6 @@ const ViewOrderWorkshopLayoutPage = () => {
     const [order, setOrder] = useState<OrderWorkshopModel>(null);
     const [carSelected, setCarSelected]  = useState<Array<any>>([]);
     const [tableKey, setTableKey] = useState<number>( Math.random());
-
     const [tasks, setTasks] = useState<any[]>([{
         service: '',
         item: '',
@@ -129,7 +128,7 @@ const ViewOrderWorkshopLayoutPage = () => {
                 message = message + ' ' + 'Generales';  
             }else message = message + ', ' + 'Generales'
         }
-        if(clientName === '' || clientLastname === '' || clientEmail === '' || clientPhone === '' || clientBirth === '' || clientRuc === ''){
+        if(clientName === '' || clientLastname === '' || clientEmail === '' || clientPhone === ''){
             if(message === ''){
                 message = message + ' ' + 'Cliente';  
             }else message = message + ', ' + 'Cliente';
@@ -158,7 +157,7 @@ const ViewOrderWorkshopLayoutPage = () => {
                 owner: user?.role === 'owner' ? user?._id : user?.owner,
                 state: currentOrderState,
                 pdfUri: '',
-                totalPrice: countTotalTasksPrice(tasks),
+                totalPrice,
                 workSpace: workSpace ?? '',
                 client: {
                     _id: clientSelected ?? '',
@@ -214,6 +213,8 @@ const ViewOrderWorkshopLayoutPage = () => {
                 ammount: 0,
                 
             }]);
+            setTotalPrice('');
+
             return;
         }
         const object = inspections?.find(e => String(e?._id) === id);
@@ -578,6 +579,7 @@ const ViewOrderWorkshopLayoutPage = () => {
                                                     var tasksCast = tasks;
                                                     tasksCast[index].service = e?.target?.value;
                                                     setTasks(tasksCast);
+                                                    
                                                     setTableKey( Math.random());
                                                 }} style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}} className="btn inputForm br05" >
                                                     <option value=''>Seleccionar</option>
@@ -607,6 +609,8 @@ const ViewOrderWorkshopLayoutPage = () => {
                                                     var tasksCast = tasks;
                                                     tasksCast[index].ammount = Number(e?.target?.value);
                                                     setTasks(tasksCast);
+                                                    setTotalPrice(countTotalTasksPrice(tasksCast).toFixed(2))
+
                                                     setTableKey( Math.random());
                                                 }} type='number' className="inputForm" placeholder=''></input>
                                             </TableCell>
@@ -615,6 +619,8 @@ const ViewOrderWorkshopLayoutPage = () => {
                                                     var tasksCast = tasks;
                                                     tasksCast[index].price = e?.target?.value;
                                                     setTasks(tasksCast);
+                                                    setTotalPrice(countTotalTasksPrice(tasksCast).toFixed(2))
+
                                                     setTableKey( Math.random());
                                                 }} className="inputForm" placeholder=''></input>
                                             </TableCell>
@@ -624,6 +630,8 @@ const ViewOrderWorkshopLayoutPage = () => {
                                                     var tasksCast = tasks;
                                                     tasksCast.splice(index, 1);
                                                     setTasks(tasksCast);
+                                                    setTotalPrice(countTotalTasksPrice(tasksCast).toFixed(2))
+
                                                     setTableKey( Math.random());
                                                 }} />
                                             </TableCell>
@@ -642,7 +650,11 @@ const ViewOrderWorkshopLayoutPage = () => {
                                         
                                     }])
                                 }}>+ Agregar linea</button>
-                                <p className="mt2 mr1"><span className="mr1">Total</span> s/. {countTotalTasksPrice(tasks).toFixed(2)}</p>
+                                <div className="flex" style={{minWidth: '150px'}}>
+                                    <p className="mt2 mr1">Total</p>
+                                    <input className="ml1" style={{width: '100px', borderBottom: '1px solid grey'}} value={Number(totalPrice).toFixed(2)} type='number' onChange={(e) => setTotalPrice(e?.target?.value)} ></input>
+
+                                </div>
                             </div>
                             
                             
