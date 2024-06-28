@@ -85,6 +85,7 @@ const InspectionWorkshopLayoutPage = () => {
     const [inspections, setInspections] = useState<InspectionsModel[]>([]);
     const [disabledButton, setDisabledButton] = useState<boolean>(false);
     const [carSelected, setCarSelected]  = useState<Array<any>>([]);
+    const [totalPrice, setTotalPrice] = useState<string>('');
     const toUser = async () => {
         const userr = await getUser();
         var ownerid = String(userr?._id);
@@ -113,7 +114,7 @@ const InspectionWorkshopLayoutPage = () => {
                 message = message + ' ' + 'Generales';  
             }else message = message + ', ' + 'Generales'
         }
-        if(clientName === '' || clientLastname === '' || clientEmail === '' || clientPhone === '' || clientBirth === '' || clientRuc === ''){
+        if(clientName === '' || clientLastname === '' || clientEmail === '' || clientPhone === ''){
             if(message === ''){
                 message = message + ' ' + 'Cliente';  
             }else message = message + ', ' + 'Cliente';
@@ -137,6 +138,7 @@ const InspectionWorkshopLayoutPage = () => {
                 workerAssigned,
                 owner: user?.role === 'owner' ? user?._id : user?.owner,
                 state: 0,
+                totalPrice,
                 client: {
                     _id: clientSelected ?? '',
                     name: clientName,
@@ -567,6 +569,8 @@ const InspectionWorkshopLayoutPage = () => {
                                                 <input value={row.ammount} onChange={(e) => {
                                                     var tasksCast = tasks;
                                                     tasksCast[index].ammount = Number(e?.target?.value);
+                                                    setTotalPrice(countTotalTasksPrice(tasksCast).toFixed(2))
+
                                                     setTasks(tasksCast);
                                                     setTableKey( Math.random());
                                                 }} type='number' className="inputForm" placeholder=''></input>
@@ -575,6 +579,8 @@ const InspectionWorkshopLayoutPage = () => {
                                                 <input type='number' value={Number(row.price).toFixed(2)} onChange={(e) => {
                                                     var tasksCast = tasks;
                                                     tasksCast[index].price = e?.target?.value;
+                                                    setTotalPrice(countTotalTasksPrice(tasksCast).toFixed(2))
+
                                                     setTasks(tasksCast);
                                                     setTableKey( Math.random());
                                                 }} className="inputForm" placeholder=''></input>
@@ -584,6 +590,8 @@ const InspectionWorkshopLayoutPage = () => {
                                                 <IonIcon className="btn" name='trash-outline' style={{fontSize: '1rem', border: '0px', color: '#3662E3'}}  onClick={(e) => {
                                                     var tasksCast = tasks;
                                                     tasksCast.splice(index, 1);
+                                                    setTotalPrice(countTotalTasksPrice(tasksCast).toFixed(2))
+
                                                     setTasks(tasksCast);
                                                     setTableKey( Math.random());
                                                 }} />
@@ -604,8 +612,11 @@ const InspectionWorkshopLayoutPage = () => {
                                         
                                     }])
                                 }}>+ Agregar linea</button>
-                                <p className="mt2 mr1"><span className="mr1">Total</span> s/. {countTotalTasksPrice(tasks).toFixed(2)}</p>
-                            </div>
+                                    <div className="flex" style={{minWidth: '150px'}}>
+                                        <p className="mt2 mr1">Total</p>
+                                        <input className="ml1" style={{width: '100px', borderBottom: '1px solid grey'}} value={Number(totalPrice).toFixed(2)} type='number' onChange={(e) => setTotalPrice(e?.target?.value)} ></input>
+                                    </div>
+                                </div>
                             <p className="formTitle mt2">Observaciones adicionales</p>
                             <input onChange={(e) => setObservations(e.target.value)} value={observations} className="inputForm mt1 w100" type="text" placeholder=""/>
                         

@@ -59,9 +59,6 @@ const NewOrderWorkshopLayoutPage = () => {
     const [dateStart, setDateStart] = useState<string>('');
     const [workerAssigned, setWorker] = useState<string>('');
 
-    const [taskAmmount, setTaskAmmount] = useState<string>('');
-    const [taskDescription, setTaskDescription] = useState<string>('');
-    const [taskPrice, setTaskPrice] = useState<string>('');
     const [totalPrice, setTotalPrice] = useState<string>('');
     const [dateEnd, setDateEnd] = useState<string>('');
     const [workSpace, setWorkSpace] = useState<string>('');
@@ -110,7 +107,7 @@ const NewOrderWorkshopLayoutPage = () => {
                 message = message + ' ' + 'Generales';  
             }else message = message + ', ' + 'Generales'
         }
-        if(clientName === '' || clientLastname === '' || clientEmail === '' || clientPhone === '' || clientBirth === '' || clientRuc === ''){
+        if(clientName === '' || clientLastname === '' || clientEmail === '' || clientPhone === ''){
             if(message === ''){
                 message = message + ' ' + 'Cliente';  
             }else message = message + ', ' + 'Cliente';
@@ -140,7 +137,7 @@ const NewOrderWorkshopLayoutPage = () => {
                 owner: user?.role === 'owner' ? user?._id : user?.owner,
                 state: 'pending',
                 pdfUri: '',
-                totalPrice: String(countTotalTasksPrice(tasks)),
+                totalPrice,
                 workSpace,
                 client: {
                     _id: clientSelected ?? '',
@@ -196,6 +193,7 @@ const NewOrderWorkshopLayoutPage = () => {
             setSelectedInspection(null);
             setDateStart('');
             setWorker('');
+            setTotalPrice('');
             return;
         }
         const object = inspections?.find(e => String(e?._id) === id);
@@ -217,7 +215,8 @@ const NewOrderWorkshopLayoutPage = () => {
             setVehicleYear(object?.vehicle?.year);
             setVehicleVin(object?.vehicle?.vin);
             setSelectedInspection(object);
-            setTasks(object?.tasks ?? [])
+            setTasks(object?.tasks ?? []);
+            setTotalPrice(countTotalTasksPrice(object?.tasks).toFixed(2))
         }
     }
     useEffect(() => {
@@ -581,6 +580,7 @@ const NewOrderWorkshopLayoutPage = () => {
                                                     var tasksCast = tasks;
                                                     tasksCast[index].ammount = Number(e?.target?.value);
                                                     setTasks(tasksCast);
+                                                    setTotalPrice(countTotalTasksPrice(tasksCast).toFixed(2))
                                                     setTableKey( Math.random());
                                                 }} type='number' className="inputForm" placeholder=''></input>
                                             </TableCell>
@@ -588,6 +588,7 @@ const NewOrderWorkshopLayoutPage = () => {
                                                 <input type='number' value={Number(row.price).toFixed(2)} onChange={(e) => {
                                                     var tasksCast = tasks;
                                                     tasksCast[index].price = e?.target?.value;
+                                                    setTotalPrice(countTotalTasksPrice(tasksCast).toFixed(2))
                                                     setTasks(tasksCast);
                                                     setTableKey( Math.random());
                                                 }} className="inputForm" placeholder=''></input>
@@ -598,6 +599,7 @@ const NewOrderWorkshopLayoutPage = () => {
                                                     var tasksCast = tasks;
                                                     tasksCast.splice(index, 1);
                                                     setTasks(tasksCast);
+                                                    setTotalPrice(countTotalTasksPrice(tasksCast).toFixed(2))
                                                     setTableKey( Math.random());
                                                 }} />
                                             </TableCell>
@@ -606,7 +608,7 @@ const NewOrderWorkshopLayoutPage = () => {
                                     </TableBody>
                                 </Table>
                             </TableContainer>
-                            <div className="flex between">
+                            <div className="flex displayBlockResponsiveMin between">
                                 <button className="btn btn-gradient-secondary mt2" onClick={() => {
                                     setTasks([...tasks, {
                                         service: '',
@@ -616,7 +618,11 @@ const NewOrderWorkshopLayoutPage = () => {
                                         
                                     }])
                                 }}>+ Agregar linea</button>
-                                <p className="mt2 mr1"><span className="mr1">Total</span> s/. {countTotalTasksPrice(tasks).toFixed(2)}</p>
+                                <div className="flex" style={{minWidth: '150px'}}>
+                                    <p className="mt2 mr1">Total</p>
+                                    <input className="ml1" style={{width: '100px', borderBottom: '1px solid grey'}} value={Number(totalPrice).toFixed(2)} type='number' onChange={(e) => setTotalPrice(e?.target?.value)} ></input>
+
+                                </div>
                             </div>
                             
                             

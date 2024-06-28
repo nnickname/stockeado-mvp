@@ -213,7 +213,7 @@ const HomeWorkshopLayoutPage = () => {
                                 </div>
                                 <div className="ml1">
                                     <p>Crecimiento cliente</p>
-                                    <span className="span">+ {isNaN(percentageIncreaseClients) ? 0 : percentageIncreaseClients}%</span>
+                                    <span className="span">+ {isNaN(percentageIncreaseClients) ? 0 : percentageIncreaseClients.toFixed(2)}%</span>
                                 </div>
                             </div>
                             <div className="cardHome mt1">
