@@ -1,15 +1,15 @@
 import 'react-responsive-modal/styles.css';
-import LayoutMarketPlaceNative from './marketplace/layoutMP';
+import LayoutDashboard from './dashboard/page';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Stockeado | Marketplace",
+  title: "Stockeado",
   // other metadata
 };
 const Page = () => {
 
   return (
-    <LayoutMarketPlaceNative/>
+    <LayoutDashboard/>
   );
 }
 

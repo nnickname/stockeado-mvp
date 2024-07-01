@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import ThemeToggler from "./ThemeToggler";
 import menuData from "./menuData";
-
+import IonIcon from "@reacticons/ionicons";
 const Header = () => {
   // Navbar toggle
   const [navbarOpen, setNavbarOpen] = useState(false);
@@ -41,20 +41,20 @@ const Header = () => {
   return (
     <>
       <header
-        style={{zIndex: 55}}
+        style={{zIndex: 55, borderBottom: '1px solid rgba(52, 52, 143, 0.264)'}}
         className={`header left-0 top-0 z-40 flex w-full items-center ${
           sticky
             ? "dark:bg-gray-dark dark:shadow-sticky-dark fixed z-[9999] bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm transition"
             : "absolute bg-transparent"
         }`}
       >
-        <div className="container">
-          <div className="relative -mx-4 flex items-center justify-between">
-            <div className="w-60 max-w-full px-4 xl:mr-12">
+        <div className="w-full">
+          <div className="relative flex items-center justify-between">
+            <div className="w-60 max-w-full px-4 xl:mr-8">
               <Link
                 href="/dashboard"
                 className={`header-logo block w-full ${
-                  sticky ? "py-5 lg:py-2" : "py-8"
+                  sticky ? "py-5 lg:py-2" : "py-4"
                 } `}
               >
                 <Image
@@ -74,7 +74,7 @@ const Header = () => {
               </Link>
             </div>
             <div className="flex w-full items-center justify-between px-4">
-              <div>
+              <div className="w-full">
                 <button
                   onClick={navbarToggleHandler}
                   id="navbarToggler"
@@ -105,19 +105,20 @@ const Header = () => {
                       : "invisible top-[120%] opacity-0"
                   }`}
                 >
-                  <ul className="block lg:flex lg:space-x-12">
+                  <ul className="block lg:flex lg:space-x-14" style={{paddingLeft: 'auto', marginRight: '1px'}}>
                     {menuData.map((menuItem, index) => (
-                      <li key={index} className="group relative">
+                      <li style={{minWidth: 'max-content'}} key={index} className="group mt1 relative lg:mt-0">
                         {menuItem.path ? (
                           <Link
                             href={menuItem.path}
-                            className={`flex py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${
+                            className={`flex py-0 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-0 ${
                               usePathName === menuItem.path
                                 ? "text-primary dark:text-white"
                                 : "text-dark hover:text-primary dark:text-white/70 dark:hover:text-white"
                             }`}
+                            style={{fontSize: '.95rem', fontWeight: '600', color: usePathName === menuItem.path ? '#3662E3' : '#293745'}}
                           >
-                            {menuItem.title} {menuItem?.path === '/workshops' ? <div><span style={{marginBottom: '.4rem', color: '#ea4848', fontSize: '.6rem', padding: '.2rem', border: '1px solid #ea4848', borderRadius: '.2rem', marginLeft: '.2rem'}}>Nuevo</span></div>: ''}
+                            {menuItem.title} 
                           </Link>
                         ) : (
                           <>
@@ -163,25 +164,28 @@ const Header = () => {
                     <Link href='/signin' style={{color: '#135bb9'}}>Iniciar sesión</Link>
               </div>
               <div className="flex items-center justify-end pr-16 lg:pr-0">
+              <Link
+                  href="/signin"
+                  className="ease-in-up shadow-btn hover:shadow-btn-hover hideResponsive rounded-sm bg-primary px-8 py-2 text-base font-medium text-white transition duration-300 hover:bg-opacity-90 md:block md:px-9 lg:px-6 xl:px-9"
+                  style={{marginLeft: '.5rem', backgroundColor: 'transparent', color: '#3662E3', border: '1px solid rgba(52, 52, 143, 0.264)', borderRadius: '.5rem', minWidth: 'max-content'}}
+                >
+                  <IonIcon className="alignIcon" style={{fontSize: '1rem', marginRight: '.5rem'}} name="log-in-outline"/>
+                  <span className="fz1" >Iniciar sesión</span>
+                </Link>
                 <Link
                   href="/workshops"
-                  className="hidden px-7 py-3 text-base font-medium text-dark hover:opacity-70 dark:text-white md:block"
+                  className="hideResponsive px-7 py-2 text-base font-medium text-dark hover:opacity-70 dark:text-white md:block"
                   style={{
                     color: 'white',
                     margin: '.5rem',
                     borderRadius: '.5rem',
+                    border: '1px solid rgba(24, 36, 61, 0.2)',
                     backgroundImage: 'linear-gradient(89deg, var(--token-dc60c65c-2692-4b09-8d77-49a86f7aedee, rgb(24, 36, 61)) /* {"name":"Azul prinicipal"} */ 0%, var(--token-1632e6e1-d1e5-427f-b435-20cb1e67f695, rgb(54, 98, 227)) /* {"name":"Azul claro"} */ 123.5068681091516%)'}}
-
+                     
                 >
-                  Registrarme
+                  <span className="fz1">Registrate</span>
                 </Link>
-                <Link
-                  href="/signin"
-                  className="ease-in-up shadow-btn hover:shadow-btn-hover hidden rounded-sm bg-primary px-8 py-3 text-base font-medium text-white transition duration-300 hover:bg-opacity-90 md:block md:px-9 lg:px-6 xl:px-9"
-                  style={{backgroundColor: 'transparent', color: '#3662E3', border: '1px solid #3662E3', borderRadius: '.5rem'}}
-                >
-                  Iniciar sesión
-                </Link>
+                
                 <div>
                 </div>
               </div>

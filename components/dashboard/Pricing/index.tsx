@@ -1,32 +1,26 @@
 "use client";
 import { useState } from "react";
-import SectionTitle from "../Common/SectionTitle";
 import OfferList from "./OfferList";
 import PricingBox from "./PricingBox";
 
 const Pricing = () => {
-  const [isMonthly, setIsMonthly] = useState(true);
+  const [isMonthly, setIsMonthly] = useState(false);
 
   return (
-    <section id="pricing" className="relative z-10 py-16 md:py-20 lg:py-28">
+    <section id="pricing" className="relative z-10 py-8 md:py-10 lg:py-12">
       <div className="container">
-        <SectionTitle
-          title="Con precios Increibles"
-          paragraph="Tanto la subscripción como el fee son los mas bajos del mercadao comparado con la competencia."
-          center
-          width="665px"
-        />
+        
 
         <div className="w-full">
           <div
-            className="wow fadeInUp mb-8 flex justify-center md:mb-12 lg:mb-16"
+            className="wow fadeInUp mb-8 flex justify-center md:mb-6 lg:mb-6"
             data-wow-delay=".1s"
           >
             <span
               onClick={() => setIsMonthly(true)}
               className={`${
                 isMonthly
-                  ? "pointer-events-none text-primary"
+                  ? "pointer-events-none textPrimary"
                   : "text-dark dark:text-white"
               } mr-4 cursor-pointer text-base font-semibold`}
             >
@@ -37,11 +31,11 @@ const Pricing = () => {
               className="flex cursor-pointer items-center"
             >
               <div className="relative">
-                <div className="h-5 w-14 rounded-full bg-[#1D2144] shadow-inner"></div>
+                <div className="h-5 w-14 rounded-full bg-[rgb(197, 197, 202)] shadow-inner"></div>
                 <div
                   className={`${
                     isMonthly ? "" : "translate-x-full"
-                  } shadow-switch-1 absolute left-0 top-[-4px] flex h-7 w-7 items-center justify-center rounded-full bg-primary transition`}
+                  } shadow-switch-1 absolute left-0 top-[-4px] flex h-7 w-7 items-center justify-center rounded-full colorPrimary transition`}
                 >
                   <span className="active h-4 w-4 rounded-full bg-white"></span>
                 </div>
@@ -52,7 +46,7 @@ const Pricing = () => {
               className={`${
                 isMonthly
                   ? "text-dark dark:text-white"
-                  : "pointer-events-none text-primary"
+                  : "pointer-events-none textPrimary"
               } ml-4 cursor-pointer text-base font-semibold`}
             >
               Anual{'(Recomendado)'}
@@ -60,45 +54,45 @@ const Pricing = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
+        <div className="flex displayBlockResponsive" style={{justifyContent: 'center'}}>
           <PricingBox
-            packageName="Lite"
-            price={isMonthly ? "40" : "120"}
+            packageName="Full"
+            price={isMonthly ? "112" : "899"}
             duration={isMonthly ? "mo" : "yr"}
-            subtitle="Lorem ipsum dolor sit amet adiscing elit Mauris egestas enim."
+            subtitle="Recomendado para pequeños/medianos Workshops"
           >
-            <OfferList text="All UI Components" status="active" />
-            <OfferList text="Use with Unlimited Projects" status="active" />
-            <OfferList text="Commercial Use" status="active" />
-            <OfferList text="Email Support" status="active" />
-            <OfferList text="Lifetime Access" status="inactive" />
-            <OfferList text="Free Lifetime Updates" status="inactive" />
+            <OfferList text="Acceso completo" status="active" />
+            <OfferList text="Inspecciones" status="active" />
+            <OfferList text="Órdenes de servicio" status="active" />
+            <OfferList text="Vehiculos" status="active" />
+            <OfferList text="Clientes" status="active" />
+            <OfferList text="Usuarios" status="active" />
+            <OfferList text="Calendario" status="active" />
+            <OfferList text="Datos mensuales" status="active" />
+            <OfferList text="Soporte" status="active" />
+            <OfferList text="3 usuarios" status="inactive" />
+            <OfferList text="Cambios en la aplicación" status="inactive" />
           </PricingBox>
+          
           <PricingBox
-            packageName="Basic"
-            price={isMonthly ? "399" : "789"}
+            packageName="Costumizado"
+            price={isMonthly ? "0" : "0"}
             duration={isMonthly ? "mo" : "yr"}
-            subtitle="Lorem ipsum dolor sit amet adiscing elit Mauris egestas enim."
+            subtitle="Recomendado para Workshops con mayor volumen"
           >
-            <OfferList text="All UI Components" status="active" />
-            <OfferList text="Use with Unlimited Projects" status="active" />
-            <OfferList text="Commercial Use" status="active" />
-            <OfferList text="Email Support" status="active" />
-            <OfferList text="Lifetime Access" status="active" />
-            <OfferList text="Free Lifetime Updates" status="inactive" />
-          </PricingBox>
-          <PricingBox
-            packageName="Plus"
-            price={isMonthly ? "589" : "999"}
-            duration={isMonthly ? "mo" : "yr"}
-            subtitle="Lorem ipsum dolor sit amet adiscing elit Mauris egestas enim."
-          >
-            <OfferList text="All UI Components" status="active" />
-            <OfferList text="Use with Unlimited Projects" status="active" />
-            <OfferList text="Commercial Use" status="active" />
-            <OfferList text="Email Support" status="active" />
-            <OfferList text="Lifetime Access" status="active" />
-            <OfferList text="Free Lifetime Updates" status="active" />
+            <OfferList text="Acceso completo" status="active" />
+            <OfferList text="Inspecciones" status="active" />
+            <OfferList text="Órdenes de servicio" status="active" />
+            <OfferList text="Vehiculos" status="active" />
+            <OfferList text="Clientes" status="active" />
+            <OfferList text="Usuarios" status="active" />
+            <OfferList text="Calendario" status="active" />
+            <OfferList text="Inventario" status="active" />
+            <OfferList text="Marketplace" status="active" />
+            <OfferList text="Datos mensuales" status="active" />
+            <OfferList text="Soporte" status="active" />
+            <OfferList text="Usuarios ilimitados" status="active" />
+            <OfferList text="Cambios en la aplicación" status="active" />
           </PricingBox>
         </div>
       </div>
