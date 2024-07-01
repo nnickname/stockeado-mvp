@@ -1,4 +1,3 @@
-import Features from "@/components/dashboard/Features";
 import Footer from "@/components/dashboard/Footer";
 import Header from "@/components/dashboard/Header";
 import Hero from "@/components/dashboard/Hero";
