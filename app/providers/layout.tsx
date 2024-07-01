@@ -6,10 +6,12 @@ import { createUser } from "../api/user/call";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import Footer from "@/components/dashboard/Footer";
+import IonIcon from "@reacticons/ionicons";
 
 const LayoutSignUp = () => {
     const [nameShop, setNameShop] = useState<string>('');
     const [name, setName] = useState<string>('');
+    const [lastname, setLastName] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [validate, setValidate] = useState<any>();
@@ -17,10 +19,10 @@ const LayoutSignUp = () => {
     const buildForm = async () => {
       console.log(validate);
       if(validate === 'on'){
-        if(name !== '' && password !== '' && email !== ''){
+        if(name !== '' && password !== '' && email !== '' && lastname !== ''){
           const body = {
             name,
-            lastname: '',
+            lastname: lastname,
             nameShop,
             phone: '',
             image: '',
@@ -50,7 +52,7 @@ const LayoutSignUp = () => {
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4">
               <div className="shadow-three mx-auto max-w-[500px] rounded bg-white px-6 py-10 dark:bg-dark sm:p-[60px]">
-                <h3 className="mb-3 text-center text-2xl font-bold text-black dark:text-white sm:text-3xl">
+                <h3 className="mb-3 text-center text-2xl  sm:text-3xl">
                   Crea tu cuenta
                 </h3>
                 <p className="mb-11 text-center text-base font-medium text-body-color">
@@ -68,6 +70,23 @@ const LayoutSignUp = () => {
                     <input
                       value={name}
                       onChange={(e) => setName(e.target.value)}
+                      type="text"
+                      name="name"
+                      placeholder=""
+                      className="border-stroke dark:text-body-color-dark dark:shadow-two w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:focus:border-primary dark:focus:shadow-none"
+                    />
+                  </div>
+                  <div className="mb-8">
+                    <label
+                      htmlFor="name"
+                      className="mb-3 block text-sm text-dark dark:text-white"
+                    >
+                      {" "}
+                     Apellido
+                    </label>
+                    <input
+                      value={lastname}
+                      onChange={(e) => setLastName(e.target.value)}
                       type="text"
                       name="name"
                       placeholder=""
@@ -173,8 +192,10 @@ const LayoutSignUp = () => {
                     </label>
                   </div>
                   <div className="mb-6">
-                    <button onClick={() => buildForm()} type='button' className="shadow-submit dark:shadow-submit-dark flex w-full items-center justify-center rounded-sm bg-primary px-9 py-4 text-base font-medium text-white duration-300 hover:bg-primary/90">
-                      Crear cuenta
+                    <button type='button' onClick={() => buildForm()} className="btn-gradient-third w100 flex" style={{justifyContent: 'center'}}>
+                      <p className="mr1" style={{color: 'white', fontSize: '1.1rem'}}>Crear cuenta</p>
+                      <IonIcon className="alignIcon" style={{fontSize: '1.1rem'}} name="arrow-forward-outline"/>
+
                     </button>
                   </div>
                 </form>

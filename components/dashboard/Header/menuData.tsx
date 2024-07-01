@@ -3,19 +3,26 @@ import { Menu } from "@/types/menu";
 const menuData: Menu[] = [
   {
     id: 1,
-    title: "Para talleres",
-    path: "/workshops",
-    newTab: true,
-  },
-  {
-    id: 1,
-    title: "Marketplace",
+    title: "Repuestos",
     path: "/marketplace",
     newTab: true,
   },
   {
+    id: 2,
+    title: "Precios",
+    path: "/pricing",
+    newTab: true,
+  },
+  {
     id: 3,
-    title: "Para proveedores",
+    title: "Soy taller",
+    path: "/workshops",
+    newTab: true,
+  },
+  
+  {
+    id: 4,
+    title: "Soy proveedor",
     path: "/providers",
     newTab: true,
   },
