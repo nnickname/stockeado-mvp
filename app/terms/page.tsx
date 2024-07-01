@@ -1,6 +1,3 @@
-import Brands from "@/components/dashboard/Brands";
-import ScrollUp from "@/components/dashboard/Common/ScrollUp";
-import Contact from "@/components/dashboard/Contact";
 import Features from "@/components/dashboard/Features";
 import Footer from "@/components/dashboard/Footer";
 import Header from "@/components/dashboard/Header";
