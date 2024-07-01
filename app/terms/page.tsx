@@ -1,9 +1,5 @@
 import Footer from "@/components/dashboard/Footer";
 import Header from "@/components/dashboard/Header";
-import Hero from "@/components/dashboard/Hero";
-
-import Pricing from "@/components/dashboard/Pricing";
-import Video from "@/components/dashboard/Video";
 import { Metadata } from "next";
 import { useTheme } from "next-themes";
 import 'react-responsive-modal/styles.css';

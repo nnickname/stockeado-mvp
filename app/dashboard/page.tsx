@@ -1,10 +1,7 @@
 
 import Footer from "@/components/dashboard/Footer";
 import Header from "@/components/dashboard/Header";
-import Hero from "@/components/dashboard/Hero";
-
 import Pricing from "@/components/dashboard/Pricing";
-import Video from "@/components/dashboard/Video";
 import IonIcon from "@reacticons/ionicons";
 import { Metadata } from "next";
 import { useTheme } from "next-themes";
