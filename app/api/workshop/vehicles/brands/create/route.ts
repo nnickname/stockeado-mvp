@@ -1,7 +1,7 @@
 import dbConnect from "@/app/api/db";
 import middlewareApi from "@/app/api/midd/_middleware.api";
 import { NextResponse } from "next/server";
-import Vehicle from '../../../../../models/workshops/vehicles/vehicles.model';
+import VehicleBrand from '../../../../../../models/workshops/vehicles/brands.model';
 export async function POST(
     req: Request,
   ) {
@@ -10,12 +10,12 @@ export async function POST(
           if(middlewareApi()){
             let body = await req.json();
             
-            const addingVehicle = new Vehicle(body);
-            addingVehicle.markModified("vehicles");
+            const addingVehicle = new VehicleBrand(body);
+            addingVehicle.markModified("vehiclesbrands");
             addingVehicle.save()
             if (addingVehicle) {
               return NextResponse
-                .json({ message: "Vehicle registered", vehicle: addingVehicle });
+                .json({ message: "VehicleBrand registered", vehicle: addingVehicle });
             } else return NextResponse.json({ message: "Vehicle not registered" });
           }
           return NextResponse.json({message: 'Invalid auth'});

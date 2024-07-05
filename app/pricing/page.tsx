@@ -9,8 +9,8 @@ import Footer from "@/components/dashboard/Footer";
 import '../dashboard/index.css';
 
 export const metadata: Metadata = {
-  title: "Stockeado - Configuración",
-  description: "Mira tu Resumen en Stockeado",
+  title: "Stockeado - Precios",
+  description: "Stockeado - Precios",
   // other metadata
 };
 const Page = () => {

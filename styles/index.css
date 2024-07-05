@@ -166,8 +166,9 @@ input{
   border-radius: .3rem;
 }
 .inputForm:focus{
-  border: 1px solid blue;
+  border: 1px solid #3662E3;
 }
+
 
 .btn-gradient-primary{
            

@@ -14,7 +14,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { getAllVehicles } from "@/app/api/workshop/vehicles/call";
 import { getAllInspections } from "@/app/api/workshop/inspections/call";
 import { InspectionsModel } from "@/models/workshops/inspections.model";
-import { VehiclesModel } from "@/models/workshops/vehicles.model";
+import { VehiclesModel } from "@/models/workshops/vehicles/vehicles.model";
 import { ClientsModel } from "@/models/workshops/clients.model";
 import { getAllClients } from "@/app/api/workshop/clients/call";
 import { getAllOrderServices } from "@/app/api/workshop/orders/call";

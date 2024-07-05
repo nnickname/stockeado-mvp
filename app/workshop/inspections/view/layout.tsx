@@ -8,9 +8,9 @@ import { useState, useEffect } from "react";
 import '../create/index.css';
 import Select from "react-dropdown-select";
 import { getAllClients } from "@/app/api/workshop/clients/call";
-import { getAllVehicles } from "@/app/api/workshop/vehicles/call";
+import { getAllVehicles, getVehicleBrands } from "@/app/api/workshop/vehicles/call";
 import { ClientsModel } from "@/models/workshops/clients.model";
-import { VehiclesModel } from "@/models/workshops/vehicles.model";
+import { VehiclesModel } from "@/models/workshops/vehicles/vehicles.model";
 import { toast } from "react-toastify";
 import { createInspection, getAllInspections, updateInspection } from "@/app/api/workshop/inspections/call";
 import { InspectionsModel } from "@/models/workshops/inspections.model";
@@ -18,7 +18,6 @@ import Link from "next/link";
 import { createCalendar, deleteCalendar, getAllCalendarsInspections } from "@/app/api/workshop/calendars/call";
 import Checkbox from "@mui/material/Checkbox";
 import { ReturnUnifiedStringDateTime } from "@/utils/hooks";
-import Cars from '@/json/cars.json';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -28,6 +27,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import LoadPage from "@/components/general/loadPage";
 import BackButton from "@/components/general/backButton";
+import { VehiclesBrandModel } from "@/models/workshops/vehicles/brands.model";
+import AddVehicle from "@/components/workshops/addvehicle";
 function countTotalTasksPrice(tasks: any[]){
     var count = 0;
     tasks?.map((e) => {
@@ -55,6 +56,7 @@ const InspectionViewWorkshopLayoutPage = () => {
     const [vehicleYear, setVehicleYear] = useState<string>('');
     const [vehiclePlate, setVehiclePlate] = useState<string>('');
     const [vehicleVin, setVehicleVin] = useState<string>('');
+    const [vehicleBrands, setVehicleBrands] = useState<VehiclesBrandModel[]>([]);
 
     const [dateStart, setDateStart] = useState<string>('');
     const [workerAssigned, setWorker] = useState<string>('');
@@ -69,7 +71,7 @@ const InspectionViewWorkshopLayoutPage = () => {
     const [newSchedulerDate, setSchedulerDate] = useState<string>('');
     const [calendars, setCalendars] = useState<any[]>([]);
     const [accesories, setAccesories] = useState<any>([]);
-    
+
     const [inspections, setInspections] = useState<InspectionsModel[]>([]);
     const [selectedInspection, setSelectedInspection] = useState<InspectionsModel>(null);
     const [orderIndex, setOrderIndex] = useState<number>(0);
@@ -97,6 +99,8 @@ const InspectionViewWorkshopLayoutPage = () => {
         const vehicless = await getAllVehicles(ownerid) ?? [];
         const clientss = await getAllClients(ownerid) ?? [];
         const inspectionsCast = await getAllInspections(ownerid) ?? [];
+        const vehicleBrandsCast = await getVehicleBrands() ?? [];
+        setVehicleBrands(vehicleBrandsCast);
         setClients(clientss);
         setVehicles(vehicless);
         setUser(userr);
@@ -293,7 +297,11 @@ const InspectionViewWorkshopLayoutPage = () => {
                         </div>
                         <div className="flex between displayBlockResponsive">
                         <div className="cardWhiteForm mt1 w100 mr1">
-                                <div className="flex between displayBlockResponsiveMin">
+                                <div className="flex">
+                                    <p className="subsubtitle mr1">¿No encuentras tu Marca/Modelo?</p>
+                                    <AddVehicle brands={vehicleBrands} setVehicleBrands={setVehicleBrands}/>
+                                </div>
+                                <div className="mt1 flex between displayBlockResponsiveMin">
                                     <p className="subsubtitle mt1">Vehículo</p>
                                     <Select
                                         closeOnClickInput
@@ -362,7 +370,7 @@ const InspectionViewWorkshopLayoutPage = () => {
                                         style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
                                         options={
                                             
-                                            [...Cars?.map((e) => {
+                                            [...vehicleBrands?.map((e) => {
                                                 return {
                                                     label: e?.brand,
                                                     value: e?.brand
@@ -374,7 +382,7 @@ const InspectionViewWorkshopLayoutPage = () => {
                                             onChange={(values) => {
                                                 if(values[0]?.value !== 'other') {
                                                     setVehicleBrand(values[0]?.value);
-                                                    setCarSelected(Cars?.find((e) => e?.brand === values[0]?.value)?.models);
+                                                    setCarSelected(vehicleBrands?.find((e) => e?.brand === values[0]?.value)?.models);
                                                     return;
                                                 }
                                         } } values={[{value: vehicleBrand, label: vehicleBrand === '' ? 'Seleccionar/buscar' : '# ' + vehicleBrand }]}                                     />

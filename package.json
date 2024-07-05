@@ -26,6 +26,7 @@
     "eslint": "8.33.0",
     "eslint-config-next": "13.1.6",
     "express": "^4.17.1",
+    "fs": "^0.0.1-security",
     "jsonwebtoken": "^8.5.1",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.8.1",

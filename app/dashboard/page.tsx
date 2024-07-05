@@ -69,8 +69,8 @@ const Page = () => {
           <div className="left centerResponsive mt2">
             <h1 className="mt1" style={{fontSize: '1.5rem', fontWeight: '600'}}>Inventario de vehículo o <br/>inspecciones de forma digital</h1>
             <p className="subsubtitle mt05" style={{fontSize: '1.1rem'}}>Guarda la información de inspección o inventario <br/>del vehículo en una sola plataforma, accesible en <br/>cualquier momento y dispositivo</p>
-            <Link href='/pricing'className="btn centerResponsiveButton mt05 flex" style={{color: '#3662e3', padding: '0rem', justifyContent: 'center'}}>
-              <p className="mr1" style={{color: '#3662e3', fontSize: '1.1rem', justifyContent: 'center'}}>Mas información
+            <Link href='/pricing'className="btn centerResponsiveButton justifyCenterResponsive mt05 flex" style={{color: '#3662e3', padding: '0rem', justifyContent: 'left'}}>
+              <p className="mr1" style={{color: '#3662e3', fontSize: '1.1rem'}}>Mas información
               </p>
               <IonIcon className="alignIcon" style={{fontSize: '1.1rem'}} name="arrow-forward-outline"/>
 
@@ -87,7 +87,7 @@ const Page = () => {
           <div className="left centerResponsive">
             <h1 className="mt1" style={{fontSize: '1.5rem', fontWeight: '600'}}>Agenda recordatorios automáticos de<br/> futuros servicios            </h1>
             <p className="subsubtitle mt05" style={{fontSize: '1.1rem'}}>Luego de las inspecciones, agenda recordatorios de tus <br/>clientes para poder ofrecer futuros servicio e <br/>incrementa tus ventas</p>
-            <Link href='/pricing'className="btn centerResponsiveButton mt05 flex" style={{color: '#3662e3', padding: '0rem', justifyContent: 'center'}}>
+            <Link href='/pricing'className="btn centerResponsiveButton mt05 justifyCenterResponsive flex" style={{color: '#3662e3', padding: '0rem', justifyContent: 'left'}}>
               <p className="mr1" style={{color: '#3662e3', fontSize: '1.1rem', justifyContent: 'center'}}>Mas información
               </p>
               <IonIcon className="alignIcon" style={{fontSize: '1.1rem'}} name="arrow-forward-outline"/>
@@ -100,7 +100,7 @@ const Page = () => {
           <div className="left centerResponsive">
             <h1 className="mt1" style={{fontSize: '1.5rem', fontWeight: '600'}}>Historial de tus clientes            </h1>
             <p className="subsubtitle mt05" style={{fontSize: '1.1rem'}}>Lleva el historial de visitas y servicios de tus clientes <br/> de manera rápida y sencilla para evitar posibles<br/> reclamos más adelante.</p>
-            <Link href='/pricing'className="btn centerResponsiveButton mt05 flex" style={{color: '#3662e3', padding: '0rem', justifyContent: 'center'}}>
+            <Link href='/pricing'className="btn centerResponsiveButton mt05 justifyCenterResponsive flex" style={{color: '#3662e3', padding: '0rem', justifyContent: 'left'}}>
               <p className="mr1" style={{color: '#3662e3', fontSize: '1.1rem', justifyContent: 'center'}}>Mas información
               </p>
               <IonIcon className="alignIcon" style={{fontSize: '1.1rem'}} name="arrow-forward-outline"/>

@@ -13,7 +13,7 @@ import Select from "react-dropdown-select";
 import Link from "next/link";
 import { ValuesDataGridLocale } from "../inspections/layoutview";
 import { createVehicle, getAllVehicles } from "@/app/api/workshop/vehicles/call";
-import { VehiclesModel } from "@/models/workshops/vehicles.model";
+import { VehiclesModel } from "@/models/workshops/vehicles/vehicles.model";
 import { toast } from "react-toastify";
 import { NewTableComponentType } from "../clients/layoutview";
 import { OrderWorkshopModel } from "@/models/workshops/orders.model";

@@ -22,3 +22,19 @@ export const updateVehicle = async (body: object) => {
     if(client?.vehicle !== null) return true;
     return false;
 }
+export const createVehicleBrand = async (body: Object) => {
+    const vehicle = await callApiHookPost('/api/workshop/vehicles/brands/create', body);
+    if(vehicle !== null) return true;
+    return false;
+}
+
+export const getVehicleBrands = async () => {
+    const vehicle = await callApiHookPost('/api/workshop/vehicles/brands/get', {});
+    if(vehicle?.brands !== undefined) return vehicle?.brands;
+    return null;
+}
+export const updateVehicleBrands = async (body: object) => {
+    const client = await callApiHookPost('/api/workshop/vehicles/brands/update', body);
+    if(client?.vehicle !== null) return true;
+    return false;
+}

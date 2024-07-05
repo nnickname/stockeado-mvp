@@ -3,7 +3,7 @@ import middlewareApi from "@/app/api/midd/_middleware.api";
 import { NextResponse } from "next/server";
 import Inspection from '../../../../../models/workshops/inspections.model';
 import Client from '../../../../../models/workshops/clients.model';
-import Vehicle from '../../../../../models/workshops/vehicles.model';
+import Vehicle from '../../../../../models/workshops/vehicles/vehicles.model';
 import Calendar from '../../../../../models/workshops/calendars.model';
 export async function POST(
     req: Request,

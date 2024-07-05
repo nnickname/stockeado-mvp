@@ -15,7 +15,7 @@ import { ValuesDataGridLocale } from "../inspections/layoutview";
 import { createClient, getAllClients } from "@/app/api/workshop/clients/call";
 import { ClientsModel } from "@/models/workshops/clients.model";
 import { toast } from "react-toastify";
-import { VehiclesModel } from "@/models/workshops/vehicles.model";
+import { VehiclesModel } from "@/models/workshops/vehicles/vehicles.model";
 import { getAllVehicles } from "@/app/api/workshop/vehicles/call";
 import { getAllOrderServices } from "@/app/api/workshop/orders/call";
 import { OrderWorkshopModel } from "@/models/workshops/orders.model";
