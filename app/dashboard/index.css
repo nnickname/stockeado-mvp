@@ -27,11 +27,11 @@
     .mlResponsive{
         margin-left: 0rem !important;
     }
-    
-}
-@media screen and (max-width: 920px) {
     .centerResponsive{
         text-align: center !important;
+        justify-content: center !important;
+    }
+    .justifyCenterResponsive{
         justify-content: center !important;
     }
 }

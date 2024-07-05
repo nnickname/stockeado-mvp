@@ -1,6 +1,6 @@
 import dbConnect from "@/app/api/db";
 import { NextResponse } from "next/server";
-import Vehicle from '../../../../../models/workshops/vehicles.model';
+import Vehicle from '../../../../../models/workshops/vehicles/vehicles.model';
 export async function POST(
     req: Request,
   ) {

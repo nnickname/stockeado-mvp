@@ -6,7 +6,7 @@ import { CalendarsModel } from "@/models/workshops/calendars.model";
 import clientsModel, { ClientsModel } from "@/models/workshops/clients.model";
 import { InspectionsModel } from "@/models/workshops/inspections.model";
 import { OrderWorkshopModel } from "@/models/workshops/orders.model";
-import { VehiclesModel } from "@/models/workshops/vehicles.model";
+import { VehiclesModel } from "@/models/workshops/vehicles/vehicles.model";
 import { Scheduler } from "@aldabil/react-scheduler"
 import { EventActions, ProcessedEvent } from "@aldabil/react-scheduler/types";
 import { FunctionComponent, useState } from "react";

@@ -9,16 +9,15 @@ import Select from "react-dropdown-select";
 import '../../inspections/create/index.css';
 import { InspectionsModel } from "@/models/workshops/inspections.model";
 import { getAllInspections } from "@/app/api/workshop/inspections/call";
-import { VehiclesModel } from "@/models/workshops/vehicles.model";
+import { VehiclesModel } from "@/models/workshops/vehicles/vehicles.model";
 import { ClientsModel } from "@/models/workshops/clients.model";
 import { getAllClients } from "@/app/api/workshop/clients/call";
-import { getAllVehicles } from "@/app/api/workshop/vehicles/call";
+import { getAllVehicles, getVehicleBrands } from "@/app/api/workshop/vehicles/call";
 import { toast } from "react-toastify";
 import { createOrderService, getAllOrderServices, updateOrderService } from "@/app/api/workshop/orders/call";
 import { OrderWorkshopModel } from "@/models/workshops/orders.model";
 import { getOrderServiceClassNameState } from "../layoutview";
 import { ReturnUnifiedStringDateTime } from "@/utils/hooks";
-import Cars from '@/json/cars.json';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -28,6 +27,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import BackButton from "@/components/general/backButton";
 import LoadPage from "@/components/general/loadPage";
+import { VehiclesBrandModel } from "@/models/workshops/vehicles/brands.model";
 function countTotalTasksPrice(tasks: any[]){
     var count = 0;
     tasks?.map((e) => {
@@ -58,13 +58,11 @@ const ViewOrderWorkshopLayoutPage = () => {
     const [vehicleYear, setVehicleYear] = useState<string>('');
     const [vehiclePlate, setVehiclePlate] = useState<string>('');
     const [vehicleVin, setVehicleVin] = useState<string>('');
+    const [vehicleBrands, setVehicleBrands] = useState<VehiclesBrandModel[]>([]);
 
     const [dateStart, setDateStart] = useState<string>('');
     const [workerAssigned, setWorker] = useState<string>('');
 
-    const [taskAmmount, setTaskAmmount] = useState<string>('');
-    const [taskDescription, setTaskDescription] = useState<string>('');
-    const [taskPrice, setTaskPrice] = useState<string>('');
     const [totalPrice, setTotalPrice] = useState<string>('');
     const [dateEnd, setDateEnd] = useState<string>('');
     const [workSpace, setWorkSpace] = useState<string>('');
@@ -96,6 +94,8 @@ const ViewOrderWorkshopLayoutPage = () => {
         const clientss = await getAllClients(ownerid) ?? [];
         const inspectionsCast = await getAllInspections(ownerid) ?? [];
         const ordersCast = await getAllOrderServices(ownerid);
+        const vehicleBrandsCast = await getVehicleBrands() ?? [];
+        setVehicleBrands(vehicleBrandsCast);
         setClients(clientss);
         setVehicles(vehicless);
         setUser(userr);
@@ -318,8 +318,12 @@ const ViewOrderWorkshopLayoutPage = () => {
                             </div>
                         </div>
                         <div className="flex between displayBlockResponsive">
-                        <div className="cardWhiteForm mt1 w100 mr1">
-                                <div className="flex between displayBlockResponsiveMin">
+                            <div className="cardWhiteForm mt1 w100 mr1">
+                                <div className="flex between">
+                                    <h1 className="headerSideBar"> Nueva orden de servicio</h1>
+                                    <BackButton route='/workshop/orders'/>
+                                </div>
+                                <div className="flex between mt1 displayBlockResponsiveMin">
                                     <p className="subsubtitle mt1">Vehículo</p>
                                     <Select
                                         closeOnClickInput
@@ -388,7 +392,7 @@ const ViewOrderWorkshopLayoutPage = () => {
                                         style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
                                         options={
                                             
-                                            [...Cars?.map((e) => {
+                                            [...vehicleBrands?.map((e) => {
                                                 return {
                                                     label: e?.brand,
                                                     value: e?.brand
@@ -400,7 +404,7 @@ const ViewOrderWorkshopLayoutPage = () => {
                                             onChange={(values) => {
                                                 if(values[0]?.value !== 'other') {
                                                     setVehicleBrand(values[0]?.value);
-                                                    setCarSelected(Cars?.find((e) => e?.brand === values[0]?.value)?.models);
+                                                    setCarSelected(vehicleBrands?.find((e) => e?.brand === values[0]?.value)?.models);
                                                     return;
                                                 }
                                         } } values={[{value: vehicleBrand, label: vehicleBrand === '' ? 'Seleccionar/buscar' : '# ' + vehicleBrand }]}                                     />

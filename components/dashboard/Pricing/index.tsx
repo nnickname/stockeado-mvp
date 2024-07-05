@@ -57,7 +57,7 @@ const Pricing = () => {
         <div className="flex displayBlockResponsive" style={{justifyContent: 'center'}}>
           <PricingBox
             packageName="Full"
-            price={isMonthly ? "112" : "899"}
+            price={isMonthly ? "112" : "1120"}
             duration={isMonthly ? "mo" : "yr"}
             subtitle="Recomendado para pequeños/medianos Workshops"
           >

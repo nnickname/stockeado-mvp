@@ -14,7 +14,7 @@ import Link from "next/link";
 import { ClientsModel } from "@/models/workshops/clients.model";
 import { toast } from "react-toastify";
 import { CalendarsModel } from "@/models/workshops/calendars.model";
-import { VehiclesModel } from "@/models/workshops/vehicles.model";
+import { VehiclesModel } from "@/models/workshops/vehicles/vehicles.model";
 import { ReturnUnifiedStringDateTime } from "@/utils/hooks";
 import Select from "react-dropdown-select";
 import Cars from '@/json/cars.json';

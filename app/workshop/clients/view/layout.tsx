@@ -11,7 +11,7 @@ import { getAllInspections } from "@/app/api/workshop/inspections/call";
 import { getAllClients, getClient, updateClient } from "@/app/api/workshop/clients/call";
 import { ClientsModel } from "@/models/workshops/clients.model";
 import { getAllVehicles, getVehicle } from "@/app/api/workshop/vehicles/call";
-import { VehiclesModel } from "@/models/workshops/vehicles.model";
+import { VehiclesModel } from "@/models/workshops/vehicles/vehicles.model";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import { OrderWorkshopModel } from "@/models/workshops/orders.model";
