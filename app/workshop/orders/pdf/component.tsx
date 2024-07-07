@@ -12,6 +12,7 @@ import { FunctionComponent } from 'react';
 import { ReturnUnifiedStringDateTime } from '@/utils/hooks';
 import { InspectionsModel } from '@/models/workshops/inspections.model';
 import { OrderWorkshopModel } from '@/models/workshops/orders.model';
+import '../../inspections/pdf/index.css';
 function countTotalTasksPrice(tasks: any[]){
     var count = 0;
     tasks?.map((e) => {
@@ -30,34 +31,34 @@ const ViewPDFOrderPage: FunctionComponent<ViewPDFOrderPageType> = ({tasks, user,
     return <div className="inspectionPdfView p1">
         <div className="flex w100">
             <div className="w100">
-                <h1 style={{fontSize: '1rem', fontWeight: '600'}}>{user?.nameShop}</h1>
-                <p style={{fontSize: '1rem'}}>{user?.direction}</p>
-                <p style={{fontSize: '1rem'}}>RUC: {user?.ruc}</p>
-                <p style={{fontSize: '1rem'}}>Celular: {user?.phone}</p>
+                <h1 className="fz1"  style={{fontWeight: '600'}}>{user?.nameShop}</h1>
+                <p className="fz1" >{user?.direction}</p>
+                <p className="fz1" >RUC: {user?.ruc}</p>
+                <p className="fz1" >Celular: {user?.phone}</p>
             </div>
             <div className="w100">
                 <img style={{border: '1px solid grey', marginLeft: 'auto', marginRight: 'auto'}} src={user?.imageLogo !== '' ? user?.imageLogo : blueImage.src} width='100px' height='100px'/>
 
             </div>
             <div className="w100 right">
-                <h1 className="title" style={{fontSize: '1rem', fontWeight: '600'}}>Cotización</h1>
-                <p style={{fontSize: '1rem'}}>N 00{(indexLength - (index+1))+1}</p>
+                <h1 className="title fz1" style={{fontWeight: '600'}}>Cotización</h1>
+                <p className="fz1" >N 00{(indexLength - (index+1))+1}</p>
                 <div className="flex">
-                    <p className="subtitle" style={{marginLeft: 'auto', fontSize: '1rem'}}>Fecha emisión:</p>
-                    <p className="ml1" style={{fontSize: '1rem'}}>{ReturnUnifiedStringDateTime(new Date().toString())}</p>
+                    <p className="subtitle fz1" style={{marginLeft: 'auto'}}>Fecha emisión:</p>
+                    <p className="ml1 fz1">{ReturnUnifiedStringDateTime(new Date().toString())}</p>
                 </div>
                 <div className="flex">
-                    <p className="subtitle" style={{marginLeft: 'auto', fontSize: '1rem'}}>Asesor:</p>
-                    <p className="ml1" style={{fontSize: '1rem'}}>{user?.name + ' ' + user?.lastname}</p>
+                    <p className="subtitle fz1" style={{marginLeft: 'auto'}}>Asesor:</p>
+                    <p className="ml1 fz1" >{user?.name + ' ' + user?.lastname}</p>
                 </div>
                 <div className="flex">
-                    <p className="subtitle" style={{marginLeft: 'auto', fontSize: '1rem'}}>Mecanico:</p>
-                    <p className="ml1" style={{fontSize: '1rem'}}>{inspection?.workerAssigned}</p>
+                    <p className="subtitle fz1" style={{marginLeft: 'auto'}}>Mecanico:</p>
+                    <p className="ml1 fz1">{inspection?.workerAssigned}</p>
                 </div>
             </div>
         </div>
         <div className="w100 mt1 center">
-            <h1 className="mt1" style={{color: 'grey', fontSize: '1.4rem'}}>Cotización</h1>
+            <h1 className="mt1" style={{color: 'grey', fontSize: '1.5rem'}}>Cotización</h1>
         </div>
         <div className="p1 mt1">
             <div className="flex between">
@@ -95,12 +96,12 @@ const ViewPDFOrderPage: FunctionComponent<ViewPDFOrderPageType> = ({tasks, user,
                 <Table aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Servicio</TableCell>
-                            <TableCell align="center">Item</TableCell>
-                            <TableCell align="center">Cantidad</TableCell>
-                            <TableCell align="center">Precio</TableCell>
-                            <TableCell align="center">Total</TableCell>
-                            <TableCell align="center"></TableCell>
+                            <TableCell className="fz1"  >Servicio</TableCell>
+                            <TableCell className="fz1"  align="center">Item</TableCell>
+                            <TableCell className="fz1"  align="center">Cantidad</TableCell>
+                            <TableCell className="fz1"  align="center">Precio</TableCell>
+                            <TableCell className="fz1"  align="center">Total</TableCell>
+                            <TableCell className="fz1"  align="center"></TableCell>
                         </TableRow>
                         </TableHead>
                             <TableBody>
@@ -110,17 +111,17 @@ const ViewPDFOrderPage: FunctionComponent<ViewPDFOrderPageType> = ({tasks, user,
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                             style={{borderBottom: '1px solid rgba(0, 0, 0, 0.2)'}}
                                         >
-                                        <TableCell component="th" scope="row">
+                                        <TableCell className="fz1"  component="th" scope="row">
                                             {row.service}
                                             </TableCell>
-                                            <TableCell align="center">
+                                            <TableCell className="fz1"  align="center">
                                                 {row.item}
                                                 </TableCell>
-                                                <TableCell align="center">
+                                                <TableCell className="fz1"  align="center">
                                                     {row.ammount}</TableCell>
-                                                <TableCell align="center">
+                                                <TableCell className="fz1"  align="center">
                                                     s/. {Number(row.price).toFixed(2)}</TableCell>
-                        <TableCell align="center">s/. {(Number(row?.price) * Number(row?.ammount)).toFixed(2)}</TableCell>
+                        <TableCell className="fz1"  align="center">s/. {(Number(row?.price) * Number(row?.ammount)).toFixed(2)}</TableCell>
                     </TableRow>
                 })} 
                     </TableBody>
@@ -128,20 +129,23 @@ const ViewPDFOrderPage: FunctionComponent<ViewPDFOrderPageType> = ({tasks, user,
             </TableContainer>
             <div className="flex between">
                 <p></p>
-                <p className="mt2 mr1"><span className="mr1">Total</span> s/. {countTotalTasksPrice(tasks).toFixed(2)}</p>
+                <p className="mt2 mr1"><span className="mr1 fz1">Total</span> s/. {countTotalTasksPrice(tasks).toFixed(2)}</p>
             </div>
 
-            <div className="w100 center" style={{marginTop: '6rem'}}>
+            <div className="w100 center" style={{marginTop: '6rem', marginBottom: '7rem'}}>
                 <div className="flex w100" style={{justifyContent: 'center'}} >
                     <div  style={{width: '200px'}}>
                         <p className="w100" style={{height: '2px', background: 'black'}}/>
-                        <p className="mt05">Elaborado por</p>
+                        <p className="mt05 fz1">Elaborado por</p>
                     </div>
                     <div style={{width: '200px', marginLeft: '3rem'}}>
                         <p className="w100" style={{height: '2px', background: 'black'}}/>
-                        <p className="mt05">Firma del cliente</p>
+                        <p className="mt05 fz1">Firma del cliente</p>
                     </div>
                 </div>
+            </div>
+            <div style={{width: '100%', marginTop: '1rem', whiteSpace: 'pre-wrap'}}>
+                <p style={{width: '100%', padding: '1rem', marginTop: '1rem', borderTop: '1px solid rgba(0, 0, 0, 0.2)'}}>{String(user?.footerpdf).replace("\n", "\r\n")}</p>
             </div>
         </div>
     </div>

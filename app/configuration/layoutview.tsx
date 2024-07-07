@@ -40,7 +40,7 @@ const LayoutConfigurationPage = () =>{
     const [width, setWidth] = useState(0);
     const [disabledButton, setDisabledButton] = useState<boolean>(false);
     const [formError, setErrorForm] = useState<string>('');
-
+    const [note, setNote] = useState<string>('');
     const handleResize = () => setWidth(window.innerWidth);
 
     const toUser = async () => {
@@ -49,6 +49,9 @@ const LayoutConfigurationPage = () =>{
             router.push('/signin');
         }
         setUser(userr);
+        setNote(userr?.footerpdf)
+        setImageLogo(userr?.imageLogo)
+        setImage(userr?.image);
         setNameShop(userr?.nameShop);
         setName(userr?.name);
         setLastname(userr?.lastname);
@@ -118,7 +121,8 @@ const LayoutConfigurationPage = () =>{
             phone: phone,
             ruc: ruc,
             type: user?.type,
-            accesories: accesoriess
+            accesories: accesoriess,
+            footerpdf: note
         };
         const response = await editUser(body);
         if(response) {
@@ -204,7 +208,20 @@ const LayoutConfigurationPage = () =>{
 
 
                 {user?.type === 'workshop' ? <div>
-
+                    <div className="cardWhiteForm mt1">
+                        <h1 className="title">Configura tu Pie de página</h1>
+                        <p className="subsubtitle">Personaliza el texto que aparecera en la parte inferior de tus archivos PDF</p>
+                        <textarea  onChange={(e) => setNote(e.target.value)} value={note} rows={5} style={{width: '100%', padding: '.5rem', marginTop: '1rem', border: '1px solid rgba(0, 0, 0, 0.2)'}}/>
+                        <div style={{width: '100%', marginTop: '1rem', textAlign: 'right'}}>
+                            <button
+                                        onClick={() => validateForm(accesories)}
+                                        className="inline-block rounded-sm bg-black px-8 py-4 text-base font-semibold text-white duration-300 ease-in-out hover:bg-black/90 dark:bg-white/10 dark:text-white dark:hover:bg-white/5"
+                                        style={{color: '#3662E3', background: 'transparent', fontWeight: '400', fontSize: '1rem'}}
+                                        >
+                                    Guardar
+                            </button>
+                        </div>
+                    </div>
                     <div className="cardWhiteForm mt1">
                         <h1 className="title">Configura tu inspección digital</h1>
                         <p className="subtitle mt1">Accesorios</p>
@@ -213,9 +230,9 @@ const LayoutConfigurationPage = () =>{
                         {accesories?.map((e, index: number) => <div className="item-create mt1 ml1">
                             <div className="flex">
                                 <p>{e}</p>
-                                <IonIcon onClick={() => {
+                                <IonIcon onClick={async () => {
                                     setAccesories(accesories?.filter((obj, indexx) => index !== indexx));
-                                    toast.warning('Necesitas guardar los cambios');
+                                    await validateForm(accesories?.filter((obj, indexx) => index !== indexx));
                                 }} className="icon ml1" name="trash-outline"/>
                             </div>
                         </div>)}

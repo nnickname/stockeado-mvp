@@ -28,6 +28,7 @@ import Paper from '@mui/material/Paper';
 import BackButton from "@/components/general/backButton";
 import LoadPage from "@/components/general/loadPage";
 import { VehiclesBrandModel } from "@/models/workshops/vehicles/brands.model";
+import AddVehicle from "@/components/workshops/addvehicle";
 function countTotalTasksPrice(tasks: any[]){
     var count = 0;
     tasks?.map((e) => {
@@ -319,9 +320,9 @@ const ViewOrderWorkshopLayoutPage = () => {
                         </div>
                         <div className="flex between displayBlockResponsive">
                             <div className="cardWhiteForm mt1 w100 mr1">
-                                <div className="flex between">
-                                    <h1 className="headerSideBar"> Nueva orden de servicio</h1>
-                                    <BackButton route='/workshop/orders'/>
+                                <div className="flex">
+                                    <p className="subsubtitle mr1">¿No encuentras tu Marca/Modelo?</p>
+                                    <AddVehicle brands={vehicleBrands} setVehicleBrands={setVehicleBrands}/>
                                 </div>
                                 <div className="flex between mt1 displayBlockResponsiveMin">
                                     <p className="subsubtitle mt1">Vehículo</p>

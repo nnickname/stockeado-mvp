@@ -18,6 +18,7 @@ export interface UserModel extends Document {
   services: any[],
   role: string;
   owner: string;
+  footerpdf: string;
   createdAt: string;
 }
 
@@ -84,6 +85,9 @@ const UserSchema = new Schema({
     type: Array
   },
   ruc: {
+    type: String
+  },
+  footerpdf: {
     type: String
   }
 }, {timestamps: true});
