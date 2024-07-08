@@ -145,7 +145,7 @@ const ViewPDFOrderPage: FunctionComponent<ViewPDFOrderPageType> = ({tasks, user,
                 </div>
             </div>
             <div style={{width: '100%', marginTop: '1rem', whiteSpace: 'pre-wrap'}}>
-                <p style={{width: '100%', padding: '1rem', marginTop: '1rem', borderTop: '1px solid rgba(0, 0, 0, 0.2)'}}>{String(user?.footerpdf).replace("\n", "\r\n")}</p>
+                <p style={{width: '100%', padding: '1rem', marginTop: '1rem', borderTop: '1px solid rgba(0, 0, 0, 0.2)'}}>{String(user?.footerpdf).replace("\n", "\r\n") === 'undefined' ? '' : String(user?.footerpdf).replace("\n", "\r\n")}</p>
             </div>
         </div>
     </div>

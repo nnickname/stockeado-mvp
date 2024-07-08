@@ -139,9 +139,8 @@ const ViewPDFPageInspection: FunctionComponent<ViewPDFPageInspectionType> = ({us
                 <div className="w100">
                     {
                         inspection?.accesories?.map((e) => {
-                            return e?.value === 'on' ? <p style={{width: 'max-content', display: 'inline-block'}} className="mt05 fz1 ml1">
-                                {e?.label}
-                            </p> : <div/>
+                            if(e?.value === 'on' ) return <p style={{width: 'max-content', display: 'inline-block'}} className="mt05 fz1 ml1">
+                                {e?.label}</p>
                         })
                     }
                 </div>
@@ -207,7 +206,7 @@ const ViewPDFPageInspection: FunctionComponent<ViewPDFPageInspectionType> = ({us
                 </div>
             </div>
             <div style={{width: '100%', marginTop: '1rem', whiteSpace: 'pre-wrap'}}>
-                <p style={{width: '100%', padding: '1rem', marginTop: '1rem', borderTop: '1px solid rgba(0, 0, 0, 0.2)'}}>{String(user?.footerpdf).replace("\n", "\r\n")}</p>
+                <p style={{width: '100%', padding: '1rem', marginTop: '1rem', borderTop: '1px solid rgba(0, 0, 0, 0.2)'}}>{String(user?.footerpdf).replace("\n", "\r\n") === 'undefined' ? '' : String(user?.footerpdf).replace("\n", "\r\n")}</p>
             </div>
         </div>
     </div>

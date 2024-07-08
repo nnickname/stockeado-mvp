@@ -591,7 +591,7 @@ const InspectionViewWorkshopLayoutPage = () => {
 
                         <div className="cardWhiteForm mt1">
                             <p className="subsubtitle">Trabajos a realizar</p>
-                            <TableContainer key={tableKey} className="mt1" style={{boxShadow: 'none'}} component={Paper}>
+                            <TableContainer key={tableKey} className="mt1 scrollLeftGet" style={{boxShadow: 'none'}} component={Paper}>
                                 <Table aria-label="simple table">
                                     <TableHead>
                                     <TableRow>
@@ -615,7 +615,10 @@ const InspectionViewWorkshopLayoutPage = () => {
                                                     var tasksCast = tasks;
                                                     tasksCast[index].service = e?.target?.value;
                                                     setTasks(tasksCast);
+                                                    const scrolls = document.querySelector(".scrollLeftGet")?.scrollLeft;
                                                     setTableKey( Math.random());
+                                                    setTimeout(() => document.querySelector(".scrollLeftGet").scrollLeft = scrolls, 20);
+
                                                 }} style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}} className="btn inputForm br05" >
                                                     <option value=''>Seleccionar</option>
                                                     {user?.services?.map((e) => {
@@ -631,7 +634,10 @@ const InspectionViewWorkshopLayoutPage = () => {
                                                     tasksCast[index].price = user?.services?.find(a => a?.name === tasks[index].service)?.tasks.find(a => a?.name === e?.target?.value)?.price;
 
                                                     setTasks(tasksCast);
+                                                    const scrolls = document.querySelector(".scrollLeftGet")?.scrollLeft;
                                                     setTableKey( Math.random());
+                                                    setTimeout(() => document.querySelector(".scrollLeftGet").scrollLeft = scrolls, 20);
+
                                                 }} value={row?.item} style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}} className="btn inputForm br05">
                                                     <option value=''>Seleccionar</option>
                                                     {user?.services?.find(e => e?.name === tasks[index].service)?.tasks?.map((e) => {
@@ -640,24 +646,31 @@ const InspectionViewWorkshopLayoutPage = () => {
                                                 </select>
                                             </TableCell>
                                             <TableCell align="right">
-                                                <input value={row.ammount} onChange={(e) => {
+                                                <input onBlur={() => {
+                                                    const scrolls = document.querySelector(".scrollLeftGet")?.scrollLeft;
+                                                    setTableKey( Math.random());
+                                                    setTimeout(() => document.querySelector(".scrollLeftGet").scrollLeft = scrolls, 20);
+
+                                                }} placeholder={row.ammount} onChange={(e) => {
                                                     var tasksCast = tasks;
                                                     tasksCast[index].ammount = Number(e?.target?.value);
                                                     setTasks(tasksCast);
                                                     setTotalPrice(countTotalTasksPrice(tasksCast).toFixed(2))
 
-                                                    setTableKey( Math.random());
-                                                }} type='number' className="inputForm" placeholder=''></input>
+                                                }} type='number' className="inputForm"></input>
                                             </TableCell>
-                                            <TableCell align="right">
-                                                <input type='number' value={Number(row.price).toFixed(2)} onChange={(e) => {
+                                            <TableCell  align="right">
+                                                <input onBlur={() => {
+                                                    const scrolls = document.querySelector(".scrollLeftGet")?.scrollLeft;
+                                                    setTableKey( Math.random());
+                                                    setTimeout(() => document.querySelector(".scrollLeftGet").scrollLeft = scrolls, 20);
+
+                                                }} type='number' placeholder={Number(row.price).toFixed(2)} onChange={(e) => {
                                                     var tasksCast = tasks;
                                                     tasksCast[index].price = e?.target?.value;
                                                     setTotalPrice(countTotalTasksPrice(tasksCast).toFixed(2))
-
                                                     setTasks(tasksCast);
-                                                    setTableKey( Math.random());
-                                                }} className="inputForm" placeholder=''></input>
+                                                }} className="inputForm"></input>
                                             </TableCell>
                                             <TableCell align="right">s/. {(Number(row?.price) * Number(row?.ammount)).toFixed(2)}</TableCell>
                                             <TableCell  align="right">
@@ -667,7 +680,10 @@ const InspectionViewWorkshopLayoutPage = () => {
                                                     setTasks(tasksCast);
                                                     setTotalPrice(countTotalTasksPrice(tasksCast).toFixed(2))
 
+                                                    const scrolls = document.querySelector(".scrollLeftGet")?.scrollLeft;
                                                     setTableKey( Math.random());
+                                                    setTimeout(() => document.querySelector(".scrollLeftGet").scrollLeft = scrolls, 20);
+
                                                 }} />
                                             </TableCell>
                                         </TableRow>

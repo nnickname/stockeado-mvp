@@ -12,7 +12,7 @@ import 'react-responsive-modal/styles.css';
 import Select from "react-dropdown-select";
 import Link from "next/link";
 import { ValuesDataGridLocale } from "../inspections/layoutview";
-import { createVehicle, getAllVehicles } from "@/app/api/workshop/vehicles/call";
+import { createVehicle, getAllVehicles, getVehicleBrands } from "@/app/api/workshop/vehicles/call";
 import { VehiclesModel } from "@/models/workshops/vehicles/vehicles.model";
 import { toast } from "react-toastify";
 import { NewTableComponentType } from "../clients/layoutview";
@@ -22,10 +22,11 @@ import { getAllClients } from "@/app/api/workshop/clients/call";
 import { getAllOrderServices } from "@/app/api/workshop/orders/call";
 import { getAllCalendars } from "@/app/api/workshop/calendars/call";
 import { CalendarsModel } from "@/models/workshops/calendars.model";
-import Cars from '@/json/cars.json';
 import { ReturnUnifiedStringDateTime } from "@/utils/hooks";
 import { ExportJsonCsv } from 'react-export-json-csv';
 import LoadPage from "@/components/general/loadPage";
+import { VehiclesBrandModel } from "@/models/workshops/vehicles/brands.model";
+import AddVehicle from "@/components/workshops/addvehicle";
 
 const VehiclesWorkshopLayoutPage = ( ) => {
     const headers = [
@@ -60,7 +61,7 @@ const VehiclesWorkshopLayoutPage = ( ) => {
     const [clients, setClients] = useState<ClientsModel[]>([]);
     const [orders, setOrders] = useState<OrderWorkshopModel[]>([]);
     const [realVehicles, setRealVehicles] = useState<VehiclesModel[]>([]);
-
+    const [vehicleBrands, setVehicleBrands] = useState<VehiclesBrandModel[]>([]);
     const [brand, setBrand] = useState<string>('');
     const [model, setModel] = useState<string>('');
     const [year, setYear] = useState<string>('');
@@ -86,6 +87,8 @@ const VehiclesWorkshopLayoutPage = ( ) => {
         const vehicless = await getAllVehicles(ownerid) ?? [];
         const ordersCast = await getAllOrderServices(ownerid);
         const calendarsCast = await getAllCalendars(ownerid);
+        const vehicleBrandsCast = await getVehicleBrands() ?? [];
+        setVehicleBrands(vehicleBrandsCast);
         setOrders(ordersCast?.reverse() ?? []);
         setUser(userr);
         setClients(clientss ?? []);
@@ -145,11 +148,18 @@ const VehiclesWorkshopLayoutPage = ( ) => {
                         <div className="flex between">
                             <div>
                                 <p className="subtitle mt2">Vehículos registrados recientes</p>
+                                
+                                <div className="flex">
+                                    <p className="subsubtitle mr1">¿No encuentras tu Marca/Modelo?</p>
+                                    <div ><AddVehicle brands={vehicleBrands} setVehicleBrands={setVehicleBrands}/></div>
+                                </div>
+
                             </div>
                             <div>
-                                <button onClick={() => setOpen(true)} className="btn-gradient-secondary mt1"><IonIcon className="mr1" name="car-outline" style={{fontSize: '1.1rem'}}/> <span style={{fontSize: '1rem'}}>Nuevo vehículo</span></button>
+                                <button onClick={() => setOpen(true)} className="btn-gradient-secondary mt2"><IonIcon className="mr1" name="car-outline" style={{fontSize: '1.1rem'}}/> <span style={{fontSize: '1rem'}}>Nuevo vehículo</span></button>
                             </div>
                         </div>
+                        
                         
                         <div className="flex w100 mt1">
                             <div className="inputRightIcon">
@@ -203,6 +213,7 @@ const VehiclesWorkshopLayoutPage = ( ) => {
                                     <option value={12}>Diciembre</option>
                             </select>
                         </div>
+                        
                         <TableComponent rows={
                             [...vehicles?.map((e, index: number) => {
                                 var calendarsCount:number = 0;
@@ -240,21 +251,22 @@ const VehiclesWorkshopLayoutPage = ( ) => {
         }
 
 <Modal closeIcon={<IonIcon name="close"/>} styles={{
-              modal : {borderRadius: '.5rem', width: '100%', padding: '0rem', maxWidth: width < 921 ? '80%' : '600px'},
+              modal : {borderRadius: '.5rem', width: '100%', padding: '0rem', maxWidth: width < 921 ? '80%' : '600px', zIndex: '98'},
               closeIcon: {color: 'white !important'},
-              overlay: {backgroundColor: 'rgba(220, 217, 217, 0.5)'}
+              overlay: {backgroundColor: 'rgba(220, 217, 217, 0.5)', zIndex: '90'}
             }}  open={open} center onClose={() => setOpen(false) }>
               <div style={{padding: '1rem'}}>
                 <h1 className="title">Nuevo vehículo</h1>
                 <h2 className="subtitle mt1">Vehículo #{vehicles?.length+1}</h2>
-                <div className="flex between displayBlockResponsive mt1">
+                
+                <div className="flex between mt1 displayBlockResponsive mt1">
                     <p className="formTitle mr1">Marca</p>
                     <Select
                         closeOnClickInput
                         style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}}
                         options={[
                             
-                            ...Cars?.map((e) => {
+                            ...vehicleBrands?.map((e) => {
                                 return {
                                     label: e?.brand,
                                     value: e?.brand
@@ -266,7 +278,7 @@ const VehiclesWorkshopLayoutPage = ( ) => {
                             onChange={(values) => {
                                 if(values[0]?.value !== 'other') {
                                     setBrand(values[0]?.value);
-                                    setCarSelected(Cars?.find((e) => e?.brand === values[0]?.value)?.models);
+                                    setCarSelected(vehicleBrands?.find((e) => e?.brand === values[0]?.value)?.models);
                                     return;
                                 }
                         } } values={[{value: brand, label: brand === '' ? 'Seleccionar/buscar' : '# ' + brand }]}                                     />

@@ -50,6 +50,7 @@ const AddVehicle: FunctionComponent<AddVehicleType> = ({brands, setVehicleBrands
     return <Popover
         
         containerStyle={{
+            zIndex: '99',
             backgroundColor: 'white',
             padding: '1rem',
             border: '1px solid rgba(0, 0, 0, 0.2)',
@@ -58,7 +59,7 @@ const AddVehicle: FunctionComponent<AddVehicleType> = ({brands, setVehicleBrands
         isOpen={isPopoverOpen}
         positions={['top', 'bottom', 'left', 'right']} // preferred positions by priority
         content={
-        <div className="p1">
+        <div className="p1" style={{zIndex: '110'}}>
             <select value={typeSelected} onChange={(e) => setSelectedType(Number(e.target.value))} className="inputForm w100">
                 <option value={-1}>Tipo</option>
                 <option value={0}>Nueva marca</option>
