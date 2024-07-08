@@ -28,6 +28,7 @@ import Paper from '@mui/material/Paper';
 import BackButton from "@/components/general/backButton";
 import LoadPage from "@/components/general/loadPage";
 import { VehiclesBrandModel } from "@/models/workshops/vehicles/brands.model";
+import AddVehicle from "@/components/workshops/addvehicle";
 function countTotalTasksPrice(tasks: any[]){
     var count = 0;
     tasks?.map((e) => {
@@ -319,9 +320,9 @@ const ViewOrderWorkshopLayoutPage = () => {
                         </div>
                         <div className="flex between displayBlockResponsive">
                             <div className="cardWhiteForm mt1 w100 mr1">
-                                <div className="flex between">
-                                    <h1 className="headerSideBar"> Nueva orden de servicio</h1>
-                                    <BackButton route='/workshop/orders'/>
+                                <div className="flex">
+                                    <p className="subsubtitle mr1">¿No encuentras tu Marca/Modelo?</p>
+                                    <AddVehicle brands={vehicleBrands} setVehicleBrands={setVehicleBrands}/>
                                 </div>
                                 <div className="flex between mt1 displayBlockResponsiveMin">
                                     <p className="subsubtitle mt1">Vehículo</p>
@@ -559,7 +560,7 @@ const ViewOrderWorkshopLayoutPage = () => {
 
                         <div className="cardWhiteForm mt1">
                             <p className="subsubtitle">Trabajos a realizar</p>
-                            <TableContainer key={tableKey} className="mt1" style={{boxShadow: 'none'}} component={Paper}>
+                            <TableContainer key={tableKey} className="mt1 scrollLeftGet" style={{boxShadow: 'none'}} component={Paper}>
                                 <Table aria-label="simple table">
                                     <TableHead>
                                     <TableRow>
@@ -583,8 +584,10 @@ const ViewOrderWorkshopLayoutPage = () => {
                                                     var tasksCast = tasks;
                                                     tasksCast[index].service = e?.target?.value;
                                                     setTasks(tasksCast);
-                                                    
+                                                    const scrolls = document.querySelector(".scrollLeftGet")?.scrollLeft;
                                                     setTableKey( Math.random());
+                                                    setTimeout(() => document.querySelector(".scrollLeftGet").scrollLeft = scrolls, 20);
+                                                
                                                 }} style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}} className="btn inputForm br05" >
                                                     <option value=''>Seleccionar</option>
                                                     {user?.services?.map((e) => {
@@ -598,9 +601,11 @@ const ViewOrderWorkshopLayoutPage = () => {
                                                     var tasksCast = tasks;
                                                     tasksCast[index].item = e?.target?.value;
                                                     tasksCast[index].price = user?.services?.find(a => a?.name === tasks[index].service)?.tasks.find(a => a?.name === e?.target?.value)?.price;
-
                                                     setTasks(tasksCast);
+                                                    const scrolls = document.querySelector(".scrollLeftGet")?.scrollLeft;
                                                     setTableKey( Math.random());
+                                                    setTimeout(() => document.querySelector(".scrollLeftGet").scrollLeft = scrolls, 20);
+                                                
                                                 }} value={row?.item} style={{color: '#8C95A3', backgroundColor: '#F2F3F5', minWidth: '150px'}} className="btn inputForm br05">
                                                     <option value=''>Seleccionar</option>
                                                     {user?.services?.find(e => e?.name === tasks[index].service)?.tasks?.map((e) => {
@@ -609,24 +614,28 @@ const ViewOrderWorkshopLayoutPage = () => {
                                                 </select>
                                             </TableCell>
                                             <TableCell align="right">
-                                                <input value={row.ammount} onChange={(e) => {
+                                                <input onBlur={() => {
+                                                    const scrolls = document.querySelector(".scrollLeftGet")?.scrollLeft;
+                                                    setTableKey( Math.random());
+                                                    setTimeout(() => document.querySelector(".scrollLeftGet").scrollLeft = scrolls, 20);
+                                                }} placeholder={row.ammount} onChange={(e) => {
                                                     var tasksCast = tasks;
                                                     tasksCast[index].ammount = Number(e?.target?.value);
                                                     setTasks(tasksCast);
                                                     setTotalPrice(countTotalTasksPrice(tasksCast).toFixed(2))
-
-                                                    setTableKey( Math.random());
-                                                }} type='number' className="inputForm" placeholder=''></input>
+                                                }} type='number' className="inputForm"></input>
                                             </TableCell>
                                             <TableCell align="right">
-                                                <input type='number' value={Number(row.price).toFixed(2)} onChange={(e) => {
+                                                <input onBlur={() => {
+                                                    const scrolls = document.querySelector(".scrollLeftGet")?.scrollLeft;
+                                                    setTableKey( Math.random());
+                                                    setTimeout(() => document.querySelector(".scrollLeftGet").scrollLeft = scrolls, 20);
+                                                }} type='number' placeholder={Number(row.price).toFixed(2)} onChange={(e) => {
                                                     var tasksCast = tasks;
                                                     tasksCast[index].price = e?.target?.value;
                                                     setTasks(tasksCast);
                                                     setTotalPrice(countTotalTasksPrice(tasksCast).toFixed(2))
-
-                                                    setTableKey( Math.random());
-                                                }} className="inputForm" placeholder=''></input>
+                                                }} className="inputForm"></input>
                                             </TableCell>
                                             <TableCell align="right">s/. {(Number(row?.price) * Number(row?.ammount)).toFixed(2)}</TableCell>
                                             <TableCell  align="right">

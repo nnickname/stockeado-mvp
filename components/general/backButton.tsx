@@ -8,7 +8,7 @@ type BackButtonType = {
 const BackButton: FunctionComponent<BackButtonType> = ({route}) => {
     return <div className="btn-back" style={{backgroundColor: 'white'}}>
         <Link className="flex mr1 mt1 " style={{color: '#3662E3', background: 'white'}} href={route}>
-            <IonIcon name="chevron-back-outline" style={{fontSize: '1.1rem', marginTop: '.1rem'}}  className=" mr1"/>
+            <IonIcon name="chevron-back-outline" style={{fontSize: '1rem', marginTop: '0rem', marginRight: '0.5rem'}}  className="alignIcon"/>
             <span className="">Atras</span>
         </Link>
     </div>

@@ -170,7 +170,7 @@ const Header = () => {
                   style={{marginLeft: '.5rem', backgroundColor: 'transparent', color: '#3662E3', border: '1px solid rgba(52, 52, 143, 0.264)', borderRadius: '.5rem', minWidth: 'max-content'}}
                 >
                   <IonIcon className="alignIcon" style={{fontSize: '1rem', marginRight: '.5rem'}} name="log-in-outline"/>
-                  <span className="fz1" >Iniciar sesión</span>
+                  <span style={{fontSize: '1rem'}}>Iniciar sesión</span>
                 </Link>
                 <Link
                   href="/workshops"
@@ -183,7 +183,7 @@ const Header = () => {
                     backgroundImage: 'linear-gradient(89deg, var(--token-dc60c65c-2692-4b09-8d77-49a86f7aedee, rgb(24, 36, 61)) /* {"name":"Azul prinicipal"} */ 0%, var(--token-1632e6e1-d1e5-427f-b435-20cb1e67f695, rgb(54, 98, 227)) /* {"name":"Azul claro"} */ 123.5068681091516%)'}}
                      
                 >
-                  <span className="fz1">Registrate</span>
+                  <span style={{fontSize: '1rem'}}>Registrate</span>
                 </Link>
                 
                 <div>
