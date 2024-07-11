@@ -179,10 +179,10 @@ const ViewPDFPageInspection: FunctionComponent<ViewPDFPageInspectionType> = ({us
                                                 {row.item}
                                                 </TableCell>
                                                 <TableCell className="fz1"  align="center">
-                                                    {row.ammount}</TableCell>
+                                                    {Number(row.ammount) === 0 ? '' : row.ammount}</TableCell>
                                                 <TableCell className="fz1"  align="center">
-                                                    s/. {Number(row.price).toFixed(2)}</TableCell>
-                        <TableCell className="fz1"  align="right">s/. {(Number(row?.price) * Number(row?.ammount)).toFixed(2)}</TableCell>
+                                                     {Number(row.price) === 0 ? '' : ('s/. ' + Number(row.price).toFixed(2))}</TableCell>
+                                        <TableCell className="fz1"  align="right">{Number(row.price) === 0|| Number(row.ammount) === 0 ? '' : ('s/. ' + (Number(row?.price) * Number(row?.ammount)).toFixed(2))}</TableCell>
                     </TableRow>
                 })} 
                     </TableBody>
@@ -190,10 +190,12 @@ const ViewPDFPageInspection: FunctionComponent<ViewPDFPageInspectionType> = ({us
             </TableContainer>
             <div className="flex between">
                 <p></p>
-                <p className="mt2 mr1 fz1"><span className="mr1">Total</span> s/. {countTotalTasksPrice(inspection?.tasks).toFixed(2)}</p>
+                <p className="mt2 mr1 fz1">
+                    <span style={{marginRight: '2rem'}}>Total</span>  {countTotalTasksPrice(inspection?.tasks).toFixed(2) === '0.00' ? "__________" : ('s/. ' + countTotalTasksPrice(inspection.tasks).toFixed(2))}
+                </p>
             </div>
 
-            <div className="w100 center" style={{marginTop: '6rem', marginBottom: '7rem'}}>
+            <div className="w100 center" style={{marginTop: '8rem', marginBottom: '7rem'}}>
                 <div className="flex w100" style={{justifyContent: 'center'}} >
                     <div  style={{width: '200px'}}>
                         <p className="w100" style={{height: '2px', background: 'black'}}/>
@@ -208,6 +210,11 @@ const ViewPDFPageInspection: FunctionComponent<ViewPDFPageInspectionType> = ({us
             <div style={{width: '100%', marginTop: '1rem', whiteSpace: 'pre-wrap'}}>
                 <p style={{width: '100%', padding: '1rem', marginTop: '1rem', borderTop: '1px solid rgba(0, 0, 0, 0.2)'}}>{String(user?.footerpdf).replace("\n", "\r\n") === 'undefined' ? '' : String(user?.footerpdf).replace("\n", "\r\n")}</p>
             </div>
+            {user?.image === '' ? '' : 
+            <div className='mt1'>
+                <img src={user?.image}/>
+            </div>}
+            
         </div>
     </div>
 }

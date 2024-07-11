@@ -94,8 +94,8 @@ const SideBarComponent: FunctionComponent<SideBarProps> = ({user, frameContennt,
     
     return <div className="">
         <div className="responsiveButtonViewNavigation" style={{display: 'none', width: '100%', textAlign: 'right'}}>
-                <button style={{fontSize: '.9rem', color: 'grey', position: 'absolute', top: '1rem', right: '1rem'}} onClick={() => setOpen(!open)}>{open ? <IonIcon style={{fontSize: '1.5rem', color: 'grey'}} name="eye-off-outline"/> : 
-                <IonIcon style={{fontSize: '1.5rem', color: 'grey'}} name="menu-outline"/>}</button>
+                <button className="br05" style={{fontSize: '.9rem', color: 'grey', position: 'absolute', top: '1rem', right: '1rem', border: '1px solid rgba(0,0,0, 0.2)'}} onClick={() => setOpen(!open)}>{open ? <IonIcon className="alignIcon" style={{fontSize: '1.5rem', color: 'black'}} name="eye-off-outline"/> : 
+                <IonIcon className="alignIcon" style={{fontSize: '1.5rem', color: 'black'}} name="menu-outline"/>}</button>
         </div>
         
         <div className="sideBar">
