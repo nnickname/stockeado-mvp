@@ -353,7 +353,8 @@ input{
 }
 @media screen and (max-width: 1110px) {
   .btn-back{
-    padding-right: 3rem !important;
+    margin-top: .23rem;
+    padding-right: 3.8rem !important;
     font-size: .8rem;
     
   }
