@@ -19,8 +19,10 @@ type SchedulerProps = {
     inspections: InspectionsModel[],
     calendars: CalendarsModel[],
     setCalendars: any,
+    count: number;
+    setCount: any
 }
-const SchedulerRender: FunctionComponent<SchedulerProps> = ({user, setCalendars, calendars, clients, vehicles, inspections}) => {
+const SchedulerRender: FunctionComponent<SchedulerProps> = ({user, setCalendars, calendars, clients, vehicles, inspections, setCount, count}) => {
 
     const date = new Date();
     var date15m = date;
@@ -52,6 +54,7 @@ const SchedulerRender: FunctionComponent<SchedulerProps> = ({user, setCalendars,
                     setCalendars(calendarsGet ?? []);
                     res(String(deleteId));
                     toast.success('Eliminaste un recordatorio');
+                    setCount(count - 1);
                 }
             }
           });
@@ -75,9 +78,8 @@ const SchedulerRender: FunctionComponent<SchedulerProps> = ({user, setCalendars,
             const response = await createCalendar(body);
             if(response) {
                 toast.success('Añadiste un nuevo recordatorio.');
+                setCount(count+1);
                 const calendarsCast = await getAllCalendars(String(user?.role === 'owner' ? user?._id : user?.owner));
-                
-                
                 setTimeout(() => {
                     
                     res({
