@@ -172,6 +172,7 @@ const InspectionWorkshopLayoutPage = () => {
                 createdBy: user?.name + ' ' + user?.lastname
             }
         }
+        console.log(body);
         const response = await createInspection(body);
         if(response !== null){
             toast.success('Creaste una nueva inspección');

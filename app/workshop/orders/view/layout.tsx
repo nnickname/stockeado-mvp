@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import Select from "react-dropdown-select";
 import '../../inspections/create/index.css';
-import { InspectionsModel } from "@/models/workshops/inspections.model";
+import inspectionsModel, { InspectionsModel } from "@/models/workshops/inspections.model";
 import { getAllInspections } from "@/app/api/workshop/inspections/call";
 import { VehiclesModel } from "@/models/workshops/vehicles/vehicles.model";
 import { ClientsModel } from "@/models/workshops/clients.model";
@@ -117,7 +117,23 @@ const ViewOrderWorkshopLayoutPage = () => {
             setWorkSpace(object?.workSpace);
             setDateEnd(object?.dateEnd);
             selectInspectionCall(object?.inspection, inspectionsCast);
-            setSelectedInspection(inspectionsCast?.find(e => String(e?._id) === object?.inspection));
+            const inspectionid = inspectionsCast?.find(e => String(e?._id) === object?.inspection);
+            if(inspectionid === undefined ) {
+                setSelectedInspection(null);
+            } else setSelectedInspection(inspectionid);
+            setSelectedClient(String(object?.client?._id));
+            setClientName(object?.client?.name);
+            setClientLastName(object?.client?.lastname);
+            setClientEmail(object?.client?.email);
+            setClientPhone(object?.client?.phone);
+            setClientBirth(object?.client?.birth);
+            setClientRuc(object?.client?.ruc);
+            setSelectedVehicle(String(object?.vehicle?._id));
+            setVehiclePlate(object?.vehicle?.plate);
+            setVehicleBrand(object?.vehicle?.brand);
+            setVehicleModel(object?.vehicle?.model);
+            setVehicleYear(object?.vehicle?.year);
+            setVehicleVin(object?.vehicle?.vin);
             setTasks(object?.tasks);
             setTotalPrice(object?.totalPrice)
         } else selectInspectionCall('other', inspectionsCast);
@@ -178,7 +194,7 @@ const ViewOrderWorkshopLayoutPage = () => {
                     vin: vehicleVin
                 },                
                 tasks,
-                inspection: inspectionSelected?._id ?? '',
+                inspection: inspectionSelected?._id ?? ' ',
                 updatedBy: user?.name + ' ' + user?.lastname
             }
         }
@@ -205,8 +221,6 @@ const ViewOrderWorkshopLayoutPage = () => {
             setVehicleYear('');
             setVehicleVin('');
             setSelectedInspection(null);
-            setDateStart('');
-            setWorker('');
             setTasks([{
                 service: '',
                 item: '',
@@ -220,15 +234,13 @@ const ViewOrderWorkshopLayoutPage = () => {
         }
         const object = inspections?.find(e => String(e?._id) === id);
         if(object !== null){
-            setDateStart(object?.dateStart);
             setWorker(object?.workerAssigned);
-            setSelectedClient(object?.client?._id);
             setSelectedClient(String(object?.client?._id));
             setClientName(object?.client?.name);
             setClientLastName(object?.client?.lastname);
             setClientEmail(object?.client?.email);
             setClientPhone(object?.client?.phone);
-            setClientBirth(object.client.birth);
+            setClientBirth(object?.client?.birth);
             setClientRuc(object?.client?.ruc);
             setSelectedVehicle(String(object?.vehicle?._id));
             setVehiclePlate(object?.vehicle?.plate);
@@ -236,8 +248,8 @@ const ViewOrderWorkshopLayoutPage = () => {
             setVehicleModel(object?.vehicle?.model);
             setVehicleYear(object?.vehicle?.year);
             setVehicleVin(object?.vehicle?.vin);
-            setSelectedInspection(object);
-            setTasks(object?.tasks ?? [])
+            setSelectedInspection(object ?? null);
+            setTasks(object?.tasks ?? []);
 
         }
     }

@@ -160,7 +160,7 @@ const NewOrderWorkshopLayoutPage = () => {
                     vin: vehicleVin
                 },
                 tasks,
-                inspection: inspectionSelected?._id ?? '',
+                inspection: inspectionSelected?._id ?? ' ',
                 createdBy: user?.name + ' ' + user?.lastname
 
         }
@@ -209,7 +209,7 @@ const NewOrderWorkshopLayoutPage = () => {
             setClientLastName(object?.client?.lastname);
             setClientEmail(object?.client?.email);
             setClientPhone(object?.client?.phone);
-            setClientBirth(object.client.birth);
+            setClientBirth(object?.client.birth);
             setClientRuc(object?.client?.ruc);
             setSelectedVehicle(String(object?.vehicle?._id));
             setVehiclePlate(object?.vehicle?.plate);
@@ -217,7 +217,7 @@ const NewOrderWorkshopLayoutPage = () => {
             setVehicleModel(object?.vehicle?.model);
             setVehicleYear(object?.vehicle?.year);
             setVehicleVin(object?.vehicle?.vin);
-            setSelectedInspection(object);
+            setSelectedInspection(object ?? null);
             setTasks(object?.tasks ?? []);
             setTotalPrice(countTotalTasksPrice(object?.tasks).toFixed(2))
         }
@@ -274,7 +274,7 @@ const NewOrderWorkshopLayoutPage = () => {
                                         onChange={(values) => {
                                             selectInspectionCall(String(values[0]?.value), inspections);
                                         } } 
-                                        values={[{value: inspectionSelected?._id, label: inspectionSelected === null ? 'Seleccionar/buscar' : '#' +  '  ' + inspectionSelected?.vehicle?.plate}]}                                    />
+                                        values={[{value: inspectionSelected?._id, label: inspectionSelected === null ? 'Seleccionar/buscar' : ('#' +  '  ' + inspectionSelected?.vehicle?.plate)}]}                                    />
                                 </div>
                             </div>
                         </div>
@@ -622,7 +622,7 @@ const NewOrderWorkshopLayoutPage = () => {
                                                     const scrolls = document.querySelector(".scrollLeftGet")?.scrollLeft;
                                                     setTableKey( Math.random());
                                                     setTimeout(() => document.querySelector(".scrollLeftGet").scrollLeft = scrolls, 20);
-                                                                                                }} />
+                                                }} />
                                             </TableCell>
                                         </TableRow>
             })} 
