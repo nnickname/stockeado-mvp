@@ -80,14 +80,13 @@ const HomeWorkshopLayoutPage = () => {
         toUser();
     }, []);
     const filterMonth = (month: number, clients: ClientsModel[], orders: OrderWorkshopModel[]) => {
-    
         const currentDate = new Date();
         var clientsFilterBeforeMonth: ClientsModel[] = [];
         var clientsFilter: ClientsModel[] = [];
         clients?.map((e) => {
             const date = new Date(e?.createdAt);
             if(currentDate.getFullYear() === date?.getFullYear()){
-                if(month === Number(date?.getUTCMonth() +1)){
+                if(month === Number(date?.getUTCMonth()+1 )){
                     clientsFilter.push(e);
                 }
             }
@@ -95,14 +94,14 @@ const HomeWorkshopLayoutPage = () => {
         clients?.map((e) => {
             const date = new Date(e?.createdAt);
             if(currentDate.getFullYear() === date?.getFullYear()){
-                if(month === Number(date?.getUTCMonth())){
+                if(month-1 === Number(date?.getUTCMonth()+1)){
                     clientsFilterBeforeMonth.push(e);
                 }
             }
         });
         const difference = (clientsFilter.length - clientsFilterBeforeMonth?.length);
-        const differenceCast = (difference / 100) * 100
-        const finalNumber = differenceCast*100;
+        const differenceCast = difference*100;
+        const finalNumber = differenceCast;
         setClientsFilter(clientsFilter ?? []);
         setPercentageClientsIncrease(finalNumber > 0 ? finalNumber : 0);
         selectMonth(month);
