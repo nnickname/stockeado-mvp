@@ -39,7 +39,7 @@ const HomeWorkshopLayoutPage = () => {
     const [orderTotal, setOrdersTotal] = useState<number>(0);
     const [orderAverage, setOrderAverage] = useState<number>(0);
     const [clientAverage, setClientAverage] = useState<number>(0);
-
+    const [calendarsCount, setCalendarsCount] = useState<number>(0);
     const toUser = async () => {
         const userr = await getUser();
         var ownerid = String(userr?._id);
@@ -62,20 +62,31 @@ const HomeWorkshopLayoutPage = () => {
         setUser(userr);
         filterMonth(Number(new Date().getMonth() +1), clientsCast, ordersCast);
         selectMonth(Number(new Date().getMonth() +1));
-
-      }
+        const currentTime = new Date();
+        var currentCount: number = 0;
+        calendarsCast?.map((e) => {
+            const timeTask = new Date(ReturnUnifiedStringDateTime(e?.dateEnd));
+            if(timeTask.getDate() === currentTime.getDate()){
+                if(timeTask.getMonth() === currentTime.getMonth()){
+                    if(timeTask.getFullYear() === currentTime.getFullYear()){
+                        currentCount++;
+                    }
+                }
+            }
+        });
+        setCalendarsCount(currentCount)
+    }
     useEffect(() => {
         toUser();
     }, []);
     const filterMonth = (month: number, clients: ClientsModel[], orders: OrderWorkshopModel[]) => {
-    
         const currentDate = new Date();
         var clientsFilterBeforeMonth: ClientsModel[] = [];
         var clientsFilter: ClientsModel[] = [];
         clients?.map((e) => {
             const date = new Date(e?.createdAt);
             if(currentDate.getFullYear() === date?.getFullYear()){
-                if(month === Number(date?.getUTCMonth() +1)){
+                if(month === Number(date?.getUTCMonth()+1 )){
                     clientsFilter.push(e);
                 }
             }
@@ -83,14 +94,14 @@ const HomeWorkshopLayoutPage = () => {
         clients?.map((e) => {
             const date = new Date(e?.createdAt);
             if(currentDate.getFullYear() === date?.getFullYear()){
-                if(month === Number(date?.getUTCMonth())){
+                if(month-1 === Number(date?.getUTCMonth()+1)){
                     clientsFilterBeforeMonth.push(e);
                 }
             }
         });
         const difference = (clientsFilter.length - clientsFilterBeforeMonth?.length);
-        const differenceCast = (difference / 100) * 100
-        const finalNumber = differenceCast*100;
+        const differenceCast = difference*100;
+        const finalNumber = differenceCast;
         setClientsFilter(clientsFilter ?? []);
         setPercentageClientsIncrease(finalNumber > 0 ? finalNumber : 0);
         selectMonth(month);
@@ -232,16 +243,12 @@ const HomeWorkshopLayoutPage = () => {
                         <p className="subsubtitle"> Registra recordatorios para no perder clientes y ganar más por vehículo</p>
                         <div className="card w100 inline-items br0 mt1">
                             <p className="inline-items subsubtitle mt1 ml1">Tareas por vencer hoy:
-                            { calendars?.length === 0 ? <span> No encontrado</span>:<span></span>} </p>
+                            { calendarsCount === 0 ? <span> No encontrado</span>:<span></span>} </p>
                             {
                                  
                             ...calendars?.map((e) => {
                                 const currentTime = new Date();
                                 const timeTask = new Date(ReturnUnifiedStringDateTime(e?.dateEnd));
-                                console.log(timeTask.getDate(), currentTime.getDate());
-                                console.log(timeTask.getMonth(), currentTime.getMonth());
-                                console.log(timeTask.getFullYear(), currentTime.getFullYear());
-
                                 if(timeTask.getDate() === currentTime.getDate()){
                                     if(timeTask.getMonth() === currentTime.getMonth()){
                                         if(timeTask.getFullYear() === currentTime.getFullYear()){
@@ -256,7 +263,7 @@ const HomeWorkshopLayoutPage = () => {
                             
                         </div>
                         <div className="">
-                            <SchedulerRender setCalendars={setCalendars} calendars={calendars} user={user} orders={orders} vehicles={vehicles} clients={clients} inspections={inspections}/>
+                            <SchedulerRender setCount={setCalendarsCount} setCalendars={setCalendars} calendars={calendars} user={user} orders={orders} vehicles={vehicles} clients={clients} inspections={inspections} count={calendarsCount}/>
                         </div>
 
 

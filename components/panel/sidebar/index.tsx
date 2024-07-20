@@ -2,7 +2,6 @@
 import Link from "next/link";
 import Logo from '../../../public/images/logo/logopreferente.png';
 import blueImage from '../../../public/images/logo/blueimage.png';
-
 import './index.css';
 import Image from "next/image";
 import IonIcon from "@reacticons/ionicons";
@@ -10,7 +9,6 @@ import { FunctionComponent, ReactNode, useState } from "react";
 import { UserModel } from "@/models/user.model";
 import Cookie from "universal-cookie";
 import { useRouter } from "next/navigation";
-import { getDefaultAutoSelectFamilyAttemptTimeout } from "net";
 import { toast } from "react-toastify";
 
 type SideBarProps = {

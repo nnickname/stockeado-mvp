@@ -78,6 +78,7 @@ export const verifyUserWorkshop = (userr: any, router: any, route: string) => {
     }
     const routeCast = WorkShopOptions.find((e) => e?.route === route);
     const role = routeCast?.roles?.find((e) => e === userr?.role);
+    console.log(role);
     if(role?.length > 0){
         return true;
     } else {
