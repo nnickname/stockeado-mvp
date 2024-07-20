@@ -18,6 +18,19 @@ function countTotalTasksPrice(tasks: any[]){
     })
     return count;
 }
+export function createArrayToTable(tasks: any[]){
+    var titles: string[] = [];
+    tasks?.map((e) => {
+        var finded: boolean = false;
+        titles.map((a) => {
+            if(a === e?.service){
+                finded = true;
+            }
+        });
+        if(!finded) titles.push(e.service);
+    })
+    return titles;
+}
 type ViewPDFPageInspectionType = {
     user: UserModel;
     inspection: InspectionsModel;
@@ -139,7 +152,7 @@ const ViewPDFPageInspection: FunctionComponent<ViewPDFPageInspectionType> = ({us
                 <div className="w100">
                     {
                         inspection?.accesories?.map((e) => {
-                            if(e?.value === 'on' ) return <p style={{width: 'max-content', display: 'inline-block'}} className="mt05 fz1 ml1">
+                            if(e?.value === 'on' ) return <p style={{width: 'max-content', display: 'inline-block', marginLeft: '3rem'}} className="mt05 fz1">
                                 {e?.label}</p>
                         })
                     }
@@ -153,41 +166,46 @@ const ViewPDFPageInspection: FunctionComponent<ViewPDFPageInspectionType> = ({us
             </div>
             <div className="mt2" style={{width: '100%', height: '2px', background: 'rgba(0, 0, 0, 0.2)'}}/>
 
-            <TableContainer className="mt1" style={{boxShadow: 'none', backgroundColor: 'transparent'}} component={Paper}>
-                <Table aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell className="fz1" >Servicio</TableCell>
-                            <TableCell className="fz1"  align="center">Item</TableCell>
-                            <TableCell className="fz1"  align="center">Cantidad</TableCell>
-                            <TableCell className="fz1"  align="center">Precio</TableCell>
-                            <TableCell className="fz1"  align="center">Total</TableCell>
-                            <TableCell className="fz1"  align="center"></TableCell>
-                        </TableRow>
-                        </TableHead>
-                            <TableBody>
-                                {inspection?.tasks?.map((row, index) => {
-                                        return <TableRow
-                                            key={index}
-                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                            style={{borderBottom: '1px solid rgba(0, 0, 0, 0.2)'}}
-                                        >
-                                        <TableCell className="fz1" component="th" scope="row">
-                                            {row.service}
-                                            </TableCell>
-                                            <TableCell className="fz1"  align="center">
-                                                {row.item}
-                                                </TableCell>
-                                                <TableCell className="fz1"  align="center">
-                                                    {Number(row.ammount) === 0 ? '' : row.ammount}</TableCell>
-                                                <TableCell className="fz1"  align="center">
-                                                     {Number(row.price) === 0 ? '' : ('s/. ' + Number(row.price).toFixed(2))}</TableCell>
-                                        <TableCell className="fz1"  align="right">{Number(row.price) === 0|| Number(row.ammount) === 0 ? '' : ('s/. ' + (Number(row?.price) * Number(row?.ammount)).toFixed(2))}</TableCell>
-                    </TableRow>
-                })} 
-                    </TableBody>
-                </Table>
-            </TableContainer>
+            {createArrayToTable(inspection?.tasks)?.map((e) => {
+                const items = inspection?.tasks?.filter((a) => a.service === e);
+                
+
+                return <div>
+                    <h1 className="mt2 fz1">{e}</h1>
+                     <TableContainer className="mt1" style={{boxShadow: 'none', backgroundColor: 'transparent'}} component={Paper}>
+                        <Table aria-label="simple table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell className="fz1"  align="left">Item</TableCell>
+                                    <TableCell className="fz1"  align="center">Cantidad</TableCell>
+                                    <TableCell className="fz1"  align="center">Precio</TableCell>
+                                    <TableCell className="fz1"  align="center">Total</TableCell>
+                                    <TableCell className="fz1"  align="center"></TableCell>
+                                </TableRow>
+                                </TableHead>
+                                    <TableBody>
+                                        {items?.map((row, index) => {
+                                                return <TableRow
+                                                    key={index}
+                                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                                    style={{borderBottom: '1px solid rgba(0, 0, 0, 0.2)'}}
+                                                >
+                                                
+                                                    <TableCell className="fz1"  align="left">
+                                                        {row.item}
+                                                        </TableCell>
+                                                        <TableCell className="fz1"  align="center">
+                                                            {Number(row.ammount) === 0 ? '' : row.ammount}</TableCell>
+                                                        <TableCell className="fz1"  align="center">
+                                                            {Number(row.price) === 0 ? '' : ('s/. ' + Number(row.price).toFixed(2))}</TableCell>
+                                                <TableCell className="fz1"  align="right">{Number(row.price) === 0|| Number(row.ammount) === 0 ? '' : ('s/. ' + (Number(row?.price) * Number(row?.ammount)).toFixed(2))}</TableCell>
+                            </TableRow>
+                        })} 
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </div>
+            })}
             <div className="flex between">
                 <p></p>
                 <p className="mt2 mr1 fz1">
