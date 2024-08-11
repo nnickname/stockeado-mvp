@@ -28,6 +28,8 @@ import LoadPage from "@/components/general/loadPage";
 import BackButton from "@/components/general/backButton";
 import AddVehicle from "@/components/workshops/addvehicle";
 import { VehiclesBrandModel } from "@/models/workshops/vehicles/brands.model";
+import blueImage from '@/public/images/logo/whiteimage.png';
+
 function countTotalTasksPrice(tasks: any[]){
     var count = 0;
     tasks?.map((e) => {
@@ -87,6 +89,22 @@ const InspectionWorkshopLayoutPage = () => {
     const [disabledButton, setDisabledButton] = useState<boolean>(false);
     const [carSelected, setCarSelected]  = useState<Array<any>>([]);
     const [totalPrice, setTotalPrice] = useState<string>('');
+    const [image1, setImage1] = useState('');
+    const [image2, setImage2] = useState('');
+    const [image3, setImage3] = useState('');
+    const [image4, setImage4] = useState('');
+    const onChangeImage = async (event, setImage: any) => {
+        event.preventDefault();
+        const file = event.target.files[0];
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.onload = () => {
+          setImage(String(fileReader.result));
+        };
+        fileReader.onerror = (error) => {
+          console.log(error);
+        };
+    }
     const toUser = async () => {
         const userr = await getUser();
         var ownerid = String(userr?._id);
@@ -160,6 +178,7 @@ const InspectionWorkshopLayoutPage = () => {
                     year: vehicleYear,
                     vin: vehicleVin
                 },
+                imageList: [image1 ?? '', image2 ?? '', image3 ?? '', image4 ?? ''],
                 orders: [],
                 mileage,
                 oil,
@@ -172,7 +191,6 @@ const InspectionWorkshopLayoutPage = () => {
                 createdBy: user?.name + ' ' + user?.lastname
             }
         }
-        console.log(body);
         const response = await createInspection(body);
         if(response !== null){
             toast.success('Creaste una nueva inspección');
@@ -459,15 +477,7 @@ const InspectionWorkshopLayoutPage = () => {
                                     <input disabled placeholder={clientSelected !== null ? 'Recurrente' : 'Nuevo'} className="inputForm w100Min " type="text"/>
                                 </div>
                             </div>
-                            
-                            
-
-                            
                         </div>
-
-
-
-
                         <div className="cardWhiteForm mt1">
                             <p className="subsubtitle">Estado del vehículo actual</p>
                             <div className="flex between displayBlockResponsive mt1">
@@ -476,53 +486,43 @@ const InspectionWorkshopLayoutPage = () => {
                                         <p className="formTitle mr1">Kilometraje</p>
                                         <input onChange={(e) => setMileage(e.target.value)} value={mileage} className="inputForm w100Min" type="text" placeholder=""/>
                                     </div>
-
                                 </div>
                                 <div className="w100 nPaddingLeftResponsive" style={{ paddingLeft: '2rem'}}>
                                     <div className="flex between displayBlockResponsiveMin mt1">
                                         <p className="formTitle mr1" >Nivel de aceite</p>
                                         <input onChange={(e) => setOil(e.target.value)} value={oil} className="inputForm w100Min" type="text" placeholder=""/>
                                     </div>
-
                                 </div>
                             </div>
-
                             <div className="flex between displayBlockResponsive">
                                 <div className="w100 mr1 nPaddingLeftResponsive" style={{paddingRight: '2rem'}}>
                                     <div className="flex between displayBlockResponsiveMin mt1">
                                         <p className="formTitle mr1">Nivel de gasolina</p>
                                         <input onChange={(e) => setFuel(e.target.value)} value={fuel} className="inputForm w100Min" type="text" placeholder=""/>
                                     </div>
-
                                 </div>
                                 <div className="w100 nPaddingLeftResponsive" style={{ paddingLeft: '2rem'}}>
                                     <div className="flex between displayBlockResponsiveMin mt1">
                                         <p className="formTitle mr1" >Líquido de frenos</p>
                                         <input onChange={(e) => setBrakes(e.target.value)} value={brakes} className="inputForm w100Min" type="text" placeholder=""/>
                                     </div>
-
                                 </div>
                             </div>
-
                             <div className="flex between displayBlockResponsive">
                                 <div className="w100 mr1 nPaddingLeftResponsive" style={{paddingRight: '2rem'}}>
                                     <div className="flex between displayBlockResponsiveMin mt1">
                                         <p className="formTitle mr1 ">Refrigerante</p>
                                         <input onChange={(e) => setRefrigerant(e.target.value)} value={refrigerant} className="inputForm w100Min" type="text" placeholder=""/>
                                     </div>
-
                                 </div>
                                 <div  className="w100 nPaddingLeftResponsive" style={{ paddingLeft: '2rem'}}>
                                     <div className="flex between displayBlockResponsiveMin mt1">
                                         <p className="formTitle mr1" >Fotos actuales(max 4)</p>
                                         <input disabled className="inputForm" type="text" placeholder=""/>
                                     </div>
-
                                 </div>
                             </div>
-
                         </div>
-
                         <div className="cardWhiteForm mt1">
                             <p className="subsubtitle">Trabajos a realizar</p>
                             {user.services?.length === 0 ? <div className="flex mt1">
@@ -627,7 +627,6 @@ const InspectionWorkshopLayoutPage = () => {
                                     </TableBody>
                                 </Table>
                             </TableContainer>
-                            
                             <div className="flex between">
                                 <button className="btn btn-gradient-secondary mt2" onClick={() => {
                                     setTasks([...tasks, {
@@ -640,14 +639,12 @@ const InspectionWorkshopLayoutPage = () => {
                                 }}>+ Agregar linea</button>
                                     <div className="flex" style={{minWidth: '150px'}}>
                                         <p className="mt2 mr1">Total</p>
-                                        <input className="ml1" style={{width: '100px', borderBottom: '1px solid grey'}} value={Number(totalPrice).toFixed(2)} type='number' onChange={(e) => setTotalPrice(e?.target?.value)} ></input>
+                                        <input className="ml1" style={{width: '100px', borderBottom: '1px solid grey'}} value={totalPrice} type='text' onChange={(e) => setTotalPrice(e?.target?.value)} ></input>
                                     </div>
                                 </div>
                             <p className="formTitle mt2">Observaciones adicionales</p>
                             <input onChange={(e) => setObservations(e.target.value)} value={observations} className="inputForm mt1 w100" type="text" placeholder=""/>
-                        
                         </div>
-
                         <div className="cardWhiteForm overFlowXResponsive mt1">
                             <div className="flex">
                                 <p className="subsubtitle">Recordatorios </p>
@@ -662,7 +659,6 @@ const InspectionWorkshopLayoutPage = () => {
                                         }} className="icon ml1" name="trash-outline"/>
                                     </div>
                                 </div>)}
-                                
                             </div>
                             <div className="flex w100">
                                 <input onChange={(e) => setSchedulerDate(e.target.value)} value={newSchedulerDate} type="datetime-local" className="inputForm mt1" style={{borderRadius: '.5rem 0rem 0rem .5rem'}}/>
@@ -686,7 +682,6 @@ const InspectionWorkshopLayoutPage = () => {
                                 }} className="btn-gradient-secondary mt1" style={{border:'1px solid grey', borderRadius: '0px .5rem .5rem 0rem'}} >Añadir</button>
                             </div>
                         </div>
- 
                         <div className="cardWhiteForm mt1">
                             <p className="subsubtitle">Accesorios</p>
                             {accesories?.length === 0 ? <div className="flex mt1">
@@ -708,13 +703,33 @@ const InspectionWorkshopLayoutPage = () => {
                                     </div>
                                 </div>})}
                             </div>
-                            
                         </div>
-
-                        
-                        
-                        
-                        
+                        <div className="card overFlowXResponsive  p2 mt1 w100" >
+                                <p className="subsubtitle w100">Subir imagenes</p>
+                                <div className="inline-items w100 mt1">
+                                    <label className="inline-items" htmlFor="imageLogo"  style={{border: '1px solid grey', cursor: 'pointer'}}>
+                                        <img style={{width: '250px', height: '250px'}} className="inline-items" src={image1 !== '' ? image1 : blueImage.src} alt="Logo"/>
+                                        <input accept="image" id="imageLogo" onChange={(e) => onChangeImage(e, setImage1)} type='file' placeholder='Subir archivo' style={{
+                                            visibility: 'hidden', display: 'none'}}/>
+                                    </label>
+                                    <label className="inline-items"  htmlFor="imageLogo1" style={{border: '1px solid grey', cursor: 'pointer'}}>
+                                        <img style={{width: '250px', height: '250px'}} className="inline-items" src={image2 !== '' ? image2 : blueImage.src} alt="Logo"/>
+                                        <input accept="image" id="imageLogo1" onChange={(e) => onChangeImage(e, setImage2)} type='file' placeholder='Subir archivo' style={{
+                                            visibility: 'hidden', display: 'none'}}/>
+                                    </label>
+                                    <label className="inline-items"  htmlFor="imageLogo2"  style={{border: '1px solid grey', cursor: 'pointer'}}>
+                                        <img style={{width: '250px', height: '250px'}} className="inline-items" src={image3 !== '' ? image3 : blueImage.src} alt="Logo"/>
+                                        <input accept="image" id="imageLogo2" onChange={(e) => onChangeImage(e, setImage3)} type='file' placeholder='Subir archivo' style={{
+                                            visibility: 'hidden', display: 'none'}}/>
+                                    </label>
+                                    <label className="inline-items" htmlFor="imageLogo3"  style={{border: '1px solid grey', cursor: 'pointer'}}>
+                                        <img style={{width: '250px', height: '250px'
+                                        }} src={image4 !== '' ? image4 : blueImage.src} className="inline-items" alt="Logo"/>
+                                        <input accept="image" id="imageLogo4" onChange={(e) => onChangeImage(e, setImage4)} type='file' placeholder='Subir archivo' style={{
+                                            visibility: 'hidden', display: 'none'}}/>
+                                    </label>
+                                </div>
+                        </div>
                         <div className="mSidesAuto" style={{width: 'max-content', maxWidth: '100%'}}>
                             <div className="card p2 mt1 flex displayBlockResponsiveMin" >
                                 <p className="formTitle mr1">Resultados scanner</p>
@@ -731,15 +746,11 @@ const InspectionWorkshopLayoutPage = () => {
                                 </div>
                             </div>
                         </div>
-
                         <div className="center mt1 mSidesAuto">
                             <button className="btn btn-gradient-third displayBlockResponsiveMin w100Min mt1 mr1" onClick={() => buildForm()}>{
                                 disabledButton ? <IonIcon name='chevron-collapse-outline' className="rotateItem mt1" color='grey' style={{fontSize: '1rem' }}/> : 'Crear inspección'}</button>
                             <button className="btn-disabled-secondary mt1 displayBlockResponsiveMin w100Min " disabled>Crear orden de servicio</button>
                         </div>
-
-                        
-
                     </div>
                 </div>
             }

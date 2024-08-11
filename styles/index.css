@@ -45,7 +45,9 @@ p, span, button{
   padding: 1rem;
   color: #25d366;
   font-size: 1rem;
-
+}
+.inline-block{
+  display: inline-block !important;
 }
 @layer components {
   input[type="checkbox"]:checked ~ label span svg {

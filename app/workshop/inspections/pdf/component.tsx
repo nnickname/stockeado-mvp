@@ -54,7 +54,7 @@ const ViewPDFPageInspection: FunctionComponent<ViewPDFPageInspectionType> = ({us
                 <p className="fz1">Celular: {user?.phone}</p>
             </div>
             <div className="w100 center">
-                <img style={{border: '1px solid grey', marginLeft: 'auto', marginRight: 'auto'}} src={user?.imageLogo !== '' ? user?.imageLogo : blueImage.src} width='100px' height='100px'/>
+                <img style={{border: '1px solid grey', marginLeft: 'auto', marginRight: 'auto'}} src={user?.imageLogo !== '' ? user?.imageLogo : blueImage.src} width='180px' height='180px'/>
 
             </div>
             <div className="w100 right">
@@ -212,7 +212,13 @@ const ViewPDFPageInspection: FunctionComponent<ViewPDFPageInspectionType> = ({us
                     <span style={{marginRight: '2rem'}}>Total</span>  {countTotalTasksPrice(inspection?.tasks).toFixed(2) === '0.00' ? "__________" : ('s/. ' + countTotalTasksPrice(inspection.tasks).toFixed(2))}
                 </p>
             </div>
+            <div className="inline-block w100 center " style={{marginTop: '3.5rem'}}>
+                <img  className="inline-block" src={inspection?.imageList[0] ?? ''} />
+                <img  className="inline-block" src={inspection?.imageList[1] ?? ''} />
+                <img  className="inline-block" src={inspection?.imageList[2] ?? ''} />
+                <img  className="inline-block" src={inspection?.imageList[3] ?? ''} />
 
+            </div>
             <div className="w100 center" style={{marginTop: '8rem', marginBottom: '7rem'}}>
                 <div className="flex w100" style={{justifyContent: 'center'}} >
                     <div  style={{width: '200px'}}>

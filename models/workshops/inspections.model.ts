@@ -18,13 +18,14 @@ export interface InspectionsModel extends Document {
     observations: string,
     scannerUri: string,
     state: number,
-    totalPrice: string;
+    imageList: any[],
+    totalPrice: string,
     extradata: string,
-    createdAt: string;
-    updatedAt: string;
-    createdBy: string;
-    updatedBy: string;
-}
+    createdAt: string,
+    updatedAt: string,
+    createdBy: string,
+    updatedBy: string
+};
 
 const InspecionsSchema = new Schema({
   dateStart: {
@@ -91,6 +92,9 @@ const InspecionsSchema = new Schema({
   },
   totalPrice: {
     type: String
+  },
+  imageList : {
+    type: Array
   },
   createdBy: {
     type: String

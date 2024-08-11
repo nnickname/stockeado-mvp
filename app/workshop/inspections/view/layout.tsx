@@ -29,6 +29,8 @@ import LoadPage from "@/components/general/loadPage";
 import BackButton from "@/components/general/backButton";
 import { VehiclesBrandModel } from "@/models/workshops/vehicles/brands.model";
 import AddVehicle from "@/components/workshops/addvehicle";
+import blueImage from '@/public/images/logo/whiteimage.png';
+
 function countTotalTasksPrice(tasks: any[]){
     var count = 0;
     tasks?.map((e) => {
@@ -87,6 +89,10 @@ const InspectionViewWorkshopLayoutPage = () => {
         ammount: 0,
         
     }]);
+    const [image1, setImage1] = useState('');
+    const [image2, setImage2] = useState('');
+    const [image3, setImage3] = useState('');
+    const [image4, setImage4] = useState('');
     const toUser = async () => {
         const userr = await getUser();
         var ownerid = String(userr?._id);
@@ -163,7 +169,7 @@ const InspectionViewWorkshopLayoutPage = () => {
             setClientLastName(object?.client?.lastname);
             setClientEmail(object?.client?.email);
             setClientPhone(object?.client?.phone);
-            setClientBirth(object.client.birth);
+            setClientBirth(object.client?.birth);
             setClientRuc(object?.client?.ruc);
             setSelectedVehicle(String(object?.vehicle?._id));
             setVehiclePlate(object?.vehicle?.plate);
@@ -181,8 +187,21 @@ const InspectionViewWorkshopLayoutPage = () => {
             setMileage(object?.mileage);
             setRefrigerant(object?.refrigerant);
             selectState(object?.state);
-            setTotalPrice(object?.totalPrice)
-
+            setTotalPrice(object?.totalPrice);
+            console.log(object.imageList)
+            if (object?.imageList?.length > 0  && object?.imageList[0] !== undefined){             
+                setImage1(object?.imageList[0] ?? '');
+            }
+            if (object?.imageList?.length > 0  && object?.imageList[1] !== undefined){             
+                setImage2(object?.imageList[1] ?? '');
+            }
+            if (object?.imageList?.length > 0  && object?.imageList[2] !== undefined){             
+                setImage3(object?.imageList[2] ?? '');
+            }
+            if (object?.imageList?.length > 0  && object?.imageList[3] !== undefined){             
+                setImage4(object?.imageList[3] ?? '');
+            }
+           
         }
     }
     
@@ -234,6 +253,7 @@ const InspectionViewWorkshopLayoutPage = () => {
                     year: vehicleYear,
                     vin: vehicleVin
                 },
+                imageList: [image1 ?? '', image2 ?? '', image3 ?? '', image4 ?? ''],
                 orders: [],
                 mileage,
                 oil,
@@ -256,6 +276,18 @@ const InspectionViewWorkshopLayoutPage = () => {
     useEffect(() => {
         toUser();
     }, []); 
+    const onChangeImage = async (event, setImage: any) => {
+        event.preventDefault();
+        const file = event.target.files[0];
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.onload = () => {
+          setImage(String(fileReader.result));
+        };
+        fileReader.onerror = (error) => {
+          console.log(error);
+        };
+    }
     return <div>
         {user === null ? <LoadPage/> :
             <SideBarComponent user={user} route='/workshop/inspections' frameContennt={
@@ -703,9 +735,8 @@ const InspectionViewWorkshopLayoutPage = () => {
                                     }])
                                 }}>+ Agregar linea</button>
                                 <div className="flex" style={{minWidth: '150px'}}>
-                                    <p className="mt2 mr1">Total</p>
-                                    <input className="ml1" style={{width: '100px', borderBottom: '1px solid grey'}} value={Number(totalPrice).toFixed(2)} type='number' onChange={(e) => setTotalPrice(e?.target?.value)} ></input>
-
+                                        <p className="mt2 mr1">Total</p>
+                                        <input className="ml1" style={{width: '100px', borderBottom: '1px solid grey'}} value={totalPrice} type='text' onChange={(e) => setTotalPrice(e?.target?.value)} ></input>
                                 </div>
                             </div>
                             <p className="formTitle mt2">Observaciones adicionales</p>
@@ -789,7 +820,32 @@ const InspectionViewWorkshopLayoutPage = () => {
                         
                         
                         
-                        
+                        <div className="card overFlowXResponsive  p2 mt1 w100" >
+                                <p className="subsubtitle w100">Subir imagenes</p>
+                                <div className="inline-items w100 mt1">
+                                    <label className="inline-items" htmlFor="imageLogo"  style={{border: '1px solid grey', cursor: 'pointer'}}>
+                                        <img style={{width: '250px', height: '250px'}} className="inline-items" src={image1 !== '' ? image1 : blueImage.src} alt="Logo"/>
+                                        <input accept="image" id="imageLogo" onChange={(e) => onChangeImage(e, setImage1)} type='file' placeholder='Subir archivo' style={{
+                                            visibility: 'hidden', display: 'none'}}/>
+                                    </label>
+                                    <label className="inline-items"  htmlFor="imageLogo1" style={{border: '1px solid grey', cursor: 'pointer'}}>
+                                        <img style={{width: '250px', height: '250px'}} className="inline-items" src={image2 !== '' ? image2 : blueImage.src} alt="Logo"/>
+                                        <input accept="image" id="imageLogo1" onChange={(e) => onChangeImage(e, setImage2)} type='file' placeholder='Subir archivo' style={{
+                                            visibility: 'hidden', display: 'none'}}/>
+                                    </label>
+                                    <label className="inline-items"  htmlFor="imageLogo2"  style={{border: '1px solid grey', cursor: 'pointer'}}>
+                                        <img style={{width: '250px', height: '250px'}} className="inline-items" src={image3 !== '' ? image3 : blueImage.src} alt="Logo"/>
+                                        <input accept="image" id="imageLogo2" onChange={(e) => onChangeImage(e, setImage3)} type='file' placeholder='Subir archivo' style={{
+                                            visibility: 'hidden', display: 'none'}}/>
+                                    </label>
+                                    <label className="inline-items" htmlFor="imageLogo3"  style={{border: '1px solid grey', cursor: 'pointer'}}>
+                                        <img style={{width: '250px', height: '250px'
+                                        }} src={image4 !== '' ? image4 : blueImage.src} className="inline-items" alt="Logo"/>
+                                        <input accept="image" id="imageLogo4" onChange={(e) => onChangeImage(e, setImage4)} type='file' placeholder='Subir archivo' style={{
+                                            visibility: 'hidden', display: 'none'}}/>
+                                    </label>
+                                </div>
+                        </div>
                         <div className="mSidesAuto" style={{width: 'max-content'}}>
                             <div className="card p2 mt1 flex displayBlockResponsiveMin" >
                                 <p className="formTitle mr1">Resultados scanner</p>

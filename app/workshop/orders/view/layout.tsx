@@ -677,8 +677,7 @@ const ViewOrderWorkshopLayoutPage = () => {
                                 }}>+ Agregar linea</button>
                                 <div className="flex" style={{minWidth: '150px'}}>
                                     <p className="mt2 mr1">Total</p>
-                                    <input className="ml1" style={{width: '100px', borderBottom: '1px solid grey'}} value={Number(totalPrice).toFixed(2)} type='number' onChange={(e) => setTotalPrice(e?.target?.value)} ></input>
-
+                                    <input className="ml1" style={{width: '100px', borderBottom: '1px solid grey'}} value={totalPrice} type='text' onChange={(e) => setTotalPrice(e?.target?.value)} ></input>
                                 </div>
                             </div>
                             
