@@ -16,11 +16,15 @@ import { ExportJsonCsv } from 'react-export-json-csv';
 import ViewPDFPageInspection from "./pdf/component";
 import generatePDF from "react-to-pdf";
 import LoadPage from "@/components/general/loadPage";
+import { getApiImage } from "@/app/api/images/call";
 
 const LayoutViewInspectionsWorkShop = ( ) => {
     const targetRef = useRef();
     const [selectIndexPdf, setSelectedIndexPdf] = useState<number>(0);
-
+    const [image1, setImage1] = useState('');
+    const [image2, setImage2] = useState('');
+    const [image3, setImage3] = useState('');
+    const [image4, setImage4] = useState('');
     const router = useRouter();
     const [open, setOpen] = useState<boolean>();
     const [user, setUser] = useState<UserModel>(null);
@@ -89,7 +93,7 @@ const LayoutViewInspectionsWorkShop = ( ) => {
     }   
     return <div className="w100">
         <div style={{transform: 'translateX(-99999%)', position: 'absolute', width: '100%', minWidth: '1500px'}}>
-            <div ref={targetRef}> <ViewPDFPageInspection indexLength={realInspections?.length} index={selectIndexPdf}  user={user} inspection={inspections[selectIndexPdf]}/> </div>
+            <div ref={targetRef}> <ViewPDFPageInspection image1={image1} image2={image2} image3={image3} image4={image4} indexLength={realInspections?.length} index={selectIndexPdf}  user={user} inspection={inspections[selectIndexPdf]}/> </div>
         </div>
         {user === null ? <LoadPage/> :
             <SideBarComponent user={user} route='/workshop/inspections' frameContennt={
@@ -138,7 +142,7 @@ const LayoutViewInspectionsWorkShop = ( ) => {
                             </select>
                         </div>
                         <div className="w100">
-                        <TableComponent targetRef={targetRef} setSelectedIndexPdf={setSelectedIndexPdf} rows={
+                        <TableComponent setImage1={setImage1} setImage2={setImage2} setImage3={setImage3} setImage4={setImage4} targetRef={targetRef} setSelectedIndexPdf={setSelectedIndexPdf} rows={
                             [...inspections?.map((e, index: number) => {
                                 return {
                                     id: index,
@@ -148,7 +152,8 @@ const LayoutViewInspectionsWorkShop = ( ) => {
                                     date: ReturnUnifiedStringDateTime(e?.createdAt),
                                     plate: e?.vehicle?.plate,
                                     state: e?.state,
-                                    action: e?._id
+                                    action: e?._id,
+                                    imageList: e?.imageList
                                 }
                             })]?.filter((item) => (item?.name + ' ' + item?.lastname).toLowerCase().includes(search?.toLowerCase()))
                         } />
@@ -159,8 +164,10 @@ const LayoutViewInspectionsWorkShop = ( ) => {
         }
     </div>
 }
-
-const TableComponent: FunctionComponent<NewTableComponentType> = ({rows, targetRef, setSelectedIndexPdf}) => {
+async function getImageData(id: any){
+    return id?.data;
+}
+const TableComponent: FunctionComponent<NewTableComponentType> = ({rows, targetRef, setSelectedIndexPdf, setImage1, setImage2, setImage3, setImage4}) => {
     const columns: GridColDef[] = [
         
         
@@ -201,8 +208,12 @@ const TableComponent: FunctionComponent<NewTableComponentType> = ({rows, targetR
                 <Link href={'/workshop/inspections/view?id=' + params?.value} className="btn mt05">
                     <IonIcon style={{fontSize: '1.5rem', color: "#3662E3"}} name='eye-outline'/>
                 </Link>
-                <button className="btn" onClick={() => {
+                <button className="btn" onClick={async () => {
                     setSelectedIndexPdf(params.id);
+                    setImage1(await getImageData(params.row?.imageList[0] ?? ''));
+                    setImage2(await getImageData(params.row?.imageList[1] ?? ''));
+                    setImage3(await getImageData(params.row?.imageList[2] ?? ''));
+                    setImage4(await getImageData(params.row?.imageList[3] ?? ''));
                     setTimeout(() => {
                         generatePDF(targetRef, {filename: 'inspection.pdf'});
 

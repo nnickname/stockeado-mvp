@@ -299,7 +299,11 @@ const ClientsWorkshopLayoutPage = ( ) => {
 export type NewTableComponentType = {
     rows: any,
     targetRef?: any,
-    setSelectedIndexPdf?: any
+    setSelectedIndexPdf?: any,
+    setImage1?: any,
+    setImage2?: any,
+    setImage3?: any,
+    setImage4?: any
 }
 const TableComponent: FunctionComponent<NewTableComponentType> = ({rows}) => {
     const router = useRouter();

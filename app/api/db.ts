@@ -7,6 +7,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { NextResponse } from "next/server";
+import path from "path";
 
 
 function createServer() {
@@ -15,7 +16,7 @@ function createServer() {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(cookieParser());
- 
+
   const cors = {
       origin: ["www.stockeado.com","stockeado.com","64.225.62.133"]
   }

@@ -7,10 +7,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { UserModel } from '@/models/user.model';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
 import { ReturnUnifiedStringDateTime } from '@/utils/hooks';
 import { InspectionsModel } from '@/models/workshops/inspections.model';
 import './index.css';
+import { getApiImage } from '@/app/api/images/call';
 function countTotalTasksPrice(tasks: any[]){
     var count = 0;
     tasks?.map((e) => {
@@ -31,18 +32,20 @@ export function createArrayToTable(tasks: any[]){
     })
     return titles;
 }
+
 type ViewPDFPageInspectionType = {
     user: UserModel;
     inspection: InspectionsModel;
     index: number;
     indexLength: number;
+    image1: string;
+    image2: string;
+    image3: string;
+    image4: string;
 }
 
-const ViewPDFPageInspection: FunctionComponent<ViewPDFPageInspectionType> = ({user, inspection, index, indexLength}) => {
+const ViewPDFPageInspection: FunctionComponent<ViewPDFPageInspectionType> = ({user, inspection, index, indexLength, image1, image2, image3, image4}) => {
    
-
-    
-
     
     return <div className="inspectionPdfView p1">
         
@@ -213,10 +216,10 @@ const ViewPDFPageInspection: FunctionComponent<ViewPDFPageInspectionType> = ({us
                 </p>
             </div>
             <div className="inline-block w100 center " style={{marginTop: '3.5rem'}}>
-                <img  className="inline-block" src={inspection?.imageList[0] ?? ''} />
-                <img  className="inline-block" src={inspection?.imageList[1] ?? ''} />
-                <img  className="inline-block" src={inspection?.imageList[2] ?? ''} />
-                <img  className="inline-block" src={inspection?.imageList[3] ?? ''} />
+                <img  className="inline-block" src={image1 ?? ''} />
+                <img  className="inline-block" src={image2 ?? ''} />
+                <img  className="inline-block" src={image3 ?? ''} />
+                <img  className="inline-block" src={image4 ?? ''} />
 
             </div>
             <div className="w100 center" style={{marginTop: '8rem', marginBottom: '7rem'}}>

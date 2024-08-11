@@ -29,6 +29,7 @@ import BackButton from "@/components/general/backButton";
 import AddVehicle from "@/components/workshops/addvehicle";
 import { VehiclesBrandModel } from "@/models/workshops/vehicles/brands.model";
 import blueImage from '@/public/images/logo/whiteimage.png';
+import { uploadApiImage } from "@/app/api/images/call";
 
 function countTotalTasksPrice(tasks: any[]){
     var count = 0;
@@ -99,7 +100,7 @@ const InspectionWorkshopLayoutPage = () => {
         const fileReader = new FileReader();
         fileReader.readAsDataURL(file);
         fileReader.onload = () => {
-          setImage(String(fileReader.result));
+          setImage(fileReader.result);
         };
         fileReader.onerror = (error) => {
           console.log(error);
@@ -153,6 +154,43 @@ const InspectionWorkshopLayoutPage = () => {
         } 
         if(message !== '') return toast.error('Encontramos los siguientes errores en el formulario:' + message);
         setDisabledButton(true);
+        var image1Response = '', image2Response = '', image3Response = '', image4Response = '';
+        if(image1 !== ''){
+            image1Response = await uploadApiImage({
+                name: 'inspectionphoto',
+                type: 'image/png',
+                data: image1 
+            }).then(e => {
+                return e?._id
+            });
+        }
+        if(image2 !== ''){
+            image2Response = await uploadApiImage({
+                name: 'inspectionphoto',
+                type: 'image/png',
+                data: image2 
+            }).then(e => {
+                return e?._id
+            });
+        }
+        if(image3 !== ''){
+            image3Response = await uploadApiImage({
+                name: 'inspectionphoto',
+                type: 'image/png',
+                data: image3 
+            }).then(e => {
+                return e?._id
+            });
+        }
+        if(image4 !== ''){
+            image4Response = await uploadApiImage({
+                name: 'inspectionphoto',
+                type: 'image/png',
+                data: image4 
+            }).then(e => {
+                return e?._id
+            });
+        }
         const body = {
             calendars,
             object: {
@@ -178,7 +216,7 @@ const InspectionWorkshopLayoutPage = () => {
                     year: vehicleYear,
                     vin: vehicleVin
                 },
-                imageList: [image1 ?? '', image2 ?? '', image3 ?? '', image4 ?? ''],
+                imageList: [image1Response ?? '', image2Response ?? '', image3Response ?? '', image4Response ?? ''],
                 orders: [],
                 mileage,
                 oil,

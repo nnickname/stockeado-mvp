@@ -30,6 +30,7 @@ import BackButton from "@/components/general/backButton";
 import { VehiclesBrandModel } from "@/models/workshops/vehicles/brands.model";
 import AddVehicle from "@/components/workshops/addvehicle";
 import blueImage from '@/public/images/logo/whiteimage.png';
+import { getApiImage, uploadApiImage } from "@/app/api/images/call";
 
 function countTotalTasksPrice(tasks: any[]){
     var count = 0;
@@ -124,7 +125,7 @@ const InspectionViewWorkshopLayoutPage = () => {
         })]);
         
     }
-    const selectInspectionCall = (id: string, inspections: InspectionsModel[]) => {
+    const selectInspectionCall = async (id: string, inspections: InspectionsModel[]) => {
         if(id === 'other'){
             setSelectedClient(null);
             setClientName('');
@@ -188,18 +189,21 @@ const InspectionViewWorkshopLayoutPage = () => {
             setRefrigerant(object?.refrigerant);
             selectState(object?.state);
             setTotalPrice(object?.totalPrice);
-            console.log(object.imageList)
-            if (object?.imageList?.length > 0  && object?.imageList[0] !== undefined){             
-                setImage1(object?.imageList[0] ?? '');
+            if (object?.imageList?.length > 0  && object?.imageList[0] !== undefined){  
+                const data = await getApiImage(object?.imageList[0]);           
+                setImage1(data);
             }
-            if (object?.imageList?.length > 0  && object?.imageList[1] !== undefined){             
-                setImage2(object?.imageList[1] ?? '');
+            if (object?.imageList?.length > 0  && object?.imageList[1] !== undefined){   
+                const data = await getApiImage(object?.imageList[1]);           
+                setImage2(data);
             }
             if (object?.imageList?.length > 0  && object?.imageList[2] !== undefined){             
-                setImage3(object?.imageList[2] ?? '');
+                const data = await getApiImage(object?.imageList[2]);           
+                setImage3(data);
             }
             if (object?.imageList?.length > 0  && object?.imageList[3] !== undefined){             
-                setImage4(object?.imageList[3] ?? '');
+                const data = await getApiImage(object?.imageList[3]);           
+                setImage4(data);
             }
            
         }
@@ -229,6 +233,35 @@ const InspectionViewWorkshopLayoutPage = () => {
         } 
         if(message !== '') return toast.error('Encontramos los siguientes errores en el formulario:' + message);
         setDisabledButton(true);
+        var castInspection = selectedInspection;
+        if (selectedInspection?.imageList?.length > 0  && selectedInspection?.imageList[0] !== undefined && selectedInspection?.imageList[0] !== image1){  
+            castInspection.imageList[0] = await uploadApiImage({
+                name: 'mifile.png',
+                type: 'image/png',
+                data: image1
+            });
+        }
+        if (selectedInspection?.imageList?.length > 0  && selectedInspection?.imageList[1] !== undefined && selectedInspection?.imageList[0] !== image2){   
+            castInspection.imageList[1] = await uploadApiImage({
+                name: 'mifile.png',
+                type: 'image/png',
+                data: image2
+            });
+        }
+        if (selectedInspection?.imageList?.length > 0  && selectedInspection?.imageList[2] !== undefined && selectedInspection?.imageList[0] !== image3){             
+            castInspection.imageList[2] = await uploadApiImage({
+                name: 'mifile.png',
+                type: 'image/png',
+                data: image3
+            });
+        }
+        if (selectedInspection?.imageList?.length > 0  && selectedInspection?.imageList[3] !== undefined && selectedInspection?.imageList[0] !== image4){             
+            castInspection.imageList[3] = await uploadApiImage({
+                name: 'mifile.png',
+                type: 'image/png',
+                data: image4
+            });
+        }
         const body = {
             _id: String(selectedInspection?._id),
             object: {
@@ -253,7 +286,7 @@ const InspectionViewWorkshopLayoutPage = () => {
                     year: vehicleYear,
                     vin: vehicleVin
                 },
-                imageList: [image1 ?? '', image2 ?? '', image3 ?? '', image4 ?? ''],
+                imageList: castInspection.imageList,
                 orders: [],
                 mileage,
                 oil,
@@ -282,7 +315,7 @@ const InspectionViewWorkshopLayoutPage = () => {
         const fileReader = new FileReader();
         fileReader.readAsDataURL(file);
         fileReader.onload = () => {
-          setImage(String(fileReader.result));
+          setImage(fileReader.result);
         };
         fileReader.onerror = (error) => {
           console.log(error);
@@ -824,23 +857,23 @@ const InspectionViewWorkshopLayoutPage = () => {
                                 <p className="subsubtitle w100">Subir imagenes</p>
                                 <div className="inline-items w100 mt1">
                                     <label className="inline-items" htmlFor="imageLogo"  style={{border: '1px solid grey', cursor: 'pointer'}}>
-                                        <img style={{width: '250px', height: '250px'}} className="inline-items" src={image1 !== '' ? image1 : blueImage.src} alt="Logo"/>
+                                        <img style={{width: '250px', height: '250px'}} className="inline-items" src={image1 !== '' ? image1 : blueImage.src} alt=""/>
                                         <input accept="image" id="imageLogo" onChange={(e) => onChangeImage(e, setImage1)} type='file' placeholder='Subir archivo' style={{
                                             visibility: 'hidden', display: 'none'}}/>
                                     </label>
                                     <label className="inline-items"  htmlFor="imageLogo1" style={{border: '1px solid grey', cursor: 'pointer'}}>
-                                        <img style={{width: '250px', height: '250px'}} className="inline-items" src={image2 !== '' ? image2 : blueImage.src} alt="Logo"/>
+                                        <img style={{width: '250px', height: '250px'}} className="inline-items" src={image2 !== '' ? image2 : blueImage.src} alt=""/>
                                         <input accept="image" id="imageLogo1" onChange={(e) => onChangeImage(e, setImage2)} type='file' placeholder='Subir archivo' style={{
                                             visibility: 'hidden', display: 'none'}}/>
                                     </label>
                                     <label className="inline-items"  htmlFor="imageLogo2"  style={{border: '1px solid grey', cursor: 'pointer'}}>
-                                        <img style={{width: '250px', height: '250px'}} className="inline-items" src={image3 !== '' ? image3 : blueImage.src} alt="Logo"/>
+                                        <img style={{width: '250px', height: '250px'}} className="inline-items" src={image3 !== '' ? image3 : blueImage.src} alt=""/>
                                         <input accept="image" id="imageLogo2" onChange={(e) => onChangeImage(e, setImage3)} type='file' placeholder='Subir archivo' style={{
                                             visibility: 'hidden', display: 'none'}}/>
                                     </label>
                                     <label className="inline-items" htmlFor="imageLogo3"  style={{border: '1px solid grey', cursor: 'pointer'}}>
                                         <img style={{width: '250px', height: '250px'
-                                        }} src={image4 !== '' ? image4 : blueImage.src} className="inline-items" alt="Logo"/>
+                                        }} src={image4 !== '' ? image4 : blueImage.src} className="inline-items" alt=""/>
                                         <input accept="image" id="imageLogo4" onChange={(e) => onChangeImage(e, setImage4)} type='file' placeholder='Subir archivo' style={{
                                             visibility: 'hidden', display: 'none'}}/>
                                     </label>
