@@ -234,28 +234,28 @@ const InspectionViewWorkshopLayoutPage = () => {
         if(message !== '') return toast.error('Encontramos los siguientes errores en el formulario:' + message);
         setDisabledButton(true);
         var castInspection = selectedInspection;
-        if (selectedInspection?.imageList?.length > 0  && selectedInspection?.imageList[0] !== undefined && selectedInspection?.imageList[0] !== image1){  
+        if (image1.length > 0  && image1 !== undefined && selectedInspection?.imageList[0] !== image1){  
             castInspection.imageList[0] = await uploadApiImage({
                 name: 'mifile.png',
                 type: 'image/png',
                 data: image1
             });
         }
-        if (selectedInspection?.imageList?.length > 0  && selectedInspection?.imageList[1] !== undefined && selectedInspection?.imageList[0] !== image2){   
+        if (image2.length > 0  && image2 !== undefined && selectedInspection?.imageList[1] !== image2){   
             castInspection.imageList[1] = await uploadApiImage({
                 name: 'mifile.png',
                 type: 'image/png',
                 data: image2
             });
         }
-        if (selectedInspection?.imageList?.length > 0  && selectedInspection?.imageList[2] !== undefined && selectedInspection?.imageList[0] !== image3){             
+        if (image3.length > 0  && image3 !== undefined && selectedInspection?.imageList[2] !== image3){             
             castInspection.imageList[2] = await uploadApiImage({
                 name: 'mifile.png',
                 type: 'image/png',
                 data: image3
             });
         }
-        if (selectedInspection?.imageList?.length > 0  && selectedInspection?.imageList[3] !== undefined && selectedInspection?.imageList[0] !== image4){             
+        if (image4.length > 0  && image4 !== undefined && selectedInspection?.imageList[3] !== image4){             
             castInspection.imageList[3] = await uploadApiImage({
                 name: 'mifile.png',
                 type: 'image/png',
