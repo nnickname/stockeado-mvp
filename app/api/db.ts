@@ -11,7 +11,7 @@ import { NextResponse } from "next/server";
 
 function createServer() {
   const app = express();
-  app.use(express.json());
+  app.use(express.json({limit: '300mb'}));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(cookieParser());
